@@ -8,6 +8,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MyConcordiaID.Models;
+using MyConcordiaID.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace MyConcordiaID
 {
@@ -29,6 +32,13 @@ namespace MyConcordiaID
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<DatabaseContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<DatabaseContext>()
+                .AddDefaultTokenProviders();
+
             services.AddMvc();
             services.AddSingleton<IStudentRepository, StudentRepository>();
         }
@@ -50,6 +60,16 @@ namespace MyConcordiaID
             }
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
+
+            // external authentication middleware 
+            app.UseGoogleAuthentication(new GoogleOptions
+            {
+                ClientId = Configuration["Google:ClientId"],
+                ClientSecret = Configuration["Google:ClientSecret"],
+                Scope = { "email", "profile" }
+            });
 
             app.UseMvc(routes =>
             {
