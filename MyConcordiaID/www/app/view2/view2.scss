@@ -17,12 +17,14 @@ $level3-blue: #D8E5F1;
 }
 
 #viewport{
+  height:100%;
   background-color: $level1-blue;
   #cardContainer{
     background-color: $level2-blue;
     width:380px;
     height:480px;
     @include center();
+    @include vertical-align();
 
       #cardHolder{
         width:300px;
