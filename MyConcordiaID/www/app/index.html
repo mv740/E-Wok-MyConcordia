@@ -39,20 +39,33 @@
     <link rel="stylesheet" type="text/css" href="bower_components/ng-swippy/ngswippy.css">
     <script src="bower_components/ng-swippy/ng-swippy.js"></script>
     <script src="bower_components/angular-css/angular-css.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
 </head>
 <body>
+<!--http://www.w3schools.com/howto/howto_js_sidenav.asp-->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
         <a href="#!/view1" ng-click="closeNav()">view1</a>
         <a href="#!/view2" ng-click="closeNav()">view2</a>
     </div>
 
-    <span id="hamburger" ng-click="openNav()">open</span>
+
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
-
-<div ng-view></div>
+<div id="main" class="row">
+<div id="sideMenuStatic" class="col-sm-1 mainComponent">
+    <span id="hamburger" ng-click="openNav()">open</span>
+    <div>
+        <a href="#!/view1" ng-click="closeNav()">icon</a>
+        <a href="#!/view2" ng-click="closeNav()">icon</a>
+    </div>
+</div>
+<div id="ng-view" class="col-sm-11 mainComponent" ng-view></div>
+    </div>
 </body>
 </html>
