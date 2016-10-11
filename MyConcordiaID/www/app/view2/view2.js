@@ -5,8 +5,8 @@ angular.module('myApp.view2', ['ngRoute', 'ngTouch', 'ngSwippy', 'angularCSS'])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view2', {
     templateUrl: 'view2/view2.html',
-    controller: 'View2Ctrl'
-   // css: 'view2/card-stack.css'
+    controller: 'View2Ctrl',
+    css: 'view2/view2.css'
   });
 }])
 

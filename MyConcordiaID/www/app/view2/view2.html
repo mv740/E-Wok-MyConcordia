@@ -1,3 +1,15 @@
 <div id="viewport" ng-controller="View2Ctrl">
-  <ng-swippy collection='itemsCollection' width='{{size.width}}px' height='{{size.height}}px' item-click='myCustomFunction' data='showinfo'collection-empty='swipeend' swipe-left='swipeLeft'  swipe-right='swipeRight' cards-number='2' label-ok='Cool' label-negative='Bad'></ng-swippy>
+    <div id="cardContainer">
+        <div id="cardHolder">
+            <ng-swippy collection='itemsCollection' width='{{size.width}}px' height='{{size.height}}px'
+                       item-click='myCustomFunction' data='showinfo' collection-empty='swipeend' swipe-left='swipeLeft'
+                       swipe-right='swipeRight' cards-number='2' label-ok='Cool' label-negative='Bad'></ng-swippy>
+        </div>
+        <div id="noYesContainer">
+            <div id="noYesHolder">
+                <button ng-click="swipeLeft">nope</button>
+                <button ng-click="swipeRight">yiss</button>
+            </div>
+        </div>
+    </div>
 </div>

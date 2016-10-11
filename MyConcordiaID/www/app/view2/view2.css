@@ -1,0 +1,34 @@
+#viewport {
+  background-color: #6696C8; }
+  #viewport #cardContainer {
+    background-color: #B2CAE4;
+    width: 380px;
+    height: 480px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+    #viewport #cardContainer #cardHolder {
+      width: 300px;
+      height: 400px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      top: 50%;
+      -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%); }
+      #viewport #cardContainer #cardHolder .ng-swippy {
+        display: block;
+        margin-left: auto;
+        margin-right: auto; }
+  #viewport #noYesContainer {
+    position: relative;
+    bottom: -50px; }
+    #viewport #noYesContainer #noYesHolder {
+      width: 300px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto; }
+      #viewport #noYesContainer #noYesHolder button {
+        width: 147.7px; }
