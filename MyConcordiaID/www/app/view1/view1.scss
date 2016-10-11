@@ -1,4 +1,17 @@
+$invalid-color: #FCB9B8;
+$valid-color: #D3F0D2;
+
+
 #viewport{
+
   height:100%;
-  background-color: red;
+  #invalid, #valid{
+    height:100%;
+  }
+  #invalid{
+    background-color:$invalid-color;
+  }
+  #valid{
+    background-color:$valid-color;
+  }
 }

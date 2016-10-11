@@ -43,13 +43,17 @@
     <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.css">
+    <script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.js"></script>
 </head>
 <body>
 <!--http://www.w3schools.com/howto/howto_js_sidenav.asp-->
     <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
-        <a href="#!/view1" ng-click="closeNav()">view1</a>
-        <a href="#!/view2" ng-click="closeNav()">view2</a>
+        <!--<a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>-->
+        <a  ng-click="toggleNav()">Close</a>
+        <a href="#!/view1" ng-click="closeNav()">Review</a>
+        <a href="#!/view2" ng-click="closeNav()">Validate</a>
     </div>
 
 
@@ -58,14 +62,14 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 <div id="main" class="row">
-<div id="sideMenuStatic" class="col-sm-1 mainComponent">
-    <span id="hamburger" ng-click="openNav()">open</span>
+<div id="sideMenuStatic" class="mainComponent">
     <div>
-        <a href="#!/view1" ng-click="closeNav()">icon</a>
-        <a href="#!/view2" ng-click="closeNav()">icon</a>
+        <hamburger-toggle id="hamburger" ng-click="toggleNav()" state="hamState"></hamburger-toggle>
+        <a id="goToReviewIcon" href="#!/view1" ng-click="closeNav()"></a>
+        <a id="goToValidateIcon" href="#!/view2" ng-click="closeNav()"></a>
     </div>
 </div>
-<div id="ng-view" class="col-sm-11 mainComponent" ng-view></div>
+<div id="ng-view" class="mainComponent" ng-view></div>
     </div>
 </body>
 </html>

@@ -1,5 +1,21 @@
 /* app css stylesheet */
 $sideNav-color:  #FFFFFF;
+$sideNav-width: 60px;
+$sideNavIcon-size:40px;
+
+@mixin center(){
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
 
 html, body, .ng-scope {
   height: 100%;
@@ -8,18 +24,51 @@ html, body, .ng-scope {
 #main {
   height:100%;
   #sideMenuStatic {
+    position:relative;
     background-color: $sideNav-color;
     z-index: 100;
+    width: $sideNav-width;
+    float:left;
+    margin-left: 15px;
+
+    #hamburger{
+      transform: scale(0.2);
+      margin-left: 2px;
+      margin-right: auto;
+      display:block;
+      margin-top:20px;
+      width: $sideNavIcon-size;
+      height: $sideNavIcon-size;
+    }
+
+    a{
+      @include center();
+      display:block;
+      margin-top:20px;
+      width: $sideNavIcon-size;
+      height: $sideNavIcon-size;
+
+    }
+    #goToReviewIcon{
+      background: url(icons/reviewViewIcon.png) no-repeat center;
+
+      background-size:70%;
+    }
+    #goToValidateIcon{
+      background: url(icons/validateViewIcon.png) no-repeat center;
+
+      background-size:67%;
+    }
   }
   .mainComponent {
     height: 100%;
   }
+  #ng-view{
+    overflow:hidden;
+    width:auto;
+  }
 }
 
-
-#hamburger {
-  position: absolute;
-}
 
 .card {
   height: 100%;
@@ -34,15 +83,16 @@ html, body, .ng-scope {
   left: 0;
   background-color: $sideNav-color;
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 
   /* The navigation menu links */
   a {
+    height:$sideNavIcon-size;
+    margin-top:20px;
     margin-left:50px;
     padding: 8px 8px 8px 32px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 15px;
     color: #818181;
     display: block;
     transition: 0.3s

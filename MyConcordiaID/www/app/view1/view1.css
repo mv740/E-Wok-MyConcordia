@@ -1,3 +1,8 @@
 #viewport {
-  height: 100%;
-  background-color: red; }
+  height: 100%; }
+  #viewport #invalid, #viewport #valid {
+    height: 100%; }
+  #viewport #invalid {
+    background-color: #FCB9B8; }
+  #viewport #valid {
+    background-color: #D3F0D2; }

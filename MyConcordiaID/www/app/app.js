@@ -7,7 +7,8 @@ angular.module('myApp', [
   'ngMaterial',
   'myApp.view1',
   'myApp.view2',
-  'myApp.version'
+  'myApp.version',
+    'ngHamburger'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');
@@ -15,12 +16,23 @@ config(['$locationProvider', '$routeProvider', function($locationProvider, $rout
   $routeProvider.otherwise({redirectTo: '/view1'});
 }]).
 controller('MainCtrl', function($scope, $mdSidenav) {
-  $scope.openNav = function() {
-    document.getElementById("mySidenav").style.width = "250px";
+
+  $scope.toggleNav = function(){
+    if (!$scope.hamState){
+      closeNav();
+    }
+    else openNav();
   }
 
   /* Set the width of the side navigation to 0 */
-  $scope.closeNav = function() {
+  var closeNav = function(){
     document.getElementById("mySidenav").style.width = "0";
+    $scope.hamState = false;
   }
+  $scope.closeNav = closeNav;
+
+  function openNav(){
+    document.getElementById("mySidenav").style.width = "250px";
+  }
+
 });
