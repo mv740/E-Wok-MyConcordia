@@ -3,8 +3,12 @@
     <div class="item" item-image>
       <img ng-src="{{pictureUrl}}">
     </div>
-    <div class="takePictureButton">
-      <button ng-click="takePicture()" class="button button-block button-calm">Take Picture</button>
+    <div class="takePictureButton" ng-show="showTakePictureButton">
+      <button ng-click="takePicture()" class="button button-block button-calm">{{takePictureButtonText}}</button>
+    </div>
+
+    <div class="sendPictureButton" ng-show="showSendPictureButton">
+      <button ng-click="sendPicture()" class="button button-block button-calm">Send Picture</button>
     </div>
   </ion-content>
 </ion-view>

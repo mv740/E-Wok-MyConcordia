@@ -46,8 +46,9 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
 .controller('CameraCtrl', function($scope, $cordovaCamera) {
     $scope.pictureUrl = 'http://placehold.it/300x300';
-
-
+    $scope.showTakePictureButton = true;
+    $scope.showSendPictureButton = false;
+    $scope.takePictureButtonText = 'Take Picture';
 
     $scope.takePicture = function () {
 
@@ -67,11 +68,19 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
       $cordovaCamera.getPicture(options)
         .then(function (imageData) {
           $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
-
+          //set send picture button visible
+          //set retake photo button visible
+          //set text take picture to retake picture
+          $scope.takePictureButtonText = 'Retake Picture';
+          $scope.showSendPictureButton = true;
         }, function (error) {
 
         })
     }
+
+    // $scope.sendPicture = function() {
+    //
+    // }
   })
 
 .controller('LoginCtrl', function($scope) {
