@@ -55,7 +55,7 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
         quality: 50,
         destinationType: Camera.DestinationType.DATA_URL,
         sourceType: Camera.PictureSourceType.CAMERA,
-        allowEdit: true,
+        allowEdit: true, //This function allows cropping and editing the picture
         encodingType: Camera.EncodingType.JPEG,
         targetWidth: 300,
         targetHeight: 300,
