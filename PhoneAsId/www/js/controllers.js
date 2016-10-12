@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
 .controller('AppCtrl', ['$scope', '$ionicModal', '$timeout', '$http', 'serverName', function($scope, $ionicModal, $timeout, $http, serverName) {
 
@@ -43,6 +43,19 @@ angular.module('starter.controllers', [])
     }, 1000);
   };
 }])
+
+.controller('CameraCtrl', function($scope, $cordovaCamera) {
+    $scope.pictureUrl = 'http://placehold.it/300x300';
+
+    $scope.takePicture = function () {
+      $cordovaCamera.getPicture({})
+        .then(function (data) {
+          
+        }, function (error) {
+          
+        })
+    }
+  })
 
 .controller('LoginCtrl', function($scope) {
 
