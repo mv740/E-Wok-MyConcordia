@@ -72,6 +72,30 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
         })
     }
+
+  $scope.loadPicture = function () {
+
+    var loadOptions = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+      correctOrientation:true
+    };
+
+    $cordovaCamera.getPicture(loadOptions)
+      .then(function (imageData) {
+        $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
+
+      }, function (error) {
+
+      })
+  }
   })
 
 .controller('LoginCtrl', function($scope) {
