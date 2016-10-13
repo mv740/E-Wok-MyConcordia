@@ -1,3 +1,8 @@
 MyConcordiaID/.vs/
 MyConcordiaID/src/MyConcordiaID/obj/
 MyConcordiaID/src/MyConcordiaID/bin/
+/packages/
+!packages/repositories.config
+MyConcordiaID/OracleEntityFramework/obj/
+MyConcordiaID/OracleEntityFramework/bin/
+MyConcordiaID/packages/

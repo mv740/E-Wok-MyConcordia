@@ -11,6 +11,7 @@ using MyConcordiaID.Models;
 using MyConcordiaID.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using OracleEntityFramework;
 
 namespace MyConcordiaID
 {
@@ -40,6 +41,7 @@ namespace MyConcordiaID
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddScoped(_ => new DatabaseEntities());
             services.AddSingleton<IStudentRepository, StudentRepository>();
         }
 

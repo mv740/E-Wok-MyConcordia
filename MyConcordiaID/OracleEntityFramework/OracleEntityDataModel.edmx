@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="OracleDataModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CONCORDIAUSERS">
+          <Key>
+            <PropertyRef Name="NETNAME" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="ROLE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="64" Nullable="false" />
+          <Property Name="NETNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="OAUTHID" Type="varchar2" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="OracleDataModelStoreContainer">
+          <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSERS" Schema="MV740" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OracleDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CONCORDIAUSER">
+          <Key>
+            <PropertyRef Name="NETNAME" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="ROLE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NETNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="OAUTHID" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="MyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSER" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OracleDataModelStoreContainer" CdmEntityContainer="MyEntities">
+          <EntitySetMapping Name="CONCORDIAUSERS">
+            <EntityTypeMapping TypeName="OracleDataModel.CONCORDIAUSER">
+              <MappingFragment StoreEntitySet="CONCORDIAUSERS">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ROLE" ColumnName="ROLE" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />
+                <ScalarProperty Name="OAUTHID" ColumnName="OAUTHID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
