@@ -53,7 +53,7 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
       var options = {
         quality: 50,
-        destinationType: Camera.DestinationType.DATA_URL,
+        destinationType: Camera.DestinationType.FILE_URI,
         sourceType: Camera.PictureSourceType.CAMERA,
         allowEdit: true, //This function allows cropping and editing the picture
         encodingType: Camera.EncodingType.JPEG,
@@ -65,8 +65,8 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
       };
 
       $cordovaCamera.getPicture(options)
-        .then(function (imageData) {
-          $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
+        .then(function (imageURI) {
+          $scope.pictureUrl = imageURI;
           $scope.takePictureButtonText = 'Retake Picture';
           $scope.showSendPictureButton = true;
         }, function (error) {
@@ -74,15 +74,11 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
         })
     }
 
-    // $scope.sendPicture = function() {
-    //
-    // }
-
   $scope.loadPicture = function () {
 
     var loadOptions = {
       quality: 50,
-      destinationType: Camera.DestinationType.DATA_URL,
+      destinationType:  Camera.DestinationType.FILE_URI,
       sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
       allowEdit: true,
       encodingType: Camera.EncodingType.JPEG,
@@ -94,12 +90,39 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
     };
 
     $cordovaCamera.getPicture(loadOptions)
-      .then(function (imageData) {
-        $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
+      .then(function (imageURI) {
+        $scope.pictureUrl = imageURI;
+        $scope.showSendPictureButton = true;
 
       }, function (error) {
 
       })
+  }
+
+  //TODO upload animation?
+  $scope.sendPicture = function() {
+    var ft = new FileTransfer(),
+      options = new FileUploadOptions();
+
+    var serverURL = encodeURI("https://myconcordiaid.azurewebsites.net");
+
+    options.fileKey = "file";
+    options.fileName = 'filename.jpg';
+    options.mimeType = "image/jpeg";
+    options.chunkedMode = false;
+    options.params = {
+      //TODO get timestamp
+      "timestamp": "Oct 12,2016"
+    };
+
+    ft.upload($scope.pictureUrl, serverURL + "/api/student/ProfilePicture",
+      function (e) {
+        alert("Upload sent");
+      },
+      function (e) {
+        alert("Upload failed");
+      }, options);
+
   }
 
   })
