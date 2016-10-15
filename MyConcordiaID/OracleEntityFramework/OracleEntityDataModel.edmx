@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="OracleDataModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="OracleDataModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CONCORDIAUSERS">
           <Key>
             <PropertyRef Name="NETNAME" />
@@ -15,11 +15,21 @@
           <Property Name="NETNAME" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="OAUTHID" Type="varchar2" MaxLength="256" Nullable="false" />
         </EntityType>
+        <EntityType Name="PICTURE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="PENDING" Type="binary_double" Nullable="false" />
+          <Property Name="APPROVED" Type="binary_double" />
+          <Property Name="PICTURE" Type="blob" Nullable="false" />
+          <Property Name="UPLOADEDDATE" Type="timestamp" Precision="6" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="OracleDataModelStoreContainer">
           <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSERS" Schema="MV740" store:Type="Tables" />
+          <EntitySet Name="PICTURE" EntityType="Self.PICTURE" Schema="MV740" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OracleDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -35,7 +45,18 @@
         </EntityType>
         <EntityContainer Name="MyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSER" />
+          <EntitySet Name="PICTUREs" EntityType="OracleDataModel.PICTURE" />
         </EntityContainer>
+        <EntityType Name="PICTURE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="PENDING" Type="Double" Nullable="false" />
+          <Property Name="APPROVED" Type="Double" />
+          <Property Name="PICTURE1" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="UPLOADEDDATE" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -50,6 +71,17 @@
                 <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
                 <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />
                 <ScalarProperty Name="OAUTHID" ColumnName="OAUTHID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PICTUREs">
+            <EntityTypeMapping TypeName="OracleDataModel.PICTURE">
+              <MappingFragment StoreEntitySet="PICTURE">
+                <ScalarProperty Name="UPLOADEDDATE" ColumnName="UPLOADEDDATE" />
+                <ScalarProperty Name="PICTURE1" ColumnName="PICTURE" />
+                <ScalarProperty Name="APPROVED" ColumnName="APPROVED" />
+                <ScalarProperty Name="PENDING" ColumnName="PENDING" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

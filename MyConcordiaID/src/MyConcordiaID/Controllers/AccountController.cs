@@ -10,6 +10,7 @@ using System.Security.Claims;
 using MyConcordiaID.Models.AccountViewModels;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Http;
+using OracleEntityFramework;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -23,16 +24,19 @@ namespace MyConcordiaID.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly DatabaseEntities _database;
         private readonly ILogger _logger;
 
         public AccountController(
            UserManager<ApplicationUser> userManager,
            SignInManager<ApplicationUser> signInManager,
-           ILoggerFactory loggerFactory)
+           ILoggerFactory loggerFactory,
+           DatabaseEntities dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _database = dbContext;
         }
 
         //
@@ -102,8 +106,12 @@ namespace MyConcordiaID.Controllers
                 // If the user does not have an account, then ask the user to create an account.
                 ViewData["ReturnUrl"] = returnUrl;
                 ViewData["LoginProvider"] = info.LoginProvider;
+
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = email });
+            
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel {
+                    Email = email,
+                });
             }
         }
 
@@ -124,7 +132,28 @@ namespace MyConcordiaID.Controllers
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user);
-                if (result.Succeeded)
+
+                var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
+
+                var lastname = info.Principal.FindFirstValue(ClaimTypes.Surname);
+             
+                //todo change primary key to id
+                var concordiaUsers = _database.Set<CONCORDIAUSER>();
+                CONCORDIAUSER newUser = new CONCORDIAUSER();
+                newUser.EMAIL = model.Email;
+                Random rnd = new Random();
+                newUser.ID = rnd.Next(20000000, 99999999); // with AD from concordia we would get the real id
+                string netname = firstName[0] + "_" + lastname.Substring(0, 5);
+                newUser.NETNAME = netname; // michal wozniak => m_wozni
+                newUser.ROLE = "STUDENT";
+   
+                //change variable oathid to nameIdentifier or even remove completely
+                newUser.OAUTHID = info.Principal.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                concordiaUsers.Add(newUser);
+                var oracleResult = _database.SaveChangesAsync();
+                
+                if (result.Succeeded && oracleResult.IsCompleted)
                 {
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)
