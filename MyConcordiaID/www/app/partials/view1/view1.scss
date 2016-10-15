@@ -5,8 +5,9 @@ $valid-color: #D3F0D2;
 #viewport{
 
   height:100%;
-  #invalid, #valid{
+  #invalid{
     height:100%;
+    overflow: auto;
   }
   #invalid{
     background-color:$invalid-color;

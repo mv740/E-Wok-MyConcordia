@@ -2,37 +2,37 @@
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
-  'ngRoute',
-  'ngAnimate',
-  'ngMaterial',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.version',
+    'ngRoute',
+    'ngAnimate',
+    'ngMaterial',
+    'myApp.view1',
+    'myApp.searchModal',
+    'myApp.searchModal.gallery',
+    'myApp.searchBox',
+    'myApp.version',
     'ngHamburger'
-]).
-config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
-  $locationProvider.hashPrefix('!');
+]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+    $locationProvider.hashPrefix('!');
 
-  $routeProvider.otherwise({redirectTo: '/view1'});
-}]).
-controller('MainCtrl', function($scope, $mdSidenav) {
+    $routeProvider.otherwise({redirectTo: '/view1'});
+}]).controller('MainCtrl', function ($scope, $mdSidenav) {
 
-  $scope.toggleNav = function(){
-    if (!$scope.hamState){
-      closeNav();
+    $scope.toggleNav = function () {
+        if (!$scope.hamState) {
+            closeNav();
+        }
+        else openNav();
     }
-    else openNav();
-  }
 
-  /* Set the width of the side navigation to 0 */
-  var closeNav = function(){
-    document.getElementById("mySidenav").style.width = "0";
-    $scope.hamState = false;
-  }
-  $scope.closeNav = closeNav;
+    /* Set the width of the side navigation to 0 */
+    var closeNav = function () {
+        document.getElementById("mySidenav").style.width = "0";
+        $scope.hamState = false;
+    }
+    $scope.closeNav = closeNav;
 
-  function openNav(){
-    document.getElementById("mySidenav").style.width = "250px";
-  }
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+    }
 
 });

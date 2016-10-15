@@ -1,7 +1,8 @@
 #viewport {
   height: 100%; }
-  #viewport #invalid, #viewport #valid {
-    height: 100%; }
+  #viewport #invalid {
+    height: 100%;
+    overflow: auto; }
   #viewport #invalid {
     background-color: #FCB9B8; }
   #viewport #valid {
