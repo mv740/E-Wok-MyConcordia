@@ -46,6 +46,7 @@
     <!--CONTROLLERS-->
     <script src="app.js"></script>
     <script src="partials/view1/view1.js"></script>
+    <script src="partials/login/login.js"></script>
     <script src="partials/searchModal/searchModal.js"></script>
     <script src="partials/searchModal/gallery/gallery.js"></script>
     <script src="partials/searchBox/searchBox.js"></script>
@@ -65,7 +66,7 @@
     <!--<a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>-->
     <a ng-click="toggleNav()">Close</a>
     <a href="#!/view1" ng-click="closeNav()">Review</a>
-    <a href="#!/view2" ng-click="closeNav()">Validate</a>
+    <a href="#!/login" ng-click="closeNav()">Validate</a>
 </div>
 
 <div id="myModal" class="modal fade" role="dialog" ng-include="'partials/searchModal/searchModal.html'"></div>
@@ -76,7 +77,7 @@
         <div>
             <hamburger-toggle id="hamburger" ng-click="toggleNav()" state="hamState"></hamburger-toggle>
             <a id="goToReviewIcon" href="#!/view1" ng-click="closeNav()"></a>
-            <a id="goToValidateIcon" href="#!/view2" ng-click="closeNav()"></a>
+            <a id="goToValidateIcon" href="#!/login" ng-click="closeNav()"></a>
         </div>
     </div>
 

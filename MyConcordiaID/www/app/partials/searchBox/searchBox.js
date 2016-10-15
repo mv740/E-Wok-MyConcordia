@@ -4,7 +4,7 @@
 
 'use strict';
 
-angular.module('myApp.searchBox', ['ngRoute', 'ngTouch', 'angularCSS'])
+angular.module('myApp.searchBox', [])
 
     .controller('SearchBoxCtrl', ['$scope', '$timeout', function($scope, $timeout) {
 

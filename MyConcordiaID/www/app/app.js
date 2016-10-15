@@ -5,6 +5,7 @@ angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
     'ngMaterial',
+    'myApp.login',
     'myApp.view1',
     'myApp.searchModal',
     'myApp.searchModal.gallery',
