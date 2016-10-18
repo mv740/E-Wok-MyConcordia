@@ -28,7 +28,9 @@
     "EntityFramework.Oracle.Rdb": "7.3.4",
     "BundlerMinifier.Core": "2.2.281",
     "odp.net.x64": "112.3.20",
-    "Microsoft.AspNet.Identity.Core": "2.2.1"
+    "Microsoft.AspNet.Identity.Core": "2.2.1",
+    "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
+    "Microsoft.ApplicationInsights.Web": "2.1.0"
   },
 
   "tools": {

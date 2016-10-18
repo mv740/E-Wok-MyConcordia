@@ -14,6 +14,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <SchemaVersion>2.0</SchemaVersion>
+    <ApplicationInsightsResourceId>/subscriptions/d9f4860b-c778-4241-9edc-6acc6d3271da/resourcegroups/MyConcordia/providers/microsoft.insights/components/MyConcordiaID</ApplicationInsightsResourceId>
   </PropertyGroup>
   <ItemGroup>
     <DnxInvisibleContent Include="bower.json" />

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,6 +28,8 @@ namespace MyConcordiaID
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddApplicationInsightsTelemetry(Configuration);
             // Add framework services.
             services.AddDbContext<DatabaseContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -60,6 +58,9 @@ namespace MyConcordiaID
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            // Add Application Insights monitoring to the request pipeline as a very first middleware.
+            app.UseApplicationInsightsRequestTelemetry();
 
             app.UseStaticFiles();
 
