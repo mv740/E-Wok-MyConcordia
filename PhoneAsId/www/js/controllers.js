@@ -49,20 +49,22 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
     $scope.showSendPictureButton = false;
     $scope.takePictureButtonText = 'Take Picture';
 
+    var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.FILE_URI,
+      allowEdit: true, //This function allows cropping and editing the picture
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 300,
+      targetHeight: 300,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false,
+      correctOrientation:true
+    };
+
     $scope.takePicture = function () {
 
-      var options = {
-        quality: 50,
-        destinationType: Camera.DestinationType.FILE_URI,
-        sourceType: Camera.PictureSourceType.CAMERA,
-        allowEdit: true, //This function allows cropping and editing the picture
-        encodingType: Camera.EncodingType.JPEG,
-        targetWidth: 300,
-        targetHeight: 300,
-        popoverOptions: CameraPopoverOptions,
-        saveToPhotoAlbum: false,
-        correctOrientation:true
-      };
+
+      options.sourceType=Camera.PictureSourceType.CAMERA;
 
       $cordovaCamera.getPicture(options)
         .then(function (imageURI) {
@@ -76,20 +78,10 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
   $scope.loadPicture = function () {
 
-    var loadOptions = {
-      quality: 50,
-      destinationType:  Camera.DestinationType.FILE_URI,
-      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-      allowEdit: true,
-      encodingType: Camera.EncodingType.JPEG,
-      targetWidth: 300,
-      targetHeight: 300,
-      popoverOptions: CameraPopoverOptions,
-      saveToPhotoAlbum: false,
-      correctOrientation:true
-    };
 
-    $cordovaCamera.getPicture(loadOptions)
+    options.sourceType = Camera.PictureSourceType.PHOTOLIBRARY;
+
+    $cordovaCamera.getPicture(options)
       .then(function (imageURI) {
         $scope.pictureUrl = imageURI;
         $scope.showSendPictureButton = true;
