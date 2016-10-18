@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="partials/searchModal/gallery/gallery.css">
+<div ng-controller="GalleryCtrl">
+
+
+    <div class="thumbsshell">
+        <div class="thumbswrapper">
+            <ul>
+                <!--    Iterate through all images and display them end to end as thumbs -->
+                <li ng-repeat="image in gallery.data">
+                    <div class="thumbwrapper">
+                        <a ng-href="" ng-click="setFullscreen(image)" data-toggle="modal" data-target="#imageModal">
+                            <img class="thumbnail" ng-src="{{gallery.IMAGE_LOCATION+image}}"/>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

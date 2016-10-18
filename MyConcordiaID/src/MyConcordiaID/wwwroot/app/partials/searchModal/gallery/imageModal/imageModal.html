@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="partials/searchModal/gallery/imageModal/imageModal.css">
+
+<div id='imageModal' class="modal-dialog" ng-controller="SearchModalCtrl">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div id="modal-body" class="modal-body row">
+            <img id="fullsize" height="200" width="100" ng-href="{{gallery.IMAGE_LOCATION+gallery.fullscreen}}" ng-show="gallery.IMAGE_LOCATION+gallery.fullscreen != null"/>
+        </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+
+</div>
