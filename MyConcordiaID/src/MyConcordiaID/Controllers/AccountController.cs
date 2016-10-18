@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
@@ -8,16 +7,14 @@ using MyConcordiaID.Models;
 using Microsoft.Extensions.Logging;
 using System.Security.Claims;
 using MyConcordiaID.Models.AccountViewModels;
-using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Http;
 using OracleEntityFramework;
+using MyConcordiaID.Helper;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MyConcordiaID.Controllers
 {
-
-
 
     [Authorize]
     public class AccountController : Controller
@@ -26,6 +23,7 @@ namespace MyConcordiaID.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly DatabaseEntities _database;
         private readonly ILogger _logger;
+        private readonly IUrlHelper _urlHelper;
 
         public AccountController(
            UserManager<ApplicationUser> userManager,
@@ -74,6 +72,59 @@ namespace MyConcordiaID.Controllers
         }
 
         //
+        // POST: /Account/ExternalLogin
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Account/ExternalLogin")]
+        public IActionResult GetExternalLogin(string provider, string returnUrl = null)
+        {
+            // Request a redirect to the external login provider.
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return Challenge(properties, provider);
+        }
+
+        // GET : /Account/ExternalLogins
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Account/ExternalLogins")]
+        public ExternalLoginViewModel GetExternalLogins(string returnUrl, bool generateState = false)
+        {
+
+            ExternalLoginViewModel login;
+            string state;
+
+            if (generateState)
+            {
+                const int strengthInBits = 256;
+                state = RandomOAuthStateGenerator.Generate(strengthInBits);
+            }
+            else
+            {
+                state = null;
+            }
+
+            ///todo : replace client_id literal string by fetching directly from .json 
+            login = new ExternalLoginViewModel
+            {
+                Name = Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme,
+                Url = Url.Action("ExternalLogin", new
+                {
+                    provider = "Google",
+                    response_type = "token",
+                    client_id = "410122942772-7ugs0v8ltf2127of481ie7oej4q5or4j.apps.googleusercontent.com",
+                    redirect_uri = new Uri(HttpRequestExtensions.ToUri(Request), returnUrl).AbsoluteUri,
+                    state = state
+                }),
+                State = state
+
+            };
+
+            return login;
+        }
+
+
+        //
         // GET: /Account/ExternalLoginCallback
         [HttpGet]
         [AllowAnonymous]
@@ -108,8 +159,9 @@ namespace MyConcordiaID.Controllers
                 ViewData["LoginProvider"] = info.LoginProvider;
 
                 var email = info.Principal.FindFirstValue(ClaimTypes.Email);
-            
-                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel {
+
+                return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel
+                {
                     Email = email,
                 });
             }
@@ -136,7 +188,7 @@ namespace MyConcordiaID.Controllers
                 var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
 
                 var lastname = info.Principal.FindFirstValue(ClaimTypes.Surname);
-             
+
                 //todo change primary key to id
                 var concordiaUsers = _database.Set<CONCORDIAUSER>();
                 CONCORDIAUSER newUser = new CONCORDIAUSER();
@@ -146,13 +198,13 @@ namespace MyConcordiaID.Controllers
                 string netname = firstName[0] + "_" + lastname.Substring(0, 5);
                 newUser.NETNAME = netname; // michal wozniak => m_wozni
                 newUser.ROLE = "STUDENT";
-   
+
                 //change variable oathid to nameIdentifier or even remove completely
                 newUser.OAUTHID = info.Principal.FindFirstValue(ClaimTypes.NameIdentifier);
 
                 concordiaUsers.Add(newUser);
                 var oracleResult = _database.SaveChangesAsync();
-                
+
                 if (result.Succeeded && oracleResult.IsCompleted)
                 {
                     result = await _userManager.AddLoginAsync(user, info);
@@ -198,5 +250,7 @@ namespace MyConcordiaID.Controllers
         }
 
         #endregion
+
+
     }
 }
