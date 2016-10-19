@@ -10,7 +10,6 @@ angular.module('myApp', [
     'myApp.searchModal',
     'myApp.searchModal.gallery',
     'myApp.searchBox',
-    'myApp.version',
     'ngHamburger'
 ]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');

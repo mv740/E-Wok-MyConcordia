@@ -6,11 +6,11 @@ angular.module('myApp.searchModal', ['ngRoute', 'ngTouch', 'ngSwippy', 'angularC
 .controller('SearchModalCtrl', ['$scope', '$timeout', function($scope, $timeout) {
 
   $scope.itemsCollection = [{
-    thumbnail: 'partials/searchModal/images/1.jpg',
+    thumbnail: 'images/1.jpg',
     title: 'Clara Oswin Oswald',
     subtitle: 'clara@gmail.com'
   }, {
-    thumbnail: 'partials/searchModal/images/2.jpg',
+    thumbnail: 'images/2.jpg',
     title: 'Emy Pond',
     subtitle: 'emy@gmail.com'
   }]

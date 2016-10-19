@@ -1,9 +1,0 @@
-#viewport {
-  height: 100%; }
-  #viewport #invalid {
-    height: 100%;
-    overflow: auto; }
-  #viewport #invalid {
-    background-color: #FCB9B8; }
-  #viewport #valid {
-    background-color: #D3F0D2; }
