@@ -23,13 +23,13 @@ angular.module('myApp', [
             closeNav();
         }
         else openNav();
-    }
+    };
 
     /* Set the width of the side navigation to 0 */
     var closeNav = function () {
         document.getElementById("mySidenav").style.width = "0";
         $scope.hamState = false;
-    }
+    };
     $scope.closeNav = closeNav;
 
     function openNav() {

@@ -9,7 +9,7 @@ angular.module('myApp.searchModal.gallery',[])
 
         var IMAGE_WIDTH = 405;
         $scope.gallery = {
-            IMAGE_LOCATION : "partials/searchModal/images/",
+            IMAGE_LOCATION : "images/",
             data : [
                 '1.jpg',
                 '2.jpg'

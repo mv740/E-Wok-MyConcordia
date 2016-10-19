@@ -1,0 +1,15 @@
+#searchModal {
+  background-color: #B2CAE4;
+  min-width: 650px; }
+  #searchModal .modal-element {
+    background-color: #B2CAE4; }
+    #searchModal .modal-element #galleryContainer {
+      max-height: 200px; }
+  #searchModal #cardHolder {
+    padding-bottom: 2%;
+    background-color: #D8E5F1; }
+
+#noYesContainer button {
+  float: left; }
+
+/*# sourceMappingURL=searchModal.css.map */

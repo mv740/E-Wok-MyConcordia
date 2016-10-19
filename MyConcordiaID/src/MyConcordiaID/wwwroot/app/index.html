@@ -15,7 +15,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="~/css/app.css">
 
 
     <!-- In production use:
@@ -45,16 +45,16 @@
 
     <!--CONTROLLERS-->
     <script src="~/js/app.js"></script>
-    <script src="partials/view1/view1.js"></script>
-    <script src="partials/login/login.js"></script>
-    <script src="partials/searchModal/searchModal.js"></script>
-    <script src="partials/searchModal/gallery/gallery.js"></script>
-    <script src="partials/searchBox/searchBox.js"></script>
-    <script src="components/version/version.js"></script>
+    <script src="~/js/view1.js"></script>
+    <script src="~/js/login.js"></script>
+    <script src="~/js/searchModal.js"></script>
+    <script src="~/js/gallery/gallery.js"></script>
+    <script src="~/js/searchBox.js"></script>
+    <script src="~/js/version.js"></script>
 
 
-    <script src="components/version/version-directive.js"></script>
-    <script src="components/version/interpolate-filter.js"></script>
+    <!--<script src="components/version/version-directive.js"></script>
+    <script src="components/version/interpolate-filter.js"></script>-->
 
 
 
@@ -69,8 +69,8 @@
     <a href="#!/login" ng-click="closeNav()">Validate</a>
 </div>
 
-<div id="myModal" class="modal fade" role="dialog" ng-include="'partials/searchModal/searchModal.html'"></div>
-<div id="imageModal" class="modal fade" role="dialog" ng-controller="GalleryCtrl" ng-include="'partials/searchModal/gallery/imageModal/imageModal.html'"></div>
+<div id="myModal" class="modal fade" role="dialog" ng-include="'app/partials/searchModal/searchModal.html'"></div>
+<div id="imageModal" class="modal fade" role="dialog" ng-controller="GalleryCtrl" ng-include="'app/partials/searchModal/gallery/imageModal/imageModal.html'"></div>
 
 <div id="main" class="row">
     <div id="sideMenuStatic" class="mainComponent">
