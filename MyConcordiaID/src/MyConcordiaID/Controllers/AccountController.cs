@@ -10,6 +10,7 @@ using MyConcordiaID.Models.AccountViewModels;
 using Microsoft.AspNetCore.Http;
 using OracleEntityFramework;
 using MyConcordiaID.Helper;
+using Microsoft.AspNetCore.Authentication;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -72,14 +73,14 @@ namespace MyConcordiaID.Controllers
         }
 
         //
-        // POST: /Account/ExternalLogin
+        // GET: /Account/ExternalLogin
         [HttpGet]
         [AllowAnonymous]
         [Route("Account/ExternalLogin")]
         public IActionResult GetExternalLogin(string provider, string returnUrl = null)
         {
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var redirectUrl = Url.Action("ExternalLoginMobileCallback", "Account", new { ReturnUrl = returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
@@ -136,6 +137,7 @@ namespace MyConcordiaID.Controllers
                 return View(nameof(Login));
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
+           
             if (info == null)
             {
                 return RedirectToAction(nameof(Login));
@@ -164,6 +166,48 @@ namespace MyConcordiaID.Controllers
                 {
                     Email = email,
                 });
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginMobileCallback(string returnUrl = null, string remoteError = null)
+        {
+          
+
+            //if (remoteError != null)
+            //{
+            //    //Error from external provider
+            //    return new BadRequestResult();
+            //}
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            //var authToken = info.AuthenticationTokens;
+            Authentication authObject = new Authentication();
+            // authToken.GetEnumerator().MoveNext();
+            // AuthenticationToken token = authToken.GetEnumerator().Current;
+            authObject.AuthToken = "1";//token.Value;
+
+            return new OkObjectResult(authObject);
+
+            if (info == null)
+            {
+                //need to login
+                return new UnauthorizedResult();
+            }
+
+            // Sign in the user with this external login provider if the user already has a login.
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+            if (result.Succeeded)
+            {
+              
+                 //authToken = info.AuthenticationTokens;
+                return new OkObjectResult(authObject);
+
+            }
+            else
+            {
+                return Unauthorized();
             }
         }
 
