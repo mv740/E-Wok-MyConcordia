@@ -72,14 +72,14 @@ namespace MyConcordiaID.Controllers
         }
 
         //
-        // POST: /Account/ExternalLogin
+        // GET: /Account/ExternalLogin
         [HttpGet]
         [AllowAnonymous]
         [Route("Account/ExternalLogin")]
         public IActionResult GetExternalLogin(string provider, string returnUrl = null)
         {
             // Request a redirect to the external login provider.
-            var redirectUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            var redirectUrl = Url.Action("ExternalLoginMobileCallback", "Account", new { ReturnUrl = returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
@@ -136,6 +136,7 @@ namespace MyConcordiaID.Controllers
                 return View(nameof(Login));
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
+           
             if (info == null)
             {
                 return RedirectToAction(nameof(Login));
@@ -164,6 +165,38 @@ namespace MyConcordiaID.Controllers
                 {
                     Email = email,
                 });
+            }
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ExternalLoginMobileCallback(string returnUrl = null, string remoteError = null)
+        {
+            if (remoteError != null)
+            {
+                //Error from external provider
+                return new BadRequestResult();
+            }
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            
+            if (info == null)
+            {
+                //need to login
+                return new UnauthorizedResult();
+            }
+
+            // Sign in the user with this external login provider if the user already has a login.
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+            if (result.Succeeded)
+            {
+
+                var authToken = info.AuthenticationTokens;
+                return new OkObjectResult(authToken);
+
+            }
+            else
+            {
+                return Unauthorized();
             }
         }
 
