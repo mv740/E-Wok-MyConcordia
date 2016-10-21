@@ -33,6 +33,9 @@ html, body {
     #main #sideMenuStatic #goToValidateIcon {
       background: url(../../images/icons/validateViewIcon.png) no-repeat center;
       background-size: 67%; }
+    #main #sideMenuStatic #loginIcon {
+      background: url(../../images/icons/loginIcon.png) no-repeat center;
+      background-size: 70%; }
   #main .mainComponent {
     height: 100%; }
   #main #ng-view {

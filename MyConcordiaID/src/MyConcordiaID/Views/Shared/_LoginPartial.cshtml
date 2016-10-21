@@ -2,22 +2,37 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-@if (SignInManager.IsSignedIn(User))
-{
-    <form asp-area="" asp-controller="Account" asp-action="LogOff" method="post" id="logoutForm" class="navbar-right">
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                <a asp-area="" asp-controller="Manage" asp-action="Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
-            </li>
-            <li>
-                <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
-            </li>
-        </ul>
-    </form>
-}
-else
-{
-    <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Account" asp-action="Login">Log in</a></li>
-    </ul>
-}
+
+<div id="mySidenav" class="sidenav">
+    <!--<a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>-->
+    <a ng-click="toggleNav()">Close</a>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a href="#!/view1" ng-click="closeNav()">Review</a>
+        <a href="#!/login" ng-click="closeNav()">Validate</a>
+    }
+    else
+    {
+        <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+    }
+
+</div>
+
+<div id="main" class="row">
+    <div id="sideMenuStatic" class="mainComponent">
+        <div>
+            <hamburger-toggle id="hamburger" ng-click="toggleNav()" state="hamState"></hamburger-toggle>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <a id="goToReviewIcon" href="#!/view1" ng-click="closeNav()"></a>
+                <a id="goToValidateIcon" href="#!/login" ng-click="closeNav()"></a>
+            }
+            else
+            {
+                <a id="loginIcon" asp-area="" asp-controller="Account" asp-action="Login"></a>
+            }
+        </div>
+    </div>
+
+    <div id="ng-view" class="mainComponent" ng-view></div>
+</div>
