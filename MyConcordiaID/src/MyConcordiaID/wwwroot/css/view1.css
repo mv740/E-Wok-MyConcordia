@@ -1,4 +1,4 @@
-#viewport {
+﻿#viewport {
   height: 100%; }
   #viewport #invalid {
     height: 100%;
@@ -7,5 +7,8 @@
     background-color: #FCB9B8; }
   #viewport #valid {
     background-color: #D3F0D2; }
+  #viewport .view1Component {
+    position: relative;
+    margin: 20px auto 10px auto;
+    width: 92%; }
 
-/*# sourceMappingURL=view1.css.map */

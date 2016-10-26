@@ -1,20 +1,20 @@
-li {
+﻿#gallery li {
   list-style: none;
   display: inline-block; }
 
-ul {
+#gallery ul {
   padding: 0;
   margin: 0;
   white-space: nowrap; }
 
-.thumbnail {
+#gallery .thumbnail {
   height: 50px;
   padding: 2px; }
 
-.large {
+#gallery .large {
   width: 405px; }
 
-.mainimageshell {
+#gallery .mainimageshell {
   display: none;
   background-color: #fff;
   border-radius: 8px;
@@ -22,13 +22,13 @@ ul {
   width: 400px;
   padding: 10px; }
 
-.viewwindow {
+#gallery .viewwindow {
   width: 400px;
   height: 307px;
   overflow-x: hidden;
   position: relative; }
 
-.fullsizelist {
+#gallery .fullsizelist {
   position: absolute;
   top: 0;
   left: 0;
@@ -38,28 +38,28 @@ ul {
   -webkit-transition: left .8s ease;
   -moz-transition: left .8s ease; }
 
-.bg {
+#gallery .bg {
   background-color: #333;
   padding: 10px;
   border-radius: 8px;
   float: left; }
 
-.thumbsshell {
+#gallery .thumbsshell {
   margin-top: 6px;
   background-color: #fff;
   padding: 5px;
   border-radius: 5px; }
 
-.thumbswrapper {
+#gallery .thumbswrapper {
   overflow-x: scroll;
   overflow-y: hidden;
   height: 70px; }
 
-.thumbwrapper {
+#gallery .thumbwrapper {
   float: left;
   height: 60px; }
 
-.captionshell {
+#gallery .captionshell {
   margin: 0 0 10px 5px;
   background-color: #fff;
   width: 175px;
@@ -68,4 +68,3 @@ ul {
   border-radius: 8px;
   float: left; }
 
-/*# sourceMappingURL=gallery.css.map */

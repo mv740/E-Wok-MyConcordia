@@ -1,0 +1,10 @@
+<!--src: http://cssdeck.com/labs/0chmqae2-->
+<link rel="stylesheet" type="text/css" href="css/searchResults.css">
+
+<div class="view1Component">
+<li id="searchResults" ng-controller="SearchResultsCtrl">
+    <ul ng-repeat="result in results" data-toggle="modal" data-target="#myModal">
+        <div>{{result.name}}</div>
+    </ul>
+</li>
+</div>

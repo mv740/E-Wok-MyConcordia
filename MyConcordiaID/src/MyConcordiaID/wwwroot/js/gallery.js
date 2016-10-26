@@ -26,7 +26,6 @@ angular.module('myApp.searchModal.gallery',[])
         // Scroll to appropriate position based on image index and width
         $scope.setFullscreen = function(image) {
             $scope.gallery.fullscreen = image;
-            $scope.$apply();
         };
 
     }]);
