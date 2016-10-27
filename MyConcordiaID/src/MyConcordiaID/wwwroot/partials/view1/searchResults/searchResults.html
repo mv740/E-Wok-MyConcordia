@@ -3,8 +3,8 @@
 
 <div class="view1Component">
 <li id="searchResults" ng-controller="SearchResultsCtrl">
-    <ul ng-repeat="result in results" data-toggle="modal" data-target="#myModal">
-        <div>{{result.name}}</div>
+    <ul ng-repeat="result in results" ng-click="studentClick(result)" data-toggle="modal" data-target="#myModal">
+        <div>{{result.firstName}}</div>
     </ul>
 </li>
 </div>

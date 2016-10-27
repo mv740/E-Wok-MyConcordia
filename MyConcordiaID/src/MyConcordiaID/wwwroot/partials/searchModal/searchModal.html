@@ -13,11 +13,11 @@
 
             <div id="cardContainer" class="modal-element col-sm-6">
                 <div id="cardHolder">
-                    <ng-swippy collection='itemsCollection' width='100%' height='{{size.height}}px'
-                               item-click='myCustomFunction' data='showinfo' collection-empty='swipeend'
-                               swipe-left='swipeLeft'
-                               swipe-right='swipeRight' cards-number='2' label-ok='Cool'
-                               label-negative='Bad'></ng-swippy>
+                    <ng-swippy collection='ngSwippy.collection' width='100%' height='{{ngSwippy.size.height}}px'
+                               item-click='ngSwippy.onClick' data='ngSwippy.showinfo' collection-empty='ngSwippy.swipeend'
+                               swipe-left='ngSwippy.swipeLeft'
+                               swipe-right='ngSwippy.swipeRight' cards-number='2' label-ok='Yes'
+                               label-negative='No'></ng-swippy>
 
                 </div>
                 <div id="galleryContainer" ng-include="'partials/searchModal/gallery/gallery.html'"></div>
@@ -25,14 +25,7 @@
 
 
             <div class="modal-element col-sm-6">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam augue erat, blandit non fermentum
-                    vitae, fermentum at tellus. Mauris condimentum tellus vitae leo efficitur auctor. Suspendisse at
-                    ultricies ex, sed viverra lectus. Sed lorem turpis, malesuada in eros sit amet, auctor tincidunt
-                    tellus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
-                    Donec purus erat, feugiat in sapien porttitor, vestibulum vestibulum erat. Morbi rhoncus mi at
-                    sapien dignissim rutrum. Duis tempor dapibus quam et porttitor. Fusce scelerisque, diam efficitur
-                    ornare mollis, tellus tellus fringilla urna, nec faucibus ante est vitae ante. Pellentesque
-                    mollis </p>
+                <p>{{student.firstName}}</p>
             </div>
 
 

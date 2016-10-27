@@ -26,5 +26,9 @@
   {
     "outputFile": "wwwroot/css/view1.css",
     "inputFile": "wwwroot/css/view1.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/searchBox.css",
+    "inputFile": "wwwroot/css/searchBox.scss"
   }
 ]

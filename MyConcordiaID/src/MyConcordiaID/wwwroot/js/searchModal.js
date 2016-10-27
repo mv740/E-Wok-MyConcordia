@@ -3,47 +3,56 @@
 angular.module('myApp.searchModal', ['ngRoute', 'ngTouch', 'ngSwippy', 'angularCSS'])
 
 
-.controller('SearchModalCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+.controller('SearchModalCtrl', ['$rootScope', '$scope', '$timeout', function($rootScope, $scope, $timeout) {
 
-  $scope.itemsCollection = [{
-    thumbnail: 'images/1.jpg',
-    title: 'Clara Oswin Oswald',
-    subtitle: 'clara@gmail.com'
-  }, {
-    thumbnail: 'images/2.jpg',
-    title: 'Emy Pond',
-    subtitle: 'emy@gmail.com'
-  }]
+    var searchModal = $scope;
+    
+    searchModal.student = {};
 
-  $scope.myCustomFunction = function(){
+    searchModal.ngSwippy = {
+        showInfo : false,
+        clickedTimes: 0,
+        actions: [],
+        size : {
+            width: 250,
+            height: 350
+        }
+    };
+
+    $rootScope.$on('updateSearchModal', function (event, student) {
+        searchModal.student = student;
+        searchModal.ngSwippy.collection = [{
+            thumbnail: student.gallery.toValidate
+        }];
+
+        $rootScope.$broadcast('updateGallery', student.gallery.validated);
+    });
+    
+
+    searchModal.ngSwippy.collection = [{
+        thumbnail: 'images/1.jpg'
+    }];
+
+    searchModal.ngSwippy.onClick = function () {
     $timeout(function(){
-      $scope.clickedTimes = $scope.clickedTimes + 1;
-      $scope.actions.unshift({name: 'Click on item'});
+        searchModal.ngSwippy.clickedTimes = searchModal.ngSwippy.clickedTimes + 1;
+        searchModal.ngSwippy.actions.unshift({ name: 'Click on item' });
     });
 
   };
 
-  $scope.size = {
-    width: 300,
-    height: 400
+    searchModal.ngSwippy.swipend = function () {
+        searchModal.ngSwippy.actions.unshift({ name: 'Collection Empty' });
   };
 
-  $scope.showinfo = true;
 
-  $scope.swipend = function(){
-    $scope.actions.unshift({name: 'Collection Empty'});
+
+    searchModal.ngSwippy.swipeLeft = function (person) {
+        searchModal.ngSwippy.actions.unshift({ name: 'Left swipe' });
   };
 
-  $scope.clickedTimes = 0;
-
-  $scope.actions = [];
-
-  $scope.swipeLeft = function(person){
-    $scope.actions.unshift({name: 'Left swipe'});
-  };
-
-  $scope.swipeRight = function(person){
-    $scope.actions.unshift({name: 'Right swipe'});
+    searchModal.ngSwippy.swipeRight = function (person) {
+        searchModal.ngSwippy.actions.unshift({ name: 'Right swipe' });
   };
 
 }]);

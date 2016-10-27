@@ -6,6 +6,6 @@
 
 angular.module('myApp.view1.searchBox', [])
 
-    .controller('SearchBoxCtrl', ['$scope', '$timeout', function($scope, $timeout) {
+    .controller('SearchBoxCtrl', ['$scope', function($scope) {
 
     }]);
