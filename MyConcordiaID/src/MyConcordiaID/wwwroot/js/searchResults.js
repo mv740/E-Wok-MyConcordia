@@ -15,8 +15,8 @@ angular.module('myApp.view1.searchResults', [])
             "lastName": "Cote-Tremblay",
             "id": "9999999",
             "gallery": {
-                "toValidate": "images/1.jpg",
-                "validated": ["images/1.jpg", "images/2.jpg"]
+                "toValidate": "images/francis1.jpg",
+                "validated": ["images/francis2.jpg", "images/francis3.jpg"]
             },
             "birthdate": {
                 "day": "10",
@@ -29,8 +29,8 @@ angular.module('myApp.view1.searchResults', [])
             "lastName": "Wozniak",
             "id": "88888",
             "gallery": {
-                "toValidate": "images/1.jpg",
-                "validated": ["images/1.jpg", "images/2.jpg"]
+                "toValidate": "images/michal1.jpg",
+                "validated": ["images/michal2.jpg", "images/michal3.jpg"]
             },
             "birthdate": {
                 "day": "1",

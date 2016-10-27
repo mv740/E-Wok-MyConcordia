@@ -27,11 +27,6 @@ angular.module('myApp.searchModal', ['ngRoute', 'ngTouch', 'ngSwippy', 'angularC
 
         $rootScope.$broadcast('updateGallery', student.gallery.validated);
     });
-    
-
-    searchModal.ngSwippy.collection = [{
-        thumbnail: 'images/1.jpg'
-    }];
 
     searchModal.ngSwippy.onClick = function () {
     $timeout(function(){

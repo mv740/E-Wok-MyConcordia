@@ -1,4 +1,5 @@
-﻿#viewport {
+﻿@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
+#viewport {
   height: 100%; }
   #viewport #invalid {
     height: 100%;
@@ -10,5 +11,6 @@
   #viewport .view1Component {
     position: relative;
     margin: 20px auto 10px auto;
-    width: 92%; }
+    width: 92%;
+    font: 1.2em 'Montserrat Alternates'; }
 

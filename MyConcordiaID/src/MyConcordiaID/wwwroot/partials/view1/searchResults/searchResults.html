@@ -2,9 +2,20 @@
 <link rel="stylesheet" type="text/css" href="css/searchResults.css">
 
 <div class="view1Component">
-<li id="searchResults" ng-controller="SearchResultsCtrl">
-    <ul ng-repeat="result in results" ng-click="studentClick(result)" data-toggle="modal" data-target="#myModal">
-        <div>{{result.firstName}}</div>
-    </ul>
-</li>
+    <li id="searchResults" ng-controller="SearchResultsCtrl">
+        <ul ng-repeat="result in results" ng-click="studentClick(result)" data-toggle="modal" data-target="#myModal">
+            <div>
+                <span>{{result.id}},</span>
+
+                <span>{{result.firstName}}</span>
+                <span>{{result.lastName}},</span>
+
+                <span>{{result.netname}},</span>
+
+                <span>{{result.birthdate.day}}</span>
+                <span>{{result.birthdate.month}}</span>
+                <span>{{result.birthdate.year}}</span>
+            </div>
+        </ul>
+    </li>
 </div>
