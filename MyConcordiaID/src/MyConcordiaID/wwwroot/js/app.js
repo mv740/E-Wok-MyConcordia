@@ -13,12 +13,39 @@ angular.module('myApp', [
     'myApp.searchModal.gallery',
     'myApp.imageModal',
     'ngHamburger'
-]).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
+]).constant("myConfig", {
+    "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
+    "port": "80",
+
+    "validatePhoto": {
+        "url": "student/validatePhoto",
+        "dataTemplate": {
+            "id": "",
+            "valid": ""
+        }
+    },
+
+    "searchStudent": {
+        "url": "student/searchStudent",
+        "dataTemplate": {
+            "firstName": "",
+            "lastName": "",
+            "id": "",
+            "birthdate": {
+                "day": "",
+                "month": "",
+                "year": ""
+            },
+            "netname": ""
+        }
+
+    }
+}).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
-    $routeProvider.otherwise({redirectTo: '/view1'});
+    $routeProvider.otherwise({ redirectTo: '/view1' });
 }]).controller('MainCtrl', function ($scope, $mdSidenav) {
-    
+
     var app = $scope;
 
     app.toggleNav = function () {

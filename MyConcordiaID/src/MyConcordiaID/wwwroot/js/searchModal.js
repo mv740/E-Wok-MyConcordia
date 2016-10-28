@@ -3,7 +3,7 @@
 angular.module('myApp.searchModal', ['ngRoute', 'ngTouch', 'ngSwippy', 'angularCSS'])
 
 
-.controller('SearchModalCtrl', ['$rootScope', '$scope', '$timeout', function($rootScope, $scope, $timeout) {
+.controller('SearchModalCtrl', ['$rootScope', '$scope', '$http', 'myConfig', function($rootScope, $scope, $http, myConfig) {
 
     var searchModal = $scope;
     
@@ -28,26 +28,40 @@ angular.module('myApp.searchModal', ['ngRoute', 'ngTouch', 'ngSwippy', 'angularC
         $rootScope.$broadcast('updateGallery', student.gallery.validated);
     });
 
-    searchModal.ngSwippy.onClick = function () {
-    $timeout(function(){
-        searchModal.ngSwippy.clickedTimes = searchModal.ngSwippy.clickedTimes + 1;
-        searchModal.ngSwippy.actions.unshift({ name: 'Click on item' });
-    });
 
+    searchModal.ngSwippy.onClick = function () {
+        searchModal.ngSwippy.actions.unshift({ name: 'Click on item' });
   };
+
 
     searchModal.ngSwippy.swipend = function () {
         searchModal.ngSwippy.actions.unshift({ name: 'Collection Empty' });
   };
 
 
-
     searchModal.ngSwippy.swipeLeft = function (person) {
         searchModal.ngSwippy.actions.unshift({ name: 'Left swipe' });
+        sendValidation(false);
   };
 
     searchModal.ngSwippy.swipeRight = function (person) {
         searchModal.ngSwippy.actions.unshift({ name: 'Right swipe' });
-  };
+        sendValidation(true);
+    };
+
+    function sendValidation(valid) {
+
+        var data = myConfig.validatePhoto.dataTemplate;
+        data.id = searchModal.student.id;
+        data.valid = valid
+
+        $http({
+            method: 'POST',
+            url: myConfig.baseUrl + myConfig.validatePhoto,
+            data: data
+        });
+
+    }
 
 }]);
+

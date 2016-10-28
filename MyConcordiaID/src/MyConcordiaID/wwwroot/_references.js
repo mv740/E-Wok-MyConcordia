@@ -5,7 +5,6 @@
 /// <reference path="js/login.js" />
 /// <reference path="js/searchBox.js" />
 /// <reference path="js/searchModal.js" />
-/// <reference path="js/imageModal.js" />
 /// <reference path="js/searchresults.js" />
 /// <reference path="js/view1.js" />
 /// <reference path="lib/angular/angular.js" />
@@ -24,4 +23,5 @@
 /// <reference path="lib/jquery/dist/jquery.js" />
 /// <reference path="lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
+/// <reference path="mocks/searchresultsmock - copy.js" />
 /// <reference path="mocks/searchResultsMock.js" />

@@ -1,4 +1,4 @@
-﻿{
+﻿[{
     "firstName": "Francis",
     "lastName": "Cote-Tremblay",
     "id": "9999999",
@@ -8,4 +8,4 @@
         "year": "1992"
     },
     "netname": "f_cotetr"
-}
+}]
