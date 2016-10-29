@@ -25,9 +25,29 @@
           <Property Name="PICTURE" Type="blob" Nullable="false" />
           <Property Name="UPLOADEDDATE" Type="timestamp" Precision="6" Nullable="false" />
         </EntityType>
+        <EntityType Name="STUDENTS">
+          <Key>
+            <PropertyRef Name="NETNAME" />
+          </Key>
+          <Property Name="NETNAME" Type="varchar2" MaxLength="7" Nullable="false" />
+          <Property Name="ID" Type="number" Precision="8" Scale="0" Nullable="false" />
+          <Property Name="FIRSTNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="LASTNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="VALID" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="PENDING" Type="number" Precision="1" Scale="0" Nullable="false" />
+          <Property Name="PROFILEPICTURE" Type="blob" />
+          <Property Name="PREVIOUSPICTURE1" Type="blob" />
+          <Property Name="PREVIOUSPICTURE2" Type="blob" />
+          <Property Name="PENDINGPICTURE" Type="blob" />
+          <Property Name="UGRADSTATUS" Type="varchar2" MaxLength="2" Nullable="false" />
+          <Property Name="EXPIREDATE" Type="date" Nullable="false" />
+          <Property Name="UPDATEPICTURE" Type="number" Precision="1" Scale="0" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="OracleDataModelStoreContainer">
           <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSERS" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTURE" EntityType="Self.PICTURE" Schema="MV740" store:Type="Tables" />
+          <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="MV740" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -46,6 +66,7 @@
         <EntityContainer Name="MyEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSER" />
           <EntitySet Name="PICTUREs" EntityType="OracleDataModel.PICTURE" />
+          <EntitySet Name="STUDENTS" EntityType="OracleDataModel.STUDENT" />
         </EntityContainer>
         <EntityType Name="PICTURE">
           <Key>
@@ -56,6 +77,25 @@
           <Property Name="APPROVED" Type="Double" />
           <Property Name="PICTURE1" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="UPLOADEDDATE" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="STUDENT">
+          <Key>
+            <PropertyRef Name="NETNAME" />
+          </Key>
+          <Property Name="NETNAME" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="FIRSTNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LASTNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="VALID" Type="Boolean" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" />
+          <Property Name="PENDING" Type="Boolean" Nullable="false" />
+          <Property Name="PROFILEPICTURE" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PREVIOUSPICTURE1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PREVIOUSPICTURE2" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="PENDINGPICTURE" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="UGRADSTATUS" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="EXPIREDATE" Type="DateTime" Nullable="false" />
+          <Property Name="UPDATEPICTURE" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -85,7 +125,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="STUDENTS">
+            <EntityTypeMapping TypeName="OracleDataModel.STUDENT">
+              <MappingFragment StoreEntitySet="STUDENTS">
+                <ScalarProperty Name="UPDATEPICTURE" ColumnName="UPDATEPICTURE" />
+                <ScalarProperty Name="EXPIREDATE" ColumnName="EXPIREDATE" />
+                <ScalarProperty Name="UGRADSTATUS" ColumnName="UGRADSTATUS" />
+                <ScalarProperty Name="PENDINGPICTURE" ColumnName="PENDINGPICTURE" />
+                <ScalarProperty Name="PREVIOUSPICTURE2" ColumnName="PREVIOUSPICTURE2" />
+                <ScalarProperty Name="PREVIOUSPICTURE1" ColumnName="PREVIOUSPICTURE1" />
+                <ScalarProperty Name="PROFILEPICTURE" ColumnName="PROFILEPICTURE" />
+                <ScalarProperty Name="PENDING" ColumnName="PENDING" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="VALID" ColumnName="VALID" />
+                <ScalarProperty Name="LASTNAME" ColumnName="LASTNAME" />
+                <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

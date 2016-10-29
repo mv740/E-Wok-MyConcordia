@@ -1,46 +1,114 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using OracleEntityFramework;
+using System.IO;
+using MyConcordiaID.Models.Picture;
 
-namespace MyConcordiaID.Models
+namespace MyConcordiaID.Models.Student
 {
     public class StudentRepository : IStudentRepository
     {
-        private static ConcurrentDictionary<int, Student> students =
-              new ConcurrentDictionary<int, Student>();
 
-        public StudentRepository()
+        private readonly DatabaseEntities _database;
+
+        public StudentRepository(DatabaseEntities context)
         {
-            Add(new Student { FirstName = "John", LastName = "Smith", Id = 212345 });
+            _database = context;
         }
 
-        public IEnumerable<Student> GetAll()
+        public STUDENT Find(int id)
         {
-            return students.Values;
-        }
+            var student = _database.STUDENTS
+                 .Where(s => s.ID == id)
+                 .SingleOrDefault();
 
-        public void Add(Student student)
-        {
-
-            students[student.Id] = student;
-        }
-
-        public Student Find(int Id)
-        {
-            Student item;
-            students.TryGetValue(Id, out item);
-            return item;
-        }
-
-        public Student Remove(int Id)
-        {
-            Student student;
-            students.TryRemove(Id, out student);
             return student;
         }
 
-        public void Update(Student student)
+        public dynamic GetAll()
         {
-            students[student.Id] = student;
+
+            var students = _database.STUDENTS.Select(s => new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME });
+
+            return students;
+        }
+
+        public void AddPendingPicture(int id, IFormFile file)
+        {
+
+            //will be used to store image time
+            //var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+
+            using (Stream stream = file.OpenReadStream())
+            {
+                using (var binaryReader = new BinaryReader(stream))
+                {
+                    var fileContent = binaryReader.ReadBytes((int)file.Length);
+
+                    var student = _database.STUDENTS
+                        .Where(s => s.ID == id)
+                        .FirstOrDefault();
+
+                    student.PENDINGPICTURE = fileContent;
+                    student.PENDING = true;
+                    _database.SaveChanges();
+
+
+                }
+            }
+            
+        }
+
+        public dynamic FindPendingPicture(int id)
+        {
+
+            var student = _database.STUDENTS
+                .Where(s => s.ID == id)
+                .Select(s => new { s.ID, s.PENDINGPICTURE, s.PREVIOUSPICTURE1, s.PREVIOUSPICTURE2 })
+                .FirstOrDefault();
+
+            return student;
+            
+        }
+
+        public void ValidatePicture(PictureValidation pictureValidation)
+        {
+
+            var student = _database.STUDENTS
+                .Where(s => s.ID == pictureValidation.id)
+                .FirstOrDefault();
+
+           
+            if(pictureValidation.valid)
+            {
+
+                if(student.PROFILEPICTURE !=null)
+                {
+                    if(student.PREVIOUSPICTURE1 != null)
+                    {
+                        var previous1 = student.PREVIOUSPICTURE1;
+                        student.PREVIOUSPICTURE2 = previous1;
+                    }
+
+                    var previous = student.PROFILEPICTURE;
+                    student.PREVIOUSPICTURE1 = previous; 
+                }
+
+                byte[] validPicture = student.PENDINGPICTURE;
+                student.PROFILEPICTURE = validPicture;
+                student.PENDINGPICTURE = null;
+
+            }
+            else
+            {
+                student.PENDINGPICTURE = null;
+            }
+            student.PENDING = false;
+            _database.SaveChanges();
+
         }
     }
 }

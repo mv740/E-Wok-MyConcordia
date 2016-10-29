@@ -1,13 +1,19 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Http;
+using MyConcordiaID.Models.Picture;
+using OracleEntityFramework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace MyConcordiaID.Models
+namespace MyConcordiaID.Models.Student
 {
     public interface IStudentRepository
     {
-        void Add(Student item);
-        IEnumerable<Student> GetAll();
-        Student Find(int id);
-        Student Remove(int id);
-        void Update(Student item);
+        dynamic GetAll();
+        STUDENT Find(int id);
+        void AddPendingPicture(int id, IFormFile file);
+        dynamic FindPendingPicture(int id);
+        void ValidatePicture(PictureValidation pictureValidation);
     }
 }

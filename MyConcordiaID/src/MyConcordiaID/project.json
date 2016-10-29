@@ -30,7 +30,12 @@
     "odp.net.x64": "112.3.20",
     "Microsoft.AspNet.Identity.Core": "2.2.1",
     "Microsoft.ApplicationInsights.AspNetCore": "1.0.0",
-    "Microsoft.ApplicationInsights.Web": "2.1.0"
+    "Microsoft.ApplicationInsights.Web": "2.1.0",
+    "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0",
+    "AspNet.Security.OAuth.Validation": "1.0.0-alpha2-final",
+    "OpenIddict": "1.0.0-*",
+    "OpenIddict.Mvc": "1.0.0-*",
+    "Microsoft.AspNetCore.Authentication.OpenIdConnect": "1.0.0"
   },
 
   "tools": {

@@ -24,7 +24,6 @@ namespace MyConcordiaID.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly DatabaseEntities _database;
         private readonly ILogger _logger;
-        private readonly IUrlHelper _urlHelper;
 
         public AccountController(
            UserManager<ApplicationUser> userManager,
@@ -79,6 +78,7 @@ namespace MyConcordiaID.Controllers
         [Route("Account/ExternalLogin")]
         public IActionResult GetExternalLogin(string provider, string returnUrl = null)
         {
+            
             // Request a redirect to the external login provider.
             var redirectUrl = Url.Action("ExternalLoginMobileCallback", "Account", new { ReturnUrl = returnUrl });
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
@@ -137,6 +137,7 @@ namespace MyConcordiaID.Controllers
                 return View(nameof(Login));
             }
             var info = await _signInManager.GetExternalLoginInfoAsync();
+            
            
             if (info == null)
             {
@@ -145,8 +146,12 @@ namespace MyConcordiaID.Controllers
 
             // Sign in the user with this external login provider if the user already has a login.
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
+
+
+
             if (result.Succeeded)
             {
+                
                 _logger.LogInformation(5, "User logged in with {Name} provider.", info.LoginProvider);
                 return RedirectToLocal(returnUrl);
             }
@@ -173,22 +178,14 @@ namespace MyConcordiaID.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginMobileCallback(string returnUrl = null, string remoteError = null)
         {
-          
 
-            //if (remoteError != null)
-            //{
-            //    //Error from external provider
-            //    return new BadRequestResult();
-            //}
+
+            if (remoteError != null)
+            {
+                //Error from external provider
+                return new BadRequestResult();
+            }
             var info = await _signInManager.GetExternalLoginInfoAsync();
-
-            //var authToken = info.AuthenticationTokens;
-            Authentication authObject = new Authentication();
-            // authToken.GetEnumerator().MoveNext();
-            // AuthenticationToken token = authToken.GetEnumerator().Current;
-            authObject.AuthToken = "1";//token.Value;
-
-            return new OkObjectResult(authObject);
 
             if (info == null)
             {
@@ -200,8 +197,11 @@ namespace MyConcordiaID.Controllers
             var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false);
             if (result.Succeeded)
             {
-              
-                 //authToken = info.AuthenticationTokens;
+           
+                var authToken = info.AuthenticationTokens;
+                authToken.GetEnumerator().MoveNext();
+                AuthenticationToken token = authToken.GetEnumerator().Current;
+                Authentication authObject = new Authentication() { AuthToken = token.Value };
                 return new OkObjectResult(authObject);
 
             }
@@ -227,29 +227,28 @@ namespace MyConcordiaID.Controllers
                     return View("ExternalLoginFailure");
                 }
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-                var result = await _userManager.CreateAsync(user);
+                var result = await _userManager.CreateAsync(user); // see how to use move this to oracle db
 
                 var firstName = info.Principal.FindFirstValue(ClaimTypes.GivenName);
-
                 var lastname = info.Principal.FindFirstValue(ClaimTypes.Surname);
-
+             
+                
                 //todo change primary key to id
-                var concordiaUsers = _database.Set<CONCORDIAUSER>();
-                CONCORDIAUSER newUser = new CONCORDIAUSER();
-                newUser.EMAIL = model.Email;
-                Random rnd = new Random();
-                newUser.ID = rnd.Next(20000000, 99999999); // with AD from concordia we would get the real id
-                string netname = firstName[0] + "_" + lastname.Substring(0, 5);
-                newUser.NETNAME = netname; // michal wozniak => m_wozni
-                newUser.ROLE = "STUDENT";
 
-                //change variable oathid to nameIdentifier or even remove completely
-                newUser.OAUTHID = info.Principal.FindFirstValue(ClaimTypes.NameIdentifier);
+                STUDENT newStudent = new STUDENT
+                {
+                    NETNAME = StudentHelper.getNetName(firstName,lastname),
+                    ID = StudentHelper.getRandomId(),
+                    FIRSTNAME = firstName,
+                    LASTNAME = lastname,
+                    DOB = DateTime.UtcNow,
+                    UGRADSTATUS = "U"
+                };
+                _database.STUDENTS.Add(newStudent);
+                _database.SaveChanges();
 
-                concordiaUsers.Add(newUser);
-                var oracleResult = _database.SaveChangesAsync();
 
-                if (result.Succeeded && oracleResult.IsCompleted)
+                if (result.Succeeded)
                 {
                     result = await _userManager.AddLoginAsync(user, info);
                     if (result.Succeeded)

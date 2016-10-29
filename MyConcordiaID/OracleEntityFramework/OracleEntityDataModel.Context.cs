@@ -27,5 +27,6 @@ namespace OracleEntityFramework
     
         public virtual DbSet<CONCORDIAUSER> CONCORDIAUSERS { get; set; }
         public virtual DbSet<PICTURE> PICTUREs { get; set; }
+        public virtual DbSet<STUDENT> STUDENTS { get; set; }
     }
 }
