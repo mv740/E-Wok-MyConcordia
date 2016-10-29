@@ -27,7 +27,7 @@ namespace MyConcordiaID.Controllers
             StudentsRepo = students;
             _database = context;
         }
-        
+
 
         [AllowAnonymous]
         [HttpGet]
@@ -84,10 +84,10 @@ namespace MyConcordiaID.Controllers
         [AllowAnonymous]
         [HttpPost]
         [Route("ProfilePictureTest/{id}")]
-        public  IActionResult PostProfilePictureTest([FromRoute]int id, IFormFile file)
+        public IActionResult PostProfilePictureTest([FromRoute]int id, IFormFile file)
         {
 
-            if (file == null || file.Length ==0 )
+            if (file == null || file.Length == 0)
                 return new JsonResult(new { Error = "file is empty" }) { StatusCode = (int)HttpStatusCode.NotFound };
 
             StudentsRepo.AddPendingPicture(id, file);
@@ -116,6 +116,15 @@ namespace MyConcordiaID.Controllers
 
         [AllowAnonymous]
         [HttpGet]
+        [Route("Pending")]
+        public IActionResult GetAllPending()
+        {
+            return new ObjectResult(StudentsRepo.GetAllPending());
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet]
         [Route("PendingPicture/{id}")]
         public IActionResult GetPendingPicture(int id)
         {
@@ -125,8 +134,6 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(student);
         }
 
-
-
         [AllowAnonymous]
         [HttpPost]
         [Route("ValidatePicture")]
@@ -135,6 +142,15 @@ namespace MyConcordiaID.Controllers
             StudentsRepo.ValidatePicture(picture);
 
             return Ok();
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Valid")]
+        public IActionResult GetAllValid()
+        {
+            return new ObjectResult(StudentsRepo.GetAllValid());
+
         }
 
     }

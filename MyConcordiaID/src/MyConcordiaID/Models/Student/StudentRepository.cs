@@ -100,6 +100,7 @@ namespace MyConcordiaID.Models.Student
                 byte[] validPicture = student.PENDINGPICTURE;
                 student.PROFILEPICTURE = validPicture;
                 student.PENDINGPICTURE = null;
+                student.VALID = true;
 
             }
             else
@@ -110,5 +111,33 @@ namespace MyConcordiaID.Models.Student
             _database.SaveChanges();
 
         }
+
+        public dynamic GetAllPending()
+        {
+
+           var students =  _database.STUDENTS
+                .Where(s => s.PENDING == true)
+                .Select(s=> new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME})
+                .ToList();
+
+            return students;
+
+           
+        }
+
+        public dynamic GetAllValid()
+        {
+
+            var students = _database.STUDENTS
+                 .Where(s => s.VALID == true)
+                 .Select(s => new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME })
+                 .ToList();
+
+            return students;
+
+
+        }
+
     }
+
 }

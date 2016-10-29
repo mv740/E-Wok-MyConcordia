@@ -15,5 +15,7 @@ namespace MyConcordiaID.Models.Student
         void AddPendingPicture(int id, IFormFile file);
         dynamic FindPendingPicture(int id);
         void ValidatePicture(PictureValidation pictureValidation);
+        dynamic GetAllPending();
+        dynamic GetAllValid();
     }
 }
