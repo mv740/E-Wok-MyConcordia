@@ -8,6 +8,8 @@
   #searchModal #cardHolder {
     padding-bottom: 2%;
     background-color: #D8E5F1; }
+    #searchModal #cardHolder img {
+      max-width: 100%; }
 
 #noYesContainer button {
   float: left; }

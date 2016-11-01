@@ -18,10 +18,7 @@
 /// <reference path="lib/angular-messages/angular-messages.js" />
 /// <reference path="lib/angular-mocks/angular-mocks.js" />
 /// <reference path="lib/angular-route/angular-route.js" />
-/// <reference path="lib/angular-touch/angular-touch.js" />
 /// <reference path="lib/bootstrap/dist/js/bootstrap.js" />
 /// <reference path="lib/jquery/dist/jquery.js" />
 /// <reference path="lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
-/// <reference path="mocks/searchresultsmock - copy.js" />
-/// <reference path="mocks/searchResultsMock.js" />

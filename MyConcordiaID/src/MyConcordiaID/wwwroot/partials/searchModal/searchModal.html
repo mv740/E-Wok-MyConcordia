@@ -13,12 +13,7 @@
 
             <div id="cardContainer" class="modal-element col-sm-6">
                 <div id="cardHolder">
-                    <ng-swippy collection='ngSwippy.collection' width='100%' height='{{ngSwippy.size.height}}px'
-                               item-click='ngSwippy.onClick' data='ngSwippy.showinfo' collection-empty='ngSwippy.swipeend'
-                               swipe-left='ngSwippy.swipeLeft'
-                               swipe-right='ngSwippy.swipeRight' cards-number='2' label-ok='Yes'
-                               label-negative='No'></ng-swippy>
-
+                    <img ng-src="data:image/JPEG;base64,{{pendingPicture}}" />
                 </div>
                 <div id="galleryContainer" ng-include="'partials/searchModal/gallery/gallery.html'"></div>
             </div>
@@ -27,8 +22,8 @@
             <div class="modal-element col-sm-6">
                 <span>{{student.id}},</span>
 
-                <span>{{student.firstName}}</span>
-                <span>{{student.lastName}},</span>
+                <span>{{student.firstname}}</span>
+                <span>{{student.lastname}},</span>
 
                 <span>{{student.netname}},</span>
 

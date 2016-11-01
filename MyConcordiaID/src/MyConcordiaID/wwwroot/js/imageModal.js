@@ -10,7 +10,7 @@ angular.module('myApp.imageModal', [])
 
         var imageModal = $scope;
 
-        $rootScope.$on('enlargeImage', function (event, image) {
+        $rootScope.$on('imageModal.enlargeImage', function (event, image) {
             imageModal.image = image;
         });
 

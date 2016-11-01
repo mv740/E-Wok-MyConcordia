@@ -16,8 +16,6 @@
     "angular-aria": "^1.5.8",
     "angular-bootstrap": "^2.2.0",
     "angular-material": "^1.1.1",
-    "angular-touch": "^1.5.8",
-    "ng-swippy": "^0.1.2",
     "angular-css": "^1.0.8"
   }
 }

@@ -1,53 +1,26 @@
 'use strict';
 
-angular.module('myApp.searchModal', ['ngRoute', 'ngTouch', 'ngSwippy', 'angularCSS'])
+angular.module('myApp.searchModal', ['ngRoute', 'angularCSS'])
 
 
 .controller('SearchModalCtrl', ['$rootScope', '$scope', '$http', 'myConfig', function($rootScope, $scope, $http, myConfig) {
 
     var searchModal = $scope;
-    
-    searchModal.student = {};
 
-    searchModal.ngSwippy = {
-        showInfo : false,
-        clickedTimes: 0,
-        actions: [],
-        size : {
-            width: 250,
-            height: 350
-        }
-    };
+    $rootScope.$on('searchModal.updateSearchModal', function (event, student) {
 
-    $rootScope.$on('updateSearchModal', function (event, student) {
         searchModal.student = student;
-        searchModal.ngSwippy.collection = [{
-            thumbnail: student.gallery.toValidate
-        }];
 
-        $rootScope.$broadcast('updateGallery', student.gallery.validated);
+        $http.get(myConfig.baseUrl + myConfig.pendingPicture + student.id).then(function(value) {
+            console.log(value.data.id);
+            searchModal.pendingPicture = value.data.pendingpicture;
+            searchModal.student.gallery = [value.data.previouspicturE1, value.data.previouspicturE2];
+
+            $rootScope.$broadcast('gallery.updateGallery', searchModal.student.gallery);
+        });
+
     });
 
-
-    searchModal.ngSwippy.onClick = function () {
-        searchModal.ngSwippy.actions.unshift({ name: 'Click on item' });
-  };
-
-
-    searchModal.ngSwippy.swipend = function () {
-        searchModal.ngSwippy.actions.unshift({ name: 'Collection Empty' });
-  };
-
-
-    searchModal.ngSwippy.swipeLeft = function (person) {
-        searchModal.ngSwippy.actions.unshift({ name: 'Left swipe' });
-        sendValidation(false);
-  };
-
-    searchModal.ngSwippy.swipeRight = function (person) {
-        searchModal.ngSwippy.actions.unshift({ name: 'Right swipe' });
-        sendValidation(true);
-    };
 
     function sendValidation(valid) {
 

@@ -15,31 +15,10 @@ angular.module('myApp', [
     'ngHamburger'
 ]).constant("myConfig", {
     "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
-    "port": "80",
+    "validatePhoto": "student/validatePhoto/",
+    "searchStudent": "student/",
+    "pendingPicture": "student/PendingPicture/"
 
-    "validatePhoto": {
-        "url": "student/validatePhoto",
-        "dataTemplate": {
-            "id": "",
-            "valid": ""
-        }
-    },
-
-    "searchStudent": {
-        "url": "student/searchStudent",
-        "dataTemplate": {
-            "firstName": "",
-            "lastName": "",
-            "id": "",
-            "birthdate": {
-                "day": "",
-                "month": "",
-                "year": ""
-            },
-            "netname": ""
-        }
-
-    }
 }).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 

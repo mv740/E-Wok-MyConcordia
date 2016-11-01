@@ -9,7 +9,7 @@
                 <li ng-repeat="image in images">
                     <div class="thumbwrapper">
                         <a ng-href="" ng-click="setFullscreen(image)" data-toggle="modal" data-target="#imageModal">
-                            <img class="thumbnail" ng-src="{{image}}"/>
+                            <img class="thumbnail" ng-src="data:image/JPEG;base64,{{image}}"/>
                         </a>
                     </div>
                 </li>

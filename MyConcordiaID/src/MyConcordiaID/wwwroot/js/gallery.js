@@ -9,7 +9,7 @@ angular.module('myApp.searchModal.gallery',[])
 
         var gallery = $scope;
 
-        $rootScope.$on('updateGallery', function (event, images) {
+        $rootScope.$on('gallery.updateGallery', function (event, images) {
             gallery.images = images;
         });
 
@@ -17,7 +17,7 @@ angular.module('myApp.searchModal.gallery',[])
 
 
         gallery.setFullscreen = function(image) {
-            $rootScope.$broadcast('enlargeImage', image);
+            $rootScope.$broadcast('imageModal.enlargeImage', image);
         };
 
     }]);

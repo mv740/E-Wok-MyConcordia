@@ -11,13 +11,9 @@ angular.module('myApp.view1.searchResults', [])
         var searchResults = $scope;
 
         searchResults.results = [{
-            "firstName": "Francis",
-            "lastName": "Cote-Tremblay",
+            "firstname": "Francis",
+            "lastname": "Cote-Tremblay",
             "id": "9999999",
-            "gallery": {
-                "toValidate": "images/francis1.jpg",
-                "validated": ["images/francis2.jpg", "images/francis3.jpg"]
-            },
             "birthdate": {
                 "day": "10",
                 "month": "april",
@@ -25,13 +21,9 @@ angular.module('myApp.view1.searchResults', [])
             },
             "netname": "f_cotetr"
         }, {
-            "firstName": "Michal",
-            "lastName": "Wozniak",
-            "id": "88888",
-            "gallery": {
-                "toValidate": "images/michal1.jpg",
-                "validated": ["images/michal2.jpg", "images/michal3.jpg"]
-            },
+            "firstname": "Michal",
+            "lastname": "Wozniak",
+            "id": "38901062",
             "birthdate": {
                 "day": "1",
                 "month": "january",
@@ -41,7 +33,7 @@ angular.module('myApp.view1.searchResults', [])
         }];
 
         searchResults.studentClick = function (student) {
-            $rootScope.$broadcast('updateSearchModal', student );
+            $rootScope.$broadcast('searchModal.updateSearchModal', student );
         };
 
         
