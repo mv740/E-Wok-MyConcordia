@@ -8,8 +8,8 @@
     <a ng-click="toggleNav()"></a>
     @if (SignInManager.IsSignedIn(User))
     {
+        <a href="#!/login" ng-click="closeNav()">Logout</a>
         <a href="#!/view1" ng-click="closeNav()">Review</a>
-        <a href="#!/login" ng-click="closeNav()">Validate</a>
     }
     else
     {
@@ -24,8 +24,8 @@
             <hamburger-toggle id="hamburger" ng-click="toggleNav()" state="hamState"></hamburger-toggle>
             @if (SignInManager.IsSignedIn(User))
             {
+                <a id="logoffIcon" href="#!/login" ng-click="closeNav()"></a>
                 <a id="goToReviewIcon" href="#!/view1" ng-click="closeNav()"></a>
-                <a id="goToValidateIcon" href="#!/login" ng-click="closeNav()"></a>
             }
             else
             {
@@ -33,6 +33,12 @@
             }
         </div>
     </div>
-
-    <div id="ng-view" class="mainComponent" ng-view></div>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div id="ng-view" class="mainComponent" ng-view></div>
+    }
+    else
+    {
+        <div ng-include="'partials/login/login.html'"></div>
+    }
 </div>
