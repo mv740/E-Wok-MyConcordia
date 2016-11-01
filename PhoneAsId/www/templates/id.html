@@ -1,12 +1,31 @@
 <ion-view view-title="Search">
-  <ion-content>
-    <h1>ID</h1>
-    <h2>CONCORDIA LOGO</h2>
-    <h2>PHOTO</h2>
-    <h2>FIRST NAME</h2>
-    <h2>LAST NAME</h2>
-    <h2>DOB</h2>
-    <h2>ID</h2>
-    <h2>VALID</h2>
+  <ion-content ng-controller="IdCtrl">
+
+    <!-- template used if for portrait -->
+    <div ng-if="screenOrientation == 'portrait-primary'">
+      <h1>PORTRAIT VIEW</h1>
+
+      <h2>CONCORDIA LOGO</h2>
+      <h2>PHOTO</h2>
+      <h2>FIRST NAME</h2>
+      <h2>LAST NAME</h2>
+      <h2>DOB</h2>
+      <h2>ID</h2>
+      <h2>VALID</h2>
+    </div>
+
+    <!-- template used if for landscape -->
+    <div ng-if="screenOrientation == 'landscape-secondary'">
+
+      <h1>LANDSCAPE VIEW</h1>
+
+      <h2>CONCORDIA LOGO</h2>
+      <h2>PHOTO</h2>
+      <h2>FIRST NAME</h2>
+      <h2>LAST NAME</h2>
+      <h2>DOB</h2>
+      <h2>ID</h2>
+      <h2>VALID</h2>
+    </div>
   </ion-content>
 </ion-view>

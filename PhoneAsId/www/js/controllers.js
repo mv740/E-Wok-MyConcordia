@@ -122,7 +122,14 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
 })
 
-.controller('IdCtrl', function($scope) {
+.controller('IdCtrl', function($scope,$window,$state) {
+  $scope.screenOrientation = screen.orientation.type;
 
+  //changes the template view used when the phones orientation changes
+  $window.addEventListener("orientationchange", function(){
+    console.log(screen.orientation.type); //"portrait-primary" or "landscape-secondary"
+    $scope.screenOrientation = screen.orientation.type;
+    $state.reload();
+  });
 })
 
