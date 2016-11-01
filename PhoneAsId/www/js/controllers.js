@@ -102,10 +102,9 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
     options.fileName = 'filename.jpg';
     options.mimeType = "image/jpeg";
     options.chunkedMode = false;
-    options.params = {
-      //TODO get timestamp
-      "timestamp": "Oct 12,2016"
-    };
+    // options.params = {
+    //   "timestamp": "Oct 12,2016"
+    // };
 
     ft.upload($scope.pictureUrl, serverURL + "/api/student/ProfilePicture",
       function (e) {
@@ -121,4 +120,9 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
 .controller('LoginCtrl', function($scope) {
 
-});
+})
+
+.controller('IdCtrl', function($scope) {
+
+})
+

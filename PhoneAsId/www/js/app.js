@@ -34,11 +34,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.id', {
+    url: '/id',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/id.html',
+        controller: 'IdCtrl'
       }
     }
   })
