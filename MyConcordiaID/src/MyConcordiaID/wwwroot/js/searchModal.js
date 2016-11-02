@@ -12,7 +12,6 @@ angular.module('myApp.searchModal', ['ngRoute', 'angularCSS'])
         searchModal.student = student;
 
         $http.get(myConfig.baseUrl + myConfig.pendingPicture + student.id).then(function(value) {
-            console.log(value.data.id);
             searchModal.pendingPicture = value.data.pendingpicture;
             searchModal.student.gallery = [value.data.previouspicturE1, value.data.previouspicturE2];
 
@@ -22,7 +21,7 @@ angular.module('myApp.searchModal', ['ngRoute', 'angularCSS'])
     });
 
 
-    function sendValidation(valid) {
+    searchModal.sendValidation = function(valid) {
 
         var data = myConfig.validatePhoto.dataTemplate;
         data.id = searchModal.student.id;

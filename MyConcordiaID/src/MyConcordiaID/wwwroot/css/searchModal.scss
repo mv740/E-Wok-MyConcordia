@@ -30,10 +30,12 @@ $level3-blue: #D8E5F1;
   }
 
   #cardHolder {
-    padding-bottom: 2%;
     background-color: $level3-blue;
     img{
         max-width: 100%;
+    }
+    div{
+    margin: auto;
     }
   }
 }

@@ -6,10 +6,11 @@
     #searchModal .modal-element #galleryContainer {
       max-height: 200px; }
   #searchModal #cardHolder {
-    padding-bottom: 2%;
     background-color: #D8E5F1; }
     #searchModal #cardHolder img {
       max-width: 100%; }
+    #searchModal #cardHolder div {
+      margin: auto; }
 
 #noYesContainer button {
   float: left; }

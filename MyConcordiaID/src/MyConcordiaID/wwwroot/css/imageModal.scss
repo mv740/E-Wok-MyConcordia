@@ -7,5 +7,6 @@
 #imageModal{
   img{
     @include center();
+    max-width: 100%;
   }
 }

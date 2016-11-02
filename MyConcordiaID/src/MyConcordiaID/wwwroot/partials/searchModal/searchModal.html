@@ -14,6 +14,10 @@
             <div id="cardContainer" class="modal-element col-sm-6">
                 <div id="cardHolder">
                     <img ng-src="data:image/JPEG;base64,{{pendingPicture}}" />
+                    <div class="row">
+                        <button ng-click="sendValidation(true)" type="button" class="btn btn-default col-sm-6">yes</button>
+                        <button ng-click="sendValidation(false)" type="button" class="btn btn-default col-sm-6">no</button>
+                    </div>
                 </div>
                 <div id="galleryContainer" ng-include="'partials/searchModal/gallery/gallery.html'"></div>
             </div>
