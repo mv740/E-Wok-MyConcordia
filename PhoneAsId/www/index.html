@@ -26,14 +26,20 @@
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
+    <script src="lib/es6-shim/es6-shim.js"></script>
+
     <!-- cordova script (this will be a 404 during development) -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
     <script src="cordova.js"></script>
+
+    <script src="lib/oidc-client/dist/oidc-client.js"></script>
 
     <!-- your app's js -->
     <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/cameraController.js"></script>
+
+    <script src="js/services/angular-oidc-client.js"></script>
   </head>
 
   <body ng-app="starter">

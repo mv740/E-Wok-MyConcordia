@@ -46,9 +46,29 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
 
 
-.controller('LoginCtrl', function($scope) {
+.controller('LoginCtrl', ['$log', '$scope', '$state', '$ionicPlatform', 'ngOidcClient', function ($log, $scope, $state, $ionicPlatform, ngOidcClient) {
+  $log.log('LoginCtrl loaded');
 
-})
+  $scope.apptitle = "OIDC Demo";
+  $scope.loginEnabled = false;
+
+  var signin = function () {
+    ngOidcClient.signinPopup().then(function (user) {
+      $log.log("user:" + JSON.stringify(user));
+      if (!!user) {
+        $log.log('Logged in so going to home state');
+        $state.go('app.home');
+      }
+    });
+  }
+
+  $ionicPlatform.ready(function () {
+    $log.log('HomeCtrl: Platform ready so attempting signin.');
+    $scope.loginEnabled = true;
+  });
+
+  $scope.logIn = signin;
+}])
 
 .controller('IdCtrl', function($scope,$window,$state) {
   $scope.screenOrientation = screen.orientation.type;
@@ -60,4 +80,44 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
     $state.reload();
   });
 })
+
+
+.controller('AccountCtrl', ['$log', '$scope', '$state', 'ngOidcClient', function ($log, $scope, $state, ngOidcClient) {
+    $log.log('AccountCtrl');
+
+    $scope.userInfo = {
+      userData: {},
+      claims: []
+    };
+
+    function processUserData() {
+      var userInfo = ngOidcClient.getUserInfo();
+      $scope.userInfo.userData = userInfo;
+      if (userInfo && userInfo.user) {
+        $scope.userInfo.claims = [];
+        for (var property in userInfo.user.profile) {
+          if (userInfo.user.profile.hasOwnProperty(property)) {
+            $scope.userInfo.claims.push({
+              key: property,
+              value: userInfo.user.profile[property]
+            });
+          }
+        }
+      }
+    }
+
+    processUserData();
+
+    ngOidcClient.userInfoChanged($scope, function () {
+      $scope.$apply(function () {
+        processUserData();
+      });
+    });
+
+    $scope.logOut = function () {
+      ngOidcClient.signoutPopup().then(function () {
+        $state.go('login');
+      });
+    };
+  }]);
 
