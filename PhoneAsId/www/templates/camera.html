@@ -3,10 +3,11 @@
     <div class="item" item-image>
       <img ng-src="{{pictureUrl}}">
     </div>
-    <div class="takePictureButton">
+    <img id="mySpinner" src="img/spinner.gif" ng-show="uploadSpinnerGif" />
+    <div class="takePictureButton" ng-show="showTakePictureButton">
       <button ng-click="takePicture()" class="button button-block button-calm">{{takePictureButtonText}}</button>
     </div>
-    <div class="loadPictureButton">
+    <div class="loadPictureButton" ng-show="showLoadPictureButton">
       <button ng-click="loadPicture()" class="button button-block button-calm">Load Picture</button>
     </div>
     <div class="sendPictureButton" ng-show="showSendPictureButton">
