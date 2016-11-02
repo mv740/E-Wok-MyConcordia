@@ -4,9 +4,6 @@
 
 angular.module('starter.controllers').controller('CameraCtrl', function($scope, $cordovaCamera) {
   $scope.pictureUrl = 'http://placehold.it/300x300';
-  $scope.showTakePictureButton = true;
-  $scope.showLoadPictureButton = true;
-  $scope.showSendPictureButton = false;
   $scope.takePictureButtonText = 'Take Picture';
 
   var options = {
@@ -30,7 +27,7 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
       .then(function (imageURI) {
         $scope.pictureUrl = imageURI;
         $scope.takePictureButtonText = 'Retake Picture';
-        $scope.showSendPictureButton = true;
+        $scope.hideSendPictureButton = false;
       }, function (error) {
 
       })
@@ -44,7 +41,7 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
     $cordovaCamera.getPicture(options)
       .then(function (imageURI) {
         $scope.pictureUrl = imageURI;
-        $scope.showSendPictureButton = true;
+        $scope.hideSendPictureButton = false;
 
       }, function (error) {
 
@@ -66,16 +63,17 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
     //   "timestamp": "Oct 12,2016"
     // };
 
-    $scope.uploadSpinnerGif = true;
-    $scope.showTakePictureButton = false;
-    $scope.showLoadPictureButton = false;
-    $scope.showSendPictureButton = false;
+    $scope.showUploadSpinnerGif = true;
+    $scope.hideTakePictureButton = true;
+    $scope.hideLoadPictureButton = true;
+    $scope.hideSendPictureButton = true;
+
     ft.upload($scope.pictureUrl, serverURL + "/api/student/ProfilePicture",
       function (e) {
         alert("Upload sent");
         //hide uploading spinner when callback succeeded
         $scope.$apply(function(){
-          $scope.uploadSpinnerGif = false;
+          $scope.showUploadSpinnerGif = false;
         });
         //$location.path('/id');
         //TODO redirect ID page
@@ -84,10 +82,10 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
         alert("Upload failed");
         //hide uploading spinner when callback failed
         $scope.$apply(function(){
-          $scope.uploadSpinnerGif = false;
-          $scope.showTakePictureButton = true;
-          $scope.showLoadPictureButton = true;
-          $scope.showSendPictureButton = true;
+          $scope.showUploadSpinnerGif = false;
+          $scope.hideTakePictureButton = false;
+          $scope.hideLoadPictureButton = false;
+          $scope.hideSendPictureButton = false;
         });
       }, options);
   }

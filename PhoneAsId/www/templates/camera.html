@@ -3,14 +3,14 @@
     <div class="item" item-image>
       <img ng-src="{{pictureUrl}}">
     </div>
-    <img id="mySpinner" src="img/spinner.gif" ng-show="uploadSpinnerGif" />
-    <div class="takePictureButton" ng-show="showTakePictureButton">
+    <img id="mySpinner" src="img/spinner.gif" ng-show="showUploadSpinnerGif" />
+    <div class="takePictureButton" ng-hide="hideTakePictureButton">
       <button ng-click="takePicture()" class="button button-block button-calm">{{takePictureButtonText}}</button>
     </div>
-    <div class="loadPictureButton" ng-show="showLoadPictureButton">
+    <div class="loadPictureButton" ng-hide="hideLoadPictureButton">
       <button ng-click="loadPicture()" class="button button-block button-calm">Load Picture</button>
     </div>
-    <div class="sendPictureButton" ng-show="showSendPictureButton">
+    <div class="sendPictureButton" ng-hide="hideSendPictureButton">
       <button ng-click="sendPicture()" class="button button-block button-calm">Send Picture</button>
     </div>
   </ion-content>
