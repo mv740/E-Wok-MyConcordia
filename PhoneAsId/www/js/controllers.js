@@ -52,5 +52,5 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
 .controller('IdCtrl', function($scope) {
 
-})
+});
 
