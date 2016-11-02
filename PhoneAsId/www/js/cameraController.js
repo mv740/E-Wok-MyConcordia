@@ -108,7 +108,9 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
               $scope.description = visionObj.image_description;
 
             }, function(err){
-              alert('An error occurred while uploading the file');
+              var res = JSON.parse(result.response);
+              console.log(res);
+              //alert('An error occurred while uploading the file');
             });
         }, function(err){
           alert('An error occurred while trying to write the file');
