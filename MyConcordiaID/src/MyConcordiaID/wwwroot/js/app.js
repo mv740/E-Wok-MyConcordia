@@ -6,13 +6,15 @@ angular.module('myApp', [
     'ngAnimate',
     'ngMaterial',
     'myApp.login',
+    'myApp.sideNav',
+    'ngHamburger',
     'myApp.view1',
     'myApp.view1.searchBox',
     'myApp.view1.searchResults',
     'myApp.searchModal',
     'myApp.searchModal.gallery',
-    'myApp.imageModal',
-    'ngHamburger'
+    'myApp.imageModal'
+
 ]).constant("myConfig", {
     "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
     "validatePhoto": "student/validatePhoto/",
@@ -24,26 +26,4 @@ angular.module('myApp', [
 
     $routeProvider
         .otherwise({ redirectTo: '/login' });
-}]).controller('MainCtrl', function ($scope, $mdSidenav) {
-
-    var app = $scope;
-
-    app.toggleNav = function () {
-        if (!$scope.hamState) {
-            closeNav();
-        }
-        else openNav();
-    };
-
-    /* Set the width of the side navigation to 0 */
-    var closeNav = function () {
-        document.getElementById("mySidenav").style.width = "0";
-        app.hamState = false;
-    };
-    app.closeNav = closeNav;
-
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "250px";
-    }
-
-});
+}]);

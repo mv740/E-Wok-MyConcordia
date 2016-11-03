@@ -6,6 +6,7 @@
 /// <reference path="js/searchBox.js" />
 /// <reference path="js/searchModal.js" />
 /// <reference path="js/searchresults.js" />
+/// <reference path="js/sivenav.js" />
 /// <reference path="js/view1.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-animate/angular-animate.js" />

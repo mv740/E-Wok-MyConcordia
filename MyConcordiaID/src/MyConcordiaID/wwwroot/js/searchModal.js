@@ -23,9 +23,10 @@ angular.module('myApp.searchModal', ['ngRoute', 'angularCSS'])
 
     searchModal.sendValidation = function(valid) {
 
-        var data = myConfig.validatePhoto.dataTemplate;
-        data.id = searchModal.student.id;
-        data.valid = valid
+        var data = {
+            id: searchModal.student.id,
+            valid : valid
+        }
 
         $http({
             method: 'POST',
