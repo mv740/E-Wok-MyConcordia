@@ -4,44 +4,58 @@ $level1-blue: #6696C8;
 $level2-blue: #B2CAE4;
 $level3-blue: #D8E5F1;
 
-@mixin center(){
-  display:block;
-  margin-left: auto;
-  margin-right: auto;
+@mixin center() {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 @mixin vertical-align($position: relative) {
-  position: $position;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+    position: $position;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
-#searchModal{
-  background-color: $level2-blue;
-  min-width: 650px;
-  .modal-element{
+#searchModal {
     background-color: $level2-blue;
+    min-width: 650px;
 
-    #galleryContainer{
-      max-height: 200px;
-    }
-  }
+    .circularLoading {
+        height: 100px;
 
-  #cardHolder {
-    background-color: $level3-blue;
-    img{
-        max-width: 100%;
+        md-progress-circular {
+            display: block;
+            margin: auto;
+            top: 25%;
+            position: relative;
+        }
     }
-    div{
-    margin: auto;
+
+    .modal-element {
+        background-color: $level2-blue;
+
+        #galleryContainer {
+            max-height: 200px;
+        }
     }
-  }
+
+    #cardHolder {
+        background-color: $level3-blue;
+
+        img {
+            max-width: 100%;
+        }
+
+        div {
+            margin: auto;
+        }
+    }
 }
+
 #noYesContainer {
-  button {
-    float: left;
-  }
+    button {
+        float: left;
+    }
 }
-

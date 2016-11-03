@@ -17,7 +17,7 @@ angular.module('myApp', [
 
 ]).constant("myConfig", {
     "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
-    "validatePhoto": "student/validatePhoto/",
+    "validatePhoto": "student/ValidatePicture",
     "searchStudent": "student/",
     "pendingPicture": "student/PendingPicture/"
 

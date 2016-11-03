@@ -30,5 +30,9 @@
   {
     "outputFile": "wwwroot/css/searchBox.css",
     "inputFile": "wwwroot/css/searchBox.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/review/searchModal/searchModal.css",
+    "inputFile": "wwwroot/partials/review/searchModal/searchModal.scss"
   }
 ]

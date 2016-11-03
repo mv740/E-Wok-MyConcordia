@@ -11,6 +11,7 @@ angular.module('myApp.searchModal.gallery',[])
 
         $rootScope.$on('gallery.updateGallery', function (event, images) {
             gallery.images = images;
+            $rootScope.$broadcast('searchModal.doneLoading');
         });
 
         var IMAGE_WIDTH = 405;
