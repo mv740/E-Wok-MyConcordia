@@ -8,7 +8,7 @@ angular.module('myApp.login', ['ngRoute', 'angularCSS'])
         $routeProvider.when('/login', {
             templateUrl: 'partials/login/login.html',
             controller: 'LoginCtrl',
-            css: 'css/login.css'
+            css: 'partials/login/login.css'
         });
     }])
     .controller('LoginCtrl', ['$scope', function($scope) {

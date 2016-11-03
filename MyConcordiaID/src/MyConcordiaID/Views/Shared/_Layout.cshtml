@@ -15,10 +15,8 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 
-    <!--CSS-->
-    <link rel="stylesheet" href="~/css/app.css">
-
-    <!--BOWER COMPONENTS-->
+    
+    <!--BOWER COMPONENTS -->
     <link rel="stylesheet" href="~/lib/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="~/lib/html5-boilerplate/dist/css/main.css">
     <script src="~/lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
@@ -36,16 +34,19 @@
     <link rel="stylesheet" type="text/css" href="~/lib/angular-hamburger-toggle/dist/angular-hamburger-toggle.css">
     <script src="~/lib/angular-hamburger-toggle/dist/angular-hamburger-toggle.js"></script>
 
+    <!--APP-->
+    <script src="~/app/app.js"></script>
+    <link rel="stylesheet" href="~/app/app.css">
+
     <!--CONTROLLERS-->
-    <script src="~/js/app.js"></script>
-    <script src="~/js/view1.js"></script>
-    <script src="~/js/login.js"></script>
-    <script src="~/js/sideNav.js"></script>
-    <script src="~/js/searchModal.js"></script>
-    <script src="~/js/gallery.js"></script>
-    <script src="~/js/searchBox.js"></script>
-    <script src="~/js/searchResults.js"></script>
-    <script src="~/js/imageModal.js"></script>
+    <script src="~/partials/login/login.js"></script>
+    <script src="~/partials/review/review.js"></script>
+    <script src="~/partials/review/sideNav/sideNav.js"></script>
+    <script src="~/partials/review/searchModal/searchModal.js"></script>
+    <script src="~/partials/review/searchModal/gallery/gallery.js"></script>
+    <script src="~/partials/review/searchBox/searchBox.js"></script>
+    <script src="~/partials/review/searchResults/searchResults.js"></script>
+    <script src="~/partials/review/imageModal/imageModal.js"></script>
 </head>
 <body>
     @RenderBody()

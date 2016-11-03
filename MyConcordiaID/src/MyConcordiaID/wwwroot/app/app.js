@@ -8,9 +8,9 @@ angular.module('myApp', [
     'myApp.login',
     'myApp.sideNav',
     'ngHamburger',
-    'myApp.view1',
-    'myApp.view1.searchBox',
-    'myApp.view1.searchResults',
+    'myApp.review',
+    'myApp.review.searchBox',
+    'myApp.review.searchResults',
     'myApp.searchModal',
     'myApp.searchModal.gallery',
     'myApp.imageModal'

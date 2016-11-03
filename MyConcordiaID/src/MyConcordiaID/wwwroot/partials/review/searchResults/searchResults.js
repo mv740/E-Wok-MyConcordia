@@ -4,7 +4,7 @@
 
 'use strict';
 
-angular.module('myApp.view1.searchResults', [])
+angular.module('myApp.review.searchResults', [])
 
     .controller('SearchResultsCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {
 

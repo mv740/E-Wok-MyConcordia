@@ -4,7 +4,7 @@
 
 'use strict';
 
-angular.module('myApp.view1.searchBox', [])
+angular.module('myApp.review.searchBox', [])
 
     .controller('SearchBoxCtrl', ['$scope', function($scope) {
 
