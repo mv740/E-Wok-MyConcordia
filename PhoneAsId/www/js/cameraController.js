@@ -2,7 +2,7 @@
  * Created by Simon on 2016-11-01.
  */
 
-angular.module('starter.controllers').controller('CameraCtrl', function($scope, $cordovaCamera) {
+angular.module('starter.controllers').controller('CameraCtrl', function ($scope, $cordovaCamera, $ionicPopup, $location) {
   $scope.pictureUrl = 'http://placehold.it/300x300';
   $scope.takePictureButtonText = 'Take Picture';
 
@@ -15,13 +15,13 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
     targetHeight: 300,
     popoverOptions: CameraPopoverOptions,
     saveToPhotoAlbum: false,
-    correctOrientation:true
+    correctOrientation: true
   };
 
   $scope.takePicture = function () {
 
 
-    options.sourceType=Camera.PictureSourceType.CAMERA;
+    options.sourceType = Camera.PictureSourceType.CAMERA;
 
     $cordovaCamera.getPicture(options)
       .then(function (imageURI) {
@@ -48,8 +48,7 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
       })
   }
 
-  //TODO upload animation?
-  $scope.sendPicture = function() {
+  $scope.sendPicture = function () {
     var ft = new FileTransfer(),
       options = new FileUploadOptions();
 
@@ -70,18 +69,18 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
 
     ft.upload($scope.pictureUrl, serverURL + "/api/student/ProfilePicture",
       function (e) {
-        alert("Upload sent");
+        $scope.showAlert('upload-success');
+
         //hide uploading spinner when callback succeeded
-        $scope.$apply(function(){
+        $scope.$apply(function () {
           $scope.showUploadSpinnerGif = false;
         });
-        //$location.path('/id');
-        //TODO redirect ID page
       },
       function (e) {
-        alert("Upload failed");
+        $scope.showAlert('upload-fail');
+
         //hide uploading spinner when callback failed
-        $scope.$apply(function(){
+        $scope.$apply(function () {
           $scope.showUploadSpinnerGif = false;
           $scope.hideTakePictureButton = false;
           $scope.hideLoadPictureButton = false;
@@ -89,4 +88,25 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
         });
       }, options);
   }
+
+  // ionic alert dialogues
+  $scope.showAlert = function (alertType) {
+    var alertPopup;
+
+    if (alertType == 'upload-success') {
+      alertPopup = $ionicPopup.alert({
+        title: 'Upload successful',
+        template: 'The picture has been successfully sent. Please visit the Birks Student Service Centre in person to have your photo validated.'
+      });
+      alertPopup.then(function (res) {
+        console.log('Thank you for not eating my delicious ice cream cone');
+        $location.path('/app/id');
+      });
+    } else if (alertType = "upload-fail") {
+      alertPopup = $ionicPopup.alert({
+        title: 'Upload failed',
+        template: 'Uh oh, looks like something went wrong. Please try sending the photo again.'
+      });
+    }
+  };
 })
