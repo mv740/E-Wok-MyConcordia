@@ -4,6 +4,11 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+
+// Client side variable used to restrict access to the Update Picture feature.
+var canUpdatePicture = false;
+
+
 angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
   .constant('serverName', 'https://myconcordiaid.azurewebsites.net/api/')
 
@@ -49,7 +54,15 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       views: {
         'menuContent': {
           templateUrl: 'templates/camera.html',
-          controller: 'CameraCtrl'
+          controller: 'CameraCtrl',
+          resolve: {
+            security: ['$q', function($q){
+              if(!canUpdatePicture){
+                return $q.reject("Not Authorized");
+              }
+            }]
+          }
+
         }
       }
     })
