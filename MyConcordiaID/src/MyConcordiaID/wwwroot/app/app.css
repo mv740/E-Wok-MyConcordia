@@ -1,4 +1,4 @@
-﻿/* app css stylesheet */
+/* app css stylesheet */
 html, body {
   height: 100%; }
 
@@ -20,6 +20,14 @@ html, body {
       width: 40px;
       height: 40px; }
     #main #sideMenuStatic a {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      margin-top: 20px;
+      width: 40px;
+      height: 40px; }
+    #main #sideMenuStatic form a {
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -84,6 +92,25 @@ html, body {
     color: #818181;
     display: block;
     transition: 0.3s; }
+  .sidenav form button {
+    height: 40px;
+    margin-top: 20px;
+    margin-left: 50px;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: block; }
+  .sidenav button:hover {
+    color: #f1f1f1;
+    outline: none; }
+  .sidenav button:focus {
+    outline: none; }
   .sidenav a:hover, .sidenav .offcanvas a:focus {
     color: #f1f1f1; }
   .sidenav .closebtn {
@@ -93,3 +120,4 @@ html, body {
     font-size: 36px;
     margin-left: 50px; }
 
+/*# sourceMappingURL=app.css.map */
