@@ -28,6 +28,13 @@ $button3D-shadow-color: #323232;
       height: $sideNavIcon-size;
 }
 
+@mixin button-as-anchor(){
+    background:none;
+    border:none;
+    cursor:pointer;
+    display:block;
+}
+
 html, body{
   height: 100%;
 }
@@ -70,15 +77,32 @@ html, body{
 
       background-size:70%;
     }
-    #logoffIcon{
-      background: url(../../images/icons/logoffIcon.png) no-repeat center;
 
-      background-size:67%;
+    form #logoffIcon:hover{
+        color: #f1f1f1;
+        outline:none;
     }
+
+    form #logoffIcon:focus {
+        outline:none;
+    }
+
+    form #logoffIcon{
+        border:none;
+        cursor:pointer;
+        display:block;
+        background: url(../../images/icons/logoffIcon.png) no-repeat center;
+        background-size:67%;
+        margin:8px;
+        margin-top:20px;
+        width:40px;
+        height:40px;
+    }
+
     #loginIcon{
       background: url(../../images/icons/loginIcon.png) no-repeat center;
 
-      background-size:70%;
+      background-size:67%;
     }
   }
   .mainComponent {
@@ -142,17 +166,14 @@ html, body{
         color: #818181;
         display: block;
         transition: 0.3s;
-        background:none;
-        border:none;
-        cursor:pointer;
-        display:block;
+        @include button-as-anchor();
     }
-    button:hover{
+    form button:hover{
         color: #f1f1f1;
         outline:none;
     }
 
-    button:focus {
+    form button:focus {
         outline:none;
     }
 

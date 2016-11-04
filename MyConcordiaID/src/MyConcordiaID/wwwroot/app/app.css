@@ -38,12 +38,24 @@ html, body {
     #main #sideMenuStatic #goToReviewIcon {
       background: url(../../images/icons/reviewViewIcon.png) no-repeat center;
       background-size: 70%; }
-    #main #sideMenuStatic #logoffIcon {
+    #main #sideMenuStatic form #logoffIcon:hover {
+      color: #f1f1f1;
+      outline: none; }
+    #main #sideMenuStatic form #logoffIcon:focus {
+      outline: none; }
+    #main #sideMenuStatic form #logoffIcon {
+      border: none;
+      cursor: pointer;
+      display: block;
       background: url(../../images/icons/logoffIcon.png) no-repeat center;
-      background-size: 67%; }
+      background-size: 67%;
+      margin: 8px;
+      margin-top: 20px;
+      width: 40px;
+      height: 40px; }
     #main #sideMenuStatic #loginIcon {
       background: url(../../images/icons/loginIcon.png) no-repeat center;
-      background-size: 70%; }
+      background-size: 67%; }
   #main .mainComponent {
     height: 100%; }
   #main #ng-view {
@@ -106,10 +118,10 @@ html, body {
     border: none;
     cursor: pointer;
     display: block; }
-  .sidenav button:hover {
+  .sidenav form button:hover {
     color: #f1f1f1;
     outline: none; }
-  .sidenav button:focus {
+  .sidenav form button:focus {
     outline: none; }
   .sidenav a:hover, .sidenav .offcanvas a:focus {
     color: #f1f1f1; }

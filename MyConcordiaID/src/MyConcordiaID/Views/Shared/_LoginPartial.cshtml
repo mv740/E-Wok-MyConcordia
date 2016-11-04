@@ -21,26 +21,20 @@
 
 <div id="main" class="row">
     <div id="sideMenuStatic" class="mainComponent">
-        <div>
-            <hamburger-toggle id="hamburger" ng-click="toggleNav()" state="hamState"></hamburger-toggle>
-            @if (SignInManager.IsSignedIn(User))
-            {
-                <form>
-
-                    <a id="logoffIcon" asp-area="" asp-controller="Account" asp-action="LogOff"></a>
-                    <a id="goToReviewIcon" href="#!/view1" ng-click="closeNav()"></a>
-
-                </form>
-
-            }
-            else
-            {
-                <form>
-                    <a id="loginIcon" asp-area="" asp-controller="Account" asp-action="Login" method></a>
-                </form>
-
-            }
-        </div>
+        <hamburger-toggle id="hamburger" ng-click="toggleNav()" state="hamState"></hamburger-toggle>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <form asp-controller="Account" asp-action="LogOff" method="post">
+                <button id="logoffIcon" type="submit"></button>
+                <a id="goToReviewIcon" href="#!/view1" ng-click="closeNav()"></a>
+            </form>
+        }
+        else
+        {
+            <form>
+                <a id="loginIcon" asp-area="" asp-controller="Account" asp-action="Login" method></a>
+            </form>
+        }
     </div>
     @if (SignInManager.IsSignedIn(User))
     {
