@@ -25,7 +25,7 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
 
   var options = {
     quality: 50,
-    destinationType: Camera.DestinationType.FILE_URI,
+    destinationType: Camera.DestinationType.DATA_URL,
     allowEdit: true, //This function allows cropping and editing the picture
     encodingType: Camera.EncodingType.JPEG,
     targetWidth: 300,
@@ -57,7 +57,7 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
 
     $cordovaCamera.getPicture(options)
       .then(function (imageURI) {
-        $scope.pictureUrl = imageURI;
+        $scope.pictureUrl = "data:image/jpeg;base64," + imageURI;
         $scope.showSendPictureButton = true;
 
         visionObj.current_image = "data:image/jpeg;base64," + imageURI;
@@ -108,8 +108,7 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
               $scope.description = visionObj.image_description;
 
             }, function(err){
-              var res = JSON.parse(result.response);
-              console.log(res);
+              alert(JSON.stringify(err));
               //alert('An error occurred while uploading the file');
             });
         }, function(err){
