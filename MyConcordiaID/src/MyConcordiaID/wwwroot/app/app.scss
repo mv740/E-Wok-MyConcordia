@@ -35,6 +35,18 @@ $button3D-shadow-color: #323232;
     display:block;
 }
 
+@mixin nav-menu-links(){
+    height:$sideNavIcon-size;
+    margin-top:20px;
+    margin-left:50px;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
 html, body{
   height: 100%;
 }
@@ -145,27 +157,11 @@ html, body{
 
   /* The navigation menu links */
     a {
-        height:$sideNavIcon-size;
-        margin-top:20px;
-        margin-left:50px;
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 15px;
-        color: #818181;
-        display: block;
-        transition: 0.3s
+        @include nav-menu-links();
     }
 
     form button {
-        height:$sideNavIcon-size;
-        margin-top:20px;
-        margin-left:50px;
-        padding: 8px 8px 8px 32px;
-        text-decoration: none;
-        font-size: 15px;
-        color: #818181;
-        display: block;
-        transition: 0.3s;
+        @include nav-menu-links();
         @include button-as-anchor();
     }
     form button:hover{
