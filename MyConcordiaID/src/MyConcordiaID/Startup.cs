@@ -42,7 +42,12 @@ namespace MyConcordiaID
                 .AddEntityFrameworkStores<DatabaseContext>()
                 .AddDefaultTokenProviders();
 
-
+            services.AddCors(o => o.AddPolicy("AllowPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddOpenIddict<DatabaseContext>()
                 .AddMvcBinders()
@@ -78,6 +83,9 @@ namespace MyConcordiaID
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+            // global policy
+            app.UseCors("AllowPolicy");
+
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
@@ -95,6 +103,8 @@ namespace MyConcordiaID
             app.UseApplicationInsightsRequestTelemetry();
 
             app.UseStaticFiles();
+            //
+          
 
             // Add a middleware used to validate access
             // tokens and protect the API endpoints.
