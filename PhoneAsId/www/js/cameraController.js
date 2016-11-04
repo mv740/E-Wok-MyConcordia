@@ -45,6 +45,9 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
         $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
         $scope.takePictureButtonText = 'Retake Picture';
         $scope.showSendPictureButton = true;
+
+        sendToVision(imageData);
+
       }, function (error) {
 
       })
@@ -60,9 +63,6 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
         $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
         $scope.showSendPictureButton = true;
 
-        visionObj.current_image = "data:image/jpeg;base64," + imageData;
-        visionObj.image_description = '';
-        visionObj.locale = '';
 
         sendToVision(imageData);
 
@@ -97,6 +97,10 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
   };
 
   function sendToVision(imageData){
+
+    visionObj.current_image = "data:image/jpeg;base64," + imageData;
+    visionObj.image_description = '';
+    visionObj.locale = '';
 
     var vision_api_json = {
       "requests":[
