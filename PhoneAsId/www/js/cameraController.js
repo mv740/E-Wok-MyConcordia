@@ -11,13 +11,14 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
   var visionObj = this;
   visionObj.current_image = '';
   visionObj.image_description = '';
-  visionObj.detection_type = 'LABEL_DETECTION';
+  visionObj.detection_type = 'SAFE_SEARCH_DETECTION';
 
   visionObj.detection_types = {
     LABEL_DETECTION: 'label',
     TEXT_DETECTION: 'text',
     LOGO_DETECTION: 'logo',
-    LANDMARK_DETECTION: 'landmark'
+    LANDMARK_DETECTION: 'landmark',
+    SAFE_SEARCH_DETECTION:'safeSearch'
   };
 
   //For testing only
@@ -111,7 +112,7 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
           "features":[
             {
               "type": visionObj.detection_type,
-              "maxResults": 1
+
             }
           ]
         }
@@ -141,9 +142,9 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
         .then(function(result){
 
           var res = JSON.parse(result.response);
-          var key = visionObj.detection_types[visionObj.detection_type] + 'Annotations';
-
-          visionObj.image_description = res.responses[0][key][0].description;
+          var key = visionObj.detection_types[visionObj.detection_type] + 'Annotation';
+          
+          visionObj.image_description = res.responses[0][key].adult;
           $scope.description = visionObj.image_description;
 
         }, function(err){
