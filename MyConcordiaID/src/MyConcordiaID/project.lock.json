@@ -24,7 +24,7 @@
           "lib/net451/AspNet.Security.OAuth.Validation.dll": {}
         }
       },
-      "AspNet.Security.OpenIdConnect.Extensions/1.0.0-beta7-0992": {
+      "AspNet.Security.OpenIdConnect.Extensions/1.0.0-beta7-0998": {
         "type": "package",
         "dependencies": {
           "AngleSharp": "0.9.7",
@@ -38,10 +38,10 @@
           "lib/net451/AspNet.Security.OpenIdConnect.Extensions.dll": {}
         }
       },
-      "AspNet.Security.OpenIdConnect.Server/1.0.0-beta7-0992": {
+      "AspNet.Security.OpenIdConnect.Server/1.0.0-beta7-0998": {
         "type": "package",
         "dependencies": {
-          "AspNet.Security.OpenIdConnect.Extensions": "1.0.0-beta7-0992",
+          "AspNet.Security.OpenIdConnect.Extensions": "1.0.0-beta7-0998",
           "Microsoft.AspNetCore.Authentication": "1.0.0",
           "Microsoft.IdentityModel.Protocols.OpenIdConnect": "2.0.0"
         },
@@ -52,7 +52,7 @@
           "lib/net451/AspNet.Security.OpenIdConnect.Server.dll": {}
         }
       },
-      "BundlerMinifier.Core/2.2.281": {
+      "BundlerMinifier.Core/2.2.301": {
         "type": "package",
         "dependencies": {
           "NUglify": "1.5.1",
@@ -152,7 +152,7 @@
           "lib/net45/Microsoft.AI.Agent.Intercept.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.AspNetCore/1.0.0": {
+      "Microsoft.ApplicationInsights.AspNetCore/1.0.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.1.0",
@@ -161,7 +161,7 @@
           "Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel": "2.1.0",
           "Microsoft.AspNetCore.Hosting.Abstractions": "1.0.0",
           "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
-          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.ViewFeatures": "1.0.1",
           "Microsoft.Extensions.Configuration": "1.0.0",
           "Microsoft.Extensions.DiagnosticAdapter": "1.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "1.0.0"
@@ -1922,10 +1922,10 @@
           "lib/net40/Oracle.DataAccess.dll": {}
         }
       },
-      "OpenIddict/1.0.0-beta1-0470": {
+      "OpenIddict/1.0.0-beta1-0471": {
         "type": "package",
         "dependencies": {
-          "OpenIddict.EntityFramework": "1.0.0-beta1-0470"
+          "OpenIddict.EntityFramework": "1.0.0-beta1-0471"
         },
         "compile": {
           "lib/net451/OpenIddict.dll": {}
@@ -1934,10 +1934,10 @@
           "lib/net451/OpenIddict.dll": {}
         }
       },
-      "OpenIddict.Core/1.0.0-beta1-0470": {
+      "OpenIddict.Core/1.0.0-beta1-0471": {
         "type": "package",
         "dependencies": {
-          "AspNet.Security.OpenIdConnect.Server": "1.0.0-beta7-0992",
+          "AspNet.Security.OpenIdConnect.Server": "1.0.0-beta7-0998",
           "CryptoHelper": "2.0.0",
           "Microsoft.AspNetCore.Diagnostics.Abstractions": "1.0.0",
           "Microsoft.Extensions.Caching.Memory": "1.0.0"
@@ -1949,11 +1949,11 @@
           "lib/net451/OpenIddict.Core.dll": {}
         }
       },
-      "OpenIddict.EntityFramework/1.0.0-beta1-0470": {
+      "OpenIddict.EntityFramework/1.0.0-beta1-0471": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "1.0.0",
-          "OpenIddict.Core": "1.0.0-beta1-0470"
+          "OpenIddict.Core": "1.0.0-beta1-0471"
         },
         "compile": {
           "lib/net451/OpenIddict.EntityFramework.dll": {}
@@ -1962,11 +1962,11 @@
           "lib/net451/OpenIddict.EntityFramework.dll": {}
         }
       },
-      "OpenIddict.Mvc/1.0.0-beta1-0470": {
+      "OpenIddict.Mvc/1.0.0-beta1-0471": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.0",
-          "OpenIddict.Core": "1.0.0-beta1-0470"
+          "OpenIddict.Core": "1.0.0-beta1-0471"
         },
         "compile": {
           "lib/net451/OpenIddict.Mvc.dll": {}
@@ -2798,12 +2798,12 @@
         "lib/netstandard1.3/AspNet.Security.OAuth.Validation.xml"
       ]
     },
-    "AspNet.Security.OpenIdConnect.Extensions/1.0.0-beta7-0992": {
-      "sha512": "Hm6DLC7C6bz6CZjuPBRZIN/b9VHUhRdi+uJXVT3JEkGUyjjBYiwzTgeDh8Wo8PV5Q6cWYIgWIke4SfgG8b8ETw==",
+    "AspNet.Security.OpenIdConnect.Extensions/1.0.0-beta7-0998": {
+      "sha512": "DS/7YmVsutGmSt0wcW3washMCxVk4c9+Lbgb/56o8EGuhi8US64sG9HHeAaT5TGwx34C0xz8aDCHm0f19VMMKA==",
       "type": "package",
-      "path": "AspNet.Security.OpenIdConnect.Extensions/1.0.0-beta7-0992",
+      "path": "AspNet.Security.OpenIdConnect.Extensions/1.0.0-beta7-0998",
       "files": [
-        "AspNet.Security.OpenIdConnect.Extensions.1.0.0-beta7-0992.nupkg.sha512",
+        "AspNet.Security.OpenIdConnect.Extensions.1.0.0-beta7-0998.nupkg.sha512",
         "AspNet.Security.OpenIdConnect.Extensions.nuspec",
         "lib/net451/AspNet.Security.OpenIdConnect.Extensions.dll",
         "lib/net451/AspNet.Security.OpenIdConnect.Extensions.xml",
@@ -2811,12 +2811,12 @@
         "lib/netstandard1.4/AspNet.Security.OpenIdConnect.Extensions.xml"
       ]
     },
-    "AspNet.Security.OpenIdConnect.Server/1.0.0-beta7-0992": {
-      "sha512": "SRCpR6RXbwkIEdxB4pnv2uuP9pNoTuJYLmObu1eacuLciUqEWYMpHt9NGkReyHYdbtQgamm30pFGkcVxsWDchg==",
+    "AspNet.Security.OpenIdConnect.Server/1.0.0-beta7-0998": {
+      "sha512": "VuYUEaBP2PZKMhfT6Urk3NSUjc0tPrHmFPFPwqsg7kqLcDYlK5cOLmGZAvPcUmgdM187fxMDLRW18eIgZzVNaQ==",
       "type": "package",
-      "path": "AspNet.Security.OpenIdConnect.Server/1.0.0-beta7-0992",
+      "path": "AspNet.Security.OpenIdConnect.Server/1.0.0-beta7-0998",
       "files": [
-        "AspNet.Security.OpenIdConnect.Server.1.0.0-beta7-0992.nupkg.sha512",
+        "AspNet.Security.OpenIdConnect.Server.1.0.0-beta7-0998.nupkg.sha512",
         "AspNet.Security.OpenIdConnect.Server.nuspec",
         "lib/net451/AspNet.Security.OpenIdConnect.Server.dll",
         "lib/net451/AspNet.Security.OpenIdConnect.Server.xml",
@@ -2826,12 +2826,12 @@
         "lib/netstandard1.6/AspNet.Security.OpenIdConnect.Server.xml"
       ]
     },
-    "BundlerMinifier.Core/2.2.281": {
-      "sha512": "cUiOJT4rjubD9tOsLo0ruPqfLEy5GUByj9JZ2fVlU5uR4QYTIN//BpeQfsmBwIU/GWrpVJqYsyX474Bm0U3XHQ==",
+    "BundlerMinifier.Core/2.2.301": {
+      "sha512": "7vWVrVzO8a9NbdJN/ydYl3pjdt7+VTyGqO5ot2NKi7PGwCQt/H1Jckz0q131y8JbOmdXk/MYvN5U4UFhXUWxOw==",
       "type": "package",
-      "path": "BundlerMinifier.Core/2.2.281",
+      "path": "BundlerMinifier.Core/2.2.301",
       "files": [
-        "BundlerMinifier.Core.2.2.281.nupkg.sha512",
+        "BundlerMinifier.Core.2.2.301.nupkg.sha512",
         "BundlerMinifier.Core.nuspec",
         "lib/net452/dotnet-bundle.exe",
         "lib/netcoreapp1.0/dotnet-bundle.dll",
@@ -2941,15 +2941,17 @@
         "lib/net45/Microsoft.AI.Agent.Intercept.dll"
       ]
     },
-    "Microsoft.ApplicationInsights.AspNetCore/1.0.0": {
-      "sha512": "t1O4hbatuHU4BJnuBZ4zmx6fNoTryyZO/NwxwqmMUbuHyvil3elkOZvX3pJWlUTOk6/wyRXItGKBiW4uDET6Kw==",
+    "Microsoft.ApplicationInsights.AspNetCore/1.0.2": {
+      "sha512": "2pe22FuypQRT5YNd4cIehYqDduxiQzt1o/585LgG6vJmOfuX7aF2h4uSI5epRrvu1EikuoZEzBchAR6U8cBybQ==",
       "type": "package",
-      "path": "Microsoft.ApplicationInsights.AspNetCore/1.0.0",
+      "path": "Microsoft.ApplicationInsights.AspNetCore/1.0.2",
       "files": [
-        "Microsoft.ApplicationInsights.AspNetCore.1.0.0.nupkg.sha512",
+        "Microsoft.ApplicationInsights.AspNetCore.1.0.2.nupkg.sha512",
         "Microsoft.ApplicationInsights.AspNetCore.nuspec",
         "lib/net451/Microsoft.ApplicationInsights.AspNetCore.dll",
-        "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll"
+        "lib/net451/Microsoft.ApplicationInsights.AspNetCore.xml",
+        "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll",
+        "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.xml"
       ]
     },
     "Microsoft.ApplicationInsights.DependencyCollector/2.1.0": {
@@ -4537,12 +4539,12 @@
         "odp.net.x64.nuspec"
       ]
     },
-    "OpenIddict/1.0.0-beta1-0470": {
-      "sha512": "+THYwZEgSIs1NaZ6dZWN+jKKbBLxHiJJkdjAyA6MXW6Y/81615eRv+TSQNghLXJvT/RHAt1A9M4Fc95Cl0z2oQ==",
+    "OpenIddict/1.0.0-beta1-0471": {
+      "sha512": "IBy9Y+IwOsYRdOjtAappslMM/x0cixyLPo1iw+ATl399+a+eGwR2X92KNqrs25JUMZOmFjdmeWlowzwEvIAIfQ==",
       "type": "package",
-      "path": "OpenIddict/1.0.0-beta1-0470",
+      "path": "OpenIddict/1.0.0-beta1-0471",
       "files": [
-        "OpenIddict.1.0.0-beta1-0470.nupkg.sha512",
+        "OpenIddict.1.0.0-beta1-0471.nupkg.sha512",
         "OpenIddict.nuspec",
         "lib/net451/OpenIddict.dll",
         "lib/net451/OpenIddict.xml",
@@ -4550,12 +4552,12 @@
         "lib/netstandard1.4/OpenIddict.xml"
       ]
     },
-    "OpenIddict.Core/1.0.0-beta1-0470": {
-      "sha512": "shmBlQ2jvf21FWqopbduNYBZJHSnbS+Jq0gQ4hRZN+xR1kw6hybbYwDHgbLYvZLDiDZbmYJT1L0pZ0om/ESW3A==",
+    "OpenIddict.Core/1.0.0-beta1-0471": {
+      "sha512": "BNK5Y1LrHDPmkxLWsQiUuMaSeIKxPGHEQNEju9hPDbbwLzrnivDgrt5BQoYXMqef7DZCS27ELA2deNDRMAVKYQ==",
       "type": "package",
-      "path": "OpenIddict.Core/1.0.0-beta1-0470",
+      "path": "OpenIddict.Core/1.0.0-beta1-0471",
       "files": [
-        "OpenIddict.Core.1.0.0-beta1-0470.nupkg.sha512",
+        "OpenIddict.Core.1.0.0-beta1-0471.nupkg.sha512",
         "OpenIddict.Core.nuspec",
         "lib/net451/OpenIddict.Core.dll",
         "lib/net451/OpenIddict.Core.xml",
@@ -4563,12 +4565,12 @@
         "lib/netstandard1.4/OpenIddict.Core.xml"
       ]
     },
-    "OpenIddict.EntityFramework/1.0.0-beta1-0470": {
-      "sha512": "dsSixH6cSsCwXBi+qEAR6c+679ksEySg5WjlO5Wd7YODCNMBEmkghVIqIuZ1ae6e1USu35etAp1Wq5OBsQt+sw==",
+    "OpenIddict.EntityFramework/1.0.0-beta1-0471": {
+      "sha512": "hqKgwCZszkjOOR5FhqfIozNe2SAW5hA6BzRLi24ZSz4y0E36qI+x0ud1AwKeeOgsCtxl6DpI0hxDBEvKQxmbzg==",
       "type": "package",
-      "path": "OpenIddict.EntityFramework/1.0.0-beta1-0470",
+      "path": "OpenIddict.EntityFramework/1.0.0-beta1-0471",
       "files": [
-        "OpenIddict.EntityFramework.1.0.0-beta1-0470.nupkg.sha512",
+        "OpenIddict.EntityFramework.1.0.0-beta1-0471.nupkg.sha512",
         "OpenIddict.EntityFramework.nuspec",
         "lib/net451/OpenIddict.EntityFramework.dll",
         "lib/net451/OpenIddict.EntityFramework.xml",
@@ -4576,12 +4578,12 @@
         "lib/netstandard1.4/OpenIddict.EntityFramework.xml"
       ]
     },
-    "OpenIddict.Mvc/1.0.0-beta1-0470": {
-      "sha512": "DmAS9uueq1co4TPQOu/8c5c+EsfQc9m4jc2djNSrFNLgrWbbZCc1lTf1jGGt02H4hwn9ZVYXThrhvYE+IXhDYw==",
+    "OpenIddict.Mvc/1.0.0-beta1-0471": {
+      "sha512": "7F85LRAmkVdh9bA5krOwv2XdecfVJInuYTyCLN7UMfrJ0+loxlJcA5i2RPEzZBM23XLUnSIqqM7/qhj0bDQjcw==",
       "type": "package",
-      "path": "OpenIddict.Mvc/1.0.0-beta1-0470",
+      "path": "OpenIddict.Mvc/1.0.0-beta1-0471",
       "files": [
-        "OpenIddict.Mvc.1.0.0-beta1-0470.nupkg.sha512",
+        "OpenIddict.Mvc.1.0.0-beta1-0471.nupkg.sha512",
         "OpenIddict.Mvc.nuspec",
         "lib/net451/OpenIddict.Mvc.dll",
         "lib/net451/OpenIddict.Mvc.xml",
@@ -7548,15 +7550,16 @@
   "projectFileDependencyGroups": {
     "": [
       "AspNet.Security.OAuth.Validation >= 1.0.0-alpha2-final",
-      "BundlerMinifier.Core >= 2.2.281",
+      "BundlerMinifier.Core >= 2.2.301",
       "EntityFramework >= 6.1.3",
       "EntityFramework.Oracle.Rdb >= 7.3.4",
-      "Microsoft.ApplicationInsights.AspNetCore >= 1.0.0",
+      "Microsoft.ApplicationInsights.AspNetCore >= 1.0.2",
       "Microsoft.ApplicationInsights.Web >= 2.1.0",
       "Microsoft.AspNet.Identity.Core >= 2.2.1",
       "Microsoft.AspNetCore.Authentication.Google >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.OpenIdConnect >= 1.0.0",
+      "Microsoft.AspNetCore.Cors >= 1.0.0",
       "Microsoft.AspNetCore.Diagnostics >= 1.0.0",
       "Microsoft.AspNetCore.Identity >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 1.0.0",

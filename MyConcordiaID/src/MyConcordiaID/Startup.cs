@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using MyConcordiaID.Models.Student;
+using Microsoft.IdentityModel.Tokens;
 
 namespace MyConcordiaID
 {
@@ -103,63 +104,27 @@ namespace MyConcordiaID
 
 
 
-            app.UseOAuthAuthentication(new OAuthOptions
+          
+
+            app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
-                AuthenticationScheme = "Google-AccessToken",
-                DisplayName = "Google-AccessToken",
-                ClientId = Configuration["google:clientid"],
-                ClientSecret = Configuration["google:clientsecret"],
-                CallbackPath = new PathString("/signin-google-token"),
-                AuthorizationEndpoint = GoogleDefaults.AuthorizationEndpoint,
-                TokenEndpoint = GoogleDefaults.TokenEndpoint,
-                Scope = { "openid", "profile", "email" },
-                SaveTokens = true,
+                AutomaticAuthenticate = true,
+                AutomaticChallenge = true,
+                Authority = "https://accounts.google.com",
+                Audience = Configuration["Google:ClientId"],
 
-                //Events = new OAuthEvents
-                //{
-                //    // The OnCreatingTicket event is called after the user has been authenticated and the OAuth middleware has
-                //    // created an auth ticket. We need to manually call the UserInformationEndpoint to retrieve the user's information,
-                //    // parse the resulting JSON to extract the relevant information, and add the correct claims.
-                //    OnCreatingTicket = async context =>
-                //    {
-                //    // Retrieve user info
-                //    var request = new HttpRequestMessage(HttpMethod.Get, context.Options.UserInformationEndpoint);
-                //        request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", context.AccessToken);
-                //        request.Headers.Add("x-li-format", "json"); // Tell LinkedIn we want the result in JSON, otherwise it will return XML
-
-                //    var response = await context.Backchannel.SendAsync(request, context.HttpContext.RequestAborted);
-                //        response.EnsureSuccessStatusCode();
-
-                //    // Extract the user info object
-                //    var user = JObject.Parse(await response.Content.ReadAsStringAsync());
-
-
-
-                //    }
-                //}
+                TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = true,
+                    ValidIssuer = "accounts.google.com"
+                },
+                RequireHttpsMetadata = false
 
 
             });
 
-            //app.UseJwtBearerAuthentication(new JwtBearerOptions
-            //{
-            //    AutomaticAuthenticate = true,
-            //    AutomaticChallenge = true,
-            //    Authority = "https://accounts.google.com",
-            //    Audience = Configuration["Google:ClientId"],
-
-            //    TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateAudience = true,
-            //        ValidIssuer = "accounts.google.com"
-            //    },
-            //    RequireHttpsMetadata = false
-
-
-            //});
-
-                // external authentication middleware 
-                app.UseGoogleAuthentication(new GoogleOptions
+            // external authentication middleware 
+            app.UseGoogleAuthentication(new GoogleOptions
             {
                 AuthenticationScheme = "Google",
                 ClientId = Configuration["Google:ClientId"],
