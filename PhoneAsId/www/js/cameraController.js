@@ -41,8 +41,8 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
     options.sourceType=Camera.PictureSourceType.CAMERA;
 
     $cordovaCamera.getPicture(options)
-      .then(function (imageURI) {
-        $scope.pictureUrl = imageURI;
+      .then(function (imageData) {
+        $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
         $scope.takePictureButtonText = 'Retake Picture';
         $scope.showSendPictureButton = true;
       }, function (error) {
@@ -56,11 +56,11 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
     options.sourceType = Camera.PictureSourceType.PHOTOLIBRARY;
 
     $cordovaCamera.getPicture(options)
-      .then(function (imageURI) {
-        $scope.pictureUrl = "data:image/jpeg;base64," + imageURI;
+      .then(function (imageData) {
+        $scope.pictureUrl = "data:image/jpeg;base64," + imageData;
         $scope.showSendPictureButton = true;
 
-        visionObj.current_image = "data:image/jpeg;base64," + imageURI;
+        visionObj.current_image = "data:image/jpeg;base64," + imageData;
         visionObj.image_description = '';
         visionObj.locale = '';
 
@@ -68,7 +68,7 @@ angular.module('starter.controllers').controller('CameraCtrl', function($scope, 
           "requests":[
             {
               "image":{
-                "content": imageURI
+                "content": imageData
               },
               "features":[
                 {
