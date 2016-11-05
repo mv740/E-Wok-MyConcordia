@@ -8,3 +8,4 @@ MyConcordiaID/OracleEntityFramework/bin/
 MyConcordiaID/packages/
 MyConcordiaID/src/MyConcordiaID/wwwroot/lib/
 MyConcordiaID/.idea/
+MyConcordiaID/src/MyConcordiaID/project.lock.json
