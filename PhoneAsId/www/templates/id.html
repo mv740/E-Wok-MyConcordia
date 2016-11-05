@@ -4,28 +4,29 @@
     <!-- template used if for portrait -->
     <div ng-if="screenOrientation == 'portrait-primary'">
       <h1>PORTRAIT VIEW</h1>
-
       <h2>CONCORDIA LOGO</h2>
-      <h2>PHOTO</h2>
-      <h2>FIRST NAME</h2>
-      <h2>LAST NAME</h2>
-      <h2>DOB</h2>
-      <h2>ID</h2>
-      <h2>VALID</h2>
+
+      <img ng-src="data:image/PNG;base64,{{profilepicture}}">
+      <p>{{firstname}}</p>
+      <p>{{lastname}}</p>
+      <p>{{dob}}</p>
+      <p>{{id}}</p>
+      <p>{{ugradstatus}}</p>
+      <p>{{expiredate}}</p>
     </div>
 
     <!-- template used if for landscape -->
     <div ng-if="screenOrientation == 'landscape-secondary' || screenOrientation == 'landscape-primary'">
-
       <h1>LANDSCAPE VIEW</h1>
-
       <h2>CONCORDIA LOGO</h2>
-      <h2>PHOTO</h2>
-      <h2>FIRST NAME</h2>
-      <h2>LAST NAME</h2>
-      <h2>DOB</h2>
-      <h2>ID</h2>
-      <h2>VALID</h2>
+
+      <img ng-src="data:image/PNG;base64,{{profilepicture}}">
+      <p>{{firstname}}</p>
+      <p>{{lastname}}</p>
+      <p>{{dob}}</p>
+      <p>{{id}}</p>
+      <p>{{ugradstatus}}</p>
+      <p>{{expiredate}}</p>
     </div>
   </ion-content>
 </ion-view>
