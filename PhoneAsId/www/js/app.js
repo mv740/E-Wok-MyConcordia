@@ -55,9 +55,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
         'menuContent': {
           templateUrl: 'templates/camera.html',
           controller: 'CameraCtrl',
+
+          // If the student cannot update picture, restrict access to the camera.
           resolve: {
             security: ['$q', function($q){
               if(!canUpdatePicture){
+                alert("Cannot update picture at the moment. Please contact Birks for more details.");
                 return $q.reject("Not Authorized");
               }
             }]
