@@ -25,6 +25,14 @@
           <Property Name="PICTURE" Type="blob" Nullable="false" />
           <Property Name="UPLOADEDDATE" Type="timestamp" Precision="6" Nullable="false" />
         </EntityType>
+        <EntityType Name="PICTUREUPDATESETTING">
+          <Key>
+            <PropertyRef Name="YEAR" />
+          </Key>
+          <Property Name="YEAR" Type="number" Precision="4" Scale="0" Nullable="false" />
+          <Property Name="STARDATE" Type="date" Nullable="false" />
+          <Property Name="ENDDATE" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="STUDENTS">
           <Key>
             <PropertyRef Name="NETNAME" />
@@ -47,6 +55,7 @@
         <EntityContainer Name="OracleDataModelStoreContainer">
           <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSERS" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTURE" EntityType="Self.PICTURE" Schema="MV740" store:Type="Tables" />
+          <EntitySet Name="PICTUREUPDATESETTING" EntityType="Self.PICTUREUPDATESETTING" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="MV740" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -67,6 +76,7 @@
           <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSER" />
           <EntitySet Name="PICTUREs" EntityType="OracleDataModel.PICTURE" />
           <EntitySet Name="STUDENTS" EntityType="OracleDataModel.STUDENT" />
+          <EntitySet Name="PICTUREUPDATESETTINGs" EntityType="OracleDataModel.PICTUREUPDATESETTING" />
         </EntityContainer>
         <EntityType Name="PICTURE">
           <Key>
@@ -96,6 +106,14 @@
           <Property Name="UGRADSTATUS" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="EXPIREDATE" Type="DateTime" Nullable="false" />
           <Property Name="UPDATEPICTURE" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PICTUREUPDATESETTING">
+          <Key>
+            <PropertyRef Name="YEAR" />
+          </Key>
+          <Property Name="YEAR" Type="Int16" Nullable="false" />
+          <Property Name="STARDATE" Type="DateTime" Nullable="false" />
+          <Property Name="ENDDATE" Type="DateTime" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -142,6 +160,15 @@
                 <ScalarProperty Name="FIRSTNAME" ColumnName="FIRSTNAME" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PICTUREUPDATESETTINGs">
+            <EntityTypeMapping TypeName="OracleDataModel.PICTUREUPDATESETTING">
+              <MappingFragment StoreEntitySet="PICTUREUPDATESETTING">
+                <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
+                <ScalarProperty Name="STARDATE" ColumnName="STARDATE" />
+                <ScalarProperty Name="YEAR" ColumnName="YEAR" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

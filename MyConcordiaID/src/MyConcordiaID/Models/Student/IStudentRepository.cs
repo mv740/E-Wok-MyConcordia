@@ -18,5 +18,6 @@ namespace MyConcordiaID.Models.Student
         dynamic GetAllPending();
         dynamic GetAllValid();
         void Add(STUDENT student);
+        PicturePeriod GetUpdatePicturePeriod();
     }
 }

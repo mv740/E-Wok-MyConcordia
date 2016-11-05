@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using MyConcordiaID.Models.Student;
 using Microsoft.IdentityModel.Tokens;
+using MyConcordiaID.Models.Admin;
 
 namespace MyConcordiaID
 {
@@ -78,6 +79,7 @@ namespace MyConcordiaID
             services.AddMvc();
             services.AddScoped(_ => new DatabaseEntities());
             services.AddSingleton<IStudentRepository, StudentRepository>();
+            services.AddSingleton<IAdminRepository, AdminRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

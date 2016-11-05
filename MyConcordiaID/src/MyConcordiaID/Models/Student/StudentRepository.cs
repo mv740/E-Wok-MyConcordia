@@ -54,6 +54,7 @@ namespace MyConcordiaID.Models.Student
 
                     student.PENDINGPICTURE = fileContent;
                     student.PENDING = true;
+                    student.UPDATEPICTURE = false; // so he can't send multiple update 
                     _database.SaveChanges();
 
 
@@ -142,6 +143,49 @@ namespace MyConcordiaID.Models.Student
         {
             _database.STUDENTS.Add(newStudent);
             _database.SaveChanges();
+        }
+
+        public PicturePeriod GetUpdatePicturePeriod()
+        {
+            // May 1st 2016 start of academic year 2016-17 : summer 2016, fall 16, winter 17
+
+            int month = DateTime.Now.Month;
+            int year = DateTime.Now.Year;
+
+
+            int academicYear;
+            if(month >= 5 )
+            {
+                academicYear = year;
+            }
+            else
+            {
+                academicYear = year - 1;
+            }
+
+            var period = _database.PICTUREUPDATESETTINGs
+                .Where(p => p.YEAR == academicYear)
+                .FirstOrDefault();
+
+            DateTime today = DateTime.Today;
+
+
+            bool canUpdate = false;
+            if(today >= period.STARDATE && today <= period.ENDDATE)
+            {
+                canUpdate = true;
+            }
+
+            PicturePeriod picturePeriod = new PicturePeriod
+            {
+                canUpdatePicture = canUpdate,
+                startDate = period.STARDATE.ToString("dd-MM-yyyy"),
+                endDate = period.ENDDATE.ToString("dd-MM-yyyy")
+            };
+
+            return picturePeriod;
+
+
         }
 
     }

@@ -6,7 +6,7 @@
     "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
-    "angular": "~1.5.0",
+    "angular": "1.5.8",
     "angular-route": "~1.5.0",
     "angular-loader": "~1.5.0",
     "angular-mocks": "~1.5.0",

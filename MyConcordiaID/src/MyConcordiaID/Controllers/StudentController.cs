@@ -153,5 +153,16 @@ namespace MyConcordiaID.Controllers
 
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("UpdatePeriod")]
+        public IActionResult GetUpdatePicturePeriod()
+        {
+            return new ObjectResult(StudentsRepo.GetUpdatePicturePeriod());
+           
+        }
+
+
+
     }
 }
