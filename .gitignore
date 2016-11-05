@@ -12,3 +12,5 @@ MyConcordiaID/src/UnitTestCore/bin/
 MyConcordiaID/src/UnitTestCore/Properties/AssemblyInfo.cs
 MyConcordiaID/src/UnitTestCore/project.fragment.lock.json
 MyConcordiaID/src/UnitTestCore/project.lock.json
+MyConcordiaID/.idea/
+MyConcordiaID/src/MyConcordiaID/project.lock.json
