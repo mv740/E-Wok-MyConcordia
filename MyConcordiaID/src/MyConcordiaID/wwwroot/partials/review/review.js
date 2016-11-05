@@ -3,7 +3,7 @@
 angular.module('myApp.review', ['ngRoute', 'angularCSS'])
 
 .config(['$routeProvider', function($routeProvider) {
-  $routeProvider.when('/view1', {
+  $routeProvider.when('/review', {
     templateUrl: 'partials/review/review.html',
     controller: 'ReviewCtrl',
     css: [

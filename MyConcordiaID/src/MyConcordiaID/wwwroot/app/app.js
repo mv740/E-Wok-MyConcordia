@@ -5,7 +5,6 @@ angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
     'ngMaterial',
-    'myApp.login',
     'myApp.sideNav',
     'ngHamburger',
     'myApp.review',
@@ -25,5 +24,5 @@ angular.module('myApp', [
     $locationProvider.hashPrefix('!');
 
     $routeProvider
-        .otherwise({ redirectTo: '/login' });
+        .otherwise({ redirectTo: '/review' });
 }]);

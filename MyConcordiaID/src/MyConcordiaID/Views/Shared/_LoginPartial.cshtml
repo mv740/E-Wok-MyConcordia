@@ -2,46 +2,33 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<div id="mySidenav" class="sidenav">
-    <!--<a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>-->
-    <a ng-click="toggleNav()"></a>
-    @if (SignInManager.IsSignedIn(User))
-    {
+@if (SignInManager.IsSignedIn(User))
+{
+
+    <div id="mySidenav" class="sidenav">
+        <!--<a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>-->
+        <a ng-click="toggleNav()"></a>
         <form asp-controller="Account" asp-action="LogOff" method="post">
             <button id="logoff" type="submit">Logout</button>
-            <a href="#!/view1" ng-click="closeNav()">Review</a>
+            <a href="#!/review" ng-click="closeNav()">Review</a>
         </form>
-    }
-    else
-    {
-        <a asp-area="" asp-controller="Account" asp-action="Login">Login</a>
-    }
+    </div>
 
-</div>
-
-<div id="main" class="row">
-    <div id="sideMenuStatic" class="mainComponent">
-        <hamburger-toggle id="hamburger" ng-click="toggleNav()" state="hamState"></hamburger-toggle>
-        @if (SignInManager.IsSignedIn(User))
-        {
+    <div id="main" class="row">
+        <div id="sideMenuStatic" class="mainComponent">
+            <hamburger-toggle id="hamburger" ng-click="toggleNav()" state="hamState"></hamburger-toggle>
             <form asp-controller="Account" asp-action="LogOff" method="post">
                 <button id="logoffIcon" type="submit"></button>
-                <a id="goToReviewIcon" href="#!/view1" ng-click="closeNav()"></a>
+                <a id="goToReviewIcon" href="#!/review" ng-click="closeNav()"></a>
             </form>
-        }
-        else
-        {
-            <form>
-                <a id="loginIcon" asp-area="" asp-controller="Account" asp-action="Login" method></a>
-            </form>
-        }
-    </div>
-    @if (SignInManager.IsSignedIn(User))
-    {
+        </div>
+
         <div id="ng-view" class="mainComponent" ng-view></div>
-    }
-    else
-    {
-        <div ng-include="'partials/login/login.html'"></div>
-    }
-</div>
+
+
+    </div>
+}
+else
+{
+    @await Html.PartialAsync("_LoginProvider")
+}

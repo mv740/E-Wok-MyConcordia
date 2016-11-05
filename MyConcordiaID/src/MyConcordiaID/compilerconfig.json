@@ -34,5 +34,9 @@
   {
     "outputFile": "wwwroot/partials/review/searchModal/searchModal.css",
     "inputFile": "wwwroot/partials/review/searchModal/searchModal.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/loginProvider/loginProvider.css",
+    "inputFile": "wwwroot/partials/loginProvider/loginProvider.scss"
   }
 ]
