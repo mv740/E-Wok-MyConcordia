@@ -17,5 +17,6 @@ namespace MyConcordiaID.Models.Student
         void ValidatePicture(PictureValidation pictureValidation);
         dynamic GetAllPending();
         dynamic GetAllValid();
+        void Add(STUDENT student);
     }
 }

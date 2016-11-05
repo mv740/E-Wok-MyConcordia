@@ -7,3 +7,8 @@ MyConcordiaID/OracleEntityFramework/obj/
 MyConcordiaID/OracleEntityFramework/bin/
 MyConcordiaID/packages/
 MyConcordiaID/src/MyConcordiaID/wwwroot/lib/
+MyConcordiaID/src/UnitTestCore/obj/
+MyConcordiaID/src/UnitTestCore/bin/
+MyConcordiaID/src/UnitTestCore/Properties/AssemblyInfo.cs
+MyConcordiaID/src/UnitTestCore/project.fragment.lock.json
+MyConcordiaID/src/UnitTestCore/project.lock.json

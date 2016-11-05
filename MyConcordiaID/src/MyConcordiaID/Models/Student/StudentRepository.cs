@@ -138,6 +138,12 @@ namespace MyConcordiaID.Models.Student
 
         }
 
+        public void Add(STUDENT newStudent)
+        {
+            _database.STUDENTS.Add(newStudent);
+            _database.SaveChanges();
+        }
+
     }
 
 }
