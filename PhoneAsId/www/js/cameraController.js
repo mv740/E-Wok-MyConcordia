@@ -22,6 +22,16 @@ angular.module('starter.controllers').controller('CameraCtrl', function ($scope,
     SAFE_SEARCH_DETECTION: 'safeSearch'
   };
 
+  visionObj.safe_search_result = {
+    V_UNL: "VERY_UNLIKELY",
+    UNL: "UNLIKELY",
+    POS: "POSSIBLE",
+    LIK: "LIKELY",
+    V_LIK:"VERY_LIKELY"
+  };
+
+  var safeToSend = true;
+
   //For testing only
   var google_api_key = 'AIzaSyAhURhpm8tVY1k2RM2T1_I84bqC-lFJlZc';
 
@@ -80,40 +90,46 @@ angular.module('starter.controllers').controller('CameraCtrl', function ($scope,
 
     var serverURL = encodeURI("https://myconcordiaid.azurewebsites.net");
 
-    options.fileKey = "file";
-    options.fileName = 'filename.jpg';
-    options.mimeType = "image/jpeg";
-    options.chunkedMode = false;
-    // options.params = {
-    //   "timestamp": "Oct 12,2016"
-    // };
+    if(safeToSend){
+      options.fileKey = "file";
+      options.fileName = 'filename.jpg';
+      options.mimeType = "image/jpeg";
+      options.chunkedMode = false;
+      // options.params = {
+      //   "timestamp": "Oct 12,2016"
+      // };
 
-    $scope.showUploadSpinnerGif = true;
-    $scope.hideTakePictureButton = true;
-    $scope.hideLoadPictureButton = true;
-    $scope.hideSendPictureButton = true;
+      $scope.showUploadSpinnerGif = true;
+      $scope.hideTakePictureButton = true;
+      $scope.hideLoadPictureButton = true;
+      $scope.hideSendPictureButton = true;
 
-    ft.upload($scope.pictureUrl, serverURL + "/api/student/ProfilePicture",
-      function (e) {
-        $scope.showAlert('upload-success');
+      ft.upload($scope.pictureUrl, serverURL + "/api/student/ProfilePicture",
+        function (e) {
+          $scope.showAlert('upload-success');
 
-        //hide uploading spinner when callback succeeded
-        $scope.$apply(function () {
-          $scope.showUploadSpinnerGif = false;
-        });
-      },
-      function (e) {
-        $scope.showAlert('upload-fail');
+          //hide uploading spinner when callback succeeded
+          $scope.$apply(function () {
+            $scope.showUploadSpinnerGif = false;
+          });
+        },
+        function (e) {
+          $scope.showAlert('upload-fail');
 
-        //hide uploading spinner when callback failed
-        $scope.$apply(function () {
-          $scope.showUploadSpinnerGif = false;
-          $scope.hideTakePictureButton = false;
-          $scope.hideLoadPictureButton = false;
-          $scope.hideSendPictureButton = false;
-        });
-      }, options);
-
+          //hide uploading spinner when callback failed
+          $scope.$apply(function () {
+            $scope.showUploadSpinnerGif = false;
+            $scope.hideTakePictureButton = false;
+            $scope.hideLoadPictureButton = false;
+            $scope.hideSendPictureButton = false;
+          });
+        }, options);
+    }else{
+      var alertSafePopup = $ionicPopup.alert({
+        title: 'Request Denied',
+        template: 'The picture you tried to send contained content that may not be suitable for children under the age of 18. Please try again'
+      });
+    }
   }
 
   // ionic alert dialogues
@@ -186,6 +202,11 @@ angular.module('starter.controllers').controller('CameraCtrl', function ($scope,
 
           visionObj.image_description = res.responses[0][key].adult;
           $scope.description = visionObj.image_description;
+          if(visionObj.image_description ==  visionObj.safe_search_result['V_UNL'] ||  visionObj.image_description ==  visionObj.safe_search_result['UNL'] || visionObj.image_description ==  visionObj.safe_search_result['POS']){
+            safeToSend = true;
+          }else{
+            safeToSend = false;
+          }
 
         }, function (err) {
           alert(JSON.stringify(err));
