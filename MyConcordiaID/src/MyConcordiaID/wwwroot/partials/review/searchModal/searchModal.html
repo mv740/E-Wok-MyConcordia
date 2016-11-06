@@ -1,0 +1,55 @@
+
+<div class="modal-dialog" ng-controller="SearchModalCtrl">
+
+    <!-- Modal content-->
+    <div  id="searchModal" class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Validate Student Picture</h4>
+        </div>
+
+        <div class="circularLoading" ng-if="loading">
+            <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+        </div>
+
+        <div ng-show="!loading" id="modal-body" class="modal-body row">
+            <div id="cardContainer" class="modal-element col-sm-6">
+                <div id="cardHolder">
+                    <img ng-src="data:image/JPEG;base64,{{pendingPicture}}" />
+                    <div class="row">
+                        <button ng-click="sendValidation(true)" type="button" class="btn btn-default col-sm-6">yes</button>
+                        <button ng-click="sendValidation(false)" type="button" class="btn btn-default col-sm-6">no</button>
+                    </div>
+                </div>
+                <div id="galleryContainer" ng-include="'partials/review/searchModal/gallery/gallery.html'"></div>
+            </div>
+
+
+            <div class="modal-element col-sm-6">
+                <span>{{student.id}},</span>
+
+                <span>{{student.firstname}}</span>
+                <span>{{student.lastname}},</span>
+
+                <span>{{student.netname}},</span>
+
+                <span>{{student.birthdate.day}}</span>
+                <span>{{student.birthdate.month}}</span>
+                <span>{{student.birthdate.year}}</span>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+            <!--<div id="noYesContainer" class="col-sm-6">
+                <button ng-click="swipeLeft" class="btn btn-default">nope</button>
+                <button ng-click="swipeRight" class="btn btn-default">yiss</button>
+            </div>
+            <div class="col-sm-6">-->
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <!--</div>-->
+        </div>
+    </div>
+
+</div>
+

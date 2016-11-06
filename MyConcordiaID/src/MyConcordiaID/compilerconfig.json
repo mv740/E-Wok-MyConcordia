@@ -1,0 +1,42 @@
+﻿[
+  {
+    "outputFile": "wwwroot/css/searchResults.css",
+    "inputFile": "wwwroot/css/searchResults.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/app.css",
+    "inputFile": "wwwroot/css/app.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/gallery.css",
+    "inputFile": "wwwroot/css/gallery.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/imageModal.css",
+    "inputFile": "wwwroot/css/imageModal.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/login.css",
+    "inputFile": "wwwroot/css/login.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/searchModal.css",
+    "inputFile": "wwwroot/css/searchModal.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/view1.css",
+    "inputFile": "wwwroot/css/view1.scss"
+  },
+  {
+    "outputFile": "wwwroot/css/searchBox.css",
+    "inputFile": "wwwroot/css/searchBox.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/review/searchModal/searchModal.css",
+    "inputFile": "wwwroot/partials/review/searchModal/searchModal.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/loginProvider/loginProvider.css",
+    "inputFile": "wwwroot/partials/loginProvider/loginProvider.scss"
+  }
+]

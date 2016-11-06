@@ -1,0 +1,26 @@
+$invalid-color: #FCB9B8;
+$valid-color: #D3F0D2;
+
+@import "../../app/utilities.scss";
+
+#viewport{
+    
+  height:100%;
+  #invalid{
+    height:100%;
+    overflow: auto;
+  }
+  #invalid{
+    background-color:$invalid-color;
+  }
+  #valid{
+    background-color:$valid-color;
+  }
+
+  .view1Component{
+      position:relative;
+      margin:20px auto 10px auto;
+      width:92%;
+      font: 1.2em 'Montserrat Alternates';
+  }
+}

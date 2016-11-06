@@ -1,0 +1,16 @@
+MyConcordiaID/.vs/
+MyConcordiaID/src/MyConcordiaID/obj/
+MyConcordiaID/src/MyConcordiaID/bin/
+/packages/
+!packages/repositories.config
+MyConcordiaID/OracleEntityFramework/obj/
+MyConcordiaID/OracleEntityFramework/bin/
+MyConcordiaID/packages/
+MyConcordiaID/src/MyConcordiaID/wwwroot/lib/
+MyConcordiaID/src/UnitTestCore/obj/
+MyConcordiaID/src/UnitTestCore/bin/
+MyConcordiaID/src/UnitTestCore/Properties/AssemblyInfo.cs
+MyConcordiaID/src/UnitTestCore/project.fragment.lock.json
+MyConcordiaID/src/UnitTestCore/project.lock.json
+MyConcordiaID/.idea/
+MyConcordiaID/src/MyConcordiaID/project.lock.json
