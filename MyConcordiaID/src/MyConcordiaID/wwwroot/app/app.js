@@ -12,17 +12,22 @@ angular.module('myApp', [
     'myApp.review.searchResults',
     'myApp.searchModal',
     'myApp.searchModal.gallery',
-    'myApp.imageModal'
+    'myApp.imageModal',
+    'ui.bootstrap'
 
 ]).constant("myConfig", {
     "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
     "validatePhoto": "student/ValidatePicture",
     "searchStudent": "student/",
-    "pendingPicture": "student/PendingPicture/"
+    "pendingPicture": "student/PendingPicture/",
+    "picturePeriod": "admin/picturePeriod"
 
 }).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
 
     $routeProvider
+        .when('/admin', {
+            templateUrl : 'partials/admin/admin.html'
+        })
         .otherwise({ redirectTo: '/review' });
 }]);
