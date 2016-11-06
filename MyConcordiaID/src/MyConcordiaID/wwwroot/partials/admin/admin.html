@@ -1,0 +1,99 @@
+﻿<div>
+
+    <div ng-controller="AdminController as admin">
+
+
+        
+
+        <div class="container" style="margin-top:50px">
+            <div class="page-header">
+                <h1>Admin Setting</h1>
+            </div>
+
+            <div class=" col-md-6 col-md-offset-3">
+                <div class="row">
+
+                </div>
+                <div class="row">
+
+
+                    <div>
+                        <h3>Update Picture Valid Period</h3>
+                        <br />
+                    </div>
+
+                    <div>
+
+
+                    </div>
+
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="form-group">
+                                    <label for="AcademicYear" class="col-sm-5 control-label">Academic Year</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" placeholder="2016" class="form-control" ng-model="admin.academicYear" maxlength="4">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="dateFrom" class="col-sm-5 control-label">From</label>
+                                    <div class="col-sm-7">
+                                        <input type="text"
+                                               class="form-control date"
+                                               id="dateFrom"
+                                               placeholder="From"
+                                               ng-click="admin.dateFrom=true"
+                                               datepicker-popup="{{admin.format}}"
+                                               ng-model="admin.dtFrom"
+                                               is-open="admin.dateFrom"
+                                               datepicker-options="admin.dateOptions"
+                                               date-disabled="disabled(date, mode)"
+                                               ng-required="true"
+                                               close-text="Close">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dateTo" class="col-sm-5 control-label">To</label>
+                                    <div class="col-sm-7">
+                                        <input type="text"
+                                               class="form-control date"
+                                               id="dateTo"
+                                               placeholder="To"
+                                               ng-click="admin.dateTo=true"
+                                               datepicker-popup="{{admin.format}}"
+                                               ng-model="admin.dtTo"
+                                               is-open="admin.dateTo"
+                                               datepicker-options="admin.dateOptions"
+                                               date-disabled="disabled(date, mode)"
+                                               ng-required="true"
+                                               close-text="Close">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-offset-5 col-sm-7">
+                                        <button ng-click="admin.submit()" data-loading-text="Loading..." class="btn btn-default">{{ admin.submitButton }}</button>
+                                     </div>
+                                </div>
+
+
+                                <div>
+                                    View
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+</div>
