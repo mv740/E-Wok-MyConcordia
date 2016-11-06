@@ -48,6 +48,11 @@ namespace MyConcordiaID.Models.Admin
                 found.ENDDATE = endDateTime;
             }
 
+            var allStudents = _database.STUDENTS.ToList();
+
+            allStudents.ForEach(s => s.UPDATEPICTURE = true);
+
+
             _database.SaveChanges();
 
 
