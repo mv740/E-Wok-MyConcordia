@@ -4,10 +4,18 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
+
+// Client side variable used to restrict access to the Update Picture feature.
+var canUpdate = true;
+
+
 angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
   .constant('serverName', 'https://myconcordiaid.azurewebsites.net/api/')
 
-.run(function($ionicPlatform) {
+
+
+
+.run(function($ionicPlatform, $rootScope) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -21,6 +29,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    $rootScope.canUpdate = true;
+    $rootScope.validPeriod = true;
   });
 })
 
@@ -49,7 +60,19 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       views: {
         'menuContent': {
           templateUrl: 'templates/camera.html',
-          controller: 'CameraCtrl'
+          controller: 'CameraCtrl',
+
+
+          // If the student cannot update picture, restrict access to the camera.
+          resolve: {
+            security: ['$q','$rootScope', function ($q, $rootScope){
+              if(!$rootScope.canUpdate || !$rootScope.validPeriod){
+                alert("Cannot update picture at the moment. Please contact Birks for more details.");
+                return $q.reject("Not Authorized");
+              }
+            }]
+          }
+
         }
       }
     })

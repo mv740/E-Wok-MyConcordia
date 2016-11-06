@@ -1,5 +1,7 @@
 angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
+
+
   .controller('AppCtrl', ['$scope', '$ionicModal', '$timeout', '$http', 'serverName', function ($scope, $ionicModal, $timeout, $http, serverName) {
 
     // With the new view caching in Ionic, Controllers are only called
@@ -45,7 +47,9 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
   }])
 
 
-  .controller('LoginCtrl', function ($scope) {
+  .controller('LoginCtrl', function ($scope, $http) {
+
+
 
   })
 
@@ -54,7 +58,7 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
   })
 
-  .controller('IdCtrl', function ($scope, $window, $state, $http) {
+  .controller('IdCtrl', function ($scope, $window, $state, $http, $rootScope) {
 
     var studentid = '38901062';
     $scope.studentInfo = "";
@@ -72,6 +76,8 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
         $scope.pending = data.pending;
         $scope.updatepicture = data.updatepicture;
 
+        $rootScope.canUpdate = data.updatepicture;
+
         //variables to be displayed on id
         $scope.profilepicture = data.profilepicture;
         $scope.firstname = data.firstname;
@@ -84,6 +90,19 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
       .error(function (data) {
         console.log('data error');
       });
+
+      $http.get("https://myconcordiaid.azurewebsites.net/api/student/UpdatePeriod").then(function successCallback(response) {
+          // this callback will be called asynchronously
+          // when the response is available
+          $rootScope.validPeriod = response.data.canUpdatePicture;
+
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          console.log(response);
+        });
+
+
 
     $scope.screenOrientation = screen.orientation.type;
 
