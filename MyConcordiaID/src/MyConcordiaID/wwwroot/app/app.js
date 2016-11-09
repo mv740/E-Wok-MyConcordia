@@ -5,15 +5,9 @@ angular.module('myApp', [
     'ngRoute',
     'ngAnimate',
     'ngMaterial',
-    'myApp.sideNav',
     'ngHamburger',
-    'myApp.review',
-    'myApp.review.searchBox',
-    'myApp.review.searchResults',
-    'myApp.searchModal',
-    'myApp.searchModal.gallery',
-    'myApp.imageModal',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'angularCSS'
 
 ]).constant("myConfig", {
     "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
@@ -28,6 +22,17 @@ angular.module('myApp', [
     $routeProvider
         .when('/admin', {
             templateUrl : 'partials/admin/admin.html'
+        }).when('/review', {
+            templateUrl: 'partials/review/review.html',
+            css: [
+                'partials/review/review.css',
+                'partials/review/searchBox/searchBox.css',
+                'partials/review/searchResults/searchResults.css',
+                'partials/review/searchModal/searchModal.css',
+                'partials/review/searchModal/gallery/gallery.css',
+                'partials/review/imageModal/imageModal.css',
+                'partials/review/sideNav/sideNav.css'
+            ]
         })
         .otherwise({ redirectTo: '/review' });
 }]);
