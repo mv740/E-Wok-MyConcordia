@@ -5,9 +5,6 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-// Client side variable used to restrict access to the Update Picture feature.
-var canUpdate = true;
-
 
 angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
   .constant('serverName', 'https://myconcordiaid.azurewebsites.net/api/')
