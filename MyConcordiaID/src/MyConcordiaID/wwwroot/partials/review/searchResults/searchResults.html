@@ -1,8 +1,8 @@
 
 
 <div class="view1Component">
-    <li id="searchResults" ng-controller="SearchResultsCtrl as searchResults">
-        <ul class="button3D" ng-repeat="result in searchResults.results" ng-click="searchResults.studentClick(result)" data-toggle="modal" data-target="#myModal">
+    <li id="searchResults" ng-controller="SearchResultsCtrl">
+        <ul class="button3D" ng-repeat="result in results" ng-click="studentClick(result)" data-toggle="modal" data-target="#myModal">
             <div>
                 <span>{{result.id}},</span>
 

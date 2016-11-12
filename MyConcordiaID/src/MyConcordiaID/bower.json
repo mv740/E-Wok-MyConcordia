@@ -17,6 +17,7 @@
     "angular-bootstrap": "^2.2.0",
     "angular-material": "^1.1.1",
     "angular-css": "^1.0.8",
+    "jasmine-core": "jasmine#^2.5.2",
     "ng-eternicode-datepicker": "0.1.3"
   }
 }

@@ -1,10 +1,12 @@
 'use strict';
 
-angular
-    .module('myApp')
-    .controller('SearchModalCtrl', ['$rootScope', '$http', 'myConfig', function ($rootScope, $http, myConfig) {
+angular.module('myApp.searchModal', ['ngRoute', 'angularCSS'])
 
-    var searchModal = this;
+
+.controller('SearchModalCtrl', ['$rootScope', '$scope', '$http', 'myConfig', function ($rootScope, $scope, $http, myConfig) {
+
+
+    var searchModal = $scope;
     searchModal.loading = true;
 
     $rootScope.$on('searchModal.doneLoading', function (event) {

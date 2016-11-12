@@ -4,11 +4,11 @@
 
 'use strict';
 
-angular
-    .module('myApp')
-    .controller('SearchResultsCtrl', ['$rootScope', function ($rootScope) {
+angular.module('myApp.review.searchResults', [])
 
-        var searchResults = this;
+    .controller('SearchResultsCtrl', ['$rootScope', '$scope', function ($rootScope, $scope) {
+
+        var searchResults = $scope;
 
         searchResults.results = [{
             "firstname": "Francis",

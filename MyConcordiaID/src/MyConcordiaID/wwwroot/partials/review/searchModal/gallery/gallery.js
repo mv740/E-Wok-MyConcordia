@@ -2,11 +2,12 @@
  * Created by franc on 10/15/2016.
  */
 
-angular
-    .module('myApp')
-    .controller('GalleryCtrl', ['$rootScope',function($rootScope) {
+angular.module('myApp.searchModal.gallery',[])
 
-        var gallery = this;
+
+    .controller('GalleryCtrl', ['$rootScope', '$scope',function($rootScope, $scope) {
+
+        var gallery = $scope;
 
         $rootScope.$on('gallery.updateGallery', function (event, images) {
             gallery.images = images;
