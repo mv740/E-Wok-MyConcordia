@@ -2,12 +2,11 @@
  * Created by franc on 10/15/2016.
  */
 
-angular.module('myApp.sideNav',[])
+angular
+    .module('myApp')
+    .controller('SideNavCtrl', function() {
 
-
-    .controller('SideNavCtrl', ['$scope', function($scope) {
-
-        var sideNav = $scope;
+        var sideNav = this;
 
         sideNav.toggleNav = function () {
             if (!sideNav.hamState) {
@@ -26,4 +25,6 @@ angular.module('myApp.sideNav',[])
             document.getElementById("mySidenav").style.width = "250px";
         }
 
-    }]);
+        return sideNav;
+
+    });

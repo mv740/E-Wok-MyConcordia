@@ -1,4 +1,4 @@
-<div id='imageModal' class="modal-dialog" ng-controller="ImageModalCtrl">
+<div id='imageModal' class="modal-dialog" ng-controller="ImageModalCtrl as imageModal">
 
     <!-- Modal content-->
     <div class="modal-content">
@@ -7,7 +7,7 @@
             <h4 class="modal-title">Modal Header</h4>
         </div>
         <div id="modal-body" class="modal-body row">
-            <img id="fullsize" ng-src="data:image/JPEG;base64,{{image}}"/>
+            <img id="fullsize" ng-src="data:image/JPEG;base64,{{imageModal.image}}"/>
         </div>
         <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
