@@ -58,5 +58,14 @@ namespace MyConcordiaID.Models.Admin
 
 
         }
+
+        public PICTUREUPDATESETTING GetUpdatePicturePeriod(int year)
+        {
+            var info = _database.PICTUREUPDATESETTINGs
+               .Where(i => i.YEAR == year)
+               .SingleOrDefault();
+
+            return info;
+        }
     }
 }

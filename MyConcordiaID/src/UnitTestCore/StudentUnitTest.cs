@@ -71,7 +71,7 @@ namespace UnitTestCore
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = StudentHelper.GenerateNetName(name, lastName),
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
@@ -80,7 +80,7 @@ namespace UnitTestCore
             },
                  new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = StudentHelper.GenerateNetName(name, lastName),
                 ID = 11141097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
@@ -109,7 +109,7 @@ namespace UnitTestCore
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = StudentHelper.GenerateNetName(name, lastName),
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
@@ -119,7 +119,7 @@ namespace UnitTestCore
 
             new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = StudentHelper.GenerateNetName(name, lastName),
                 ID = 11141097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
@@ -148,7 +148,7 @@ namespace UnitTestCore
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = StudentHelper.GenerateNetName(name, lastName),
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
@@ -191,7 +191,7 @@ namespace UnitTestCore
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = StudentHelper.GenerateNetName(name, lastName),
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
@@ -243,7 +243,7 @@ namespace UnitTestCore
             {
                 new STUDENT
                 {
-                    NETNAME = StudentHelper.getNetName(name, lastName),
+                    NETNAME = StudentHelper.GenerateNetName(name, lastName),
                     ID = 21941097,
                     FIRSTNAME = name,
                     LASTNAME = lastName,
@@ -288,6 +288,23 @@ namespace UnitTestCore
             Assert.AreEqual(true, studentLatestInfo.VALID);
             Assert.IsFalse(studentLatestInfo.PROFILEPICTURE == null); // there is a picture thus false
         }
+
+        [TestMethod]
+        public void GenerateStudentNetName()
+        {
+            var firstName = "francis";
+            var lastName = "cote-tremblay";
+      
+            var netName = StudentHelper.GenerateNetName(firstName, lastName);
+            var cleanedLastName = StudentHelper.CleanInput(lastName);
+
+            var result = "f_cotet";
+
+            Assert.AreEqual(result, netName);
+        }
     }
+
+
+
 
 }

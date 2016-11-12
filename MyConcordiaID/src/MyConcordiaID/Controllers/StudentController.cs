@@ -70,7 +70,7 @@ namespace MyConcordiaID.Controllers
                     //await _uploadService.AddFile(fileContent, file.FileName, file.ContentType);
 
                     var picturesDb = _database.Set<PICTURE>();
-                    var id = StudentHelper.getRandomId();
+                    var id = StudentHelper.GenerateRandomId();
                     PICTURE newPicture = new PICTURE { ID = id, APPROVED = null, PENDING = 1, PICTURE1 = fileContent, UPLOADEDDATE = DateTime.UtcNow };
                     picturesDb.Add(newPicture);
                     _database.SaveChanges();

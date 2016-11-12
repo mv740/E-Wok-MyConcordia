@@ -237,8 +237,8 @@ namespace MyConcordiaID.Controllers
 
                 STUDENT newStudent = new STUDENT
                 {
-                    NETNAME = StudentHelper.getNetName(firstName,lastname),
-                    ID = StudentHelper.getRandomId(),
+                    NETNAME = StudentHelper.GenerateNetName(firstName,lastname),
+                    ID = StudentHelper.GenerateRandomId(),
                     FIRSTNAME = firstName,
                     LASTNAME = lastname,
                     DOB = DateTime.UtcNow,
