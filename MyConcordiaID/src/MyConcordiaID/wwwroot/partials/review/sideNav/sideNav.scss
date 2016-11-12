@@ -1,0 +1,154 @@
+
+@import "../../../app/utilities.scss";
+
+$sideNav-color:  white;
+$sideNav-width: 60px;
+$sideNavIcon-size:40px;
+
+$review-icon: '../../../images/icons/reviewViewIcon.png';
+$logoff-icon: '../../../images/icons/logoffIcon.png';
+
+
+@mixin form-a() {
+      @include center();
+      display:block;
+      margin-top:20px;
+      width: $sideNavIcon-size;
+      height: $sideNavIcon-size;
+}
+
+@mixin button-as-anchor(){
+    background:none;
+    border:none;
+    cursor:pointer;
+    display:block;
+}
+
+@mixin nav-menu-links(){
+    height:$sideNavIcon-size;
+    margin-top:20px;
+    margin-left:50px;
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+#sideMenuContainer{
+
+    height: 100%;
+    float: left;
+
+    div{
+        z-index:2;
+    }
+
+#sideMenuStatic {
+    position:relative;
+    background-color: $sideNav-color;
+    width: $sideNav-width;
+    float:left;
+    height:100%;
+
+    #hamburger{
+      transform: scale(0.2);
+      margin-left: 2px;
+      margin-right: auto;
+      display:block;
+      margin-top:20px;
+      width: $sideNavIcon-size;
+      height: $sideNavIcon-size;
+    }
+
+    a{
+      @include center();
+      display:block;
+      margin-top:20px;
+      width: $sideNavIcon-size;
+      height: $sideNavIcon-size;
+
+    }
+    form a{
+      @include form-a();
+    }
+
+    #goToReviewIcon{
+      background: url($review-icon) no-repeat center;
+
+      background-size:70%;
+    }
+
+    form #logoffIcon:hover{
+        color: #f1f1f1;
+        outline:none;
+    }
+
+    form #logoffIcon:focus {
+        outline:none;
+    }
+
+    form #logoffIcon{
+        border:none;
+        cursor:pointer;
+        display:block;
+        background: url($logoff-icon) no-repeat center;
+        background-size:67%;
+        margin:8px;
+        margin-top:20px;
+        width:40px;
+        height:40px;
+    }
+
+    #loginIcon{
+      background: url(../../images/icons/loginIcon.png) no-repeat center;
+
+      background-size:67%;
+    }
+  }
+
+
+.sidenav{
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    top: 0;
+    left: 0;
+    background-color: $sideNav-color;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+
+  /* The navigation menu links */
+    a {
+        @include nav-menu-links();
+    }
+
+    form button {
+        @include nav-menu-links();
+        @include button-as-anchor();
+    }
+    form button:hover{
+        color: #f1f1f1;
+        outline:none;
+    }
+
+    form button:focus {
+        outline:none;
+    }
+
+  /* When you mouse over the navigation links, change their color */
+    a:hover, .offcanvas a:focus {
+        color: #f1f1f1;
+    }
+
+  /* Position and style the close button (top right corner) */
+    .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+    }
+}
+}

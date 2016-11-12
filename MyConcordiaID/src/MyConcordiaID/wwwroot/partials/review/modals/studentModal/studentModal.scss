@@ -1,8 +1,9 @@
 
+@import "../../../../app/utilities.scss";
 
-$level1-blue: #6696C8;
-$level2-blue: #B2CAE4;
-$level3-blue: #D8E5F1;
+$level1-blue: #e4e6e9;
+$level2-blue: #e4e6e9;
+$level3-blue: #e4e6e9;
 
 @mixin center() {
     display: block;
@@ -18,7 +19,7 @@ $level3-blue: #D8E5F1;
     transform: translateY(-50%);
 }
 
-#searchModal {
+#studentModal {
     background-color: $level2-blue;
     min-width: 650px;
 

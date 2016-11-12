@@ -1,0 +1,49 @@
+
+<div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div  id="studentModal" class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Validate Student Picture</h4>
+        </div>
+
+        <div class="circularLoading" ng-if="modals.loading">
+            <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+        </div>
+
+        <div ng-show="!modals.loading" id="modal-body" class="modal-body row">
+            <div id="cardContainer" class="modal-element col-sm-6">
+                <div id="cardHolder">
+                    <img ng-src="data:image/JPEG;base64,{{modals.student.pendingPicture}}" />
+                    <div class="row">
+                        <button ng-click="modals.sendValidation(true)" type="button" class="btn btn-default col-sm-6">yes</button>
+                        <button ng-click="modals.sendValidation(false)" type="button" class="btn btn-default col-sm-6">no</button>
+                    </div>
+                </div>
+                <div id="galleryContainer" ng-include="'partials/review/modals/studentModal/gallery/gallery.html'"></div>
+            </div>
+
+
+            <div class="modal-element col-sm-6">
+                <span>{{modals.student.id}},</span>
+
+                <span>{{modals.student.firstname}}</span>
+                <span>{{modals.student.lastname}},</span>
+
+                <span>{{modals.student.netname}},</span>
+
+                <span>{{modals.student.birthdate.day}}</span>
+                <span>{{modals.student.birthdate.month}}</span>
+                <span>{{modals.student.birthdate.year}}</span>
+            </div>
+
+
+        </div>
+        <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+
+</div>
+

@@ -38,5 +38,21 @@
   {
     "outputFile": "wwwroot/partials/loginProvider/loginProvider.css",
     "inputFile": "wwwroot/partials/loginProvider/loginProvider.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/review/sideNav/sideNav.css",
+    "inputFile": "wwwroot/partials/review/sideNav/sideNav.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/review/searchBox/searchBox.css",
+    "inputFile": "wwwroot/partials/review/searchBox/searchBox.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/review/modals/studentModal/studentModal.css",
+    "inputFile": "wwwroot/partials/review/modals/studentModal/studentModal.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/review/modals/studentModal/gallery/gallery.css",
+    "inputFile": "wwwroot/partials/review/modals/studentModal/gallery/gallery.scss"
   }
 ]

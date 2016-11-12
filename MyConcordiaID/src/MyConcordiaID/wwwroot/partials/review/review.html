@@ -1,8 +1,9 @@
-<div id="myModal" class="modal fade" role="dialog" ng-include="'partials/review/searchModal/searchModal.html'"></div>
-<div id="imageModal" class="modal fade" role="dialog" ng-include="'partials/review/imageModal/imageModal.html'"></div>
-
+<div ng-controller="modalsCtrl as modals">
+<div id="myModal" class="modal fade" role="dialog" ng-include="'partials/review/modals/studentModal/studentModal.html'"></div>
+<div id="imageModal" class="modal fade" role="dialog" ng-include="'partials/review/modals/imageModal/imageModal.html'"></div>
+</div>
 <div id="viewport">
-<div id="invalid" class="col-sm-12">
+<div class="col-sm-12">
 
     <div id="searchBoxContainer" ng-include="'partials/review/searchBox/searchBox.html'"></div>
     <div id="searchResultsContainer" ng-include="'partials/review/searchResults/searchResults.html'"></div>

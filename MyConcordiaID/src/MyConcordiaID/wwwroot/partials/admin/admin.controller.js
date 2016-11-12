@@ -10,8 +10,8 @@
     function AdminController($http, myConfig) {
         self = this;
 
-        self.submitButton = "Submit"
-        self.someProp = 'Check This value displays.. confirms controller initalised'
+        self.submitButton = "Submit";
+        self.someProp = 'Check This value displays.. confirms controller initalised';
         self.opened = {};
         self.open = function ($event) {
 
@@ -24,11 +24,11 @@
 
         };
 
-        self.format = 'dd-MM-yyyy'
+        self.format = 'dd-MM-yyyy';
 
 
         self.submit = function UpdatePeriod() {
-            self.submitButton = "Sending..."
+            self.submitButton = "Sending...";
 
             var startDate = new Date(self.dtFrom);
             var endDate = new Date(self.dtTo);
@@ -46,17 +46,16 @@
                 {
                     "year": self.academicYear,
                     "startDate": dateStart,
-                    "endDate": dateEnd,
+                    "endDate": dateEnd
                 };
 
             $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
-                .then(function success(response)
-                {
-                    self.submitButton = "Submit"
+                .then(function success(response) {
+                    self.submitButton = "Submit";
                 }, function failure(response) {
-            });
+                });
 
-        }
+        };
 
 
 

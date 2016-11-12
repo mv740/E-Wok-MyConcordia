@@ -33,7 +33,7 @@ angular
         }];
 
         searchResults.studentClick = function (student) {
-            $rootScope.$broadcast('searchModal.updateSearchModal', student );
+            $rootScope.$broadcast('modals.update', student );
         };
 
         

@@ -28,9 +28,9 @@ angular.module('myApp', [
                 'partials/review/review.css',
                 'partials/review/searchBox/searchBox.css',
                 'partials/review/searchResults/searchResults.css',
-                'partials/review/searchModal/searchModal.css',
-                'partials/review/searchModal/gallery/gallery.css',
-                'partials/review/imageModal/imageModal.css',
+                'partials/review/modals/studentModal/studentModal.css',
+                'partials/review/modals/studentModal/gallery/gallery.css',
+                'partials/review/modals/imageModal/imageModal.css',
                 'partials/review/sideNav/sideNav.css'
             ]
         })

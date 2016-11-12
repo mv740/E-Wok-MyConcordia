@@ -1,16 +1,112 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
-#viewport {
-  height: 100%; }
-  #viewport #invalid {
-    height: 100%;
-    overflow: auto; }
-  #viewport #invalid {
-    background-color: #FCB9B8; }
-  #viewport #valid {
-    background-color: #D3F0D2; }
-  #viewport .view1Component {
+#sideMenuContainer {
+  height: 100%;
+  float: left; }
+  #sideMenuContainer div {
+    z-index: 2; }
+  #sideMenuContainer #sideMenuStatic {
     position: relative;
-    margin: 20px auto 10px auto;
-    width: 92%;
-    font: 1.2em 'Montserrat Alternates'; }
+    background-color: white;
+    width: 60px;
+    float: left;
+    height: 100%; }
+    #sideMenuContainer #sideMenuStatic #hamburger {
+      transform: scale(0.2);
+      margin-left: 2px;
+      margin-right: auto;
+      display: block;
+      margin-top: 20px;
+      width: 40px;
+      height: 40px; }
+    #sideMenuContainer #sideMenuStatic a {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      margin-top: 20px;
+      width: 40px;
+      height: 40px; }
+    #sideMenuContainer #sideMenuStatic form a {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      margin-top: 20px;
+      width: 40px;
+      height: 40px; }
+    #sideMenuContainer #sideMenuStatic #goToReviewIcon {
+      background: url("../../../images/icons/reviewViewIcon.png") no-repeat center;
+      background-size: 70%; }
+    #sideMenuContainer #sideMenuStatic form #logoffIcon:hover {
+      color: #f1f1f1;
+      outline: none; }
+    #sideMenuContainer #sideMenuStatic form #logoffIcon:focus {
+      outline: none; }
+    #sideMenuContainer #sideMenuStatic form #logoffIcon {
+      border: none;
+      cursor: pointer;
+      display: block;
+      background: url("../../../images/icons/logoffIcon.png") no-repeat center;
+      background-size: 67%;
+      margin: 8px;
+      margin-top: 20px;
+      width: 40px;
+      height: 40px; }
+    #sideMenuContainer #sideMenuStatic #loginIcon {
+      background: url(../../images/icons/loginIcon.png) no-repeat center;
+      background-size: 67%; }
+  #sideMenuContainer .sidenav {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+    /* The navigation menu links */
+    /* When you mouse over the navigation links, change their color */
+    /* Position and style the close button (top right corner) */ }
+    #sideMenuContainer .sidenav a {
+      height: 40px;
+      margin-top: 20px;
+      margin-left: 50px;
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 15px;
+      color: #818181;
+      display: block;
+      transition: 0.3s; }
+    #sideMenuContainer .sidenav form button {
+      height: 40px;
+      margin-top: 20px;
+      margin-left: 50px;
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 15px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: block; }
+    #sideMenuContainer .sidenav form button:hover {
+      color: #f1f1f1;
+      outline: none; }
+    #sideMenuContainer .sidenav form button:focus {
+      outline: none; }
+    #sideMenuContainer .sidenav a:hover, #sideMenuContainer .sidenav .offcanvas a:focus {
+      color: #f1f1f1; }
+    #sideMenuContainer .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px; }
 
