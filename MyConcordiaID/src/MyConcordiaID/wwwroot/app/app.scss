@@ -5,7 +5,7 @@
 $button3D-border-color: #6A6A6A;
 $button3D-shadow-color: #323232;
 
-@import "utilities";
+@import "utilities.scss";
 
 
 html, body{
@@ -32,3 +32,14 @@ html, body{
 }
 
 
+
+.circularLoading {
+        height: 100px;
+
+        md-progress-circular {
+            display: block;
+            margin: auto;
+            top: 25%;
+            position: relative;
+        }
+    }

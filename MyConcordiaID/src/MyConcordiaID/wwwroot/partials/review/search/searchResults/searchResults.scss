@@ -1,0 +1,23 @@
+
+
+$margin: 8px;
+
+#searchResultsContainer {
+
+    #searchResults {
+        width: 100%;
+        list-style: none;
+
+        ul {
+
+            div {
+                margin-left: $margin;
+
+                span {
+                    top: $margin;
+                    position: relative;
+                }
+            }
+        }
+    }
+}

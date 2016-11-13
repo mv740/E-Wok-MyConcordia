@@ -4,37 +4,40 @@
 
 angular
     .module('myApp')
-    .controller('SideNavCtrl', function() {
+    .controller('SideNavCtrl', SideNavCtrl);
 
-        var sideNav = this;
+function SideNavCtrl() {
 
-        sideNav.toggleNav = function () {
-            if (!sideNav.hamState) {
-                sideNav.closeNav();
-            }
-            else openNav();
-        };
+    var sideNav = this;
 
-        
-        sideNav.closeNav = function () {
-            document.getElementById("mySidenav").style.width = "0";
-            sideNav.hamState = false;
-            removeOverlay();
-        };
+    sideNav.toggleNav = toggleNav;
+    sideNav.closeNav = closeNav;
 
-        function openNav() {
-            addOverlay();
-            document.getElementById("mySidenav").style.width = "250px";
+    //////////////////
+
+    function toggleNav() {
+        if (!sideNav.hamState) {
+            sideNav.closeNav();
         }
+        else openNav();
+    }
 
-        function addOverlay() {
-            $('<div class="modal-backdrop" style= "background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>').appendTo($("#viewport")).hide().fadeIn();
-        }
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        sideNav.hamState = false;
+        removeOverlay();
+    }
 
-        function removeOverlay() {
-            $(".modal-backdrop").remove();
-        }
+    function openNav() {
+        addOverlay();
+        document.getElementById("mySidenav").style.width = "250px";
+    }
 
-        return sideNav;
+    function addOverlay() {
+        $('<div class="modal-backdrop" style= "background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>').appendTo($("#viewport")).hide().fadeIn();
+    }
 
-    });
+    function removeOverlay() {
+        $(".modal-backdrop").remove();
+    }
+}

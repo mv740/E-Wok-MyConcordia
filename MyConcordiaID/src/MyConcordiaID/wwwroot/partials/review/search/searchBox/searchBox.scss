@@ -1,9 +1,14 @@
-@import "../../../app/utilities.scss";
+@import "../../../../app/utilities.scss";
 
 $border-color: $concordia-color;
 $shadow-color: #600026;
 
 
+
+#searchBoxContainer{
+    
+
+    
 .field {
     display: flex;
     flex-direction: row;
@@ -28,4 +33,6 @@ $shadow-color: #600026;
         color: white;
         border: none;
     }
+}
+
 }

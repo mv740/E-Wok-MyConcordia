@@ -10,9 +10,9 @@ $concordia-color: #8A0037;
   margin-right: auto;
 }
 
-@mixin vertical-align($position: relative) {
-  position: $position;
-  top: 50%;
+@mixin vertical-align() {
+  position: relative;
+  top: 49%;
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);

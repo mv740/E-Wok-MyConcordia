@@ -1,13 +1,13 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
+#viewport.middle {
+  top: 40%; }
+
 #viewport {
-  height: 100%; }
-  #viewport #invalid {
-    height: 100%;
-    overflow: auto; }
-  #viewport #invalid {
-    background-color: #FCB9B8; }
-  #viewport #valid {
-    background-color: #D3F0D2; }
+  height: 100%;
+  overflow: auto;
+  top: 0%;
+  position: relative;
+  transition: 0.4s ease-out; }
   #viewport .view1Component {
     position: relative;
     margin: 20px auto 10px auto;

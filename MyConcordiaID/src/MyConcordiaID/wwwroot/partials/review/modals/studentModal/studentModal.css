@@ -2,13 +2,6 @@
 #studentModal {
   background-color: #e4e6e9;
   min-width: 650px; }
-  #studentModal .circularLoading {
-    height: 100px; }
-    #studentModal .circularLoading md-progress-circular {
-      display: block;
-      margin: auto;
-      top: 25%;
-      position: relative; }
   #studentModal .modal-element {
     background-color: #e4e6e9; }
     #studentModal .modal-element #galleryContainer {

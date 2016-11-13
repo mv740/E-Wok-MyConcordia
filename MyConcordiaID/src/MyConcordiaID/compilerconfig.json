@@ -54,5 +54,25 @@
   {
     "outputFile": "wwwroot/partials/review/modals/studentModal/gallery/gallery.css",
     "inputFile": "wwwroot/partials/review/modals/studentModal/gallery/gallery.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/review/search/searchResults/searchResults.css",
+    "inputFile": "wwwroot/partials/review/search/searchResults/searchResults.scss"
+  },
+  {
+    "outputFile": "wwwroot/app/app.css",
+    "inputFile": "wwwroot/app/app.scss"
+  },
+  {
+    "outputFile": "wwwroot/app/utilities.css",
+    "inputFile": "wwwroot/app/utilities.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/review/review.css",
+    "inputFile": "wwwroot/partials/review/review.scss"
+  },
+  {
+    "outputFile": "wwwroot/partials/review/search/searchBox/searchBox.css",
+    "inputFile": "wwwroot/partials/review/search/searchBox/searchBox.scss"
   }
 ]

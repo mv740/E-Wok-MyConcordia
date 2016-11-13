@@ -1,12 +1,10 @@
-<div ng-controller="modalsCtrl as modals">
-<div id="myModal" class="modal fade" role="dialog" ng-include="'partials/review/modals/studentModal/studentModal.html'"></div>
-<div id="imageModal" class="modal fade" role="dialog" ng-include="'partials/review/modals/imageModal/imageModal.html'"></div>
+<div ng-controller="ModalsCtrl as modals">
+<div id="studentModalContainer" class="modal fade" role="dialog" ng-include="'partials/review/modals/studentModal/studentModal.html'"></div>
+<div id="imageModalContainer" class="modal fade" role="dialog" ng-include="'partials/review/modals/imageModal/imageModal.html'"></div>
 </div>
-<div id="viewport">
-<div class="col-sm-12">
+<div id="viewport" ng-class="{'middle': search.initialState}" ng-controller="SearchCtrl as search">
 
-    <div id="searchBoxContainer" ng-include="'partials/review/searchBox/searchBox.html'"></div>
-    <div id="searchResultsContainer" ng-include="'partials/review/searchResults/searchResults.html'"></div>
+    <div id="searchBoxContainer" ng-include="'partials/review/search/searchBox/searchBox.html'"></div>
+    <div id="searchResultsContainer" ng-include="'partials/review/search/searchResults/searchResults.html'"></div>
 
-</div>
 </div>

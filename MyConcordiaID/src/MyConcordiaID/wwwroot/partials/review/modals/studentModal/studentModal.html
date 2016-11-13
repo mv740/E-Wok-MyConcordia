@@ -17,8 +17,8 @@
                 <div id="cardHolder">
                     <img ng-src="data:image/JPEG;base64,{{modals.student.pendingPicture}}" />
                     <div class="row">
-                        <button ng-click="modals.sendValidation(true)" type="button" class="btn btn-default col-sm-6">yes</button>
-                        <button ng-click="modals.sendValidation(false)" type="button" class="btn btn-default col-sm-6">no</button>
+                        <button ng-click="modals.sendValidation(modals.student.id, true)" type="button" class="btn btn-default col-sm-6">yes</button>
+                        <button ng-click="modals.sendValidation(modals.student.id, false)" type="button" class="btn btn-default col-sm-6">no</button>
                     </div>
                 </div>
                 <div id="galleryContainer" ng-include="'partials/review/modals/studentModal/gallery/gallery.html'"></div>

@@ -14,7 +14,8 @@ angular.module('myApp', [
     "validatePhoto": "student/ValidatePicture",
     "searchStudent": "student/",
     "pendingPicture": "student/PendingPicture/",
-    "picturePeriod": "admin/picturePeriod"
+    "picturePeriod": "admin/picturePeriod",
+    "getStudents": "student"
 
 }).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
@@ -26,8 +27,8 @@ angular.module('myApp', [
             templateUrl: 'partials/review/review.html',
             css: [
                 'partials/review/review.css',
-                'partials/review/searchBox/searchBox.css',
-                'partials/review/searchResults/searchResults.css',
+                'partials/review/search/searchBox/searchBox.css',
+                'partials/review/search/searchResults/searchResults.css',
                 'partials/review/modals/studentModal/studentModal.css',
                 'partials/review/modals/studentModal/gallery/gallery.css',
                 'partials/review/modals/imageModal/imageModal.css',

@@ -1,12 +1,17 @@
 
 @import "../../app/utilities.scss";
 
+#viewport.middle{
+        top:40%;
+    }
+
 #viewport{
-    
   height:100%;
-  div{
-    overflow: auto;
-  }
+  overflow: auto;
+
+   top:0%;
+    position:relative;
+    transition: 0.4s ease-out;
 
   .view1Component{
       position:relative;
