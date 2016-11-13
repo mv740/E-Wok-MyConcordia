@@ -1,18 +1,24 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using AspNet.Security.OAuth.Validation;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MyConcordiaID.Models;
 using MyConcordiaID.Data;
-using OracleEntityFramework;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using MyConcordiaID.Models.Student;
-using Microsoft.IdentityModel.Tokens;
+using MyConcordiaID.Helper;
+using MyConcordiaID.Models;
 using MyConcordiaID.Models.Admin;
+using MyConcordiaID.Models.Student;
+using MyConcordiaID.Providers;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using OracleEntityFramework;
+using System;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNet.Identity;
 
 namespace MyConcordiaID
 {
@@ -35,13 +41,21 @@ namespace MyConcordiaID
         {
 
             services.AddApplicationInsightsTelemetry(Configuration);
-            //Add framework services.
-           services.AddDbContext<DatabaseContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<DatabaseContext>()
-                .AddDefaultTokenProviders();
+            ////Add framework services.
+            //services.AddDbContext<DatabaseContext>(options =>
+            //   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //    .AddEntityFrameworkStores<DatabaseContext>()
+            //    .AddDefaultTokenProviders();
+
+            services.AddEntityFramework()
+                .AddEntityFrameworkInMemoryDatabase()
+                .AddDbContext<ApplicationContext>(options =>
+                {
+                    options.UseInMemoryDatabase();
+                });
 
             services.AddCors(o => o.AddPolicy("AllowPolicy", builder =>
             {
@@ -50,30 +64,13 @@ namespace MyConcordiaID
                        .AllowAnyHeader();
             }));
 
-            services.AddOpenIddict<DatabaseContext>()
-                .AddMvcBinders()
-                .EnableAuthorizationEndpoint("/connect/authorize")
-                .EnableLogoutEndpoint("/connect/logout")
-                .EnableTokenEndpoint("/connect/token")
-                .EnableUserinfoEndpoint("/Account/Userinfo")
+            /// set default authentication middleware // it is required for api oauth2
+            services.AddAuthentication(options =>
+            {
+                options.SignInScheme = "ServerCookie";
 
-                // Note: the Mvc.Client sample only uses the code flow and the password flow, but you
-                // can enable the other flows if you need to support implicit or client credentials.
-                .AllowAuthorizationCodeFlow()
-                .AllowPasswordFlow()
-                .AllowRefreshTokenFlow()
+            });
 
-                // Make the "client_id" parameter mandatory when sending a token request.
-                .RequireClientIdentification()
-
-                // During development, you can disable the HTTPS requirement.
-                .DisableHttpsRequirement()
-
-                // Register a new ephemeral key, that is discarded when the application
-                // shuts down. Tokens signed using this key are automatically invalidated.
-                // This method should only be used during development.
-                .AddEphemeralSigningKey()
-                .UseJsonWebTokens();
 
 
             services.AddMvc();
@@ -91,6 +88,9 @@ namespace MyConcordiaID
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            //remove when oauth is functional 
+            app.UseDeveloperExceptionPage();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -103,51 +103,67 @@ namespace MyConcordiaID
 
             // Add Application Insights monitoring to the request pipeline as a very first middleware.
             app.UseApplicationInsightsRequestTelemetry();
-
             app.UseStaticFiles();
-            //
-          
 
-            // Add a middleware used to validate access
-            // tokens and protect the API endpoints.
-            app.UseOAuthValidation();
-
-            app.UseIdentity();
+           // app.UseIdentity();
 
 
-
-          
-
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            app.UseWhen(context => context.Request.Path.StartsWithSegments(new PathString("/api")), branch =>
             {
-                AutomaticAuthenticate = true,
-                AutomaticChallenge = true,
-                Authority = "https://accounts.google.com",
-                Audience = Configuration["Google:ClientId"],
-
-                TokenValidationParameters = new TokenValidationParameters
+                branch.UseOAuthValidation(new OAuthValidationOptions
                 {
-                    ValidateAudience = true,
-                    ValidIssuer = "accounts.google.com"
-                },
-                RequireHttpsMetadata = false
+                    AutomaticAuthenticate = true,
+                    AutomaticChallenge = true
+                });
 
 
             });
 
-            // external authentication middleware 
-            app.UseGoogleAuthentication(new GoogleOptions
+
+            // Create a new branch where the registered middleware will be executed only for non API calls.
+            app.UseWhen(context => !context.Request.Path.StartsWithSegments(new PathString("/api")), branch =>
             {
-                AuthenticationScheme = "Google",
-                ClientId = Configuration["Google:ClientId"],
-                ClientSecret = Configuration["Google:ClientSecret"],
-                Scope = { "email", "profile" },
-                SaveTokens = true,
-              
+                // Insert a new cookies middleware in the pipeline to store
+                // the user identity returned by the external identity provider.
+                branch.UseCookieAuthentication(new CookieAuthenticationOptions
+                {
+                    AutomaticAuthenticate = true,
+                    AutomaticChallenge = true,
+                    AuthenticationScheme = "ServerCookie",
+                    CookieName = CookieAuthenticationDefaults.CookiePrefix + "ServerCookie",
+                    ExpireTimeSpan = TimeSpan.FromMinutes(5),
+                    LoginPath = new PathString("/signin"),
+                    LogoutPath = new PathString("/signout")
+                });
+
+                branch.UseGoogleAuthentication(new GoogleOptions
+                {
+
+                    ClientId = Configuration["Google:ClientId"],
+                    ClientSecret = Configuration["Google:ClientSecret"],
+                    Scope = { "email", "profile" },
+
+
+                });
+
             });
 
-            app.UseOAuthValidation(); // enabled auth through bearer tokens
-            app.UseOpenIddict();
+
+            app.UseOpenIdConnectServer(options =>
+            {
+                options.Provider = new AuthorizationProvider();
+
+                // Enable the authorization and logout endpoints.
+                options.AuthorizationEndpointPath = "/connect/authorize";
+                options.LogoutEndpointPath = "/connect/logout";
+
+                options.ApplicationCanDisplayErrors = true;
+                options.AllowInsecureHttp = true;
+
+                // Note: to override the default access token format and use JWT, assign AccessTokenHandler:
+                // options.AccessTokenHandler = new JwtSecurityTokenHandler();
+            });
+
 
             app.UseMvc(routes =>
             {
@@ -156,7 +172,40 @@ namespace MyConcordiaID
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            
+            using (var context = new ApplicationContext(
+               app.ApplicationServices.GetRequiredService<DbContextOptions<ApplicationContext>>()))
+            {
+                // Note: when using the introspection middleware, your resource server
+                // MUST be registered as an OAuth2 client and have valid credentials.
+                // 
+                // database.Applications.Add(new Application {
+                //     ApplicationID = "resource_server",
+                //     DisplayName = "Main resource server",
+                //     Secret = "875sqd4s5d748z78z7ds1ff8zz8814ff88ed8ea4z4zzd"
+                // });
+
+
+                context.Applications.Add(new Application
+                {
+                    ApplicationID = "oidcWebClient",
+                    DisplayName = "My client application",
+                    RedirectUri = "https://localhost/oidc",
+                    LogoutRedirectUri = "https://localhost/oidc",
+                    // Secret = "secret_secret_secret"
+                });
+
+                context.Applications.Add(new Application
+                {
+                    ApplicationID = "oidcdemomobile",
+                    DisplayName = "My client application",
+                    RedirectUri = "https://localhost/oidc",
+                    LogoutRedirectUri = "https://localhost/oidc",
+                    // Secret = "secret_secret_secret"
+                });
+
+                context.SaveChanges();
+            }
+
         }
     }
 }

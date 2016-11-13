@@ -1,9 +1,9 @@
 ﻿<!DOCTYPE html>
-<html class="no-js">
+
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - MyConcordiaID</title>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
@@ -15,19 +15,12 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
 
-    
-    <!--BOWER COMPONENTS -->
-    <link rel="stylesheet" href="~/lib/html5-boilerplate/dist/css/normalize.css">
-    <link rel="stylesheet" href="~/lib/html5-boilerplate/dist/css/main.css">
-    <script src="~/lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.css">
-    <script class="cssdeck" src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-
 
 </head>
 <body>
-    @RenderBody()
+    <div>
+        @RenderBody()
+    </div>
 
     <environment names="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>
@@ -42,6 +35,7 @@
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
+    
     </environment>
 
     @RenderSection("scripts", required: false)
