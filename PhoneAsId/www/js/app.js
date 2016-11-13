@@ -27,15 +27,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
 
 .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
+  var link = "https://myconcordiaoauth.azurewebsites.net/";
+  var link2 = "https://myconcordiaid.azurewebsites.net/";
+
     ngOidcClientProvider.setSettings({
-      authority: "https://myconcordiaid.azurewebsites.net/",
+      authority: link2,
       client_id: "oidcdemomobile",
       redirect_uri: "https://localhost/oidc",
       post_logout_redirect_uri: "https://localhost/oidc",
       silent_redirect_uri: "https://localhost/oidc",
 
-      response_type: "id_token token",
-      scope: "openid profile",
+      response_type: "token",
+      scope: "profile",
 
       automaticSilentRenew: true,
 

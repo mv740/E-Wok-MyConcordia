@@ -46,7 +46,7 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
 
 
-.controller('LoginCtrl', ['$log', '$scope', '$state', '$ionicPlatform', 'ngOidcClient', function ($log, $scope, $state, $ionicPlatform, ngOidcClient) {
+.controller('LoginCtrl', ['$log', '$scope', '$state', '$ionicPlatform', 'ngOidcClient','$http', function ($log, $scope, $state, $ionicPlatform, ngOidcClient,$http) {
   $log.log('LoginCtrl loaded');
 
   $scope.apptitle = "OIDC Demo";
@@ -57,7 +57,7 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
       $log.log("user:" + JSON.stringify(user));
       if (!!user) {
         $log.log('Logged in so going to home state');
-        $state.go('app.home');
+        $state.go('app.account');
       }
     });
   }
@@ -68,6 +68,7 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
   });
 
   $scope.logIn = signin;
+
 }])
 
 .controller('IdCtrl', function($scope,$window,$state) {
@@ -82,7 +83,7 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 })
 
 
-.controller('AccountCtrl', ['$log', '$scope', '$state', 'ngOidcClient', function ($log, $scope, $state, ngOidcClient) {
+.controller('AccountCtrl', ['$log', '$scope', '$state', 'ngOidcClient','$http', function ($log, $scope, $state, ngOidcClient,$http) {
     $log.log('AccountCtrl');
 
     $scope.userInfo = {
@@ -119,5 +120,22 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
         $state.go('login');
       });
     };
+
+    console.log($scope.userInfo);
+    $scope.Confirmation = function () {
+      var headers = {};
+      headers['Authorization'] = 'Bearer ' + $scope.userInfo.userData.access_token;
+
+      var token = $scope.userInfo.userData.user.access_token;
+      console.log(token);
+
+    $http({
+      method: 'GET',
+      url: 'https://myconcordiaoauth.azurewebsites.net/api/message',
+      headers: {'Authorization': 'Bearer '+token}
+    }).then(function successCallback(response) {
+      console.log(response.data);
+    });
+  }
   }]);
 
