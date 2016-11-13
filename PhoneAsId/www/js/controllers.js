@@ -131,7 +131,7 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
 
     $http({
       method: 'GET',
-      url: 'https://myconcordiaoauth.azurewebsites.net/api/message',
+      url: 'https://myconcordiaid.azurewebsites.net/api/message',
       headers: {'Authorization': 'Bearer '+token}
     }).then(function successCallback(response) {
       console.log(response.data);
