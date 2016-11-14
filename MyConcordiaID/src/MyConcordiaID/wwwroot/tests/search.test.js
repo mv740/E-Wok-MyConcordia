@@ -1,0 +1,1 @@
+﻿var input = "francis cote-tremblay 10 april 1992 26615287 f_cotetr";

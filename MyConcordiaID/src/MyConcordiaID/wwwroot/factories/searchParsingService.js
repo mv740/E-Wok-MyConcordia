@@ -20,7 +20,7 @@ function studentService() {
 
     function parseSearchInput(input) {
         //split by either a whitespace, a comma,a backslash or a frontslash
-        var params = searchBox.toFind.split(/(\s|,|\\|\/)/);
+        var params = input.split(/[(\s|,|\\|\/)]/);
 
         //dont modify order. The name is the result from splicing the id, birthdate and netname from the params.
         //after each finding, the params array is spliced
@@ -34,7 +34,7 @@ function studentService() {
             'netname': netname,
             'birdthdate': birdthdate,
             'name': name
-        }
+        };
 
         return parsed;
     }
@@ -70,15 +70,17 @@ function studentService() {
 
             //find year
             if (params[i].match(/(\d{4})/)) {
-                 birtdate.year = params[i];
-                 params.splice(i, 1);
+                birthdate.year = params[i];
+                params.splice(i, 1);
+                i--;
             }
             
             //find month
             for (var j = 0; j < months.length; j++) {
                 if (params[i].match(months[j])) {
-                    birtdate.month = params[i];
+                    birthdate.month = params[i];
                     params.splice(i, 1);
+                    i--;
                 }
             }
 
@@ -99,6 +101,11 @@ function studentService() {
             if (params[i].match(/(\d{1,2})/)) {
                 var day = params[i];
                 params.splice(i, 1);
+
+                //if there is a th, nd or other suffix, take only the integer part
+                if (day.length > 2) {
+                    return day.substring(0,2);
+                }
                 return day;
             }
 

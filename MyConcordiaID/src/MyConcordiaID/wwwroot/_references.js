@@ -1,6 +1,7 @@
 ﻿/// <autosync enabled="true" />
 /// <reference path="app/app.js" />
-/// <reference path="factories/modalUpdater.js" />
+/// <reference path="factories/studentservice - copy.js" />
+/// <reference path="factories/studentService.js" />
 /// <reference path="lib/angular/angular.js" />
 /// <reference path="lib/angular-animate/angular-animate.js" />
 /// <reference path="lib/angular-aria/angular-aria.js" />
@@ -19,5 +20,5 @@
 /// <reference path="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
 /// <reference path="partials/admin/admin.controller.js" />
 /// <reference path="partials/review/modals/modals.controller.js" />
-/// <reference path="partials/review/search/searchbox.controller.js" />
+/// <reference path="partials/review/search/search.controller.js" />
 /// <reference path="partials/review/sidenav/sidenav.controller.js" />
