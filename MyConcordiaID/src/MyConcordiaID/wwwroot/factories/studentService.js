@@ -62,4 +62,27 @@ function studentService($http, $q, myConfig) {
         return deferred.promise;
     }
 
+    function search(params) {
+        var deferred = $q.defer();
+
+        $http({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'POST',
+            url: myConfig.baseUrl + myConfig.search,
+            data: params
+        }).then(
+        function (value) {
+            console.log('validate success');
+            deferred.resolve(value);
+        },
+        function (failure) {
+            console.log('validate failure');
+        });
+
+        return deferred.promise;
+    }
+
 }

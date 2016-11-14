@@ -8,9 +8,9 @@ angular
     .module('myApp')
     .controller('SearchCtrl', SearchCtrl);
 
-SearchCtrl.$inject = ['$rootScope', 'studentService'];
+SearchCtrl.$inject = ['$rootScope', 'studentService', 'searchParsingService'];
 
-function SearchCtrl($rootScope, studentService) {
+function SearchCtrl($rootScope, studentService, searchParsingService) {
 
     var search = this;
 
@@ -20,10 +20,21 @@ function SearchCtrl($rootScope, studentService) {
 
     ///////////////////
 
-    function find() {
+    function find(input) {
         search.initialState = false;
         search.searching = true;
 
+        //temporary until find can parse parameters
+        getAllStudents();
+
+        var params = searchParsingService.parseSearchInput(input);
+        studentService.search(params).then(function (value) {
+            search.results = value.data;
+        });
+    }
+
+    //temporary until find can parse parameters
+    function getAllStudents() {
         studentService.getStudents().then(function (value) {
             search.searching = false;
             search.results = value.data;
