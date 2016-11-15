@@ -1,5 +1,5 @@
 
-angular.module('starter.controllers', ['ionic', 'starter.controllers'])
+angular.module('starter.controllers', ['ionic', 'starter.controllers', 'starter.services'])
 
 .controller('AppCtrl', ['$scope', '$ionicModal', '$timeout', '$http', 'serverName', function($scope, $ionicModal, $timeout, $http, serverName) {
 
@@ -122,7 +122,10 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers'])
       headers: {'Authorization': 'Bearer '+token}
     }).then(function successCallback(response) {
       console.log(response.data);
+      $state.go('app.id');
     });
+
+
   }
   }]);
 
