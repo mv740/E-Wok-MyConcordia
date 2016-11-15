@@ -78,7 +78,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
       views: {
         'menuContent': {
           templateUrl: 'templates/login.html',
-          controller: 'LoginCtrl'
+          controller: 'LoginCtrl',
+          css: 'css/login.css'
         }
       }
     });

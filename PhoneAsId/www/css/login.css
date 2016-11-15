@@ -1,0 +1,10 @@
+#loginpage {
+  background-color: #8A0037;
+  position: relative;
+  height:100%;
+}
+
+#loginbutton {
+  position: absolute;
+  bottom: 0;
+}
