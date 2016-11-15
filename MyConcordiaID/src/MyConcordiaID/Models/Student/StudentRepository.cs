@@ -196,9 +196,12 @@ namespace MyConcordiaID.Models.Student
             IQueryable<STUDENT> student = _database.STUDENTS;
 
             //each if statement will try to build the where clauses and it only be executed when ToList() is called 
-            if(StudentHelper.ValidId(searchOptions.id))
+            if(searchOptions.id.HasValue)
             {
-                student = student.Where(s => s.ID == searchOptions.id);
+                if(StudentHelper.ValidId(searchOptions.id.Value))
+                {
+                    student = student.Where(s => s.ID == searchOptions.id.Value);
+                }
             }
             if (!string.IsNullOrEmpty(searchOptions.name))
             {

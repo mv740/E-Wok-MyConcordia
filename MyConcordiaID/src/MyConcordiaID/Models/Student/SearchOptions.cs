@@ -7,7 +7,7 @@ namespace MyConcordiaID.Models.Student
 {
     public class SearchOptions
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string netname { get; set; }
         public string birthdate { get; set; }
         public string name { get; set; }
