@@ -25,7 +25,6 @@ namespace MyConcordiaID.Helper
 
         }
 
-
         /// <summary>
         /// 
         /// Strip invalid characters from a String
@@ -47,5 +46,12 @@ namespace MyConcordiaID.Helper
                 return String.Empty;
             }
         }
+
+        public static bool ValidId(int id)
+        {
+            //21941097 = 8 characters
+            return (id.ToString().Length == 8) ?  true : false;
+        }
+
     }
 }

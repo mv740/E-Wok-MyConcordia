@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using OracleEntityFramework;
 using System.IO;
 using MyConcordiaID.Models.Picture;
+using MyConcordiaID.Helper;
 
 namespace MyConcordiaID.Models.Student
 {
@@ -188,6 +189,34 @@ namespace MyConcordiaID.Models.Student
 
         }
 
+        public List<STUDENT> Search(SearchOptions searchOptions)
+        {
+
+
+            IQueryable<STUDENT> student = _database.STUDENTS;
+
+            //each if statement will try to build the where clauses and it only be executed when ToList() is called 
+            if(StudentHelper.ValidId(searchOptions.id))
+            {
+                student = student.Where(s => s.ID == searchOptions.id);
+            }
+            if (!string.IsNullOrEmpty(searchOptions.name))
+            {
+                student = student.Where(s => s.FIRSTNAME.Contains(searchOptions.name) || s.LASTNAME.Contains(searchOptions.name));
+            }
+            if(!string.IsNullOrEmpty(searchOptions.birthdate))
+            {
+                //parse dob 
+                //add linq query
+            }
+            if(!string.IsNullOrEmpty(searchOptions.netname))
+            {
+                student = student.Where(s => s.NETNAME.Contains(searchOptions.netname));
+            }
+
+           return  student.ToList();
+            
+        }
     }
 
 }

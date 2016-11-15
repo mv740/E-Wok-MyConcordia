@@ -19,5 +19,6 @@ namespace MyConcordiaID.Models.Student
         dynamic GetAllValid();
         void Add(STUDENT student);
         PicturePeriod GetUpdatePicturePeriod();
+        List<STUDENT> Search(SearchOptions searchOptions);
     }
 }

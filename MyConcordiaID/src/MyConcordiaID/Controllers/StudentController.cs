@@ -162,6 +162,15 @@ namespace MyConcordiaID.Controllers
            
         }
 
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("Search")]
+        public IActionResult SearchByParameters([FromBody] SearchOptions searchOptions)
+        {
+            return new ObjectResult(StudentsRepo.Search(searchOptions));
+            
+        }
+
 
 
     }
