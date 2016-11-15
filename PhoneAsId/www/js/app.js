@@ -5,8 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-
-angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidcclient'])
   .constant('serverName', 'https://myconcordiaid.azurewebsites.net/api/')
 
 
@@ -31,6 +30,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
     $rootScope.validPeriod = true;
   });
 })
+
+
+.config(['ngOidcClientProvider', function (ngOidcClientProvider) {
+
+
+  var link = "https://myconcordiaid.azurewebsites.net/";
+
+    ngOidcClientProvider.setSettings({
+      authority: link,
+      client_id: "oidcdemomobile",
+      redirect_uri: "https://localhost/oidc",
+      post_logout_redirect_uri: "https://localhost/oidc",
+      silent_redirect_uri: "https://localhost/oidc",
+
+      response_type: "token",
+      scope: "profile",
+
+      automaticSilentRenew: true,
+
+      filterProtocolClaims: true,
+      loadUserInfo: true,
+
+      popupNavigator: new Oidc.CordovaPopupNavigator(),
+      iframeNavigator: new Oidc.CordovaIFrameNavigator()
+    });
+  }])
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -80,6 +105,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova'])
           templateUrl: 'templates/login.html',
           controller: 'LoginCtrl',
           css: 'css/login.css'
+        }
+      }
+    })
+
+    .state('app.account', {
+      url: "/account",
+      cache: false,
+      views: {
+        'menuContent': {
+          templateUrl: "templates/account.html",
+          controller: 'AccountCtrl'
         }
       }
     });
