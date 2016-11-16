@@ -78,7 +78,7 @@ function studentService() {
             //find month
             for (var j = 0; j < months.length; j++) {
                 if (params[i].match(months[j])) {
-                    birthdate.month = params[i];
+                    birthdate.month = j;
                     params.splice(i, 1);
                     i--;
                 }
@@ -91,7 +91,9 @@ function studentService() {
            birthdate.day = findBirthdateDay(params);
         }
 
-        return birthdate;
+        var datum = new Date(Date.UTC(birthdate.year,birthdate.month,birthdate.day,0,0,0));
+
+        return datum;
     }
 
     function findBirthdateDay(params) {
