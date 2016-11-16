@@ -25,13 +25,13 @@ function SearchCtrl($rootScope, studentService, searchParsingService) {
         search.searching = true;
 
         //temporary until find can parse parameters
-        getAllStudents();
+        //getAllStudents();
 
         var params = searchParsingService.parseSearchInput(search.input);
-        alert(JSON.stringify(params));
-       /* studentService.search(params).then(function (value) {
+        //alert(JSON.stringify(params));
+        studentService.search(params).then(function (value) {
             search.results = value.data;
-        });*/
+        });
     }
 
     //temporary until find can parse parameters

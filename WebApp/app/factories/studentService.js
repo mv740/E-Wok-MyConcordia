@@ -11,7 +11,8 @@ function studentService($http, $q, myConfig) {
     var service = {
         sendValidation: sendValidation,
         getStudentPictures: getStudentPictures,
-        getStudents: getStudents
+        getStudents: getStudents,
+        search: search
     };
 
     return service;

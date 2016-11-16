@@ -15,7 +15,8 @@ angular.module('myApp', [
     "searchStudent": "student/",
     "pendingPicture": "student/PendingPicture/",
     "picturePeriod": "admin/picturePeriod",
-    "getStudents": "student"
+    "getStudents": "student",
+    "search": "student/search"
 
 }).config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
     $locationProvider.hashPrefix('!');
