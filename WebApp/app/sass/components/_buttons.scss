@@ -1,0 +1,6 @@
+@import "../base/mixins/make3D";
+@import "../base/colors";
+
+.button3D{
+  @include make-button-3d($button3D-border-color, $button3D-shadow-color);
+}

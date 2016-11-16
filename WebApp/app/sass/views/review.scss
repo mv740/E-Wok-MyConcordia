@@ -1,0 +1,30 @@
+@import "../base/reset";
+@import "../components/buttons";
+
+@import "../base/mixins/transitions";
+@import "../base/mixins/fill";
+
+@import "../components/sideNav";
+@import "../components/searchBox";
+@import "../components/searchResults";
+@import "../components/studentModal";
+@import "../components/imageModal";
+@import "../components/gallery";
+
+
+#viewport.middle{
+        top:40%;
+    }
+
+#viewport{
+  @include fill();
+  @include transition();
+  position: relative;
+  top:0%;
+  overflow: auto;
+}
+
+.view1Component{
+  margin:20px auto 10px auto;
+  width:92%;
+}

@@ -1,7 +1,7 @@
 
 html, body{
   height: 100%;
-  font: 1.2em 'Montserrat Alternates';
+  font: 1em 'Montserrat Alternates';
 
   ul {
     list-style:none;
@@ -13,6 +13,21 @@ html, body{
       padding:0;
     }
 
+  }
+
+}
+
+
+#main {
+  height:100%;
+
+
+  .mainComponent {
+    height: 100%;
+  }
+  #ng-view{
+    overflow:hidden;
+    width:auto;
   }
 
 }

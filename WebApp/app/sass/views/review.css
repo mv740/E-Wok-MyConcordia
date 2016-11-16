@@ -1,0 +1,249 @@
+html, body {
+  height: 100%;
+  font: 1em 'Montserrat Alternates'; }
+  html ul, body ul {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    html ul li, body ul li {
+      margin: 0;
+      padding: 0; }
+
+#main {
+  height: 100%; }
+  #main .mainComponent {
+    height: 100%; }
+  #main #ng-view {
+    overflow: hidden;
+    width: auto; }
+
+.button3D {
+  position: relative;
+  height: 46px;
+  padding: 0px;
+  margin: 20px 0px 10px 0px;
+  background-color: white;
+  border: 0.25em solid #6A6A6A;
+  box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232; }
+  .button3D:hover {
+    top: 3px;
+    left: 3px;
+    box-shadow: 0.7px 0.7px 0 #323232, 1.4px 1.4px 0 #323232, 2.1px 2.1px 0 #323232, 2.8px 2.8px 0 #323232, 3.5px 3.5px 0 #323232, 4.2px 4.2px 0 #323232, 4.9px 4.9px 0 #323232; }
+
+#sideMenuContainer {
+  height: 100%;
+  float: left; }
+  #sideMenuContainer div {
+    z-index: 2; }
+  #sideMenuContainer #sideMenuStatic {
+    position: relative;
+    background-color: white;
+    width: 60px;
+    float: left;
+    height: 100%; }
+    #sideMenuContainer #sideMenuStatic #hamburger {
+      transform: scale(0.2);
+      margin-left: 2px;
+      margin-right: auto;
+      display: block;
+      margin-top: 20px;
+      width: 40px;
+      height: 40px; }
+    #sideMenuContainer #sideMenuStatic a {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+      margin-top: 20px;
+      width: 40px;
+      height: 40px; }
+    #sideMenuContainer #sideMenuStatic #goToReviewIcon {
+      background: url("../../images/icons/reviewViewIcon.png") no-repeat center;
+      background-size: 70%; }
+    #sideMenuContainer #sideMenuStatic #logoffIcon:hover {
+      color: #f1f1f1;
+      outline: none; }
+    #sideMenuContainer #sideMenuStatic #logoffIcon:focus {
+      outline: none; }
+    #sideMenuContainer #sideMenuStatic #logoffIcon {
+      border: none;
+      cursor: pointer;
+      display: block;
+      background: url("../../images/icons/logoffIcon.png") no-repeat center;
+      background-size: 67%;
+      margin: 8px;
+      margin-top: 20px;
+      width: 40px;
+      height: 40px; }
+    #sideMenuContainer #sideMenuStatic #loginIcon {
+      background: url(../../images/icons/loginIcon.png) no-repeat center;
+      background-size: 67%; }
+  #sideMenuContainer .sidenav {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+    /* The navigation menu links */
+    /* When you mouse over the navigation links, change their color */
+    /* Position and style the close button (top right corner) */ }
+    #sideMenuContainer .sidenav a {
+      height: 40px;
+      margin-top: 20px;
+      margin-left: 50px;
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 15px;
+      color: #818181;
+      display: block;
+      transition: 0.3s; }
+    #sideMenuContainer .sidenav a:hover, #sideMenuContainer .sidenav .offcanvas a:focus {
+      color: #f1f1f1; }
+    #sideMenuContainer .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px; }
+
+#searchBoxContainer .field {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 1px 1px 0 #600026, 2px 2px 0 #600026, 3px 3px 0 #600026, 4px 4px 0 #600026, 5px 5px 0 #600026, 6px 6px 0 #600026, 7px 7px 0 #600026; }
+  #searchBoxContainer .field input[type=text],
+  #searchBoxContainer .field button {
+    display: block; }
+  #searchBoxContainer .field input[type=text] {
+    flex: 1;
+    padding: 0.6em;
+    border: 0.2em solid #8A0037; }
+  #searchBoxContainer .field button {
+    padding: 0.6em 0.8em;
+    background-color: #8A0037;
+    color: white;
+    border: none; }
+
+#searchResultsContainer #searchResults {
+  width: 100%;
+  list-style: none; }
+  #searchResultsContainer #searchResults ul div {
+    margin-left: 8px; }
+    #searchResultsContainer #searchResults ul div span {
+      top: 8px;
+      position: relative; }
+
+#studentModal {
+  background-color: #e4e6e9;
+  min-width: 650px; }
+  #studentModal .modal-element {
+    background-color: #e4e6e9; }
+    #studentModal .modal-element #galleryContainer {
+      max-height: 200px; }
+  #studentModal #cardHolder {
+    background-color: #e4e6e9; }
+    #studentModal #cardHolder img {
+      max-width: 100%; }
+    #studentModal #cardHolder div {
+      margin: auto; }
+
+#noYesContainer button {
+  float: left; }
+
+#imageModal img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 100%; }
+
+#gallery li {
+  list-style: none;
+  display: inline-block; }
+
+#gallery ul {
+  padding: 0;
+  margin: 0;
+  white-space: nowrap; }
+
+#gallery .thumbnail {
+  height: 50px;
+  padding: 2px; }
+
+#gallery .large {
+  width: 405px; }
+
+#gallery .mainimageshell {
+  display: none;
+  background-color: #fff;
+  border-radius: 8px;
+  float: left;
+  width: 400px;
+  padding: 10px; }
+
+#gallery .viewwindow {
+  width: 400px;
+  height: 307px;
+  overflow-x: hidden;
+  position: relative; }
+
+#gallery .fullsizelist {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: left .8s ease;
+  -ms-transition: left .8s ease;
+  -o-transition: left .8s ease;
+  -webkit-transition: left .8s ease;
+  -moz-transition: left .8s ease; }
+
+#gallery .bg {
+  background-color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  float: left; }
+
+#gallery .thumbsshell {
+  margin-top: 6px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px; }
+
+#gallery .thumbswrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 70px; }
+
+#gallery .thumbwrapper {
+  float: left;
+  height: 60px; }
+
+#gallery .captionshell {
+  margin: 0 0 10px 5px;
+  background-color: #fff;
+  width: 175px;
+  height: 324px;
+  padding: 0 10px;
+  border-radius: 8px;
+  float: left; }
+
+#viewport.middle {
+  top: 40%; }
+
+#viewport {
+  height: 100%;
+  width: 100%;
+  transition: 0.4s ease-out;
+  position: relative;
+  top: 0%;
+  overflow: auto; }
+
+.view1Component {
+  margin: 20px auto 10px auto;
+  width: 92%; }

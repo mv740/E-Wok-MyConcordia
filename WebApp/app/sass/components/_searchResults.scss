@@ -1,0 +1,21 @@
+@import "../base/variables";
+
+#searchResultsContainer {
+
+    #searchResults {
+        width: 100%;
+        list-style: none;
+
+        ul {
+
+            div {
+                margin-left: $search-result-margin;
+
+                span {
+                    top: $search-result-margin;
+                    position: relative;
+                }
+            }
+        }
+    }
+}

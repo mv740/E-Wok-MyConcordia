@@ -26,15 +26,7 @@ angular.module('myApp', [
             templateUrl : 'partials/admin/admin.html'
         }).when('/review', {
             templateUrl: 'partials/review/review.html',
-            css: [
-                'partials/review/review.css',
-                'partials/review/search/searchBox/searchBox.css',
-                'partials/review/search/searchResults/searchResults.css',
-                'partials/review/modals/studentModal/studentModal.css',
-                'partials/review/modals/studentModal/gallery/gallery.css',
-                'partials/review/modals/imageModal/imageModal.css',
-                'partials/review/sideNav/sideNav.css'
-            ]
+            css: 'sass/views/review.css'
         })
         .otherwise({ redirectTo: '/review' });
 }]);

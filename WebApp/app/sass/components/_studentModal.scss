@@ -1,0 +1,33 @@
+@import "../base/colors";
+
+#studentModal {
+    background-color: $modal-background-color;
+    min-width: 650px;
+
+    
+    .modal-element {
+        background-color: $modal-background-color;
+
+        #galleryContainer {
+            max-height: 200px;
+        }
+    }
+
+    #cardHolder {
+        background-color: $modal-background-color;
+
+        img {
+            max-width: 100%;
+        }
+
+        div {
+            margin: auto;
+        }
+    }
+}
+
+#noYesContainer {
+    button {
+        float: left;
+    }
+}
