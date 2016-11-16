@@ -54,14 +54,14 @@
     <a><hamburger-toggle id="hamburger" ng-click="sideNav.toggleNav()" state="sideNav.hamState"></hamburger-toggle></a>
     <a id="logoffIcon"></a>
     <a id="goToReviewIcon" href="#!/review" ng-click="sideNav.closeNav()"></a>
-    <a href="#!/admin" ng-click="sideNav.closeNav()">A</a>
+    <a id="adminIcon" href="#!/admin" ng-click="sideNav.closeNav()"></a>
   </div>
 </div>
 
 <div id="main" class="row">
 
 
-  <div id="ng-view" class="mainComponent" ng-view></div>
+  <div id="ng-view" ng-view></div>
 
 
 </div>

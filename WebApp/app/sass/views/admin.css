@@ -1,0 +1,56 @@
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+#sideMenuContainer {
+  height: 100%;
+  float: left; }
+  #sideMenuContainer div {
+    z-index: 2; }
+  #sideMenuContainer a {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 28px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px; }
+  #sideMenuContainer #sideMenuStatic {
+    position: relative;
+    background-color: white;
+    width: 60px;
+    float: left;
+    height: 100%; }
+    #sideMenuContainer #sideMenuStatic #hamburger {
+      transform: scale(0.23);
+      margin-left: -13px;
+      margin-right: auto;
+      display: block;
+      margin-top: 20px;
+      width: 25px;
+      height: 25px; }
+    #sideMenuContainer #sideMenuStatic #goToReviewIcon {
+      background: url("../../images/icons/review-icon.png") no-repeat center;
+      background-size: 25px; }
+    #sideMenuContainer #sideMenuStatic #logoffIcon {
+      background: url("../../images/icons/logoff-icon.png") no-repeat center;
+      background-size: 25px; }
+    #sideMenuContainer #sideMenuStatic #adminIcon {
+      background: url("../../images/icons/settings-icon.png") no-repeat center;
+      background-size: 25px; }
+  #sideMenuContainer .sideNavDrawer {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */ }

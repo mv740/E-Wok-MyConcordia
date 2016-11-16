@@ -45,6 +45,10 @@
     #logoffIcon{
       @include setBackground($logoff-icon, $sideNav-icon-size);
     }
+
+    #adminIcon{
+      @include setBackground($admin-icon, $sideNav-icon-size);
+    }
   }
 
 

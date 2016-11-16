@@ -23,7 +23,8 @@ angular.module('myApp', [
 
     $routeProvider
         .when('/admin', {
-            templateUrl : 'partials/admin/admin.html'
+            templateUrl : 'partials/admin/admin.html',
+            css: 'sass/views/admin.css'
         }).when('/review', {
             templateUrl: 'partials/review/review.html',
             css: 'sass/views/review.css'
