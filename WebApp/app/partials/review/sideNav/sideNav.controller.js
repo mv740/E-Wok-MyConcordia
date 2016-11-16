@@ -30,7 +30,7 @@ function SideNavCtrl() {
 
     function openNav() {
         addOverlay();
-        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("mySidenav").style.width = "170px";
     }
 
     function addOverlay() {

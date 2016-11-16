@@ -1,0 +1,4 @@
+@mixin setBackground($path, $size) {
+  background: url($path) no-repeat center;
+  background-size: $size;
+}

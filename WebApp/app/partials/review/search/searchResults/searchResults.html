@@ -2,8 +2,8 @@
 
 <div class="view1Component">
 
-    <li id="searchResults">
-        <ul class="button3D" ng-repeat="result in search.results" ng-click="search.studentClick(result)" data-toggle="modal" data-target="#studentModalContainer">
+    <ul id="searchResults">
+        <li class="button3D" ng-repeat="result in search.results" ng-click="search.studentClick(result)" data-toggle="modal" data-target="#studentModalContainer">
             <div>
                 <span>{{result.id}},</span>
 
@@ -16,6 +16,6 @@
                 <span>{{result.birthdate.month}}</span>
                 <span>{{result.birthdate.year}}</span>
             </div>
-        </ul>
-    </li>
+        </li>
+    </ul>
 </div>

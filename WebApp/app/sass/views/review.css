@@ -30,11 +30,25 @@ html, body {
     left: 3px;
     box-shadow: 0.7px 0.7px 0 #323232, 1.4px 1.4px 0 #323232, 2.1px 2.1px 0 #323232, 2.8px 2.8px 0 #323232, 3.5px 3.5px 0 #323232, 4.2px 4.2px 0 #323232, 4.9px 4.9px 0 #323232; }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
 #sideMenuContainer {
   height: 100%;
   float: left; }
   #sideMenuContainer div {
     z-index: 2; }
+  #sideMenuContainer a {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    margin-top: 28px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px; }
   #sideMenuContainer #sideMenuStatic {
     position: relative;
     background-color: white;
@@ -42,43 +56,20 @@ html, body {
     float: left;
     height: 100%; }
     #sideMenuContainer #sideMenuStatic #hamburger {
-      transform: scale(0.2);
-      margin-left: 2px;
+      transform: scale(0.23);
+      margin-left: -13px;
       margin-right: auto;
       display: block;
       margin-top: 20px;
-      width: 40px;
-      height: 40px; }
-    #sideMenuContainer #sideMenuStatic a {
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      display: block;
-      margin-top: 20px;
-      width: 40px;
-      height: 40px; }
+      width: 25px;
+      height: 25px; }
     #sideMenuContainer #sideMenuStatic #goToReviewIcon {
-      background: url("../../images/icons/reviewViewIcon.png") no-repeat center;
-      background-size: 70%; }
-    #sideMenuContainer #sideMenuStatic #logoffIcon:hover {
-      color: #f1f1f1;
-      outline: none; }
-    #sideMenuContainer #sideMenuStatic #logoffIcon:focus {
-      outline: none; }
+      background: url("../../images/icons/review-icon.png") no-repeat center;
+      background-size: 25px; }
     #sideMenuContainer #sideMenuStatic #logoffIcon {
-      border: none;
-      cursor: pointer;
-      display: block;
-      background: url("../../images/icons/logoffIcon.png") no-repeat center;
-      background-size: 67%;
-      margin: 8px;
-      margin-top: 20px;
-      width: 40px;
-      height: 40px; }
-    #sideMenuContainer #sideMenuStatic #loginIcon {
-      background: url(../../images/icons/loginIcon.png) no-repeat center;
-      background-size: 67%; }
-  #sideMenuContainer .sidenav {
+      background: url("../../images/icons/logoff-icon.png") no-repeat center;
+      background-size: 25px; }
+  #sideMenuContainer .sideNavDrawer {
     height: 100%;
     /* 100% Full-height */
     width: 0;
@@ -91,28 +82,7 @@ html, body {
     overflow-x: hidden;
     /* Disable horizontal scroll */
     transition: 0.5s;
-    /* 0.5 second transition effect to slide in the sidenav */
-    /* The navigation menu links */
-    /* When you mouse over the navigation links, change their color */
-    /* Position and style the close button (top right corner) */ }
-    #sideMenuContainer .sidenav a {
-      height: 40px;
-      margin-top: 20px;
-      margin-left: 50px;
-      padding: 8px 8px 8px 32px;
-      text-decoration: none;
-      font-size: 15px;
-      color: #818181;
-      display: block;
-      transition: 0.3s; }
-    #sideMenuContainer .sidenav a:hover, #sideMenuContainer .sidenav .offcanvas a:focus {
-      color: #f1f1f1; }
-    #sideMenuContainer .sidenav .closebtn {
-      position: absolute;
-      top: 0;
-      right: 25px;
-      font-size: 36px;
-      margin-left: 50px; }
+    /* 0.5 second transition effect to slide in the sidenav */ }
 
 #searchBoxContainer .field {
   display: flex;
@@ -131,14 +101,14 @@ html, body {
     color: white;
     border: none; }
 
-#searchResultsContainer #searchResults {
-  width: 100%;
-  list-style: none; }
-  #searchResultsContainer #searchResults ul div {
+#searchResults div {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+  #searchResults div span {
     margin-left: 8px; }
-    #searchResultsContainer #searchResults ul div span {
-      top: 8px;
-      position: relative; }
 
 #studentModal {
   background-color: #e4e6e9;
@@ -156,6 +126,11 @@ html, body {
 
 #noYesContainer button {
   float: left; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
 
 #imageModal img {
   display: block;
