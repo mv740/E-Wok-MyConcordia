@@ -20,5 +20,6 @@ namespace MyConcordiaID.Models.Student
         void Add(STUDENT student);
         PicturePeriod GetUpdatePicturePeriod();
         List<STUDENT> Search(SearchOptions searchOptions);
+        bool DoesStudentExist(string firstName, string lastName);
     }
 }

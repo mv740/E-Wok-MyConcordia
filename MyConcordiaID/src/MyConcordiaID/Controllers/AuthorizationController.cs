@@ -14,16 +14,21 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using MyConcordiaID.Models;
 using MyConcordiaID.Helpers;
+using MyConcordiaID.Models.Student;
+using OracleEntityFramework;
+using MyConcordiaID.Helper;
 
 namespace MyConcordiaID.Controllers
 {
     public class AuthorizationController : Controller
     {
-        private readonly ApplicationContext database;
+        private readonly ApplicationContext _database;
+        private IStudentRepository _studentsRepo { get; set; }
 
-        public AuthorizationController(ApplicationContext database)
+        public AuthorizationController(IStudentRepository students, ApplicationContext database)
         {
-            this.database = database;
+            _database = database;
+            _studentsRepo = students;
         }
 
         [Authorize, HttpGet("~/connect/authorize")]
@@ -149,6 +154,28 @@ namespace MyConcordiaID.Controllers
             // Set the resources servers the access token should be issued for.
             ticket.SetResources("resource_server");
 
+
+            //add the user to the database if he doesn't exist yet
+            var firstName = GetGivenName(ticket);
+            var lastname = GetSurname(ticket);
+
+            if(!_studentsRepo.DoesStudentExist(firstName, lastname))
+            {
+                STUDENT newStudent = new STUDENT
+                {
+                    NETNAME = StudentHelper.GenerateNetName(firstName, lastname),
+                    ID = StudentHelper.GenerateRandomId(),
+                    FIRSTNAME = firstName,
+                    LASTNAME = lastname,
+                    DOB = DateTime.UtcNow,
+                    UGRADSTATUS = "U"
+                };
+
+                _studentsRepo.Add(newStudent);
+
+            }
+
+
             // Returning a SignInResult will ask ASOS to serialize the specified identity to build appropriate tokens.
             // Note: you should always make sure the identities you return contain ClaimTypes.NameIdentifier claim.
             // In this sample, the identity always contains the name identifier returned by the external provider.
@@ -221,9 +248,23 @@ namespace MyConcordiaID.Controllers
         protected virtual Task<Application> GetApplicationAsync(string identifier, CancellationToken cancellationToken)
         {
             // Retrieve the application details corresponding to the requested client_id.
-            return (from application in database.Applications
+            return (from application in _database.Applications
                     where application.ApplicationID == identifier
                     select application).SingleOrDefaultAsync(cancellationToken);
         }
+
+
+        public static string GetGivenName(AuthenticationTicket ticket)
+        {
+            return ticket.Principal.FindFirstValue(ClaimTypes.GivenName);
+        }
+
+        public static string GetSurname(AuthenticationTicket ticket)
+        {
+            return ticket.Principal.FindFirstValue(ClaimTypes.Surname);
+        }
+
+
+
     }
 }

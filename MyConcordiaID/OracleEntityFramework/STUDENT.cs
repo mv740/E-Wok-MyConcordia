@@ -22,11 +22,11 @@ namespace OracleEntityFramework
         public System.DateTime DOB { get; set; }
         public bool PENDING { get; set; }
         public byte[] PROFILEPICTURE { get; set; }
-        public byte[] PREVIOUSPICTURE1 { get; set; }
-        public byte[] PREVIOUSPICTURE2 { get; set; }
         public byte[] PENDINGPICTURE { get; set; }
         public string UGRADSTATUS { get; set; }
         public System.DateTime EXPIREDATE { get; set; }
         public bool UPDATEPICTURE { get; set; }
+    
+        public virtual PICTUREARCHIVE PICTUREARCHIVE { get; set; }
     }
 }

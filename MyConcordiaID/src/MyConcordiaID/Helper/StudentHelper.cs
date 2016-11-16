@@ -21,8 +21,9 @@ namespace MyConcordiaID.Helper
             var cleanedLastName = CleanInput(lastName).Trim();
             
 
-            return firstName[0] + "_" + cleanedLastName.Substring(0, 5);
+            return firstName[0].ToString().ToLower() + "_" + cleanedLastName.Substring(0, 6).ToLower();
 
+       
         }
 
         /// <summary>
@@ -36,7 +37,7 @@ namespace MyConcordiaID.Helper
             // Replace invalid characters with empty strings.
             try
             {
-                return Regex.Replace(strIn, @"[!@#$%-_]", "",
+                return Regex.Replace(strIn, @"[!@_#$%-]", "",
                                      RegexOptions.None, TimeSpan.FromSeconds(1.5));
             }
             // If we timeout when replacing invalid characters, 

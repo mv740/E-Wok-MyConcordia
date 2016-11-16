@@ -296,12 +296,14 @@ namespace UnitTestCore
             var lastName = "cote-tremblay";
       
             var netName = StudentHelper.GenerateNetName(firstName, lastName);
-            var cleanedLastName = StudentHelper.CleanInput(lastName);
-
-            var result = "f_cotet";
+           
+          
+            var result = "f_cotetr";
 
             Assert.AreEqual(result, netName);
+          
         }
+
     }
 
 

@@ -69,7 +69,7 @@ namespace MyConcordiaID.Models.Student
 
             var student = _database.STUDENTS
                 .Where(s => s.ID == id)
-                .Select(s => new { s.ID, s.PENDINGPICTURE, s.PREVIOUSPICTURE1, s.PREVIOUSPICTURE2 })
+                .Select(s => new { s.ID, s.PENDINGPICTURE })
                 .FirstOrDefault();
 
             return student;
@@ -83,21 +83,33 @@ namespace MyConcordiaID.Models.Student
                 .Where(s => s.ID == pictureValidation.id)
                 .FirstOrDefault();
 
-           
-            if(pictureValidation.valid)
+            var netName = student.NETNAME;
+
+            var pictureArchive = _database.PICTUREARCHIVEs;
+
+            if (pictureValidation.valid)
             {
 
-                if(student.PROFILEPICTURE !=null)
-                {
-                    if(student.PREVIOUSPICTURE1 != null)
-                    {
-                        var previous1 = student.PREVIOUSPICTURE1;
-                        student.PREVIOUSPICTURE2 = previous1;
-                    }
+               
 
-                    var previous = student.PROFILEPICTURE;
-                    student.PREVIOUSPICTURE1 = previous; 
+                if(student.VALID)
+                {
+                    //there is a existing valid profile pic 
+
+                    PICTUREARCHIVE archivingProfile = new PICTUREARCHIVE
+                    {
+                        NETNAME = netName,
+                        STATUS = PictureHelper.GetArchivedStatus(),
+                        TIMESTAMP = DateTime.Now,
+                        PICTURE = student.PROFILEPICTURE,
+                        STUDENT = student
+
+                    };
+
+                    pictureArchive.Add(archivingProfile);
                 }
+
+
 
                 byte[] validPicture = student.PENDINGPICTURE;
                 student.PROFILEPICTURE = validPicture;
@@ -107,6 +119,17 @@ namespace MyConcordiaID.Models.Student
             }
             else
             {
+                PICTUREARCHIVE archivingDeniedPicture = new PICTUREARCHIVE
+                {
+                    NETNAME = netName,
+                    STATUS = PictureHelper.GetDeniedStatus(),
+                    TIMESTAMP = DateTime.Now,
+                    PICTURE = student.PENDINGPICTURE,
+                    STUDENT = student
+
+                };
+                pictureArchive.Add(archivingDeniedPicture);
+
                 student.PENDINGPICTURE = null;
             }
             student.PENDING = false;
@@ -143,7 +166,7 @@ namespace MyConcordiaID.Models.Student
         public void Add(STUDENT newStudent)
         {
             _database.STUDENTS.Add(newStudent);
-            _database.SaveChanges();
+            _database.SaveChangesAsync();
         }
 
         public PicturePeriod GetUpdatePicturePeriod()
@@ -220,6 +243,18 @@ namespace MyConcordiaID.Models.Student
            return  student.ToList();
             
         }
+
+        public bool DoesStudentExist(string firstName, string lastName)
+        {
+            var student = _database.STUDENTS
+              .Where(s => s.FIRSTNAME == firstName && s.LASTNAME == lastName)
+              .FirstOrDefault();
+
+      
+            return (student == null) ? false : true; 
+
+        }
+
     }
 
 }

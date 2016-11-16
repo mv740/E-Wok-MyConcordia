@@ -14,5 +14,15 @@ namespace MyConcordiaID.Helper
             else
                 return Convert.ToBase64String(picture);
         }
+
+        public static string GetDeniedStatus()
+        {
+            return "denied";
+        }
+
+        public static string GetArchivedStatus()
+        {
+            return "archived";
+        }
     }
 }

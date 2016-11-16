@@ -18,6 +18,8 @@ namespace MyConcordiaID.Controllers
             }
 
             return Content($"{identity.Name} has been successfully authenticated.");
+
+           
         }
 
 

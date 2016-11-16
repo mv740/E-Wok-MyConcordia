@@ -25,6 +25,15 @@
           <Property Name="PICTURE" Type="blob" Nullable="false" />
           <Property Name="UPLOADEDDATE" Type="timestamp" Precision="6" Nullable="false" />
         </EntityType>
+        <EntityType Name="PICTUREARCHIVE">
+          <Key>
+            <PropertyRef Name="NETNAME" />
+          </Key>
+          <Property Name="NETNAME" Type="varchar2" MaxLength="8" Nullable="false" />
+          <Property Name="PICTURE" Type="blob" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="8" Nullable="false" />
+          <Property Name="TIMESTAMP" Type="date" Nullable="false" />
+        </EntityType>
         <EntityType Name="PICTUREUPDATESETTING">
           <Key>
             <PropertyRef Name="YEAR" />
@@ -37,7 +46,7 @@
           <Key>
             <PropertyRef Name="NETNAME" />
           </Key>
-          <Property Name="NETNAME" Type="varchar2" MaxLength="7" Nullable="false" />
+          <Property Name="NETNAME" Type="varchar2" MaxLength="8" Nullable="false" />
           <Property Name="ID" Type="number" Precision="8" Scale="0" Nullable="false" />
           <Property Name="FIRSTNAME" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="LASTNAME" Type="varchar2" MaxLength="20" Nullable="false" />
@@ -45,18 +54,33 @@
           <Property Name="DOB" Type="date" Nullable="false" />
           <Property Name="PENDING" Type="number" Precision="1" Scale="0" Nullable="false" />
           <Property Name="PROFILEPICTURE" Type="blob" />
-          <Property Name="PREVIOUSPICTURE1" Type="blob" />
-          <Property Name="PREVIOUSPICTURE2" Type="blob" />
           <Property Name="PENDINGPICTURE" Type="blob" />
           <Property Name="UGRADSTATUS" Type="varchar2" MaxLength="2" Nullable="false" />
           <Property Name="EXPIREDATE" Type="date" Nullable="false" />
           <Property Name="UPDATEPICTURE" Type="number" Precision="1" Scale="0" Nullable="false" />
         </EntityType>
+        <Association Name="PICTUREARCHIVE_FK1">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
+          <End Role="PICTUREARCHIVE" Type="Self.PICTUREARCHIVE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="PICTUREARCHIVE">
+              <PropertyRef Name="NETNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="OracleDataModelStoreContainer">
           <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSERS" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTURE" EntityType="Self.PICTURE" Schema="MV740" store:Type="Tables" />
+          <EntitySet Name="PICTUREARCHIVE" EntityType="Self.PICTUREARCHIVE" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTUREUPDATESETTING" EntityType="Self.PICTUREUPDATESETTING" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="MV740" store:Type="Tables" />
+          <AssociationSet Name="PICTUREARCHIVE_FK1" Association="Self.PICTUREARCHIVE_FK1">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="PICTUREARCHIVE" EntitySet="PICTUREARCHIVE" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -77,6 +101,11 @@
           <EntitySet Name="PICTUREs" EntityType="OracleDataModel.PICTURE" />
           <EntitySet Name="STUDENTS" EntityType="OracleDataModel.STUDENT" />
           <EntitySet Name="PICTUREUPDATESETTINGs" EntityType="OracleDataModel.PICTUREUPDATESETTING" />
+          <EntitySet Name="PICTUREARCHIVEs" EntityType="OracleDataModel.PICTUREARCHIVE" />
+          <AssociationSet Name="PICTUREARCHIVE_FK1" Association="OracleDataModel.PICTUREARCHIVE_FK1">
+            <End Role="STUDENT" EntitySet="STUDENTS" />
+            <End Role="PICTUREARCHIVE" EntitySet="PICTUREARCHIVEs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="PICTURE">
           <Key>
@@ -92,7 +121,7 @@
           <Key>
             <PropertyRef Name="NETNAME" />
           </Key>
-          <Property Name="NETNAME" Type="String" Nullable="false" MaxLength="7" FixedLength="false" Unicode="false" />
+          <Property Name="NETNAME" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="ID" Type="Int32" Nullable="false" />
           <Property Name="FIRSTNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="LASTNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
@@ -100,12 +129,11 @@
           <Property Name="DOB" Type="DateTime" Nullable="false" />
           <Property Name="PENDING" Type="Boolean" Nullable="false" />
           <Property Name="PROFILEPICTURE" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PREVIOUSPICTURE1" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PREVIOUSPICTURE2" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="PENDINGPICTURE" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="UGRADSTATUS" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="EXPIREDATE" Type="DateTime" Nullable="false" />
           <Property Name="UPDATEPICTURE" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="PICTUREARCHIVE" Relationship="OracleDataModel.PICTUREARCHIVE_FK1" FromRole="STUDENT" ToRole="PICTUREARCHIVE" />
         </EntityType>
         <EntityType Name="PICTUREUPDATESETTING">
           <Key>
@@ -115,6 +143,28 @@
           <Property Name="STARDATE" Type="DateTime" Nullable="false" />
           <Property Name="ENDDATE" Type="DateTime" Nullable="false" />
         </EntityType>
+        <EntityType Name="PICTUREARCHIVE">
+          <Key>
+            <PropertyRef Name="NETNAME" />
+          </Key>
+          <Property Name="NETNAME" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="PICTURE" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="STATUS" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="STUDENT" Relationship="OracleDataModel.PICTUREARCHIVE_FK1" FromRole="PICTUREARCHIVE" ToRole="STUDENT" />
+        </EntityType>
+        <Association Name="PICTUREARCHIVE_FK1">
+          <End Type="OracleDataModel.STUDENT" Role="STUDENT" Multiplicity="1" />
+          <End Type="OracleDataModel.PICTUREARCHIVE" Role="PICTUREARCHIVE" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="PICTUREARCHIVE">
+              <PropertyRef Name="NETNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -150,8 +200,6 @@
                 <ScalarProperty Name="EXPIREDATE" ColumnName="EXPIREDATE" />
                 <ScalarProperty Name="UGRADSTATUS" ColumnName="UGRADSTATUS" />
                 <ScalarProperty Name="PENDINGPICTURE" ColumnName="PENDINGPICTURE" />
-                <ScalarProperty Name="PREVIOUSPICTURE2" ColumnName="PREVIOUSPICTURE2" />
-                <ScalarProperty Name="PREVIOUSPICTURE1" ColumnName="PREVIOUSPICTURE1" />
                 <ScalarProperty Name="PROFILEPICTURE" ColumnName="PROFILEPICTURE" />
                 <ScalarProperty Name="PENDING" ColumnName="PENDING" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
@@ -169,6 +217,16 @@
                 <ScalarProperty Name="ENDDATE" ColumnName="ENDDATE" />
                 <ScalarProperty Name="STARDATE" ColumnName="STARDATE" />
                 <ScalarProperty Name="YEAR" ColumnName="YEAR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PICTUREARCHIVEs">
+            <EntityTypeMapping TypeName="OracleDataModel.PICTUREARCHIVE">
+              <MappingFragment StoreEntitySet="PICTUREARCHIVE">
+                <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
+                <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
