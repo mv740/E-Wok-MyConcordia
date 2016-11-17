@@ -31,7 +31,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
   });
 })
 
-
 .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
 
@@ -56,8 +55,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
       iframeNavigator: new Oidc.CordovaIFrameNavigator()
     });
   }])
+.config(['$stateProvider','$urlRouterProvider','$httpProvider', function($stateProvider, $urlRouterProvider,$httpProvider) {
 
-.config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
     .state('app', {
@@ -121,4 +120,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
     });
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/login');
-});
+
+  $httpProvider.interceptors.push('AuthInterceptorService');
+}]);
