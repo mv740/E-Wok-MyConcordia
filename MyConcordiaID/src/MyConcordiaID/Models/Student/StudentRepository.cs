@@ -20,10 +20,19 @@ namespace MyConcordiaID.Models.Student
             _database = context;
         }
 
-        public STUDENT Find(int id)
+        public STUDENT FindById(int id)
         {
             var student = _database.STUDENTS
                  .Where(s => s.ID == id)
+                 .SingleOrDefault();
+
+            return student;
+        }
+
+        public STUDENT FindByNetName(string netName)
+        {
+            var student = _database.STUDENTS
+                 .Where(s => s.NETNAME == netName)
                  .SingleOrDefault();
 
             return student;
@@ -37,31 +46,19 @@ namespace MyConcordiaID.Models.Student
             return students;
         }
 
-        public void AddPendingPicture(int id, IFormFile file)
+        public void AddPendingPicture(string netname, byte[] picture)
         {
 
-            //will be used to store image time
-            //var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
+            var student = _database.STUDENTS
+                .Where(s => s.NETNAME == netname)
+                .FirstOrDefault();
 
-            using (Stream stream = file.OpenReadStream())
-            {
-                using (var binaryReader = new BinaryReader(stream))
-                {
-                    var fileContent = binaryReader.ReadBytes((int)file.Length);
+            student.PENDINGPICTURE = picture;
+            student.PENDING = true;
+            student.UPDATEPICTURE = false; // so he can't send multiple update 
 
-                    var student = _database.STUDENTS
-                        .Where(s => s.ID == id)
-                        .FirstOrDefault();
+            _database.SaveChanges();
 
-                    student.PENDINGPICTURE = fileContent;
-                    student.PENDING = true;
-                    student.UPDATEPICTURE = false; // so he can't send multiple update 
-                    _database.SaveChanges();
-
-
-                }
-            }
-            
         }
 
         public dynamic FindPendingPicture(int id)
@@ -73,7 +70,7 @@ namespace MyConcordiaID.Models.Student
                 .FirstOrDefault();
 
             return student;
-            
+
         }
 
         public void ValidatePicture(PictureValidation pictureValidation)
@@ -90,9 +87,9 @@ namespace MyConcordiaID.Models.Student
             if (pictureValidation.valid)
             {
 
-               
 
-                if(student.VALID)
+
+                if (student.VALID)
                 {
                     //there is a existing valid profile pic 
 
@@ -140,14 +137,14 @@ namespace MyConcordiaID.Models.Student
         public dynamic GetAllPending()
         {
 
-           var students =  _database.STUDENTS
-                .Where(s => s.PENDING == true)
-                .Select(s=> new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME})
-                .ToList();
+            var students = _database.STUDENTS
+                 .Where(s => s.PENDING == true)
+                 .Select(s => new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME })
+                 .ToList();
 
             return students;
 
-           
+
         }
 
         public dynamic GetAllValid()
@@ -178,7 +175,7 @@ namespace MyConcordiaID.Models.Student
 
 
             int academicYear;
-            if(month >= 5 )
+            if (month >= 5)
             {
                 academicYear = year;
             }
@@ -195,7 +192,7 @@ namespace MyConcordiaID.Models.Student
 
 
             bool canUpdate = false;
-            if(today >= period.STARDATE && today <= period.ENDDATE)
+            if (today >= period.STARDATE && today <= period.ENDDATE)
             {
                 canUpdate = true;
             }
@@ -219,9 +216,9 @@ namespace MyConcordiaID.Models.Student
             IQueryable<STUDENT> student = _database.STUDENTS;
 
             //each if statement will try to build the where clauses and it only be executed when ToList() is called 
-            if(searchOptions.id.HasValue)
+            if (searchOptions.id.HasValue)
             {
-                if(StudentHelper.ValidId(searchOptions.id.Value))
+                if (StudentHelper.ValidId(searchOptions.id.Value))
                 {
                     student = student.Where(s => s.ID == searchOptions.id.Value);
                 }
@@ -230,18 +227,18 @@ namespace MyConcordiaID.Models.Student
             {
                 student = student.Where(s => s.FIRSTNAME.Contains(searchOptions.name) || s.LASTNAME.Contains(searchOptions.name));
             }
-            if(!string.IsNullOrEmpty(searchOptions.birthdate))
+            if (!string.IsNullOrEmpty(searchOptions.birthdate))
             {
                 //parse dob 
                 //add linq query
             }
-            if(!string.IsNullOrEmpty(searchOptions.netname))
+            if (!string.IsNullOrEmpty(searchOptions.netname))
             {
                 student = student.Where(s => s.NETNAME.Contains(searchOptions.netname));
             }
 
-           return  student.ToList();
-            
+            return student.ToList();
+
         }
 
         public bool DoesStudentExist(string firstName, string lastName)
@@ -250,8 +247,8 @@ namespace MyConcordiaID.Models.Student
               .Where(s => s.FIRSTNAME == firstName && s.LASTNAME == lastName)
               .FirstOrDefault();
 
-      
-            return (student == null) ? false : true; 
+
+            return (student == null) ? false : true;
 
         }
 

@@ -111,9 +111,24 @@ namespace MyConcordiaID.Controllers
                                           OpenIdConnectConstants.Destinations.IdentityToken);
                 }
 
+                // Include the GivenName claim
+                else if (claim.Type == ClaimTypes.GivenName)
+                {
+                    claim.SetDestinations(OpenIdConnectConstants.Destinations.AccessToken,
+                                          OpenIdConnectConstants.Destinations.IdentityToken);
+                }
+
+                // Include the GivenName claim
+                else if (claim.Type == ClaimTypes.Surname)
+                {
+                    claim.SetDestinations(OpenIdConnectConstants.Destinations.AccessToken,
+                                          OpenIdConnectConstants.Destinations.IdentityToken);
+                }
+
                 identity.AddClaim(claim);
             }
 
+            
             var application = await GetApplicationAsync(request.ClientId, cancellationToken);
             if (application == null)
             {
@@ -129,6 +144,9 @@ namespace MyConcordiaID.Controllers
             // the whole delegation chain from the resource server (see ResourceController.cs).
             identity.Actor = new ClaimsIdentity(OpenIdConnectServerDefaults.AuthenticationScheme);
             identity.Actor.AddClaim(ClaimTypes.NameIdentifier, application.ApplicationID);
+
+         
+
 
             identity.Actor.AddClaim(ClaimTypes.Name, application.DisplayName,
                 OpenIdConnectConstants.Destinations.AccessToken,
@@ -151,8 +169,10 @@ namespace MyConcordiaID.Controllers
                 /* offline_access: */ OpenIdConnectConstants.Scopes.OfflineAccess
             }.Intersect(request.GetScopes()));
 
+
             // Set the resources servers the access token should be issued for.
             ticket.SetResources("resource_server");
+            
 
 
             //add the user to the database if he doesn't exist yet
@@ -174,7 +194,6 @@ namespace MyConcordiaID.Controllers
                 _studentsRepo.Add(newStudent);
 
             }
-
 
             // Returning a SignInResult will ask ASOS to serialize the specified identity to build appropriate tokens.
             // Note: you should always make sure the identities you return contain ClaimTypes.NameIdentifier claim.

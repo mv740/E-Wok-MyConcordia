@@ -10,6 +10,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MyConcordiaID.Controllers
@@ -41,7 +42,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetById(int id)
         {
 
-            var student = _studentsRepo.Find(id);
+            var student = _studentsRepo.FindById(id);
 
             if (student == null)
             {
@@ -51,51 +52,46 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(student);
         }
 
-        [AllowAnonymous]
+        [Authorize]
+        [HttpGet]
+        [Route("account")]
+        public IActionResult GetAccount()
+        {
+            var result = _studentsRepo.FindByNetName(getAuthenticatedUserNetname());
+
+            return new ObjectResult(result);
+        }
+
+
+        [Authorize]
         [HttpPost]
         [Route("ProfilePicture")]
-        public ActionResult PostProfilePicture(IFormFile file)
+        public ActionResult PostProfilePicture([FromBody] IFormFile file)
         {
+            //todo correctly handle error with correct http error code
+
             if (file == null) throw new Exception("File is null");
             if (file.Length == 0) throw new Exception("File is empty");
 
             //will be used to store image time
             var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
 
+
+            var authenticatedUser = getAuthenticatedUserNetname();
+
             using (Stream stream = file.OpenReadStream())
             {
                 using (var binaryReader = new BinaryReader(stream))
                 {
                     var fileContent = binaryReader.ReadBytes((int)file.Length);
-                    //await _uploadService.AddFile(fileContent, file.FileName, file.ContentType);
-
-                    var picturesDb = _database.Set<PICTURE>();
-                    var id = StudentHelper.GenerateRandomId();
-                    PICTURE newPicture = new PICTURE { ID = id, APPROVED = null, PENDING = 1, PICTURE1 = fileContent, UPLOADEDDATE = DateTime.UtcNow };
-                    picturesDb.Add(newPicture);
-                    _database.SaveChanges();
+                  
+                    _studentsRepo.AddPendingPicture(authenticatedUser, fileContent);
 
                 }
             }
 
             return Ok();
         }
-
-        [AllowAnonymous]
-        [HttpPost]
-        [Route("ProfilePictureTest/{id}")]
-        public IActionResult PostProfilePictureTest([FromRoute]int id, IFormFile file)
-        {
-
-            if (file == null || file.Length == 0)
-                return new JsonResult(new { Error = "file is empty" }) { StatusCode = (int)HttpStatusCode.NotFound };
-
-            _studentsRepo.AddPendingPicture(id, file);
-
-            return Ok();
-        }
-
-
 
         /// <summary>
         /// Get lastest uploaed picture
@@ -171,18 +167,13 @@ namespace MyConcordiaID.Controllers
             
         }
 
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("test")]
-        public IActionResult test()
+
+        
+        public string getAuthenticatedUserNetname()
         {
-            var firstName = "michal";
-            var lastname = "wozniak";
-
-
-            return new ObjectResult(_studentsRepo.DoesStudentExist(firstName, lastname));
-
-
+            var firstName = User.FindFirstValue(ClaimTypes.GivenName); 
+            var lastName = User.FindFirstValue(ClaimTypes.Surname); 
+            return StudentHelper.GenerateNetName(firstName, lastName);
         }
 
 
