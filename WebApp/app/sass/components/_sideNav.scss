@@ -15,15 +15,22 @@
   a{
     @include center();
     display:block;
-    margin-top:$sidenav-top-margin;
-    height: $sideNav-icon-size;
-    line-height:$sideNav-icon-size;
+    height: $sideNav-width;
+    line-height:$sideNav-width;
     text-align: center;
+  }
+
+  a:first-child{
+    margin-top:20px;
+  }
+
+  a.selected{
+    background-color: white;
   }
 
 #sideMenuStatic {
     position:relative;
-    background-color: $sideNav-color;
+    background-color: $concordia-background-color;
     width: $sideNav-width;
     float:left;
     height:100%;
@@ -37,21 +44,20 @@
         margin-left: -13px;
         margin-right: auto;
         display:block;
-        margin-top:20px;
         width: $sideNav-icon-size;
         height: $sideNav-icon-size;
       }
     }
 
-    #goToReviewIcon{
+    .goToReviewIcon{
       @include setBackground($review-icon, $sideNav-icon-size);
     }
 
-    #logoffIcon{
+    .logoffIcon{
       @include setBackground($logoff-icon, $sideNav-icon-size);
     }
 
-    #adminIcon{
+    .adminIcon{
       @include setBackground($admin-icon, $sideNav-icon-size);
     }
   }

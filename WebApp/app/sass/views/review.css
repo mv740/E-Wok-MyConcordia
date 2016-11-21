@@ -11,8 +11,7 @@ html, body {
   width: 100%; }
   #main #ng-view {
     height: 100%;
-    overflow: hidden;
-    background-color: #f3e5eb; }
+    overflow: hidden; }
 
 .button3D {
   position: relative;
@@ -79,7 +78,8 @@ html, body {
   margin-right: auto; }
 
 .progressCircularContainer {
-  text-align: center; }
+  text-align: center;
+  margin: 40px auto 10px auto; }
 
 .center {
   display: block;
@@ -96,13 +96,16 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     display: block;
-    margin-top: 28px;
-    height: 25px;
-    line-height: 25px;
+    height: 60px;
+    line-height: 60px;
     text-align: center; }
+  #sideMenuContainer a:first-child {
+    margin-top: 20px; }
+  #sideMenuContainer a.selected {
+    background-color: white; }
   #sideMenuContainer #sideMenuStatic {
     position: relative;
-    background-color: white;
+    background-color: #a1325e;
     width: 60px;
     float: left;
     height: 100%;
@@ -114,18 +117,23 @@ html, body {
         margin-left: -13px;
         margin-right: auto;
         display: block;
-        margin-top: 20px;
         width: 25px;
         height: 25px; }
-    #sideMenuContainer #sideMenuStatic #goToReviewIcon {
-      background: url("../../images/icons/review-icon.png") no-repeat center;
-      background-size: 25px; }
-    #sideMenuContainer #sideMenuStatic #logoffIcon {
-      background: url("../../images/icons/logoff-icon.png") no-repeat center;
-      background-size: 25px; }
-    #sideMenuContainer #sideMenuStatic #adminIcon {
-      background: url("../../images/icons/settings-icon.png") no-repeat center;
-      background-size: 25px; }
+    #sideMenuContainer #sideMenuStatic .goToReviewIcon {
+      background-image: url("../../images/icons/review-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
+    #sideMenuContainer #sideMenuStatic .logoffIcon {
+      background-image: url("../../images/icons/logoff-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
+    #sideMenuContainer #sideMenuStatic .adminIcon {
+      background-image: url("../../images/icons/settings-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
   #sideMenuContainer .sideNavDrawer {
     height: 100%;
     /* 100% Full-height */
@@ -285,13 +293,11 @@ html, body {
   transition: 0.4s ease-out;
   position: relative;
   top: 0%;
-  overflow: auto;
-  background-color: #f3e5eb; }
+  overflow: visible; }
+  #viewport .header {
+    position: absolute;
+    top: -110px; }
 
 .view1Component {
   margin: 20px auto 10px auto;
   width: 92%; }
-
-.progressCircularContainer {
-  margin: 40px auto 10px auto;
-  width: 100%; }

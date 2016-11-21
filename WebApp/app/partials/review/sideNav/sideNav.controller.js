@@ -6,7 +6,9 @@ angular
     .module('myApp')
     .controller('SideNavCtrl', SideNavCtrl);
 
-function SideNavCtrl() {
+SideNavCtrl.$inject = ['$scope'];
+
+function SideNavCtrl($scope) {
 
     var sideNav = this;
 
@@ -14,6 +16,19 @@ function SideNavCtrl() {
     sideNav.closeNav = closeNav;
 
     //////////////////
+
+    $scope.$on('$routeChangeStart', function (event, next, current) {
+
+        sideNav.isOnReviewPage = false;
+        sideNav.isOnAdminPage = false;
+
+        if (next.$$route.originalPath.match("review")){
+           sideNav.isOnReviewPage = true;
+        }
+        else if(next.$$route.originalPath.match("admin")){
+            sideNav.isOnAdminPage = true;
+        }
+    });
 
     function toggleNav() {
         if (!sideNav.hamState) {
@@ -34,7 +49,7 @@ function SideNavCtrl() {
     }
 
     function addOverlay() {
-        $('<div class="modal-backdrop" style= "background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>').appendTo($("#viewport")).hide().fadeIn();
+        $('<div class="modal-backdrop" style= "background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>').appendTo($("#ng-view")).hide().fadeIn();
     }
 
     function removeOverlay() {

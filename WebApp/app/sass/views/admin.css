@@ -13,13 +13,16 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
-    margin-top: 28px;
-    height: 25px;
-    line-height: 25px;
+    height: 60px;
+    line-height: 60px;
     text-align: center; }
+  #sideMenuContainer a:first-child {
+    margin-top: 20px; }
+  #sideMenuContainer a.selected {
+    background-color: white; }
   #sideMenuContainer #sideMenuStatic {
     position: relative;
-    background-color: white;
+    background-color: #a1325e;
     width: 60px;
     float: left;
     height: 100%;
@@ -31,18 +34,23 @@
         margin-left: -13px;
         margin-right: auto;
         display: block;
-        margin-top: 20px;
         width: 25px;
         height: 25px; }
-    #sideMenuContainer #sideMenuStatic #goToReviewIcon {
-      background: url("../../images/icons/review-icon.png") no-repeat center;
-      background-size: 25px; }
-    #sideMenuContainer #sideMenuStatic #logoffIcon {
-      background: url("../../images/icons/logoff-icon.png") no-repeat center;
-      background-size: 25px; }
-    #sideMenuContainer #sideMenuStatic #adminIcon {
-      background: url("../../images/icons/settings-icon.png") no-repeat center;
-      background-size: 25px; }
+    #sideMenuContainer #sideMenuStatic .goToReviewIcon {
+      background-image: url("../../images/icons/review-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
+    #sideMenuContainer #sideMenuStatic .logoffIcon {
+      background-image: url("../../images/icons/logoff-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
+    #sideMenuContainer #sideMenuStatic .adminIcon {
+      background-image: url("../../images/icons/settings-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
   #sideMenuContainer .sideNavDrawer {
     height: 100%;
     /* 100% Full-height */
@@ -58,3 +66,18 @@
     transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidenav */
     padding-left: 60px; }
+
+html, body {
+  height: 100%;
+  font: 1em 'Montserrat Alternates'; }
+  html ul, html li, body ul, body li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+
+#main {
+  height: 100%;
+  width: 100%; }
+  #main #ng-view {
+    height: 100%;
+    overflow: hidden; }

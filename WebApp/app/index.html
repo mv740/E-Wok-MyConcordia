@@ -52,9 +52,9 @@
 
   <div id="sideMenuStatic">
     <a class="hamburger"><hamburger-toggle ng-click="sideNav.toggleNav()" state="sideNav.hamState"></hamburger-toggle></a>
-    <a id="logoffIcon"></a>
-    <a id="goToReviewIcon" href="#!/review" ng-click="sideNav.closeNav()"></a>
-    <a id="adminIcon" href="#!/admin" ng-click="sideNav.closeNav()"></a>
+    <a class="logoffIcon"></a>
+    <a class="goToReviewIcon" href="#!/review" ng-click="sideNav.closeNav($event)" ng-class="{'selected': sideNav.isOnReviewPage}"></a>
+    <a class="adminIcon" href="#!/admin" ng-click="sideNav.closeNav($event)" ng-class="{'selected': sideNav.isOnAdminPage}"></a>
   </div>
 </div>
 
