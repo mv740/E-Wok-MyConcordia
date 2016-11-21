@@ -1,19 +1,14 @@
 @import "mixins/fill";
+@import "colors";
 
 html, body{
   height: 100%;
   font: 1em 'Montserrat Alternates';
 
-  ul {
+  ul, li {
     list-style:none;
     margin:0;
     padding:0;
-
-    li {
-      margin:0;
-      padding:0;
-    }
-
   }
 
 }
@@ -25,5 +20,6 @@ html, body{
   #ng-view {
     height:100%;
     overflow: hidden;
+    background-color: $concordia-background-color;
   }
 }

@@ -1,20 +1,18 @@
 html, body {
   height: 100%;
   font: 1em 'Montserrat Alternates'; }
-  html ul, body ul {
+  html ul, html li, body ul, body li {
     list-style: none;
     margin: 0;
     padding: 0; }
-    html ul li, body ul li {
-      margin: 0;
-      padding: 0; }
 
 #main {
   height: 100%;
   width: 100%; }
   #main #ng-view {
     height: 100%;
-    overflow: hidden; }
+    overflow: hidden;
+    background-color: #f3e5eb; }
 
 .button3D {
   position: relative;
@@ -28,6 +26,60 @@ html, body {
     top: 3px;
     left: 3px;
     box-shadow: 0.7px 0.7px 0 #323232, 1.4px 1.4px 0 #323232, 2.1px 2.1px 0 #323232, 2.8px 2.8px 0 #323232, 3.5px 3.5px 0 #323232, 4.2px 4.2px 0 #323232, 4.9px 4.9px 0 #323232; }
+
+.btn-circle {
+  width: 50px;
+  height: 50px;
+  padding: 15px 17px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+  text-align: center;
+  border: 1px;
+  margin: 0 30px 0 30px;
+  opacity: 0.5;
+  transition: 0.4s ease-out; }
+  .btn-circle:hover {
+    opacity: 1; }
+
+.btn-circle.btn-yes {
+  background-color: #47a447;
+  float: left; }
+
+.btn-circle.btn-no {
+  background-color: #d2322d;
+  float: right; }
+
+.americanPieBox {
+  text-align: center; }
+  .americanPieBox span {
+    padding: 5px;
+    border-radius: 3px;
+    display: inline-block; }
+  .americanPieBox span.revoked {
+    border: 3px solid #d2322d;
+    color: #d2322d;
+    transform: rotate(7deg);
+    -ms-transform: rotate(7deg);
+    /* IE 9 */
+    -webkit-transform: rotate(7deg);
+    /* Chrome, Safari, Opera */ }
+  .americanPieBox span.validated {
+    border: 3px solid #47a447;
+    color: #47a447;
+    transform: rotate(-7deg);
+    -ms-transform: rotate(-7deg);
+    /* IE 9 */
+    -webkit-transform: rotate(-7deg);
+    /* Chrome, Safari, Opera */ }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.progressCircularContainer {
+  text-align: center; }
 
 .center {
   display: block;
@@ -45,23 +97,26 @@ html, body {
     margin-right: auto;
     display: block;
     margin-top: 28px;
-    width: 25px;
     height: 25px;
-    line-height: 25px; }
+    line-height: 25px;
+    text-align: center; }
   #sideMenuContainer #sideMenuStatic {
     position: relative;
     background-color: white;
     width: 60px;
     float: left;
-    height: 100%; }
-    #sideMenuContainer #sideMenuStatic #hamburger {
-      transform: scale(0.23);
-      margin-left: -13px;
-      margin-right: auto;
-      display: block;
-      margin-top: 20px;
-      width: 25px;
-      height: 25px; }
+    height: 100%;
+    box-shadow: 1px 0px 10px #888888; }
+    #sideMenuContainer #sideMenuStatic .hamburger {
+      width: 25px; }
+      #sideMenuContainer #sideMenuStatic .hamburger div {
+        transform: scale(0.23);
+        margin-left: -13px;
+        margin-right: auto;
+        display: block;
+        margin-top: 20px;
+        width: 25px;
+        height: 25px; }
     #sideMenuContainer #sideMenuStatic #goToReviewIcon {
       background: url("../../images/icons/review-icon.png") no-repeat center;
       background-size: 25px; }
@@ -84,7 +139,8 @@ html, body {
     overflow-x: hidden;
     /* Disable horizontal scroll */
     transition: 0.5s;
-    /* 0.5 second transition effect to slide in the sidenav */ }
+    /* 0.5 second transition effect to slide in the sidenav */
+    padding-left: 60px; }
 
 #searchBoxContainer .field {
   display: flex;
@@ -122,12 +178,23 @@ html, body {
   #studentModal #cardHolder {
     background-color: #e4e6e9; }
     #studentModal #cardHolder img {
-      max-width: 100%; }
-    #studentModal #cardHolder div {
-      margin: auto; }
+      width: 100%; }
+    #studentModal #cardHolder .cardHolderComponent {
+      position: absolute;
+      top: 25%; }
 
-#noYesContainer button {
-  float: left; }
+.yesnoContainer {
+  position: relative;
+  bottom: 60px; }
+
+.squareBackground {
+  background: white;
+  border: 10px solid lightgray;
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 93%;
+  border-radius: 10px; }
 
 .center {
   display: block;
@@ -141,7 +208,6 @@ html, body {
   max-width: 100%; }
 
 #gallery li {
-  list-style: none;
   display: inline-block; }
 
 #gallery ul {
@@ -219,8 +285,13 @@ html, body {
   transition: 0.4s ease-out;
   position: relative;
   top: 0%;
-  overflow: auto; }
+  overflow: auto;
+  background-color: #f3e5eb; }
 
 .view1Component {
   margin: 20px auto 10px auto;
   width: 92%; }
+
+.progressCircularContainer {
+  margin: 40px auto 10px auto;
+  width: 100%; }

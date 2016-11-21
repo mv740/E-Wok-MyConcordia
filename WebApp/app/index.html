@@ -51,19 +51,15 @@
   </div>
 
   <div id="sideMenuStatic">
-    <a><hamburger-toggle id="hamburger" ng-click="sideNav.toggleNav()" state="sideNav.hamState"></hamburger-toggle></a>
+    <a class="hamburger"><hamburger-toggle ng-click="sideNav.toggleNav()" state="sideNav.hamState"></hamburger-toggle></a>
     <a id="logoffIcon"></a>
     <a id="goToReviewIcon" href="#!/review" ng-click="sideNav.closeNav()"></a>
     <a id="adminIcon" href="#!/admin" ng-click="sideNav.closeNav()"></a>
   </div>
 </div>
 
-<div id="main" class="row">
-
-
+<div id="main">
   <div id="ng-view" ng-view></div>
-
-
 </div>
 
 </body>

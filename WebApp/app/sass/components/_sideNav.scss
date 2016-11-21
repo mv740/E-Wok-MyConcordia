@@ -16,9 +16,9 @@
     @include center();
     display:block;
     margin-top:$sidenav-top-margin;
-    width: $sideNav-icon-size;
     height: $sideNav-icon-size;
     line-height:$sideNav-icon-size;
+    text-align: center;
   }
 
 #sideMenuStatic {
@@ -27,15 +27,20 @@
     width: $sideNav-width;
     float:left;
     height:100%;
+    box-shadow: 1px 0px 10px #888888;
 
-    #hamburger{
-      transform: scale(0.23);
-      margin-left: -13px;
-      margin-right: auto;
-      display:block;
-      margin-top:20px;
+    .hamburger{
       width: $sideNav-icon-size;
-      height: $sideNav-icon-size;
+
+      div{
+        transform: scale(0.23);
+        margin-left: -13px;
+        margin-right: auto;
+        display:block;
+        margin-top:20px;
+        width: $sideNav-icon-size;
+        height: $sideNav-icon-size;
+      }
     }
 
     #goToReviewIcon{
@@ -61,6 +66,7 @@
     background-color: $sideNav-color;
     overflow-x: hidden; /* Disable horizontal scroll */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+  padding-left: $sideNav-width;
 }
 
 }

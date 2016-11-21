@@ -10,9 +10,10 @@ function ModalsCtrl($scope, studentService) {
 
     var modals = this;
 
-    modals.sendValidation = studentService.sendValidation;
+    modals.sendValidation = sendValidation;
     modals.enlargeImage = enlargeImage;
     modals.loading = true;
+    modals.emptyProfilePicture = 'images/empty-profile.png';
 
     $scope.$on('modals.update', function (event, student) {
         updateStudent(student);
@@ -20,13 +21,22 @@ function ModalsCtrl($scope, studentService) {
 
     //////////////////////////
 
+    function sendValidation(id, valid){
+        modals.student.sendingValidation = true;
+        studentService.sendValidation(id,valid).then(function(){
+            modals.student.sendingValidation = false;
+            if (valid) modals.student.wasValidated = true;
+            else if (!valid) modals.student.wasRevoked = true;
+        });
+    }
+
     function updateStudent(student) {
         modals.student = student;
 
         studentService.getStudentPictures(student.id).then(function (value) {
             modals.student.pendingPicture = value.data.pendingpicture;
-            //modals.student.previousPictures = value.data.previousPictures;
-            modals.student.previousPictures = [value.data.previouspicturE1, value.data.previouspicturE2, value.data.previouspicturE1, value.data.previouspicturE2, value.data.previouspicturE1, value.data.previouspicturE2, value.data.previouspicturE1, value.data.previouspicturE2];
+            modals.student.previousPictures = value.data.previousPictures;
+
             modals.loading = false;
         });
     }

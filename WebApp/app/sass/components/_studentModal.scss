@@ -1,4 +1,5 @@
 @import "../base/colors";
+@import "../base/variables";
 
 #studentModal {
     background-color: $modal-background-color;
@@ -15,17 +16,28 @@
         background-color: $modal-background-color;
 
         img {
-            max-width: 100%;
+            width: 100%;
         }
 
-        div {
-            margin: auto;
+        .cardHolderComponent{
+            position:absolute;
+            top: 25%;
         }
     }
 }
 
-#noYesContainer {
-    button {
-        float: left;
-    }
+.yesnoContainer {
+   position:relative;
+    bottom: $btn-yesno-height + $profile-picture-frame-width;
 }
+
+.squareBackground{
+    background: white;
+    border: $profile-picture-frame-width solid lightgray;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 93%;
+    border-radius: 10px;
+}
+

@@ -1,5 +1,7 @@
 @import "../base/reset";
 @import "../components/buttons";
+@import "../components/textboxes";
+@import "../components/loading";
 
 @import "../base/mixins/transitions";
 @import "../base/mixins/fill";
@@ -22,9 +24,15 @@
   position: relative;
   top:0%;
   overflow: auto;
+  background-color: $concordia-background-color;
 }
 
 .view1Component{
   margin:20px auto 10px auto;
   width:92%;
+}
+
+.progressCircularContainer{
+  margin:40px auto 10px auto;
+  width:100%;
 }
