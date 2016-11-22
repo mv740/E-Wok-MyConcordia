@@ -16,21 +16,31 @@ function SideNavCtrl(AuthenticationService, $scope) {
     sideNav.toggleNav = toggleNav;
     sideNav.closeNav = closeNav;
     sideNav.logout = logout;
+    sideNav.isLoggedIn = false;
 
     //////////////////
 
     $scope.$on('$routeChangeStart', function (event, next, current) {
+        sideNav.isLoggedIn = AuthenticationService.isAuthenticated();
+        changeSelectedSideNavIcon(next);
+    });
 
+    function changeSelectedSideNavIcon(next){
         sideNav.isOnReviewPage = false;
         sideNav.isOnAdminPage = false;
-
-        if (next.$$route.originalPath.match("review")){
-           sideNav.isOnReviewPage = true;
+        if (typeof next.$$route != "undefined") {
+            if (next.$$route.originalPath.match("review")) {
+                sideNav.isOnReviewPage = true;
+                //temporary
+                sideNav.isLoggedIn = true
+            }
+            else if (next.$$route.originalPath.match("admin")) {
+                sideNav.isOnAdminPage = true;
+                //temporary
+                sideNav.isLoggedIn = true
+            }
         }
-        else if(next.$$route.originalPath.match("admin")){
-            sideNav.isOnAdminPage = true;
-        }
-    });
+    }
 
     function toggleNav() {
         if (!sideNav.hamState) {
@@ -52,7 +62,6 @@ function SideNavCtrl(AuthenticationService, $scope) {
 
     function logout() {
         AuthenticationService.logOut();
-
     }
 
     function addOverlay() {

@@ -4,8 +4,7 @@
 @import "../components/loading";
 
 @import "../base/mixins/transitions";
-@import "../base/mixins/fill";
-@import "../base/mixins/position";
+@import "../base/buffers";
 
 @import "../components/sideNav";
 @import "../components/searchBox";
@@ -16,22 +15,12 @@
 
 
 #viewport.middle{
-        top:40%;
+        top:28%;
     }
 
 #viewport{
-  @include fill();
   @include transition();
   position: relative;
-  top:0%;
+  top:-88px;
   overflow: visible;
-
-  .header{
-    @include aboveContainer(110px);
-  }
-}
-
-.view1Component{
-  margin:20px auto 10px auto;
-  width:92%;
 }

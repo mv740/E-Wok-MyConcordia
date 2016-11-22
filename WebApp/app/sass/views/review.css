@@ -1,23 +1,24 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
 html, body {
-  height: 100%;
   font: 1em 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
     list-style: none;
     margin: 0;
     padding: 0; }
 
-#main {
-  height: 100%;
-  width: 100%; }
-  #main #ng-view {
-    height: 100%;
-    overflow: hidden; }
+#main #ng-view {
+  overflow: hidden; }
 
 .button3D {
   position: relative;
   height: 46px;
-  padding: 0px;
-  margin: 20px 0px 10px 0px;
+  padding: 10px;
   background-color: white;
   border: 0.25em solid #6A6A6A;
   box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232; }
@@ -80,6 +81,9 @@ html, body {
 .progressCircularContainer {
   text-align: center;
   margin: 40px auto 10px auto; }
+
+.top-buffer {
+  margin-top: 20px; }
 
 .center {
   display: block;
@@ -185,8 +189,6 @@ html, body {
       max-height: 200px; }
   #studentModal #cardHolder {
     background-color: #e4e6e9; }
-    #studentModal #cardHolder img {
-      width: 100%; }
     #studentModal #cardHolder .cardHolderComponent {
       position: absolute;
       top: 25%; }
@@ -199,7 +201,6 @@ html, body {
   background: white;
   border: 10px solid lightgray;
   position: relative;
-  width: 100%;
   height: 0;
   padding-bottom: 93%;
   border-radius: 10px; }
@@ -285,19 +286,10 @@ html, body {
   float: left; }
 
 #viewport.middle {
-  top: 40%; }
+  top: 28%; }
 
 #viewport {
-  height: 100%;
-  width: 100%;
   transition: 0.4s ease-out;
   position: relative;
-  top: 0%;
+  top: -88px;
   overflow: visible; }
-  #viewport .header {
-    position: absolute;
-    top: -110px; }
-
-.view1Component {
-  margin: 20px auto 10px auto;
-  width: 92%; }

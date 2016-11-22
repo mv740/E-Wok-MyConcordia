@@ -14,11 +14,11 @@
         <div ng-show="!modals.loading" id="modal-body" class="modal-body row">
             <div id="cardContainer" class="modal-element col-sm-6">
                 <div id="cardHolder">
-                    <div class="squareBackground">
+                    <div class="squareBackground full-width">
 
-                        <img ng-if="modals.student.pendingPicture"
+                        <img class="full-width" ng-if="modals.student.pendingPicture"
                              ng-src="data:image/JPEG;base64,{{modals.student.pendingPicture}}"/>
-                        <img ng-if="!modals.student.pendingPicture" ng-src="{{modals.emptyProfilePicture}}"/>
+                        <img class="full-width" ng-if="!modals.student.pendingPicture" ng-src="{{modals.emptyProfilePicture}}"/>
 
                         <div ng-if="modals.student.pendingPicture" class="row yesnoContainer">
                             <button ng-click="modals.sendValidation(modals.student.id, true)" type="button"
@@ -31,7 +31,7 @@
                             <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
                         </div>
 
-                        <div class="cardHolderComponent americanPieBox col-sm-12" ng-if="modals.student.pendingPicture">
+                        <div class="cardHolderComponent americanPieBox full-width" ng-if="modals.student.pendingPicture">
                             <span class="validated" ng-if="modals.student.wasValidated">VALIDATED</span>
                             <span class="revoked" ng-if="modals.student.wasRevoked">REVOKED</span>
                         </div>

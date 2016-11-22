@@ -8,7 +8,7 @@
     AdminController.$inject = ['$http', 'myConfig'];
 
     function AdminController($http, myConfig) {
-        self = this;
+        var self = this;
 
         self.submitButton = "Submit";
         self.someProp = 'Check This value displays.. confirms controller initalised';

@@ -1,8 +1,8 @@
-@import "mixins/fill";
+@import "sizes";
 @import "colors";
+@import "fonts";
 
 html, body{
-  height: 100%;
   font: 1em 'Montserrat Alternates';
 
   ul, li {
@@ -15,10 +15,8 @@ html, body{
 
 
 #main {
-  @include fill();
 
   #ng-view {
-    height:100%;
     overflow: hidden;
   }
 }

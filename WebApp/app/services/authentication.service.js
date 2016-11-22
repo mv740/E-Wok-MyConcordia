@@ -39,10 +39,7 @@
         };
 
         authService.isAuthenticated = function () {
-            if (SessionService.get()) {
-                return SessionService.get().isAuthenticated();
-            }
-            return false;
+            return SessionService.isAuthenticated();
         };
 
         return authService;
