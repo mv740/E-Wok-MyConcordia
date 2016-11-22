@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="myApp" class="no-js">
 <head>
+  <base href="/WebApp/app/">
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -20,13 +21,17 @@
   <script class="cssdeck" src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <link rel="stylesheet" type="text/css" href="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.css">
-  <script src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.js"></script>
+  <script type="text/javascript" src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.js"></script>
 
   <!--Date picker-->
   <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
 
+  <!-- Oauth 2 client-->
+  <script src="bower_components/es6-shim/es6-shim.js"></script>
+  <script src="bower_components/oidc-client/dist/oidc-client.js"></script>
+
   <!--APP-->
-  <script src="app.js"></script>
+  <script type="text/javascript" src="app.js"></script>
   <link rel="stylesheet" href="partials/loginProvider/loginProvider.css">
 
   <!--CONTROLLERS-->
@@ -34,10 +39,16 @@
   <script src="partials/review/modals/modals.controller.js"></script>
   <script src="partials/review/search/search.controller.js"></script>
   <script src="partials/admin/admin.controller.js"></script>
+  <script src="partials/login/login.controller.js"></script>
+
 
   <!--FACTORIES & SERVICES-->
   <script src="factories/studentService.js"></script>
   <script src="factories/searchParsingService.js"></script>
+  <script src="factories/angular-oidc-client.js"></script>
+  <script src="factories/session.service.js" ></script>
+  <script src="factories/authentication.service.js"></script>
+  <script src="factories/authInterceptor.service.js"></script>
 
 </head>
 <body>
@@ -45,16 +56,17 @@
 <div id="sideMenuContainer" class="sideNav" ng-controller="SideNavCtrl as sideNav">
   <div id="mySidenav" class="sideNavDrawer">
     <a></a>
-    <a>Logout</a>
-    <a href="#!/review" ng-click="sideNav.closeNav()">Review</a>
+    <a href="" ng-click="sideNav.logout()">Logout</a>
+    <a href="review" ng-click="sideNav.closeNav()">Review</a>
     <a>Admin</a>
+    <a href="login" ng-click="sideNav.closeNav()">login</a>
   </div>
 
   <div id="sideMenuStatic">
     <a class="hamburger"><hamburger-toggle ng-click="sideNav.toggleNav()" state="sideNav.hamState"></hamburger-toggle></a>
     <a class="logoffIcon"></a>
-    <a class="goToReviewIcon" href="#!/review" ng-click="sideNav.closeNav($event)" ng-class="{'selected': sideNav.isOnReviewPage}"></a>
-    <a class="adminIcon" href="#!/admin" ng-click="sideNav.closeNav($event)" ng-class="{'selected': sideNav.isOnAdminPage}"></a>
+    <a class="goToReviewIcon" href="review" ng-click="sideNav.closeNav($event)" ng-class="{'selected': sideNav.isOnReviewPage}"></a>
+    <a class="adminIcon" href="admin" ng-click="sideNav.closeNav($event)" ng-class="{'selected': sideNav.isOnAdminPage}"></a>
   </div>
 </div>
 

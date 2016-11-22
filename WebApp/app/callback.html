@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>oidc-client callback signin</title>
+</head>
+<body>
+
+
+<script src="bower_components/es6-shim/es6-shim.js"></script>
+<script src="bower_components/oidc-client/dist/oidc-client.js"></script>
+<script>
+    Oidc.Log.logger = console;
+    Oidc.Log.logLevel = Oidc.Log.INFO;
+    new Oidc.UserManager().signinPopupCallback()
+</script>
+</body>
+</html>

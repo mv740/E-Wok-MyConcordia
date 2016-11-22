@@ -6,14 +6,16 @@ angular
     .module('myApp')
     .controller('SideNavCtrl', SideNavCtrl);
 
-SideNavCtrl.$inject = ['$scope'];
 
-function SideNavCtrl($scope) {
+SideNavCtrl.$inject = ['AuthenticationService','$scope'];
+
+function SideNavCtrl(AuthenticationService, $scope) {
 
     var sideNav = this;
 
     sideNav.toggleNav = toggleNav;
     sideNav.closeNav = closeNav;
+    sideNav.logout = logout;
 
     //////////////////
 
@@ -46,6 +48,11 @@ function SideNavCtrl($scope) {
     function openNav() {
         addOverlay();
         document.getElementById("mySidenav").style.width = "170px";
+    }
+
+    function logout() {
+        AuthenticationService.logOut();
+
     }
 
     function addOverlay() {
