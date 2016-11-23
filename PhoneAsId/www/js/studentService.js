@@ -5,8 +5,7 @@
 angular.module('starter.services', [])
 
   .factory('StudentService', ['$http', function ($http) {
-    var studentid = '38901062';
-    var urlBase = 'https://myconcordiaid.azurewebsites.net/api/student/';
+    var urlBase = 'https://myconcordiaid.azurewebsites.net/api';
     var StudentService = {};
     StudentService.studentInfo = '';
 
@@ -18,7 +17,7 @@ angular.module('starter.services', [])
 
     StudentService.fetchStudentIdInfo = function () {
       console.log('getStudentInfo called');
-      return $http.get(urlBase + studentid);
+      return $http.get(urlBase + "/account");
     };
 
     return StudentService;
