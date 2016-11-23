@@ -1,0 +1,38 @@
+@import "../base/colors";
+@import "../base/variables";
+
+#studentModal {
+    background-color: $modal-background-color;
+    min-width: 650px;
+    .modal-element {
+        background-color: $modal-background-color;
+
+        #galleryContainer {
+            max-height: 200px;
+        }
+    }
+
+    #cardHolder {
+        background-color: $modal-background-color;
+
+        .cardHolderComponent{
+            position:absolute;
+            top: 25%;
+        }
+    }
+}
+
+.yesnoContainer {
+   position:relative;
+    bottom: $btn-yesno-height + $profile-picture-frame-width;
+}
+
+.squareBackground{
+    background: white;
+    border: $profile-picture-frame-width solid lightgray;
+    position: relative;
+    height: 0;
+    padding-bottom: 93%;
+    border-radius: 10px;
+}
+

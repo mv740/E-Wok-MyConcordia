@@ -24,14 +24,19 @@ function SearchCtrl($rootScope, studentService, searchParsingService) {
         search.initialState = false;
         search.searching = true;
 
-        //temporary until find can parse parameters
-        //getAllStudents();
 
-        var params = searchParsingService.parseSearchInput(search.input);
-        //alert(JSON.stringify(params));
-        studentService.search(params).then(function (value) {
-            search.results = value.data;
-        });
+        //temporary until find can parse parameters
+        if (typeof input === "undefined"){
+            getAllStudents();
+        }
+        else{
+            var params = searchParsingService.parseSearchInput(search.input);
+            alert(JSON.stringify(params));
+            studentService.search(params).then(function (value) {
+             search.results = value.data;
+             });
+        }
+
     }
 
     //temporary until find can parse parameters

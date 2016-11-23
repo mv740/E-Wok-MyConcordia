@@ -1,0 +1,22 @@
+@import "../base/mixins/make3D";
+@import "../base/colors";
+@import "../base/variables";
+@import "../base/mixins/americanPie";
+
+.americanPieBox{
+  text-align: center;
+
+  span{
+    padding:5px;
+    border-radius: 3px;
+    display: inline-block;
+  }
+
+  span.revoked{
+    @include make-american-pie($americanPieBox-border-width, $no-color, $americanPieBox-angle);
+  }
+  span.validated{
+    @include make-american-pie($americanPieBox-border-width, $yes-color, -$americanPieBox-angle);
+  }
+
+}

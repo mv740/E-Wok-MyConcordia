@@ -1,0 +1,32 @@
+@import "../base/colors";
+
+#searchBoxContainer{
+    
+.field {
+    display: flex;
+    flex-direction: row;
+    box-shadow: 1px 1px 0 $searchbox-shadow-color, 2px 2px 0 $searchbox-shadow-color, 3px 3px 0 $searchbox-shadow-color, 4px 4px 0 $searchbox-shadow-color, 5px 5px 0 $searchbox-shadow-color, 6px 6px 0 $searchbox-shadow-color, 7px 7px 0 $searchbox-shadow-color;
+
+
+    input[type=text],
+    button {
+        display: block;
+        
+    }
+
+    input[type=text] {
+        flex: 1;
+        padding: 0.6em;
+        border: 0.2em solid $concordia-color;
+    }
+
+    button {
+        padding: 0.6em 0.8em;
+        background-color: $concordia-color;
+        color: white;
+        border: none;
+    }
+}
+
+
+}

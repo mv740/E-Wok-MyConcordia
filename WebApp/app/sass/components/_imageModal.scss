@@ -1,0 +1,8 @@
+@import "../base/mixins/horizontalCenter";
+
+#imageModal{
+  img{
+    @include center();
+    max-width: 100%;
+  }
+}

@@ -1,9 +1,0 @@
-﻿#searchResultsContainer #searchResults {
-  width: 100%;
-  list-style: none; }
-  #searchResultsContainer #searchResults ul div {
-    margin-left: 8px; }
-    #searchResultsContainer #searchResults ul div span {
-      top: 8px;
-      position: relative; }
-

@@ -1,0 +1,36 @@
+@import "../base/mixins/make3D";
+@import "../base/colors";
+@import "../base/variables";
+
+.button3D{
+  @include make-button-3d($button3D-border-color, $button3D-shadow-color);
+}
+
+.btn-circle {
+  width: $btn-yesno-height;
+  height: $btn-yesno-height;
+  padding: 15px 17px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+  text-align: center;
+  border:1px;
+  margin:0 30px 0 30px;
+  opacity: 0.5;
+transition:0.4s ease-out;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+
+
+.btn-circle.btn-yes{
+  background-color: $yes-color;
+  float:left;
+}
+.btn-circle.btn-no{
+  background-color: $no-color;
+  float:right;
+}
+

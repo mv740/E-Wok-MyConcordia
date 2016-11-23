@@ -1,27 +1,47 @@
-
 <div class="modal-dialog">
 
     <!-- Modal content-->
-    <div  id="studentModal" class="modal-content">
+    <div id="studentModal" class="modal-content">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title">Validate Student Picture</h4>
         </div>
 
-        <div class="circularLoading" ng-if="modals.loading">
+        <div class="progressCircularContainer" ng-if="modals.loading">
             <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
         </div>
 
         <div ng-show="!modals.loading" id="modal-body" class="modal-body row">
             <div id="cardContainer" class="modal-element col-sm-6">
                 <div id="cardHolder">
-                    <img ng-src="data:image/JPEG;base64,{{modals.student.pendingPicture}}" />
-                    <div class="row">
-                        <button ng-click="modals.sendValidation(modals.student.id, true)" type="button" class="btn btn-default col-sm-6">yes</button>
-                        <button ng-click="modals.sendValidation(modals.student.id, false)" type="button" class="btn btn-default col-sm-6">no</button>
+                    <div class="squareBackground full-width">
+
+                        <img class="full-width" ng-if="modals.student.pendingPicture"
+                             ng-src="data:image/JPEG;base64,{{modals.student.pendingPicture}}"/>
+                        <img class="full-width" ng-if="!modals.student.pendingPicture" ng-src="{{modals.emptyProfilePicture}}"/>
+
+                        <div ng-if="modals.student.pendingPicture" class="row yesnoContainer">
+                            <button ng-click="modals.sendValidation(modals.student.id, true)" type="button"
+                                    class="btn-circle btn-yes"><i class="glyphicon glyphicon-ok"></i></button>
+                            <button ng-click="modals.sendValidation(modals.student.id, false)" type="button"
+                                    class="btn-circle btn-no"><i class="glyphicon glyphicon-remove"></i></button>
+                        </div>
+
+                        <div class="cardHolderComponent progressCircularContainer" ng-if="modals.student.sendingValidation">
+                            <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+                        </div>
+
+                        <div class="cardHolderComponent americanPieBox full-width" ng-if="modals.student.pendingPicture">
+                            <span class="validated" ng-if="modals.student.wasValidated">VALIDATED</span>
+                            <span class="revoked" ng-if="modals.student.wasRevoked">REVOKED</span>
+                        </div>
+
                     </div>
+
                 </div>
-                <div id="galleryContainer" ng-include="'partials/review/modals/studentModal/gallery/gallery.html'"></div>
+                <div id="galleryContainer" ng-if="modals.student.previousPictures" ng-include="'partials/review/modals/studentModal/gallery/gallery.html'">
+
+                </div>
             </div>
 
 
@@ -41,7 +61,7 @@
 
         </div>
         <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
     </div>
 
