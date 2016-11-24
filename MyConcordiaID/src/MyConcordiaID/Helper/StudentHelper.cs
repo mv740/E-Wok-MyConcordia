@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OracleEntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -52,6 +53,28 @@ namespace MyConcordiaID.Helper
         {
             //21941097 = 8 characters
             return (id.ToString().Length == 8) ?  true : false;
+        }
+
+
+        public static STUDENT createStudent(string firstName, string lastname)
+        {
+
+            var firstNameLowerCase = firstName.ToLower();
+            var lastNameLowerCase = lastname.ToLower();
+
+            STUDENT newStudent = new STUDENT
+            {
+                NETNAME = GenerateNetName(firstNameLowerCase, lastNameLowerCase),
+                ID = GenerateRandomId(),
+                FIRSTNAME = firstNameLowerCase,
+                LASTNAME = lastNameLowerCase,
+                DOB = DateTime.UtcNow,
+                UGRADSTATUS = "U"
+            };
+
+            return newStudent;
+
+
         }
 
     }

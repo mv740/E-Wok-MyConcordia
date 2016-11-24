@@ -144,10 +144,6 @@ namespace MyConcordiaID.Controllers
             // the whole delegation chain from the resource server (see ResourceController.cs).
             identity.Actor = new ClaimsIdentity(OpenIdConnectServerDefaults.AuthenticationScheme);
             identity.Actor.AddClaim(ClaimTypes.NameIdentifier, application.ApplicationID);
-
-         
-
-
             identity.Actor.AddClaim(ClaimTypes.Name, application.DisplayName,
                 OpenIdConnectConstants.Destinations.AccessToken,
                 OpenIdConnectConstants.Destinations.IdentityToken);
@@ -172,8 +168,6 @@ namespace MyConcordiaID.Controllers
 
             // Set the resources servers the access token should be issued for.
             ticket.SetResources("resource_server");
-            
-
 
             //add the user to the database if he doesn't exist yet
             var firstName = GetGivenName(ticket);
@@ -181,15 +175,7 @@ namespace MyConcordiaID.Controllers
 
             if(!_studentsRepo.DoesStudentExist(firstName, lastname))
             {
-                STUDENT newStudent = new STUDENT
-                {
-                    NETNAME = StudentHelper.GenerateNetName(firstName, lastname),
-                    ID = StudentHelper.GenerateRandomId(),
-                    FIRSTNAME = firstName,
-                    LASTNAME = lastname,
-                    DOB = DateTime.UtcNow,
-                    UGRADSTATUS = "U"
-                };
+                var newStudent = StudentHelper.createStudent(firstName, lastname);
 
                 _studentsRepo.Add(newStudent);
 

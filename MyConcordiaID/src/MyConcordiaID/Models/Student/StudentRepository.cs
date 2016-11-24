@@ -212,6 +212,8 @@ namespace MyConcordiaID.Models.Student
         public List<STUDENT> Search(SearchOptions searchOptions)
         {
 
+            List<string> nameLists = searchOptions.name;
+
 
             IQueryable<STUDENT> student = _database.STUDENTS;
 
@@ -223,9 +225,12 @@ namespace MyConcordiaID.Models.Student
                     student = student.Where(s => s.ID == searchOptions.id.Value);
                 }
             }
-            if (!string.IsNullOrEmpty(searchOptions.name))
+            if(nameLists.Count != 0)
             {
-                student = student.Where(s => s.FIRSTNAME.Contains(searchOptions.name) || s.LASTNAME.Contains(searchOptions.name));
+                foreach (var name in nameLists)
+                {
+                    student = student.Where(s => s.FIRSTNAME.Contains(name.ToLower()) || s.LASTNAME.Contains(name.ToLower()));
+                }
             }
             if (!string.IsNullOrEmpty(searchOptions.birthdate))
             {
@@ -243,8 +248,9 @@ namespace MyConcordiaID.Models.Student
 
         public bool DoesStudentExist(string firstName, string lastName)
         {
+
             var student = _database.STUDENTS
-              .Where(s => s.FIRSTNAME == firstName && s.LASTNAME == lastName)
+              .Where(s => s.FIRSTNAME == firstName.ToLower() && s.LASTNAME == lastName.ToLower())
               .FirstOrDefault();
 
 

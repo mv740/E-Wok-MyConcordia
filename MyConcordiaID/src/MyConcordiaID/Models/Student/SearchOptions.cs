@@ -10,6 +10,6 @@ namespace MyConcordiaID.Models.Student
         public int? id { get; set; }
         public string netname { get; set; }
         public string birthdate { get; set; }
-        public string name { get; set; }
+        public List<string> name { get; set; }
     }
 }
