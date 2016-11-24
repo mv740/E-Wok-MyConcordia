@@ -1,0 +1,14 @@
+@media screen and (orientation:portrait){
+  h1{
+    color: #387ef5;
+  }
+
+}
+
+
+@media screen and (orientation:landscape){
+  h1{
+    color: #8A0037;
+  }
+
+}

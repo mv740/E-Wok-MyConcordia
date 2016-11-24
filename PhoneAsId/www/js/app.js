@@ -71,7 +71,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
     views: {
       'menuContent': {
         templateUrl: 'templates/id.html',
-        controller: 'IdCtrl'
+        controller: 'IdCtrl',
+        css: 'css/id.css'
       }
     }
   })
