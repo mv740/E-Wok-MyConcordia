@@ -7,19 +7,31 @@
       <h2>CONCORDIA LOGO</h2>
 
       <!-- display picture if it's there. Otherwise, display pending approval picture.-->
-      <div ng-if="valid == true">
+      <div class="picture">
+        <div ng-if="valid == true">
         <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
+        </div>
+        <div ng-if="valid == false">
+          <img src="img/pending_approval.jpg" width = "200" height = "200">
+        </div>
       </div>
-      <div ng-if="valid == false">
-        <img src="img/pending_approval.jpg" width = "200" height = "200">
+
+      <div class="student_info">
+        <p>{{firstname}}</p>
+        <p>{{lastname}}</p>
+        <p>{{dob}}</p>
+        <p>{{id}}</p>
       </div>
-      <p>{{firstname}}</p>
-      <p>{{lastname}}</p>
-      <p>{{dob}}</p>
-      <p>{{id}}</p>
-      <p>{{ugradstatus}}</p>
-      <p>{{expiredate}}</p>
-      <p>BARCODE</p>
+
+      <div class="footer">
+        <p>{{ugradstatus}}</p>
+        <p>{{expiredate}}</p>
+      </div>
+
+      <div class="barcode">
+        <p>BARCODE</p>
+      </div>
+
     </div>
 
     <!-- template used if for landscape -->
@@ -27,20 +39,32 @@
       <h1>LANDSCAPE VIEW</h1>
       <h2>CONCORDIA LOGO</h2>
 
-      <!-- display picture if it's there. Otherwise, display pending approval picture.-->
-      <div ng-if="valid == true">
-        <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
+      <div class="picture">
+        <!-- display picture if it's there. Otherwise, display pending approval picture.-->
+        <div ng-if="valid == true">
+          <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
+        </div>
+        <div ng-if="valid == false">
+          <img src="img/pending_approval.jpg" width = "200" height = "200">
+        </div>
       </div>
-      <div ng-if="valid == false">
-        <img src="img/pending_approval.jpg" width = "200" height = "200">
+
+      <div class="student_info">
+        <p>{{firstname}}</p>
+        <p>{{lastname}}</p>
+        <p>{{dob}}</p>
+        <p>{{id}}</p>
       </div>
-      <p>{{firstname}}</p>
-      <p>{{lastname}}</p>
-      <p>{{dob}}</p>
-      <p>{{id}}</p>
-      <p>{{ugradstatus}}</p>
-      <p>{{expiredate}}</p>
-      <p>BARCODE</p>
+
+      <div class="footer">
+        <p>{{ugradstatus}}</p>
+        <p>{{expiredate}}</p>
+      </div>
+
+      <div class="barcode">
+        <p>BARCODE</p>
+      </div>
+
     </div>
   </ion-content>
 </ion-view>

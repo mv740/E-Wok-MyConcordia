@@ -1,3 +1,19 @@
+.picture{
+  border: solid;
+}
+
+.footer{
+  border: solid;
+}
+
+.student_info{
+  border: solid;
+}
+
+.barcode{
+  border: solid;
+}
+
 @media screen and (orientation:portrait){
   h1{
     color: #387ef5;
