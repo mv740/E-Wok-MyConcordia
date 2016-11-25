@@ -68,7 +68,7 @@ namespace MyConcordiaID.Helper
                 ID = GenerateRandomId(),
                 FIRSTNAME = firstNameLowerCase,
                 LASTNAME = lastNameLowerCase,
-                DOB = DateTime.UtcNow,
+                DOB = DateTime.Today,
                 UGRADSTATUS = "U"
             };
 

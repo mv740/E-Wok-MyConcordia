@@ -215,6 +215,8 @@ namespace MyConcordiaID.Models.Student
             List<string> nameLists = searchOptions.name;
 
 
+
+
             IQueryable<STUDENT> student = _database.STUDENTS;
 
             //each if statement will try to build the where clauses and it only be executed when ToList() is called 
@@ -234,8 +236,10 @@ namespace MyConcordiaID.Models.Student
             }
             if (!string.IsNullOrEmpty(searchOptions.birthdate))
             {
-                //parse dob 
-                //add linq query
+                DateTime dateValue;
+                DateTime.TryParse(searchOptions.birthdate, out dateValue);
+
+                student = student.Where(s => s.DOB == dateValue);
             }
             if (!string.IsNullOrEmpty(searchOptions.netname))
             {
