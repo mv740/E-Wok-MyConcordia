@@ -1,3 +1,13 @@
+.overseeing{
+  height: 100%;
+  width: 100%;
+  border: solid;
+}
+
+.main_content{
+  border: solid;
+}
+
 .picture{
   border: solid;
 }
@@ -19,12 +29,71 @@
     color: #387ef5;
   }
 
+  .vertical{
+    height: 100%;
+  }
+
+  .main_content{
+    height: 70%;
+    width: 100%;
+  }
+
+  .picture{
+    height: 70%;
+  }
+
+  .student_info{
+    height: 30%;
+  }
+
+
+  .footer{
+    height: 10%;
+  }
+
+  .barcode{
+    height: 20%;
+  }
+
 }
 
 
 @media screen and (orientation:landscape){
-  h1{
-    color: #8A0037;
+  .horizontal{
+    height: 100%;
+  }
+
+  .left{
+    height: 100%;
+    width: 75%;
+    float: left;
+  }
+
+  .main_content{
+    height: 80%;
+  }
+
+  .picture{
+    height: 100%;
+    width: 40%;
+    float: left;
+  }
+
+  .student_info{
+    height: 100%;
+    width: 60%;
+    float: left;
+  }
+
+
+  .footer{
+    height: 20%;
+  }
+
+  .barcode{
+    height: 100%;
+    width: 25%;
+    float: left;
   }
 
 }

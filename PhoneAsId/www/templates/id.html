@@ -1,69 +1,70 @@
 <ion-view view-title="Search">
   <ion-content ng-controller="IdCtrl">
 
-    <!-- template used if for portrait -->
-    <div ng-if="screenOrientation == 'portrait-primary'">
-      <h1>PORTRAIT VIEW</h1>
-      <h2>CONCORDIA LOGO</h2>
+    <div class="overseeing">
+      <!-- template used if for portrait -->
+      <div ng-if="screenOrientation == 'portrait-primary'" class="vertical">
 
-      <!-- display picture if it's there. Otherwise, display pending approval picture.-->
-      <div class="picture">
-        <div ng-if="valid == true">
-        <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
+        <div class="main_content">
+          <!-- display picture if it's there. Otherwise, display pending approval picture.-->
+          <div class="picture">
+            <div ng-if="valid == true">
+             <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
+            </div>
+            <div ng-if="valid == false">
+              <img src="img/pending_approval.jpg" width = "200" height = "200">
+            </div>
+          </div>
+
+          <div class="student_info">
+            <p>{{firstname}}</p>
+            <p>{{lastname}}</p>
+            <p>{{dob}}</p>
+            <p>{{id}}</p>
+          </div>
         </div>
-        <div ng-if="valid == false">
-          <img src="img/pending_approval.jpg" width = "200" height = "200">
+
+          <div class="footer">
+            <p>{{ugradstatus}}</p>
+            <p>{{expiredate}}</p>
+          </div>
+
+          <div class="barcode">
+            <p>BARCODE</p>
+          </div>
+      </div>
+
+        <!-- template used if for landscape -->
+        <div ng-if="screenOrientation == 'landscape-secondary' || screenOrientation == 'landscape-primary'" class="horizontal">
+          <div class="left">
+            <div class="main_content">
+              <div class="picture">
+                <!-- display picture if it's there. Otherwise, display pending approval picture.-->
+                <div ng-if="valid == true">
+                  <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
+                </div>
+                <div ng-if="valid == false">
+                  <img src="img/pending_approval.jpg" width = "200" height = "200">
+                </div>
+              </div>
+
+              <div class="student_info">
+                <p>{{firstname}}</p>
+                <p>{{lastname}}</p>
+                <p>{{dob}}</p>
+                <p>{{id}}</p>
+              </div>
+            </div>
+            <div class="footer">
+              <p>{{ugradstatus}}</p>
+              <p>{{expiredate}}</p>
+            </div>
+          </div>
+          <div class="barcode">
+            <p>BARCODE</p>
+          </div>
+
         </div>
-      </div>
-
-      <div class="student_info">
-        <p>{{firstname}}</p>
-        <p>{{lastname}}</p>
-        <p>{{dob}}</p>
-        <p>{{id}}</p>
-      </div>
-
-      <div class="footer">
-        <p>{{ugradstatus}}</p>
-        <p>{{expiredate}}</p>
-      </div>
-
-      <div class="barcode">
-        <p>BARCODE</p>
-      </div>
-
-    </div>
-
-    <!-- template used if for landscape -->
-    <div ng-if="screenOrientation == 'landscape-secondary' || screenOrientation == 'landscape-primary'">
-      <h1>LANDSCAPE VIEW</h1>
-      <h2>CONCORDIA LOGO</h2>
-
-      <div class="picture">
-        <!-- display picture if it's there. Otherwise, display pending approval picture.-->
-        <div ng-if="valid == true">
-          <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
-        </div>
-        <div ng-if="valid == false">
-          <img src="img/pending_approval.jpg" width = "200" height = "200">
-        </div>
-      </div>
-
-      <div class="student_info">
-        <p>{{firstname}}</p>
-        <p>{{lastname}}</p>
-        <p>{{dob}}</p>
-        <p>{{id}}</p>
-      </div>
-
-      <div class="footer">
-        <p>{{ugradstatus}}</p>
-        <p>{{expiredate}}</p>
-      </div>
-
-      <div class="barcode">
-        <p>BARCODE</p>
-      </div>
 
     </div>
   </ion-content>
