@@ -2,13 +2,13 @@
 
 angular
     .module('myApp')
-    .factory('searchParsingService', studentService);
+    .factory('searchParsingService', searchParsing);
 
 var idLength = 8;
 var months = ["january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
 
 
-function studentService() {
+function searchParsing() {
 
     var service = {
         parseSearchInput: parseSearchInput
@@ -19,8 +19,8 @@ function studentService() {
     /////////////////////
 
     function parseSearchInput(input) {
-        //split by either a whitespace, a comma,a backslash or a frontslash
-        var params = input.split(/[(\s|,|\\|\/)]/);
+        //split by either a whitespace, a comma,a backslash a frontslash, a comma followed by a space or a dash
+        var params = input.split(/,\s|-|\s|\\|\//);
 
         //dont modify order. The name is the result from splicing the id, birthdate and netname from the params.
         //after each finding, the params array is spliced

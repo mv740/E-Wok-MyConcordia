@@ -15,6 +15,7 @@
   a{
     @include center();
     display:block;
+    color: $button3D-shadow-color;
     height: $sideNav-width;
     line-height:$sideNav-width;
     text-align: center;

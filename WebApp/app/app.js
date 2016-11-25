@@ -52,6 +52,7 @@ angular.module('myApp', [
     $routeProvider
         .when('/login' , {
             templateUrl : 'partials/login/login.html',
+            css: 'sass/views/login.css',
             controller: 'LoginController',
             controllerAs: 'vm',
             authenticate : false

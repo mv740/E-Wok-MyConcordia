@@ -1,0 +1,20 @@
+@import "../base/mixins/make3D";
+@import "../base/colors";
+@import "../base/variables";
+@import "../base/mixins/verticalCenter";
+
+.container3D {
+  @include vertical-align();
+  @include make-button-3d($border-radius-container, $button3D-shadow-color);
+  width: 700px;
+  text-align: center;
+  border: 5px solid $concordia-color;
+  background-color: $concordia-background-color;
+  text-align: center;
+  padding-bottom: 32px;
+
+ h1, h2, h3, h4, span, label {
+    color:white;
+  }
+}
+

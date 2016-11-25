@@ -1,9 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto; }
-
 #sideMenuContainer {
   height: 100%;
   float: left; }
@@ -14,6 +9,7 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
+    color: #323232;
     height: 60px;
     line-height: 60px;
     text-align: center; }
@@ -74,6 +70,9 @@
 .full-width {
   width: 100%; }
 
+.text-left {
+  text-align: left; }
+
 html, body {
   font: 1em 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
@@ -85,11 +84,13 @@ html, body {
   overflow: hidden; }
 
 .button3D {
-  position: relative;
+  background-color: white;
   height: 46px;
   padding: 10px;
-  background-color: white;
   border: 0.25em solid #6A6A6A;
+  color: #323232;
+  position: relative;
+  border-radius: 4px;
   box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232; }
   .button3D:hover {
     top: 3px;
@@ -118,3 +119,26 @@ html, body {
 .btn-circle.btn-no {
   background-color: #d2322d;
   float: right; }
+
+.container3D {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232;
+  width: 700px;
+  text-align: center;
+  border: 5px solid #8A0037;
+  background-color: #a1325e;
+  text-align: center;
+  padding-bottom: 32px; }
+  .container3D h1, .container3D h2, .container3D h3, .container3D h4, .container3D span, .container3D label {
+    color: white; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }

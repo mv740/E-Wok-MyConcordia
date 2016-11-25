@@ -17,23 +17,24 @@ function SearchCtrl($rootScope, studentService, searchParsingService) {
     search.find = find;
     search.studentClick = studentClick;
     search.initialState = true;
+    search.input = "";
 
     ///////////////////
 
     function find() {
         search.initialState = false;
         search.searching = true;
-
+        search.results = [];
 
         //temporary until find can parse parameters
-        if (typeof input === "undefined"){
+        if (search.input.length == 0){
             getAllStudents();
         }
         else{
             var params = searchParsingService.parseSearchInput(search.input);
             alert(JSON.stringify(params));
             studentService.search(params).then(function (value) {
-             search.results = value.data;
+                setResults(value.data);
              });
         }
 
@@ -42,12 +43,16 @@ function SearchCtrl($rootScope, studentService, searchParsingService) {
     //temporary until find can parse parameters
     function getAllStudents() {
         studentService.getStudents().then(function (value) {
-            search.searching = false;
-            search.results = value.data;
+            setResults(value.data);
         });
     }
 
     function studentClick(student) {
         $rootScope.$broadcast('modals.update', student);
+    }
+
+    function setResults(results){
+        search.searching = false;
+        search.results = results;
     }
 }

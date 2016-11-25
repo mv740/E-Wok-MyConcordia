@@ -2,15 +2,16 @@
 @import "../components/buttons";
 @import "../components/textboxes";
 @import "../components/loading";
+@import "../components/containers";
 
 @import "../base/mixins/transitions";
 @import "../base/buffers";
+@import "../base/sizes";
 
 @import "../components/sideNav";
 @import "../components/searchBox";
 @import "../components/searchResults";
-@import "../components/studentModal";
-@import "../components/imageModal";
+@import "../components/modals";
 @import "../components/gallery";
 
 

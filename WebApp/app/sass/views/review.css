@@ -5,6 +5,9 @@
 .full-width {
   width: 100%; }
 
+.text-left {
+  text-align: left; }
+
 html, body {
   font: 1em 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
@@ -16,11 +19,13 @@ html, body {
   overflow: hidden; }
 
 .button3D {
-  position: relative;
+  background-color: white;
   height: 46px;
   padding: 10px;
-  background-color: white;
   border: 0.25em solid #6A6A6A;
+  color: #323232;
+  position: relative;
+  border-radius: 4px;
   box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232; }
   .button3D:hover {
     top: 3px;
@@ -73,22 +78,36 @@ html, body {
     -webkit-transform: rotate(-7deg);
     /* Chrome, Safari, Opera */ }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto; }
-
 .progressCircularContainer {
   text-align: center;
   margin: 40px auto 10px auto; }
 
+.container3D {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232;
+  width: 700px;
+  text-align: center;
+  border: 5px solid #8A0037;
+  background-color: #a1325e;
+  text-align: center;
+  padding-bottom: 32px; }
+  .container3D h1, .container3D h2, .container3D h3, .container3D h4, .container3D span, .container3D label {
+    color: white; }
+
 .top-buffer {
   margin-top: 20px; }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto; }
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
 
 #sideMenuContainer {
   height: 100%;
@@ -100,6 +119,7 @@ html, body {
     margin-left: auto;
     margin-right: auto;
     display: block;
+    color: #323232;
     height: 60px;
     line-height: 60px;
     text-align: center; }
@@ -157,19 +177,26 @@ html, body {
 #searchBoxContainer .field {
   display: flex;
   flex-direction: row;
+  border: 0.2em solid #8A0037;
+  position: relative;
+  border-radius: 4px;
   box-shadow: 1px 1px 0 #600026, 2px 2px 0 #600026, 3px 3px 0 #600026, 4px 4px 0 #600026, 5px 5px 0 #600026, 6px 6px 0 #600026, 7px 7px 0 #600026; }
+  #searchBoxContainer .field:hover {
+    top: 3px;
+    left: 3px;
+    box-shadow: 0.7px 0.7px 0 #600026, 1.4px 1.4px 0 #600026, 2.1px 2.1px 0 #600026, 2.8px 2.8px 0 #600026, 3.5px 3.5px 0 #600026, 4.2px 4.2px 0 #600026, 4.9px 4.9px 0 #600026; }
   #searchBoxContainer .field input[type=text],
   #searchBoxContainer .field button {
     display: block; }
   #searchBoxContainer .field input[type=text] {
     flex: 1;
-    padding: 0.6em;
-    border: 0.2em solid #8A0037; }
+    padding: 0.6em; }
   #searchBoxContainer .field button {
+    border: 0px;
+    border-left: 0.2em solid #8A0037;
     padding: 0.6em 0.8em;
     background-color: #8A0037;
-    color: white;
-    border: none; }
+    color: white; }
 
 #searchResults div {
   position: relative;
@@ -181,34 +208,31 @@ html, body {
     margin-left: 8px; }
 
 #studentModal {
-  background-color: #e4e6e9;
   min-width: 650px; }
-  #studentModal .modal-element {
-    background-color: #e4e6e9; }
-    #studentModal .modal-element #galleryContainer {
-      max-height: 200px; }
-  #studentModal #cardHolder {
-    background-color: #e4e6e9; }
-    #studentModal #cardHolder .cardHolderComponent {
-      position: absolute;
-      top: 25%; }
-
-.yesnoContainer {
-  position: relative;
-  bottom: 60px; }
-
-.squareBackground {
-  background: white;
-  border: 10px solid lightgray;
-  position: relative;
-  height: 0;
-  padding-bottom: 93%;
-  border-radius: 10px; }
-
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto; }
+  #studentModal .modal-element #galleryContainer {
+    max-height: 200px;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 1px 1px 0 darkgray, 2px 2px 0 darkgray, 3px 3px 0 darkgray, 4px 4px 0 darkgray, 5px 5px 0 darkgray, 6px 6px 0 darkgray, 7px 7px 0 darkgray;
+    border: 10px solid lightgray; }
+  #studentModal #cardHolder .cardHolderComponent {
+    position: absolute;
+    top: 25%; }
+  #studentModal .yesnoContainer {
+    position: relative;
+    bottom: 60px; }
+  #studentModal .squareBackground {
+    background: white;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 1px 1px 0 darkgray, 2px 2px 0 darkgray, 3px 3px 0 darkgray, 4px 4px 0 darkgray, 5px 5px 0 darkgray, 6px 6px 0 darkgray, 7px 7px 0 darkgray;
+    border: 10px solid lightgray;
+    position: relative;
+    height: 0;
+    padding-bottom: 93%;
+    border-radius: 10px; }
+  #studentModal .thumbswrapper {
+    background-color: white; }
 
 #imageModal img {
   display: block;
