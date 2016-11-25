@@ -20,8 +20,18 @@
   border: solid;
 }
 
+.student_info p{
+  text-align: center;
+}
+
 .barcode{
   border: solid;
+  padding: 1%;
+}
+
+.barcode img{
+  height: 100%;
+  width: 100%;
 }
 
 @media screen and (orientation:portrait){
@@ -83,6 +93,7 @@
     height: 100%;
     width: 60%;
     float: left;
+    padding-top: 50px;
   }
 
 
@@ -95,5 +106,6 @@
     width: 25%;
     float: left;
   }
+
 
 }
