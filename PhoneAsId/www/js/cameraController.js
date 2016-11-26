@@ -3,7 +3,7 @@
  */
 
 
-angular.module('starter.controllers').controller('CameraCtrl', function ($scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location) {
+angular.module('starter.controllers').controller('CameraCtrl',['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', function (SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location) {
 
   $scope.pictureUrl = 'http://placehold.it/300x300';
   $scope.takePictureButtonText = 'Take Picture';
@@ -47,6 +47,9 @@ angular.module('starter.controllers').controller('CameraCtrl', function ($scope,
     correctOrientation: true
   };
 
+
+
+
   $scope.takePicture = function () {
 
 
@@ -85,16 +88,26 @@ angular.module('starter.controllers').controller('CameraCtrl', function ($scope,
   };
 
   $scope.sendPicture = function () {
-    var ft = new FileTransfer(),
-      options = new FileUploadOptions();
+    
+    
+    var ft = new FileTransfer();
+    var options = new FileUploadOptions();
+    
 
     var serverURL = encodeURI("https://myconcordiaid.azurewebsites.net");
 
+    
+    var token = 'Bearer ' + SessionService.getAccessToken();
+    var headers = { 
+      'Authorization' : token
+    };
+    
     if(safeToSend){
       options.fileKey = "file";
       options.fileName = 'filename.jpg';
       options.mimeType = "image/jpeg";
       options.chunkedMode = false;
+      options.headers = headers;
       // options.params = {
       //   "timestamp": "Oct 12,2016"
       // };
@@ -115,6 +128,8 @@ angular.module('starter.controllers').controller('CameraCtrl', function ($scope,
         },
         function (e) {
           $scope.showAlert('upload-fail');
+
+          console.log("camera upload error: " + e);
 
           //hide uploading spinner when callback failed
           $scope.$apply(function () {
@@ -217,5 +232,5 @@ angular.module('starter.controllers').controller('CameraCtrl', function ($scope,
     });
 
   }
-})
+}]);
 
