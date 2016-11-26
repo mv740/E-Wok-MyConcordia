@@ -17,7 +17,7 @@ angular.module('starter.services', [])
 
     StudentService.fetchStudentIdInfo = function () {
       console.log('getStudentInfo called');
-      return $http.get(urlBase + "/account");
+      return $http.get(urlBase + "/student/account");
     };
 
     return StudentService;

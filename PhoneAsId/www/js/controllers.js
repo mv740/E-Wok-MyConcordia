@@ -50,52 +50,9 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers', 'starter.
 
   $scope.apptitle = "OIDC Demo";
   $scope.loginEnabled = false;
-  //
-  // var signin = function () {
-  //   ngOidcClient.signinPopup().then(function (user) {
-  //     $log.log("user:" + JSON.stringify(user));
-  //     if (!!user) {
-  //       $log.log('Logged in so going to home state');
-  //       $state.go('app.account');
-  //     }
-  //   });
-  // };
-  //
-  // $ionicPlatform.ready(function () {
-  //   $log.log('HomeCtrl: Platform ready so attempting signin.');
-  //   $scope.loginEnabled = true;
-  // });
-
+ 
   $scope.logIn = function () {
     AuthenticationService.signIn();
   };//
 
-}])
-
-  .controller('AccountCtrl', ['$log', '$scope', '$state', 'ngOidcClient','$http', 'SessionService', function ($log, $scope, $state, ngOidcClient,$http,SessionService) {
-    $log.log('AccountCtrl');
-    $scope.logOut = function () {
-      ngOidcClient.signoutPopup().then(function () {
-        $state.go('login');
-      });
-    };
-
-    $scope.Confirmation = function () {
-      // var headers = {};
-      // headers['Authorization'] = 'Bearer ' + $scope.userInfo.userData.access_token;
-      //
-      // var token = $scope.userInfo.userData.user.access_token;
-      // console.log(token);
-
-      $http.get('https://myconcordiaid.azurewebsites.net/api/message')
-        .then(function successCallback(response)
-        {
-          console.log(response.data);
-         // $state.go('app.id');
-      }, function fail(response) {
-          console.log(response)
-        });
-
-  }
-  }]);
-
+}]);

@@ -25,6 +25,12 @@ angular.module('starter.controllers')
           $scope.netname = data.netname;
           $scope.valid = data.valid;
           $scope.pending = data.pending;
+          
+          if($scope.valid == false && $scope.pending == false)
+          {
+            $state.go('app.camera');
+          }
+          
           $scope.updatepicture = data.updatepicture;
           $rootScope.canUpdate = data.updatepicture;
 

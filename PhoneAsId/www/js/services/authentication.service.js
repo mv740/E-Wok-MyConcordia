@@ -10,33 +10,50 @@
     .module('starter')
     .factory('AuthenticationService', AuthenticationService);
 
-  AuthenticationService.$inject = ['SessionService', '$state','ngOidcClient'];
+  AuthenticationService.$inject = ['SessionService', '$state','ngOidcClient', '$cordovaInAppBrowser','$rootScope','$ionicSideMenuDelegate'];
 
-  function AuthenticationService(SessionService, $state, ngOidcClient) {
+  function AuthenticationService(SessionService, $state, ngOidcClient, $cordovaInAppBrowser, $rootScope,$ionicSideMenuDelegate) {
 
     var authService = {};
-
+    
+    /*
+      start the oauth process 
+     */
     authService.signIn = function () {
       ngOidcClient.signinPopup().then(function (user) {
         //console.log("user:" + JSON.stringify(user));
         if (user) {
+          $ionicSideMenuDelegate.canDragContent(true);
           $state.go('app.id');
         }
       });
     };
-
-    //todo need to integrated logout from backend
+    
+    /*
+      clear the session from the inappbrowser which will log you out of third party system (google)
+     */
     authService.logOut = function () {
-      ngOidcClient.signoutPopup().then(function () {
-        $state.go('app.login');
-      });
-    };
+      //taken from
+      //https://forum.ionicframework.com/t/facebook-logout-with-firebase-ionic-clear-oauth-session-so-new-user-can-login/54557/5
 
+      var options = {
+        location: 'yes',
+        clearcache: 'yes',
+        clearsessioncache : 'yes',
+        toolbar: 'no',
+        hidden: 'yes'
+      };
+      // _blank loads in background
+      $rootScope.$on('$cordovaInAppBrowser:loadstop', function(e, event){
+        $cordovaInAppBrowser.close();
+      });
+      $cordovaInAppBrowser.open('http://www.google.com', '_blank', options);
+
+      $state.go('app.login');
+    };
+    
     authService.isAuthenticated = function () {
-      if (SessionService.get()) {
-        return SessionService.get().isAuthenticated();
-      }
-      return false;
+      return SessionService.isAuthenticated();
     };
 
     return authService;
