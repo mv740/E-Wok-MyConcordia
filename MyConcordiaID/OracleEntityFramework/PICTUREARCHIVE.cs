@@ -18,6 +18,7 @@ namespace OracleEntityFramework
         public byte[] PICTURE { get; set; }
         public string STATUS { get; set; }
         public System.DateTime TIMESTAMP { get; set; }
+        public decimal ID_PK { get; set; }
     
         public virtual STUDENT STUDENT { get; set; }
     }

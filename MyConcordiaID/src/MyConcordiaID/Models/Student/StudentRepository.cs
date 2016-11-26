@@ -7,6 +7,7 @@ using OracleEntityFramework;
 using System.IO;
 using MyConcordiaID.Models.Picture;
 using MyConcordiaID.Helper;
+using System.Data.Entity;
 
 namespace MyConcordiaID.Models.Student
 {
@@ -23,6 +24,7 @@ namespace MyConcordiaID.Models.Student
         public STUDENT FindById(int id)
         {
             var student = _database.STUDENTS
+                 .Include(s=> s.PICTUREARCHIVEs)
                  .Where(s => s.ID == id)
                  .SingleOrDefault();
 
@@ -262,6 +264,30 @@ namespace MyConcordiaID.Models.Student
 
         }
 
+        public StudentPictures FindStudentPictures(int id)
+        {
+            var student = _database.STUDENTS
+                .Where(s => s.ID == id)
+                .FirstOrDefault();
+
+
+            var studentNetname = student.NETNAME;
+
+            var archivedPictures = _database.PICTUREARCHIVEs
+                .Where(p => p.NETNAME == studentNetname)
+                .Select(p=> new { p.PICTURE, p.STATUS, p.NETNAME, p.TIMESTAMP })
+                .ToList();
+
+            StudentPictures studentPictures = new StudentPictures
+            {
+                profilePicture = student.PROFILEPICTURE,
+                pendingPicture = student.PENDINGPICTURE,
+                archivedPictures = archivedPictures
+            };
+
+            return studentPictures;
+
+        }
     }
 
 }

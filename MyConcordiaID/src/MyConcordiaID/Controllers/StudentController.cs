@@ -52,6 +52,23 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(student);
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("picture/{id}")]
+        public IActionResult GetStudentPictures(int id)
+        {
+
+            var studentPictures = _studentsRepo.FindStudentPictures(id);
+
+            if (studentPictures == null)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(studentPictures);
+        }
+
+
         [Authorize]
         [HttpGet]
         [Route("account")]
