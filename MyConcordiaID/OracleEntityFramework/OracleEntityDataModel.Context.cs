@@ -18,6 +18,7 @@ namespace OracleEntityFramework
         public DatabaseEntities()
             : base("DatabaseEntities")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

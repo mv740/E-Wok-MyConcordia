@@ -66,7 +66,7 @@ namespace MyConcordiaID.Controllers
         [Authorize]
         [HttpPost]
         [Route("ProfilePicture")]
-        public ActionResult PostProfilePicture([FromBody] IFormFile file)
+        public ActionResult PostProfilePicture(IFormFile file)
         {
             //todo correctly handle error with correct http error code
 
