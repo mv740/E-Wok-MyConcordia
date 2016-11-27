@@ -2,32 +2,23 @@
   <ion-header-bar>
     <!--<h1 class="title">Login</h1>-->
     <!--<div class="buttons">-->
-      <!--<button class="button button-clear" ng-click="closeLogin()">Close</button>-->
+    <!--<button class="button button-clear" ng-click="closeLogin()">Close</button>-->
     <!--</div>-->
   </ion-header-bar>
   <ion-content>
     <div id = "loginpage">
 
-      <img src="img/concordia_ev_pic.png" alt="Concordia ev pic" width = "100%" height = "45%">
+      <div>
+        <img src="img/concordia_ev_pic.png" alt="Concordia ev pic" width = "100%" height = "45%">
+      </div>
 
-      <form ng-submit="doLogin()">
+      <div id="lowerPart">
+        <img  src="img/concordia_logo.jpg" alt="Concordia ev pic" width = "100%" >
 
-        <!--<div class="list">-->
-        <!--<label class="item item-input">-->
-        <!--<span class="input-label">Username</span>-->
-        <!--<input type="text" ng-model="loginData.username">-->
-        <!--</label>-->
-        <!--<label class="item item-input">-->
-        <!--<span class="input-label">Password</span>-->
-        <!--<input type="password" ng-model="loginData.password">-->
-        <!--</label>-->
-        <!--<label class="item">-->
-        <!--<button class="button button-block button-positive" type="submit">Google Login</button>-->
-        <!--</label>-->
-        <!--</div>-->
 
-        <button id = "loginbutton" class="button button-block button-positive" ng-click="logIn()">Google Login</button>
-      </form>
+        <button id = "loginbutton" class="button button-block button-positive" ng-click="logIn()">LOGIN</button>
+      </div>
+
     </div>
   </ion-content>
 </ion-modal-view>
