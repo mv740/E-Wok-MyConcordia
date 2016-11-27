@@ -6,8 +6,11 @@
       <div ng-if="screenOrientation == 'portrait-primary'" class="vertical">
 
         <div class="main_content">
-          <!-- display picture if it's there. Otherwise, display pending approval picture.-->
+
           <div class="picture">
+            <!-- display a placeholder picture if no request has been sent yet.-->
+            <img src="img/placeholder_profile_pic.jpg" width = "200" height = "200">
+            <!-- display picture if it's there. Otherwise, display pending approval picture.-->
             <div ng-if="valid == true">
              <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
             </div>
@@ -39,6 +42,8 @@
           <div class="left">
             <div class="main_content">
               <div class="picture">
+                <!-- display a placeholder picture if no request has been sent yet.-->
+                <img src="img/placeholder_profile_pic.jpg" width = "200" height = "200">
                 <!-- display picture if it's there. Otherwise, display pending approval picture.-->
                 <div ng-if="valid == true">
                   <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
