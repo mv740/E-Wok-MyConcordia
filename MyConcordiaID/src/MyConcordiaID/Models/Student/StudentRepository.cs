@@ -24,7 +24,6 @@ namespace MyConcordiaID.Models.Student
         public STUDENT FindById(int id)
         {
             var student = _database.STUDENTS
-                 .Include(s=> s.PICTUREARCHIVEs)
                  .Where(s => s.ID == id)
                  .SingleOrDefault();
 
