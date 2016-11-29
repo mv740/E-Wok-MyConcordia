@@ -18,6 +18,7 @@ namespace OracleEntityFramework
         public STUDENT()
         {
             this.PICTUREARCHIVEs = new HashSet<PICTUREARCHIVE>();
+            this.LOGs = new HashSet<LOG>();
         }
     
         public string NETNAME { get; set; }
@@ -35,5 +36,7 @@ namespace OracleEntityFramework
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PICTUREARCHIVE> PICTUREARCHIVEs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LOG> LOGs { get; set; }
     }
 }

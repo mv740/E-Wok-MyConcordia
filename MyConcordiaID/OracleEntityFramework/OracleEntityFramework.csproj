@@ -59,7 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CONCORDIAUSER.cs">
+    <Compile Include="LOG.cs">
       <DependentUpon>OracleEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="OracleEntityDataModel.Context.cs">
@@ -76,9 +76,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>OracleEntityDataModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="PICTURE.cs">
-      <DependentUpon>OracleEntityDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PICTUREARCHIVE.cs">
       <DependentUpon>OracleEntityDataModel.tt</DependentUpon>

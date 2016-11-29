@@ -30,10 +30,24 @@ namespace MyConcordiaID.Models.Student
             return student;
         }
 
-        public STUDENT FindByNetName(string netName)
+        public dynamic FindByNetName(string netName)
         {
             var student = _database.STUDENTS
                  .Where(s => s.NETNAME == netName)
+                 .Select(s=> new
+                 {
+                     s.NETNAME,
+                     s.ID,
+                     s.FIRSTNAME,
+                     s.LASTNAME,
+                     s.DOB,
+                     s.VALID,
+                     s.PENDING,
+                     s.PROFILEPICTURE,
+                     s.UGRADSTATUS,
+                     s.EXPIREDATE
+                     
+                 })
                  .SingleOrDefault();
 
             return student;
@@ -100,7 +114,7 @@ namespace MyConcordiaID.Models.Student
                         STATUS = PictureHelper.GetArchivedStatus(),
                         TIMESTAMP = DateTime.Now,
                         PICTURE = student.PROFILEPICTURE,
-                        STUDENT = student
+                       
 
                     };
 
@@ -123,7 +137,6 @@ namespace MyConcordiaID.Models.Student
                     STATUS = PictureHelper.GetDeniedStatus(),
                     TIMESTAMP = DateTime.Now,
                     PICTURE = student.PENDINGPICTURE,
-                    STUDENT = student
 
                 };
                 pictureArchive.Add(archivingDeniedPicture);

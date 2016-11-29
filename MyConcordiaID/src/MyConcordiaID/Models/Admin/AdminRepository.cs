@@ -1,8 +1,6 @@
 ﻿using OracleEntityFramework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Models.Admin
 {
@@ -14,7 +12,10 @@ namespace MyConcordiaID.Models.Admin
         {
             _database = context;
         }
-
+        /// <summary>
+        ///  Set a valid period where student get update their valid profile picture 
+        /// </summary>
+        /// <param name="setting"></param>
         public void SetYearUpdatePicturePeriod(PeriodSetting setting)
         {
 
@@ -67,5 +68,6 @@ namespace MyConcordiaID.Models.Admin
 
             return info;
         }
+
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
 using MyConcordiaID.Helper;
+using MyConcordiaID.Models.Log;
 using MyConcordiaID.Models.Picture;
 using MyConcordiaID.Models.Student;
 using OracleEntityFramework;
@@ -22,10 +23,13 @@ namespace MyConcordiaID.Controllers
 
         private readonly DatabaseEntities _database;
         private IStudentRepository _studentsRepo { get; set; }
+        private ILogRepository _logRepo { get; set; }
 
-        public StudentController(IStudentRepository students, DatabaseEntities context)
+
+        public StudentController(IStudentRepository students, ILogRepository logs, DatabaseEntities context)
         {
             _studentsRepo = students;
+            _logRepo = logs;
             _database = context;
         }
 
@@ -101,30 +105,20 @@ namespace MyConcordiaID.Controllers
                 using (var binaryReader = new BinaryReader(stream))
                 {
                     var fileContent = binaryReader.ReadBytes((int)file.Length);
-                  
+
                     _studentsRepo.AddPendingPicture(authenticatedUser, fileContent);
+
+
 
                 }
             }
 
-            return Ok();
-        }
+            //log
+            _logRepo.Logger(authenticatedUser, Log.Action.SendPicture);
+            
 
-        /// <summary>
-        /// Get lastest uploaed picture
-        /// 
-        /// Will later be changed, to show user profile picture
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [AllowAnonymous]
-        [HttpGet]
-        [Route("ProfilePicture")]
-        public FileStreamResult GetProfilePicture()
-        {
-            var picture = _database.PICTUREs.OrderByDescending(p => p.UPLOADEDDATE).First();
-            Stream stream = new MemoryStream(picture.PICTURE1);
-            return new FileStreamResult(stream, new MediaTypeHeaderValue("image/png"));
+
+            return Ok();
         }
 
         [AllowAnonymous]

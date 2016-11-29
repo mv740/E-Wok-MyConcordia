@@ -12,7 +12,6 @@ namespace OracleEntityFramework
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
     public partial class DatabaseEntities : DbContext
     {
         public DatabaseEntities()
@@ -20,18 +19,16 @@ namespace OracleEntityFramework
         {
             this.Configuration.LazyLoadingEnabled = false;
             this.Configuration.ProxyCreationEnabled = false;
-
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-    
-        public virtual DbSet<CONCORDIAUSER> CONCORDIAUSERS { get; set; }
-        public virtual DbSet<PICTURE> PICTUREs { get; set; }
+
         public virtual DbSet<STUDENT> STUDENTS { get; set; }
         public virtual DbSet<PICTUREUPDATESETTING> PICTUREUPDATESETTINGs { get; set; }
         public virtual DbSet<PICTUREARCHIVE> PICTUREARCHIVEs { get; set; }
+        public virtual DbSet<LOG> LOGs { get; set; }
     }
 }

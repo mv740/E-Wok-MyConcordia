@@ -12,7 +12,7 @@ namespace MyConcordiaID.Models.Student
     {
         dynamic GetAll();
         STUDENT FindById(int id);
-        STUDENT FindByNetName(string netname);
+        dynamic FindByNetName(string netname);
         void AddPendingPicture(string netName, byte[] picture);
         dynamic FindPendingPicture(int id);
         void ValidatePicture(PictureValidation pictureValidation);

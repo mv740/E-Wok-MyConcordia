@@ -19,6 +19,7 @@ using OracleEntityFramework;
 using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
+using MyConcordiaID.Models.Log;
 
 namespace MyConcordiaID
 {
@@ -77,6 +78,7 @@ namespace MyConcordiaID
             services.AddScoped(_ => new DatabaseEntities());
             services.AddSingleton<IStudentRepository, StudentRepository>();
             services.AddSingleton<IAdminRepository, AdminRepository>();
+            services.AddSingleton<ILogRepository, LogRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

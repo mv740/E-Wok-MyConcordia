@@ -12,12 +12,13 @@ namespace OracleEntityFramework
     using System;
     using System.Collections.Generic;
     
-    public partial class PICTURE
+    public partial class LOG
     {
-        public int ID { get; set; }
-        public double PENDING { get; set; }
-        public Nullable<double> APPROVED { get; set; }
-        public byte[] PICTURE1 { get; set; }
-        public System.DateTime UPLOADEDDATE { get; set; }
+        public string ID_PK { get; set; }
+        public string NETNAME { get; set; }
+        public string ACTION { get; set; }
+        public System.DateTime TIMESTAMP { get; set; }
+    
+        public virtual STUDENT STUDENT { get; set; }
     }
 }

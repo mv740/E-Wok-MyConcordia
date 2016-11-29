@@ -20,9 +20,16 @@ namespace MyConcordiaID.Helper
             //we normally get the netname from concordia 
 
             var cleanedLastName = CleanInput(lastName).Trim();
-            
 
-            return firstName[0].ToString().ToLower() + "_" + cleanedLastName.Substring(0, 6).ToLower();
+
+            var length = cleanedLastName.Length;
+
+            if(length > 6)
+            {
+                length = 6;
+            }
+
+            return firstName[0].ToString().ToLower() + "_" + cleanedLastName.Substring(0, length).ToLower();
 
        
         }

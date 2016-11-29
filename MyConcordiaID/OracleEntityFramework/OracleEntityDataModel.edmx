@@ -5,25 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OracleDataModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="CONCORDIAUSERS">
+        <EntityType Name="LOG">
           <Key>
-            <PropertyRef Name="NETNAME" />
+            <PropertyRef Name="ID_PK" />
           </Key>
-          <Property Name="ID" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="ROLE" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="EMAIL" Type="varchar2" MaxLength="64" Nullable="false" />
+          <Property Name="ID_PK" Type="varchar2" MaxLength="20" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NETNAME" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="OAUTHID" Type="varchar2" MaxLength="256" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PICTURE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="number" Precision="8" Scale="0" Nullable="false" />
-          <Property Name="PENDING" Type="binary_double" Nullable="false" />
-          <Property Name="APPROVED" Type="binary_double" />
-          <Property Name="PICTURE" Type="blob" Nullable="false" />
-          <Property Name="UPLOADEDDATE" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="ACTION" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="TIMESTAMP" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="PICTUREARCHIVE">
           <Key>
@@ -33,7 +22,7 @@
           <Property Name="PICTURE" Type="blob" Nullable="false" />
           <Property Name="STATUS" Type="varchar2" MaxLength="8" Nullable="false" />
           <Property Name="TIMESTAMP" Type="date" Nullable="false" />
-          <Property Name="ID_PK" Type="number" Precision="38" Scale="0" Nullable="false" />
+          <Property Name="ID_PK" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="PICTUREUPDATESETTING">
           <Key>
@@ -60,6 +49,18 @@
           <Property Name="EXPIREDATE" Type="date" Nullable="false" />
           <Property Name="UPDATEPICTURE" Type="number" Precision="1" Scale="0" Nullable="false" />
         </EntityType>
+        <Association Name="LOG_FK1">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
+          <End Role="LOG" Type="Self.LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="LOG">
+              <PropertyRef Name="NETNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PICTUREARCHIVE_FK1">
           <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
           <End Role="PICTUREARCHIVE" Type="Self.PICTUREARCHIVE" Multiplicity="*" />
@@ -73,11 +74,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OracleDataModelStoreContainer">
-          <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSERS" Schema="MV740" store:Type="Tables" />
-          <EntitySet Name="PICTURE" EntityType="Self.PICTURE" Schema="MV740" store:Type="Tables" />
+          <EntitySet Name="LOG" EntityType="Self.LOG" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTUREARCHIVE" EntityType="Self.PICTUREARCHIVE" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTUREUPDATESETTING" EntityType="Self.PICTUREUPDATESETTING" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="MV740" store:Type="Tables" />
+          <AssociationSet Name="LOG_FK1" Association="Self.LOG_FK1">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="LOG" EntitySet="LOG" />
+          </AssociationSet>
           <AssociationSet Name="PICTUREARCHIVE_FK1" Association="Self.PICTUREARCHIVE_FK1">
             <End Role="STUDENTS" EntitySet="STUDENTS" />
             <End Role="PICTUREARCHIVE" EntitySet="PICTUREARCHIVE" />
@@ -87,19 +91,7 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="OracleDataModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="CONCORDIAUSER">
-          <Key>
-            <PropertyRef Name="NETNAME" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="ROLE" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="EMAIL" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="NETNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="OAUTHID" Type="String" MaxLength="256" FixedLength="false" Unicode="false" Nullable="false" />
-        </EntityType>
         <EntityContainer Name="MyEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CONCORDIAUSERS" EntityType="Self.CONCORDIAUSER" />
-          <EntitySet Name="PICTUREs" EntityType="OracleDataModel.PICTURE" />
           <EntitySet Name="STUDENTS" EntityType="OracleDataModel.STUDENT" />
           <EntitySet Name="PICTUREUPDATESETTINGs" EntityType="OracleDataModel.PICTUREUPDATESETTING" />
           <EntitySet Name="PICTUREARCHIVEs" EntityType="OracleDataModel.PICTUREARCHIVE" />
@@ -107,17 +99,12 @@
             <End Role="STUDENT" EntitySet="STUDENTS" />
             <End Role="PICTUREARCHIVE" EntitySet="PICTUREARCHIVEs" />
           </AssociationSet>
+          <EntitySet Name="LOGs" EntityType="OracleDataModel.LOG" />
+          <AssociationSet Name="LOG_FK1" Association="OracleDataModel.LOG_FK1">
+            <End Role="STUDENT" EntitySet="STUDENTS" />
+            <End Role="LOG" EntitySet="LOGs" />
+          </AssociationSet>
         </EntityContainer>
-        <EntityType Name="PICTURE">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="PENDING" Type="Double" Nullable="false" />
-          <Property Name="APPROVED" Type="Double" />
-          <Property Name="PICTURE1" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
-          <Property Name="UPLOADEDDATE" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
         <EntityType Name="STUDENT">
           <Key>
             <PropertyRef Name="NETNAME" />
@@ -135,6 +122,7 @@
           <Property Name="EXPIREDATE" Type="DateTime" Nullable="false" />
           <Property Name="UPDATEPICTURE" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PICTUREARCHIVEs" Relationship="OracleDataModel.PICTUREARCHIVE_FK1" FromRole="STUDENT" ToRole="PICTUREARCHIVE" />
+          <NavigationProperty Name="LOGs" Relationship="OracleDataModel.LOG_FK1" FromRole="STUDENT" ToRole="LOG" />
         </EntityType>
         <EntityType Name="PICTUREUPDATESETTING">
           <Key>
@@ -152,7 +140,7 @@
           <Property Name="PICTURE" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="STATUS" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" />
-          <Property Name="ID_PK" Type="Decimal" Nullable="false" Precision="38" Scale="0" />
+          <Property Name="ID_PK" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="STUDENT" Relationship="OracleDataModel.PICTUREARCHIVE_FK1" FromRole="PICTUREARCHIVE" ToRole="STUDENT" />
         </EntityType>
         <Association Name="PICTUREARCHIVE_FK1">
@@ -167,34 +155,34 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LOG">
+          <Key>
+            <PropertyRef Name="ID_PK" />
+          </Key>
+          <Property Name="ID_PK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NETNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ACTION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="STUDENT" Relationship="OracleDataModel.LOG_FK1" FromRole="LOG" ToRole="STUDENT" />
+        </EntityType>
+        <Association Name="LOG_FK1">
+          <End Type="OracleDataModel.STUDENT" Role="STUDENT" Multiplicity="1" />
+          <End Type="OracleDataModel.LOG" Role="LOG" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="LOG">
+              <PropertyRef Name="NETNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="OracleDataModelStoreContainer" CdmEntityContainer="MyEntities">
-          <EntitySetMapping Name="CONCORDIAUSERS">
-            <EntityTypeMapping TypeName="OracleDataModel.CONCORDIAUSER">
-              <MappingFragment StoreEntitySet="CONCORDIAUSERS">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="ROLE" ColumnName="ROLE" />
-                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
-                <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />
-                <ScalarProperty Name="OAUTHID" ColumnName="OAUTHID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PICTUREs">
-            <EntityTypeMapping TypeName="OracleDataModel.PICTURE">
-              <MappingFragment StoreEntitySet="PICTURE">
-                <ScalarProperty Name="UPLOADEDDATE" ColumnName="UPLOADEDDATE" />
-                <ScalarProperty Name="PICTURE1" ColumnName="PICTURE" />
-                <ScalarProperty Name="APPROVED" ColumnName="APPROVED" />
-                <ScalarProperty Name="PENDING" ColumnName="PENDING" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="STUDENTS">
             <EntityTypeMapping TypeName="OracleDataModel.STUDENT">
               <MappingFragment StoreEntitySet="STUDENTS">
@@ -230,6 +218,16 @@
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
                 <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOGs">
+            <EntityTypeMapping TypeName="OracleDataModel.LOG">
+              <MappingFragment StoreEntitySet="LOG">
+                <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
+                <ScalarProperty Name="ACTION" ColumnName="ACTION" />
+                <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />
+                <ScalarProperty Name="ID_PK" ColumnName="ID_PK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

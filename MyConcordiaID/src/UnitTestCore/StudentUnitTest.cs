@@ -43,6 +43,38 @@ namespace UnitTestCore
         {
             return source.GetType().GetProperty(property).GetValue(source, null);
         }
+        /// <summary>
+        ///  For Viewing all available properties of a dynamic object
+        /// </summary>
+        /// <param name="source"></param>
+        public static void PrintPropertiesOfDynamicObject(object source)
+        {
+            var properties = source.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                var PropertyName = property.Name;
+
+                var PropetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
+
+                Console.Write(PropertyName + " : " + PropetyValue);
+                Console.WriteLine();
+            }
+        }
+
+
+        public static byte[] getImageByte(Mock<IFormFile> image)
+        {
+            Stream stream = image.Object.OpenReadStream();
+            byte[] byteImage = null;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                byteImage = memoryStream.ToArray();
+            }
+
+            return byteImage;
+        }
 
         [TestInitialize]
         public void Initialize()
@@ -92,7 +124,7 @@ namespace UnitTestCore
             _mySet.Object.AddRange(users);
             ConnectMocksToDataStore(users);
 
-            var student = _repo.Find(21941097);
+            var student = _repo.FindById(21941097);
             Assert.AreEqual(21941097, student.ID);
             Assert.AreEqual("testFirst", student.FIRSTNAME);
 
@@ -143,17 +175,19 @@ namespace UnitTestCore
             var name = "testFirst";
             var lastName = "testLast";
 
+            var netname = StudentHelper.GenerateNetName(name, lastName);
+
 
             List<STUDENT> users = new List<STUDENT>()
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.GenerateNetName(name, lastName),
+                NETNAME = netname,
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
                 DOB = DateTime.UtcNow,
-                UGRADSTATUS = "U"
+                UGRADSTATUS = "U",
             },
         };
 
@@ -170,13 +204,17 @@ namespace UnitTestCore
             ms.Position = 0;
             fileMock.Setup(m => m.OpenReadStream()).Returns(ms);
 
-            _repo.AddPendingPicture(21941097, fileMock.Object);
+
+            _repo.AddPendingPicture(netname, getImageByte(fileMock));
 
 
-            var student = _repo.Find(21941097);
+            var student = _repo.FindById(21941097);
 
-            Assert.AreEqual(true, student.PENDING);
-            Assert.IsFalse(student.PENDINGPICTURE == null);  // not null
+            var PENDINGPICTURE = student.GetType().GetProperty("PENDINGPICTURE").GetValue(student, null);
+            var PENDING = ReflectPropertyValue(student, "PENDING");
+
+            Assert.AreEqual(true, PENDING);
+            Assert.IsNotNull(PENDINGPICTURE); 
 
         }
 
@@ -187,11 +225,12 @@ namespace UnitTestCore
             var lastName = "testLast";
 
 
-            List<STUDENT> users = new List<STUDENT>()
+            var netname = StudentHelper.GenerateNetName(name, lastName);
+            List <STUDENT> users = new List<STUDENT>()
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.GenerateNetName(name, lastName),
+                NETNAME = netname,
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
@@ -213,13 +252,14 @@ namespace UnitTestCore
             ms.Position = 0;
             fileMock.Setup(m => m.OpenReadStream()).Returns(ms);
 
-            _repo.AddPendingPicture(21941097, fileMock.Object);
+            var image = getImageByte(fileMock);
+            _repo.AddPendingPicture(netname, image);
 
 
             var student = _repo.FindPendingPicture(21941097);
 
 
-            long fileLength = fileMock.Object.Length;
+            long fileLength = image.Length;
 
 
             var PENDINGPICTURE = ReflectPropertyValue(student, "PENDINGPICTURE");
@@ -237,13 +277,13 @@ namespace UnitTestCore
         {
             var name = "testFirst";
             var lastName = "testLast";
-
+            var netname = StudentHelper.GenerateNetName(name, lastName);
 
             List<STUDENT> users = new List<STUDENT>()
             {
                 new STUDENT
                 {
-                    NETNAME = StudentHelper.GenerateNetName(name, lastName),
+                    NETNAME = netname,
                     ID = 21941097,
                     FIRSTNAME = name,
                     LASTNAME = lastName,
@@ -265,10 +305,10 @@ namespace UnitTestCore
             ms.Position = 0;
             fileMock.Setup(m => m.OpenReadStream()).Returns(ms);
 
-            _repo.AddPendingPicture(21941097, fileMock.Object);
+            _repo.AddPendingPicture(netname, getImageByte(fileMock));
 
             //verify pending picture is actually there
-            var student = _repo.Find(21941097);
+            var student = _repo.FindById(21941097);
             Assert.AreEqual(true, student.PENDING);
             Assert.IsFalse(student.PENDINGPICTURE == null);  // not null
 
@@ -281,7 +321,7 @@ namespace UnitTestCore
 
             _repo.ValidatePicture(validationMessage);
 
-            var studentLatestInfo = _repo.Find(21941097);
+            var studentLatestInfo = _repo.FindById(21941097);
 
             Assert.AreEqual(false, studentLatestInfo.PENDING);
             Assert.AreEqual(null, studentLatestInfo.PENDINGPICTURE);
@@ -301,8 +341,12 @@ namespace UnitTestCore
             var result = "f_cotetr";
 
             Assert.AreEqual(result, netName);
+
           
         }
+
+
+       
 
     }
 
