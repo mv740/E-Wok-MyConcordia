@@ -1,0 +1,8 @@
+@import "../base/mixins/_make3D";
+@import "../base/_colors";
+@import "../base/mixins/_horizontalCenter";
+
+.progressCircularContainer{
+  text-align: center;
+  margin:40px auto 10px auto;
+}

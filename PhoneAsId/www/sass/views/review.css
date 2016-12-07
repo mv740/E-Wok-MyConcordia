@@ -80,8 +80,7 @@ html, body {
 
 .progressCircularContainer {
   text-align: center;
-  margin: 40px auto 10px auto;
-  display: block; }
+  margin: 40px auto 10px auto; }
 
 .container3D {
   position: relative;
@@ -98,7 +97,7 @@ html, body {
   background-color: #a1325e;
   text-align: center;
   padding-bottom: 32px; }
-  .container3D h1, .container3D h2, .container3D h3, .container3D h4, .container3D div > span, .container3D label {
+  .container3D h1, .container3D h2, .container3D h3, .container3D h4, .container3D span, .container3D label {
     color: white; }
 
 .top-buffer {

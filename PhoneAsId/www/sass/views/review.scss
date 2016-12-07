@@ -1,0 +1,27 @@
+@import "../base/_reset";
+@import "../components/_buttons";
+@import "../components/_textboxes";
+@import "../components/_loading";
+@import "../components/_containers";
+
+@import "../base/mixins/_transitions";
+@import "../base/_buffers";
+@import "../base/_sizes";
+
+@import "../components/_sideNav";
+@import "../components/_searchBox";
+@import "../components/_searchResults";
+@import "../components/_modals";
+@import "../components/_gallery";
+
+
+#viewport.middle{
+        top:28%;
+    }
+
+#viewport{
+  @include transition();
+  position: relative;
+  top:-88px;
+  overflow: visible;
+}

@@ -1,0 +1,33 @@
+@import "../base/_colors";
+@import "../base/mixins/_make3D";
+
+#searchBoxContainer {
+
+  .field {
+    display: flex;
+    flex-direction: row;
+    border: 0.2em solid $concordia-color;
+    @include make-button-3d($border-radius-button, $searchbox-shadow-color);
+    @include make-button-3d-hover($searchbox-shadow-color);
+
+    input[type=text],
+    button {
+      display: block;
+
+    }
+
+    input[type=text] {
+      flex: 1;
+      padding: 0.6em;
+    }
+
+    button {
+      border: 0px;
+      border-left: 0.2em solid $concordia-color;
+      padding: 0.6em 0.8em;
+      background-color: $concordia-color;
+      color: white;
+    }
+  }
+
+}

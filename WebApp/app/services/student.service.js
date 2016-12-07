@@ -19,6 +19,7 @@ function studentService($http, $q, myConfig) {
     /////////////////////
 
     function sendValidation(id, valid) {
+        var deferred = $q.defer();
 
         var json = {
             id: parseInt(id),
@@ -35,12 +36,13 @@ function studentService($http, $q, myConfig) {
             data: json
         }).then(
         function (success) {
-            console.log('validate success');
+            deferred.resolve(success);
         },
         function (failure) {
             console.log('validate failure');
         });
 
+        return deferred;
     }
 
     function getStudentPictures(id) {

@@ -1,0 +1,22 @@
+@import "sizes";
+@import "colors";
+@import "fonts";
+
+html, body{
+  font: 1em 'Montserrat Alternates';
+
+  ul, li {
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+}
+
+
+#main {
+
+  #ng-view {
+    overflow: hidden;
+  }
+}

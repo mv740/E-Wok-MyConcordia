@@ -1,0 +1,7 @@
+@import "mixins/_horizontalCenter";
+
+.center{
+  @include center();
+}
+
+

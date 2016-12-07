@@ -1,0 +1,11 @@
+@import "../base/_variables";
+@import "../base/mixins/_verticalCenter";
+
+#searchResults {
+  div {
+    @include vertical-align();
+    span {
+      margin-left: $search-result-margin;
+    }
+  }
+}
