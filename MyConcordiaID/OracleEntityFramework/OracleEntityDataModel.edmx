@@ -11,8 +11,8 @@
           </Key>
           <Property Name="ID_PK" Type="varchar2" MaxLength="20" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="NETNAME" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="ACTION" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="TIMESTAMP" Type="date" Nullable="false" />
+          <Property Name="ACTION" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="TIMESTAMP" Type="timestamp" Precision="6" Nullable="false" />
         </EntityType>
         <EntityType Name="PICTUREARCHIVE">
           <Key>
@@ -161,7 +161,7 @@
           </Key>
           <Property Name="ID_PK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NETNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="ACTION" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ACTION" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" />
           <NavigationProperty Name="STUDENT" Relationship="OracleDataModel.LOG_FK1" FromRole="LOG" ToRole="STUDENT" />
         </EntityType>

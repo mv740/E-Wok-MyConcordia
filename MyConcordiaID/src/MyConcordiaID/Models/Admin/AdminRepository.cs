@@ -16,8 +16,10 @@ namespace MyConcordiaID.Models.Admin
         ///  Set a valid period where student get update their valid profile picture 
         /// </summary>
         /// <param name="setting"></param>
-        public void SetYearUpdatePicturePeriod(PeriodSetting setting)
+        public bool SetYearUpdatePicturePeriod(PeriodSetting setting)
         {
+
+            bool updatedPreviousPeriod = false; //logging purposes
 
             string start = setting.startDate;
             string end = setting.endDate;
@@ -47,6 +49,7 @@ namespace MyConcordiaID.Models.Admin
                 //else update values
                 found.STARDATE = startDateTime;
                 found.ENDDATE = endDateTime;
+                updatedPreviousPeriod = true;
             }
 
             var allStudents = _database.STUDENTS.ToList();
@@ -57,7 +60,7 @@ namespace MyConcordiaID.Models.Admin
             _database.SaveChanges();
 
 
-
+            return updatedPreviousPeriod;
         }
 
         public PICTUREUPDATESETTING GetUpdatePicturePeriod(int year)

@@ -36,9 +36,5 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(logsList);
         }
 
-
-
-
-
     }
 }

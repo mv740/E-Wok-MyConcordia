@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
@@ -113,7 +114,6 @@ namespace MyConcordiaID.Controllers
                 }
             }
 
-            //log
             _logRepo.Logger(authenticatedUser, Log.Action.SendPicture);
             
 
@@ -146,18 +146,29 @@ namespace MyConcordiaID.Controllers
         [Route("ValidatePicture")]
         public IActionResult PostValidatePicture([FromBody] PictureValidation picture)
         {
+            //var authenticatedUser = getAuthenticatedUserNetname();
+
             _studentsRepo.ValidatePicture(picture);
+
+            //if(picture.valid)
+            //{
+            //    _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture);
+            //}
+            //else
+            //{
+            //    _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture);
+            //}
+
 
             return Ok();
         }
 
         [AllowAnonymous]
-        [HttpPost]
+        [HttpGet]
         [Route("Valid")]
         public IActionResult GetAllValid()
         {
             return new ObjectResult(_studentsRepo.GetAllValid());
-
         }
 
         [AllowAnonymous]
@@ -166,7 +177,6 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetUpdatePicturePeriod()
         {
             return new ObjectResult(_studentsRepo.GetUpdatePicturePeriod());
-           
         }
 
         [AllowAnonymous]

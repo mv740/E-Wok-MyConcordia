@@ -20,6 +20,8 @@ using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNet.Identity;
 using MyConcordiaID.Models.Log;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace MyConcordiaID
 {
@@ -58,12 +60,7 @@ namespace MyConcordiaID
                     options.UseInMemoryDatabase();
                 });
 
-            services.AddCors(o => o.AddPolicy("AllowPolicy", builder =>
-            {
-                builder.AllowAnyOrigin()
-                       .AllowAnyMethod()
-                       .AllowAnyHeader();
-            }));
+  
 
             /// set default authentication middleware // it is required for api oauth2
             services.AddAuthentication(options =>
@@ -72,9 +69,20 @@ namespace MyConcordiaID
 
             });
 
-
+            services.AddCors(o => o.AddPolicy("AllowPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
             services.AddMvc();
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("AllowPolicy"));
+            });
+
             services.AddScoped(_ => new DatabaseEntities());
             services.AddSingleton<IStudentRepository, StudentRepository>();
             services.AddSingleton<IAdminRepository, AdminRepository>();

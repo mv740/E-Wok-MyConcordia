@@ -48,7 +48,8 @@ namespace MyConcordiaID.Models.Log
             {
                 NETNAME = netname,
                 ACTION = action.ToString(),
-                TIMESTAMP = DateTime.Now
+                TIMESTAMP = DateTime.UtcNow
+     
             };
 
             _database.LOGs.Add(currentLog);

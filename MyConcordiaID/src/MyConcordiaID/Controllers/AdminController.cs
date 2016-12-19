@@ -1,9 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using MyConcordiaID.Helper;
 using MyConcordiaID.Models;
 using MyConcordiaID.Models.Admin;
+using MyConcordiaID.Models.Log;
 using MyConcordiaID.Models.Student;
 using OracleEntityFramework;
+using System.Security.Claims;
 
 namespace MyConcordiaID.Controllers
 {
@@ -13,27 +17,44 @@ namespace MyConcordiaID.Controllers
     {
 
         private readonly DatabaseEntities _database;
-        private IAdminRepository AdminRepo { get; set; }
+        private IAdminRepository _adminRepo { get; set; }
+        private ILogRepository _logRepo { get; set; }
 
-        public AdminController(IAdminRepository admins, DatabaseEntities context)
+        public AdminController(IAdminRepository admins, ILogRepository logs, DatabaseEntities context)
         {
-            AdminRepo = admins;
+            _adminRepo = admins;
             _database = context;
+            _logRepo = logs;
         }
 
-
-        [AllowAnonymous]
+   
+        [Authorize]
         [HttpPost]
         [Route("PicturePeriod")]
         public IActionResult SetPicturePeriod([FromBody] PeriodSetting setting)
         {
+            var authenticatedUser = getAuthenticatedUserNetname();
 
-            AdminRepo.SetYearUpdatePicturePeriod(setting);
+            var hasUpdatedPeriodSetting = _adminRepo.SetYearUpdatePicturePeriod(setting);
+            if (hasUpdatedPeriodSetting)
+            {
+                _logRepo.Logger(authenticatedUser, Log.Action.ModifiedPictureUpdatePeriod);
+            }
+            else
+            {
+                _logRepo.Logger(authenticatedUser, Log.Action.CreatePictureUpdatePeriod);
+            }
 
+        
             return Ok();
         }
 
-
+        public string getAuthenticatedUserNetname()
+        {
+            var firstName = User.FindFirstValue(ClaimTypes.GivenName);
+            var lastName = User.FindFirstValue(ClaimTypes.Surname);
+            return StudentHelper.GenerateNetName(firstName, lastName);
+        }
 
 
 
