@@ -1,7 +1,0 @@
-@mixin make-american-pie($width, $color, $deg){
-  border: $width solid $color;
-  color: $color;
-  transform: rotate($deg);
-  -ms-transform: rotate($deg); /* IE 9 */
-  -webkit-transform: rotate($deg); /* Chrome, Safari, Opera */
-}
