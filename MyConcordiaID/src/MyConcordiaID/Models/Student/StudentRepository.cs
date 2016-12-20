@@ -87,8 +87,14 @@ namespace MyConcordiaID.Models.Student
             return student;
 
         }
-
-        public void ValidatePicture(PictureValidation pictureValidation)
+        /// <summary>
+        ///  Validate a pending picture 
+        ///  If approved, the student pending picture become their valid profile picture
+        ///  if denied, the pending picture is send to the picture archive
+        /// </summary>
+        /// <param name="pictureValidation"></param>
+        /// <returns>student netname</returns>
+        public string ValidatePicture(PictureValidation pictureValidation)
         {
 
             var student = _database.STUDENTS
@@ -146,6 +152,7 @@ namespace MyConcordiaID.Models.Student
             student.PENDING = false;
             _database.SaveChanges();
 
+            return netName; 
         }
 
         public dynamic GetAllPending()

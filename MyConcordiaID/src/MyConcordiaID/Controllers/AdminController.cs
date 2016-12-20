@@ -1,11 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using MyConcordiaID.Helper;
 using MyConcordiaID.Models;
 using MyConcordiaID.Models.Admin;
 using MyConcordiaID.Models.Log;
-using MyConcordiaID.Models.Student;
 using OracleEntityFramework;
 using System.Security.Claims;
 
@@ -38,14 +36,14 @@ namespace MyConcordiaID.Controllers
             var hasUpdatedPeriodSetting = _adminRepo.SetYearUpdatePicturePeriod(setting);
             if (hasUpdatedPeriodSetting)
             {
-                _logRepo.Logger(authenticatedUser, Log.Action.ModifiedPictureUpdatePeriod);
+                _logRepo.Logger(authenticatedUser, Log.Action.ModifiedPictureUpdatePeriod, null);
             }
             else
             {
-                _logRepo.Logger(authenticatedUser, Log.Action.CreatePictureUpdatePeriod);
+                _logRepo.Logger(authenticatedUser, Log.Action.CreatePictureUpdatePeriod, null);
             }
 
-        
+
             return Ok();
         }
 

@@ -15,7 +15,7 @@ namespace MyConcordiaID.Models.Student
         dynamic FindByNetName(string netname);
         void AddPendingPicture(string netName, byte[] picture);
         dynamic FindPendingPicture(int id);
-        void ValidatePicture(PictureValidation pictureValidation);
+        string ValidatePicture(PictureValidation pictureValidation);
         dynamic GetAllPending();
         dynamic GetAllValid();
         void Add(STUDENT student);

@@ -27,13 +27,25 @@ namespace MyConcordiaID.Controllers
 
         [AllowAnonymous]
         [HttpGet]
+        public IActionResult GetLatest50()
+        {
+            return new ObjectResult(LogRepo.GetLalestLogs(50));
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
         [Route("{value}")]
         public IActionResult GetLatestLogs(int value)
         {
+            return new ObjectResult(LogRepo.GetLalestLogs(value));
+        }
 
-            var logsList = LogRepo.GetLalestLogs(value);
-
-            return new ObjectResult(logsList);
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("{netname}")]
+        public IActionResult GetStudentLogs(string netName)
+        {
+            return new ObjectResult(LogRepo.GetStudentLogs(netName));
         }
 
     }

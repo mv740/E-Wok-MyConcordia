@@ -84,7 +84,6 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(result);
         }
 
-
         [Authorize]
         [HttpPost]
         [Route("ProfilePicture")]
@@ -114,7 +113,7 @@ namespace MyConcordiaID.Controllers
                 }
             }
 
-            _logRepo.Logger(authenticatedUser, Log.Action.SendPicture);
+            _logRepo.Logger(authenticatedUser, Log.Action.SendPicture, null);
             
 
 
@@ -141,23 +140,30 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(student);
         }
 
+        /// <summary>
+        ///  Validate a pending picture
+        ///  if approved : student's pending picture become his valid profile picture
+        ///  if denied : pending picture is send to archive picture 
+        /// </summary>
+        /// <param name="picture"></param>
+        /// <returns>student netname</returns>
         [AllowAnonymous]
         [HttpPost]
         [Route("ValidatePicture")]
         public IActionResult PostValidatePicture([FromBody] PictureValidation picture)
         {
-            //var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = getAuthenticatedUserNetname();
 
-            _studentsRepo.ValidatePicture(picture);
+            var netName = _studentsRepo.ValidatePicture(picture);
 
-            //if(picture.valid)
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture);
-            //}
-            //else
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture);
-            //}
+            if (picture.valid)
+            {
+                _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture, netName);
+            }
+            else
+            {
+                _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture, netName);
+            }
 
 
             return Ok();
@@ -179,6 +185,11 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(_studentsRepo.GetUpdatePicturePeriod());
         }
 
+        /// <summary>
+        ///  Search for specific student using different parameter : netname, date, id, first name, last name
+        /// </summary>
+        /// <param name="searchOptions"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost]
         [Route("Search")]

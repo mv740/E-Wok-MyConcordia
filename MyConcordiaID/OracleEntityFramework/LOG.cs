@@ -18,6 +18,7 @@ namespace OracleEntityFramework
         public string NETNAME { get; set; }
         public string ACTION { get; set; }
         public System.DateTime TIMESTAMP { get; set; }
+        public string AFFECTED_USER { get; set; }
     
         public virtual STUDENT STUDENT { get; set; }
     }

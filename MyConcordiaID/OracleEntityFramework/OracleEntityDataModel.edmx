@@ -13,6 +13,7 @@
           <Property Name="NETNAME" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="ACTION" Type="varchar2" MaxLength="30" Nullable="false" />
           <Property Name="TIMESTAMP" Type="timestamp" Precision="6" Nullable="false" />
+          <Property Name="AFFECTED_USER" Type="varchar2" MaxLength="20" />
         </EntityType>
         <EntityType Name="PICTUREARCHIVE">
           <Key>
@@ -162,7 +163,8 @@
           <Property Name="ID_PK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NETNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ACTION" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" />
+          <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="AFFECTED_USER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="STUDENT" Relationship="OracleDataModel.LOG_FK1" FromRole="LOG" ToRole="STUDENT" />
         </EntityType>
         <Association Name="LOG_FK1">
@@ -224,6 +226,7 @@
           <EntitySetMapping Name="LOGs">
             <EntityTypeMapping TypeName="OracleDataModel.LOG">
               <MappingFragment StoreEntitySet="LOG">
+                <ScalarProperty Name="AFFECTED_USER" ColumnName="AFFECTED_USER" />
                 <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
                 <ScalarProperty Name="ACTION" ColumnName="ACTION" />
                 <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />

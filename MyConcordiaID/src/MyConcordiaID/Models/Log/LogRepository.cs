@@ -22,18 +22,32 @@ namespace MyConcordiaID.Models.Log
             var logs = _database.LOGs
                 .Select(log => new
                 {
-                    log.ID_PK,
                     log.NETNAME,
                     log.ACTION,
+                    log.AFFECTED_USER,
                     log.TIMESTAMP
                 })
-                .OrderByDescending(log => log.ID_PK)
+                .OrderByDescending(log => log.TIMESTAMP)
                 .Take(count);
 
             return logs;
+        }
 
+        public IEnumerable<dynamic> GetStudentLogs(string netName)
+        {
+            var logs = _database.LOGs
+                .Where(s => s.NETNAME == netName || s.AFFECTED_USER == netName)
+                .Select(log => new
+                {
+                    log.NETNAME,
+                    log.ACTION,
+                    log.AFFECTED_USER,
+                    log.TIMESTAMP
+                })
+                .OrderByDescending(log => log.TIMESTAMP)
+                .Take(10);
 
-            throw new NotImplementedException();
+            return logs;
         }
 
         /// <summary>
@@ -41,15 +55,18 @@ namespace MyConcordiaID.Models.Log
         /// </summary>
         /// <param name="netname"></param>
         /// <param name="action"></param>
-        public void Logger(string netname, Log.Action action)
+        /// <param name="affectedUser"></param>
+        public void Logger(string netname, Log.Action action, string affectedUser)
         {
 
+           
             LOG currentLog = new LOG
             {
                 NETNAME = netname,
                 ACTION = action.ToString(),
-                TIMESTAMP = DateTime.UtcNow
-     
+                TIMESTAMP = DateTime.UtcNow,
+                AFFECTED_USER = affectedUser
+
             };
 
             _database.LOGs.Add(currentLog);
