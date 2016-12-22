@@ -209,7 +209,8 @@ html, body {
     margin-left: 8px; }
 
 #studentModal {
-  min-width: 650px; }
+  min-width: 650px;
+  color: white; }
   #studentModal .modal-element #galleryContainer {
     max-height: 200px;
     position: relative;

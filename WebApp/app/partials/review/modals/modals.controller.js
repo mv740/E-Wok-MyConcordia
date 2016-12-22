@@ -12,6 +12,7 @@ function ModalsCtrl($scope, studentService) {
 
     modals.sendValidation = sendValidation;
     modals.enlargeImage = enlargeImage;
+    modals.loadLogs = loadLogs;
     modals.loading = true;
     modals.emptyProfilePicture = 'images/empty-profile.png';
 
@@ -43,6 +44,12 @@ function ModalsCtrl($scope, studentService) {
 
     function enlargeImage(image) {
         modals.enlargedImage = image;
+    }
+
+    function loadLogs(){
+        studentService.getStudentLogs(modals.student.netname).then(function(value){
+            modals.logs = value.data;
+        });
     }
 
 }

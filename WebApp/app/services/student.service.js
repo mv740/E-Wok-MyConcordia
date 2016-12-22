@@ -11,6 +11,7 @@ function studentService($http, $q, myConfig) {
     var service = {
         sendValidation: sendValidation,
         getStudentPictures: getStudentPictures,
+        getStudentLogs: getStudentLogs,
         getStudents: getStudents,
         search: search
     };
@@ -49,6 +50,16 @@ function studentService($http, $q, myConfig) {
         var deferred = $q.defer();
 
         $http.get(myConfig.baseUrl + myConfig.pendingPicture + id).then(function (value) {
+            deferred.resolve(value);
+        });
+
+        return deferred.promise;
+    }
+
+    function getStudentLogs(netname) {
+        var deferred = $q.defer();
+
+        $http.get(myConfig.baseUrl + myConfig.getLogs + netname).then(function (value) {
             deferred.resolve(value);
         });
 
