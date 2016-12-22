@@ -22,6 +22,7 @@ using Microsoft.AspNet.Identity;
 using MyConcordiaID.Models.Log;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
+using MyConcordiaID.Models.Graduation;
 
 namespace MyConcordiaID
 {
@@ -87,6 +88,7 @@ namespace MyConcordiaID
             services.AddSingleton<IStudentRepository, StudentRepository>();
             services.AddSingleton<IAdminRepository, AdminRepository>();
             services.AddSingleton<ILogRepository, LogRepository>();
+            services.AddSingleton<IGraduationRepository, GraduationRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

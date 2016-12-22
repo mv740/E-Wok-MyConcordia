@@ -8,19 +8,20 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace MyConcordiaID.Controllers
-{
+{   
+
     [Authorize]
     [Route("api/[controller]")]
     public class LogController : Controller
     {
 
         private readonly DatabaseEntities _database;
-        private ILogRepository LogRepo { get; set; }
+        private ILogRepository _logRepo { get; set; }
 
 
         public LogController(ILogRepository logs, DatabaseEntities context)
         {
-            LogRepo = logs;
+            _logRepo = logs;
             _database = context;
         }
 
@@ -29,7 +30,7 @@ namespace MyConcordiaID.Controllers
         [HttpGet]
         public IActionResult GetLatest50()
         {
-            return new ObjectResult(LogRepo.GetLalestLogs(50));
+            return new ObjectResult(_logRepo.GetLalestLogs(50));
         }
 
         [AllowAnonymous]
@@ -37,7 +38,7 @@ namespace MyConcordiaID.Controllers
         [Route("{value}")]
         public IActionResult GetLatestLogs(int value)
         {
-            return new ObjectResult(LogRepo.GetLalestLogs(value));
+            return new ObjectResult(_logRepo.GetLalestLogs(value));
         }
 
         [AllowAnonymous]
@@ -45,7 +46,7 @@ namespace MyConcordiaID.Controllers
         [Route("{netname}")]
         public IActionResult GetStudentLogs(string netName)
         {
-            return new ObjectResult(LogRepo.GetStudentLogs(netName));
+            return new ObjectResult(_logRepo.GetStudentLogs(netName));
         }
 
     }
