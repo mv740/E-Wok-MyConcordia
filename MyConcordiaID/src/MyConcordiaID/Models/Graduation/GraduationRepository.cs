@@ -17,7 +17,7 @@ namespace MyConcordiaID.Models.Graduation
 
             MarshallingCard card = new MarshallingCard
             {
-                Semester = "Winter",
+                Semester = "Fall",
                 Year = 2016,
                 MarshallingCode = "01-0001Z",
                 Department = "Computer Science & Software Engineering",
