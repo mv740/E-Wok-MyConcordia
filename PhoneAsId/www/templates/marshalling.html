@@ -1,35 +1,35 @@
 <ion-view>
-  <ion-content ng-controller="IdCtrl">
+  <ion-content>
 
     <!-- TODO make pretty css master  --!>
 
     <!-- template used if for portrait -->
-    <div ng-if="screenOrientation == 'portrait-primary'" class="vertical">
-      <p>Concordia University {{semester}} Convocation {{year}}</p>
-      <p>Marshalling Card {{marshallingCode}}</p>
-      <p>{{firstname}}</p>
-      <p>{{lastname}}</p>
-      <p>{{department}}</p>
-      <p>{{location}}</p>
-      <p>{{dateTime}}</p>
-      <p>{{degree}}</p>
+    <div ng-if="vm.screenOrientation == 'portrait-primary'" class="vertical">
+      <p>Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
+      <p>Marshalling Card {{vm.marshallingCode}}</p>
+      <p>{{vm.firstname}}</p>
+      <p>{{vm.lastname}}</p>
+      <p>{{vm.department}}</p>
+      <p>{{vm.location}}</p>
+      <p>{{vm.dateTime}}</p>
+      <p>{{vm.degree}}</p>
       <p>BARCODE</p>
-      <p>{{sid}}</p>
+      <p>{{vm.sid}}</p>
     </div>
 
     <!-- template used if for landscape -->
-    <div ng-if="screenOrientation == 'landscape-secondary' || screenOrientation == 'landscape-primary'"
+    <div ng-if="vm.screenOrientation == 'landscape-secondary' || vm.screenOrientation == 'landscape-primary'"
          class="horizontal">
-      <p>Concordia University {{semester}} Convocation {{year}}</p>
-      <p>Marshalling Card {{marshallingCode}}</p>
-      <p>{{firstname}}</p>
-      <p>{{lastname}}</p>
-      <p>{{department}}</p>
-      <p>{{location}}</p>
-      <p>{{dateTime}}</p>
-      <p>{{degree}}</p>
+      <p>Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
+      <p>Marshalling Card {{vm.marshallingCode}}</p>
+      <p>{{vm.firstname}}</p>
+      <p>{{vm.lastname}}</p>
+      <p>{{vm.department}}</p>
+      <p>{{vm.location}}</p>
+      <p>{{vm.dateTime}}</p>
+      <p>{{vm.degree}}</p>
       <p>BARCODE</p>
-      <p>{{sid}}</p>
+      <p>{{vm.sid}}</p>
     </div>
 
   </ion-content>

@@ -3,15 +3,26 @@
  *
  * Controller for both student id page and marshalling card info page
  */
+(function () {
+  'use strict';
 
-angular.module('starter.controllers')
+  angular
+    .module('starter')
+    .controller('IdController', IdController);
 
-  .controller('IdCtrl', function ($scope, $window, $state, $http, $rootScope, StudentService) {
-    $scope.showMarshallingButton;
-    $scope.studentInfo = '';
-    $scope.marshallingInfo = '';
+  IdController.$inject = ['$http','$rootScope','$window','$state','StudentService'];
+
+  function IdController($http, $rootScope, $window, $state, StudentService) {
+    var vm = this;
+
+    vm.showMarshallingButton;
+    vm.studentInfo = {};
+    vm.marshallingInfo = {};
+    vm.loadMarshallingCard =  loadMarshallingCard;
+
     getStudentIdInfo();
     getMarshallingCardInfo();
+    /////////////////////////////////////
 
     /**
      * Makes a rest api call using the StudentService  object. This is used to get the student information
@@ -25,28 +36,28 @@ angular.module('starter.controllers')
           console.log('fetchStudentIdInfo data success');
           console.log(data);
 
-          $scope.studentInfo = data;
+          vm.studentInfo = data;
 
-          $scope.netname = data.netname;
-          $scope.valid = data.valid;
-          $scope.pending = data.pending;
+          vm.valid = data.valid;
+          vm.netname = data.netname;
+          vm.pending = data.pending;
 
-          if($scope.valid == false && $scope.pending == false)
+          if(vm.valid == false && vm.pending == false)
           {
             $state.go('app.camera');
           }
 
-          $scope.updatepicture = data.updatepicture;
+          vm.updatepicture = data.updatepicture;
           $rootScope.canUpdate = data.updatepicture;
 
           //variables to be displayed on id
-          $scope.profilepicture = data.profilepicture;
-          $scope.firstname = data.firstname;
-          $scope.lastname = data.lastname;
-          $scope.dob = data.dob;
-          $scope.id = data.id;
-          $scope.ugradstatus = data.ugradstatus;
-          $scope.expiredate = data.expiredate;
+          vm.profilepicture = data.profilepicture;
+          vm.firstname = data.firstname;
+          vm.lastname = data.lastname;
+          vm.dob = data.dob;
+          vm.id = data.id;
+          vm.ugradstatus = data.ugradstatus;
+          vm.expiredate = data.expiredate;
         })
         .error(function (error) {
           console.log('fetchStudentIdInfo data error');
@@ -65,22 +76,22 @@ angular.module('starter.controllers')
           console.log('fetchMarshallingCardInfo data success');
           console.log(data);
 
-          $scope.marshallingInfo = data;
+          vm.marshallingInfo = data;
 
           if(data.status == true) {
             console.log('fetchMarshallingCardInfo status true');
-            $scope.showMarshallingButton = true;
+            vm.showMarshallingButton = true;
 
 
             //variables to be displayed on marshalling card info page
-            $scope.semester = data.card.semester;
-            $scope.year = data.card.year;
-            $scope.marshallingCode = data.card.marshallingCode;
-            $scope.department = data.card.department;
-            $scope.location = data.card.location;
-            $scope.dateTime = data.card.dateTime;
-            $scope.degree = data.card.degree;
-            $scope.sid = data.card.sid;
+            vm.semester = data.card.semester;
+            vm.year = data.card.year;
+            vm.marshallingCode = data.card.marshallingCode;
+            vm.department = data.card.department;
+            vm.location = data.card.location;
+            vm.dateTime = data.card.dateTime;
+            vm.degree = data.card.degree;
+            vm.sid = data.card.sid;
           }
         })
         .error(function (error) {
@@ -88,7 +99,7 @@ angular.module('starter.controllers')
         });
     }
 
-    $scope.loadMarshallingCard = function() {
+    function loadMarshallingCard() {
       $state.go('app.marshalling');
     }
 
@@ -104,13 +115,14 @@ angular.module('starter.controllers')
     });
 
 
-    $scope.screenOrientation = screen.orientation.type;
+    vm.screenOrientation = screen.orientation.type;
 
     //changes the template view used when the phones orientation changes
     $window.addEventListener("orientationchange", function () {
       console.log(screen.orientation.type); //"portrait-primary" or "landscape-secondary"
-      $scope.screenOrientation = screen.orientation.type;
+      vm.screenOrientation = screen.orientation.type;
       $state.reload();
     });
 
-  })
+  }
+})();

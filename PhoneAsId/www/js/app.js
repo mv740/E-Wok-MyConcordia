@@ -69,7 +69,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
         views: {
           'menuContent': {
             templateUrl: 'templates/id.html',
-            controller: 'IdCtrl',
+            controller: 'IdController as vm',
             css: 'css/id.css'
           }
         }
@@ -79,7 +79,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
         views: {
           'menuContent': {
             templateUrl: 'templates/marshalling.html',
-            controller: 'IdCtrl',
+            controller: 'IdController as vm',
           }
         }
       })
@@ -109,19 +109,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
         views: {
           'menuContent': {
             templateUrl: 'templates/login.html',
-            controller: 'LoginCtrl',
+            controller: 'LoginController as vm',
             css: 'css/login.css'
-          }
-        }
-      })
-
-      .state('app.account', {
-        url: "/account",
-        cache: false,
-        views: {
-          'menuContent': {
-            templateUrl: "templates/account.html",
-            controller: 'AccountCtrl'
           }
         }
       });

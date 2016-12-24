@@ -1,41 +1,41 @@
 <ion-view >
-  <ion-content ng-controller="IdCtrl">
+  <ion-content>
 
     <div class="overseeing">
       <!-- template used if for portrait -->
-      <div ng-if="screenOrientation == 'portrait-primary'" class="vertical">
+      <div ng-if="vm.screenOrientation == 'portrait-primary'" class="vertical">
 
         <div class="main_content">
 
           <div class="picture">
             <!-- display picture if it's there. If pending review, display pending approval pic. else, placeholder.-->
-            <div ng-if="valid">
-             <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
+            <div ng-if="vm.valid">
+             <img ng-src="data:image/PNG;base64,{{vm.profilepicture}}"width = "200" height = "200">
             </div>
-            <div ng-if="!valid && pending">
+            <div ng-if="!vm.valid && vm.pending">
               <img src="img/pending_approval.jpg" width = "200" height = "200">
             </div>
-            <div ng-if="!valid && !pending">
+            <div ng-if="!vm.valid && !vm.pending">
               <img src="img/placeholder_profile_pic.jpg" width = "200" height = "200">
             </div>
           </div>
 
           <div class="student_info">
-            <p>{{firstname}}firstname</p>
-            <p>{{lastname}}lastname</p>
-            <p>{{dob}}December 25</p>
-            <p>{{id}} 99999999</p>
+            <p>{{vm.firstname}}</p>
+            <p>{{vm.lastname}}</p>
+            <p>{{vm.dob}}</p>
+            <p>{{vm.id}} </p>
 
-            <div ng-show="showMarshallingButton">
-              <button ng-click="loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
+            <div ng-show="vm.showMarshallingButton">
+              <button ng-click="vm.loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
             </div>
 
           </div>
         </div>
 
           <div class="footer">
-            <p>{{ugradstatus}}</p>
-            <p>{{expiredate}}</p>
+            <p>{{vm.ugradstatus}}</p>
+            <p>{{vm.expiredate}}</p>
           </div>
 
           <div class="barcode">
@@ -44,37 +44,37 @@
       </div>
 
         <!-- template used if for landscape -->
-        <div ng-if="screenOrientation == 'landscape-secondary' || screenOrientation == 'landscape-primary'" class="horizontal">
+        <div ng-if="vm.screenOrientation == 'landscape-secondary' || vm.screenOrientation == 'landscape-primary'" class="horizontal">
           <div class="left">
             <div class="main_content">
               <div class="picture">
                 <!-- display picture if it's there. If pending review, display pending approval pic. else, placeholder.-->
-                <div ng-if="valid">
-                  <img ng-src="data:image/PNG;base64,{{profilepicture}}"width = "200" height = "200">
+                <div ng-if="vm.valid">
+                  <img ng-src="data:image/PNG;base64,{{vm.profilepicture}}"width = "200" height = "200">
                 </div>
-                <div ng-if="!valid && pending">
+                <div ng-if="!vm.valid && vm.pending">
                   <img src="img/pending_approval.jpg" width = "200" height = "200">
                 </div>
-                <div ng-if="!valid && !pending">
+                <div ng-if="!vm.valid && !vm.pending">
                   <img src="img/placeholder_profile_pic.jpg" width = "200" height = "200">
                 </div>
               </div>
 
               <div class="student_info">
-                <p>{{firstname}}firstname</p>
-                <p>{{lastname}}lastname</p>
-                <p>{{dob}}December 25</p>
-                <p>{{id}}99999999</p>
+                <p>{{vm.firstname}}</p>
+                <p>{{vm.lastname}}</p>
+                <p>{{vm.dob}}</p>
+                <p>{{vm.id}}</p>
 
-                <div ng-show="showMarshallingButton">
-                  <button ng-click="loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
+                <div ng-show="vm.showMarshallingButton">
+                  <button ng-click="vm.loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
                 </div>
 
               </div>
             </div>
             <div class="footer">
-              <p>{{ugradstatus}}</p>
-              <p>{{expiredate}}</p>
+              <p>{{vm.ugradstatus}}</p>
+              <p>{{vm.expiredate}}</p>
             </div>
           </div>
           <div class="barcode">

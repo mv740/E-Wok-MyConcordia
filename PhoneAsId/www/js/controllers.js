@@ -10,49 +10,16 @@ angular.module('starter.controllers', ['ionic', 'starter.controllers', 'starter.
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  // // Form data for the login modal
-  // $scope.loginData = {};
-  //
-  // // Create the login modal that we will use later
-  // $ionicModal.fromTemplateUrl('templates/login.html', {
-  //   scope: $scope
-  // }).then(function (modal) {
-  //   $scope.modal = modal;
-  // });
-  //
-  // // Triggered in the login modal to close it
-  // $scope.closeLogin = function () {
-  //   $scope.modal.hide();
-  // };
-  //
-  // // Open the login modal
-  // $scope.login = function () {
-  //   $scope.modal.show();
-  // };
-  //
-  // // Perform the login action when the user submits the login form
-  // $scope.doLogin = function () {
-  //   console.log('Doing login', $scope.loginData);
-  //   var url = serverName + "student";
-  //   $http.get(url).success(function (response) {
-  //     alert(response[0].firstName);
-  //   });
-  //   // Simulate a login delay. Remove this and replace with your login
-  //   // code if using a login system
-  //   $timeout(function () {
-  //     $scope.closeLogin();
-  //   }, 1000);
-  // };
-}])
-
-  .controller('LoginCtrl', ['$log', '$scope', '$state', '$ionicPlatform', 'ngOidcClient','$http', 'AuthenticationService', function ($log, $scope, $state, $ionicPlatform, ngOidcClient,$http,AuthenticationService) {
-  $log.log('LoginCtrl loaded');
-
-  $scope.apptitle = "OIDC Demo";
-  $scope.loginEnabled = false;
- 
-  $scope.logIn = function () {
-    AuthenticationService.signIn();
-  };//
-
 }]);
+
+//   .controller('LoginCtrl', ['$log', '$scope', '$state', '$ionicPlatform', 'ngOidcClient','$http', 'AuthenticationService', function ($log, $scope, $state, $ionicPlatform, ngOidcClient,$http,AuthenticationService) {
+//   $log.log('LoginCtrl loaded');
+//
+//   $scope.apptitle = "OIDC Demo";
+//   $scope.loginEnabled = false;
+//
+//   $scope.logIn = function () {
+//     AuthenticationService.signIn();
+//   };//
+//
+// }]);
