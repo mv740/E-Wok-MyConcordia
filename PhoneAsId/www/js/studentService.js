@@ -16,8 +16,19 @@ angular.module('starter.services', [])
      */
 
     StudentService.fetchStudentIdInfo = function () {
-      console.log('getStudentInfo called');
+      console.log('fetchStudentIdInfo called');
       return $http.get(urlBase + "/student/account");
+    };
+
+    /**
+     * Rest api call for marshalling card information that will be displayed on the marshalling card info page
+     *
+     * @return HttpPromise which will on success contain a JSON with marshalling card info information
+     */
+
+    StudentService.fetchMarshallingCardInfo = function () {
+      console.log('fetchMarshallingCardInfo called');
+      return $http.get(urlBase + "/graduation");
     };
 
     return StudentService;

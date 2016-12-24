@@ -1,12 +1,17 @@
 /**
  * Created by NSPACE on 11/11/2016.
+ *
+ * Controller for both student id page and marshalling card info page
  */
 
 angular.module('starter.controllers')
-  
+
   .controller('IdCtrl', function ($scope, $window, $state, $http, $rootScope, StudentService) {
+    $scope.showMarshallingButton;
     $scope.studentInfo = '';
+    $scope.marshallingInfo = '';
     getStudentIdInfo();
+    getMarshallingCardInfo();
 
     /**
      * Makes a rest api call using the StudentService  object. This is used to get the student information
@@ -17,7 +22,7 @@ angular.module('starter.controllers')
     function getStudentIdInfo() {
       StudentService.fetchStudentIdInfo()
         .success(function (data) {
-          console.log('data success');
+          console.log('fetchStudentIdInfo data success');
           console.log(data);
 
           $scope.studentInfo = data;
@@ -25,12 +30,12 @@ angular.module('starter.controllers')
           $scope.netname = data.netname;
           $scope.valid = data.valid;
           $scope.pending = data.pending;
-          
+
           if($scope.valid == false && $scope.pending == false)
           {
             $state.go('app.camera');
           }
-          
+
           $scope.updatepicture = data.updatepicture;
           $rootScope.canUpdate = data.updatepicture;
 
@@ -44,8 +49,47 @@ angular.module('starter.controllers')
           $scope.expiredate = data.expiredate;
         })
         .error(function (error) {
-          console.log('data error');
+          console.log('fetchStudentIdInfo data error');
         });
+    }
+
+    /**
+     * Makes a rest api call using the StudentService  object. This is used to get the marshalling card information
+     * that will be displayed on the marshalling card info page. If a student has a valid marshalling card available a button
+     * from the regular student id to the marshalling card will be shown.
+     */
+
+    function getMarshallingCardInfo() {
+      StudentService.fetchMarshallingCardInfo()
+        .success(function (data) {
+          console.log('fetchMarshallingCardInfo data success');
+          console.log(data);
+
+          $scope.marshallingInfo = data;
+
+          if(data.status == true) {
+            console.log('fetchMarshallingCardInfo status true');
+            $scope.showMarshallingButton = true;
+
+
+            //variables to be displayed on marshalling card info page
+            $scope.semester = data.card.semester;
+            $scope.year = data.card.year;
+            $scope.marshallingCode = data.card.marshallingCode;
+            $scope.department = data.card.department;
+            $scope.location = data.card.location;
+            $scope.dateTime = data.card.dateTime;
+            $scope.degree = data.card.degree;
+            $scope.sid = data.card.sid;
+          }
+        })
+        .error(function (error) {
+          console.log('fetchMarshallingCardInfo data error');
+        });
+    }
+
+    $scope.loadMarshallingCard = function() {
+      $state.go('app.marshalling');
     }
 
     $http.get("https://myconcordiaid.azurewebsites.net/api/student/UpdatePeriod").then(function successCallback(response) {
@@ -68,5 +112,5 @@ angular.module('starter.controllers')
       $scope.screenOrientation = screen.orientation.type;
       $state.reload();
     });
-    
+
   })

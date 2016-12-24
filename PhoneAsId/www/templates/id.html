@@ -25,6 +25,11 @@
             <p>{{lastname}}lastname</p>
             <p>{{dob}}December 25</p>
             <p>{{id}} 99999999</p>
+
+            <div ng-show="showMarshallingButton">
+              <button ng-click="loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
+            </div>
+
           </div>
         </div>
 
@@ -60,6 +65,11 @@
                 <p>{{lastname}}lastname</p>
                 <p>{{dob}}December 25</p>
                 <p>{{id}}99999999</p>
+
+                <div ng-show="showMarshallingButton">
+                  <button ng-click="loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
+                </div>
+
               </div>
             </div>
             <div class="footer">

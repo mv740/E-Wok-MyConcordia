@@ -1,0 +1,36 @@
+<ion-view>
+  <ion-content ng-controller="IdCtrl">
+
+    <!-- TODO make pretty css master  --!>
+
+    <!-- template used if for portrait -->
+    <div ng-if="screenOrientation == 'portrait-primary'" class="vertical">
+      <p>Concordia University {{semester}} Convocation {{year}}</p>
+      <p>Marshalling Card {{marshallingCode}}</p>
+      <p>{{firstname}}</p>
+      <p>{{lastname}}</p>
+      <p>{{department}}</p>
+      <p>{{location}}</p>
+      <p>{{dateTime}}</p>
+      <p>{{degree}}</p>
+      <p>BARCODE</p>
+      <p>{{sid}}</p>
+    </div>
+
+    <!-- template used if for landscape -->
+    <div ng-if="screenOrientation == 'landscape-secondary' || screenOrientation == 'landscape-primary'"
+         class="horizontal">
+      <p>Concordia University {{semester}} Convocation {{year}}</p>
+      <p>Marshalling Card {{marshallingCode}}</p>
+      <p>{{firstname}}</p>
+      <p>{{lastname}}</p>
+      <p>{{department}}</p>
+      <p>{{location}}</p>
+      <p>{{dateTime}}</p>
+      <p>{{degree}}</p>
+      <p>BARCODE</p>
+      <p>{{sid}}</p>
+    </div>
+
+  </ion-content>
+</ion-view>
