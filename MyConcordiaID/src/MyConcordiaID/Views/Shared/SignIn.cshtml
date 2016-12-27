@@ -1,15 +1,25 @@
 ﻿@using Microsoft.AspNetCore.Http.Authentication
 @model IEnumerable<AuthenticationDescription>
-<div class="jumbotron">
-    <h1>Authentication</h1>
-    <p class="lead text-left">Sign in using one of these external providers:</p>
+<div class="container header-margin">
+    <div>
+        <div class="row extra-bottom-padding">
+            <div>
+                <img class="center-logo" src="~/images/Concordia_University_logo.svg" alt="Concordia University logo" />
 
-    @foreach (var description in Model)
-    {
-        <form action="/signin" method="post">
-            <input type="hidden" name="Provider" value="@description.AuthenticationScheme" />
-            <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
-            <button class="btn btn-lg btn-success" type="submit">Connect using @description.DisplayName</button>
-        </form>
-    }
+            </div>
+        </div>
+        <div class="row">
+            <div class="center">
+                @foreach (var description in Model)
+            {
+                    <form action="/signin" method="post">
+                        <input type="hidden" name="Provider" value="@description.AuthenticationScheme" />
+                        <input type="hidden" name="ReturnUrl" value="@ViewBag.ReturnUrl" />
+                        <button class="btn concordia center" type="submit">Continue</button>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+
 </div>
