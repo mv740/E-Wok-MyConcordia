@@ -5,31 +5,42 @@
 
     <!-- template used if for portrait -->
     <div ng-if="vm.screenOrientation == 'portrait-primary'" class="vertical">
-      <p>Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
-      <p>Marshalling Card {{vm.marshallingCode}}</p>
-      <p>{{vm.firstname}}</p>
-      <p>{{vm.lastname}}</p>
-      <p>{{vm.department}}</p>
-      <p>{{vm.location}}</p>
-      <p>{{vm.dateTime}}</p>
-      <p>{{vm.degree}}</p>
-      <p>BARCODE</p>
-      <p>{{vm.sid}}</p>
+      <div class="marshData">
+        <p>Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
+        <p>Marshalling Card {{vm.marshallingCode}}</p>
+        <p>{{vm.firstname}}</p>
+        <p>{{vm.lastname}}</p>
+        <p>{{vm.department}}</p>
+        <p>{{vm.location}}</p>
+        <p>{{vm.dateTime}}</p>
+        <p>{{vm.degree}}</p>
+      </div>
+
+      <div class="barcode">BARCODE</div>
+
+      <div class="sid">
+        <p>{{vm.sid}}</p>
+      </div>
     </div>
 
     <!-- template used if for landscape -->
     <div ng-if="vm.screenOrientation == 'landscape-secondary' || vm.screenOrientation == 'landscape-primary'"
          class="horizontal">
-      <p>Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
-      <p>Marshalling Card {{vm.marshallingCode}}</p>
-      <p>{{vm.firstname}}</p>
-      <p>{{vm.lastname}}</p>
-      <p>{{vm.department}}</p>
-      <p>{{vm.location}}</p>
-      <p>{{vm.dateTime}}</p>
-      <p>{{vm.degree}}</p>
-      <p>BARCODE</p>
-      <p>{{vm.sid}}</p>
+      <div class="marshData">
+        <p>Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
+        <p>Marshalling Card {{vm.marshallingCode}}</p>
+        <p>{{vm.firstname}}</p>
+        <p>{{vm.lastname}}</p>
+        <p>{{vm.department}}</p>
+        <p>{{vm.location}}</p>
+        <p>{{vm.dateTime}}</p>
+        <p>{{vm.degree}}</p>
+      </div>
+
+      <div class="barcode">BARCODE</div>
+      <div class="sid">
+        <p>{{vm.sid}}</p>
+      </div>
     </div>
 
   </ion-content>

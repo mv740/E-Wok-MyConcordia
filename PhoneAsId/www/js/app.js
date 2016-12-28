@@ -80,6 +80,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
           'menuContent': {
             templateUrl: 'templates/marshalling.html',
             controller: 'IdController as vm',
+            css: 'css/marshalling.css'
           }
         }
       })
