@@ -19,6 +19,7 @@
     "angular-css": "^1.0.8",
     "ng-eternicode-datepicker": "0.1.3",
     "oidc-client": "^1.2.0",
-    "es6-shim": "^0.35.1"
+    "es6-shim": "^0.35.1",
+    "angular-tooltips": "^1.1.8"
   }
 }

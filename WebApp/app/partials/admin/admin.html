@@ -4,69 +4,79 @@
     </div>
 
     <div class="col-sm-push-3 col-sm-6">
+        <div>
+            <h3>Update Picture Valid Period</h3>
+            <br/>
+        </div>
 
-
-            <div>
-                <h3>Update Picture Valid Period</h3>
-                <br/>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="AcademicYear" class="col-sm-5 control-label">Academic Year</label>
+                <div class="col-sm-7">
+                    <input id="AcademicYear"
+                           type="text"
+                           placeholder="2016"
+                           class="form-control"
+                           ng-model="admin.academicYear"
+                           maxlength="4"
+                           tooltips tooltip-template="Required"
+                           tooltips tooltip-side="right"
+                           tooltips tooltip-hidden="{{admin.yearEntered}}"
+                           tooltips tooltip-size/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dateFrom" class="col-sm-5 control-label">From</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           class="form-control date"
+                           id="dateFrom"
+                           placeholder="From"
+                           ng-click="admin.dateFrom=true"
+                           datepicker-popup="{{admin.format}}"
+                           ng-model="admin.dtFrom"
+                           is-open="admin.dateFrom"
+                           datepicker-options="admin.dateOptions"
+                           date-disabled="disabled(date, mode)"
+                           ng-required="true"
+                           close-text="Close"
+                           tooltips tooltip-template="Required"
+                           tooltips tooltip-side="right"
+                           tooltips tooltip-hidden="{{admin.startDateEntered}}">
+                </div>
             </div>
 
+            <div class="form-group">
+                <label for="dateTo" class="col-sm-5 control-label">To</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           class="form-control date"
+                           id="dateTo"
+                           placeholder="To"
+                           ng-click="admin.dateTo=true"
+                           datepicker-popup="{{admin.format}}"
+                           ng-model="admin.dtTo"
+                           is-open="admin.dateTo"
+                           datepicker-options="admin.dateOptions"
+                           date-disabled="disabled(date, mode)"
+                           ng-required="true"
+                           close-text="Close"
+                           toolt
+                           tooltips tooltip-template="Required"
+                           tooltips tooltip-side="right"
+                           tooltips tooltip-hidden="{{admin.endDateEntered}}">
 
-            <form class="form-horizontal">
-                        <div class="form-group">
-                            <label for="AcademicYear" class="col-sm-5 control-label">Academic Year</label>
-                            <div class="col-sm-7">
-                                <input id="AcademicYear" type="text" placeholder="2016" class="form-control"
-                                       ng-model="admin.academicYear" maxlength="4">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="dateFrom" class="col-sm-5 control-label">From</label>
-                            <div class="col-sm-7">
-                                <input type="text"
-                                       class="form-control date"
-                                       id="dateFrom"
-                                       placeholder="From"
-                                       ng-click="admin.dateFrom=true"
-                                       datepicker-popup="{{admin.format}}"
-                                       ng-model="admin.dtFrom"
-                                       is-open="admin.dateFrom"
-                                       datepicker-options="admin.dateOptions"
-                                       date-disabled="disabled(date, mode)"
-                                       ng-required="true"
-                                       close-text="Close">
-                            </div>
-                        </div>
+                </div>
+            </div>
 
-                        <div class="form-group">
-                            <label for="dateTo" class="col-sm-5 control-label">To</label>
-                            <div class="col-sm-7">
-                                <input type="text"
-                                       class="form-control date"
-                                       id="dateTo"
-                                       placeholder="To"
-                                       ng-click="admin.dateTo=true"
-                                       datepicker-popup="{{admin.format}}"
-                                       ng-model="admin.dtTo"
-                                       is-open="admin.dateTo"
-                                       datepicker-options="admin.dateOptions"
-                                       date-disabled="disabled(date, mode)"
-                                       ng-required="true"
-                                       close-text="Close">
-                            </div>
-                        </div>
-
-                        <div class="form-group" style="text-align: left;">
-                            <div class="col-sm-push-5 col-sm-7">
-                                <button ng-click="admin.submit()" data-loading-text="Loading..."
-                                        class="button3D">{{ admin.submitButton }}
-                                </button>
-                            </div>
-                        </div>
-
-            </form>
-
+            <div class="form-group" style="text-align: left;">
+                <div class="col-sm-push-5 col-sm-7">
+                    <button ng-click="admin.submit()" data-loading-text="Loading..."
+                            class="button3D">{{ admin.submitButton }}
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-
 </div>
 

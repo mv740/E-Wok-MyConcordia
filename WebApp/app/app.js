@@ -8,7 +8,8 @@ angular.module('myApp', [
     'ngHamburger',
     'ui.bootstrap',
     'angularCSS',
-    'ng.oidcclient'
+    'ng.oidcclient',
+    '720kb.tooltips'
 
 ]).constant("myConfig", {
     "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
