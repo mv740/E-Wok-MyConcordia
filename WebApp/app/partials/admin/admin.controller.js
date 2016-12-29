@@ -5,14 +5,29 @@
         .module('myApp')
         .controller('AdminController', AdminController);
 
-    AdminController.$inject = ['$http', 'myConfig'];
+    AdminController.$inject = ['$http', 'myConfig', 'studentService'];
 
-    function AdminController($http, myConfig) {
+    function AdminController($http, myConfig, studentService) {
         var self = this;
+
+        var defaultYear = "undefined";
+        var defaultStartDate = "18-12-2016";
+        var defaultEndDate = "24-18-2016";
 
         self.yearEntered = false;
         self.startDateEntered = false;
         self.endDateEntered = false;
+
+        studentService.getUpdatePeriod().then(function(value) {
+            if (value.data.year != defaultYear && value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
+                self.currentUpdatePeriod = "Academic year " + value.data.year + " from "
+                    + value.data.startDate + " to "
+                    + value.data.endDate;
+            }
+            else {
+                self.currentUpdatePeriod = "There is no update period currently set";
+            }
+        });
 
         self.submitButton = "Submit";
         self.someProp = 'Check This value displays.. confirms controller initalised';
@@ -69,5 +84,6 @@
             }
 
         };
+
     }
 })();

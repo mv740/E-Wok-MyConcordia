@@ -18,7 +18,8 @@ angular.module('myApp', [
     "pendingPicture": "student/PendingPicture/",
     "picturePeriod": "admin/picturePeriod",
     "getStudents": "student",
-    "search": "student/search"
+    "search": "student/search",
+    "getUpdatePeriod": "student/UpdatePeriod"
 
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
