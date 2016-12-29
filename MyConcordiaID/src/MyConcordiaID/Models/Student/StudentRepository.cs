@@ -34,7 +34,7 @@ namespace MyConcordiaID.Models.Student
         {
             var student = _database.STUDENTS
                  .Where(s => s.NETNAME == netName)
-                 .Select(s=> new
+                 .Select(s => new
                  {
                      s.NETNAME,
                      s.ID,
@@ -46,7 +46,7 @@ namespace MyConcordiaID.Models.Student
                      s.PROFILEPICTURE,
                      s.UGRADSTATUS,
                      s.EXPIREDATE
-                     
+
                  })
                  .SingleOrDefault();
 
@@ -56,7 +56,8 @@ namespace MyConcordiaID.Models.Student
         public dynamic GetAll()
         {
 
-            var students = _database.STUDENTS.Select(s => new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME });
+            var students = _database.STUDENTS
+                .Select(s => new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME });
 
             return students;
         }
@@ -120,7 +121,7 @@ namespace MyConcordiaID.Models.Student
                         STATUS = PictureHelper.GetArchivedStatus(),
                         TIMESTAMP = DateTime.Now,
                         PICTURE = student.PROFILEPICTURE,
-                       
+
 
                     };
 
@@ -152,33 +153,7 @@ namespace MyConcordiaID.Models.Student
             student.PENDING = false;
             _database.SaveChanges();
 
-            return netName; 
-        }
-
-        public dynamic GetAllPending()
-        {
-
-            var students = _database.STUDENTS
-                 .Where(s => s.PENDING == true)
-                 .Select(s => new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME })
-                 .ToList();
-
-            return students;
-
-
-        }
-
-        public dynamic GetAllValid()
-        {
-
-            var students = _database.STUDENTS
-                 .Where(s => s.VALID == true)
-                 .Select(s => new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME })
-                 .ToList();
-
-            return students;
-
-
+            return netName;
         }
 
         public void Add(STUDENT newStudent)
@@ -235,9 +210,6 @@ namespace MyConcordiaID.Models.Student
 
             List<string> nameLists = searchOptions.name;
 
-
-
-
             IQueryable<STUDENT> student = _database.STUDENTS;
 
             //each if statement will try to build the where clauses and it only be executed when ToList() is called 
@@ -248,7 +220,7 @@ namespace MyConcordiaID.Models.Student
                     student = student.Where(s => s.ID == searchOptions.id.Value);
                 }
             }
-            if(nameLists.Count != 0)
+            if (nameLists.Count != 0)
             {
                 foreach (var name in nameLists)
                 {
@@ -275,9 +247,8 @@ namespace MyConcordiaID.Models.Student
         {
 
             var student = _database.STUDENTS
-              .Where(s => s.FIRSTNAME == firstName.ToLower() && s.LASTNAME == lastName.ToLower())
-              .FirstOrDefault();
-
+                .Where(s => s.FIRSTNAME == firstName.ToLower() && s.LASTNAME == lastName.ToLower())
+                .FirstOrDefault();
 
             return (student == null) ? false : true;
 
@@ -289,12 +260,11 @@ namespace MyConcordiaID.Models.Student
                 .Where(s => s.ID == id)
                 .FirstOrDefault();
 
-
             var studentNetname = student.NETNAME;
 
             var archivedPictures = _database.PICTUREARCHIVEs
                 .Where(p => p.NETNAME == studentNetname)
-                .Select(p=> new { p.PICTURE, p.STATUS, p.NETNAME, p.TIMESTAMP })
+                .Select(p => new { p.PICTURE, p.STATUS, p.NETNAME, p.TIMESTAMP })
                 .ToList();
 
             StudentPictures studentPictures = new StudentPictures

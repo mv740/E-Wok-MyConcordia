@@ -16,8 +16,6 @@ namespace MyConcordiaID.Models.Student
         void AddPendingPicture(string netName, byte[] picture);
         dynamic FindPendingPicture(int id);
         string ValidatePicture(PictureValidation pictureValidation);
-        dynamic GetAllPending();
-        dynamic GetAllValid();
         void Add(STUDENT student);
         PicturePeriod GetUpdatePicturePeriod();
         List<STUDENT> Search(SearchOptions searchOptions);

@@ -22,16 +22,14 @@ namespace MyConcordiaID.Controllers
     public class StudentController : Controller
     {
 
-        private readonly DatabaseEntities _database;
         private IStudentRepository _studentsRepo { get; set; }
         private ILogRepository _logRepo { get; set; }
 
 
-        public StudentController(IStudentRepository students, ILogRepository logs, DatabaseEntities context)
+        public StudentController(IStudentRepository students, ILogRepository logs)
         {
             _studentsRepo = students;
             _logRepo = logs;
-            _database = context;
         }
 
 
@@ -81,6 +79,11 @@ namespace MyConcordiaID.Controllers
         {
             var result = _studentsRepo.FindByNetName(getAuthenticatedUserNetname());
 
+            if(result == null)
+            {
+                return NotFound();
+            }
+
             return new ObjectResult(result);
         }
 
@@ -90,9 +93,11 @@ namespace MyConcordiaID.Controllers
         public ActionResult PostProfilePicture(IFormFile file)
         {
             //todo correctly handle error with correct http error code
-
-            if (file == null) throw new Exception("File is null");
-            if (file.Length == 0) throw new Exception("File is empty");
+            if(file == null || file.Length == 0)
+            {
+                //file is null or empty
+                return BadRequest(); ;
+            }
 
             //will be used to store image time
             var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
@@ -108,8 +113,6 @@ namespace MyConcordiaID.Controllers
 
                     _studentsRepo.AddPendingPicture(authenticatedUser, fileContent);
 
-
-
                 }
             }
 
@@ -122,20 +125,16 @@ namespace MyConcordiaID.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("Pending")]
-        public IActionResult GetAllPending()
-        {
-            return new ObjectResult(_studentsRepo.GetAllPending());
-        }
-
-
-        [AllowAnonymous]
-        [HttpGet]
         [Route("PendingPicture/{id}")]
         public IActionResult GetPendingPicture(int id)
         {
 
             var student = _studentsRepo.FindPendingPicture(id);
+
+            if(student == null)
+            {
+                return NotFound();
+            }
 
             return new ObjectResult(student);
         }
@@ -171,14 +170,6 @@ namespace MyConcordiaID.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("Valid")]
-        public IActionResult GetAllValid()
-        {
-            return new ObjectResult(_studentsRepo.GetAllValid());
-        }
-
-        [AllowAnonymous]
-        [HttpGet]
         [Route("UpdatePeriod")]
         public IActionResult GetUpdatePicturePeriod()
         {
@@ -195,7 +186,14 @@ namespace MyConcordiaID.Controllers
         [Route("Search")]
         public IActionResult SearchByParameters([FromBody] SearchOptions searchOptions)
         {
-            return new ObjectResult(_studentsRepo.Search(searchOptions));
+
+            var result = _studentsRepo.Search(searchOptions);
+            if(result.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(result);
             
         }
 
