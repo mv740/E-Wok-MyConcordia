@@ -11,6 +11,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.Entity;
 using MyConcordiaID.Helper;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
+using System.Threading;
+using Microsoft.AspNetCore.Http;
 
 namespace UnitTestCore
 {
@@ -105,6 +108,15 @@ namespace UnitTestCore
                 LASTNAME = lastName,
                 DOB = DateTime.UtcNow,
                 UGRADSTATUS = "U"
+            },
+                 new STUDENT
+            {
+                NETNAME = StudentHelper.GenerateNetName("Michal", "Mozniak"),
+                ID = 12345678,
+                FIRSTNAME = "Michal",
+                LASTNAME = "Wozniak",
+                DOB = DateTime.UtcNow,
+                UGRADSTATUS = "U"
             }
         };
 
@@ -141,16 +153,29 @@ namespace UnitTestCore
 
             //Assert
             Assert.IsInstanceOfType(result, typeof(NotFoundResult)); //404 status
-        
+
         }
 
         [TestMethod]
-        public void GetAccount()
+        public void GetAccountNotFound()
         {
-            //get netname from oauth connection
-            var netname = "m_woznia";
-            
-             
+            //Arrange
+            SetBasicMockDb();
+           
+            var controller = new StudentController(_repo, _logs);
+            IdentityHelper.SetUser("Michal", "Wozniak", controller);
+
+
+            //Act
+            var result = controller.GetAccount() as ObjectResult;
+
+            PrintPropertiesOfDynamicObject(result.Value);
+
+            //assert
+            Assert.AreEqual("Michal", ReflectPropertyValue(result.Value,"FIRSTNAME"));
+            Assert.AreEqual("Wozniak", ReflectPropertyValue(result.Value, "LASTNAME"));
+
+
         }
 
     }
