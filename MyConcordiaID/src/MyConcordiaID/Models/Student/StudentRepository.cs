@@ -184,24 +184,35 @@ namespace MyConcordiaID.Models.Student
                 .Where(p => p.YEAR == academicYear)
                 .FirstOrDefault();
 
-            DateTime today = DateTime.Today;
-
-
-            bool canUpdate = false;
-            if (today >= period.STARDATE && today <= period.ENDDATE)
+            if(period != null)
             {
-                canUpdate = true;
+                DateTime today = DateTime.Today;
+
+                bool canUpdate = false;
+                if (today >= period.STARDATE && today <= period.ENDDATE)
+                {
+                    canUpdate = true;
+                }
+
+                PicturePeriod picturePeriod = new PicturePeriod
+                {
+                    canUpdatePicture = canUpdate,
+                    startDate = period.STARDATE.ToString("dd-MM-yyyy"),
+                    endDate = period.ENDDATE.ToString("dd-MM-yyyy")
+                };
+
+                return picturePeriod;
             }
-
-            PicturePeriod picturePeriod = new PicturePeriod
+            else
             {
-                canUpdatePicture = canUpdate,
-                startDate = period.STARDATE.ToString("dd-MM-yyyy"),
-                endDate = period.ENDDATE.ToString("dd-MM-yyyy")
-            };
-
-            return picturePeriod;
-
+                PicturePeriod picturePeriod = new PicturePeriod
+                {
+                    canUpdatePicture = false,
+                    startDate = string.Empty,
+                    endDate = string.Empty
+                };
+                return picturePeriod;
+            }
 
         }
 
