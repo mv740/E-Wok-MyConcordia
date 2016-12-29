@@ -5,41 +5,54 @@
 
     <!-- template used if for portrait -->
     <div ng-if="vm.screenOrientation == 'portrait-primary'" class="vertical">
-      <div class="marshData">
-        <p>Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
-        <p>Marshalling Card {{vm.marshallingCode}}</p>
-        <p>{{vm.firstname}}</p>
-        <p>{{vm.lastname}}</p>
-        <p>{{vm.department}}</p>
-        <p>{{vm.location}}</p>
-        <p>{{vm.dateTime}}</p>
-        <p>{{vm.degree}}</p>
-      </div>
+      <div class="overall">
+        <div class="marshData">
+          <p class="date">Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
+          <p class="marshall">Marshalling Card {{vm.marshallingCode}}</p>
+          <p class="name">{{vm.firstname}}</p>
+          <p class="name">{{vm.lastname}}</p>
+          <p class="dep">{{vm.department}}</p>
+          <p class="location">{{vm.location}}</p>
+          <p class="date">{{vm.dateTime}}</p>
+          <p class="degree">{{vm.degree}}</p>
+        </div>
 
-      <div class="barcode">BARCODE</div>
+        <div class="bottom">
+          <div class="barcode">
+            <img src="img/barcode.png">
+          </div>
 
-      <div class="sid">
-        <p>{{vm.sid}}</p>
+          <div class="sid">
+            <p>{{vm.sid}}</p>
+          </div>
+
+        </div>
       </div>
     </div>
 
     <!-- template used if for landscape -->
     <div ng-if="vm.screenOrientation == 'landscape-secondary' || vm.screenOrientation == 'landscape-primary'"
          class="horizontal">
-      <div class="marshData">
-        <p>Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
-        <p>Marshalling Card {{vm.marshallingCode}}</p>
-        <p>{{vm.firstname}}</p>
-        <p>{{vm.lastname}}</p>
-        <p>{{vm.department}}</p>
-        <p>{{vm.location}}</p>
-        <p>{{vm.dateTime}}</p>
-        <p>{{vm.degree}}</p>
-      </div>
+      <div class="overall">
+        <div class="marshData">
+          <p class="date">Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
+          <p class="marshall">Marshalling Card {{vm.marshallingCode}}</p>
+          <p class="name">{{vm.firstname}}</p>
+          <p class="name">{{vm.lastname}}</p>
+          <p class="dep">{{vm.department}}</p>
+          <p class="location">{{vm.location}}</p>
+          <p class="date">{{vm.dateTime}}</p>
+          <p class="degree">{{vm.degree}}</p>
+        </div>
 
-      <div class="barcode">BARCODE</div>
-      <div class="sid">
-        <p>{{vm.sid}}</p>
+        <div class="bottom">
+          <div class="barcode">
+            <img src="img/barcode.png">
+          </div>
+          <div class="sid">
+            <p>{{vm.sid}}</p>
+          </div>
+        </div>
       </div>
     </div>
 

@@ -1,8 +1,48 @@
-
+.overall{
+  height: 100%;
+  width: 100%;
+  background-color: white;
+}
 
 @media screen and (orientation:portrait){
 
+  .marshData{
+    height: 65%;
+    width: 100%;
+    padding-top: 5%;
+    text-align: center;
+    font-size: 120%;
+    line-height: 180%;
+  }
 
+  .date{
+    font-size: 110%;
+  }
+
+  .marshall{
+    font-size: 150%;
+    font-weight: bold;
+  }
+
+  .name{
+    font-weight: bolder;
+    font-size: 200%;
+  }
+
+  .barcode{
+    float:left;
+    width: 65%;
+    padding-top: 15%;
+  }
+
+  .sid{
+    float: left;
+    width: 35%;
+    text-align: center;
+    padding-top: 25%;
+    font-size: 150%;
+    font-weight: bold;
+  }
 
 }
 
