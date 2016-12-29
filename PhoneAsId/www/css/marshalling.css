@@ -4,6 +4,20 @@
   background-color: white;
 }
 
+.date{
+  font-size: 110%;
+}
+
+.marshall{
+  font-size: 150%;
+  font-weight: bold;
+}
+
+.name{
+  font-weight: bolder;
+  font-size: 200%;
+}
+
 @media screen and (orientation:portrait){
 
   .marshData{
@@ -15,19 +29,6 @@
     line-height: 180%;
   }
 
-  .date{
-    font-size: 110%;
-  }
-
-  .marshall{
-    font-size: 150%;
-    font-weight: bold;
-  }
-
-  .name{
-    font-weight: bolder;
-    font-size: 200%;
-  }
 
   .barcode{
     float:left;
@@ -49,5 +50,36 @@
 
 @media screen and (orientation:landscape){
 
+  .marshData{
+    height: 100%;
+    width: 65%;
+    padding-top: 2%;
+    text-align: center;
+    font-size: 120%;
+    line-height: 150%;
+    float: left;
+  }
+
+  .bottom{
+    float: left;
+    width: 35%;
+    height:95%;
+  }
+
+  .barcode{
+    width: 50%;
+    height:100%;
+    float: left;
+  }
+
+  .sid{
+    width: 50%;
+    text-align: center;
+    margin-top: 15%;
+    padding-top: 100%;
+    font-size: 150%;
+    font-weight: bold;
+    float: left;
+  }
 
 }
