@@ -111,10 +111,10 @@ namespace UnitTestCore
             },
                  new STUDENT
             {
-                NETNAME = StudentHelper.GenerateNetName("Michal", "Mozniak"),
+                NETNAME = StudentHelper.GenerateNetName("michal", "wozniak"),
                 ID = 12345678,
-                FIRSTNAME = "Michal",
-                LASTNAME = "Wozniak",
+                FIRSTNAME = "michal",
+                LASTNAME = "wozniak",
                 DOB = DateTime.UtcNow,
                 UGRADSTATUS = "U"
             }
@@ -157,25 +157,20 @@ namespace UnitTestCore
         }
 
         [TestMethod]
-        public void GetAccountNotFound()
+        public void GetAccountFound()
         {
             //Arrange
             SetBasicMockDb();
            
             var controller = new StudentController(_repo, _logs);
-            IdentityHelper.SetUser("Michal", "Wozniak", controller);
-
+            IdentityHelper.SetUser("michal", "wozniak", controller);
 
             //Act
             var result = controller.GetAccount() as ObjectResult;
 
-            PrintPropertiesOfDynamicObject(result.Value);
-
             //assert
-            Assert.AreEqual("Michal", ReflectPropertyValue(result.Value,"FIRSTNAME"));
-            Assert.AreEqual("Wozniak", ReflectPropertyValue(result.Value, "LASTNAME"));
-
-
+            Assert.AreEqual("michal", ReflectPropertyValue(result.Value,"FIRSTNAME"));
+            Assert.AreEqual("wozniak", ReflectPropertyValue(result.Value, "LASTNAME"));
         }
 
     }
