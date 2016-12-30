@@ -31,5 +31,15 @@ angular.module('starter.services', [])
       return $http.get(urlBase + "/graduation");
     };
 
+    /**
+     * Rest api call for UpdatePeriod that will determined if a user can update his profile picture
+     *
+     * @return HttpPromise which will on success contain a JSON
+     */
+    StudentService.fetchUpdatePeriod = function(){
+      console.log('fetchUpdatePeriod called');
+      return $http.get(urlBase +'/student/UpdatePeriod');
+    };
+
     return StudentService;
   }]);

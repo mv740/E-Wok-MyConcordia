@@ -8,18 +8,16 @@
     .module('starter')
     .controller('MenuController', MenuController);
 
-  MenuController.$inject = ['AuthenticationService','$ionicSideMenuDelegate'];
+  MenuController.$inject = ['AuthenticationService'];
 
-  function MenuController(AuthenticationService, $ionicSideMenuDelegate) {
+  function MenuController(AuthenticationService) {
     var vm = this;
 
-    vm.logOut = function () {
+    vm.logOut = logOut;
+
+    function logOut() {
       AuthenticationService.logOut();
-      $ionicSideMenuDelegate.canDragContent(false);
-    };
-
-
-    $ionicSideMenuDelegate.canDragContent(false)
+    }
 
   }
 })();

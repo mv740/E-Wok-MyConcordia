@@ -10,25 +10,26 @@
     .module('starter')
     .factory('AuthenticationService', AuthenticationService);
 
-  AuthenticationService.$inject = ['SessionService', '$state','ngOidcClient', '$cordovaInAppBrowser','$rootScope','$ionicSideMenuDelegate'];
+  AuthenticationService.$inject = ['SessionService', '$state','ngOidcClient', '$cordovaInAppBrowser','$rootScope','$ionicSideMenuDelegate','$ionicNavBarDelegate'];
 
-  function AuthenticationService(SessionService, $state, ngOidcClient, $cordovaInAppBrowser, $rootScope,$ionicSideMenuDelegate) {
+  function AuthenticationService(SessionService, $state, ngOidcClient, $cordovaInAppBrowser, $rootScope,$ionicSideMenuDelegate,$ionicNavBarDelegate) {
 
     var authService = {};
-    
+
     /*
-      start the oauth process 
+      start the oauth process
      */
     authService.signIn = function () {
       ngOidcClient.signinPopup().then(function (user) {
         //console.log("user:" + JSON.stringify(user));
         if (user) {
           $ionicSideMenuDelegate.canDragContent(true);
+          $ionicNavBarDelegate.showBar(true);
           $state.go('app.id');
         }
       });
     };
-    
+
     /*
       clear the session from the inappbrowser which will log you out of third party system (google)
      */
@@ -49,9 +50,11 @@
       });
       $cordovaInAppBrowser.open('http://www.google.com', '_blank', options);
 
+      //hide nav bar
+      $ionicNavBarDelegate.showBar(false);
       $state.go('app.login');
     };
-    
+
     authService.isAuthenticated = function () {
       return SessionService.isAuthenticated();
     };

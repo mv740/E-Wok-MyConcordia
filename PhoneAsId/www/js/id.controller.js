@@ -20,6 +20,7 @@
     vm.marshallingInfo = {};
     vm.loadMarshallingCard =  loadMarshallingCard;
 
+    getUpdatePeriod();
     getStudentIdInfo();
     getMarshallingCardInfo();
     /////////////////////////////////////
@@ -103,16 +104,23 @@
       $state.go('app.marshalling');
     }
 
-    $http.get("https://myconcordiaid.azurewebsites.net/api/student/UpdatePeriod").then(function successCallback(response) {
-      // this callback will be called asynchronously
-      // when the response is available
-      $rootScope.validPeriod = response.data.canUpdatePicture;
+    function getUpdatePeriod() {
+      StudentService.fetchUpdatePeriod()
+        .then(function successCallback(response) {
+        // this callback will be called asynchronously
+        // when the response is available
+        console.log("updatePeriod");
+        console.log(response);
+        $rootScope.validPeriod = response.data.canUpdatePicture;
 
-    }, function errorCallback(response) {
-      // called asynchronously if an error occurs
-      // or server returns response with an error status.
-      console.log(response);
-    });
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+        console.log(response);
+      });
+    }
+
+
 
 
     vm.screenOrientation = screen.orientation.type;
