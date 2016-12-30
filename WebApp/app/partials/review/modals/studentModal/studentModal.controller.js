@@ -24,11 +24,17 @@ function StudentModalCtrl($modal, $modalInstance, studentService, student) {
 
     function sendValidation(id, valid){
         studentModal.student.sendingValidation = true;
-        studentService.sendValidation(id,valid).then(function(){
-            studentModal.student.sendingValidation = false;
-            if (valid) studentModal.student.wasValidated = true;
-            else if (!valid) studentModal.student.wasRevoked = true;
-        });
+        studentModal.student.valid = valid;
+        studentService.sendValidation(id,valid).then(
+            function(){
+                studentModal.student.sendingValidation = false;
+                if (studentModal.student.valid) studentModal.student.wasValidated = true;
+                else if (!studentModal.student.valid) studentModal.student.wasRevoked = true;
+            },
+            function(){
+                alert("Validation failed");
+            }
+        );
     }
 
     function updateStudent() {

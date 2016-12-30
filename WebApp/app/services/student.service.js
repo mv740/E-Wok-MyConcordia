@@ -44,7 +44,7 @@ function studentService($http, $q, myConfig) {
             console.log('validate failure');
         });
 
-        return deferred;
+        return deferred.promise;
     }
 
     function getStudentPictures(id) {
