@@ -46,7 +46,8 @@ namespace MyConcordiaID.Models.Student
                      s.PENDING,
                      s.PROFILEPICTURE,
                      s.UGRADSTATUS,
-                     s.EXPIREDATE
+                     s.EXPIREDATE,
+                     s.UPDATEPICTURE
 
                  })
                  .SingleOrDefault();
