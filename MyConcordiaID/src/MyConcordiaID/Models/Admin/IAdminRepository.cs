@@ -11,7 +11,7 @@ namespace MyConcordiaID.Models
     {
         bool SetYearUpdatePicturePeriod(PeriodSetting setting);
         List<PICTUREUPDATESETTING> GetAllUpdatePicturePeriod();
-        PICTUREUPDATESETTING GetUpdatePicturePeriod();
+        PeriodSetting GetUpdatePicturePeriod();
         PICTUREUPDATESETTING GetUpdatePicturePeriod(int year);
     }
 }

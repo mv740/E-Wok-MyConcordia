@@ -69,7 +69,7 @@ namespace MyConcordiaID.Models.Admin
         ///  Get current Academic Update picture period
         /// </summary>
         /// <returns></returns>
-        public PICTUREUPDATESETTING GetUpdatePicturePeriod()
+        public PeriodSetting GetUpdatePicturePeriod()
         {
             // May 1st 2016 start of academic year 2016-17 : summer 2016, fall 16, winter 17
 
@@ -91,7 +91,24 @@ namespace MyConcordiaID.Models.Admin
                 .Where(p => p.YEAR == academicYear)
                 .FirstOrDefault();
 
-            return period;
+
+            if(period != null)
+            {
+                PeriodSetting periodFormat = new PeriodSetting
+                {
+                    year = period.YEAR,
+                    startDate = period.STARDATE.ToString("dd-MM-yyyy"),
+                    endDate = period.ENDDATE.ToString("dd-MM-yyyy")
+
+                   
+                };
+
+                return periodFormat;
+            }
+
+
+
+            return null;
         }
 
         public PICTUREUPDATESETTING GetUpdatePicturePeriod(int year)

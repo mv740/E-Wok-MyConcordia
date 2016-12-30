@@ -334,15 +334,23 @@ namespace UnitTestCore
         {
             var firstName = "francis";
             var lastName = "cote-tremblay";
-      
+
+            var bigFirstName = "abcdefghijklmnop";
+            var bigLastName = "abcdefghijklmnop";
+
             var netName = StudentHelper.GenerateNetName(firstName, lastName);
-           
+            var bigNetName = StudentHelper.GenerateNetName(bigFirstName, bigLastName); 
           
             var result = "f_cotetr";
 
             Assert.AreEqual(result, netName);
+            Assert.AreEqual("a_abcdef", bigNetName);
 
-          
+
+
+
+
+
         }
     }
 }

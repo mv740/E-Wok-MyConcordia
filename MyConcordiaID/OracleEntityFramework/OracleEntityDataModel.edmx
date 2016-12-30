@@ -10,7 +10,7 @@
             <PropertyRef Name="ID_PK" />
           </Key>
           <Property Name="ID_PK" Type="varchar2" MaxLength="20" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="NETNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="NETNAME" Type="varchar2" MaxLength="8" Nullable="false" />
           <Property Name="ACTION" Type="varchar2" MaxLength="30" Nullable="false" />
           <Property Name="TIMESTAMP" Type="timestamp" Precision="6" Nullable="false" />
           <Property Name="AFFECTED_USER" Type="varchar2" MaxLength="20" />
@@ -161,7 +161,7 @@
             <PropertyRef Name="ID_PK" />
           </Key>
           <Property Name="ID_PK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NETNAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NETNAME" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="ACTION" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="TIMESTAMP" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="AFFECTED_USER" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
