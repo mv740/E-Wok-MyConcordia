@@ -13,7 +13,8 @@ function studentService($http, $q, myConfig) {
         getStudentPictures: getStudentPictures,
         getStudentLogs: getStudentLogs,
         getStudents: getStudents,
-        search: search
+        search: search,
+        getUpdatePeriod: getUpdatePeriod
     };
 
     return service;
@@ -94,6 +95,16 @@ function studentService($http, $q, myConfig) {
         },
         function (failure) {
             console.log('validate failure');
+        });
+
+        return deferred.promise;
+    }
+
+    function getUpdatePeriod() {
+        var deferred = $q.defer();
+
+        $http.get(myConfig.baseUrl + myConfig.getUpdatePeriod).then(function (value) {
+            deferred.resolve(value);
         });
 
         return deferred.promise;

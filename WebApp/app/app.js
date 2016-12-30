@@ -8,7 +8,8 @@ angular.module('myApp', [
     'ngHamburger',
     'ui.bootstrap',
     'angularCSS',
-    'ng.oidcclient'
+    'ng.oidcclient',
+    '720kb.tooltips'
 
 ]).constant("myConfig", {
     "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
@@ -18,8 +19,8 @@ angular.module('myApp', [
     "picturePeriod": "admin/picturePeriod",
     "getStudents": "student",
     "getLogs": "log/",
-    "search": "student/search"
-
+    "search": "student/search",
+    "getUpdatePeriod": "admin/UpdatePeriod"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
