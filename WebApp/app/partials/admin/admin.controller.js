@@ -10,17 +10,19 @@
     function AdminController($http, myConfig, studentService) {
         var self = this;
 
-        var defaultYear = "undefined";
         var defaultStartDate = "18-12-2016";
         var defaultEndDate = "24-18-2016";
+        var invalidDateString = "Invalid Date";
 
         self.yearEntered = false;
         self.startDateEntered = false;
         self.endDateEntered = false;
 
+        self.currentUpdatePeriod = "Loading...";
+
         studentService.getUpdatePeriod().then(function(value) {
-            if (value.data.year != defaultYear && value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
-                self.currentUpdatePeriod = "Academic year " + value.data.year + " from "
+            if (value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
+                self.currentUpdatePeriod = "From "
                     + value.data.startDate + " to "
                     + value.data.endDate;
             }
@@ -68,8 +70,8 @@
                 };
 
             self.yearEntered = self.academicYear != null;
-            self.startDateEntered = !startString.includes("Invalid Date");
-            self.endDateEntered = !endString.includes("Invalid Date");
+            self.startDateEntered = !startString.includes(invalidDateString);
+            self.endDateEntered = !endString.includes(invalidDateString);
 
             if (self.yearEntered && self.startDateEntered && self.endDateEntered) {
                 self.submitButton = "Sending...";
