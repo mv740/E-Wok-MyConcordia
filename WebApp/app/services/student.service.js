@@ -50,7 +50,7 @@ function studentService($http, $q, myConfig) {
     function getStudentPictures(id) {
         var deferred = $q.defer();
 
-        $http.get(myConfig.baseUrl + myConfig.pendingPicture + id).then(function (value) {
+        $http.get(myConfig.baseUrl + myConfig.getStudentPictures + id).then(function (value) {
             deferred.resolve(value);
         });
 

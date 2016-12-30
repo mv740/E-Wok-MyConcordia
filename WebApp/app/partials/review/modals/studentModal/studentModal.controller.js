@@ -41,8 +41,19 @@ function StudentModalCtrl($modal, $modalInstance, studentService, student) {
         studentModal.student = student;
 
         studentService.getStudentPictures(student.id).then(function (value) {
-            studentModal.student.pendingPicture = value.data.pendingpicture;
-            studentModal.student.previousPictures = value.data.previousPictures;
+            studentModal.student.pendingPicture = value.data.pendingPicture;
+
+            var archivedPictures = value.data.archivedPictures;
+
+            if (value.data.profilePicture != null){
+                //will be removed upon next team meeting as the data returned from the get request will be modified
+                var tmp = {netname:"",
+                    picture: value.data.profilePicture,
+                    status: "validated",
+                    timestamp: "salut100"};
+                archivedPictures.unshift(tmp);
+            }
+            studentModal.student.previousPictures = archivedPictures;
 
             studentModal.loading = false;
         });
@@ -54,7 +65,7 @@ function StudentModalCtrl($modal, $modalInstance, studentService, student) {
             windowClass: 'modal',
             keyboard: true,
             resolve: {
-                student: function () {
+                image: function () {
                     return image;
                 }
             }});

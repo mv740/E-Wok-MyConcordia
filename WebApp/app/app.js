@@ -15,7 +15,7 @@ angular.module('myApp', [
     "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
     "validatePhoto": "student/ValidatePicture",
     "searchStudent": "student/",
-    "pendingPicture": "student/PendingPicture/",
+    "getStudentPictures": "student/picture/",
     "picturePeriod": "admin/picturePeriod",
     "getStudents": "student",
     "getLogs": "log/",

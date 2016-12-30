@@ -57,7 +57,6 @@ function SearchCtrl($modal, studentService, searchParsingService) {
                     return student;
                 }
             }});
-        //$rootScope.$broadcast('modals.update', student);
     }
 
     function setResults(results){
