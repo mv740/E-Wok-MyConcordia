@@ -4,7 +4,6 @@
 @import "../base/mixins/verticalCenter";
 
 .container3D {
-  @include vertical-align();
   @include make-button-3d($border-radius-container, $button3D-shadow-color);
   width: 700px;
   text-align: center;

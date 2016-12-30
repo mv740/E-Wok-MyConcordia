@@ -73,6 +73,18 @@
 .text-left {
   text-align: left; }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
 html, body {
   font: 1em 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
@@ -122,11 +134,6 @@ html, body {
 
 .container3D {
   position: relative;
-  top: 49%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-  position: relative;
   border-radius: 10px;
   box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232;
   width: 700px;
@@ -142,3 +149,10 @@ html, body {
   display: block;
   margin-left: auto;
   margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }

@@ -1,7 +1,12 @@
 @import "mixins/horizontalCenter";
+@import "mixins/verticalCenter";
 
 .center{
   @include center();
+}
+
+.verticalCenter{
+  @include vertical-align();
 }
 
 
