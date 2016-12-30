@@ -18,7 +18,7 @@
         self.startDateEntered = false;
         self.endDateEntered = false;
 
-        self.currentUpdatePeriod = "Loading...";
+        self.loading = true;
 
         studentService.getUpdatePeriod().then(function(value) {
             if (value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
@@ -29,6 +29,7 @@
             else {
                 self.currentUpdatePeriod = "There is no update period currently set";
             }
+            self.loading = false;
         });
 
         self.submitButton = "Submit";
