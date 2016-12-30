@@ -3,7 +3,11 @@
 @import "../base/mixins/make3D";
 
 #studentModal {
+    //pushing it 5% from right hides the modal-content div underneath and push studentModal back in the middle. (Since usage of angularBootstrap's $modal)
+    right:5%;
+    position:relative;
     min-width: 650px;
+    color:white;
     .modal-element {
         #galleryContainer {
             max-height: 200px;

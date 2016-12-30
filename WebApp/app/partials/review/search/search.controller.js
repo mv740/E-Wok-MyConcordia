@@ -8,9 +8,9 @@ angular
     .module('myApp')
     .controller('SearchCtrl', SearchCtrl);
 
-SearchCtrl.$inject = ['$rootScope', 'studentService', 'searchParsingService'];
+SearchCtrl.$inject = ['$modal', 'studentService', 'searchParsingService'];
 
-function SearchCtrl($rootScope, studentService, searchParsingService) {
+function SearchCtrl($modal, studentService, searchParsingService) {
 
     var search = this;
 
@@ -48,7 +48,16 @@ function SearchCtrl($rootScope, studentService, searchParsingService) {
     }
 
     function studentClick(student) {
-        $rootScope.$broadcast('modals.update', student);
+        $modal.open({templateUrl: "partials/review/modals/studentModal/studentModal.html",
+            controller: 'StudentModalCtrl as studentModal',
+            windowClass: 'modal',
+            keyboard: true,
+            resolve: {
+                student: function () {
+                    return student;
+                }
+            }});
+        //$rootScope.$broadcast('modals.update', student);
     }
 
     function setResults(results){

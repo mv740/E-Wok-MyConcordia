@@ -1,80 +1,90 @@
-<div class="container container3D">
+<div id="studentModal" class="container container3D">
 
-    <!-- Modal content-->
-    <div id="studentModal" class="full-height full-width">
         <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <button type="button" class="close" ng-click="studentModal.close()">&times;</button>
             <h4 class="modal-title">Validate Student Picture</h4>
         </div>
 
-        <div class="progressCircularContainer" ng-if="modals.loading">
+        <div class="progressCircularContainer" ng-if="studentModal.loading">
             <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
         </div>
 
-        <div ng-show="!modals.loading" id="modal-body" class="modal-body row">
-            <div id="cardContainer" class="modal-element col-sm-6">
+        <div ng-show="!studentModal.loading" id="modal-body" class="modal-body row">
+            <div id="cardContainer" class="modal-element col-xs-6">
                 <div id="cardHolder">
                     <div class="squareBackground full-width">
 
-                        <img class="full-width" ng-if="modals.student.pendingPicture"
-                             ng-src="data:image/JPEG;base64,{{modals.student.pendingPicture}}"/>
-                        <img class="full-width" ng-if="!modals.student.pendingPicture"
-                             ng-src="{{modals.emptyProfilePicture}}"/>
+                        <img class="full-width" ng-if="studentModal.student.pendingPicture"
+                             ng-src="data:image/JPEG;base64,{{studentModal.student.pendingPicture}}"/>
+                        <img class="full-width" ng-if="!studentModal.student.pendingPicture"
+                             ng-src="{{studentModal.emptyProfilePicture}}"/>
 
-                        <div ng-if="modals.student.pendingPicture" class="row yesnoContainer">
-                            <button ng-click="modals.sendValidation(modals.student.id, true)" type="button"
+                        <div ng-if="studentModal.student.pendingPicture" class="row yesnoContainer">
+                            <button ng-click="studentModal.sendValidation(studentModal.student.id, true)" type="button"
                                     class="btn-circle btn-yes"><i class="glyphicon glyphicon-ok"></i></button>
-                            <button ng-click="modals.sendValidation(modals.student.id, false)" type="button"
+                            <button ng-click="studentModal.sendValidation(studentModal.student.id, false)" type="button"
                                     class="btn-circle btn-no"><i class="glyphicon glyphicon-remove"></i></button>
                         </div>
 
-                        <div class="cardHolderComponent progressCircularContainer"
-                             ng-if="modals.student.sendingValidation">
+                        <div class="full-width cardHolderComponent progressCircularContainer"
+                             ng-if="studentModal.student.sendingValidation">
                             <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
                         </div>
 
                         <div class="cardHolderComponent americanPieBox full-width"
-                             ng-if="modals.student.pendingPicture">
-                            <span class="validated" ng-if="modals.student.wasValidated">VALIDATED</span>
-                            <span class="revoked" ng-if="modals.student.wasRevoked">REVOKED</span>
+                             ng-if="studentModal.student.pendingPicture">
+                            <span class="validated" ng-if="studentModal.student.wasValidated">VALIDATED</span>
+                            <span class="revoked" ng-if="studentModal.student.wasRevoked">REVOKED</span>
                         </div>
 
                     </div>
 
                 </div>
-                <div id="galleryContainer" ng-if="modals.student.previousPictures" class="top-buffer"
+                <div id="galleryContainer" ng-if="studentModal.student.previousPictures" class="top-buffer"
                      ng-include="'partials/review/modals/studentModal/gallery/gallery.html'">
 
                 </div>
             </div>
 
 
-            <div class="modal-element col-sm-6 text-left">
+            <div class="modal-element col-xs-6 text-left">
                 <div>
-                    <span>ID:</span><span>{{modals.student.id}}</span>
+                    <span>ID:</span><span>{{studentModal.student.id}}</span>
                 </div>
                 <br>
                 <div>
                     <span>Name:</span>
-                    <span>{{modals.student.firstname}}</span>
-                    <span>{{modals.student.lastname}}</span>
+                    <span>{{studentModal.student.firstname}}</span>
+                    <span>{{studentModal.student.lastname}}</span>
                 </div>
                 <br>
                 <div>
-                    <span>Netname:</span><span>{{modals.student.netname}}</span>
+                    <span>Netname:</span><span>{{studentModal.student.netname}}</span>
                 </div>
                 <br>
                 <div>
                     <span>Birthdate:</span>
-                    <span>{{modals.student.birthdate.day}}</span>
-                    <span>{{modals.student.birthdate.month}}</span>
-                    <span>{{modals.student.birthdate.year}}</span>
+                    <span>{{studentModal.student.birthdate.day}}</span>
+                    <span>{{studentModal.student.birthdate.month}}</span>
+                    <span>{{studentModal.student.birthdate.year}}</span>
                 </div>
+            </div>
+            <div class="col-xs-12 top-buffer">
+
+                <button class="col-xs-12 button3D" ng-click="studentModal.loadLogs()"> Show logs</button>
+                <ul class="col-xs-12 top-buffer" ng-if="studentModal.logs">
+                    <li ng-repeat="log in studentModal.logs">
+                        <p>
+                            <span>{{log.action}}:</span>
+                            <span>{{log.timestamp}}</span>
+                        </p>
+                    </li>
+                </ul>
             </div>
 
 
+
         </div>
-    </div>
 
 </div>
 

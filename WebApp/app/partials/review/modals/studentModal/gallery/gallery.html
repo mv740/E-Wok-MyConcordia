@@ -3,9 +3,9 @@
         <div class="thumbswrapper">
             <ul>
                 <!--    Iterate through all images and display them end to end as thumbs -->
-                <li ng-repeat="image in modals.student.previousPictures track by $index">
+                <li ng-repeat="image in studentModal.student.previousPictures track by $index">
                     <div class="thumbwrapper">
-                        <a ng-href="" ng-click="modals.enlargeImage(image)" data-toggle="modal" data-target="#imageModalContainer">
+                        <a ng-href="" ng-click="modals.enlargeImage(image)">
                             <img class="thumbnail" ng-src="data:image/JPEG;base64,{{image}}"/>
                         </a>
                     </div>

@@ -11,6 +11,7 @@ function studentService($http, $q, myConfig) {
     var service = {
         sendValidation: sendValidation,
         getStudentPictures: getStudentPictures,
+        getStudentLogs: getStudentLogs,
         getStudents: getStudents,
         search: search,
         getUpdatePeriod: getUpdatePeriod
@@ -20,6 +21,7 @@ function studentService($http, $q, myConfig) {
     /////////////////////
 
     function sendValidation(id, valid) {
+        var deferred = $q.defer();
 
         var json = {
             id: parseInt(id),
@@ -36,18 +38,29 @@ function studentService($http, $q, myConfig) {
             data: json
         }).then(
         function (success) {
-            console.log('validate success');
+            deferred.resolve(success);
         },
         function (failure) {
             console.log('validate failure');
         });
 
+        return deferred;
     }
 
     function getStudentPictures(id) {
         var deferred = $q.defer();
 
         $http.get(myConfig.baseUrl + myConfig.pendingPicture + id).then(function (value) {
+            deferred.resolve(value);
+        });
+
+        return deferred.promise;
+    }
+
+    function getStudentLogs(netname) {
+        var deferred = $q.defer();
+
+        $http.get(myConfig.baseUrl + myConfig.getLogs + netname).then(function (value) {
             deferred.resolve(value);
         });
 
