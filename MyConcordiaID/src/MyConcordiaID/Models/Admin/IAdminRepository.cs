@@ -10,6 +10,8 @@ namespace MyConcordiaID.Models
     public interface IAdminRepository
     {
         bool SetYearUpdatePicturePeriod(PeriodSetting setting);
+        List<PICTUREUPDATESETTING> GetAllUpdatePicturePeriod();
+        PICTUREUPDATESETTING GetUpdatePicturePeriod();
         PICTUREUPDATESETTING GetUpdatePicturePeriod(int year);
     }
 }

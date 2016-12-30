@@ -47,6 +47,46 @@ namespace MyConcordiaID.Controllers
             return Ok();
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("UpdatePeriod")]
+        public IActionResult GetUpdatePicturePeriod()
+        {
+            var result = _adminRepo.GetUpdatePicturePeriod();
+
+            if(result == null)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(result);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("UpdatePeriod/{year}")]
+        public IActionResult GetUpdatePicturePeriod(int year)
+        {
+            var result = _adminRepo.GetUpdatePicturePeriod(year);
+
+            if(result == null)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(result);
+        }
+
+        [AllowAnonymous]
+        [HttpGet]
+        [Route("UpdatePeriods")]
+        public IActionResult GetAllUpdatePicturePeriod()
+        {
+            var result = _adminRepo.GetAllUpdatePicturePeriod();
+
+            return new ObjectResult(result);
+        }
+
         public string getAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName);
