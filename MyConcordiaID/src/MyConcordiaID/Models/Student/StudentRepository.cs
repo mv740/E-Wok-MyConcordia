@@ -8,6 +8,7 @@ using System.IO;
 using MyConcordiaID.Models.Picture;
 using MyConcordiaID.Helper;
 using System.Data.Entity;
+using System.Collections;
 
 namespace MyConcordiaID.Models.Student
 {
@@ -216,11 +217,16 @@ namespace MyConcordiaID.Models.Student
 
         }
 
-        public List<STUDENT> Search(SearchOptions searchOptions)
+        public IEnumerable<STUDENT> Search(SearchOptions searchOptions)
         {
 
-            List<string> nameLists = searchOptions.name;
+            //empty 
+            if(string.IsNullOrEmpty(searchOptions.birthdate) && !searchOptions.id.HasValue && searchOptions.name.Capacity == 0 && string.IsNullOrEmpty(searchOptions.netname))
+            {
+                return Enumerable.Empty<STUDENT>();
+            }
 
+            //else search 
             IQueryable<STUDENT> student = _database.STUDENTS;
 
             //each if statement will try to build the where clauses and it only be executed when ToList() is called 
@@ -231,9 +237,9 @@ namespace MyConcordiaID.Models.Student
                     student = student.Where(s => s.ID == searchOptions.id.Value);
                 }
             }
-            if (nameLists.Count != 0)
+            if (searchOptions.name.Count != 0)
             {
-                foreach (var name in nameLists)
+                foreach (var name in searchOptions.name)
                 {
                     student = student.Where(s => s.FIRSTNAME.Contains(name.ToLower()) || s.LASTNAME.Contains(name.ToLower()));
                 }

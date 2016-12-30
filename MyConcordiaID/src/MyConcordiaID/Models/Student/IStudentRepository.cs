@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
-using MyConcordiaID.Models.Picture;
+﻿using MyConcordiaID.Models.Picture;
 using OracleEntityFramework;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Models.Student
 {
@@ -18,7 +14,7 @@ namespace MyConcordiaID.Models.Student
         string ValidatePicture(PictureValidation pictureValidation);
         void Add(STUDENT student);
         PicturePeriod GetUpdatePicturePeriod();
-        List<STUDENT> Search(SearchOptions searchOptions);
+        IEnumerable<STUDENT> Search(SearchOptions searchOptions);
         bool DoesStudentExist(string firstName, string lastName);
         StudentPictures FindStudentPictures(int id);
     }

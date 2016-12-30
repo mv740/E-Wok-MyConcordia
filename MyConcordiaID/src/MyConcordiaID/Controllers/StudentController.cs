@@ -188,7 +188,7 @@ namespace MyConcordiaID.Controllers
         {
 
             var result = _studentsRepo.Search(searchOptions);
-            if(result.Count == 0)
+            if(!result.Any())
             {
                 return NotFound();
             }
