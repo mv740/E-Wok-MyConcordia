@@ -22,9 +22,9 @@
 
         studentService.getUpdatePeriod().then(function(value) {
             if (value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
-                self.currentUpdatePeriod = "From "
-                    + value.data.startDate + " to "
-                    + value.data.endDate;
+                self.currentUpdatePeriod = "Academic Year: " + value.data.year
+                    + ", from " + value.data.startDate
+                    + " to " + value.data.endDate;
             }
             else {
                 self.currentUpdatePeriod = "There is no update period currently set";
