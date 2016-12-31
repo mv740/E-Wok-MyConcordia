@@ -31,7 +31,9 @@
                            tooltips tooltip-template="Required"
                            tooltips tooltip-side="right"
                            tooltips tooltip-hidden="{{admin.yearEntered}}"
-                           tooltips tooltip-size/>
+                           tooltips tooltip-size
+                           ng-style="(admin.yearEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
+                           ng-blur="admin.setYearEntered()"/>
                 </div>
             </div>
             <div class="form-group">
@@ -51,7 +53,9 @@
                            close-text="Close"
                            tooltips tooltip-template="Required"
                            tooltips tooltip-side="right"
-                           tooltips tooltip-hidden="{{admin.startDateEntered}}">
+                           tooltips tooltip-hidden="{{admin.startDateEntered}}"
+                           ng-style="(admin.startDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
+                           ng-blur="admin.setStartDateEntered()"/>
                 </div>
             </div>
 
@@ -72,7 +76,9 @@
                            close-text="Close"
                            tooltips tooltip-template="Required"
                            tooltips tooltip-side="right"
-                           tooltips tooltip-hidden="{{admin.endDateEntered}}">
+                           tooltips tooltip-hidden="{{admin.endDateEntered}}"
+                           ng-style="(admin.endDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
+                           ng-blur="admin.setEndDateEntered()"/>
 
                 </div>
             </div>

@@ -88,5 +88,17 @@
 
         };
 
+        self.setYearEntered = function() {
+            self.yearEntered = self.academicYear != null;
+        };
+
+        self.setStartDateEntered = function() {
+            self.startDateEntered = self.dtFrom != null;
+        }
+
+        self.setEndDateEntered = function() {
+            self.endDateEntered = self.dtTo != null;
+        }
+
     }
 })();
