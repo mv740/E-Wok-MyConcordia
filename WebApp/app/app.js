@@ -73,7 +73,7 @@ angular.module('myApp', [
 
 
         $locationProvider.html5Mode({
-            enabled: false,
+            enabled: true,
             requireBase: true
         });
 
