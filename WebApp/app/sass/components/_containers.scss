@@ -3,17 +3,24 @@
 @import "../base/variables";
 @import "../base/mixins/verticalCenter";
 
-.container3D {
-  @include make-button-3d($border-radius-container, $button3D-shadow-color);
-  width: 700px;
-  text-align: center;
-  border: 5px solid $concordia-color;
-  background-color: $concordia-background-color;
-  text-align: center;
-  padding-bottom: 32px;
 
- h1, h2, h3, h4, div>span, label {
-    color:white;
-  }
+.container3D {
+  @include make-container-3d($concordia-background-color, $concordia-color, white, $border-radius-container, $button3D-shadow-color );
+  width: 700px;
+  padding-bottom: 32px;
+}
+
+.container3D-grey{
+  @include make-container-3d(white, $button3D-border-color, black, $border-radius-container, $button3D-shadow-color );
+}
+
+.cardHolder{
+  background: white;
+  @include make-button-3d($border-radius-container, darkgray);
+  border: $profile-picture-frame-width solid lightgray;
+  position: relative;
+  height: 0;
+  padding-bottom: 93%;
+  border-radius: 10px;
 }
 

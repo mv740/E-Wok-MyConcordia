@@ -95,6 +95,9 @@ html, body {
 #main #ng-view {
   overflow: hidden; }
 
+.modal-content {
+  height: 0px; }
+
 .button3D {
   background-color: white;
   height: 46px;
@@ -136,14 +139,34 @@ html, body {
   position: relative;
   border-radius: 10px;
   box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232;
-  width: 700px;
   text-align: center;
   border: 5px solid #8A0037;
   background-color: #a1325e;
-  text-align: center;
+  width: 700px;
   padding-bottom: 32px; }
   .container3D h1, .container3D h2, .container3D h3, .container3D h4, .container3D div > span, .container3D label {
     color: white; }
+
+.container3D-grey {
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232;
+  text-align: center;
+  border: 5px solid #6A6A6A;
+  background-color: white; }
+  .container3D-grey h1, .container3D-grey h2, .container3D-grey h3, .container3D-grey h4, .container3D-grey div > span, .container3D-grey label {
+    color: black; }
+
+.cardHolder {
+  background: white;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: 1px 1px 0 darkgray, 2px 2px 0 darkgray, 3px 3px 0 darkgray, 4px 4px 0 darkgray, 5px 5px 0 darkgray, 6px 6px 0 darkgray, 7px 7px 0 darkgray;
+  border: 10px solid lightgray;
+  position: relative;
+  height: 0;
+  padding-bottom: 93%;
+  border-radius: 10px; }
 
 .center {
   display: block;

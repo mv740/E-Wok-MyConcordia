@@ -1,11 +1,10 @@
 @import "../base/colors";
 @import "../base/variables";
 @import "../base/mixins/make3D";
+@import "../base/mixins/positions";
 
 #studentModal {
-    //pushing it 5% from right hides the modal-content div underneath and push studentModal back in the middle. (Since usage of angularBootstrap's $modal)
-    right:5%;
-    position:relative;
+    @include angular-bootstrap-modal-fix();
     min-width: 650px;
     color:white;
     .modal-element {
@@ -16,7 +15,7 @@
         }
     }
 
-    #cardHolder {
+    .cardHolder {
 
         .cardHolderComponent{
             position:absolute;
@@ -29,16 +28,6 @@
         bottom: $btn-yesno-height + $profile-picture-frame-width;
     }
 
-    .squareBackground{
-        background: white;
-        @include make-button-3d($border-radius-container, darkgray);
-        border: $profile-picture-frame-width solid lightgray;
-        position: relative;
-        height: 0;
-        padding-bottom: 93%;
-        border-radius: 10px;
-    }
-
     .thumbswrapper{
         background-color:white;
     }
@@ -47,8 +36,10 @@
 
 
 #imageModal{
+    @include angular-bootstrap-modal-fix();
+    width:400px;
+    padding:5px;
     img{
         @include center();
-        max-width: 100%;
     }
 }

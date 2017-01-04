@@ -21,3 +21,8 @@ html, body{
     overflow: hidden;
   }
 }
+
+//fix for custom modals when using angular-bootstrop
+.modal-content{
+  height:0px;
+}
