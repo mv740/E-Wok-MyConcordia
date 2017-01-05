@@ -5,6 +5,7 @@ using MyConcordiaID.Helper;
 
 namespace MyConcordiaID.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AuthenticationController : Controller
     {
         [HttpGet("~/signin")]

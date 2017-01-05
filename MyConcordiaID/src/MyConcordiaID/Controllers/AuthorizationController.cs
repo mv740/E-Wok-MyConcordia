@@ -20,6 +20,7 @@ using MyConcordiaID.Helper;
 
 namespace MyConcordiaID.Controllers
 {
+    [ApiExplorerSettings(IgnoreApi = true)]
     public class AuthorizationController : Controller
     {
         private readonly ApplicationContext _database;

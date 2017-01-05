@@ -23,6 +23,10 @@ using MyConcordiaID.Models.Log;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using MyConcordiaID.Models.Graduation;
+using Swashbuckle.AspNetCore.Swagger;
+using System.IO;
+using Microsoft.Extensions.PlatformAbstractions;
+using MyConcordiaID.Swagger;
 
 namespace MyConcordiaID
 {
@@ -89,6 +93,20 @@ namespace MyConcordiaID
             services.AddSingleton<IAdminRepository, AdminRepository>();
             services.AddSingleton<ILogRepository, LogRepository>();
             services.AddSingleton<IGraduationRepository, GraduationRepository>();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "MyConcordiaID API", Version = "v1" });
+               
+
+                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "MyConcordiaID.xml");
+                c.IncludeXmlComments(filePath);
+
+                c.OperationFilter<FileOperation>();
+                c.DescribeAllEnumsAsStrings();
+                
+
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -132,6 +150,13 @@ namespace MyConcordiaID
             });
 
 
+            //api documentation
+            app.UseSwagger();
+            app.UseSwaggerUi(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyConcordiaID V1");
+               
+            });
             // Create a new branch where the registered middleware will be executed only for non API calls.
             app.UseWhen(context => !context.Request.Path.StartsWithSegments(new PathString("/api")), branch =>
             {

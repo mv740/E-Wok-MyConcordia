@@ -25,7 +25,10 @@ namespace MyConcordiaID.Controllers
             _database = context;
         }
 
-
+        /// <summary>
+        ///  Retrieves the latest 50 logs 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
         public IActionResult GetLatest50()
@@ -33,6 +36,11 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(_logRepo.GetLalestLogs(50));
         }
 
+        /// <summary>
+        ///  Retrieve the latest 
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
         [Route("{value}")]

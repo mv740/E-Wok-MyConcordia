@@ -25,7 +25,14 @@ namespace MyConcordiaID.Controllers
             _logRepo = logs;
         }
 
-   
+        /// <summary>
+        ///  Set an update picture period for an specific academic year
+        /// </summary>
+        /// <remarks>Must be authenticated!</remarks>
+        /// <param name="setting"></param>
+        /// <returns></returns>
+        /// <response code="200">Submited new period</response>
+        /// <response code="401">Not authenticated</response>
         [Authorize]
         [HttpPost]
         [Route("PicturePeriod")]
@@ -47,6 +54,11 @@ namespace MyConcordiaID.Controllers
             return Ok();
         }
 
+        /// <summary>
+        ///  Return the current update picture period for this academic year
+        /// </summary>
+        /// <response code="200">update picture period</response>
+        /// <response code="404">No update picture period have been set for this year</response>
         [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriod")]
@@ -62,6 +74,12 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        ///  Retrives a specifc update picture period by year
+        /// </summary>
+        /// <param name="year"></param>
+        /// <response code="200">Return picture period</response>
+        /// <response code="404">update picture period doesn't exist for that year</response>
         [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriod/{year}")]
@@ -77,6 +95,10 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        ///  Retrives all update picture periods 
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriods")]
@@ -86,7 +108,7 @@ namespace MyConcordiaID.Controllers
 
             return new ObjectResult(result);
         }
-
+        [ApiExplorerSettings(IgnoreApi = true)]
         public string getAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName);

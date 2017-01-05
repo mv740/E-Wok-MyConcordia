@@ -32,7 +32,12 @@ namespace MyConcordiaID.Controllers
             _logRepo = logs;
         }
 
-
+        /// <summary>
+        /// Retrieve all the students accounts
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">List of students</response>
+       
         [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()
@@ -40,6 +45,13 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(_studentsRepo.GetAll());
         }
 
+        /// <summary>
+        ///  Retrieve a specific student account
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <response code="200">Return student information</response>
+        /// <response code="404">id is invalid, user doesn't exist</response>
         [AllowAnonymous]
         [HttpGet("{id}", Name = "GetStudent")]
         public IActionResult GetById(int id)
@@ -55,6 +67,13 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(student);
         }
 
+        /// <summary>
+        ///  Retrieve all pictures related to a specific student account
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <response code="200">Return pictures</response>
+        /// <response code="404">user was not found </response>
         [AllowAnonymous]
         [HttpGet]
         [Route("picture/{id}")]
@@ -71,7 +90,13 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(studentPictures);
         }
 
-
+        /// <summary>
+        ///  Retrieve Authenticated user's account information
+        /// </summary>
+        /// <returns></returns>
+        /// <remarks>Must be authenticated!</remarks>
+        /// <response code="200">return account information</response>
+        /// <response code="401">Not authenticated</response>
         [Authorize]
         [HttpGet]
         [Route("account")]
@@ -79,7 +104,7 @@ namespace MyConcordiaID.Controllers
         {
             var result = _studentsRepo.FindByNetName(getAuthenticatedUserNetname());
 
-            if(result == null)
+            if (result == null)
             {
                 return NotFound();
             }
@@ -87,6 +112,14 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(result);
         }
 
+        /// <summary>
+        ///  Send a profile picture for validation
+        /// </summary>
+        /// <remarks>Must be authenticated!</remarks>
+        /// <param name="file"></param>
+        /// <response code="200">Picture Submited</response>
+        /// <response code="400">Missing the picture or invalid</response>
+        [ApiExplorerSettings(IgnoreApi =true)]
         [Authorize]
         [HttpPost]
         [Route("ProfilePicture")]
@@ -122,7 +155,11 @@ namespace MyConcordiaID.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpGet]
         [Route("PendingPicture/{id}")]
@@ -151,23 +188,28 @@ namespace MyConcordiaID.Controllers
         [Route("ValidatePicture")]
         public IActionResult PostValidatePicture([FromBody] PictureValidation picture)
         {
-            var authenticatedUser = getAuthenticatedUserNetname();
+           // var authenticatedUser = getAuthenticatedUserNetname();
 
             var netName = _studentsRepo.ValidatePicture(picture);
 
-            if (picture.valid)
-            {
-                _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture, netName);
-            }
-            else
-            {
-                _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture, netName);
-            }
+            //if (picture.valid)
+            //{
+            //    _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture, netName);
+            //}
+            //else
+            //{
+            //    _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture, netName);
+            //}
 
 
             return Ok();
         }
 
+        /// <summary>
+        ///  Retrive the current update picture period for this academic year
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200"></response>
         [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriod")]
@@ -198,7 +240,7 @@ namespace MyConcordiaID.Controllers
         }
 
 
-        
+        [ApiExplorerSettings(IgnoreApi = true)]
         public string getAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName); 

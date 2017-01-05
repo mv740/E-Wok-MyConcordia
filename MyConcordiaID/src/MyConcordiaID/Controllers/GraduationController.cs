@@ -45,6 +45,7 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(_gradRepo.GetMarshallingCardRequestDenied(null));
         }
 
+        [ApiExplorerSettings(IgnoreApi = true)]
         public string getAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName);

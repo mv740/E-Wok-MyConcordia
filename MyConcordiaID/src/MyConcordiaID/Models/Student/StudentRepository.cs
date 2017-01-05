@@ -48,9 +48,9 @@ namespace MyConcordiaID.Models.Student
                      s.UGRADSTATUS,
                      s.EXPIREDATE,
                      s.UPDATEPICTURE
-
                  })
                  .SingleOrDefault();
+
 
             return student;
         }
@@ -59,7 +59,15 @@ namespace MyConcordiaID.Models.Student
         {
 
             var students = _database.STUDENTS
-                .Select(s => new { s.ID, s.NETNAME, s.FIRSTNAME, s.LASTNAME });
+                .Select(s => new
+                {
+                    s.ID,
+                    s.NETNAME,
+                    s.FIRSTNAME,
+                    s.LASTNAME,
+                    s.DOB
+                })
+                .ToList();
 
             return students;
         }
@@ -283,6 +291,7 @@ namespace MyConcordiaID.Models.Student
             var archivedPictures = _database.PICTUREARCHIVEs
                 .Where(p => p.NETNAME == studentNetname)
                 .Select(p => new { p.PICTURE, p.STATUS, p.NETNAME, p.TIMESTAMP })
+                .OrderByDescending(p => p.TIMESTAMP)
                 .ToList();
 
             StudentPictures studentPictures = new StudentPictures
