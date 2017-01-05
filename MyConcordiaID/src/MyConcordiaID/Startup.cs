@@ -3,12 +3,10 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MyConcordiaID.Data;
 using MyConcordiaID.Helper;
 using MyConcordiaID.Models;
 using MyConcordiaID.Models.Admin;
@@ -17,8 +15,6 @@ using MyConcordiaID.Providers;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using OracleEntityFramework;
 using System;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNet.Identity;
 using MyConcordiaID.Models.Log;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Cors.Internal;
@@ -26,7 +22,6 @@ using MyConcordiaID.Models.Graduation;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using Microsoft.Extensions.PlatformAbstractions;
-using MyConcordiaID.Swagger;
 
 namespace MyConcordiaID
 {
@@ -102,10 +97,8 @@ namespace MyConcordiaID
                 var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, "MyConcordiaID.xml");
                 c.IncludeXmlComments(filePath);
 
-                c.OperationFilter<FileOperation>();
                 c.DescribeAllEnumsAsStrings();
                 
-
             });
         }
 
