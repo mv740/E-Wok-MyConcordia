@@ -85,6 +85,10 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%); }
 
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
 html, body {
   font: 1em 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
@@ -167,6 +171,9 @@ html, body {
   height: 0;
   padding-bottom: 93%;
   border-radius: 10px; }
+  .cardHolder .cardHolderComponent {
+    position: absolute;
+    top: 25%; }
 
 .center {
   display: block;
@@ -179,3 +186,7 @@ html, body {
   -webkit-transform: translateY(-50%);
   -ms-transform: translateY(-50%);
   transform: translateY(-50%); }
+
+.atBottom {
+  position: absolute;
+  bottom: 50px; }

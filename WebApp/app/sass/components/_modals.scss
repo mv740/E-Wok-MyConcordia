@@ -15,14 +15,6 @@
         }
     }
 
-    .cardHolder {
-
-        .cardHolderComponent{
-            position:absolute;
-            top: 25%;
-        }
-    }
-
     .yesnoContainer {
         position:relative;
         bottom: $btn-yesno-height + $profile-picture-frame-width;

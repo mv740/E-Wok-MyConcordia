@@ -21,4 +21,10 @@
     @include make-american-pie($americanPieBox-border-width, $yes-color, -$americanPieBox-angle);
   }
 
+  span.redClickable{
+    cursor: pointer;
+    background-color:rgba(1000, 1000, 1000, 0.3);
+    @include make-american-pie-no-rot($americanPieBox-border-width, $no-color, $americanPieBox-angle);
+  }
+
 }

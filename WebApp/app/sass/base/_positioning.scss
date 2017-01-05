@@ -9,6 +9,9 @@
   @include vertical-align();
 }
 
-
+.atBottom{
+  position:absolute;
+  bottom:50px;
+}
 
 

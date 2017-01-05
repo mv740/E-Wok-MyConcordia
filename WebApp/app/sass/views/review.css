@@ -20,6 +20,10 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%); }
 
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
 html, body {
   font: 1em 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
@@ -94,6 +98,11 @@ html, body {
     /* IE 9 */
     -webkit-transform: rotate(-7deg);
     /* Chrome, Safari, Opera */ }
+  .americanPieBox span.redClickable {
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 3px solid #d2322d;
+    color: #d2322d; }
 
 .progressCircularContainer {
   text-align: center;
@@ -132,9 +141,15 @@ html, body {
   height: 0;
   padding-bottom: 93%;
   border-radius: 10px; }
+  .cardHolder .cardHolderComponent {
+    position: absolute;
+    top: 25%; }
 
 .top-buffer {
   margin-top: 20px; }
+
+.bottom-buffer {
+  margin-bottom: 20px; }
 
 .full-height {
   height: 100%; }
@@ -252,9 +267,6 @@ html, body {
     border-radius: 10px;
     box-shadow: 1px 1px 0 darkgray, 2px 2px 0 darkgray, 3px 3px 0 darkgray, 4px 4px 0 darkgray, 5px 5px 0 darkgray, 6px 6px 0 darkgray, 7px 7px 0 darkgray;
     border: 10px solid lightgray; }
-  #studentModal .cardHolder .cardHolderComponent {
-    position: absolute;
-    top: 25%; }
   #studentModal .yesnoContainer {
     position: relative;
     bottom: 60px; }

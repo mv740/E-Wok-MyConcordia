@@ -5,3 +5,8 @@
   -ms-transform: rotate($deg); /* IE 9 */
   -webkit-transform: rotate($deg); /* Chrome, Safari, Opera */
 }
+
+@mixin make-american-pie-no-rot($width, $color, $deg){
+  border: $width solid $color;
+  color: $color;
+}

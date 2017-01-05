@@ -14,7 +14,8 @@ function studentService($http, $q, myConfig) {
         getStudentLogs: getStudentLogs,
         getStudents: getStudents,
         search: search,
-        getUpdatePeriod: getUpdatePeriod
+        getUpdatePeriod: getUpdatePeriod,
+        sendPictureBackToValidation: sendPictureBackToValidation
     };
 
     return service;
@@ -52,6 +53,8 @@ function studentService($http, $q, myConfig) {
 
         $http.get(myConfig.baseUrl + myConfig.getStudentPictures + id).then(function (value) {
             deferred.resolve(value);
+        },function (failure) {
+            console.log('getStudentPicture failure');
         });
 
         return deferred.promise;
@@ -62,6 +65,8 @@ function studentService($http, $q, myConfig) {
 
         $http.get(myConfig.baseUrl + myConfig.getLogs + netname).then(function (value) {
             deferred.resolve(value);
+        },function (failure) {
+            console.log('getStudentLogs failure');
         });
 
         return deferred.promise;
@@ -72,6 +77,8 @@ function studentService($http, $q, myConfig) {
 
         $http.get(myConfig.baseUrl + myConfig.getStudents).then(function (value) {
             deferred.resolve(value);
+        },function (failure) {
+            console.log('getStudents failure');
         });
 
         return deferred.promise;
@@ -90,11 +97,10 @@ function studentService($http, $q, myConfig) {
             data: params
         }).then(
         function (value) {
-            console.log('validate success');
             deferred.resolve(value);
         },
         function (failure) {
-            console.log('validate failure');
+            console.log('search failure');
         });
 
         return deferred.promise;
@@ -105,9 +111,35 @@ function studentService($http, $q, myConfig) {
 
         $http.get(myConfig.baseUrl + myConfig.getUpdatePeriod).then(function (value) {
             deferred.resolve(value);
+        },function (failure) {
+            console.log('updating period failure');
         });
 
         return deferred.promise;
+    }
+
+    function sendPictureBackToValidation(id, picture){
+
+        var deferred = $q.defer();
+
+        var req = {
+            method: 'POST',
+            url: myConfig.baseUrl + myConfig.sendPictureBackToValidation,
+            headers: {
+                'Content-Type': "JSON"
+            },
+            data: { id: id,
+            picture: picture}
+        }
+
+        $http(req).then(function (value) {
+            deferred.resolve(value);
+        }, function(){
+            console.log("sendPictureBackToValidation failure");
+        });
+
+        return deferred.promise;
+
     }
 
 }
