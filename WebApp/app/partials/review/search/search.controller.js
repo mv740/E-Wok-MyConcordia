@@ -18,6 +18,7 @@ function SearchCtrl($modal, studentService, searchParsingService) {
     search.studentClick = studentClick;
     search.initialState = true;
     search.input = "";
+    search.emptyResults = false;
 
     ///////////////////
 
@@ -25,6 +26,7 @@ function SearchCtrl($modal, studentService, searchParsingService) {
         search.initialState = false;
         search.searching = true;
         search.results = [];
+        search.emptyResults = false;
 
         //temporary until find can parse parameters
         if (search.input.length == 0){
@@ -35,7 +37,7 @@ function SearchCtrl($modal, studentService, searchParsingService) {
             alert(JSON.stringify(params));
             studentService.search(params).then(function (value) {
                 setResults(value.data);
-             });
+            });
         }
 
     }
@@ -59,8 +61,9 @@ function SearchCtrl($modal, studentService, searchParsingService) {
             }});
     }
 
-    function setResults(results){
+    function setResults(results) {
         search.searching = false;
         search.results = results;
+        search.emptyResults = search.results.length == 0;
     }
 }
