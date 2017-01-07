@@ -12,6 +12,7 @@ namespace MyConcordiaID.Models.Log
             SendPicture,
             ApprovePicture,
             DeniedPicture,
+            ReApprovedPicture,
             CreatePictureUpdatePeriod,
             ModifiedPictureUpdatePeriod
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OracleEntityFramework;
+using System.Data.Entity;
 
 namespace MyConcordiaID.Models.Log
 {
@@ -17,9 +18,9 @@ namespace MyConcordiaID.Models.Log
         }
 
 
-        public IEnumerable<dynamic> GetLalestLogs(int count)
+        public async Task<IEnumerable<dynamic>> GetLalestLogs(int count)
         {
-            var logs = _database.LOGs
+            var logs = await _database.LOGs
                 .Select(log => new
                 {
                     log.NETNAME,
@@ -28,14 +29,15 @@ namespace MyConcordiaID.Models.Log
                     log.TIMESTAMP
                 })
                 .OrderByDescending(log => log.TIMESTAMP)
-                .Take(count);
+                .Take(count)
+                .ToListAsync();
 
             return logs;
         }
 
-        public IEnumerable<dynamic> GetStudentLogs(string netName)
+        public async Task<IEnumerable<dynamic>> GetStudentLogs(string netName)
         {
-            var logs = _database.LOGs
+            var logs = await _database.LOGs
                 .Where(s => s.NETNAME == netName || s.AFFECTED_USER == netName)
                 .Select(log => new
                 {
@@ -45,7 +47,8 @@ namespace MyConcordiaID.Models.Log
                     log.TIMESTAMP
                 })
                 .OrderByDescending(log => log.TIMESTAMP)
-                .Take(10);
+                .Take(10)
+                .ToListAsync();
 
             return logs;
         }
@@ -70,7 +73,7 @@ namespace MyConcordiaID.Models.Log
             };
 
             _database.LOGs.Add(currentLog);
-            _database.SaveChanges();
+            _database.SaveChangesAsync();
         }
 
     }
