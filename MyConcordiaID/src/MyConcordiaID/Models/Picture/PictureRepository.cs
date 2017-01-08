@@ -54,9 +54,9 @@ namespace MyConcordiaID.Models.Picture
                     .Select(p => new { p.PICTURE_DATA })
                     .FirstOrDefault();
 
-                var archived = Status.Archived.ToString();
-                var arhivedPictures = _database.PICTUREs
-                    .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS == aproved)
+                //all picture that aren't a profile or a pending
+                var remainingPicture = _database.PICTUREs
+                    .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS != aproved && p.STATUS != pending)
                     .Select(s => new
                     {
                         s.ID_PK,
@@ -78,7 +78,7 @@ namespace MyConcordiaID.Models.Picture
                 {
                     profilePicture = (profile == null) ? null : profile.PICTURE_DATA,
                     pendingPicture = (pendingPicture == null) ? null : pendingPicture.PICTURE_DATA,
-                    archivedPictures = arhivedPictures
+                    archivedPictures = remainingPicture
                 };
 
                 return pictures;

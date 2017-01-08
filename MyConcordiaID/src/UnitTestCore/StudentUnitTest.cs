@@ -391,7 +391,7 @@ namespace UnitTestCore
             decimal id = -1;
             string status = "";
             // in our unit test our student has only 1 picture
-            foreach(dynamic d in studentPictures)
+            foreach(dynamic d in studentPictures.archivedPictures)
             {
                 PrintPropertiesOfDynamicObject(d);
                 id = ReflectPropertyValue(d, "ID_PK");
