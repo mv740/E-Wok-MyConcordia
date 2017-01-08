@@ -8,7 +8,7 @@ namespace MyConcordiaID.Models.Picture
 {
     public interface IPictureRepository
     {
-        IEnumerable<dynamic> FindStudentPictures(int id);
+        StudentPictures FindStudentPictures(int id);
         void AddPendingPicture(string netName, byte[] picture);
         PICTURE FindPendingPicture(int id);
     }

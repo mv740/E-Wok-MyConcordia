@@ -16,29 +16,75 @@ namespace MyConcordiaID.Models.Picture
             _database = context;
         }
 
-        public IEnumerable<dynamic> FindStudentPictures(int id)
+        public StudentPictures FindStudentPictures(int id)
         {
             var student = _database.STUDENTS
                 .Where(s => s.ID == id)
                 .FirstOrDefault();
 
-            var studentNetname = student.NETNAME;
+            if(student != null)
+            {
 
-            var pictures = _database.PICTUREs
-                .Where(s => s.STUDENT_NETNAME == studentNetname)
-                .Select(s => new
+                var studentNetname = student.NETNAME;
+
+                //all picture together 
+                //var pictures = _database.PICTUREs
+                //    .Where(s => s.STUDENT_NETNAME == studentNetname)
+                //    .Select(s => new
+                //    {
+                //        s.ID_PK,
+                //        s.PICTURE_DATA,
+                //        s.STATUS,
+                //        s.CREATED,
+                //        s.UPDATED
+
+                //    })
+                //    .OrderByDescending(s => s.CREATED)
+                //    .ToList();
+
+                var aproved = Status.Approved.ToString();
+                var profile = _database.PICTUREs
+                    .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS == aproved)
+                    .Select(p => new { p.PICTURE_DATA })
+                    .FirstOrDefault();
+
+                var pending = Status.Pending.ToString();
+                var pendingPicture = _database.PICTUREs
+                    .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS == pending)
+                    .Select(p => new { p.PICTURE_DATA })
+                    .FirstOrDefault();
+
+                var archived = Status.Archived.ToString();
+                var arhivedPictures = _database.PICTUREs
+                    .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS == aproved)
+                    .Select(s => new
+                    {
+                        s.ID_PK,
+                        s.PICTURE_DATA,
+                        s.STATUS,
+                        s.CREATED,
+                        s.UPDATED
+
+                    })
+                    .OrderByDescending(s => s.CREATED)
+                    .ToList();
+
+
+                //all pictures by status
+
+
+
+                StudentPictures pictures = new StudentPictures
                 {
-                    s.ID_PK,
-                    s.PICTURE_DATA,
-                    s.STATUS,
-                    s.CREATED,
-                    s.UPDATED
+                    profilePicture = (profile == null) ? null : profile.PICTURE_DATA,
+                    pendingPicture = (pendingPicture == null) ? null : pendingPicture.PICTURE_DATA,
+                    archivedPictures = arhivedPictures
+                };
 
-                })
-                .OrderByDescending(s => s.CREATED)
-                .ToList();
+                return pictures;
+            }
 
-            return pictures;
+            return null;// student not found;
         }
 
         public void AddPendingPicture(string netname, byte[] picture)

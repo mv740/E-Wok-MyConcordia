@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Helper
 {
@@ -13,16 +10,6 @@ namespace MyConcordiaID.Helper
                 return string.Empty;
             else
                 return Convert.ToBase64String(picture);
-        }
-
-        public static string GetDeniedStatus()
-        {
-            return "denied";
-        }
-
-        public static string GetArchivedStatus()
-        {
-            return "archived";
         }
     }
 }

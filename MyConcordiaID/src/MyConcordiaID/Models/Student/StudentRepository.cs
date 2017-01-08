@@ -22,16 +22,72 @@ namespace MyConcordiaID.Models.Student
             _database = context;
         }
 
-        public STUDENT FindById(int id)
+        public StudentAccount FindById(int id)
         {
             var student = _database.STUDENTS
                  .Where(s => s.ID == id)
+                 .Select(s => new
+                 {
+                     s.NETNAME,
+                     s.ID,
+                     s.FIRSTNAME,
+                     s.LASTNAME,
+                     s.DOB,
+                     s.VALID,
+                     s.PENDING,
+                     s.UGRADSTATUS,
+                     s.EXPIREDATE,
+                     s.UPDATEPICTURE
+                 })
                  .SingleOrDefault();
 
-            return student;
+            if (student != null)
+            {
+                StudentAccount account = new StudentAccount
+                {
+                    ID = student.ID,
+                    NetName = student.NETNAME,
+                    FirstName = student.FIRSTNAME,
+                    LastName = student.LASTNAME,
+                    DOB = student.DOB,
+                    Valid = student.VALID,
+                    Pending = student.PENDING,
+                    UGradStatus = student.UGRADSTATUS,
+                    ExpireDate = student.EXPIREDATE
+                };
+
+                if (student.PENDING)
+                {
+                    //retrieve pending picture
+                    string pending = Status.Pending.ToString();
+                    var pendingPicture = _database.PICTUREs
+                        .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == pending)
+                        .FirstOrDefault();
+
+                    account.PendingPicture = pendingPicture.PICTURE_DATA;
+
+                }
+
+                if (student.VALID)
+                {
+                    //retrieve profile  picture
+                    string aproved = Status.Approved.ToString();
+                    var profilePicture = _database.PICTUREs
+                        .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == aproved)
+                        .FirstOrDefault();
+
+                    account.ProfilePicture = profilePicture.PICTURE_DATA;
+
+                }
+
+                return account;
+            }
+
+            //not found
+            return null;
         }
 
-        public dynamic FindByNetName(string netName)
+        public StudentAccount FindByNetName(string netName)
         {
             var student = _database.STUDENTS
                  .Where(s => s.NETNAME == netName)
@@ -44,15 +100,57 @@ namespace MyConcordiaID.Models.Student
                      s.DOB,
                      s.VALID,
                      s.PENDING,
-                     s.PROFILEPICTURE,
                      s.UGRADSTATUS,
                      s.EXPIREDATE,
                      s.UPDATEPICTURE
                  })
                  .SingleOrDefault();
 
+            if(student != null)
+            {
+                StudentAccount account = new StudentAccount
+                {
+                    ID = student.ID,
+                    NetName = student.NETNAME,
+                    FirstName = student.FIRSTNAME,
+                    LastName = student.LASTNAME,
+                    DOB = student.DOB,
+                    Valid = student.VALID,
+                    Pending = student.PENDING,
+                    UGradStatus = student.UGRADSTATUS,
+                    ExpireDate = student.EXPIREDATE,
+                    UpdatePicture = student.UPDATEPICTURE
+                };
 
-            return student;
+                if (student.PENDING)
+                {
+                    //retrieve pending picture
+                    string pending = Status.Pending.ToString();
+                    var pendingPicture = _database.PICTUREs
+                        .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == pending)
+                        .FirstOrDefault();
+
+                    account.PendingPicture = pendingPicture.PICTURE_DATA;
+
+                }
+
+                if (student.VALID)
+                {
+                    //retrieve profile  picture
+                    var approved = Status.Approved.ToString();
+                    var profilePicture = _database.PICTUREs
+                        .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == approved)
+                        .FirstOrDefault();
+
+                    account.ProfilePicture = profilePicture.PICTURE_DATA;
+
+                }
+
+                return account;
+            }
+
+            //not found
+            return null;
         }
 
         public dynamic GetAll()
@@ -88,8 +186,10 @@ namespace MyConcordiaID.Models.Student
 
             var studentNetname = student.NETNAME;
 
+
+            var pending = Status.Pending.ToString();
             var pendingPicture = _database.PICTUREs.
-                Where(p => p.STATUS == Status.Pending.ToString() && p.STUDENT_NETNAME == studentNetname)
+                Where(p => p.STATUS == pending && p.STUDENT_NETNAME == studentNetname)
                 .FirstOrDefault();
 
             if(pictureValidation.valid)
@@ -97,8 +197,9 @@ namespace MyConcordiaID.Models.Student
                 pendingPicture.STATUS = Status.Approved.ToString();
 
                 //if user has already a profile picture, set to archive
+                var archived = Status.Archived.ToString();
                 var profilePicture = _database.PICTUREs.
-                Where(p => p.STATUS == Status.Approved.ToString() && p.STUDENT_NETNAME == studentNetname)
+                Where(p => p.STATUS == archived && p.STUDENT_NETNAME == studentNetname)
                 .FirstOrDefault();
 
                 if(profilePicture != null)
@@ -107,6 +208,9 @@ namespace MyConcordiaID.Models.Student
                     profilePicture.UPDATED = DateTime.UtcNow;
                     profilePicture.ADMINISTRATOR = netName;
                 }
+
+                //account is now valid
+                student.VALID = true;
 
             }
             else

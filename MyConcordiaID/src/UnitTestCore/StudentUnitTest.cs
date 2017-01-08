@@ -137,7 +137,7 @@ namespace UnitTestCore
 
             var student = _repo.FindById(21941097);
             Assert.AreEqual(21941097, student.ID);
-            Assert.AreEqual("testFirst", student.FIRSTNAME);
+            Assert.AreEqual("testFirst", student.FirstName);
 
         }
 

@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Net.Http.Headers;
@@ -7,13 +6,9 @@ using MyConcordiaID.Helper;
 using MyConcordiaID.Models.Log;
 using MyConcordiaID.Models.Picture;
 using MyConcordiaID.Models.Student;
-using OracleEntityFramework;
-using System;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Controllers
 {
@@ -192,7 +187,9 @@ namespace MyConcordiaID.Controllers
         {
            // var authenticatedUser = getAuthenticatedUserNetname();
 
-            var netName = _studentsRepo.ValidatePicture(picture, "test");
+
+            //m_woznia is default admin name input until we activated autorize on this api  
+            var netName = _studentsRepo.ValidatePicture(picture, "m_woznia");
 
             //if (picture.valid)
             //{
@@ -209,9 +206,7 @@ namespace MyConcordiaID.Controllers
 
 
         /// <summary>
-        ///  Validate a pending picture
-        ///  if approved : student's pending picture become his valid profile picture
-        ///  if denied : pending picture is send to archive picture 
+        /// Reapprove a previous picture 
         /// </summary>
         /// <param name="picture"></param>
         /// <returns>student netname</returns>

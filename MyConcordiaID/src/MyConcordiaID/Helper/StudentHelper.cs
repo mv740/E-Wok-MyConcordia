@@ -1,4 +1,5 @@
-﻿using OracleEntityFramework;
+﻿using MyConcordiaID.Models.Student;
+using OracleEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +84,5 @@ namespace MyConcordiaID.Helper
 
 
         }
-
     }
 }

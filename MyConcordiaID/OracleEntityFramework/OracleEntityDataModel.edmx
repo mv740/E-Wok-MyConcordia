@@ -56,8 +56,6 @@
           <Property Name="VALID" Type="number" Precision="1" Scale="0" Nullable="false" />
           <Property Name="DOB" Type="date" Nullable="false" />
           <Property Name="PENDING" Type="number" Precision="1" Scale="0" Nullable="false" />
-          <Property Name="PROFILEPICTURE" Type="blob" />
-          <Property Name="PENDINGPICTURE" Type="blob" />
           <Property Name="UGRADSTATUS" Type="varchar2" MaxLength="2" Nullable="false" />
           <Property Name="EXPIREDATE" Type="date" Nullable="false" />
           <Property Name="UPDATEPICTURE" Type="number" Precision="1" Scale="0" Nullable="false" />
@@ -171,8 +169,6 @@
           <Property Name="VALID" Type="Boolean" Nullable="false" />
           <Property Name="DOB" Type="DateTime" Nullable="false" />
           <Property Name="PENDING" Type="Boolean" Nullable="false" />
-          <Property Name="PROFILEPICTURE" Type="Binary" MaxLength="Max" FixedLength="false" />
-          <Property Name="PENDINGPICTURE" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="UGRADSTATUS" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="EXPIREDATE" Type="DateTime" Nullable="false" />
           <Property Name="UPDATEPICTURE" Type="Boolean" Nullable="false" />
@@ -285,8 +281,6 @@
                 <ScalarProperty Name="UPDATEPICTURE" ColumnName="UPDATEPICTURE" />
                 <ScalarProperty Name="EXPIREDATE" ColumnName="EXPIREDATE" />
                 <ScalarProperty Name="UGRADSTATUS" ColumnName="UGRADSTATUS" />
-                <ScalarProperty Name="PENDINGPICTURE" ColumnName="PENDINGPICTURE" />
-                <ScalarProperty Name="PROFILEPICTURE" ColumnName="PROFILEPICTURE" />
                 <ScalarProperty Name="PENDING" ColumnName="PENDING" />
                 <ScalarProperty Name="DOB" ColumnName="DOB" />
                 <ScalarProperty Name="VALID" ColumnName="VALID" />

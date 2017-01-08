@@ -7,8 +7,8 @@ namespace MyConcordiaID.Models.Student
     public interface IStudentRepository
     {
         dynamic GetAll();
-        STUDENT FindById(int id);
-        dynamic FindByNetName(string netname);
+        StudentAccount FindById(int id);
+        StudentAccount FindByNetName(string netname);
         string ValidatePicture(PictureValidation pictureValidation, string netName);
         string RevalidatePicture(PictureValidation pictureValidation, string netname);
         void Add(STUDENT student);

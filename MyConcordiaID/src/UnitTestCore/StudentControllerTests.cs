@@ -154,14 +154,16 @@ namespace UnitTestCore
 
             //Act
             var result = controller.GetById(21941097) as ObjectResult;
-            var student = result.Value as STUDENT;
+            var student = result.Value as StudentAccount;
+
+            var resultStatus = controller.GetById(21941097) as StatusCodeResult;
 
             //Assert
-
+            Assert.AreEqual(200, StatusCodes.Status200OK);
             Assert.AreEqual(21941097, student.ID);
-            Assert.AreEqual("testFirst", student.FIRSTNAME);
-
+            Assert.AreEqual("testFirst", student.FirstName);            
         }
+
         [TestMethod]
         public void GetStudentByIdNotFound()
         {
@@ -170,10 +172,10 @@ namespace UnitTestCore
             var controller = new StudentController(_repo,_pictures, _logs);
 
             //Act
-            var result = controller.GetById(21111111);
+            var result = controller.GetById(21111111) as StatusCodeResult;
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult)); //404 status
+            Assert.AreEqual(404, StatusCodes.Status404NotFound);
 
         }
 
@@ -187,11 +189,17 @@ namespace UnitTestCore
             IdentityHelper.SetUser("michal", "wozniak", controller);
 
             //Act
+            //var result = controller.GetAccount() as ObjectResult;
+
             var result = controller.GetAccount() as ObjectResult;
 
+            var account = result.Value as StudentAccount;
+
+            Console.WriteLine(result.Value);
+
             //assert
-            Assert.AreEqual("michal", ReflectPropertyValue(result.Value,"FIRSTNAME"));
-            Assert.AreEqual("wozniak", ReflectPropertyValue(result.Value, "LASTNAME"));
+            Assert.AreEqual("michal", account.FirstName);
+            Assert.AreEqual("wozniak", account.LastName);
         }
 
     }
