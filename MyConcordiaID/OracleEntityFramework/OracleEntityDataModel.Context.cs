@@ -30,5 +30,6 @@ namespace OracleEntityFramework
         public virtual DbSet<PICTUREUPDATESETTING> PICTUREUPDATESETTINGs { get; set; }
         public virtual DbSet<PICTUREARCHIVE> PICTUREARCHIVEs { get; set; }
         public virtual DbSet<LOG> LOGs { get; set; }
+        public virtual DbSet<PICTURE> PICTUREs { get; set; }
     }
 }

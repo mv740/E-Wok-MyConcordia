@@ -15,6 +15,18 @@
           <Property Name="TIMESTAMP" Type="timestamp" Precision="6" Nullable="false" />
           <Property Name="AFFECTED_USER" Type="varchar2" MaxLength="20" />
         </EntityType>
+        <EntityType Name="PICTURE">
+          <Key>
+            <PropertyRef Name="ID_PK" />
+          </Key>
+          <Property Name="ID_PK" Type="number" Precision="38" Scale="0" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PICTURE_DATA" Type="blob" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="CREATED" Type="date" Nullable="false" />
+          <Property Name="UPDATED" Type="date" />
+          <Property Name="STUDENT_NETNAME" Type="varchar2" MaxLength="8" Nullable="false" />
+          <Property Name="ADMINISTRATOR" Type="varchar2" MaxLength="8" />
+        </EntityType>
         <EntityType Name="PICTUREARCHIVE">
           <Key>
             <PropertyRef Name="ID_PK" />
@@ -62,6 +74,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="PICTURE_ADMIN_FK">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="0..1" />
+          <End Role="PICTURE" Type="Self.PICTURE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="PICTURE">
+              <PropertyRef Name="ADMINISTRATOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PICTURE_STUDENT_FK">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
+          <End Role="PICTURE" Type="Self.PICTURE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="PICTURE">
+              <PropertyRef Name="STUDENT_NETNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="PICTUREARCHIVE_FK1">
           <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
           <End Role="PICTUREARCHIVE" Type="Self.PICTUREARCHIVE" Multiplicity="*" />
@@ -76,12 +112,21 @@
         </Association>
         <EntityContainer Name="OracleDataModelStoreContainer">
           <EntitySet Name="LOG" EntityType="Self.LOG" Schema="MV740" store:Type="Tables" />
+          <EntitySet Name="PICTURE" EntityType="Self.PICTURE" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTUREARCHIVE" EntityType="Self.PICTUREARCHIVE" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTUREUPDATESETTING" EntityType="Self.PICTUREUPDATESETTING" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="MV740" store:Type="Tables" />
           <AssociationSet Name="LOG_FK1" Association="Self.LOG_FK1">
             <End Role="STUDENTS" EntitySet="STUDENTS" />
             <End Role="LOG" EntitySet="LOG" />
+          </AssociationSet>
+          <AssociationSet Name="PICTURE_ADMIN_FK" Association="Self.PICTURE_ADMIN_FK">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="PICTURE" EntitySet="PICTURE" />
+          </AssociationSet>
+          <AssociationSet Name="PICTURE_STUDENT_FK" Association="Self.PICTURE_STUDENT_FK">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="PICTURE" EntitySet="PICTURE" />
           </AssociationSet>
           <AssociationSet Name="PICTUREARCHIVE_FK1" Association="Self.PICTUREARCHIVE_FK1">
             <End Role="STUDENTS" EntitySet="STUDENTS" />
@@ -105,7 +150,16 @@
             <End Role="STUDENT" EntitySet="STUDENTS" />
             <End Role="LOG" EntitySet="LOGs" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="PICTUREs" EntityType="OracleDataModel.PICTURE" />
+          <AssociationSet Name="PICTURE_ADMIN_FK" Association="OracleDataModel.PICTURE_ADMIN_FK">
+            <End Role="STUDENT" EntitySet="STUDENTS" />
+            <End Role="PICTURE" EntitySet="PICTUREs" />
+          </AssociationSet>
+          <AssociationSet Name="PICTURE_STUDENT_FK" Association="OracleDataModel.PICTURE_STUDENT_FK">
+            <End Role="STUDENT" EntitySet="STUDENTS" />
+            <End Role="PICTURE" EntitySet="PICTUREs" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="STUDENT">
           <Key>
             <PropertyRef Name="NETNAME" />
@@ -124,7 +178,9 @@
           <Property Name="UPDATEPICTURE" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="PICTUREARCHIVEs" Relationship="OracleDataModel.PICTUREARCHIVE_FK1" FromRole="STUDENT" ToRole="PICTUREARCHIVE" />
           <NavigationProperty Name="LOGs" Relationship="OracleDataModel.LOG_FK1" FromRole="STUDENT" ToRole="LOG" />
-        </EntityType>
+          <NavigationProperty Name="PICTUREs" Relationship="OracleDataModel.PICTURE_ADMIN_FK" FromRole="STUDENT" ToRole="PICTURE" />
+          <NavigationProperty Name="PICTUREs1" Relationship="OracleDataModel.PICTURE_STUDENT_FK" FromRole="STUDENT" ToRole="PICTURE" />
+          </EntityType>
         <EntityType Name="PICTUREUPDATESETTING">
           <Key>
             <PropertyRef Name="YEAR" />
@@ -179,7 +235,45 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="PICTURE">
+          <Key>
+            <PropertyRef Name="ID_PK" />
+          </Key>
+          <Property Name="ID_PK" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PICTURE_DATA" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="STATUS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CREATED" Type="DateTime" Nullable="false" />
+          <Property Name="UPDATED" Type="DateTime" />
+          <Property Name="STUDENT_NETNAME" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ADMINISTRATOR" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="STUDENT_ADMIN_FK" Relationship="OracleDataModel.PICTURE_ADMIN_FK" FromRole="PICTURE" ToRole="STUDENT" />
+          <NavigationProperty Name="STUDENT_FK" Relationship="OracleDataModel.PICTURE_STUDENT_FK" FromRole="PICTURE" ToRole="STUDENT" />
+        </EntityType>
+        <Association Name="PICTURE_ADMIN_FK">
+          <End Type="OracleDataModel.STUDENT" Role="STUDENT" Multiplicity="0..1" />
+          <End Type="OracleDataModel.PICTURE" Role="PICTURE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="PICTURE">
+              <PropertyRef Name="ADMINISTRATOR" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PICTURE_STUDENT_FK">
+          <End Type="OracleDataModel.STUDENT" Role="STUDENT" Multiplicity="1" />
+          <End Type="OracleDataModel.PICTURE" Role="PICTURE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="PICTURE">
+              <PropertyRef Name="STUDENT_NETNAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -230,6 +324,19 @@
                 <ScalarProperty Name="TIMESTAMP" ColumnName="TIMESTAMP" />
                 <ScalarProperty Name="ACTION" ColumnName="ACTION" />
                 <ScalarProperty Name="NETNAME" ColumnName="NETNAME" />
+                <ScalarProperty Name="ID_PK" ColumnName="ID_PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PICTUREs">
+            <EntityTypeMapping TypeName="OracleDataModel.PICTURE">
+              <MappingFragment StoreEntitySet="PICTURE">
+                <ScalarProperty Name="ADMINISTRATOR" ColumnName="ADMINISTRATOR" />
+                <ScalarProperty Name="STUDENT_NETNAME" ColumnName="STUDENT_NETNAME" />
+                <ScalarProperty Name="UPDATED" ColumnName="UPDATED" />
+                <ScalarProperty Name="CREATED" ColumnName="CREATED" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="PICTURE_DATA" ColumnName="PICTURE_DATA" />
                 <ScalarProperty Name="ID_PK" ColumnName="ID_PK" />
               </MappingFragment>
             </EntityTypeMapping>

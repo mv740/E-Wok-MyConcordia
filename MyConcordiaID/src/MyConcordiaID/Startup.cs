@@ -22,6 +22,7 @@ using MyConcordiaID.Models.Graduation;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using Microsoft.Extensions.PlatformAbstractions;
+using MyConcordiaID.Models.Picture;
 
 namespace MyConcordiaID
 {
@@ -86,6 +87,7 @@ namespace MyConcordiaID
             services.AddScoped(_ => new DatabaseEntities());
             services.AddSingleton<IStudentRepository, StudentRepository>();
             services.AddSingleton<IAdminRepository, AdminRepository>();
+            services.AddSingleton<IPictureRepository, PictureRepository>();
             services.AddSingleton<ILogRepository, LogRepository>();
             services.AddSingleton<IGraduationRepository, GraduationRepository>();
 

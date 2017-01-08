@@ -72,32 +72,6 @@ namespace MyConcordiaID.Models.Student
             return students;
         }
 
-        public void AddPendingPicture(string netname, byte[] picture)
-        {
-
-            var student = _database.STUDENTS
-                .Where(s => s.NETNAME == netname)
-                .FirstOrDefault();
-
-            student.PENDINGPICTURE = picture;
-            student.PENDING = true;
-            student.UPDATEPICTURE = false; // so he can't send multiple update 
-
-            _database.SaveChanges();
-
-        }
-
-        public dynamic FindPendingPicture(int id)
-        {
-
-            var student = _database.STUDENTS
-                .Where(s => s.ID == id)
-                .Select(s => new { s.ID, s.PENDINGPICTURE })
-                .FirstOrDefault();
-
-            return student;
-
-        }
         /// <summary>
         ///  Validate a pending picture 
         ///  If approved, the student pending picture become their valid profile picture
@@ -105,71 +79,88 @@ namespace MyConcordiaID.Models.Student
         /// </summary>
         /// <param name="pictureValidation"></param>
         /// <returns>student netname</returns>
-        public string ValidatePicture(PictureValidation pictureValidation)
+        public string ValidatePicture(PictureValidation pictureValidation,string netName)
         {
 
             var student = _database.STUDENTS
                 .Where(s => s.ID == pictureValidation.id)
                 .FirstOrDefault();
 
-            var netName = student.NETNAME;
+            var studentNetname = student.NETNAME;
 
-            var pictureArchive = _database.PICTUREARCHIVEs;
+            var pendingPicture = _database.PICTUREs.
+                Where(p => p.STATUS == Status.Pending.ToString() && p.STUDENT_NETNAME == studentNetname)
+                .FirstOrDefault();
 
-            if (pictureValidation.valid)
+            if(pictureValidation.valid)
             {
+                pendingPicture.STATUS = Status.Approved.ToString();
 
+                //if user has already a profile picture, set to archive
+                var profilePicture = _database.PICTUREs.
+                Where(p => p.STATUS == Status.Approved.ToString() && p.STUDENT_NETNAME == studentNetname)
+                .FirstOrDefault();
 
-
-                if (student.VALID)
+                if(profilePicture != null)
                 {
-                    //there is a existing valid profile pic 
-
-                    PICTUREARCHIVE archivingProfile = new PICTUREARCHIVE
-                    {
-                        NETNAME = netName,
-                        STATUS = PictureHelper.GetArchivedStatus(),
-                        TIMESTAMP = DateTime.Now,
-                        PICTURE = student.PROFILEPICTURE,
-
-
-                    };
-
-                    pictureArchive.Add(archivingProfile);
+                    profilePicture.STATUS = Status.Archived.ToString();
+                    profilePicture.UPDATED = DateTime.UtcNow;
+                    profilePicture.ADMINISTRATOR = netName;
                 }
-
-
-
-                byte[] validPicture = student.PENDINGPICTURE;
-                student.PROFILEPICTURE = validPicture;
-                student.PENDINGPICTURE = null;
-                student.VALID = true;
 
             }
             else
             {
-                PICTUREARCHIVE archivingDeniedPicture = new PICTUREARCHIVE
-                {
-                    NETNAME = netName,
-                    STATUS = PictureHelper.GetDeniedStatus(),
-                    TIMESTAMP = DateTime.Now,
-                    PICTURE = student.PENDINGPICTURE,
-
-                };
-                pictureArchive.Add(archivingDeniedPicture);
-
-                student.PENDINGPICTURE = null;
+                pendingPicture.STATUS = Status.Denied.ToString();
             }
+
+
             student.PENDING = false;
+            //log the admin doing the validation
+            pendingPicture.ADMINISTRATOR = netName;
+            pendingPicture.UPDATED = DateTime.UtcNow;
             _database.SaveChanges();
 
-            return netName;
+            return studentNetname;
+        }
+
+        /// <summary>
+        ///  Approve once more a previous picture 
+        /// </summary>
+        /// <param name="pictureValidation">id : picture id </param>
+        /// <returns>student netname</returns>
+        public string RevalidatePicture(PictureValidation pictureValidation, string netName)
+        {
+            
+            var newApprovedPicture = _database.PICTUREs.
+                Where(p =>  p.ID_PK == pictureValidation.id)
+                .FirstOrDefault();
+
+            var studentNetname = newApprovedPicture.STUDENT_NETNAME;
+
+            //archived picture
+            var currentProfilePicture = _database.PICTUREs
+                .Where(p => p.STUDENT_NETNAME == studentNetname)
+                .FirstOrDefault();
+
+            currentProfilePicture.STATUS = Status.Archived.ToString();
+            currentProfilePicture.UPDATED = DateTime.UtcNow;
+            currentProfilePicture.ADMINISTRATOR = netName;
+
+            //new profile
+            newApprovedPicture.STATUS = Status.Approved.ToString();
+            newApprovedPicture.UPDATED = DateTime.UtcNow;
+            newApprovedPicture.ADMINISTRATOR = netName;
+
+            _database.SaveChanges();
+
+            return studentNetname;
         }
 
         public void Add(STUDENT newStudent)
         {
             _database.STUDENTS.Add(newStudent);
-            _database.SaveChangesAsync();
+            _database.SaveChanges();
         }
 
         public PicturePeriod GetUpdatePicturePeriod()
@@ -277,31 +268,6 @@ namespace MyConcordiaID.Models.Student
                 .FirstOrDefault();
 
             return (student == null) ? false : true;
-
-        }
-
-        public StudentPictures FindStudentPictures(int id)
-        {
-            var student = _database.STUDENTS
-                .Where(s => s.ID == id)
-                .FirstOrDefault();
-
-            var studentNetname = student.NETNAME;
-
-            var archivedPictures = _database.PICTUREARCHIVEs
-                .Where(p => p.NETNAME == studentNetname)
-                .Select(p => new { p.PICTURE, p.STATUS, p.NETNAME, p.TIMESTAMP })
-                .OrderByDescending(p => p.TIMESTAMP)
-                .ToList();
-
-            StudentPictures studentPictures = new StudentPictures
-            {
-                profilePicture = student.PROFILEPICTURE,
-                pendingPicture = student.PENDINGPICTURE,
-                archivedPictures = archivedPictures
-            };
-
-            return studentPictures;
 
         }
     }

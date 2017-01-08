@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using System.Threading;
 using Microsoft.AspNetCore.Http;
+using MyConcordiaID.Models.Picture;
 
 namespace UnitTestCore
 {
@@ -23,17 +24,30 @@ namespace UnitTestCore
 
         private Mock<DatabaseEntities> _context;
         private StudentRepository _repo;
+        private PictureRepository _pictures;
         private LogRepository _logs;
-        private Mock<DbSet<STUDENT>> _mySet;
+        private Mock<DbSet<STUDENT>> _mySetStudent;
+        private Mock<DbSet<PICTURE>> _mySetPicture;
 
         private void ConnectMocksToDataStore(IEnumerable<STUDENT> data_store)
         {
             var data_source = data_store.AsQueryable();
-            _mySet.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(data_source.Provider);
-            _mySet.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            _mySet.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySet.As<IQueryable<STUDENT>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
-            _context.Setup(a => a.STUDENTS).Returns(_mySet.Object);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(data_source.Expression);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            _context.Setup(a => a.STUDENTS).Returns(_mySetStudent.Object);
+        }
+
+
+        private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> data_store)
+        {
+            var data_source = data_store.AsQueryable();
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(data_source.Expression);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
 
         /// <summary>
@@ -69,7 +83,8 @@ namespace UnitTestCore
         public void Initialize()
         {
             _context = new Mock<DatabaseEntities>();
-            _mySet = new Mock<DbSet<STUDENT>>();
+            _mySetStudent = new Mock<DbSet<STUDENT>>();
+            _mySetPicture = new Mock<DbSet<PICTURE>>();
             _repo = new StudentRepository(_context.Object);
             _logs = new LogRepository(_context.Object);
         }
@@ -78,7 +93,8 @@ namespace UnitTestCore
         public void Cleanup()
         {
             _context = null;
-            _mySet = null;
+            _mySetPicture = null;
+            _mySetStudent = null;
             _repo = null;
         }
 
@@ -120,8 +136,13 @@ namespace UnitTestCore
             }
         };
 
-            _mySet.Object.AddRange(users);
+
+            List<PICTURE> pictures = new List<PICTURE>();
+
+            _mySetStudent.Object.AddRange(users);
+            _mySetPicture.Object.AddRange(pictures);
             ConnectMocksToDataStore(users);
+            ConnectPictureMocksToDataStore(pictures);
         }
 
         [TestMethod]
@@ -129,7 +150,7 @@ namespace UnitTestCore
         {
             //Arrange
             SetBasicMockDb();
-            var controller = new StudentController(_repo, _logs);
+            var controller = new StudentController(_repo,_pictures, _logs);
 
             //Act
             var result = controller.GetById(21941097) as ObjectResult;
@@ -146,7 +167,7 @@ namespace UnitTestCore
         {
             //Arrange
             SetBasicMockDb();
-            var controller = new StudentController(_repo, _logs);
+            var controller = new StudentController(_repo,_pictures, _logs);
 
             //Act
             var result = controller.GetById(21111111);
@@ -162,7 +183,7 @@ namespace UnitTestCore
             //Arrange
             SetBasicMockDb();
            
-            var controller = new StudentController(_repo, _logs);
+            var controller = new StudentController(_repo, _pictures, _logs);
             IdentityHelper.SetUser("michal", "wozniak", controller);
 
             //Act

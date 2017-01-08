@@ -11,7 +11,10 @@
         <AssociationConnector Association="OracleDataModel.PICTUREARCHIVE_FK1" />
         <EntityTypeShape EntityType="OracleDataModel.LOG" Width="1.5" PointX="0.75" PointY="5" />
         <AssociationConnector Association="OracleDataModel.LOG_FK1" />
-      </Diagram>
+        <EntityTypeShape EntityType="OracleDataModel.PICTURE" Width="1.875" PointX="5.625" PointY="4.125" />
+        <AssociationConnector Association="OracleDataModel.PICTURE_ADMIN_FK" />
+        <AssociationConnector Association="OracleDataModel.PICTURE_STUDENT_FK" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

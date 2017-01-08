@@ -23,12 +23,14 @@ namespace MyConcordiaID.Controllers
     {
 
         private IStudentRepository _studentsRepo { get; set; }
+        private IPictureRepository _pictureRepo { get; set; }
         private ILogRepository _logRepo { get; set; }
 
 
-        public StudentController(IStudentRepository students, ILogRepository logs)
+        public StudentController(IStudentRepository students,IPictureRepository pictures, ILogRepository logs)
         {
             _studentsRepo = students;
+            _pictureRepo = pictures;
             _logRepo = logs;
         }
 
@@ -80,7 +82,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetStudentPictures(int id)
         {
 
-            var studentPictures = _studentsRepo.FindStudentPictures(id);
+            var studentPictures = _pictureRepo.FindStudentPictures(id);
 
             if (studentPictures == null)
             {
@@ -144,7 +146,7 @@ namespace MyConcordiaID.Controllers
                 {
                     var fileContent = binaryReader.ReadBytes((int)file.Length);
 
-                    _studentsRepo.AddPendingPicture(authenticatedUser, fileContent);
+                    _pictureRepo.AddPendingPicture(authenticatedUser, fileContent);
 
                 }
             }
@@ -166,7 +168,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetPendingPicture(int id)
         {
 
-            var student = _studentsRepo.FindPendingPicture(id);
+            var student = _pictureRepo.FindPendingPicture(id);
 
             if(student == null)
             {
@@ -190,7 +192,7 @@ namespace MyConcordiaID.Controllers
         {
            // var authenticatedUser = getAuthenticatedUserNetname();
 
-            var netName = _studentsRepo.ValidatePicture(picture);
+            var netName = _studentsRepo.ValidatePicture(picture, "test");
 
             //if (picture.valid)
             //{
@@ -204,6 +206,37 @@ namespace MyConcordiaID.Controllers
 
             return Ok();
         }
+
+
+        /// <summary>
+        ///  Validate a pending picture
+        ///  if approved : student's pending picture become his valid profile picture
+        ///  if denied : pending picture is send to archive picture 
+        /// </summary>
+        /// <param name="picture"></param>
+        /// <returns>student netname</returns>
+        [AllowAnonymous]
+        [HttpPost]
+        [Route("RevalidatePicture")]
+        public IActionResult PostRevalidatePicture([FromBody] PictureValidation picture)
+        {
+            // var authenticatedUser = getAuthenticatedUserNetname();
+
+            var netName = _studentsRepo.RevalidatePicture(picture, "test");
+
+            //if (picture.valid)
+            //{
+            //    _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture, netName);
+            //}
+            //else
+            //{
+            //    _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture, netName);
+            //}
+
+
+            return Ok();
+        }
+
 
         /// <summary>
         ///  Retrive the current update picture period for this academic year
