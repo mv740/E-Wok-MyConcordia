@@ -48,17 +48,17 @@
             $state.go('app.camera');
           }
 
-          vm.updatepicture = data.updatepicture;
-          $rootScope.canUpdate = data.updatepicture;
+          vm.updatePicture = data.updatePicture;
+          $rootScope.canUpdate = data.updatePicture;
 
           //variables to be displayed on id
-          vm.profilepicture = data.profilepicture;
-          vm.firstname = data.firstname;
-          vm.lastname = data.lastname;
+          vm.profilePicture = data.profilePicture;
+          vm.firstName = data.firstName;
+          vm.lastName = data.lastName;
           vm.dob = data.dob;
           vm.id = data.id;
-          vm.ugradstatus = data.ugradstatus;
-          vm.expiredate = data.expiredate;
+          vm.uGradStatus = data.uGradStatus;
+          vm.expireDate = data.expireDate;
         })
         .error(function (error) {
           console.log('fetchStudentIdInfo data error');
@@ -107,17 +107,17 @@
     function getUpdatePeriod() {
       StudentService.fetchUpdatePeriod()
         .then(function successCallback(response) {
-        // this callback will be called asynchronously
-        // when the response is available
-        console.log("updatePeriod");
-        console.log(response);
-        $rootScope.validPeriod = response.data.canUpdatePicture;
+          // this callback will be called asynchronously
+          // when the response is available
+          console.log("updatePeriod");
+          console.log(response);
+          $rootScope.validPeriod = response.data.canUpdatePicture;
 
-      }, function errorCallback(response) {
-        // called asynchronously if an error occurs
-        // or server returns response with an error status.
-        console.log(response);
-      });
+        }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          console.log(response);
+        });
     }
 
 
