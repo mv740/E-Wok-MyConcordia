@@ -1,19 +1,18 @@
 @import "../base/colors";
 @import "../base/variables";
 @import "../base/mixins/make3D";
-@import "../base/mixins/positions";
+
 
 #studentModal {
-    @include angular-bootstrap-modal-fix();
-    min-width: 650px;
+
+    #cardContainer{
+        height: $modal-picture-width;
+    }
     color:white;
-    .modal-element {
-        #galleryContainer {
-            max-height: 200px;
-            @include make-button-3d($border-radius-container, darkgray);
-            border: $profile-picture-frame-width solid lightgray;
-            height:90px;
-        }
+    height: $modal-picture-width;
+
+    input{
+        height:100px;
     }
 
     .yesnoContainer {
@@ -21,15 +20,8 @@
         bottom: $btn-yesno-height + $profile-picture-frame-width;
     }
 
-    .thumbswrapper{
-        background-color:white;
-        position: relative;
-        width: 100%;
-        top: -10px;
-        text-align: left;
-    }
-}
 
+}
 
 
 #imageModal{

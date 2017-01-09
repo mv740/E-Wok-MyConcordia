@@ -2,6 +2,7 @@
 @import "../base/colors";
 @import "../base/variables";
 @import "../base/mixins/verticalCenter";
+@import "../base/mixins/fixes";
 
 
 .container3D {
@@ -14,19 +15,23 @@
   @include make-container-3d(white, $button3D-border-color, black, $border-radius-container, $button3D-shadow-color );
 }
 
-.cardHolder{
-  background: white;
-  @include make-button-3d($border-radius-container, darkgray);
-  border: $profile-picture-frame-width solid lightgray;
-  position: relative;
-  height: 0;
-  padding-bottom: 93%;
-  border-radius: 10px;
-
+.container2D{
+  @include angular-bootstrap-modal-fix();
+  background-color: $concordia-background-color;
+  width: $modal-picture-width * 2;
+  padding:0px;
 }
 
 .cardHolderComponent{
   position:absolute;
   top: 25%;
 }
+
+.textContainer{
+  padding-right:30px;
+  padding-left:30px;
+  overflow-y: auto;
+}
+
+
 

@@ -1,6 +1,5 @@
 @mixin angular-bootstrap-modal-fix() {
   //pushing it 5% from right hides the modal-content div underneath and push studentModal back in the middle. (Since usage of angularBootstrap's $modal)
   position: relative;
-  right:5%;
-  width:110%;
+  right:7%;
 }

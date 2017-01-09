@@ -37,6 +37,9 @@ html, body {
 .modal-content {
   height: 0px; }
 
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
+  padding: 0px; }
+
 .button3D {
   background-color: white;
   height: 46px;
@@ -131,20 +134,21 @@ html, body {
   .container3D-grey h1, .container3D-grey h2, .container3D-grey h3, .container3D-grey h4, .container3D-grey div > span, .container3D-grey label {
     color: black; }
 
-.cardHolder {
-  background: white;
+.container2D {
   position: relative;
-  border-radius: 10px;
-  box-shadow: 1px 1px 0 darkgray, 2px 2px 0 darkgray, 3px 3px 0 darkgray, 4px 4px 0 darkgray, 5px 5px 0 darkgray, 6px 6px 0 darkgray, 7px 7px 0 darkgray;
-  border: 10px solid lightgray;
-  position: relative;
-  height: 0;
-  padding-bottom: 93%;
-  border-radius: 10px; }
+  right: 7%;
+  background-color: #a1325e;
+  width: 750px;
+  padding: 0px; }
 
 .cardHolderComponent {
   position: absolute;
   top: 25%; }
+
+.textContainer {
+  padding-right: 30px;
+  padding-left: 30px;
+  overflow-y: auto; }
 
 .top-buffer {
   margin-top: 20px; }
@@ -157,6 +161,15 @@ html, body {
 
 .full-width {
   width: 100%; }
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-bottom: 375px solid #a1325e;
+  border-right: 28px solid transparent;
+  position: absolute;
+  right: 347px;
+  z-index: 2; }
 
 #sideMenuContainer {
   height: 100%;
@@ -257,32 +270,19 @@ html, body {
     margin-left: 8px; }
 
 #studentModal {
-  position: relative;
-  right: 5%;
-  width: 110%;
-  min-width: 650px;
-  color: white; }
-  #studentModal .modal-element #galleryContainer {
-    max-height: 200px;
-    position: relative;
-    border-radius: 10px;
-    box-shadow: 1px 1px 0 darkgray, 2px 2px 0 darkgray, 3px 3px 0 darkgray, 4px 4px 0 darkgray, 5px 5px 0 darkgray, 6px 6px 0 darkgray, 7px 7px 0 darkgray;
-    border: 10px solid lightgray;
-    height: 90px; }
+  color: white;
+  height: 375px; }
+  #studentModal #cardContainer {
+    height: 375px; }
+  #studentModal input {
+    height: 100px; }
   #studentModal .yesnoContainer {
     position: relative;
     bottom: 60px; }
-  #studentModal .thumbswrapper {
-    background-color: white;
-    position: relative;
-    width: 100%;
-    top: -10px;
-    text-align: left; }
 
 #imageModal {
   position: relative;
-  right: 5%;
-  width: 110%;
+  right: 7%;
   width: 400px;
   padding: 5px; }
   #imageModal img {
@@ -290,74 +290,68 @@ html, body {
     margin-left: auto;
     margin-right: auto; }
 
-#gallery li {
-  display: inline-block; }
-
-#gallery ul {
-  padding: 0;
-  margin: 0;
-  white-space: nowrap; }
-
-#gallery .thumbnail {
-  height: 50px;
-  padding: 2px; }
-
-#gallery .large {
-  width: 405px; }
-
-#gallery .mainimageshell {
-  display: none;
-  background-color: #fff;
-  border-radius: 8px;
-  float: left;
-  width: 400px;
-  padding: 10px; }
-
-#gallery .viewwindow {
-  width: 400px;
-  height: 307px;
-  overflow-x: hidden;
-  position: relative; }
-
-#gallery .fullsizelist {
-  position: absolute;
-  top: 0;
-  left: 0;
-  transition: left .8s ease;
-  -ms-transition: left .8s ease;
-  -o-transition: left .8s ease;
-  -webkit-transition: left .8s ease;
-  -moz-transition: left .8s ease; }
-
-#gallery .bg {
-  background-color: #333;
-  padding: 10px;
-  border-radius: 8px;
-  float: left; }
-
-#gallery .thumbsshell {
-  margin-top: 6px;
-  background-color: #fff;
-  padding: 5px;
-  border-radius: 5px; }
-
-#gallery .thumbswrapper {
-  overflow-x: scroll;
-  overflow-y: hidden;
-  height: 70px; }
-
-#gallery .thumbwrapper {
-  float: left;
-  height: 60px; }
-
-#gallery .captionshell {
-  margin: 0 0 10px 5px;
-  background-color: #fff;
-  width: 175px;
-  height: 324px;
-  padding: 0 10px;
-  border-radius: 8px;
-  float: left; }
+#gallery {
+  height: 120px; }
+  #gallery li {
+    display: inline-block; }
+  #gallery ul {
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;
+    height: 120px; }
+  #gallery .thumbnail {
+    padding: 2px;
+    height: 120px;
+    margin: 0px; }
+  #gallery .large {
+    width: 405px; }
+  #gallery .mainimageshell {
+    display: none;
+    background-color: #fff;
+    border-radius: 8px;
+    float: left;
+    width: 400px;
+    padding: 10px; }
+  #gallery .viewwindow {
+    width: 400px;
+    height: 307px;
+    overflow-x: hidden;
+    position: relative; }
+  #gallery .fullsizelist {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: left .8s ease;
+    -ms-transition: left .8s ease;
+    -o-transition: left .8s ease;
+    -webkit-transition: left .8s ease;
+    -moz-transition: left .8s ease; }
+  #gallery .bg {
+    background-color: #333;
+    padding: 10px;
+    border-radius: 8px;
+    float: left; }
+  #gallery .thumbsshell {
+    margin-top: 6px;
+    background-color: #fff;
+    padding: 5px;
+    border-radius: 5px; }
+  #gallery .thumbswrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    width: 100%;
+    position: relative;
+    top: -30px; }
+  #gallery .thumbwrapper {
+    float: left; }
+  #gallery .captionshell {
+    margin: 0 0 10px 5px;
+    background-color: #fff;
+    width: 175px;
+    height: 324px;
+    padding: 0 10px;
+    border-radius: 8px;
+    float: left; }
 
 #viewport.middle {
   top: 28%; }

@@ -1,5 +1,6 @@
+$thumbnail-picture-height: 120px;
 #gallery{
-
+  height: $thumbnail-picture-height;
 li {
   display:inline-block;
 }
@@ -8,11 +9,13 @@ ul{
   padding:0;
   margin:0;
   white-space:nowrap;
+  height: $thumbnail-picture-height;
 }
 
 .thumbnail {
-  height:50px;
   padding:2px;
+  height: $thumbnail-picture-height;
+  margin:0px;
 }
 
 .large {
@@ -64,12 +67,13 @@ ul{
 .thumbswrapper {
   overflow-x: scroll;
   overflow-y: hidden;
-  height:70px;
+  width:100%;
+  position: relative;
+  top: -30px;
 }
 
 .thumbwrapper {
   float:left;
-  height:60px;
 }
 
 .captionshell {

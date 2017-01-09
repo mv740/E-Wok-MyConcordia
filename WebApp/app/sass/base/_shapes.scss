@@ -1,0 +1,14 @@
+@import "colors";
+@import "variables";
+
+$triangle-width: 28px;
+
+.triangle{
+  width: 0;
+  height: 0;
+  border-bottom: 375px solid $concordia-background-color;
+  border-right: $triangle-width solid transparent;
+  position: absolute;
+  right: $modal-picture-width - $triangle-width;
+  z-index: 2;
+}

@@ -1,66 +1,24 @@
-<div id="studentModal" class="container container3D">
+<div id="studentModal" class="container2D">
 
-        <div class="modal-header">
-            <button type="button" class="close" ng-click="studentModal.close()">&times;</button>
-            <h4 class="modal-title">Validate Student Picture</h4>
-        </div>
+    <div class="progressCircularContainer" ng-if="studentModal.loading">
+        <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+    </div>
 
-        <div class="progressCircularContainer" ng-if="studentModal.loading">
-            <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
-        </div>
+    <div ng-if="!studentModal.loading" id="modal-body">
+        <div id="cardContainer" class="textContainer modal-element col-xs-6">
 
-        <div ng-show="!studentModal.loading" id="modal-body" class="modal-body row">
-            <div id="cardContainer" class="modal-element col-xs-6">
-                <div class="cardHolder">
+            <div class="text-left">
 
-                        <img class="full-width" ng-if="studentModal.student.pendingPicture"
-                             ng-src="data:image/JPEG;base64,{{studentModal.student.pendingPicture}}"/>
-                        <img class="full-width" ng-if="studentModal.student.pendingPicture == null"
-                             ng-src="{{studentModal.emptyProfilePicture}}"/>
-
-                        <div ng-if="studentModal.student.pendingPicture" class="row yesnoContainer">
-                            <button ng-click="studentModal.sendValidation(studentModal.student.id, true)" type="button"
-                                    class="btn-circle btn-yes"><i class="glyphicon glyphicon-ok"></i></button>
-                            <button ng-click="studentModal.sendValidation(studentModal.student.id, false)" type="button"
-                                    class="btn-circle btn-no"><i class="glyphicon glyphicon-remove"></i></button>
-                        </div>
-
-                        <div class="full-width cardHolderComponent progressCircularContainer"
-                             ng-if="studentModal.student.sendingValidation">
-                            <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
-                        </div>
-
-                        <div class="cardHolderComponent americanPieBox full-width">
-                            <span class="validated" ng-if="studentModal.student.pendingPicture == null">NO PENDING PICTURE</span>
-                            <span class="validated" ng-if="studentModal.student.pendingPicture && studentModal.student.wasValidated">VALIDATED</span>
-                            <span class="revoked" ng-if="studentModal.student.pendingPicture && studentModal.student.wasRevoked">REVOKED</span>
-                        </div>
-
-
-                </div>
-                <div id="galleryContainer" ng-if="studentModal.student.previousPictures.length > 0" class="top-buffer"
-                     ng-include="'partials/review/modals/studentModal/gallery/gallery.html'">
-                </div>
-            </div>
-
-
-            <div class="modal-element col-xs-6 text-left">
-                <div>
-                    <span>ID:</span><span>{{studentModal.student.id}}</span>
-                </div>
-                <br>
-                <div>
-                    <span>Name:</span>
-                    <span>{{studentModal.student.firstname}}</span>
+                <h2><span>{{studentModal.student.firstname}}</span>
                     <span>{{studentModal.student.lastname}}</span>
-                </div>
-                <br>
+                </h2>
                 <div>
-                    <span>Netname:</span><span>{{studentModal.student.netname}}</span>
+                    <span>{{studentModal.student.id}}</span>
                 </div>
-                <br>
                 <div>
-                    <span>Birthdate:</span>
+                    <span>{{studentModal.student.netname}}</span>
+                </div>
+                <div>
                     <span>{{studentModal.student.birthdate.day}}</span>
                     <span>{{studentModal.student.birthdate.month}}</span>
                     <span>{{studentModal.student.birthdate.year}}</span>
@@ -78,10 +36,46 @@
                     </li>
                 </ul>
             </div>
+            <br>
+            <div class="top-buffer col-xs-12">
+            <span>You can add a comment here:</span>
+            <input type="text" class="col-xs-12">
+            </div>
+        </div>
+        <div class="cardHolder col-xs-6">
 
+            <img class="full-width" ng-if="studentModal.student.pendingPicture"
+                 ng-src="data:image/JPEG;base64,{{studentModal.student.pendingPicture}}"/>
+            <img class="full-width" ng-if="studentModal.student.pendingPicture == null"
+                 ng-src="{{studentModal.emptyProfilePicture}}"/>
+
+            <div ng-if="studentModal.student.pendingPicture" class="row yesnoContainer">
+                <button ng-click="studentModal.sendValidation(studentModal.student.id, true)" type="button"
+                        class="btn-circle btn-yes"><i class="glyphicon glyphicon-ok"></i></button>
+                <button ng-click="studentModal.sendValidation(studentModal.student.id, false)" type="button"
+                        class="btn-circle btn-no"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+
+            <div class="full-width cardHolderComponent progressCircularContainer"
+                 ng-if="studentModal.student.sendingValidation">
+                <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+            </div>
+
+            <div class="cardHolderComponent americanPieBox full-width">
+                <span class="validated" ng-if="studentModal.student.pendingPicture == null">NO PENDING PICTURE</span>
+                <span class="validated"
+                      ng-if="studentModal.student.pendingPicture && studentModal.student.wasValidated">VALIDATED</span>
+                <span class="revoked" ng-if="studentModal.student.pendingPicture && studentModal.student.wasRevoked">REVOKED</span>
+            </div>
 
 
         </div>
 
+    </div>
+
+</div>
+
+<div id="galleryContainer" ng-if="studentModal.student.previousPictures.length > 0" class="container2D top-buffer"
+     ng-include="'partials/review/modals/studentModal/gallery/gallery.html'">
 </div>
 
