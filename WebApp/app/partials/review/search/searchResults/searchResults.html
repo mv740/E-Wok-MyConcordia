@@ -1,6 +1,6 @@
 
 
-<div ng-show="!search.emptyResults">
+<div ng-if="!search.emptyResults">
     <ul id="searchResults">
         <li class="button3D top-buffer" ng-repeat="result in search.results"
                                         ng-click="search.studentClick(result)">
@@ -19,7 +19,7 @@
         </li>
     </ul>
 </div>
-<div class="row" ng-show="search.emptyResults">
+<div class="row" ng-if="search.emptyResults">
     <div class="col-sm-6 col-sm-push-3" style="margin-top:30px">
         <h4>We were unable to find results matching your search.</h4>
     </div>
