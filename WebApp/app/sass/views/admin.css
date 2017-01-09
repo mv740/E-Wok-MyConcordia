@@ -171,9 +171,10 @@ html, body {
   height: 0;
   padding-bottom: 93%;
   border-radius: 10px; }
-  .cardHolder .cardHolderComponent {
-    position: absolute;
-    top: 25%; }
+
+.cardHolderComponent {
+  position: absolute;
+  top: 25%; }
 
 .center {
   display: block;

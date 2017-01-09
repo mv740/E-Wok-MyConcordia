@@ -141,9 +141,10 @@ html, body {
   height: 0;
   padding-bottom: 93%;
   border-radius: 10px; }
-  .cardHolder .cardHolderComponent {
-    position: absolute;
-    top: 25%; }
+
+.cardHolderComponent {
+  position: absolute;
+  top: 25%; }
 
 .top-buffer {
   margin-top: 20px; }
@@ -266,12 +267,17 @@ html, body {
     position: relative;
     border-radius: 10px;
     box-shadow: 1px 1px 0 darkgray, 2px 2px 0 darkgray, 3px 3px 0 darkgray, 4px 4px 0 darkgray, 5px 5px 0 darkgray, 6px 6px 0 darkgray, 7px 7px 0 darkgray;
-    border: 10px solid lightgray; }
+    border: 10px solid lightgray;
+    height: 90px; }
   #studentModal .yesnoContainer {
     position: relative;
     bottom: 60px; }
   #studentModal .thumbswrapper {
-    background-color: white; }
+    background-color: white;
+    position: relative;
+    width: 100%;
+    top: -10px;
+    text-align: left; }
 
 #imageModal {
   position: relative;

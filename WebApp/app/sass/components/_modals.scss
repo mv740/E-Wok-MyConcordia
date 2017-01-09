@@ -12,6 +12,7 @@
             max-height: 200px;
             @include make-button-3d($border-radius-container, darkgray);
             border: $profile-picture-frame-width solid lightgray;
+            height:90px;
         }
     }
 
@@ -22,6 +23,10 @@
 
     .thumbswrapper{
         background-color:white;
+        position: relative;
+        width: 100%;
+        top: -10px;
+        text-align: left;
     }
 }
 
