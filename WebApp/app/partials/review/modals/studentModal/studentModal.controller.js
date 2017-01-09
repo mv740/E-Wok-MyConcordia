@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .controller('StudentModalCtrl', StudentModalCtrl);
 
-StudentModalCtrl.$inject = ['$modal', '$modalInstance', 'studentService' , 'student'];
+StudentModalCtrl.$inject = ['$scope', '$modal', '$modalInstance', 'studentService' , 'student'];
 
-function StudentModalCtrl($modal, $modalInstance, studentService, student) {
+function StudentModalCtrl($scope, $modal, $modalInstance, studentService, student) {
 
     var studentModal = this;
 
@@ -17,6 +17,7 @@ function StudentModalCtrl($modal, $modalInstance, studentService, student) {
     studentModal.loading = true;
     studentModal.emptyProfilePicture = 'images/empty-profile.png';
 
+    $scope.$on("StudentModal.updateStudent", updateStudent);
     $modalInstance.opened.then(updateStudent);
     $modalInstance.result.then(resetModal);
 

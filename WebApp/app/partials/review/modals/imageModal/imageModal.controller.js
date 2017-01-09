@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .controller('ImageModalCtrl', ImageModalCtrl);
 
-ImageModalCtrl.$inject = ['$modalInstance', 'studentService', 'image'];
+ImageModalCtrl.$inject = ['$rootscope', '$modalInstance', 'studentService', 'image'];
 
-function ImageModalCtrl($modalInstance, studentService, image) {
+function ImageModalCtrl($rootscope, $modalInstance, studentService, image) {
 
     var imageModal = this;
     imageModal.close = $modalInstance.close;
@@ -21,8 +21,13 @@ function ImageModalCtrl($modalInstance, studentService, image) {
     }
 
     function sendPictureBackToValidation(){
+        imageModal.sendingBackToValidation = true;
        studentService.sendPictureBackToValidation(imageModal.image.id, imageModal.image.picture).then(function(){
-           //success
+           //succes
+           imageModal.sendingBackToValidation = false;
+           $rootscope.$broadcast("StudentModal.updateStudent");
+           $modalInstance.close();
+
        });
     }
 
