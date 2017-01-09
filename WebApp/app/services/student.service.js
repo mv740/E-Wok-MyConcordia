@@ -101,6 +101,7 @@ function studentService($http, $q, myConfig) {
         },
         function (failure) {
             console.log('search failure');
+            deferred.resolve(failure);
         });
 
         return deferred.promise;
