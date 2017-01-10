@@ -26,13 +26,29 @@ namespace MyConcordiaID.Models.Picture
                 var aproved = Status.Approved.ToString();
                 var profile = _database.PICTUREs
                     .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS == aproved)
-                    .Select(p => new { p.PICTURE_DATA })
+                    .Select(s => new
+                    {
+                        s.ID_PK,
+                        s.PICTURE_DATA,
+                        s.STATUS,
+                        s.CREATED,
+                        s.UPDATED
+
+                    })
                     .FirstOrDefault();
 
                 var pending = Status.Pending.ToString();
                 var pendingPicture = _database.PICTUREs
                     .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS == pending)
-                    .Select(p => new { p.PICTURE_DATA })
+                    .Select(s => new
+                    {
+                        s.ID_PK,
+                        s.PICTURE_DATA,
+                        s.STATUS,
+                        s.CREATED,
+                        s.UPDATED
+
+                    })
                     .FirstOrDefault();
 
                 //all picture that aren't a profile or a pending
