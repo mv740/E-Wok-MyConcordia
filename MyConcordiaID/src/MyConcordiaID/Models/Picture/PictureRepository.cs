@@ -1,14 +1,11 @@
 ﻿using OracleEntityFramework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Models.Picture
 {
     public class PictureRepository : IPictureRepository
     {
-
         private readonly DatabaseEntities _database;
 
         public PictureRepository(DatabaseEntities context)
@@ -24,23 +21,7 @@ namespace MyConcordiaID.Models.Picture
 
             if(student != null)
             {
-
                 var studentNetname = student.NETNAME;
-
-                //all picture together 
-                //var pictures = _database.PICTUREs
-                //    .Where(s => s.STUDENT_NETNAME == studentNetname)
-                //    .Select(s => new
-                //    {
-                //        s.ID_PK,
-                //        s.PICTURE_DATA,
-                //        s.STATUS,
-                //        s.CREATED,
-                //        s.UPDATED
-
-                //    })
-                //    .OrderByDescending(s => s.CREATED)
-                //    .ToList();
 
                 var aproved = Status.Approved.ToString();
                 var profile = _database.PICTUREs
@@ -76,8 +57,8 @@ namespace MyConcordiaID.Models.Picture
 
                 StudentPictures pictures = new StudentPictures
                 {
-                    profilePicture = (profile == null) ? null : profile.PICTURE_DATA,
-                    pendingPicture = (pendingPicture == null) ? null : pendingPicture.PICTURE_DATA,
+                    profilePicture = profile,
+                    pendingPicture = pendingPicture,
                     archivedPictures = remainingPicture
                 };
 

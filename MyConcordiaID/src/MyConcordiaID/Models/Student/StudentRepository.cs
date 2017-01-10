@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using OracleEntityFramework;
-using System.IO;
 using MyConcordiaID.Models.Picture;
 using MyConcordiaID.Helper;
-using System.Data.Entity;
-using System.Collections;
 
 namespace MyConcordiaID.Models.Student
 {
@@ -153,6 +148,10 @@ namespace MyConcordiaID.Models.Student
             return null;
         }
 
+        /// <summary>
+        ///  Retrieve all the students basic informations
+        /// </summary>
+        /// <returns></returns>
         public dynamic GetAll()
         {
 
@@ -175,7 +174,7 @@ namespace MyConcordiaID.Models.Student
         ///  If approved, the student pending picture become their valid profile picture
         ///  if denied, the pending picture is send to the picture archive
         /// </summary>
-        /// <param name="pictureValidation"></param>
+        /// <param name="pictureValidation">id : student id,valid : bool</param>
         /// <returns>student netname</returns>
         public string ValidatePicture(PictureValidation pictureValidation,string netName)
         {
@@ -229,32 +228,52 @@ namespace MyConcordiaID.Models.Student
         }
 
         /// <summary>
-        ///  Approve once more a previous picture 
+        ///  Approve once more a previous picture or invalidate the current profile picture
         /// </summary>
-        /// <param name="pictureValidation">id : picture id </param>
+        /// <param name="pictureValidation">id : picture id, valid : bool </param>
         /// <returns>student netname</returns>
         public string RevalidatePicture(PictureValidation pictureValidation, string netName)
         {
-            
-            var newApprovedPicture = _database.PICTUREs.
-                Where(p =>  p.ID_PK == pictureValidation.id)
-                .FirstOrDefault();
 
-            var studentNetname = newApprovedPicture.STUDENT_NETNAME;
+            var picture = _database.PICTUREs
+                 .Where(p => p.ID_PK == pictureValidation.id)
+                 .FirstOrDefault();
 
-            //archived picture
+            var studentNetname = picture.STUDENT_NETNAME;
+
             var currentProfilePicture = _database.PICTUREs
                 .Where(p => p.STUDENT_NETNAME == studentNetname)
                 .FirstOrDefault();
 
-            currentProfilePicture.STATUS = Status.Archived.ToString();
+
+            if (pictureValidation.valid)
+            {
+                //archived picture
+                currentProfilePicture.STATUS = Status.Archived.ToString();
+               
+                //new profile
+                picture.STATUS = Status.Approved.ToString();
+                picture.UPDATED = DateTime.UtcNow;
+                picture.ADMINISTRATOR = netName;
+            }
+            else
+            {
+                //invalidate current profile picture
+                currentProfilePicture.PICTURE_DATA = null;
+                currentProfilePicture.STATUS = Status.Denied.ToString();
+
+                //user doesn't have valid profile picture
+                var student = _database.STUDENTS
+                    .Where(s => s.NETNAME == currentProfilePicture.STUDENT_NETNAME)
+                    .FirstOrDefault();
+
+                student.VALID = false;
+                  
+            }
+            //log admin
             currentProfilePicture.UPDATED = DateTime.UtcNow;
             currentProfilePicture.ADMINISTRATOR = netName;
 
-            //new profile
-            newApprovedPicture.STATUS = Status.Approved.ToString();
-            newApprovedPicture.UPDATED = DateTime.UtcNow;
-            newApprovedPicture.ADMINISTRATOR = netName;
 
             _database.SaveChanges();
 
