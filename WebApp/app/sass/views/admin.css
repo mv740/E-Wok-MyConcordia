@@ -169,7 +169,8 @@ html, body {
   right: 7%;
   background-color: #a1325e;
   width: 750px;
-  padding: 0px; }
+  padding: 0px;
+  color: white; }
 
 .cardHolderComponent {
   position: absolute;

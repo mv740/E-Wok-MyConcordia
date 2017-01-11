@@ -24,20 +24,9 @@
                     <span>{{studentModal.student.birthdate.year}}</span>
                 </div>
             </div>
-            <div class="col-xs-12 top-buffer">
 
-                <button class="col-xs-12 button3D" ng-click="studentModal.loadLogs()"> Show logs</button>
-                <ul class="col-xs-12 top-buffer" ng-if="studentModal.logs">
-                    <li ng-repeat="log in studentModal.logs">
-                        <p>
-                            <span>{{log.action}}:</span>
-                            <span>{{log.timestamp}}</span>
-                        </p>
-                    </li>
-                </ul>
-            </div>
             <br>
-            <div class="top-buffer col-xs-12">
+            <div id="commentBox" class="col-xs-12">
             <span>You can add a comment here:</span>
             <input type="text" class="col-xs-12">
             </div>
@@ -45,7 +34,7 @@
         <div class="cardHolder col-xs-6">
 
             <img class="full-width" ng-if="studentModal.student.pendingPicture"
-                 ng-src="data:image/JPEG;base64,{{studentModal.student.pendingPicture}}"/>
+                 ng-src="data:image/JPEG;base64,{{studentModal.student.pendingPicture.picturE_DATA}}"/>
             <img class="full-width" ng-if="studentModal.student.pendingPicture == null"
                  ng-src="{{studentModal.emptyProfilePicture}}"/>
 
@@ -77,5 +66,18 @@
 
 <div id="galleryContainer" ng-if="studentModal.student.previousPictures.length > 0" class="container2D top-buffer"
      ng-include="'partials/review/modals/studentModal/gallery/gallery.html'">
+</div>
+
+<div class="container2D top-buffer">
+
+    <button class="col-xs-12 button3D" ng-click="studentModal.loadLogs()"> Show logs</button>
+    <ul class="col-xs-12 top-buffer" ng-if="studentModal.logs">
+        <li ng-repeat="log in studentModal.logs">
+            <p>
+                <span>{{log.action}}:</span>
+                <span>{{log.timestamp}}</span>
+            </p>
+        </li>
+    </ul>
 </div>
 

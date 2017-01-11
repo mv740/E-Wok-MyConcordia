@@ -1,12 +1,12 @@
-
-<div id="gallery" >
+<div id="gallery" class="side-padding bottom-padding">
+    <h2>Archived pictures</h2>
         <div class="thumbswrapper">
             <ul>
                 <!--    Iterate through all images and display them end to end as thumbs -->
                 <li ng-repeat="image in studentModal.student.previousPictures track by $index">
                     <div class="thumbwrapper">
                         <a ng-href="" ng-click="studentModal.enlargeImage(image)">
-                            <img class="thumbnail" ng-src="data:image/JPEG;base64,{{image.picture}}"/>
+                            <img class="thumbnail" ng-src="data:image/JPEG;base64,{{image.picturE_DATA}}"/>
                         </a>
                     </div>
                 </li>

@@ -46,13 +46,8 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
 
             var archivedPictures = value.data.archivedPictures;
 
-            if (value.data.profilePicture != null){
-                //will be removed upon next team meeting as the data returned from the get request will be modified
-                var tmp = {netname:"",
-                    picture: value.data.profilePicture,
-                    status: "validated",
-                    timestamp: "salut100"};
-                archivedPictures.unshift(tmp);
+            if (value.data.profilePicture){
+                archivedPictures.unshift(value.data.profilePicture);
             }
             studentModal.student.previousPictures = archivedPictures;
 

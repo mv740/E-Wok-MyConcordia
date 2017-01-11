@@ -2,6 +2,7 @@
 @import "../base/variables";
 @import "../base/mixins/make3D";
 
+$commentBoxHeight: 100px;
 
 #studentModal {
 
@@ -11,9 +12,13 @@
     color:white;
     height: $modal-picture-width;
 
-    input{
-        height:100px;
+    #commentBox {
+        margin-top:106px;
+        input {
+            height: $commentBoxHeight;
+        }
     }
+
 
     .yesnoContainer {
         position:relative;

@@ -109,8 +109,8 @@ html, body {
 
 .progressCircularContainer {
   text-align: center;
-  margin: 40px auto 10px auto;
-  display: block; }
+  top: 60px;
+  position: relative; }
 
 .container3D {
   position: relative;
@@ -139,7 +139,8 @@ html, body {
   right: 7%;
   background-color: #a1325e;
   width: 750px;
-  padding: 0px; }
+  padding: 0px;
+  color: white; }
 
 .cardHolderComponent {
   position: absolute;
@@ -155,6 +156,13 @@ html, body {
 
 .bottom-buffer {
   margin-bottom: 20px; }
+
+.side-padding {
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.bottom-padding {
+  padding-bottom: 30px; }
 
 .full-height {
   height: 100%; }
@@ -274,8 +282,10 @@ html, body {
   height: 375px; }
   #studentModal #cardContainer {
     height: 375px; }
-  #studentModal input {
-    height: 100px; }
+  #studentModal #commentBox {
+    margin-top: 106px; }
+    #studentModal #commentBox input {
+      height: 100px; }
   #studentModal .yesnoContainer {
     position: relative;
     bottom: 60px; }
@@ -290,68 +300,76 @@ html, body {
     margin-left: auto;
     margin-right: auto; }
 
-#gallery {
+#gallery li {
+  display: inline-block; }
+
+#gallery ul {
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
   height: 120px; }
-  #gallery li {
-    display: inline-block; }
-  #gallery ul {
-    padding: 0;
-    margin: 0;
-    white-space: nowrap;
-    height: 120px; }
-  #gallery .thumbnail {
-    padding: 2px;
-    height: 120px;
-    margin: 0px; }
-  #gallery .large {
-    width: 405px; }
-  #gallery .mainimageshell {
-    display: none;
-    background-color: #fff;
-    border-radius: 8px;
-    float: left;
-    width: 400px;
-    padding: 10px; }
-  #gallery .viewwindow {
-    width: 400px;
-    height: 307px;
-    overflow-x: hidden;
-    position: relative; }
-  #gallery .fullsizelist {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transition: left .8s ease;
-    -ms-transition: left .8s ease;
-    -o-transition: left .8s ease;
-    -webkit-transition: left .8s ease;
-    -moz-transition: left .8s ease; }
-  #gallery .bg {
-    background-color: #333;
-    padding: 10px;
-    border-radius: 8px;
-    float: left; }
-  #gallery .thumbsshell {
-    margin-top: 6px;
-    background-color: #fff;
-    padding: 5px;
-    border-radius: 5px; }
-  #gallery .thumbswrapper {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    width: 100%;
-    position: relative;
-    top: -30px; }
-  #gallery .thumbwrapper {
-    float: left; }
-  #gallery .captionshell {
-    margin: 0 0 10px 5px;
-    background-color: #fff;
-    width: 175px;
-    height: 324px;
-    padding: 0 10px;
-    border-radius: 8px;
-    float: left; }
+
+#gallery .thumbnail {
+  padding: 10px 10px 10px 0px;
+  height: 120px;
+  border: 0px;
+  background-color: transparent; }
+
+#gallery .large {
+  width: 405px; }
+
+#gallery .mainimageshell {
+  display: none;
+  background-color: #fff;
+  border-radius: 8px;
+  float: left;
+  width: 400px;
+  padding: 10px; }
+
+#gallery .viewwindow {
+  width: 400px;
+  height: 307px;
+  overflow-x: hidden;
+  position: relative; }
+
+#gallery .fullsizelist {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: left .8s ease;
+  -ms-transition: left .8s ease;
+  -o-transition: left .8s ease;
+  -webkit-transition: left .8s ease;
+  -moz-transition: left .8s ease; }
+
+#gallery .bg {
+  background-color: #333;
+  padding: 10px;
+  border-radius: 8px;
+  float: left; }
+
+#gallery .thumbsshell {
+  margin-top: 6px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 5px; }
+
+#gallery .thumbswrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%; }
+
+#gallery .thumbwrapper {
+  float: left; }
+
+#gallery .captionshell {
+  margin: 0 0 10px 5px;
+  background-color: #fff;
+  width: 175px;
+  height: 324px;
+  padding: 0 10px;
+  border-radius: 8px;
+  float: left; }
 
 #viewport.middle {
   top: 28%; }

@@ -2,10 +2,10 @@
 
         <div class="modal-header">
             <button type="button" class="close" ng-click="imageModal.close()">&times;</button>
-            <h4 class="modal-title">{{imageModal.image.status}} on {{imageModal.image.timestamp}}</h4>
+            <h4 class="modal-title">{{imageModal.image.status}} on {{imageModal.image.updated}}</h4>
         </div>
         <div id="modal-body">
-              <img class="full-width" ng-src="data:image/JPEG;base64,{{imageModal.image.picture}}"/>
+              <img class="full-width" ng-src="data:image/JPEG;base64,{{imageModal.image.picturE_DATA}}"/>
             <div class="atBottom americanPieBox full-width">
                 <span class="revoked" ng-click="imageModal.sendPictureBackToValidation()">SEND BACK TO VALIDATION</span>
             </div>
