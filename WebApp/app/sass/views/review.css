@@ -24,6 +24,9 @@
   position: absolute;
   bottom: 50px; }
 
+.textCenter {
+  text-align: center; }
+
 html, body {
   font: 1em 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
@@ -80,10 +83,7 @@ h2 {
   text-align: center;
   border: 1px;
   margin: 0 30px 0 30px;
-  opacity: 0.5;
-  transition: 0.4s ease-out; }
-  .btn-circle:hover {
-    opacity: 1; }
+  opacity: 0.9; }
 
 .btn-circle.btn-yes {
   background-color: #47a447;
@@ -324,7 +324,7 @@ h2 {
       height: 100px; }
   .validationModal .yesnoContainer {
     position: relative;
-    bottom: 60px; }
+    bottom: 80px; }
 
 .validationModal-xl {
   color: white;
@@ -340,7 +340,7 @@ h2 {
       height: 100px; }
   .validationModal-xl .yesnoContainer {
     position: relative;
-    bottom: 60px; }
+    bottom: 80px; }
 
 #gallery li {
   display: inline-block; }
