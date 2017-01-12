@@ -174,8 +174,17 @@ html, body {
   padding-left: 30px;
   padding-right: 30px; }
 
+.all-side-padding {
+  padding: 30px; }
+
 .bottom-padding {
   padding-bottom: 30px; }
+
+.overflow-auto {
+  overflow: auto; }
+
+.overflow-hidden {
+  overflow: hidden; }
 
 .full-height {
   height: 100%; }
@@ -293,7 +302,7 @@ html, body {
 #studentModal {
   color: white;
   height: 375px; }
-  #studentModal #cardContainer {
+  #studentModal .cardHolder {
     height: 375px; }
   #studentModal #commentBox {
     margin-top: 106px; }

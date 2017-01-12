@@ -5,7 +5,7 @@
     </div>
 
     <div ng-if="!studentModal.loading" id="modal-body">
-        <div id="cardContainer" class="textContainer modal-element col-xs-6">
+        <div class="cardHolder textContainer modal-element col-xs-6">
 
             <div class="text-left">
 
@@ -64,14 +64,11 @@
 
 </div>
 
-<div id="galleryContainer" ng-if="studentModal.student.previousPictures.length > 0" class="container2D top-buffer"
-     ng-include="'partials/review/modals/studentModal/gallery/gallery.html'">
-</div>
+<div id="logsContainer" class="container2D overflow-hidden top-buffer">
 
-<div class="container2D top-buffer">
-
+    <div class="side-padding top-buffer">
     <button class="col-xs-12 button3D" ng-click="studentModal.loadLogs()"> Show logs</button>
-    <ul class="col-xs-12 top-buffer" ng-if="studentModal.logs">
+    <ul class="col-xs-12 top-buffer">
         <li ng-repeat="log in studentModal.logs">
             <p>
                 <span>{{log.action}}:</span>
@@ -79,5 +76,12 @@
             </p>
         </li>
     </ul>
+    </div>
 </div>
+
+<div id="galleryContainer" ng-if="studentModal.student.previousPictures.length > 0" class="container2D top-buffer"
+     ng-include="'partials/review/modals/studentModal/gallery/gallery.html'">
+</div>
+
+
 

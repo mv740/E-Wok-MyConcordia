@@ -6,11 +6,13 @@ $commentBoxHeight: 100px;
 
 #studentModal {
 
-    #cardContainer{
-        height: $modal-picture-width;
-    }
     color:white;
     height: $modal-picture-width;
+
+    .cardHolder{
+        height: $modal-picture-width;
+    }
+
 
     #commentBox {
         margin-top:106px;
@@ -27,6 +29,7 @@ $commentBoxHeight: 100px;
 
 
 }
+
 
 
 #imageModal{
