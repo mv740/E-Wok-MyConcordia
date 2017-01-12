@@ -1,42 +1,26 @@
 @import "../base/colors";
 @import "../base/variables";
-@import "../base/mixins/make3D";
+@import "../base/mixins/modalBuilder";
 
 $commentBoxHeight: 100px;
 
-#studentModal {
-
-    color:white;
-    height: $modal-picture-width;
-
-    .cardHolder{
-        height: $modal-picture-width;
-    }
-
-
-    #commentBox {
-        margin-top:106px;
-        input {
-            height: $commentBoxHeight;
-        }
-    }
-
-
-    .yesnoContainer {
-        position:relative;
-        bottom: $btn-yesno-height + $profile-picture-frame-width;
-    }
-
-
-}
-
-
-
-#imageModal{
-    @include angular-bootstrap-modal-fix();
-    width:400px;
-    padding:5px;
-    img{
-        @include center();
+.app-modal-window {
+    .modal-dialog {
+        width: $modal-picture-width * 2;
     }
 }
+
+.app-modal-window-xl {
+    .modal-dialog {
+        width: $modal-picture-width-xl * 2;
+    }
+}
+
+.validationModal {
+    @include buildValidationModal($commentBoxHeight, $modal-picture-width);
+}
+
+.validationModal-xl {
+    @include buildValidationModal($commentBoxHeight, $modal-picture-width-xl);
+}
+

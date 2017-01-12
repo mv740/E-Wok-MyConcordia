@@ -58,7 +58,7 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
     function enlargeImage(image) {
         $modal.open({templateUrl: "partials/review/modals/imageModal/imageModal.html",
             controller: 'ImageModalCtrl as imageModal',
-            windowClass: 'modal',
+            windowClass: 'app-modal-window-xl',
             keyboard: true,
             resolve: {
                 image: function () {

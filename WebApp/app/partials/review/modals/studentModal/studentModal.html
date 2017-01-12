@@ -1,15 +1,15 @@
-<div id="studentModal" class="container2D">
+<div class="validationModal container2D">
 
     <div class="progressCircularContainer" ng-if="studentModal.loading">
         <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
     </div>
 
     <div ng-if="!studentModal.loading" id="modal-body">
-        <div class="cardHolder textContainer modal-element col-xs-6">
+        <div class="cardHolder side-padding modal-element col-xs-6">
 
-            <div class="text-left">
+            <div class="pictureAttributes text-left">
 
-                <h2><span>{{studentModal.student.firstname}}</span>
+                <h2 class="top-padding"><span>{{studentModal.student.firstname}}</span>
                     <span>{{studentModal.student.lastname}}</span>
                 </h2>
                 <div>
@@ -24,9 +24,7 @@
                     <span>{{studentModal.student.birthdate.year}}</span>
                 </div>
             </div>
-
-            <br>
-            <div id="commentBox" class="col-xs-12">
+            <div class="commentBox col-xs-12">
             <span>You can add a comment here:</span>
             <input type="text" class="col-xs-12">
             </div>

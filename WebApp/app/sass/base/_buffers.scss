@@ -1,20 +1,46 @@
+@import "variables";
+
+.top-buffer-sm{
+  margin-top:$buffer-sm;
+}
+
 .top-buffer{
-  margin-top:20px;
+  margin-top:$buffer-md;
 }
 
 .bottom-buffer{
-  margin-bottom:20px;
+  margin-bottom:$buffer-md;
+}
+.side-padding{
+  padding-left:$buffer-md;
+  padding-right:$buffer-md;
 }
 
-.side-padding{
-  padding-left:30px;
-  padding-right:30px;
+.all-side-padding-sm{
+  padding:$buffer-sm;
 }
 
 .all-side-padding{
-  padding:30px;
+  padding:$buffer-md;
+}
+
+.top-padding{
+  padding-top:$buffer-md;
 }
 
 .bottom-padding{
-  padding-bottom:30px;
+  padding-bottom:$buffer-md;
+}
+
+.bottom-padding-sm{
+  padding-bottom:$buffer-sm;
+}
+
+.bottom-padding-xs{
+  padding-bottom:$buffer-xs;
+}
+
+.top-bottom-padding-sm{
+  padding-top:$buffer-sm;
+  padding-bottom:$buffer-sm;
 }

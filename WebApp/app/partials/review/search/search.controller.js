@@ -52,7 +52,7 @@ function SearchCtrl($modal, studentService, searchParsingService) {
     function studentClick(student) {
         $modal.open({templateUrl: "partials/review/modals/studentModal/studentModal.html",
             controller: 'StudentModalCtrl as studentModal',
-            windowClass: 'modal',
+            windowClass: 'app-modal-window',
             keyboard: true,
             resolve: {
                 student: function () {

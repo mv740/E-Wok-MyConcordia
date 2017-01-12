@@ -37,6 +37,9 @@ html, body {
 .modal-content {
   height: 0px; }
 
+h2 {
+  margin-top: 0px; }
+
 .col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12 {
   padding: 0px; }
 
@@ -90,41 +93,18 @@ html, body {
   background-color: #d2322d;
   float: right; }
 
-.container3D {
-  position: relative;
-  border-radius: 10px;
-  box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232;
-  text-align: center;
-  border: 5px solid #8A0037;
-  background-color: #a1325e;
-  width: 700px;
-  padding-bottom: 32px; }
-  .container3D h1, .container3D h2, .container3D h3, .container3D h4, .container3D div > span, .container3D label {
-    color: white; }
-
-.container3D-grey {
-  position: relative;
-  border-radius: 10px;
-  box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232;
-  text-align: center;
-  border: 5px solid #6A6A6A;
-  background-color: white; }
-  .container3D-grey h1, .container3D-grey h2, .container3D-grey h3, .container3D-grey h4, .container3D-grey div > span, .container3D-grey label {
-    color: black; }
-
 .container2D {
-  position: relative;
-  right: 7%;
   background-color: #a1325e;
   width: 750px;
+  padding: 0px;
+  color: white; }
+
+.container2D-xl {
+  background-color: #a1325e;
+  width: 900px;
   padding: 0px;
   color: white; }
 
 .cardHolderComponent {
   position: absolute;
   top: 25%; }
-
-.textContainer {
-  padding-right: 30px;
-  padding-left: 30px;
-  overflow-y: auto; }

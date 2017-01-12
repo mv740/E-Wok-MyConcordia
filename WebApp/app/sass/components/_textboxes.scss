@@ -3,6 +3,9 @@
 @import "../base/variables";
 @import "../base/mixins/americanPie";
 
+$americanPieBox-border-width: 3px;
+$americanPieBox-angle: 7deg;
+
 .americanPieBox{
   text-align: center;
 

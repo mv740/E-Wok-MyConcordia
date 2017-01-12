@@ -1,0 +1,28 @@
+@import "../variables";
+
+@mixin buildValidationModal($commentBoxHeight, $height) {
+  color:white;
+  height: $height;
+
+  .cardHolder{
+    height: $height;
+  }
+
+  .pictureAttributes{
+    height: $height / 2;
+  }
+
+  .commentBox {
+    //19px is the size of the span above the commentboxb
+    padding-top: $height / 2 - $commentBoxHeight - 19px - $buffer-md;
+    height: $height / 2;
+    input {
+      height: $commentBoxHeight;
+    }
+  }
+
+  .yesnoContainer {
+    position:relative;
+    bottom: $btn-yesno-height;
+  }
+}

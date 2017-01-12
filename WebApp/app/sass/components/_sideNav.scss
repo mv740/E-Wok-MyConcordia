@@ -3,6 +3,10 @@
 @import "../base/mixins/horizontalCenter";
 @import "../base/mixins/background";
 
+$sidenav-top-margin: 28px;
+$sideNav-width: 60px;
+$sideNav-icon-size:25px;
+
 #sideMenuContainer{
 
     height: 100%;
