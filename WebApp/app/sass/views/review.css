@@ -318,7 +318,7 @@ h2 {
       height: 100px; }
   .validationModal .yesnoContainer {
     position: relative;
-    bottom: 50px; }
+    bottom: 60px; }
 
 .validationModal-xl {
   color: white;
@@ -334,7 +334,7 @@ h2 {
       height: 100px; }
   .validationModal-xl .yesnoContainer {
     position: relative;
-    bottom: 50px; }
+    bottom: 60px; }
 
 #gallery li {
   display: inline-block; }
