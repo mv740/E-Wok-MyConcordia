@@ -96,11 +96,11 @@ h2 {
 .americanPieBox {
   text-align: center; }
   .americanPieBox span {
-    padding: 5px;
     border-radius: 3px;
-    display: inline-block; }
+    display: inline-block;
+    font-size: 40px; }
   .americanPieBox span.revoked {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 0, 0, 0.1);
     border: 3px solid #d2322d;
     color: #d2322d;
     transform: rotate(7deg);
@@ -109,7 +109,7 @@ h2 {
     -webkit-transform: rotate(7deg);
     /* Chrome, Safari, Opera */ }
   .americanPieBox span.validated {
-    background-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(0, 255, 0, 0.1);
     border: 3px solid #47a447;
     color: #47a447;
     transform: rotate(-7deg);
@@ -153,9 +153,15 @@ h2 {
 .bottom-buffer {
   margin-bottom: 30px; }
 
+.all-side-margin-sm {
+  margin: 20px; }
+
 .side-padding {
   padding-left: 30px;
   padding-right: 30px; }
+
+.all-side-padding-xs {
+  padding: 10px; }
 
 .all-side-padding-sm {
   padding: 20px; }

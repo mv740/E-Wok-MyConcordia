@@ -49,10 +49,10 @@
             </div>
 
             <div class="cardHolderComponent americanPieBox full-width">
-                <span class="validated" ng-if="studentModal.student.pendingPicture == null">NO PENDING PICTURE</span>
-                <span class="validated"
+                <span class="validated all-side-padding-xs all-side-margin-sm" ng-if="studentModal.student.pendingPicture == null">NO PENDING PICTURE</span>
+                <span class="validated all-side-padding-xs all-side-margin-sm"
                       ng-if="studentModal.student.pendingPicture && studentModal.student.wasValidated">VALIDATED</span>
-                <span class="revoked" ng-if="studentModal.student.pendingPicture && studentModal.student.wasRevoked">REVOKED</span>
+                <span class="revoked all-side-padding-xs" ng-if="studentModal.student.pendingPicture && studentModal.student.wasRevoked">REVOKED</span>
             </div>
 
 

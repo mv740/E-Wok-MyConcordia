@@ -11,9 +11,18 @@
 .bottom-buffer{
   margin-bottom:$buffer-md;
 }
+
+.all-side-margin-sm{
+  margin: $buffer-sm;
+}
+
 .side-padding{
   padding-left:$buffer-md;
   padding-right:$buffer-md;
+}
+
+.all-side-padding-xs{
+  padding:$buffer-xs;
 }
 
 .all-side-padding-sm{

@@ -10,17 +10,17 @@ $americanPieBox-angle: 7deg;
   text-align: center;
 
   span{
-    padding:5px;
     border-radius: 3px;
     display: inline-block;
+    font-size:40px;
   }
 
   span.revoked{
-    background-color:rgba(1000, 1000, 1000, 0.3);
+    background-color:rgba(255, 0, 0, 0.1);
     @include make-american-pie($americanPieBox-border-width, $no-color, $americanPieBox-angle);
   }
   span.validated{
-    background-color:rgba(1000, 1000, 1000, 0.3);
+    background-color:rgba(0, 255, 0, 0.1);
     @include make-american-pie($americanPieBox-border-width, $yes-color, -$americanPieBox-angle);
   }
 
