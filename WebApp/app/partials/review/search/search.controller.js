@@ -34,7 +34,7 @@ function SearchCtrl($modal, studentService, searchParsingService) {
         }
         else{
             var params = searchParsingService.parseSearchInput(search.input);
-            alert(JSON.stringify(params));
+            console.log(JSON.stringify(params));
             studentService.search(params).then(function (value) {
                 setResults(value.data);
             });
