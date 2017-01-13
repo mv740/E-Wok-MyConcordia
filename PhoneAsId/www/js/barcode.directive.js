@@ -12,17 +12,26 @@ function barcodeDirective(){
   var directive = {
     restrict: 'EA',
     template: '<canvas class="barcodegen"></canvas>',
+    scope: {
+      bcode: '='
+    },
     link:linkFunc,
-    controller: 'IdController',
-    controllerAs: 'vm',
-    bindToController: true
 
   };
   return directive;
 
   function linkFunc(scope, el, attr, ctrl){
-    var canvas = el.find('canvas');
-    new JsBarcode(canvas[0], "hello");
+    scope.$watch(function() {
+        return scope.bcode;
+      },
+      function() {
+        var canvas = el.find('canvas');
+        new JsBarcode(canvas[0], scope.bcode, {
+          format: "CODE39"
+        });
+      }
+    );
+
   }
 }})();
 

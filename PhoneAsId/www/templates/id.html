@@ -20,14 +20,13 @@
             </div>
           </div>
 
-          <barcode-directive>
 
-          </barcode-directive>
           <div class="student_info">
             <p>{{vm.firstname}}</p>
             <p>{{vm.lastname}}</p>
             <p>{{vm.dob}}</p>
-            <p>{{vm.id}} </p>
+            <p>{{vm.id}}</p>
+
 
             <div ng-show="vm.showMarshallingButton">
               <button ng-click="vm.loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
@@ -42,7 +41,7 @@
           </div>
 
           <div class="barcode">
-
+            <barcode-directive bcode="vm.id"></barcode-directive>
           </div>
 
 
@@ -70,6 +69,7 @@
                 <p>{{vm.lastname}}</p>
                 <p>{{vm.dob}}</p>
                 <p>{{vm.id}}</p>
+                <p>{{vm.testid}}</p>
 
                 <div ng-show="vm.showMarshallingButton">
                   <button ng-click="vm.loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
@@ -82,8 +82,11 @@
               <p>{{vm.expiredate}}</p>
             </div>
           </div>
+          <barcode-directive>
+
+          </barcode-directive>
           <div class="barcode">
-            <img src="img/barcode_horizontal.png">
+
           </div>
 
         </div>
