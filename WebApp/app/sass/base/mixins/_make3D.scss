@@ -9,7 +9,7 @@
 }
 
 @mixin make-button-3d-hover($button3D-shadow-color){
-  &:hover {
+  &:not(.nohover):hover {
     top:3px;
     left:3px;
     box-shadow: 0.7px 0.7px 0 $button3D-shadow-color, 1.4px 1.4px 0 $button3D-shadow-color, 2.1px 2.1px 0 $button3D-shadow-color, 2.8px 2.8px 0 $button3D-shadow-color, 3.5px 3.5px 0 $button3D-shadow-color, 4.2px 4.2px 0 $button3D-shadow-color, 4.9px 4.9px 0 $button3D-shadow-color;

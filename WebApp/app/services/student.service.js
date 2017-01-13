@@ -15,7 +15,7 @@ function studentService($http, $q, myConfig) {
         getStudents: getStudents,
         search: search,
         getUpdatePeriod: getUpdatePeriod,
-        sendPictureBackToValidation: sendPictureBackToValidation
+        validateArchived: validateArchived
     };
 
     return service;
@@ -119,18 +119,18 @@ function studentService($http, $q, myConfig) {
         return deferred.promise;
     }
 
-    function sendPictureBackToValidation(id, picture){
+    function validateArchived(id, valid){
 
         var deferred = $q.defer();
 
         var req = {
             method: 'POST',
-            url: myConfig.baseUrl + myConfig.sendPictureBackToValidation,
+            url: myConfig.baseUrl + myConfig.validateArchived,
             headers: {
                 'Content-Type': "JSON"
             },
             data: { id: id,
-            picture: picture}
+            valid: valid}
         }
 
         $http(req).then(function (value) {

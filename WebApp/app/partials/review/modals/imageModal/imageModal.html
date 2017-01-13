@@ -22,10 +22,10 @@
                  ng-src="data:image/JPEG;base64,{{imageModal.image.picturE_DATA}}"/>
 
             <div class="row yesnoContainer">
-                <button ng-if="imageModal.image.status == 'Denied'" ng-click="imageModal.sendValidation(imageModal.image.iD_PK, true)" type="button"
-                        class="btn-circle btn-yes"><i class="glyphicon glyphicon-ok"></i></button>
-                <button ng-if="imageModal.image.status == 'Approved'" ng-click="imageModal.sendValidation(imageModal.image.iD_PK, false)" type="button"
-                        class="btn-circle btn-no"><i class="glyphicon glyphicon-remove"></i></button>
+                <button ng-class="{'greyed-out': imageModal.approved(), 'nohover': imageModal.approved()}" ng-click="imageModal.sendValidation(imageModal.image.iD_PK, true)" type="button"
+                        class="btn-circle btn-yes button3D"><i class="glyphicon glyphicon-ok"></i></button>
+                <button ng-class="{'greyed-out': imageModal.denied(), 'nohover': imageModal.denied()}" ng-click="imageModal.sendValidation(imageModal.image.iD_PK, false)" type="button"
+                        class="btn-circle btn-no button3D"><i class="glyphicon glyphicon-remove"></i></button>
             </div>
 
             <div class="full-width cardHolderComponent progressCircularContainer"

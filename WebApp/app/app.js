@@ -20,7 +20,8 @@ angular.module('myApp', [
     "getStudents": "student",
     "getLogs": "log/",
     "search": "student/search",
-    "getUpdatePeriod": "admin/UpdatePeriod"
+    "getUpdatePeriod": "admin/UpdatePeriod",
+    "validateArchived": "student/RevalidatePicture"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 

@@ -10,7 +10,9 @@ function ImageModalCtrl($modalInstance, studentService, image) {
 
     var imageModal = this;
     imageModal.close = $modalInstance.close;
-    imageModal.sendPictureBackToValidation = sendPictureBackToValidation;
+    imageModal.sendValidation = sendValidation;
+    imageModal.approved = approved;
+    imageModal.denied = denied;
 
     $modalInstance.opened.then(setImage);
 
@@ -20,12 +22,23 @@ function ImageModalCtrl($modalInstance, studentService, image) {
         imageModal.image = image;
     }
 
-    function sendPictureBackToValidation(){
-        imageModal.sendingBackToValidation = true;
-       studentService.sendPictureBackToValidation(imageModal.image.id, imageModal.image.picture).then(function(){
-           imageModal.sendingBackToValidation = false;
-           //$modalInstance.close();
-       });
+    function sendValidation(id, valid){
+        //allow to send validation only if the request applies to the status of the picture. eg validate a previously denied picture
+        if ((valid && denied()) || (!valid && approved())){
+            imageModal.sendingBackToValidation = true;
+            studentService.validateArchived(imageModal.image.id, imageModal.image.picture).then(function(){
+                imageModal.sendingBackToValidation = false;
+                //$modalInstance.close();
+            });
+        }
+
+    }
+
+    function approved(){
+        return (imageModal.image.status == 'Approved');
+    }
+    function denied(){
+        return (imageModal.image.status == 'Denied');
     }
 
 }

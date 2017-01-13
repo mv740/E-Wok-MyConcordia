@@ -32,18 +32,25 @@ $border-radius-button:4px;
   border-radius: 25px;
   text-align: center;
   border: 1px;
-  margin: 0 30px 0 30px;
+  margin: 0 50px 0 50px;
   opacity: 0.9;
+
+  &.btn-yes {
+    background-color: $yes-color;
+    float: left;
+    &.greyed-out{
+      background-color:grey;
+    }
+  }
+  &.btn-no {
+    background-color: $no-color;
+    float: right;
+    &.greyed-out{
+      background-color:grey;
+    }
+  }
 }
 
 
 
-.btn-circle.btn-yes{
-  background-color: $yes-color;
-  float:left;
-}
-.btn-circle.btn-no{
-  background-color: $no-color;
-  float:right;
-}
 
