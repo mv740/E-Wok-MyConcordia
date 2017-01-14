@@ -77,7 +77,12 @@ namespace MyConcordiaID
                        .AllowAnyHeader();
             }));
 
-            services.AddMvc();
+            services
+                .AddMvc()
+                .AddJsonOptions(option =>
+                {
+                    option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
 
             services.Configure<MvcOptions>(options =>
             {

@@ -259,7 +259,6 @@ namespace MyConcordiaID.Models.Student
             else
             {
                 //invalidate current profile picture
-                currentProfilePicture.PICTURE_DATA = null;
                 currentProfilePicture.STATUS = Status.Denied.ToString();
 
                 //user doesn't have valid profile picture

@@ -217,7 +217,7 @@ namespace MyConcordiaID.Controllers
         {
             // var authenticatedUser = getAuthenticatedUserNetname();
 
-            var netName = _studentsRepo.RevalidatePicture(picture, "test");
+            var netName = _studentsRepo.RevalidatePicture(picture, "m_woznia");
 
             //if (picture.valid)
             //{
