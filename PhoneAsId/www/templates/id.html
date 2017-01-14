@@ -1,95 +1,75 @@
-<ion-view >
+<ion-view>
   <ion-content>
 
     <div class="overseeing">
       <!-- template used if for portrait -->
-      <div ng-if="vm.screenOrientation == 'portrait-primary'" class="vertical">
 
-        <div class="main_content">
+      <div class="main_content">
 
-          <div class="picture">
-            <!-- display picture if it's there. If pending review, display pending approval pic. else, placeholder.-->
-            <div ng-if="vm.valid">
-             <img ng-src="data:image/PNG;base64,{{vm.profilepicture}}"width = "200" height = "200">
+
+        <div class="row">
+          <div class="col">
+            <div class="card removeMarginTop">
+              <div class="item item-text-wrap centerText">
+                <p class="graduateStatus">{{vm.uGradStatus}}</p>
+              </div>
             </div>
-            <div ng-if="!vm.valid && vm.pending">
-              <img src="img/pending_approval.jpg" width = "200" height = "200">
+
+            <div class="card">
+              <div class="item item-divider">
+                <p>Expire</p>
+              </div>
+              <div class="item item-text-wrap centerText">
+                <p>{{vm.expireDate}}</p>
+              </div>
             </div>
-            <div ng-if="!vm.valid && !vm.pending">
-              <img src="img/placeholder_profile_pic.jpg" width = "200" height = "200">
+
+
+          </div>
+          <div class="col">
+            <div>
+              <!-- display picture if it's there. If pending review, display pending approval pic. else, placeholder.-->
+              <div ng-if="vm.valid">
+                <img ng-src="data:image/PNG;base64,{{vm.profilePicture}}" width="200" height="200">
+              </div>
+              <div ng-if="!vm.valid && vm.pending">
+                <img src="img/pending_approval.jpg" width="200" height="200">
+              </div>
+              <div ng-if="!vm.valid && !vm.pending">
+                <img src="img/placeholder_profile_pic.jpg" width="200" height="200">
+              </div>
             </div>
+
+          </div>
+        </div>
+
+        <!--information card-->
+        <div class="list card removeMarginTop">
+          <div class="item item-icon-left">
+            <i class="icon ion-person"></i>
+            <p>{{vm.firstName}}</p>
           </div>
 
+          <div class="item item-icon-left">
+            <i class="icon ion-person"></i>
+            <p>{{vm.lastName}}</p>
+          </div>
 
-          <div class="student_info">
-            <p>{{vm.firstname}}</p>
-            <p>{{vm.lastname}}</p>
+          <div class="item item-icon-left">
+            <i class="icon ion-android-calendar"></i>
             <p>{{vm.dob}}</p>
+          </div>
+
+          <div class="item item-icon-left">
+            <i class="icon ion-card"></i>
             <p>{{vm.id}}</p>
+          </div>
 
-
-            <div ng-show="vm.showMarshallingButton">
-              <button ng-click="vm.loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
-            </div>
-
+          <div class="barcodeId">
+            <barcode-directive bcode="vm.id" height="50" font-size="15"></barcode-directive>
           </div>
         </div>
-
-          <div class="footer">
-            <p>{{vm.ugradstatus}}</p>
-            <p>{{vm.expiredate}}</p>
-          </div>
-
-          <div class="barcode">
-            <barcode-directive bcode="vm.id"></barcode-directive>
-          </div>
-
-
       </div>
-
-        <!-- template used if for landscape -->
-        <div ng-if="vm.screenOrientation == 'landscape-secondary' || vm.screenOrientation == 'landscape-primary'" class="horizontal">
-          <div class="left">
-            <div class="main_content">
-              <div class="picture">
-                <!-- display picture if it's there. If pending review, display pending approval pic. else, placeholder.-->
-                <div ng-if="vm.valid">
-                  <img ng-src="data:image/PNG;base64,{{vm.profilepicture}}"width = "200" height = "200">
-                </div>
-                <div ng-if="!vm.valid && vm.pending">
-                  <img src="img/pending_approval.jpg" width = "200" height = "200">
-                </div>
-                <div ng-if="!vm.valid && !vm.pending">
-                  <img src="img/placeholder_profile_pic.jpg" width = "200" height = "200">
-                </div>
-              </div>
-
-              <div class="student_info">
-                <p>{{vm.firstname}}</p>
-                <p>{{vm.lastname}}</p>
-                <p>{{vm.dob}}</p>
-                <p>{{vm.id}}</p>
-                <p>{{vm.testid}}</p>
-
-                <div ng-show="vm.showMarshallingButton">
-                  <button ng-click="vm.loadMarshallingCard()">Marshalling Card</button>       <!--TODO button css-->
-                </div>
-
-              </div>
-            </div>
-            <div class="footer">
-              <p>{{vm.ugradstatus}}</p>
-              <p>{{vm.expiredate}}</p>
-            </div>
-          </div>
-          <barcode-directive>
-
-          </barcode-directive>
-          <div class="barcode">
-
-          </div>
-
-        </div>
 
     </div>
   </ion-content>

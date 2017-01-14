@@ -1,38 +1,48 @@
 /**
  * Created by Simon on 2017-01-11.
  */
-(function() {
+(function () {
   'use strict';
 
-angular
-  .module('starter')
-  .directive('barcodeDirective', barcodeDirective);
+  angular
+    .module('starter')
+    .directive('barcodeDirective', barcodeDirective);
 
-function barcodeDirective(){
-  var directive = {
-    restrict: 'EA',
-    template: '<canvas class="barcodegen"></canvas>',
-    scope: {
-      bcode: '='
-    },
-    link:linkFunc,
+  function barcodeDirective() {
 
-  };
-  return directive;
-
-  function linkFunc(scope, el, attr, ctrl){
-    scope.$watch(function() {
-        return scope.bcode;
+    var directive = {
+      restrict: 'EA',
+      template: '<canvas class="barcodegen"></canvas>',
+      scope: {
+        bcode: '=',
+        height: '=',
+        fontSize: '='
       },
-      function() {
-        var canvas = el.find('canvas');
-        new JsBarcode(canvas[0], scope.bcode, {
-          format: "CODE39"
-        });
-      }
-    );
+      link: linkFunc,
 
+    };
+    return directive;
+
+    function linkFunc(scope, el, attr, ctrl) {
+      scope.$watch(function () {
+          return scope.bcode;
+        },
+
+        function () {
+          var canvas = el.find('canvas');
+          console.log("scope.bar => " + scope.height);
+          console.log("scope.fontsize => " + scope.fontSize);
+
+          var height = scope.bar;
+          new JsBarcode(canvas[0], scope.bcode, {
+            format: "CODE39",
+            height: scope.height,
+            fontSize: scope.fontSize,
+          });
+        }
+      );
+    }
   }
-}})();
+})();
 
 

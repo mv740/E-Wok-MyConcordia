@@ -10,12 +10,11 @@
     .module('starter')
     .controller('IdController', IdController);
 
-  IdController.$inject = ['$http','$rootScope','$window','$state','StudentService'];
+  IdController.$inject = ['$rootScope','$window','$state','StudentService'];
 
-  function IdController($http, $rootScope, $window, $state, StudentService) {
+  function IdController($rootScope, $window, $state, StudentService) {
     var vm = this;
 
-    vm.showMarshallingButton;
     vm.studentInfo = {};
     vm.marshallingInfo = {};
     vm.loadMarshallingCard =  loadMarshallingCard;
@@ -55,10 +54,10 @@
           vm.profilePicture = data.profilePicture;
           vm.firstName = data.firstName;
           vm.lastName = data.lastName;
-          vm.dob = data.dob;
+          parseDate(data.dob);
           vm.id = data.id;
           vm.uGradStatus = data.uGradStatus;
-          vm.expireDate = data.expireDate;
+          parseExpirationDate(data.expireDate);
         })
         .error(function (error) {
           console.log('fetchStudentIdInfo data error');
@@ -120,9 +119,23 @@
         });
     }
 
+    function parseDate(dateUTC) {
+      let d = new Date(dateUTC);
+      let day = d.getUTCDate();
+      let month = d.getMonth()+1;
+      let year = d.getUTCFullYear();
+
+      vm.dob = month + "/" + day + "/" + year;
+    }
+
+    function parseExpirationDate(dateUTC) {
+      let d = new Date(dateUTC);
+      let year = d.getYear();
+      let month = d.toLocaleString("en-us", {month: "short"});
 
 
-
+      vm.expireDate = month + ". " + year;
+    }
     vm.screenOrientation = screen.orientation.type;
 
     //changes the template view used when the phones orientation changes
@@ -131,6 +144,5 @@
       vm.screenOrientation = screen.orientation.type;
       $state.reload();
     });
-
   }
 })();
