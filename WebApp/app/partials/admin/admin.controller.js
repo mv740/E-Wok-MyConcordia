@@ -72,7 +72,7 @@
                 };
 
 
-            self.yearEntered = self.academicYear != "" && self.academicYear == lengthOfAYearString;
+            self.yearEntered = self.academicYear != "" && self.academicYear.length == lengthOfAYearString;
             self.startDateEntered = !startString.includes(invalidDateString);
             self.endDateEntered = !endString.includes(invalidDateString);
 
