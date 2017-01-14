@@ -29,57 +29,17 @@
     line-height: 180%;
   }
 
-
-  .barcode{
-    float:left;
-    width: 65%;
-    padding-top: 15%;
-  }
-
-  .sid{
-    float: left;
-    width: 35%;
-    text-align: center;
-    padding-top: 25%;
-    font-size: 150%;
-    font-weight: bold;
-  }
-
-}
-
-
-@media screen and (orientation:landscape){
-
-  .marshData{
-    height: 100%;
-    width: 65%;
-    padding-top: 2%;
-    text-align: center;
-    font-size: 120%;
-    line-height: 150%;
-    float: left;
-  }
-
   .bottom{
-    float: left;
-    width: 35%;
-    height:95%;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    margin-bottom: 10px;
   }
 
-  .barcode{
-    width: 50%;
-    height:100%;
-    float: left;
+  .barcodegen{
+    display: block;
+    margin: auto;
   }
 
-  .sid{
-    width: 50%;
-    text-align: center;
-    margin-top: 15%;
-    padding-top: 100%;
-    font-size: 150%;
-    font-weight: bold;
-    float: left;
-  }
 
 }

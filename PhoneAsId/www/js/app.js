@@ -12,7 +12,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
   .run(function ($ionicPlatform, $rootScope) {
     $ionicPlatform.ready(function () {
       // LOCK ORIENTATION TO PORTRAIT.
-      //screen.lockOrientation('portrait'); activate this after removing all if statement for orientation
+      screen.lockOrientation('portrait');
 
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
       // for form inputs)

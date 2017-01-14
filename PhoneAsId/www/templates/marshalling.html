@@ -4,13 +4,12 @@
     <!-- TODO make pretty css master  --!>
 
     <!-- template used if for portrait -->
-    <div ng-if="vm.screenOrientation == 'portrait-primary'" class="vertical">
       <div class="overall">
         <div class="marshData">
           <p class="date">Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
           <p class="marshall">Marshalling Card {{vm.marshallingCode}}</p>
-          <p class="name">{{vm.firstname}}</p>
-          <p class="name">{{vm.lastname}}</p>
+          <p class="name">{{vm.firstName}}</p>
+          <p class="name">{{vm.lastName}}</p>
           <p class="dep">{{vm.department}}</p>
           <p class="location">{{vm.location}}</p>
           <p class="date">{{vm.dateTime}}</p>
@@ -18,43 +17,8 @@
         </div>
 
         <div class="bottom">
-          <div class="barcode">
-            <barcode-directive bcode="vm.marshallingCode"></barcode-directive>
+            <barcode-directive bcode="vm.sid"></barcode-directive>
           </div>
-
-          <div class="sid">
-            <p>{{vm.sid}}</p>
-          </div>
-
-        </div>
       </div>
-    </div>
-
-    <!-- template used if for landscape -->
-    <div ng-if="vm.screenOrientation == 'landscape-secondary' || vm.screenOrientation == 'landscape-primary'"
-         class="horizontal">
-      <div class="overall">
-        <div class="marshData">
-          <p class="date">Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
-          <p class="marshall">Marshalling Card {{vm.marshallingCode}}</p>
-          <p class="name">{{vm.firstname}}</p>
-          <p class="name">{{vm.lastname}}</p>
-          <p class="dep">{{vm.department}}</p>
-          <p class="location">{{vm.location}}</p>
-          <p class="date">{{vm.dateTime}}</p>
-          <p class="degree">{{vm.degree}}</p>
-        </div>
-
-        <div class="bottom">
-          <div class="barcode">
-            <barcode-directive bcode="vm.marshallingCode"></barcode-directive>
-          </div>
-          <div class="sid">
-            <p>{{vm.sid}}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
   </ion-content>
 </ion-view>

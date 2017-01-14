@@ -10,9 +10,9 @@
     .module('starter')
     .controller('IdController', IdController);
 
-  IdController.$inject = ['$rootScope','$window','$state','StudentService'];
+  IdController.$inject = ['$rootScope','$state','StudentService'];
 
-  function IdController($rootScope, $window, $state, StudentService) {
+  function IdController($rootScope, $state, StudentService) {
     var vm = this;
 
     vm.studentInfo = {};
@@ -136,13 +136,5 @@
 
       vm.expireDate = month + ". " + year;
     }
-    vm.screenOrientation = screen.orientation.type;
-
-    //changes the template view used when the phones orientation changes
-    $window.addEventListener("orientationchange", function () {
-      console.log(screen.orientation.type); //"portrait-primary" or "landscape-secondary"
-      vm.screenOrientation = screen.orientation.type;
-      $state.reload();
-    });
   }
 })();
