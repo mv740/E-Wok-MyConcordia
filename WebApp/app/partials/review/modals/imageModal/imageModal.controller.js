@@ -28,7 +28,12 @@ function ImageModalCtrl($modalInstance, studentService, image) {
             imageModal.sendingBackToValidation = true;
             studentService.validateArchived(id, valid).then(function(){
                 imageModal.sendingBackToValidation = false;
-                //$modalInstance.close();
+                if (valid){
+                    imageModal.wasValidated = true;
+                }
+                else if (!valid){
+                    imageModal.wasRevoked = true;
+                }
             });
         }
 

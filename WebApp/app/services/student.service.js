@@ -127,7 +127,8 @@ function studentService($http, $q, myConfig) {
             method: 'POST',
             url: myConfig.baseUrl + myConfig.validateArchived,
             headers: {
-                'Content-Type': "JSON"
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             },
             data: { id: id,
             valid: valid}
