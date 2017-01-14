@@ -10,9 +10,20 @@
     .module('starter')
     .factory('AuthenticationService', AuthenticationService);
 
-  AuthenticationService.$inject = ['SessionService', '$state','ngOidcClient', '$cordovaInAppBrowser','$rootScope','$ionicSideMenuDelegate','$ionicNavBarDelegate'];
+  AuthenticationService.$inject = ['SessionService', '$state','ngOidcClient', '$cordovaInAppBrowser','$rootScope','$ionicSideMenuDelegate','$ionicNavBarDelegate', '$ionicPopup', '$cordovaNetwork'];
 
-  function AuthenticationService(SessionService, $state, ngOidcClient, $cordovaInAppBrowser, $rootScope,$ionicSideMenuDelegate,$ionicNavBarDelegate) {
+  function AuthenticationService(SessionService, $state, ngOidcClient, $cordovaInAppBrowser, $rootScope,$ionicSideMenuDelegate,$ionicNavBarDelegate, $ionicPopup, $cordovaNetwork) {
+    var failedLoginAlert = function() {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Failed to login',
+        template: 'There was an error. Please make sure you are connected\nto the internet and try logging in again'
+      });
+
+      alertPopup.then(function(res) {
+        $state.go("app.login");
+        console.log('redirected to login page.');
+      });
+    };
 
     var authService = {};
 
@@ -20,14 +31,30 @@
       start the oauth process
      */
     authService.signIn = function () {
-      ngOidcClient.signinPopup().then(function (user) {
-        //console.log("user:" + JSON.stringify(user));
-        if (user) {
-          $ionicSideMenuDelegate.canDragContent(true);
-          $ionicNavBarDelegate.showBar(true);
-          $state.go('app.id');
-        }
-      });
+      if ($cordovaNetwork.isOnline()) {
+        ngOidcClient.signinPopup()
+          .then(
+            function (user) {
+              console.log("user:" + JSON.stringify(user));
+              if (user) {
+                $ionicSideMenuDelegate.canDragContent(true);
+                $ionicNavBarDelegate.showBar(true);
+                $state.go('app.id');
+              }
+            },
+            function (rejected) {
+              failedLoginAlert(rejected);
+            }
+          );
+
+      } else {
+        $ionicPopup.alert({
+          title: 'Failed to login',
+          template: 'There was an error. Please make sure you are connected\nto the internet and try logging in again'
+        }).then(function(res) {
+          console.log('redirected to login page.');
+        });
+      }
     };
 
     /*
