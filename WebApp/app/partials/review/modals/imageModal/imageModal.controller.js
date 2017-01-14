@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .controller('ImageModalCtrl', ImageModalCtrl);
 
-ImageModalCtrl.$inject = ['$modalInstance', 'studentService', 'image'];
+ImageModalCtrl.$inject = ['$rootScope', '$modalInstance', 'studentService', 'image'];
 
-function ImageModalCtrl($modalInstance, studentService, image) {
+function ImageModalCtrl($rootScope, $modalInstance, studentService, image) {
 
     var imageModal = this;
     imageModal.close = $modalInstance.close;
@@ -34,6 +34,11 @@ function ImageModalCtrl($modalInstance, studentService, image) {
                 else if (!valid){
                     imageModal.wasRevoked = true;
                 }
+
+                setTimeout(function(){
+                    $modalInstance.close();
+                    $rootScope.$broadcast("studentModal.updateStudent");
+                }, 2000);
             });
         }
 
@@ -43,7 +48,7 @@ function ImageModalCtrl($modalInstance, studentService, image) {
         return (imageModal.image.status == 'Approved');
     }
     function denied(){
-        return (imageModal.image.status == 'Denied');
+        return (imageModal.image.status == 'Denied' || imageModal.image.status == 'Archived');
     }
 
 }

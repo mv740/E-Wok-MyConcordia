@@ -31,6 +31,11 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
                 studentModal.student.sendingValidation = false;
                 if (studentModal.student.valid) studentModal.student.wasValidated = true;
                 else if (!studentModal.student.valid) studentModal.student.wasRevoked = true;
+
+                setTimeout(function(){
+                    $modalInstance.close();
+                    updateStudent();
+                }, 2000);
             },
             function(){
                 alert("Validation failed");
