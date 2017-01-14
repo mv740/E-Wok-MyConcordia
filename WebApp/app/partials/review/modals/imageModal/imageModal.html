@@ -1,0 +1,47 @@
+<div class="validationModal-xl container2D-xl">
+
+    <div id="modal-body">
+        <div class="cardHolder side-padding modal-element col-xs-6">
+
+            <div class="pictureAttributes text-left">
+
+                <h2 class="top-padding"><span>{{imageModal.image.status}} on {{imageModal.image.updated}}</span>
+                </h2>
+                <div>
+                    <span>Created on {{imageModal.image.created}}</span>
+                </div>
+            </div>
+            <div class="commentBox col-xs-12">
+                <span>You can add a comment here:</span>
+                <input type="text" class="col-xs-12">
+            </div>
+        </div>
+        <div class="cardHolder col-xs-6">
+
+            <img class="full-width"
+                 ng-src="data:image/JPEG;base64,{{imageModal.image.picturE_DATA}}"/>
+
+            <div class="row yesnoContainer">
+                <button ng-class="{'greyed-out': imageModal.approved(), 'nohover': imageModal.approved()}" ng-click="imageModal.sendValidation(imageModal.image.iD_PK, true)" type="button"
+                        class="btn-circle btn-yes button3D"><i class="glyphicon glyphicon-ok"></i></button>
+                <button ng-class="{'greyed-out': imageModal.denied(), 'nohover': imageModal.denied()}" ng-click="imageModal.sendValidation(imageModal.image.iD_PK, false)" type="button"
+                        class="btn-circle btn-no button3D"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+
+            <div class="full-width cardHolderComponent progressCircularContainer"
+                 ng-if="imageModal.sendingValidation">
+                <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+            </div>
+
+            <div class="cardHolderComponent americanPieBox full-width">
+                <span class="validated"
+                      ng-if="imageModal.wasValidated">VALIDATED</span>
+                <span class="revoked" ng-if="imageModal.wasRevoked">REVOKED</span>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>

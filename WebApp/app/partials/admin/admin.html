@@ -1,0 +1,96 @@
+﻿<div ng-controller="AdminController as admin" class="container container3D verticalCenter">
+    <div class="page-header">
+        <h1>Admin Setting</h1>
+    </div>
+
+    <div class="col-sm-push-3 col-sm-6">
+        <div>
+            <h3>Update Picture Valid Period</h3>
+            <br/>
+        </div>
+
+        <div>
+            <h4>Current valid updating period:</h4>
+            <h4 ng-show="!admin.loading">{{admin.currentUpdatePeriod}}</h4>
+            <div class="progressCircularContainer" ng-show="admin.loading">
+                <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+            </div>
+            <br/>
+        </div>
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="AcademicYear" class="col-sm-5 control-label">Academic Year</label>
+                <div class="col-sm-7">
+                    <input id="AcademicYear"
+                           type="text"
+                           placeholder="2016"
+                           class="form-control"
+                           ng-model="admin.academicYear"
+                           maxlength="4"
+                           tooltips tooltip-template="Required"
+                           tooltips tooltip-side="right"
+                           tooltips tooltip-hidden="{{admin.yearEntered}}"
+                           tooltips tooltip-size
+                           ng-style="(admin.yearEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
+                           ng-keyup="admin.setYearEntered()"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="dateFrom" class="col-sm-5 control-label">From</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           class="form-control date"
+                           id="dateFrom"
+                           placeholder="From"
+                           ng-click="admin.dateFrom=true"
+                           datepicker-popup="{{admin.format}}"
+                           ng-model="admin.dtFrom"
+                           is-open="admin.dateFrom"
+                           datepicker-options="admin.dateOptions"
+                           date-disabled="disabled(date, mode)"
+                           ng-required="true"
+                           close-text="Close"
+                           tooltips tooltip-template="Required"
+                           tooltips tooltip-side="right"
+                           tooltips tooltip-hidden="{{admin.startDateEntered}}"
+                           ng-style="(admin.startDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
+                           ng-blur="admin.setStartDateEntered()"/>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="dateTo" class="col-sm-5 control-label">To</label>
+                <div class="col-sm-7">
+                    <input type="text"
+                           class="form-control date"
+                           id="dateTo"
+                           placeholder="To"
+                           ng-click="admin.dateTo=true"
+                           datepicker-popup="{{admin.format}}"
+                           ng-model="admin.dtTo"
+                           is-open="admin.dateTo"
+                           datepicker-options="admin.dateOptions"
+                           date-disabled="disabled(date, mode)"
+                           ng-required="true"
+                           close-text="Close"
+                           tooltips tooltip-template="Required"
+                           tooltips tooltip-side="right"
+                           tooltips tooltip-hidden="{{admin.endDateEntered}}"
+                           ng-style="(admin.endDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
+                           ng-blur="admin.setEndDateEntered()"/>
+
+                </div>
+            </div>
+
+            <div class="form-group" style="text-align: left;">
+                <div class="col-sm-push-5 col-sm-7">
+                    <button ng-click="admin.submit()" data-loading-text="Loading..."
+                            class="button3D">{{ admin.submitButton }}
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

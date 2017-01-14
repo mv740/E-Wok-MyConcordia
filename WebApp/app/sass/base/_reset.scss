@@ -1,0 +1,35 @@
+@import "sizes";
+@import "colors";
+@import "fonts";
+@import "positioning";
+
+html, body{
+  font: 1em 'Montserrat Alternates';
+
+  ul, li {
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+}
+
+
+#main {
+
+  #ng-view {
+    overflow: hidden;
+  }
+}
+
+//fix for custom modals when using angular-bootstrop
+.modal-content{
+  height:0px;
+}
+h2{
+  margin-top:0px;
+}
+
+.col-xs-1, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9, .col-xs-10, .col-xs-11, .col-xs-12{
+  padding:0px;
+}

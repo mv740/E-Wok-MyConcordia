@@ -1,0 +1,23 @@
+
+
+<div ng-if="!search.emptyResults">
+    <ul id="searchResults">
+        <li class="button3D top-buffer-sm" ng-repeat="result in search.results"
+                                        ng-click="search.studentClick(result)">
+            <div>
+                <span>{{result.id}},</span>
+
+                <span>{{result.firstname}} {{result.lastname}},</span>
+
+                <span>{{result.netname}},</span>
+
+                <span>{{result.birthdate.month}} {{result.birthdate.day}} {{result.birthdate.year}}</span>
+            </div>
+        </li>
+    </ul>
+</div>
+<div class="row" ng-if="search.emptyResults">
+    <div class="col-sm-6 col-sm-push-3" style="margin-top:30px">
+        <h4>We were unable to find results matching your search.</h4>
+    </div>
+</div>

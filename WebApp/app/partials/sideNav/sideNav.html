@@ -1,0 +1,19 @@
+<div class="full-height" ng-if="sideNav.isLoggedIn">
+    <div id="mySidenav" class="sideNavDrawer">
+        <a></a>
+        <a href="" ng-click="sideNav.logout()">Logout</a>
+        <a href="review" ng-click="sideNav.closeNav($event)">Review</a>
+        <a href="admin" ng-click="sideNav.closeNav($event)">Admin</a>
+    </div>
+
+    <div id="sideMenuStatic">
+        <a class="hamburger">
+            <hamburger-toggle ng-click="sideNav.toggleNav()" state="sideNav.hamState"></hamburger-toggle>
+        </a>
+        <a class="logoffIcon" href="" ng-click="sideNav.logout()"></a>
+        <a class="goToReviewIcon" href="review" ng-click="sideNav.closeNav($event)"
+           ng-class="{'selected': sideNav.isOnReviewPage}"></a>
+        <a class="adminIcon" href="admin" ng-click="sideNav.closeNav($event)"
+           ng-class="{'selected': sideNav.isOnAdminPage}"></a>
+    </div>
+</div>

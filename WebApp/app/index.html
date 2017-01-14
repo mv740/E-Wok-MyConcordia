@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html ng-app="myApp" class="no-js full-height">
+<head>
+    <base href="/WebApp/app/">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!--BOWER COMPONENTS -->
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/angular-bootstrap/ui-bootstrap-csp.css">
+    <script src="bower_components/angular-css/angular-css.js"></script>
+    <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <script class="cssdeck" src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css"
+          href="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.css">
+    <script type="text/javascript"
+            src="bower_components/angular-hamburger-toggle/dist/angular-hamburger-toggle.js"></script>
+    <link href="bower_components/angular-tooltips/dist/angular-tooltips.min.css" rel="stylesheet" type="text/css" />
+    <script src="bower_components/angular-tooltips/dist/angular-tooltips.min.js"></script>
+
+    <!--Date picker-->
+    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.0.js"></script>
+
+    <!-- Oauth 2 client-->
+    <script src="bower_components/es6-shim/es6-shim.js"></script>
+    <script src="bower_components/oidc-client/dist/oidc-client.js"></script>
+
+    <!--APP-->
+    <script type="text/javascript" src="app.js"></script>
+
+    <!--CONTROLLERS-->
+    <script src="partials/sideNav/sideNav.controller.js"></script>
+    <script src="partials/review/modals/studentModal/studentModal.controller.js"></script>
+    <script src="partials/review/modals/imageModal/imageModal.controller.js"></script>
+    <script src="partials/review/search/search.controller.js"></script>
+    <script src="partials/admin/admin.controller.js"></script>
+    <script src="partials/login/login.controller.js"></script>
+
+
+    <!--FACTORIES & SERVICES-->
+    <script src="services/student.service.js"></script>
+    <script src="services/searchParsing.service.js"></script>
+    <script src="services/dateParsing.service.js"></script>
+    <script src="services/angular-oidc-client.js"></script>
+    <script src="services/session.service.js"></script>
+    <script src="services/authentication.service.js"></script>
+    <script src="services/authInterceptor.service.js"></script>
+
+
+    <!--DIRECTIVES-->
+    <script src="directives/keyboard.directive.js"></script>
+
+
+</head>
+<body class="full-height">
+<div ng-include="'partials/sideNav/sideNav.html'" id="sideMenuContainer" ng-controller="SideNavCtrl as sideNav"></div>
+<div id="main" class="full-height full-width">
+    <div id="ng-view" class="full-height" ng-view></div>
+</div>
+
+</body>
+</html>
