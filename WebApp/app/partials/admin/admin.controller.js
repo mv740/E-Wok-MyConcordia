@@ -13,6 +13,7 @@
         var defaultStartDate = "18-12-2016";
         var defaultEndDate = "24-18-2016";
         var invalidDateString = "Invalid Date";
+        var lengthOfAYearString = 4; // number of characters for a year to be valid
 
         self.yearEntered = false;
         self.startDateEntered = false;
@@ -70,7 +71,6 @@
                     "endDate": dateEnd
                 };
 
-            var lengthOfAYearString = 4; // number of characters for a year to be valid
 
             self.yearEntered = self.academicYear != "" && self.academicYear == lengthOfAYearString;
             self.startDateEntered = !startString.includes(invalidDateString);
@@ -91,7 +91,6 @@
         };
 
         self.setYearEntered = function() {
-
             self.yearEntered = self.academicYear != "" && self.academicYear.length == lengthOfAYearString;
         };
 
