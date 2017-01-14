@@ -33,7 +33,7 @@
                            tooltips tooltip-hidden="{{admin.yearEntered}}"
                            tooltips tooltip-size
                            ng-style="(admin.yearEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
-                           ng-blur="admin.setYearEntered()"/>
+                           ng-keyup="admin.setYearEntered()"/>
                 </div>
             </div>
             <div class="form-group">

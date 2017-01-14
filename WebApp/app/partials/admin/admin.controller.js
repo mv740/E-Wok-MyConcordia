@@ -70,7 +70,9 @@
                     "endDate": dateEnd
                 };
 
-            self.yearEntered = self.academicYear != null;
+            var lengthOfAYearString = 4; // number of characters for a year to be valid
+
+            self.yearEntered = self.academicYear != "" && self.academicYear == lengthOfAYearString;
             self.startDateEntered = !startString.includes(invalidDateString);
             self.endDateEntered = !endString.includes(invalidDateString);
 
@@ -89,7 +91,8 @@
         };
 
         self.setYearEntered = function() {
-            self.yearEntered = self.academicYear != null;
+
+            self.yearEntered = self.academicYear != "" && self.academicYear.length == lengthOfAYearString;
         };
 
         self.setStartDateEntered = function() {
