@@ -7,7 +7,7 @@ angular.module('starter.controllers').controller('CameraCtrl',['SessionService',
 
   $scope.pictureUrl = 'http://placehold.it/300x300';
   $scope.takePictureButtonText = 'Take Picture';
-  $scope.description = "none";
+  $scope.description = "";
 
   var visionObj = this;
   visionObj.current_image = '';
@@ -88,20 +88,20 @@ angular.module('starter.controllers').controller('CameraCtrl',['SessionService',
   };
 
   $scope.sendPicture = function () {
-    
-    
+
+
     var ft = new FileTransfer();
     var options = new FileUploadOptions();
-    
+
 
     var serverURL = encodeURI("https://myconcordiaid.azurewebsites.net");
 
-    
+
     var token = 'Bearer ' + SessionService.getAccessToken();
-    var headers = { 
+    var headers = {
       'Authorization' : token
     };
-    
+
     if(safeToSend){
       options.fileKey = "file";
       options.fileName = 'filename.jpg';

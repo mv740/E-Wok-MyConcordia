@@ -1,0 +1,8 @@
+.cam-container {
+  height: 100%;
+  width: 100%;
+  border: solid;
+  background-color: #8A0037;
+  font-size: 150%;
+  font-weight: bold;
+}

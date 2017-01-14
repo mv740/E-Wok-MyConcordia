@@ -95,6 +95,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
           'menuContent': {
             templateUrl: 'templates/camera.html',
             controller: 'CameraCtrl',
+            css: 'css/camera.css',
 
 
             // If the student cannot update picture, restrict access to the camera.
