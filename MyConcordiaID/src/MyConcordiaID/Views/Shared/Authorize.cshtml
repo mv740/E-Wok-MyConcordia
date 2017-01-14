@@ -1,0 +1,52 @@
+﻿@using AspNet.Security.OpenIdConnect.Extensions
+@using Microsoft.IdentityModel.Protocols.OpenIdConnect
+@using MyConcordiaID.Models
+@model Tuple<OpenIdConnectMessage, Application>
+
+@{
+    Layout = "~/Views/Shared/_LayoutMobile.cshtml";
+}
+
+
+<div class="container header-margin">
+    <div>
+        <div class="row extra-bottom-padding">
+            <div class="extra-bottom-padding">
+                <img class="center-logo" src="~/images/Concordia_University_logo.svg" alt="Concordia University logo" />
+             </div>
+            <div class="center">
+                <p class="lead text-justify">
+                    Do you want to grant this application an access to your @Model.Item1.Scope?
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="center">
+                <form enctype="application/x-www-form-urlencoded" method="post">
+                    @Html.AntiForgeryToken()
+                    @foreach (var parameter in Model.Item1.Parameters)
+                    {
+                        <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
+                    }
+                    <input class="btn concordia-success button-45-size" name="submit.Accept" type="submit" value="Yes" />
+                    <input class="btn concordia deny button-45-size" name="submit.Deny" type="submit" value="No" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*<div class="jumbotron">
+    <h1>Authorization</h1>
+    <p class="lead text-left">Do you wanna grant <strong>@Model.Item2.DisplayName</strong> an access to your resources? (scopes requested: @Model.Item1.Scope)</p>
+    <form enctype="application/x-www-form-urlencoded" method="post">
+        @Html.AntiForgeryToken()
+        @foreach (var parameter in Model.Item1.Parameters)
+        {
+            <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
+        }
+        <input class="btn btn-success" name="submit.Accept" type="submit" value="Yes" />
+        <input class="btn concordia" name="submit.Deny" type="submit" value="No" />
+    </form>
+</div>*@

@@ -5,11 +5,16 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="6e9b78a901ed4d64828b10b238d42301" Name="Diagram1">
-        <EntityTypeShape EntityType="OracleDataModel.CONCORDIAUSER" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OracleDataModel.PICTURE" Width="1.5" PointX="3.375" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="OracleDataModel.STUDENT" Width="1.5" PointX="0.75" PointY="3.75" />
-        <EntityTypeShape EntityType="OracleDataModel.PICTUREUPDATESETTING" Width="1.5" PointX="3.375" PointY="3.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="OracleDataModel.STUDENT" Width="2" PointX="0.5" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OracleDataModel.PICTUREUPDATESETTING" Width="2.875" PointX="5.125" PointY="0.5" />
+        <EntityTypeShape EntityType="OracleDataModel.PICTUREARCHIVE" Width="1.625" PointX="3.125" PointY="0.5" />
+        <AssociationConnector Association="OracleDataModel.PICTUREARCHIVE_FK1" />
+        <EntityTypeShape EntityType="OracleDataModel.LOG" Width="1.5" PointX="0.75" PointY="5" />
+        <AssociationConnector Association="OracleDataModel.LOG_FK1" />
+        <EntityTypeShape EntityType="OracleDataModel.PICTURE" Width="1.875" PointX="5.625" PointY="4.125" />
+        <AssociationConnector Association="OracleDataModel.PICTURE_ADMIN_FK" />
+        <AssociationConnector Association="OracleDataModel.PICTURE_STUDENT_FK" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

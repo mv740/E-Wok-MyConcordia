@@ -1,4 +1,5 @@
 ﻿using MyConcordiaID.Models.Admin;
+using OracleEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,9 @@ namespace MyConcordiaID.Models
 {
     public interface IAdminRepository
     {
-        void SetYearUpdatePicturePeriod(PeriodSetting setting);
+        bool SetYearUpdatePicturePeriod(PeriodSetting setting);
+        List<PICTUREUPDATESETTING> GetAllUpdatePicturePeriod();
+        PeriodSetting GetUpdatePicturePeriod();
+        PICTUREUPDATESETTING GetUpdatePicturePeriod(int year);
     }
 }

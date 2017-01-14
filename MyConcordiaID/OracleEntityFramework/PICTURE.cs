@@ -14,10 +14,15 @@ namespace OracleEntityFramework
     
     public partial class PICTURE
     {
-        public int ID { get; set; }
-        public double PENDING { get; set; }
-        public Nullable<double> APPROVED { get; set; }
-        public byte[] PICTURE1 { get; set; }
-        public System.DateTime UPLOADEDDATE { get; set; }
+        public decimal ID_PK { get; set; }
+        public byte[] PICTURE_DATA { get; set; }
+        public string STATUS { get; set; }
+        public System.DateTime CREATED { get; set; }
+        public Nullable<System.DateTime> UPDATED { get; set; }
+        public string STUDENT_NETNAME { get; set; }
+        public string ADMINISTRATOR { get; set; }
+    
+        public virtual STUDENT STUDENT_ADMIN_FK { get; set; }
+        public virtual STUDENT STUDENT_FK { get; set; }
     }
 }

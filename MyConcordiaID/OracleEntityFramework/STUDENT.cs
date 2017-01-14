@@ -14,6 +14,15 @@ namespace OracleEntityFramework
     
     public partial class STUDENT
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public STUDENT()
+        {
+            this.PICTUREARCHIVEs = new HashSet<PICTUREARCHIVE>();
+            this.LOGs = new HashSet<LOG>();
+            this.PICTUREs = new HashSet<PICTURE>();
+            this.PICTUREs1 = new HashSet<PICTURE>();
+        }
+    
         public string NETNAME { get; set; }
         public int ID { get; set; }
         public string FIRSTNAME { get; set; }
@@ -21,12 +30,17 @@ namespace OracleEntityFramework
         public bool VALID { get; set; }
         public System.DateTime DOB { get; set; }
         public bool PENDING { get; set; }
-        public byte[] PROFILEPICTURE { get; set; }
-        public byte[] PREVIOUSPICTURE1 { get; set; }
-        public byte[] PREVIOUSPICTURE2 { get; set; }
-        public byte[] PENDINGPICTURE { get; set; }
         public string UGRADSTATUS { get; set; }
         public System.DateTime EXPIREDATE { get; set; }
         public bool UPDATEPICTURE { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PICTUREARCHIVE> PICTUREARCHIVEs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LOG> LOGs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PICTURE> PICTUREs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PICTURE> PICTUREs1 { get; set; }
     }
 }

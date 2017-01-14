@@ -7,31 +7,45 @@ using MyConcordiaID.Models.Student;
 using OracleEntityFramework;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Text;
 
 namespace UnitTestCore
 {
+    /// <summary>
+    /// Testing with mocking framework https://msdn.microsoft.com/en-us/library/dn314429(v=vs.113).aspx
+    /// </summary>
     [TestClass]
     public class StudentUnitTest
     {
 
         private Mock<DatabaseEntities> _context;
         private StudentRepository _repo;
-        private Mock<DbSet<STUDENT>> _mySet;
+        private PictureRepository _picture;
+        private Mock<DbSet<STUDENT>> _mySetStudent;
+        private Mock<DbSet<PICTURE>> _mySetPicture;
 
         private void ConnectMocksToDataStore(IEnumerable<STUDENT> data_store)
         {
             var data_source = data_store.AsQueryable();
-            _mySet.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(data_source.Provider);
-            _mySet.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            _mySet.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySet.As<IQueryable<STUDENT>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
-            _context.Setup(a => a.STUDENTS).Returns(_mySet.Object);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(data_source.Expression);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            _context.Setup(a => a.STUDENTS).Returns(_mySetStudent.Object);
         }
 
+        private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> data_store)
+        {
+            var data_source = data_store.AsQueryable();
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(data_source.Expression);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
+        }
         /// <summary>
         /// http://stackoverflow.com/questions/13766198/c-sharp-accessing-property-values-dynamically-by-property-name
         ///  Access proprerty dynamically by property name
@@ -43,20 +57,55 @@ namespace UnitTestCore
         {
             return source.GetType().GetProperty(property).GetValue(source, null);
         }
+        /// <summary>
+        ///  For Viewing all available properties of a dynamic object
+        /// </summary>
+        /// <param name="source"></param>
+        public static void PrintPropertiesOfDynamicObject(object source)
+        {
+            var properties = source.GetType().GetProperties();
+            foreach (var property in properties)
+            {
+                var PropertyName = property.Name;
+
+                var PropetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
+
+                Console.Write(PropertyName + " : " + PropetyValue);
+                Console.WriteLine();
+            }
+        }
+
+
+        public static byte[] getImageByte(Mock<IFormFile> image)
+        {
+            Stream stream = image.Object.OpenReadStream();
+            byte[] byteImage = null;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                stream.CopyTo(memoryStream);
+                byteImage = memoryStream.ToArray();
+            }
+
+            return byteImage;
+        }
 
         [TestInitialize]
         public void Initialize()
         {
             _context = new Mock<DatabaseEntities>();
-            _mySet = new Mock<DbSet<STUDENT>>();
+            _mySetStudent = new Mock<DbSet<STUDENT>>();
+            _mySetPicture = new Mock<DbSet<PICTURE>>();
             _repo = new StudentRepository(_context.Object);
+            _picture = new PictureRepository(_context.Object);
         }
 
         [TestCleanup]
         public void Cleanup()
         {
             _context = null;
-            _mySet = null;
+            _mySetPicture = null;
+            _mySetStudent = null;
             _repo = null;
         }
 
@@ -71,30 +120,24 @@ namespace UnitTestCore
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = StudentHelper.GenerateNetName(name, lastName),
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
                 DOB = DateTime.UtcNow,
                 UGRADSTATUS = "U"
-            },
-                 new STUDENT
-            {
-                NETNAME = StudentHelper.getNetName(name, lastName),
-                ID = 11141097,
-                FIRSTNAME = name,
-                LASTNAME = lastName,
-                DOB = DateTime.UtcNow,
-                UGRADSTATUS = "U"
             }
-        };
+            };
 
-            _mySet.Object.AddRange(users);
+   
+            _mySetStudent.Object.AddRange(users);
+
             ConnectMocksToDataStore(users);
 
-            var student = _repo.Find(21941097);
+
+            var student = _repo.FindById(21941097);
             Assert.AreEqual(21941097, student.ID);
-            Assert.AreEqual("testFirst", student.FIRSTNAME);
+            Assert.AreEqual("testFirst", student.FirstName);
 
         }
 
@@ -109,7 +152,7 @@ namespace UnitTestCore
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = StudentHelper.GenerateNetName(name, lastName),
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
@@ -119,7 +162,7 @@ namespace UnitTestCore
 
             new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = StudentHelper.GenerateNetName(name, lastName),
                 ID = 11141097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
@@ -128,7 +171,7 @@ namespace UnitTestCore
             }
         };
 
-            _mySet.Object.AddRange(users);
+            _mySetStudent.Object.AddRange(users);
             ConnectMocksToDataStore(users);
 
             var result = _repo.GetAll();
@@ -143,22 +186,53 @@ namespace UnitTestCore
             var name = "testFirst";
             var lastName = "testLast";
 
+            var netname = StudentHelper.GenerateNetName(name, lastName);
+            var netname2 = StudentHelper.GenerateNetName("test", "test");
 
             List<STUDENT> users = new List<STUDENT>()
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = netname,
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
                 DOB = DateTime.UtcNow,
-                UGRADSTATUS = "U"
+                UGRADSTATUS = "U",
+                UPDATEPICTURE = false,
+                VALID = false
             },
+
+            new STUDENT
+            {
+                NETNAME = netname2,
+                ID = 11141097,
+                FIRSTNAME = "test",
+                LASTNAME = "test",
+                DOB = DateTime.UtcNow,
+                UGRADSTATUS = "U"
+            }
         };
 
-            _mySet.Object.AddRange(users);
+            _mySetStudent.Object.AddRange(users);
             ConnectMocksToDataStore(users);
+
+
+            List<PICTURE> pictures = new List<PICTURE>()
+            {
+                new PICTURE
+                {
+                    STATUS = Status.Denied.ToString(),
+                    CREATED = DateTime.Now,
+                    STUDENT_NETNAME = netname2,
+                    PICTURE_DATA = Encoding.ASCII.GetBytes("bytes")
+                }
+            };
+
+
+
+            _mySetPicture.Object.AddRange(pictures);
+            ConnectPictureMocksToDataStore(pictures);
 
             var fileMock = new Mock<IFormFile>();
             //Setup mock file using a memory stream
@@ -170,14 +244,12 @@ namespace UnitTestCore
             ms.Position = 0;
             fileMock.Setup(m => m.OpenReadStream()).Returns(ms);
 
-            _repo.AddPendingPicture(21941097, fileMock.Object);
 
+            _picture.AddPendingPicture(netname, getImageByte(fileMock));
 
-            var student = _repo.Find(21941097);
-
-            Assert.AreEqual(true, student.PENDING);
-            Assert.IsFalse(student.PENDINGPICTURE == null);  // not null
-
+            _mySetPicture.Verify(m => m.Add(It.IsAny<PICTURE>()), Times.Once());
+            _context.Verify(m => m.SaveChanges(), Times.Once());
+            
         }
 
         [TestMethod]
@@ -187,48 +259,62 @@ namespace UnitTestCore
             var lastName = "testLast";
 
 
+            var netname = StudentHelper.GenerateNetName(name, lastName);
+
             List<STUDENT> users = new List<STUDENT>()
             {
                 new STUDENT
             {
-                NETNAME = StudentHelper.getNetName(name, lastName),
+                NETNAME = netname,
                 ID = 21941097,
                 FIRSTNAME = name,
                 LASTNAME = lastName,
                 DOB = DateTime.UtcNow,
                 UGRADSTATUS = "U"
             },
+                new STUDENT
+            {
+                NETNAME = "test",
+                ID = 11941097,
+                FIRSTNAME = name,
+                LASTNAME = lastName,
+                DOB = DateTime.UtcNow,
+                UGRADSTATUS = "U"
+            },
+
         };
 
-            _mySet.Object.AddRange(users);
+            _mySetStudent.Object.AddRange(users);
             ConnectMocksToDataStore(users);
 
-            var fileMock = new Mock<IFormFile>();
-            //Setup mock file using a memory stream
-            var s = "Hello World from a Fake File"; // Testing purpose string byte array 
-            var ms = new MemoryStream();
-            var writer = new StreamWriter(ms);
-            writer.Write(s);
-            writer.Flush();
-            ms.Position = 0;
-            fileMock.Setup(m => m.OpenReadStream()).Returns(ms);
-
-            _repo.AddPendingPicture(21941097, fileMock.Object);
 
 
-            var student = _repo.FindPendingPicture(21941097);
+            List<PICTURE> pictures = new List<PICTURE>()
+            {
+                new PICTURE
+            {
+                PICTURE_DATA = null,
+                STUDENT_NETNAME = netname,
+                STATUS = Status.Approved.ToString(),
+                CREATED = new DateTime(1989,11,06)
+
+            }, new PICTURE
+            {
+                PICTURE_DATA = null,
+                STUDENT_NETNAME = "test",
+                STATUS = Status.Approved.ToString(),
+                CREATED = new DateTime(1989,11,06)
+
+            },
+        };
+
+            _mySetPicture.Object.AddRange(pictures);
+            ConnectPictureMocksToDataStore(pictures);
 
 
-            long fileLength = fileMock.Object.Length;
+            var picture = _picture.FindPendingPicture(21941097);
 
-
-            var PENDINGPICTURE = ReflectPropertyValue(student, "PENDINGPICTURE");
-            var ID = ReflectPropertyValue(student, "ID");
-
-
-            Assert.AreEqual(fileLength, PENDINGPICTURE.Length);
-            Assert.AreEqual(21941097, ID);
-
+            Assert.AreEqual(Status.Approved.ToString(), picture.STATUS);
 
         }
 
@@ -237,14 +323,24 @@ namespace UnitTestCore
         {
             var name = "testFirst";
             var lastName = "testLast";
-
+            var netname = StudentHelper.GenerateNetName(name, lastName);
 
             List<STUDENT> users = new List<STUDENT>()
             {
                 new STUDENT
                 {
-                    NETNAME = StudentHelper.getNetName(name, lastName),
+                    NETNAME = netname,
                     ID = 21941097,
+                    FIRSTNAME = name,
+                    LASTNAME = lastName,
+                    DOB = DateTime.UtcNow,
+                    UGRADSTATUS = "U"
+                },
+
+                 new STUDENT
+                {
+                    NETNAME = "test",
+                    ID = 11941097,
                     FIRSTNAME = name,
                     LASTNAME = lastName,
                     DOB = DateTime.UtcNow,
@@ -252,42 +348,84 @@ namespace UnitTestCore
                 },
             };
 
-            _mySet.Object.AddRange(users);
+            _mySetStudent.Object.AddRange(users);
             ConnectMocksToDataStore(users);
 
-            var fileMock = new Mock<IFormFile>();
-            //Setup mock file using a memory stream
-            var s = "Hello World from a Fake File"; // Testing purpose string byte array 
-            var ms = new MemoryStream();
-            var writer = new StreamWriter(ms);
-            writer.Write(s);
-            writer.Flush();
-            ms.Position = 0;
-            fileMock.Setup(m => m.OpenReadStream()).Returns(ms);
+            List<PICTURE> pictures = new List<PICTURE>()
+            {
+                new PICTURE
+            {
+                PICTURE_DATA = null,
+                STUDENT_NETNAME = netname,
+                STATUS = Status.Pending.ToString(),
+                CREATED = new DateTime(1989,11,06)
 
-            _repo.AddPendingPicture(21941097, fileMock.Object);
+            }, new PICTURE
+            {
+                PICTURE_DATA = null,
+                STUDENT_NETNAME = "test",
+                STATUS = Status.Approved.ToString(),
+                CREATED = new DateTime(1989,11,06)
 
-            //verify pending picture is actually there
-            var student = _repo.Find(21941097);
-            Assert.AreEqual(true, student.PENDING);
-            Assert.IsFalse(student.PENDINGPICTURE == null);  // not null
+            },
+        };
 
-            // Admin accept the picture
+            _mySetPicture.Object.AddRange(pictures);
+            ConnectPictureMocksToDataStore(pictures);
+
+
+            // Admin deny the picture
             PictureValidation validationMessage = new PictureValidation
             {
                 id = 21941097,
-                valid = true
+                valid = false
             };
 
-            _repo.ValidatePicture(validationMessage);
+            var picturePending = _picture.FindPendingPicture(21941097);
+            var pictureID = picturePending.ID_PK;
 
-            var studentLatestInfo = _repo.Find(21941097);
+            _repo.ValidatePicture(validationMessage, "test");
 
-            Assert.AreEqual(false, studentLatestInfo.PENDING);
-            Assert.AreEqual(null, studentLatestInfo.PENDINGPICTURE);
-            Assert.AreEqual(true, studentLatestInfo.VALID);
-            Assert.IsFalse(studentLatestInfo.PROFILEPICTURE == null); // there is a picture thus false
+            var studentPictures = _picture.FindStudentPictures(21941097);
+
+            decimal id = -1;
+            string status = "";
+            // in our unit test our student has only 1 picture
+            foreach(dynamic d in studentPictures.archivedPictures)
+            {
+                PrintPropertiesOfDynamicObject(d);
+                id = ReflectPropertyValue(d, "ID_PK");
+                status = ReflectPropertyValue(d, "STATUS");
+            }
+
+            Assert.AreEqual(Status.Denied.ToString(), status);
+            Assert.AreEqual(pictureID, id);
+
+
+        }
+
+        [TestMethod]
+        public void GenerateStudentNetName()
+        {
+            var firstName = "francis";
+            var lastName = "cote-tremblay";
+
+            var bigFirstName = "abcdefghijklmnop";
+            var bigLastName = "abcdefghijklmnop";
+
+            var netName = StudentHelper.GenerateNetName(firstName, lastName);
+            var bigNetName = StudentHelper.GenerateNetName(bigFirstName, bigLastName);
+
+            var result = "f_cotetr";
+
+            Assert.AreEqual(result, netName);
+            Assert.AreEqual("a_abcdef", bigNetName);
+
+
+
+
+
+
         }
     }
-
 }
