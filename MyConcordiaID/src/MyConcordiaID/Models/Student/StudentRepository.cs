@@ -196,9 +196,9 @@ namespace MyConcordiaID.Models.Student
                 pendingPicture.STATUS = Status.Approved.ToString();
 
                 //if user has already a profile picture, set to archive
-                var archived = Status.Archived.ToString();
+                var aprouved = Status.Approved.ToString();
                 var profilePicture = _database.PICTUREs.
-                Where(p => p.STATUS == archived && p.STUDENT_NETNAME == studentNetname)
+                Where(p => p.STATUS == aprouved && p.STUDENT_NETNAME == studentNetname)
                 .FirstOrDefault();
 
                 if(profilePicture != null)
@@ -235,33 +235,39 @@ namespace MyConcordiaID.Models.Student
         public string RevalidatePicture(PictureValidation pictureValidation, string netName)
         {
 
-            var picture = _database.PICTUREs
+            //find selected picture
+            var selectedPicture = _database.PICTUREs
                  .Where(p => p.ID_PK == pictureValidation.id)
                  .FirstOrDefault();
 
-            var studentNetname = picture.STUDENT_NETNAME;
+            var studentNetname = selectedPicture.STUDENT_NETNAME;
 
+            //find valid profile picture if user has one 
+            var approved = Status.Approved.ToString();
             var currentProfilePicture = _database.PICTUREs
-                .Where(p => p.STUDENT_NETNAME == studentNetname)
+                .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS == approved)
                 .FirstOrDefault();
 
 
             if (pictureValidation.valid)
             {
-                //archived picture
-                currentProfilePicture.STATUS = Status.Archived.ToString();
-               
+                if(currentProfilePicture !=null)
+                {
+                    //archived picture
+                    currentProfilePicture.STATUS = Status.Archived.ToString();
+                }
+
                 //new profile
-                picture.STATUS = Status.Approved.ToString();
-                picture.UPDATED = DateTime.UtcNow;
-                picture.ADMINISTRATOR = netName;
+                selectedPicture.STATUS = Status.Approved.ToString();
+                selectedPicture.UPDATED = DateTime.UtcNow;
+                selectedPicture.ADMINISTRATOR = netName;
             }
             else
             {
                 //invalidate current profile picture
                 currentProfilePicture.STATUS = Status.Denied.ToString();
 
-                //user doesn't have valid profile picture
+                //find his account and set it to invalid
                 var student = _database.STUDENTS
                     .Where(s => s.NETNAME == currentProfilePicture.STUDENT_NETNAME)
                     .FirstOrDefault();
@@ -270,8 +276,11 @@ namespace MyConcordiaID.Models.Student
                   
             }
             //log admin
-            currentProfilePicture.UPDATED = DateTime.UtcNow;
-            currentProfilePicture.ADMINISTRATOR = netName;
+            if(currentProfilePicture != null)
+            {
+                currentProfilePicture.UPDATED = DateTime.UtcNow;
+                currentProfilePicture.ADMINISTRATOR = netName;
+            }
 
 
             _database.SaveChanges();
@@ -279,6 +288,10 @@ namespace MyConcordiaID.Models.Student
             return studentNetname;
         }
 
+        /// <summary>
+        ///  Registered student to database
+        /// </summary>
+        /// <param name="newStudent"></param>
         public void Add(STUDENT newStudent)
         {
             _database.STUDENTS.Add(newStudent);
