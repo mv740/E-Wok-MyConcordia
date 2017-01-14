@@ -26,7 +26,7 @@ function ImageModalCtrl($modalInstance, studentService, image) {
         //allow to send validation only if the request applies to the status of the picture. eg validate a previously denied picture
         if ((valid && denied()) || (!valid && approved())){
             imageModal.sendingBackToValidation = true;
-            studentService.validateArchived(imageModal.image.id, imageModal.image.picture).then(function(){
+            studentService.validateArchived(id, valid).then(function(){
                 imageModal.sendingBackToValidation = false;
                 //$modalInstance.close();
             });

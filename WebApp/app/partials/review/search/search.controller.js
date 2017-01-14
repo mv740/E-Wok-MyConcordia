@@ -8,9 +8,9 @@ angular
     .module('myApp')
     .controller('SearchCtrl', SearchCtrl);
 
-SearchCtrl.$inject = ['$modal', 'studentService', 'searchParsingService'];
+SearchCtrl.$inject = ['$modal', 'studentService', 'searchParsingService', 'dateParsingService'];
 
-function SearchCtrl($modal, studentService, searchParsingService) {
+function SearchCtrl($modal, studentService, searchParsingService, dateParsingService) {
 
     var search = this;
 
@@ -65,5 +65,13 @@ function SearchCtrl($modal, studentService, searchParsingService) {
         search.searching = false;
         search.results = results;
         search.emptyResults = search.results.length == 0;
+        parseDOB();
+    }
+
+    function parseDOB(){
+        search.results.forEach(function(result){
+            var birthdate = dateParsingService.parse(result.dob);
+            result.birthdate = birthdate;
+        });
     }
 }

@@ -9,20 +9,18 @@
 
             <div class="pictureAttributes text-left">
 
-                <h2 class="top-padding"><span>{{studentModal.student.firstname}}</span>
-                    <span>{{studentModal.student.lastname}}</span>
+                <h2 class="top-padding"><span>{{studentModal.student.firstname}} {{studentModal.student.lastname}}</span>
                 </h2>
                 <div>
-                    <span>{{studentModal.student.id}}</span>
+                    <span>{{studentModal.student.birthdate.month}} {{studentModal.student.birthdate.day}} {{studentModal.student.birthdate.year}}</span>
                 </div>
                 <div>
                     <span>{{studentModal.student.netname}}</span>
                 </div>
                 <div>
-                    <span>{{studentModal.student.birthdate.day}}</span>
-                    <span>{{studentModal.student.birthdate.month}}</span>
-                    <span>{{studentModal.student.birthdate.year}}</span>
+                    <span>{{studentModal.student.id}}</span>
                 </div>
+
             </div>
             <div class="commentBox col-xs-12">
             <span>You can add a comment here:</span>
