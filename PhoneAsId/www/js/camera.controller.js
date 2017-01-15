@@ -3,7 +3,7 @@
  */
 
 
-angular.module('starter.controllers').controller('CameraCtrl',['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', function (SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location) {
+angular.module('starter.controllers').controller('CameraCtrl',['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', '$rootScope', function (SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location, $rootScope) {
 
   $scope.pictureUrl = 'http://placehold.it/300x300';
   $scope.takePictureButtonText = 'Take Picture';
@@ -152,6 +152,9 @@ angular.module('starter.controllers').controller('CameraCtrl',['SessionService',
     var alertPopup;
 
     if (alertType == 'upload-success') {
+
+      $rootScope.canUpdate = false; //disable
+
       alertPopup = $ionicPopup.alert({
         title: 'Upload successful',
         template: 'The picture has been successfully sent. Please visit the Birks Student Service Centre in person to have your photo validated.'

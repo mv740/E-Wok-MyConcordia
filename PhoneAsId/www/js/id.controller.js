@@ -10,18 +10,32 @@
     .module('starter')
     .controller('IdController', IdController);
 
-  IdController.$inject = ['$rootScope','$state','StudentService'];
+  IdController.$inject = ['$rootScope', '$scope', '$state', 'StudentService'];
 
-  function IdController($rootScope, $state, StudentService) {
+  function IdController($rootScope, $scope, $state, StudentService) {
     var vm = this;
 
     vm.studentInfo = {};
     vm.marshallingInfo = {};
-    vm.loadMarshallingCard =  loadMarshallingCard;
+    vm.loadMarshallingCard = loadMarshallingCard;
 
-    getUpdatePeriod();
-    getStudentIdInfo();
-    getMarshallingCardInfo();
+
+    //refresh on every load of this page
+    $scope.$on('$ionicView.enter', function (e) {
+
+      //http://stackoverflow.com/questions/30236425/ionic-framework-ionicview-entered-event-fired-twice
+      //prevent entered event fired twice
+      if (e.targetScope !== $scope) {
+        return;
+      } else {
+        console.log("enter");
+
+        getUpdatePeriod();
+        getStudentIdInfo();
+        getMarshallingCardInfo();
+      }
+    });
+
     /////////////////////////////////////
 
     /**
@@ -42,8 +56,7 @@
           vm.netname = data.netname;
           vm.pending = data.pending;
 
-          if(vm.valid == false && vm.pending == false)
-          {
+          if (vm.valid == false && vm.pending == false) {
             $state.go('app.camera');
           }
 
@@ -78,7 +91,7 @@
 
           vm.marshallingInfo = data;
 
-          if(data.status == true) {
+          if (data.status == true) {
             console.log('fetchMarshallingCardInfo status true');
             vm.showMarshallingButton = true;
 
@@ -122,7 +135,7 @@
     function parseDate(dateUTC) {
       let d = new Date(dateUTC);
       let day = d.getUTCDate();
-      let month = d.getMonth()+1;
+      let month = d.getMonth() + 1;
       let year = d.getUTCFullYear();
 
       vm.dob = month + "/" + day + "/" + year;
@@ -136,5 +149,6 @@
 
       vm.expireDate = month + ". " + year;
     }
+
   }
 })();
