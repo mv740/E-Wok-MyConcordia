@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 MyConcordiaID/.vs/
 MyConcordiaID/src/MyConcordiaID/obj/
 MyConcordiaID/src/MyConcordiaID/bin/
@@ -15,4 +16,6 @@ MyConcordiaID/src/UnitTestCore/project.lock.json
 MyConcordiaID/.idea/
 MyConcordiaID/src/MyConcordiaID/project.lock.json
 app/.idea/
-.idea/
+.idea
+node_modules/
+PhoneAsId/www/lib/

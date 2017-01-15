@@ -1,0 +1,24 @@
+<ion-view>
+  <ion-content>
+
+    <!-- TODO make pretty css master  --!>
+
+    <!-- template used if for portrait -->
+      <div class="overall">
+        <div class="marshData">
+          <p class="date">Concordia University {{vm.semester}} Convocation {{vm.year}}</p>
+          <p class="marshall">Marshalling Card {{vm.marshallingCode}}</p>
+          <p class="name">{{vm.firstName}}</p>
+          <p class="name">{{vm.lastName}}</p>
+          <p class="dep">{{vm.department}}</p>
+          <p class="location">{{vm.location}}</p>
+          <p class="date">{{vm.dateTime}}</p>
+          <p class="degree">{{vm.degree}}</p>
+        </div>
+
+        <div class="bottom">
+            <barcode-directive bcode="vm.sid"></barcode-directive>
+          </div>
+      </div>
+  </ion-content>
+</ion-view>

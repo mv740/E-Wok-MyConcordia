@@ -1,32 +1,76 @@
-<ion-view view-title="Search">
-  <ion-content ng-controller="IdCtrl">
+<ion-view>
+  <ion-content>
 
-    <!-- template used if for portrait -->
-    <div ng-if="screenOrientation == 'portrait-primary'">
-      <h1>PORTRAIT VIEW</h1>
-      <h2>CONCORDIA LOGO</h2>
+    <div class="overseeing">
+      <!-- template used if for portrait -->
 
-      <img ng-src="data:image/PNG;base64,{{profilepicture}}">
-      <p>{{firstname}}</p>
-      <p>{{lastname}}</p>
-      <p>{{dob}}</p>
-      <p>{{id}}</p>
-      <p>{{ugradstatus}}</p>
-      <p>{{expiredate}}</p>
-    </div>
+      <div class="main_content">
 
-    <!-- template used if for landscape -->
-    <div ng-if="screenOrientation == 'landscape-secondary' || screenOrientation == 'landscape-primary'">
-      <h1>LANDSCAPE VIEW</h1>
-      <h2>CONCORDIA LOGO</h2>
 
-      <img ng-src="data:image/PNG;base64,{{profilepicture}}">
-      <p>{{firstname}}</p>
-      <p>{{lastname}}</p>
-      <p>{{dob}}</p>
-      <p>{{id}}</p>
-      <p>{{ugradstatus}}</p>
-      <p>{{expiredate}}</p>
+        <div class="row">
+          <div class="col">
+            <div class="card removeMarginTop">
+              <div class="item item-text-wrap centerText">
+                <p class="graduateStatus">{{vm.uGradStatus}}</p>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="item item-divider">
+                <p>Expire</p>
+              </div>
+              <div class="item item-text-wrap centerText">
+                <p>{{vm.expireDate}}</p>
+              </div>
+            </div>
+
+
+          </div>
+          <div class="col">
+            <div>
+              <!-- display picture if it's there. If pending review, display pending approval pic. else, placeholder.-->
+              <div ng-if="vm.valid">
+                <img ng-src="data:image/PNG;base64,{{vm.profilePicture}}" width="200" height="200">
+              </div>
+              <div ng-if="!vm.valid && vm.pending">
+                <img src="img/pending_approval.jpg" width="200" height="200">
+              </div>
+              <div ng-if="!vm.valid && !vm.pending">
+                <img src="img/placeholder_profile_pic.jpg" width="200" height="200">
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!--information card-->
+        <div class="list card removeMarginTop">
+          <div class="item item-icon-left">
+            <i class="icon ion-person"></i>
+            <p>{{vm.firstName}}</p>
+          </div>
+
+          <div class="item item-icon-left">
+            <i class="icon ion-person"></i>
+            <p>{{vm.lastName}}</p>
+          </div>
+
+          <div class="item item-icon-left">
+            <i class="icon ion-android-calendar"></i>
+            <p>{{vm.dob}}</p>
+          </div>
+
+          <div class="item item-icon-left">
+            <i class="icon ion-card"></i>
+            <p>{{vm.id}}</p>
+          </div>
+
+          <div class="barcodeId">
+            <barcode-directive bcode="vm.id" height="50" font-size="15"></barcode-directive>
+          </div>
+        </div>
+      </div>
+
     </div>
   </ion-content>
 </ion-view>
