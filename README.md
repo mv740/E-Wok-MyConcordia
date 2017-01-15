@@ -23,12 +23,15 @@ Soen 490
 * Update your picture during the valid period
 * access your marshalling card 
 
-
-##MyConcordiaId Api server Live : https://myconcordiaid.azurewebsites.net/swagger/
-
-##Web Client Live :http://concordiaidclient.netlify.com/WebApp/app/login
+##MyConcordiaID
 
 ####Web application
 * Administrator validate the profile picture of each student  
 * revalidate previous picture, discard current valid picture 
 * View log of each transaction on each student account
+
+
+###MyConcordiaId Api server Live : https://myconcordiaid.azurewebsites.net/swagger/
+
+###Web Client Live :http://concordiaidclient.netlify.com/WebApp/app/login
+
