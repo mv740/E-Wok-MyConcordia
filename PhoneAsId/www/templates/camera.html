@@ -5,22 +5,23 @@
 
       <img id="mySpinner" src="img/spinner.gif" ng-show="showUploadSpinnerGif" />
 
+      <div class = "pic-box" width="200" height="200">
+        <img ng-src="{{pictureUrl}}">
+      </div>
+
       <div class = "list card">
-        <div class="item item-image">
-          <img ng-src="{{pictureUrl}}">
-        </div>
-        <a href="#" class="item item-icon-left" ng-hide="hideTakePictureButton" ng-click="takePicture()">
+        <div href="#" class="item item-icon-left" ng-hide="hideTakePictureButton" ng-click="takePicture()">
           <i class="icon ion-ios-camera"></i>
           {{takePictureButtonText}}
-        </a>
-        <a href="#" class="item item-icon-left" ng-hide="hideLoadPictureButton" ng-click="loadPicture()">
+        </div>
+        <div href="#" class="item item-icon-left" ng-hide="hideLoadPictureButton" ng-click="loadPicture()">
           <i class="icon ion-images"></i>
           Load Picture
-        </a>
-        <a href="#" class="item item-icon-left" ng-hide="hideSendPictureButton" ng-click="sendPicture()">
+        </div>
+        <div href="#" class="item item-icon-left" ng-hide="hideSendPictureButton" ng-click="sendPicture()">
           <i class="icon ion-android-send"></i>
           Send Picture
-        </a>
+        </div>
       </div>
     </div>
     <div class="loadPictureButton">

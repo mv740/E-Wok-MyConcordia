@@ -6,3 +6,8 @@
   font-size: 150%;
   font-weight: bold;
 }
+
+.pic-box {
+  display: table;
+  margin: 0 auto;
+}
