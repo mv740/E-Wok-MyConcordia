@@ -21,9 +21,14 @@ Soen 490
 * Access your virtual id card
 * Send your own picture and use it as your valid id picture (if it is approved)
 * Update your picture during the valid period
+* access your marshalling card 
 
 
-##MyConcordiaId https://myconcordiaid.azurewebsites.net
+##MyConcordiaId Api server Live : https://myconcordiaid.azurewebsites.net/swagger/
+
+##Web Client Live :http://concordiaidclient.netlify.com/WebApp/app/login
 
 ####Web application
 * Administrator validate the profile picture of each student  
+* revalidate previous picture, discard current valid picture 
+* View log of each transaction on each student account
