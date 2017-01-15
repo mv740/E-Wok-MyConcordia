@@ -33,5 +33,5 @@ Soen 490
 
 ###MyConcordiaId Api server Live : https://myconcordiaid.azurewebsites.net/swagger/
 
-###Web Client Live :http://concordiaidclient.netlify.com/WebApp/app/login
+###Web Client Live :https://concordiaidclient.netlify.com/WebApp/app/login
 
