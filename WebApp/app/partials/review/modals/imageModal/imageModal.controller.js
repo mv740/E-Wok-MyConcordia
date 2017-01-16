@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .controller('ImageModalCtrl', ImageModalCtrl);
 
-ImageModalCtrl.$inject = ['$rootScope', '$modalInstance', 'studentService', 'image'];
+ImageModalCtrl.$inject = ['$rootScope', '$modalInstance', 'studentService', 'dateParsingService', 'image'];
 
-function ImageModalCtrl($rootScope, $modalInstance, studentService, image) {
+function ImageModalCtrl($rootScope, $modalInstance, studentService, dateParsingService, image) {
 
     var imageModal = this;
     imageModal.close = $modalInstance.close;
@@ -20,6 +20,8 @@ function ImageModalCtrl($rootScope, $modalInstance, studentService, image) {
 
     function setImage() {
         imageModal.image = image;
+        imageModal.image.updated = dateParsingService.parse(imageModal.image.updated);
+        imageModal.image.created = dateParsingService.parse(imageModal.image.created);
     }
 
     function sendValidation(id, valid){
