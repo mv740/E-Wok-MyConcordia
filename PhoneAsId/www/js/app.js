@@ -111,6 +111,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
           }
         }
       })
+
+      .state('app.barcode', {
+        url: '/barcode',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/barcode.html',
+            controller: 'BarcodeController as bc',
+          }
+        }
+      })
+
       .state('app.login', {
         url: '/login',
         views: {
