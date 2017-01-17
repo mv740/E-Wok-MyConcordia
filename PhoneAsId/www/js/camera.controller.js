@@ -6,7 +6,7 @@
 angular.module('starter.controllers').controller('CameraCtrl',['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', '$rootScope', function (SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location, $rootScope) {
 
   $scope.pictureUrl = 'http://placehold.it/300x300';
-  $scope.takePictureButtonText = 'Take Picture';
+  $scope.takePictureButtonText = 'Camera';
   $scope.description = "";
 
   var visionObj = this;

@@ -1,0 +1,22 @@
+@import "../base/buffers";
+@import "../base/positioning";
+@import "../base/sizes";
+
+.overseeing{
+  background-color: #8A0037;
+  font-weight: bold;
+}
+
+  .barcodeId{
+    padding-top: 5px;
+  }
+
+  .graduateStatus
+  {
+    /*need to find which class is overwriting this*/
+    font-size: 50px!important;
+    font-weight: bolder;
+  }
+
+
+

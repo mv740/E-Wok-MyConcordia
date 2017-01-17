@@ -13,25 +13,25 @@
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
-  <drawer side="left">
+  <drawer side="left" style="width:70%;">
     <ion-header-bar align-title="center">
       <h1 class="title" ng-click="toggleDrawer()">Close</h1>
     </ion-header-bar>
     <ion-content>
       <ion-list class="bet-type-list">
-        <ion-item menu-close href="#/app/login">
+        <ion-item menu-close ng-click="toggleDrawer()" href="#/app/login">
           Login
         </ion-item>
-        <ion-item menu-close href="#/app/id">
+        <ion-item menu-close ng-click="toggleDrawer()" href="#/app/id">
           Id Card
         </ion-item>
-        <ion-item menu-close href="#/app/marshalling">
+        <ion-item menu-close ng-click="toggleDrawer()" href="#/app/marshalling">
           marshalling Card
         </ion-item>
-        <ion-item menu-close href="#/app/camera">
+        <ion-item menu-close ng-click="toggleDrawer()" href="#/app/camera">
           Update Picture
         </ion-item>
-        <ion-item menu-close href="#/app/barcode">
+        <ion-item menu-close ng-click="toggleDrawer()" href="#/app/barcode">
           Barcode Scanner
         </ion-item>
         <ion-item menu-close ng-click="vm.logOut()">

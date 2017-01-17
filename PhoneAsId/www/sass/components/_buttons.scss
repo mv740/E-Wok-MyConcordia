@@ -14,6 +14,19 @@ $border-radius-button:4px;
   @include make-button-3d-hover($button3D-shadow-color);
 }
 
+.button2D{
+  color:white;
+  height: 46px;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius:3px;
+  padding: 2px 5px;
+}
+
+.button2D:active {
+  background-color: #800033;
+}
+
 .button3D-noformat{
   background-color: white;
   padding: 10px;

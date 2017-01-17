@@ -160,29 +160,27 @@ h2 {
   padding-top: 20px;
   padding-bottom: 20px; }
 
-.container2D {
-  background-color: #a1325e;
-  width: 750px;
-  padding: 0px;
-  color: white; }
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
 
-.container2D-xl {
-  background-color: #a1325e;
-  width: 900px;
-  padding: 0px;
-  color: white; }
-
-.cardHolderComponent {
-  position: absolute;
-  top: 25%; }
-
-#loginpage {
-  background-color: #8A0037;
+.verticalCenter {
   position: relative;
-  height: 100%; }
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
 
-ion-header-bar {
-  height: 0%; }
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
 
-img {
-  margin-top: -5%; }
+.textCenter {
+  text-align: center; }
+
+.cam-container {
+  height: 100%;
+  background-color: #8A0037;
+  font-size: 150%;
+  font-weight: bold; }

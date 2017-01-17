@@ -1,0 +1,93 @@
+.no-top-buffer {
+  margin-top: 0px; }
+
+.no-left-buffer {
+  margin-left: 0px; }
+
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.all-side-margin {
+  margin: 30px; }
+
+.no-padding {
+  padding: 0px; }
+
+.side-padding {
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.side-padding-xs {
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.all-side-padding-xs {
+  padding: 10px; }
+
+.all-side-padding-sm {
+  padding: 20px; }
+
+.all-side-padding {
+  padding: 30px; }
+
+.top-padding {
+  padding-top: 30px; }
+
+.bottom-padding {
+  padding-bottom: 30px; }
+
+.bottom-padding-sm {
+  padding-bottom: 20px; }
+
+.bottom-padding-xs {
+  padding-bottom: 10px; }
+
+.top-bottom-padding-sm {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
+.textCenter {
+  text-align: center; }
+
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
+.overseeing {
+  background-color: #8A0037;
+  font-weight: bold; }
+
+.barcodeId {
+  padding-top: 5px; }
+
+.graduateStatus {
+  /*need to find which class is overwriting this*/
+  font-size: 50px !important;
+  font-weight: bolder; }

@@ -1,7 +1,7 @@
 <ion-view>
-  <ion-content>
+  <ion-content scroll="false">
 
-    <div class="overseeing">
+    <div class="overseeing full-height">
       <!-- template used if for portrait -->
 
       <div class="main_content">
@@ -9,17 +9,17 @@
 
         <div class="row">
           <div class="col">
-            <div class="card removeMarginTop">
-              <div class="item item-text-wrap centerText">
-                <p class="graduateStatus">{{vm.uGradStatus}}</p>
+            <div class="card no-top-buffer no-left-buffer">
+              <div class="item item-text-wrap text-center">
+                <p class="graduateStatus all-side-padding-sm">{{vm.uGradStatus}}</p>
               </div>
             </div>
 
-            <div class="card">
+            <div class="card no-left-buffer">
               <div class="item item-divider">
                 <p>Expire</p>
               </div>
-              <div class="item item-text-wrap centerText">
+              <div class="item item-text-wrap text-center">
                 <p>{{vm.expireDate}}</p>
               </div>
             </div>
@@ -44,15 +44,10 @@
         </div>
 
         <!--information card-->
-        <div class="list card removeMarginTop">
+        <div class="list card no-top-buffer">
           <div class="item item-icon-left">
             <i class="icon ion-person"></i>
-            <p>{{vm.firstName}}</p>
-          </div>
-
-          <div class="item item-icon-left">
-            <i class="icon ion-person"></i>
-            <p>{{vm.lastName}}</p>
+            <p>{{vm.firstName}} {{vm.lastName}}</p>
           </div>
 
           <div class="item item-icon-left">

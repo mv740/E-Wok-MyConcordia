@@ -75,7 +75,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
           'menuContent': {
             templateUrl: 'templates/id.html',
             controller: 'IdController as vm',
-            css: 'css/id.css'
+            css: 'sass/views/id.css'
           }
         }
       })
@@ -85,7 +85,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
           'menuContent': {
             templateUrl: 'templates/marshalling.html',
             controller: 'IdController as vm',
-            css: 'css/marshalling.css'
+            css: 'sass/views/marshalling.css'
           }
         }
       })
@@ -95,7 +95,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
           'menuContent': {
             templateUrl: 'templates/camera.html',
             controller: 'CameraCtrl',
-            css: 'css/camera.css',
+            css: 'sass/views/camera.css',
 
 
             // If the student cannot update picture, restrict access to the camera.

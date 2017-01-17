@@ -1,5 +1,13 @@
 @import "variables";
 
+.no-top-buffer{
+  margin-top:0px;
+}
+
+.no-left-buffer{
+  margin-left:0px;
+}
+
 .top-buffer-sm{
   margin-top:$buffer-sm;
 }
@@ -20,9 +28,18 @@
   margin: $buffer-md;
 }
 
+.no-padding{
+  padding:0px;
+}
+
 .side-padding{
   padding-left:$buffer-md;
   padding-right:$buffer-md;
+}
+
+.side-padding-xs{
+  padding-left:$buffer-xs;
+  padding-right:$buffer-xs;
 }
 
 .all-side-padding-xs{
