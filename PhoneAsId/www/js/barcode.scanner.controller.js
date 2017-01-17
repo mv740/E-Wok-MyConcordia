@@ -9,13 +9,18 @@
     .module('starter')
     .controller('BarcodeController', BarcodeController);
 
-  BarcodeController.$inject = ['$rootScope', '$scope', '$state'];
+  BarcodeController.$inject = ['$rootScope', '$scope', '$state', '$cordovaBarcodeScanner'];
 
-  function BarcodeController($rootScope, $scope, $state) {
-
+  function BarcodeController($rootScope, $scope, $state, $cordovaBarcodeScanner) {
     var bc = this;
 
-    bc.text = "Hello";
+    bc.scanBarcode = function() {
+      $cordovaBarcodeScanner.scan().then(function(imageData) {
+        alert(imageData.text);
+      }, function(error) {
+        console.log("An error happened -> " + error);
+      });
+    };
 
   }
 
