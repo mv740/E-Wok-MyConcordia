@@ -261,9 +261,20 @@ namespace MyConcordiaID.Models.Student
                 selectedPicture.STATUS = Status.Approved.ToString();
                 selectedPicture.UPDATED = DateTime.UtcNow;
                 selectedPicture.ADMINISTRATOR = netName;
+
+                //find his account and set it to valid
+                var student = _database.STUDENTS
+                    .Where(s => s.NETNAME == studentNetname)
+                    .FirstOrDefault();
+
+                student.VALID = true;
+
+
+
             }
             else
             {
+
                 //invalidate current profile picture
                 currentProfilePicture.STATUS = Status.Denied.ToString();
 

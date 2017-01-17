@@ -3,6 +3,7 @@ using OracleEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
@@ -16,23 +17,46 @@ namespace MyConcordiaID.Helper
             return rnd.Next(20000000, 99999999);
         }
 
+        /// <summary>
+        ///  Generate usrname from first name and last name 
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <returns></returns>
         public static string GenerateNetName(string firstName,string lastName)
         {
             //we normally get the netname from concordia 
 
-            var cleanedLastName = CleanInput(lastName).Trim();
+            var firstNameCleaned = RemoveSpecialCharacters(firstName);
+            var lastNameCleaned = RemoveSpecialCharacters(lastName);
 
 
-            var length = cleanedLastName.Length;
+            var lastNameTrimmed = CleanInput(lastNameCleaned).Trim();
+
+            var length = lastNameTrimmed.Length;
 
             if(length > 6)
             {
                 length = 6;
             }
 
-            return firstName[0].ToString().ToLower() + "_" + cleanedLastName.Substring(0, length).ToLower();
+            return firstNameCleaned[0].ToString().ToLower() + "_" + lastNameTrimmed.Substring(0, length).ToLower();
 
        
+        }
+
+        /// <summary>
+        ///  Remove special characters eg : ô é ... 
+        ///  http://stackoverflow.com/questions/249087/how-do-i-remove-diacritics-accents-from-a-string-in-net
+        /// </summary>
+        /// <param name="specialString"></param>
+        /// <returns></returns>
+        public static string RemoveSpecialCharacters(string specialString)
+        {
+            byte[] tempBytes = Encoding.GetEncoding("ISO-8859-8").GetBytes(specialString);
+
+            return Encoding.UTF8.GetString(tempBytes);
+
         }
 
         /// <summary>
