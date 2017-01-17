@@ -1,0 +1,26 @@
+@import "../base/colors";
+@import "../base/variables";
+@import "../base/mixins/modalBuilder";
+
+$commentBoxHeight: 100px;
+
+.app-modal-window {
+    .modal-dialog {
+        width: $modal-picture-width * 2;
+    }
+}
+
+.app-modal-window-xl {
+    .modal-dialog {
+        width: $modal-picture-width-xl * 2;
+    }
+}
+
+.validationModal {
+    @include buildValidationModal($commentBoxHeight, $modal-picture-width);
+}
+
+.validationModal-xl {
+    @include buildValidationModal($commentBoxHeight, $modal-picture-width-xl);
+}
+

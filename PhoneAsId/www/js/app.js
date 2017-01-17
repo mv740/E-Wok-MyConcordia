@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidcclient'])
+angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers', 'ngCordova', 'ng.oidcclient', 'angularCSS'])
   .constant('serverName', 'https://myconcordiaid.azurewebsites.net/api/')
 
 
@@ -128,7 +128,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
           'menuContent': {
             templateUrl: 'templates/login.html',
             controller: 'LoginController as vm',
-            css: 'css/login.css'
+            css: ['css/login.css', 'sass/views/login.css']
           }
         }
       });

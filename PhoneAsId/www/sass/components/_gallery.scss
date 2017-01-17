@@ -1,0 +1,94 @@
+$thumbnail-picture-height: 112px;
+#gallery{
+
+li {
+  display:inline-block;
+}
+
+ul{
+
+  padding:0;
+  margin:0;
+  white-space:nowrap;
+  height: $thumbnail-picture-height;
+}
+
+.thumbnail {
+  padding: 10px 10px 10px 0px;
+  height: $thumbnail-picture-height;
+  border: 0px;
+  background-color: transparent;
+}
+
+.large {
+  width:405px;
+}
+
+.mainimageshell {
+  display:none;
+  background-color:#fff;
+  border-radius:8px;
+  float:left;
+  width:400px;
+  padding:10px;
+}
+
+.viewwindow {
+  width:400px;
+  height:307px;
+  overflow-x: hidden;
+  position:relative;
+}
+
+.fullsizelist{
+  position:absolute;
+  top:0;
+  left:0;
+  transition:  left .8s ease;
+  -ms-transition:  left .8s ease;
+  -o-transition:  left .8s ease;
+  -webkit-transition:  left .8s ease;
+  -moz-transition:  left .8s ease;
+}
+
+.bg {
+  background-color:#333;
+  padding:10px;
+  border-radius:8px;
+  float:left;
+}
+
+
+.thumbsshell {
+  margin-top: 6px;
+  background-color:#fff;
+  padding:5px;
+  border-radius:5px;
+}
+
+.thumbswrapper {
+  overflow-x: auto;
+  overflow-y: hidden;
+  width:100%;
+}
+
+.thumbwrapper {
+  float:left;
+}
+
+.captionshell {
+  margin:0 0 10px 5px;
+  background-color:#fff;
+  width:175px;
+  height:324px;
+  padding:0 10px;
+  border-radius:8px;
+  float:left;
+}
+
+  img{
+    height: $thumbnail-picture-height;
+    margin-right: 10px;
+    padding:0px;
+  }
+}

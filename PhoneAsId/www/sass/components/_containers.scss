@@ -1,0 +1,21 @@
+@import "../base/mixins/make3D";
+@import "../base/colors";
+@import "../base/variables";
+@import "../base/mixins/verticalCenter";
+@import "../base/mixins/containerBuilder";
+
+.container2D{
+  @include buildContainer2D($concordia-background-color, $modal-picture-width * 2);
+}
+
+.container2D-xl{
+  @include buildContainer2D($concordia-background-color, $modal-picture-width-xl * 2);
+}
+
+.cardHolderComponent{
+  position:absolute;
+  top: 25%;
+}
+
+
+

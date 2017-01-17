@@ -12,6 +12,7 @@
     "ngCordova": "^0.1.27-alpha",
     "oidc-client": "^1.2.0",
     "es6-shim": "^0.35.1",
-    "JsBarcode": "jsbarcode#^3.5.7"
+    "JsBarcode": "jsbarcode#^3.5.7",
+    "angular-css": "^1.0.8"
   }
 }

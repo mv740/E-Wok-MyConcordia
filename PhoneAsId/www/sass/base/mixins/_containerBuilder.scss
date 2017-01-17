@@ -1,0 +1,6 @@
+@mixin buildContainer2D($background-color, $width) {
+  background-color: $background-color;
+  width: $width;
+  padding:0px;
+  color:white;
+}
