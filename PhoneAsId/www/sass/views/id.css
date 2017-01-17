@@ -74,6 +74,9 @@
 .textCenter {
   text-align: center; }
 
+.absolutePos {
+  position: absolute; }
+
 .full-height {
   height: 100%; }
 

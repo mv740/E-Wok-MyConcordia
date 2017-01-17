@@ -12,11 +12,24 @@
 
   function MenuController(AuthenticationService) {
     var vm = this;
+    vm.overlay = false;
 
+    vm.onSwipeLeft = onSwipeLeft;
+    vm.toggleDrawer = toggleDrawer;
     vm.logOut = logOut;
 
     function logOut() {
       AuthenticationService.logOut();
+    }
+
+    function toggleDrawer(){
+      if (vm.overlay)
+      vm.overlay = false;
+      else vm.overlay = true;
+    }
+
+    function onSwipeLeft(){
+      vm.overlay = false;
     }
 
   }

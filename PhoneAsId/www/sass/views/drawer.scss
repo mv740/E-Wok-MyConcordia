@@ -1,0 +1,14 @@
+@import "../base/positioning";
+@import "../base/sizes";
+
+$drawer-width: 70%;
+
+drawer{
+  width: $drawer-width;
+}
+
+.drawerOverlay{
+  width: 500%;
+  background-color: rgba(0,0,0,0.5);
+  left: 100%;
+}
