@@ -9,16 +9,17 @@
     .module('starter')
     .controller('BarcodeController', BarcodeController);
 
-  BarcodeController.$inject = ['$rootScope', '$scope', '$state', '$cordovaBarcodeScanner'];
+  BarcodeController.$inject = ['$rootScope', '$scope', '$state', '$cordovaBarcodeScanner', '$cordovaNativeAudio'];
 
-  function BarcodeController($rootScope, $scope, $state, $cordovaBarcodeScanner) {
+  function BarcodeController($rootScope, $scope, $state, $cordovaBarcodeScanner, $cordovaNativeAudio) {
     var bc = this;
 
     bc.scanData = [];
+    $cordovaNativeAudio.preloadSimple('beep', 'audio/beep.mp3');
 
     bc.scanBarcode = function() {
       $cordovaBarcodeScanner.scan().then(function(imageData) {
-        alert(imageData.text);
+        $cordovaNativeAudio.play('beep');
         bc.scanData.push(imageData.text);
       }, function(error) {
         console.log("An error happened -> " + error);

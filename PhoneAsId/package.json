@@ -35,7 +35,8 @@
     "cordova-plugin-file",
     "cordova-plugin-screen-orientation",
     "cordova-plugin-network-information",
-    "phonegap-plugin-barcodescanner"
+    "phonegap-plugin-barcodescanner",
+    "cordova-plugin-nativeaudio"
   ],
   "cordovaPlatforms": [
     {
