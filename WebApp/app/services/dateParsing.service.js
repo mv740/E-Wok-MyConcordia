@@ -21,10 +21,10 @@ function dateParsingService() {
     function parse(datetime){
         var date = {};
 
-        date.year = datetime.substring(0,4);
-        var monthNum = datetime.substring(5,7);
-        date.month = months[parseInt(monthNum)];
-        date.day = datetime.substring(8,10);
+        date.day = datetime.substring(0,2);
+        var monthNum = datetime.substring(3,5);
+        date.month = months[parseInt(monthNum - 1)];
+        date.year = datetime.substring(6,10);
 
         return date;
     }
