@@ -19,8 +19,10 @@
 
     bc.scanBarcode = function() {
       $cordovaBarcodeScanner.scan().then(function(imageData) {
-        $cordovaNativeAudio.play('beep');
-        bc.scanData.push(imageData.text);
+        if(imageData.text != ''){
+          $cordovaNativeAudio.play('beep');
+          bc.scanData.push(imageData.text);
+        }
       }, function(error) {
         console.log("An error happened -> " + error);
       });
