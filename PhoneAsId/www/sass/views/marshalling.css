@@ -30,21 +30,23 @@
 .absolutePos {
   position: absolute; }
 
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
+
 html, body {
-  font: 1em 'Montserrat Alternates'; }
+  font-family: 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
     list-style: none;
     margin: 0;
     padding: 0; }
-
-#main #ng-view {
-  overflow: hidden; }
-
-.modal-content {
-  height: 0px; }
-
-h2 {
-  margin-top: 0px; }
+  html h1, html h2, html h3, html h4, body h1, body h2, body h3, body h4 {
+    font-family: 'Montserrat Alternates'; }
 
 .no-top-buffer {
   margin-top: 0px; }
@@ -90,6 +92,9 @@ h2 {
 .top-padding {
   padding-top: 30px; }
 
+.top-padding-xs {
+  padding-top: 10px; }
+
 .bottom-padding {
   padding-bottom: 30px; }
 
@@ -124,6 +129,15 @@ h2 {
 
 .absolutePos {
   position: absolute; }
+
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
 
 .overall {
   background-color: white; }

@@ -4,7 +4,7 @@
 @import "positioning";
 
 html, body{
-  font: 1em 'Montserrat Alternates';
+  font-family: 'Montserrat Alternates';
 
   ul, li {
     list-style:none;
@@ -12,21 +12,8 @@ html, body{
     padding:0;
   }
 
-}
-
-
-#main {
-
-  #ng-view {
-    overflow: hidden;
+  h1, h2, h3, h4{
+    font-family: 'Montserrat Alternates';
   }
-}
-
-//fix for custom modals when using angular-bootstrop
-.modal-content{
-  height:0px;
-}
-h2{
-  margin-top:0px;
 }
 

@@ -1,22 +1,32 @@
+@import "../base/reset";
 @import "../base/buffers";
 @import "../base/positioning";
 @import "../base/sizes";
 
-.overseeing{
-  background-color: #8A0037;
-  font-weight: bold;
+
+$bottom-info-height: 80px;
+
+.pictureHolder{
+
+  .headerInfo{
+    top:0px;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0));
+  }
+
+  .bottomInfo{
+    height: $bottom-info-height;
+    top: - $bottom-info-height;
+    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));
+  }
+
+  p, h2, h3, span{
+    color:white;
+  }
 }
 
-  .barcodeId{
-    padding-top: 5px;
-  }
-
-  .graduateStatus
-  {
-    /*need to find which class is overwriting this*/
-    font-size: 50px!important;
-    font-weight: bolder;
-  }
+.belowPicture{
+  top: -$bottom-info-height;
+}
 
 
 

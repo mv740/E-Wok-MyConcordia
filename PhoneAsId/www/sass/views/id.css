@@ -1,3 +1,53 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
+.text-left {
+  text-align: left; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
+.textCenter {
+  text-align: center; }
+
+.absolutePos {
+  position: absolute; }
+
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
+
+html, body {
+  font-family: 'Montserrat Alternates'; }
+  html ul, html li, body ul, body li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+  html h1, html h2, html h3, html h4, body h1, body h2, body h3, body h4 {
+    font-family: 'Montserrat Alternates'; }
+
 .no-top-buffer {
   margin-top: 0px; }
 
@@ -42,6 +92,9 @@
 .top-padding {
   padding-top: 30px; }
 
+.top-padding-xs {
+  padding-top: 10px; }
+
 .bottom-padding {
   padding-bottom: 30px; }
 
@@ -77,20 +130,32 @@
 .absolutePos {
   position: absolute; }
 
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
+
 .full-height {
   height: 100%; }
 
 .full-width {
   width: 100%; }
 
-.overseeing {
-  background-color: #8A0037;
-  font-weight: bold; }
+.pictureHolder .headerInfo {
+  top: 0px;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), transparent); }
 
-.barcodeId {
-  padding-top: 5px; }
+.pictureHolder .bottomInfo {
+  height: 80px;
+  top: -80px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)); }
 
-.graduateStatus {
-  /*need to find which class is overwriting this*/
-  font-size: 50px !important;
-  font-weight: bolder; }
+.pictureHolder p, .pictureHolder h2, .pictureHolder h3, .pictureHolder span {
+  color: white; }
+
+.belowPicture {
+  top: -80px; }

@@ -20,6 +20,15 @@
 .absolutePos {
   position: absolute; }
 
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
+
 .full-height {
   height: 100%; }
 
@@ -27,9 +36,23 @@
   width: 100%; }
 
 drawer {
-  width: 70%; }
+  width: 70%;
+  left: -1px; }
 
 .drawerOverlay {
   width: 500%;
   background-color: rgba(0, 0, 0, 0.5);
   left: 100%; }
+
+.bar.bar-header {
+  background: rgba(255, 255, 255, 0.1);
+  border-bottom-width: 0; }
+
+.bar.bar-header h1 {
+  color: black !important; }
+
+.scroll-content {
+  overflow: visible !important; }
+
+.platform-ios.platform-cordova:not(.fullscreen) .has-header {
+  top: 0px; }
