@@ -20,10 +20,8 @@ ion-content {
   font-weight: bold;
 
   ul {
-    top: 20px;
-    position: relative;
     li {
-      margin-top: 10px;
+      margin-top: -5px;
       div {
         height: $list-li-height;
         padding-top: 20px;

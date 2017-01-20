@@ -2,16 +2,16 @@
   <ion-content class="side-padding-sm" ng-controller="CameraCtrl" scroll=false>
 
 
-      <ul>
+      <ul class="top-buffer-lg">
         <li><div><span>Try to find a white or pale wall</span></div></li>
         <li><div><span>Place the camera at your eye level</span></div></li>
         <li><div><span>Ensure that there is enough light in the picture</span></div></li>
         <li><div><span>Your face must be facing the camera straight</span></div></li>
       </ul>
 
-    <hr class="top-buffer-lg" style="background-color:white;">
+    <hr class="top-buffer-sm" style="background-color:white;">
 
-      <div class="col col-100 no-padding btn-circle-container">
+      <div class="col col-100 no-padding btn-circle-container top-buffer-sm">
 
         <button ng-click="takePicture()" type="button" class="btn-circle button3D floatLeft"><i class="icon ion-ios-camera"></i></button>
         <button ng-click="loadPicture()" type="button" class="btn-circle button3D floatRight"><i class="icon ion-images"></i></button>

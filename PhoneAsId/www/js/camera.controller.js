@@ -85,6 +85,8 @@ angular.module('starter.controllers').controller('CameraCtrl',['SessionService',
 
         sendToVision(imageData);
 
+        displayPicture();
+
       }, function (error) {
         alert('Error occured while getting the camera');
       })

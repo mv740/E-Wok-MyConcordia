@@ -208,38 +208,35 @@ ion-content {
   background-color: #8A0037;
   font-size: 150%;
   font-weight: bold; }
-  ion-content ul {
-    top: 20px;
-    position: relative; }
-    ion-content ul li {
-      margin-top: 10px; }
-      ion-content ul li div {
-        height: 80px;
-        padding-top: 20px;
-        padding-left: 10px;
-        padding-right: 10px;
-        text-align: center;
-        border-radius: 5px; }
-    ion-content ul li:first-child div {
-      background-color: #ad4c73;
-      width: auto;
-      color: white;
-      color: #f3e5eb; }
-    ion-content ul li:nth-child(2) div {
-      background-color: #c47f9b;
-      width: auto;
-      color: white;
-      color: #e7ccd7; }
-    ion-content ul li:nth-child(3) div {
-      background-color: #dbb2c3;
-      width: auto;
-      color: white;
-      color: #b86687; }
-    ion-content ul li:nth-child(4) div {
-      background-color: #f3e5eb;
-      width: auto;
-      color: white;
-      color: #ad4c73; }
+  ion-content ul li {
+    margin-top: -5px; }
+    ion-content ul li div {
+      height: 80px;
+      padding-top: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+      text-align: center;
+      border-radius: 5px; }
+  ion-content ul li:first-child div {
+    background-color: #ad4c73;
+    width: auto;
+    color: white;
+    color: #f3e5eb; }
+  ion-content ul li:nth-child(2) div {
+    background-color: #c47f9b;
+    width: auto;
+    color: white;
+    color: #e7ccd7; }
+  ion-content ul li:nth-child(3) div {
+    background-color: #dbb2c3;
+    width: auto;
+    color: white;
+    color: #b86687; }
+  ion-content ul li:nth-child(4) div {
+    background-color: #f3e5eb;
+    width: auto;
+    color: white;
+    color: #ad4c73; }
   ion-content .btn-circle-container {
     height: 80px; }
     ion-content .btn-circle-container button {
