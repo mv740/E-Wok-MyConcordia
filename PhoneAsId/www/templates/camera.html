@@ -1,31 +1,20 @@
 <ion-view view-title="Browse">
-  <ion-content ng-controller="CameraCtrl">
+  <ion-content class="side-padding-sm" ng-controller="CameraCtrl" scroll=false>
 
-    <div class = "cam-container">
 
-      <img id="mySpinner" src="img/spinner.gif" ng-show="showUploadSpinnerGif" />
+      <ul>
+        <li><div><span>Try to find a white or pale wall</span></div></li>
+        <li><div><span>Place the camera at your eye level</span></div></li>
+        <li><div><span>Ensure that there is enough light in the picture</span></div></li>
+        <li><div><span>Your face must be facing the camera straight</span></div></li>
+      </ul>
 
-      <div class = "pic-box" width="200" height="200">
-        <img class="col col-100 bottom-padding-xs side-padding-xs" ng-src="{{pictureUrl}}">
+    <hr class="top-buffer-lg" style="background-color:white;">
+
+      <div class="col col-100 no-padding btn-circle-container">
+
+        <button ng-click="takePicture()" type="button" class="btn-circle button3D floatLeft"><i class="icon ion-ios-camera"></i></button>
+        <button ng-click="loadPicture()" type="button" class="btn-circle button3D floatRight"><i class="icon ion-images"></i></button>
       </div>
-
-      <div class = "list card no-top-buffer">
-        <div href="#" class="item item-icon-left" ng-hide="hideTakePictureButton" ng-click="takePicture()">
-          <i class="icon ion-ios-camera"></i>
-          {{takePictureButtonText}}
-        </div>
-        <div href="#" class="item item-icon-left" ng-hide="hideLoadPictureButton" ng-click="loadPicture()">
-          <i class="icon ion-images"></i>
-          Gallery
-        </div>
-        <div href="#" class="item item-icon-left" ng-hide="hideSendPictureButton" ng-click="sendPicture()">
-          <i class="icon ion-android-send"></i>
-          Send Picture
-        </div>
-      </div>
-    </div>
-    <div class="loadPictureButton">
-        {{description}}
-    </div>
   </ion-content>
 </ion-view>

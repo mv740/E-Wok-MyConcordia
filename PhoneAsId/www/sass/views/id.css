@@ -60,6 +60,9 @@ html, body {
 .top-buffer {
   margin-top: 30px; }
 
+.top-buffer-lg {
+  margin-top: 40px; }
+
 .bottom-buffer {
   margin-bottom: 30px; }
 
@@ -75,6 +78,10 @@ html, body {
 .side-padding {
   padding-left: 30px;
   padding-right: 30px; }
+
+.side-padding-sm {
+  padding-left: 20px;
+  padding-right: 20px; }
 
 .side-padding-xs {
   padding-left: 10px;

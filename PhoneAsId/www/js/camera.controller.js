@@ -63,7 +63,10 @@ angular.module('starter.controllers').controller('CameraCtrl',['SessionService',
         $scope.hideSendPictureButton = false;
 
 
+
         sendToVision(imageData);
+
+        displayPicture();
 
       }, function (error) {
 
@@ -234,6 +237,25 @@ angular.module('starter.controllers').controller('CameraCtrl',['SessionService',
       alert('An error occurred while trying to write the file');
     });
 
+  }
+
+  function displayPicture(){
+    var myPopup = $ionicPopup.show({
+      templateUrl: 'templates/cameraPopup.html',
+      title: 'Send Picture',
+      subTitle: '',
+      scope: $scope,
+      buttons: [
+        { text: 'Cancel' },
+        {
+          text: '<b>Send</b>',
+          type: 'button-positive',
+          onTap: function(e) {
+            $scope.sendPicture();
+          }
+        }
+      ]
+    });
   }
 }]);
 

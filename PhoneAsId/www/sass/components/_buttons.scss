@@ -6,7 +6,7 @@ $border-radius-button:4px;
 
 .button3D{
   background-color: white;
-  height: 46px;
+  height: 60px;
   padding: 10px;
   border: 0.25em solid $button3D-border-color;
   color:$button3D-shadow-color;
@@ -37,15 +37,12 @@ $border-radius-button:4px;
 }
 
 .btn-circle {
-  width: $btn-yesno-height;
-  height: $btn-yesno-height;
   padding: 15px 17px;
-  font-size: 18px;
+  font-size: 30px;
   line-height: 1.33;
   border-radius: 25px;
   text-align: center;
   border: 1px;
-  margin: 0 50px 0 50px;
   opacity: 0.9;
 
   &.btn-yes {

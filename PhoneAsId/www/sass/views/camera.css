@@ -50,7 +50,7 @@ html, body {
 
 .button3D {
   background-color: white;
-  height: 46px;
+  height: 60px;
   padding: 10px;
   border: 0.25em solid #6A6A6A;
   color: #323232;
@@ -87,15 +87,12 @@ html, body {
     box-shadow: 0.7px 0.7px 0 #323232, 1.4px 1.4px 0 #323232, 2.1px 2.1px 0 #323232, 2.8px 2.8px 0 #323232, 3.5px 3.5px 0 #323232, 4.2px 4.2px 0 #323232, 4.9px 4.9px 0 #323232; }
 
 .btn-circle {
-  width: 50px;
-  height: 50px;
   padding: 15px 17px;
-  font-size: 18px;
+  font-size: 30px;
   line-height: 1.33;
   border-radius: 25px;
   text-align: center;
   border: 1px;
-  margin: 0 50px 0 50px;
   opacity: 0.9; }
   .btn-circle.btn-yes {
     background-color: #47a447;
@@ -120,6 +117,9 @@ html, body {
 .top-buffer {
   margin-top: 30px; }
 
+.top-buffer-lg {
+  margin-top: 40px; }
+
 .bottom-buffer {
   margin-bottom: 30px; }
 
@@ -135,6 +135,10 @@ html, body {
 .side-padding {
   padding-left: 30px;
   padding-right: 30px; }
+
+.side-padding-sm {
+  padding-left: 20px;
+  padding-right: 20px; }
 
 .side-padding-xs {
   padding-left: 10px;
@@ -199,8 +203,46 @@ html, body {
 .floatRight {
   float: right; }
 
-.cam-container {
+ion-content {
   height: 100%;
   background-color: #8A0037;
   font-size: 150%;
   font-weight: bold; }
+  ion-content ul {
+    top: 20px;
+    position: relative; }
+    ion-content ul li {
+      margin-top: 10px; }
+      ion-content ul li div {
+        height: 80px;
+        padding-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+        border-radius: 5px; }
+    ion-content ul li:first-child div {
+      background-color: #ad4c73;
+      width: auto;
+      color: white;
+      color: #f3e5eb; }
+    ion-content ul li:nth-child(2) div {
+      background-color: #c47f9b;
+      width: auto;
+      color: white;
+      color: #e7ccd7; }
+    ion-content ul li:nth-child(3) div {
+      background-color: #dbb2c3;
+      width: auto;
+      color: white;
+      color: #b86687; }
+    ion-content ul li:nth-child(4) div {
+      background-color: #f3e5eb;
+      width: auto;
+      color: white;
+      color: #ad4c73; }
+  ion-content .btn-circle-container {
+    height: 80px; }
+    ion-content .btn-circle-container button {
+      height: 100%;
+      border-radius: 5px;
+      width: 44%; }

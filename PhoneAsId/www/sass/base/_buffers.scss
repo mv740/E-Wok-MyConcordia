@@ -15,6 +15,9 @@
 .top-buffer{
   margin-top:$buffer-md;
 }
+.top-buffer-lg{
+  margin-top:$buffer-lg;
+}
 
 .bottom-buffer{
   margin-bottom:$buffer-md;
@@ -35,6 +38,11 @@
 .side-padding{
   padding-left:$buffer-md;
   padding-right:$buffer-md;
+}
+
+.side-padding-sm{
+  padding-left:$buffer-sm;
+  padding-right:$buffer-sm;
 }
 
 .side-padding-xs{
