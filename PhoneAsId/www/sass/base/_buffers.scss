@@ -8,6 +8,14 @@
   margin-left:0px;
 }
 
+.no-buffer{
+  margin:0px;
+}
+
+.top-buffer-xs{
+  margin-top:$buffer-xs;
+}
+
 .top-buffer-sm{
   margin-top:$buffer-sm;
 }
@@ -21,6 +29,11 @@
 
 .bottom-buffer{
   margin-bottom:$buffer-md;
+}
+
+.side-buffer-sm{
+  margin-left:$buffer-sm;
+  margin-right:$buffer-sm;
 }
 
 .all-side-margin-sm{

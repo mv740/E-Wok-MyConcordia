@@ -111,6 +111,12 @@ html, body {
 .no-left-buffer {
   margin-left: 0px; }
 
+.no-buffer {
+  margin: 0px; }
+
+.top-buffer-xs {
+  margin-top: 10px; }
+
 .top-buffer-sm {
   margin-top: 20px; }
 
@@ -122,6 +128,10 @@ html, body {
 
 .bottom-buffer {
   margin-bottom: 30px; }
+
+.side-buffer-sm {
+  margin-left: 20px;
+  margin-right: 20px; }
 
 .all-side-margin-sm {
   margin: 20px; }

@@ -23,14 +23,16 @@
             <span class="floatRight all-side-padding-xs" ng-if="vm.uGradStatus == 'U'">Undergraduate</span>
             <span class="floatRight all-side-padding-xs" ng-if="vm.uGradStatus != 'U'">Graduate</span>
           </div>
-          <div class="col col-100 textCenter bottomInfo relativePos">
+          <div class="col col-100 textCenter bottomInfo top-padding relativePos">
             <div>
-              <h2>{{vm.firstName}} {{vm.lastName}}</h2>
+              <h2 class="no-buffer">{{vm.firstName}} {{vm.lastName}}</h2>
             </div>
             <div>
-              <p>{{vm.id}}</p>
+              <p id="id">{{vm.id}}</p>
             </div>
+            <hr class="side-buffer-sm top-buffer-xs">
           </div>
+
         </div>
 
         <div class="belowPicture relativePos side-padding-xs">
@@ -38,7 +40,7 @@
             <div class="col col-100 textCenter top-padding-xs">
               <span>Expires on {{vm.expireDate}}</span>
             </div>
-<hr>
+
           <div class="col col-100 barcodeId textCenter no-padding">
             <barcode-directive bcode="vm.id" height="50" font-size="15"></barcode-directive>
           </div>

@@ -10,13 +10,19 @@ $bottom-info-height: 80px;
 
   .headerInfo{
     top:0px;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0));
+    background: linear-gradient(black, rgba(0,0,0,0));
   }
 
   .bottomInfo{
     height: $bottom-info-height;
-    top: - $bottom-info-height;
-    background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.6));
+    top: - $bottom-info-height + 1px;
+    background: linear-gradient(rgba(0,0,0,0), white);
+    p, h2 {
+      color: black;
+    }
+    #id{
+      font-size:20px;
+    }
   }
 
   p, h2, h3, span{
@@ -25,7 +31,7 @@ $bottom-info-height: 80px;
 }
 
 .belowPicture{
-  top: -$bottom-info-height;
+  top: -$bottom-info-height + $buffer-sm;
 }
 
 

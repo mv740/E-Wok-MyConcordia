@@ -111,6 +111,12 @@ html, body {
 .no-left-buffer {
   margin-left: 0px; }
 
+.no-buffer {
+  margin: 0px; }
+
+.top-buffer-xs {
+  margin-top: 10px; }
+
 .top-buffer-sm {
   margin-top: 20px; }
 
@@ -122,6 +128,10 @@ html, body {
 
 .bottom-buffer {
   margin-bottom: 30px; }
+
+.side-buffer-sm {
+  margin-left: 20px;
+  margin-right: 20px; }
 
 .all-side-margin-sm {
   margin: 20px; }
@@ -203,43 +213,43 @@ html, body {
 .floatRight {
   float: right; }
 
-ion-content {
+.cam-container {
   height: 100%;
   background-color: #8A0037;
   font-size: 150%;
   font-weight: bold; }
-  ion-content ul li {
+  .cam-container ul li {
     margin-top: -5px; }
-    ion-content ul li div {
+    .cam-container ul li div {
       height: 80px;
       padding-top: 20px;
       padding-left: 10px;
       padding-right: 10px;
       text-align: center;
       border-radius: 5px; }
-  ion-content ul li:first-child div {
+  .cam-container ul li:first-child div {
     background-color: #ad4c73;
     width: auto;
     color: white;
     color: #f3e5eb; }
-  ion-content ul li:nth-child(2) div {
+  .cam-container ul li:nth-child(2) div {
     background-color: #c47f9b;
     width: auto;
     color: white;
     color: #e7ccd7; }
-  ion-content ul li:nth-child(3) div {
+  .cam-container ul li:nth-child(3) div {
     background-color: #dbb2c3;
     width: auto;
     color: white;
     color: #b86687; }
-  ion-content ul li:nth-child(4) div {
+  .cam-container ul li:nth-child(4) div {
     background-color: #f3e5eb;
     width: auto;
     color: white;
     color: #ad4c73; }
-  ion-content .btn-circle-container {
+  .cam-container .btn-circle-container {
     height: 80px; }
-    ion-content .btn-circle-container button {
+    .cam-container .btn-circle-container button {
       height: 100%;
       border-radius: 5px;
       width: 44%; }

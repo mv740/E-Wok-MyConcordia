@@ -54,6 +54,12 @@ html, body {
 .no-left-buffer {
   margin-left: 0px; }
 
+.no-buffer {
+  margin: 0px; }
+
+.top-buffer-xs {
+  margin-top: 10px; }
+
 .top-buffer-sm {
   margin-top: 20px; }
 
@@ -65,6 +71,10 @@ html, body {
 
 .bottom-buffer {
   margin-bottom: 30px; }
+
+.side-buffer-sm {
+  margin-left: 20px;
+  margin-right: 20px; }
 
 .all-side-margin-sm {
   margin: 20px; }
@@ -154,15 +164,19 @@ html, body {
 
 .pictureHolder .headerInfo {
   top: 0px;
-  background: linear-gradient(rgba(0, 0, 0, 0.6), transparent); }
+  background: linear-gradient(black, transparent); }
 
 .pictureHolder .bottomInfo {
   height: 80px;
-  top: -80px;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.6)); }
+  top: -79px;
+  background: linear-gradient(transparent, white); }
+  .pictureHolder .bottomInfo p, .pictureHolder .bottomInfo h2 {
+    color: black; }
+  .pictureHolder .bottomInfo #id {
+    font-size: 20px; }
 
 .pictureHolder p, .pictureHolder h2, .pictureHolder h3, .pictureHolder span {
   color: white; }
 
 .belowPicture {
-  top: -80px; }
+  top: -60px; }
