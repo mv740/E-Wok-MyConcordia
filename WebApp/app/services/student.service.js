@@ -15,7 +15,8 @@ function studentService($http, $q, myConfig) {
         getStudents: getStudents,
         search: search,
         getUpdatePeriod: getUpdatePeriod,
-        validateArchived: validateArchived
+        validateArchived: validateArchived,
+        submitComment: submitComment
     };
 
     return service;
@@ -138,6 +139,31 @@ function studentService($http, $q, myConfig) {
             deferred.resolve(value);
         }, function(){
             console.log("sendPictureBackToValidation failure");
+        });
+
+        return deferred.promise;
+
+    }
+
+    function submitComment(id, comment){
+
+        var deferred = $q.defer();
+
+        var req = {
+            method: 'POST',
+            url: myConfig.baseUrl + myConfig.submitComment,
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            data: { id: id,
+                comment: comment}
+        }
+
+        $http(req).then(function (value) {
+            deferred.resolve(value);
+        }, function(){
+            console.log("submitComment failure");
         });
 
         return deferred.promise;

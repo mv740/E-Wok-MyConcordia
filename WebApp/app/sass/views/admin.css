@@ -86,8 +86,9 @@
   transform: translateY(-50%); }
 
 .atBottom {
-  position: absolute;
-  bottom: 50px; }
+  bottom: 0px;
+  left: 0px;
+  position: absolute; }
 
 .textCenter {
   text-align: center; }
@@ -99,8 +100,8 @@ html, body {
     margin: 0;
     padding: 0; }
 
-#main #ng-view {
-  overflow: hidden; }
+#ng-view {
+  overflow: auto; }
 
 .modal-content {
   height: 0px; }
@@ -189,8 +190,9 @@ h2 {
   transform: translateY(-50%); }
 
 .atBottom {
-  position: absolute;
-  bottom: 50px; }
+  bottom: 0px;
+  left: 0px;
+  position: absolute; }
 
 .textCenter {
   text-align: center; }

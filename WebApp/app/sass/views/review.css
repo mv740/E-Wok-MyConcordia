@@ -21,8 +21,9 @@
   transform: translateY(-50%); }
 
 .atBottom {
-  position: absolute;
-  bottom: 50px; }
+  bottom: 0px;
+  left: 0px;
+  position: absolute; }
 
 .textCenter {
   text-align: center; }
@@ -34,8 +35,8 @@ html, body {
     margin: 0;
     padding: 0; }
 
-#main #ng-view {
-  overflow: hidden; }
+#ng-view {
+  overflow: auto; }
 
 .modal-content {
   height: 0px; }
@@ -157,6 +158,9 @@ h2 {
 
 .all-side-margin-sm {
   margin: 20px; }
+
+.all-side-margin {
+  margin: 30px; }
 
 .side-padding {
   padding-left: 30px;
@@ -317,13 +321,10 @@ h2 {
   height: 375px; }
   .validationModal .cardHolder {
     height: 375px; }
-  .validationModal .pictureAttributes {
-    height: 187.5px; }
-  .validationModal .commentBox {
-    padding-top: 38.5px;
-    height: 187.5px; }
-    .validationModal .commentBox input {
-      height: 100px; }
+  .validationModal .commentBox textarea {
+    height: 100px;
+    resize: none;
+    color: black; }
   .validationModal .yesnoContainer {
     position: relative;
     bottom: 80px; }
@@ -333,13 +334,10 @@ h2 {
   height: 450px; }
   .validationModal-xl .cardHolder {
     height: 450px; }
-  .validationModal-xl .pictureAttributes {
-    height: 225px; }
-  .validationModal-xl .commentBox {
-    padding-top: 76px;
-    height: 225px; }
-    .validationModal-xl .commentBox input {
-      height: 100px; }
+  .validationModal-xl .commentBox textarea {
+    height: 100px;
+    resize: none;
+    color: black; }
   .validationModal-xl .yesnoContainer {
     position: relative;
     bottom: 80px; }

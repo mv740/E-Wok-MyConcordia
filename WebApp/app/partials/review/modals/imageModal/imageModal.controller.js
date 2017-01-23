@@ -53,5 +53,9 @@ function ImageModalCtrl($rootScope, $modalInstance, studentService, dateParsingS
         return (imageModal.image.status == 'Denied' || imageModal.image.status == 'Archived');
     }
 
+    function submitComment(){
+        studentService.submitComment(imageModal.image.comment);
+    }
+
 }
 
