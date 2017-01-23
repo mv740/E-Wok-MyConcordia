@@ -84,6 +84,11 @@ namespace MyConcordiaID.Models.Picture
             return null;// student not found;
         }
 
+        /// <summary>
+        ///  Insert pending picture in database 
+        /// </summary>
+        /// <param name="netname"></param>
+        /// <param name="picture"></param>
         public void AddPendingPicture(string netname, byte[] picture)
         {
 

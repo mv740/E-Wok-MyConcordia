@@ -344,8 +344,8 @@ namespace MyConcordiaID.Models.Student
                 PicturePeriod picturePeriod = new PicturePeriod
                 {
                     canUpdatePicture = canUpdate,
-                    startDate = period.STARDATE.ToString("dd-MM-yyyy"),
-                    endDate = period.ENDDATE.ToString("dd-MM-yyyy")
+                    startDate = period.STARDATE.ToString(),
+                    endDate = period.ENDDATE.ToString()
                 };
 
                 return picturePeriod;
@@ -363,6 +363,11 @@ namespace MyConcordiaID.Models.Student
 
         }
 
+        /// <summary>
+        ///  Search for specific user with parameters 
+        /// </summary>
+        /// <param name="searchOptions"></param>
+        /// <returns></returns>
         public IEnumerable<STUDENT> Search(SearchOptions searchOptions)
         {
 
