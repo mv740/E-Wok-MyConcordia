@@ -8,6 +8,13 @@
   margin-left:0px;
 }
 
+.left-buffer-xs{
+  margin-left: $buffer-xs;
+}
+.right-buffer-xs{
+  margin-right: $buffer-xs;
+}
+
 .no-buffer{
   margin:0px;
 }

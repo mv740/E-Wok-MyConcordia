@@ -11,10 +11,15 @@
 
     <hr class="top-buffer-sm" style="background-color:white;">
 
-      <div class="col col-100 no-padding btn-circle-container top-buffer-sm">
+      <div id="cameraActions" class="col col-100 no-padding top-buffer-sm textCenter">
 
-        <button ng-click="takePicture()" type="button" class="btn-circle button3D floatLeft"><i class="icon ion-ios-camera"></i></button>
-        <button ng-click="loadPicture()" type="button" class="btn-circle button3D floatRight"><i class="icon ion-images"></i></button>
+
+        <button ng-click="takePicture()" class="button button-light right-buffer-xs">
+          <i class="icon ion-ios-camera"></i>
+        </button>
+        <button ng-click="loadPicture()" class="button button-light left-buffer-xs">
+          <i class="icon ion-images"></i>
+        </button>
       </div>
   </ion-content>
 </ion-view>

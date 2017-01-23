@@ -244,14 +244,14 @@ angular.module('starter.controllers').controller('CameraCtrl',['SessionService',
   function displayPicture(){
     var myPopup = $ionicPopup.show({
       templateUrl: 'templates/cameraPopup.html',
-      title: 'Send Picture',
-      subTitle: '',
+      title: 'Send picture for approval?',
       scope: $scope,
       buttons: [
-        { text: 'Cancel' },
+        { text: 'Cancel',
+        type: 'button-assertive'},
         {
-          text: '<b>Send</b>',
-          type: 'button-positive',
+          text: 'Send',
+          type: 'button-balanced',
           onTap: function(e) {
             $scope.sendPicture();
           }

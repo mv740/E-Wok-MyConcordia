@@ -54,6 +54,12 @@ html, body {
 .no-left-buffer {
   margin-left: 0px; }
 
+.left-buffer-xs {
+  margin-left: 10px; }
+
+.right-buffer-xs {
+  margin-right: 10px; }
+
 .no-buffer {
   margin: 0px; }
 

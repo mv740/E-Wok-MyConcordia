@@ -48,68 +48,17 @@ html, body {
   html h1, html h2, html h3, html h4, body h1, body h2, body h3, body h4 {
     font-family: 'Montserrat Alternates'; }
 
-.button3D {
-  background-color: white;
-  height: 60px;
-  padding: 10px;
-  border: 0.25em solid #6A6A6A;
-  color: #323232;
-  position: relative;
-  border-radius: 4px;
-  box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232; }
-  .button3D:not(.nohover):hover {
-    top: 3px;
-    left: 3px;
-    box-shadow: 0.7px 0.7px 0 #323232, 1.4px 1.4px 0 #323232, 2.1px 2.1px 0 #323232, 2.8px 2.8px 0 #323232, 3.5px 3.5px 0 #323232, 4.2px 4.2px 0 #323232, 4.9px 4.9px 0 #323232; }
-
-.button2D {
-  color: white;
-  height: 46px;
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 3px;
-  padding: 2px 5px; }
-
-.button2D:active {
-  background-color: #800033; }
-
-.button3D-noformat {
-  background-color: white;
-  padding: 10px;
-  border: 0.25em solid #6A6A6A;
-  color: #323232;
-  position: relative;
-  border-radius: 4px;
-  box-shadow: 1px 1px 0 #323232, 2px 2px 0 #323232, 3px 3px 0 #323232, 4px 4px 0 #323232, 5px 5px 0 #323232, 6px 6px 0 #323232, 7px 7px 0 #323232; }
-  .button3D-noformat:not(.nohover):hover {
-    top: 3px;
-    left: 3px;
-    box-shadow: 0.7px 0.7px 0 #323232, 1.4px 1.4px 0 #323232, 2.1px 2.1px 0 #323232, 2.8px 2.8px 0 #323232, 3.5px 3.5px 0 #323232, 4.2px 4.2px 0 #323232, 4.9px 4.9px 0 #323232; }
-
-.btn-circle {
-  padding: 15px 17px;
-  font-size: 30px;
-  line-height: 1.33;
-  border-radius: 25px;
-  text-align: center;
-  border: 1px;
-  opacity: 0.9; }
-  .btn-circle.btn-yes {
-    background-color: #47a447;
-    float: left; }
-    .btn-circle.btn-yes.greyed-out {
-      background-color: grey; }
-  .btn-circle.btn-no {
-    background-color: #d2322d;
-    float: right; }
-    .btn-circle.btn-no.greyed-out {
-      background-color: grey; }
-
 .no-top-buffer {
   margin-top: 0px; }
 
 .no-left-buffer {
   margin-left: 0px; }
+
+.left-buffer-xs {
+  margin-left: 10px; }
+
+.right-buffer-xs {
+  margin-right: 10px; }
 
 .no-buffer {
   margin: 0px; }
@@ -247,9 +196,9 @@ html, body {
     width: auto;
     color: white;
     color: #ad4c73; }
-  .cam-container .btn-circle-container {
+  .cam-container #cameraActions {
     height: 80px; }
-    .cam-container .btn-circle-container button {
+    .cam-container #cameraActions button {
       height: 100%;
       border-radius: 5px;
-      width: 44%; }
+      width: 45.9%; }

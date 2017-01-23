@@ -1,5 +1,4 @@
 @import "../base/reset";
-@import "../components/buttons";
 @import "../base/buffers";
 @import "../base/positioning";
 @import "../base/mixins/containerBuilder";
@@ -57,13 +56,13 @@ $list-li-height:80px;
       }
     }
   }
-    .btn-circle-container {
+    #cameraActions {
       height: $list-li-height;
 
       button {
         height: 100%;
         border-radius: 5px;
-        width:44%;
+        width:45.9%;
       }
     }
 

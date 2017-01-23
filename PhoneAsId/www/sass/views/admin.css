@@ -62,14 +62,6 @@ html, body {
     left: 3px;
     box-shadow: 0.7px 0.7px 0 #323232, 1.4px 1.4px 0 #323232, 2.1px 2.1px 0 #323232, 2.8px 2.8px 0 #323232, 3.5px 3.5px 0 #323232, 4.2px 4.2px 0 #323232, 4.9px 4.9px 0 #323232; }
 
-.button2D {
-  color: white;
-  height: 46px;
-  background-color: transparent;
-  border: 2px solid white;
-  border-radius: 3px;
-  padding: 2px 5px; }
-
 .button2D:active {
   background-color: #800033; }
 
