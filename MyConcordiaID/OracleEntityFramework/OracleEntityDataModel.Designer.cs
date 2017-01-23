@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\micha\Documents\git\E-Wok-490-capstone\web-app\MyConcordiaID\OracleEntityFramework\OracleEntityDataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\micha\Documents\git\MyConcordia-BackEnd\MyConcordiaID\OracleEntityFramework\OracleEntityDataModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

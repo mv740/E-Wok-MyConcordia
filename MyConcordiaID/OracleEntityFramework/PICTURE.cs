@@ -21,6 +21,7 @@ namespace OracleEntityFramework
         public Nullable<System.DateTime> UPDATED { get; set; }
         public string STUDENT_NETNAME { get; set; }
         public string ADMINISTRATOR { get; set; }
+        public string COMMENTS { get; set; }
     
         public virtual STUDENT STUDENT_ADMIN_FK { get; set; }
         public virtual STUDENT STUDENT_FK { get; set; }

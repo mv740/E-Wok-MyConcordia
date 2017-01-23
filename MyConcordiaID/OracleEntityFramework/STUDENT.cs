@@ -17,7 +17,6 @@ namespace OracleEntityFramework
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public STUDENT()
         {
-            this.PICTUREARCHIVEs = new HashSet<PICTUREARCHIVE>();
             this.LOGs = new HashSet<LOG>();
             this.PICTUREs = new HashSet<PICTURE>();
             this.PICTUREs1 = new HashSet<PICTURE>();
@@ -34,8 +33,6 @@ namespace OracleEntityFramework
         public System.DateTime EXPIREDATE { get; set; }
         public bool UPDATEPICTURE { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PICTUREARCHIVE> PICTUREARCHIVEs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LOG> LOGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -19,7 +19,7 @@ namespace MyConcordiaID.Models.Picture
                 .Where(s => s.ID == id)
                 .FirstOrDefault();
 
-            if(student != null)
+            if (student != null)
             {
                 var studentNetname = student.NETNAME;
 
@@ -32,7 +32,8 @@ namespace MyConcordiaID.Models.Picture
                         s.PICTURE_DATA,
                         s.STATUS,
                         s.CREATED,
-                        s.UPDATED
+                        s.UPDATED,
+                        s.COMMENTS
 
                     })
                     .FirstOrDefault();
@@ -46,7 +47,9 @@ namespace MyConcordiaID.Models.Picture
                         s.PICTURE_DATA,
                         s.STATUS,
                         s.CREATED,
-                        s.UPDATED
+                        s.UPDATED,
+                        s.COMMENTS
+                    
 
                     })
                     .FirstOrDefault();
@@ -60,7 +63,8 @@ namespace MyConcordiaID.Models.Picture
                         s.PICTURE_DATA,
                         s.STATUS,
                         s.CREATED,
-                        s.UPDATED
+                        s.UPDATED,
+                        s.COMMENTS
 
                     })
                     .OrderByDescending(s => s.CREATED)
@@ -130,5 +134,23 @@ namespace MyConcordiaID.Models.Picture
 
         }
 
+        public string AddPictureComment(PictureComment comment)
+        {
+            var picture = _database.PICTUREs
+                .Where(p => p.ID_PK == comment.Id)
+                .FirstOrDefault();
+
+            if (picture != null)
+            {
+                picture.COMMENTS = comment.Comment;
+                _database.SaveChanges(); // change to async later on
+                return picture.STUDENT_NETNAME;
+
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
     }
 }

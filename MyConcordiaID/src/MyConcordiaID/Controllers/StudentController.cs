@@ -116,6 +116,7 @@ namespace MyConcordiaID.Controllers
         /// <param name="file"></param>
         /// <response code="200">Picture Submited</response>
         /// <response code="400">Missing the picture or invalid</response>
+        /// <response code="401">Unauthorized</response>
         [ApiExplorerSettings(IgnoreApi =true)]
         [Authorize]
         [HttpPost]
@@ -152,6 +153,34 @@ namespace MyConcordiaID.Controllers
 
             return Ok();
         }
+
+
+        /// <summary>
+        ///  Add a comment about a picture
+        /// </summary>
+        /// <param name="comment"></param>
+        /// <response code="200">Comment Submited</response>
+        /// <response code="404">Missing the picture or invalid</response>
+        /// <response code="401">Unauthorized</response>
+        [Authorize]
+        [HttpPost]
+        [Route("comment")]
+        public IActionResult PostPictureComment([FromBody] PictureComment comment)
+        {
+            var authenticatedUser = getAuthenticatedUserNetname();
+
+            var affectedUser = _pictureRepo.AddPictureComment(comment);
+            if(string.IsNullOrEmpty(affectedUser))
+            {
+                return NotFound();
+            }
+
+            _logRepo.Logger(authenticatedUser, Log.Action.AddComment, affectedUser);
+
+            return Ok();
+        }
+
+
         /// <summary>
         /// 
         /// </summary>

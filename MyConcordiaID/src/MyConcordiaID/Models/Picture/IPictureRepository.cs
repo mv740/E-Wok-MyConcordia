@@ -11,5 +11,6 @@ namespace MyConcordiaID.Models.Picture
         StudentPictures FindStudentPictures(int id);
         void AddPendingPicture(string netName, byte[] picture);
         PICTURE FindPendingPicture(int id);
+        string AddPictureComment(PictureComment comment);
     }
 }
