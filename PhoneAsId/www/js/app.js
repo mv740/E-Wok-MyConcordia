@@ -94,7 +94,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
         views: {
           'menuContent': {
             templateUrl: 'templates/camera.html',
-            controller: 'CameraCtrl',
+            controller: 'CameraCtrl as camCtrl',
             css: 'sass/views/camera.css',
 
 

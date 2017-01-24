@@ -1,5 +1,5 @@
 <ion-view view-title="Browse">
-  <ion-content class="cam-container side-padding-sm" ng-controller="CameraCtrl" scroll=false>
+  <ion-content class="cam-container side-padding-sm"  scroll=false>
 
 
       <ul class="top-buffer-lg">
@@ -14,10 +14,10 @@
       <div id="cameraActions" class="col col-100 no-padding top-buffer-sm textCenter">
 
 
-        <button ng-click="takePicture()" class="button button-light right-buffer-xs">
+        <button ng-click="camCtrl.takePicture()" class="button button-light right-buffer-xs">
           <i class="icon ion-ios-camera"></i>
         </button>
-        <button ng-click="loadPicture()" class="button button-light left-buffer-xs">
+        <button ng-click="camCtrl.loadPicture()" class="button button-light left-buffer-xs">
           <i class="icon ion-images"></i>
         </button>
       </div>
