@@ -19,53 +19,40 @@
     </div>
 
 
-    <div class="row datepicker-container left-buffer-sm">
+    <div class="row datepicker-container">
         <div class="col-sm-3">
-            <label for="dateFrom">From</label>
-            <input type="text"
-                   id="dateFrom"
-                   class="form-control"
-                   placeholder="From"
-                   datepicker-popup="{{admin.format}}"
-                   ng-model="admin.dtFrom"
-                   is-open="admin.dateFromIsOpen"
-                   ng-click="admin.dateFromIsOpen = true;"
-                   datepicker-options="debug"
-                   date-disabled="disabled(date, mode)"
-                   ng-required="true"
-                   close-text="Close"
-                   tooltips tooltip-template="Required"
-                   tooltips tooltip-side="right"
-                   tooltips tooltip-hidden="{{admin.startDateEntered}}"
-                   ng-style="(admin.startDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
-                   ng-blur="admin.setStartDateEntered()"/>
+            <label for="dateFrom" class="row">From</label>
+            <div class="calendar-display row">
+                <div   type="text"
+                       id="dateFrom"
+                       datepicker={{admin.format}}"
+                       ng-model="admin.dtFrom"
+                       ng-required="true"
+                       tooltips tooltip-template="Required"
+                       tooltips tooltip-side="right"
+                       tooltips tooltip-hidden="{{admin.startDateEntered}}"></div>
+            </div>
         </div>
 
-        <div class="col-sm-3 col-sm-push-3">
-            <label for="dateTo">To</label>
-            <input type="text"
-                   id="dateTo"
-                   class="form-control"
-                   placeholder="From"
-                   datepicker-popup="{{admin.format}}"
-                   ng-model="admin.dtTo"
-                   is-open="admin.dateToIsOpen"
-                   ng-click="admin.dateToIsOpen = true;"
-                   datepicker-options="debug"
-                   date-disabled="disabled(date, mode)"
-                   ng-required="true"
-                   close-text="Close"
-                   tooltips tooltip-template="Required"
-                   tooltips tooltip-side="right"
-                   tooltips tooltip-hidden="{{admin.endDateEntered}}"
-                   ng-style="(admin.endDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
-                   ng-blur="admin.setStartDateEntered()"/>
+        <div class="col-sm-3 col-sm-push-2">
+            <label for="dateTo" clas="row">To</label>
+            <div class="calendar-display" class="row">
+                <div   type="text"
+                       id="dateTo"
+                       placeholder="From"
+                       datepicker="{{admin.format}}"
+                       ng-model="admin.dtTo"
+                       ng-required="true"
+                       tooltips tooltip-template="Required"
+                       tooltips tooltip-side="right"
+                       tooltips tooltip-hidden="{{admin.endDateEntered}}"></div>
+            </div>
         </div>
     </div>
 
     <div class="row">
         <button ng-click="admin.submit()" data-loading-text="Loading..."
-                class="button3D" style="margin-left: 420px;">{{ admin.submitButton }}
+                class="button3D btn-admin-submit-center">{{ admin.submitButton }}
         </button>
     </div>
 </div>
