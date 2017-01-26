@@ -1,96 +1,72 @@
-﻿<div ng-controller="AdminController as admin" class="container container3D verticalCenter">
+﻿<div ng-controller="AdminController as admin" class="container container3D top-buffer">
     <div class="page-header">
         <h1>Admin Setting</h1>
     </div>
 
-    <div class="col-sm-push-3 col-sm-6">
-        <div>
-            <h3>Update Picture Valid Period</h3>
-            <br/>
-        </div>
-
-        <div>
-            <h4>Current valid updating period:</h4>
-            <h4 ng-show="!admin.loading">{{admin.currentUpdatePeriod}}</h4>
-            <div class="progressCircularContainer" ng-show="admin.loading">
+    <div class="row bottom-buffer">
+        <h4><img src="images/icons/ic_date_range_black_24dp.png" class="calendar-icon"/>Update period currently set to: <span ng-if="!admin.loading">{{admin.currentUpdatePeriod}}</span>
+            <div class="progressCircularContainer" ng-if="admin.loading">
                 <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
             </div>
-            <br/>
+        </h4>
+    </div>
+
+    <div class="row">
+        <select class="col-sm-10 border-standard select-admin" id="AcademicYearDropDown">
+            <option selected disabled>Academic year</option>
+            <option ng-repeat="academicYearOption in admin.academicYearOptions">{{academicYearOption}}</option>
+        </select>
+    </div>
+
+
+    <div class="row datepicker-container left-buffer-sm">
+        <div class="col-sm-3">
+            <label for="dateFrom">From</label>
+            <input type="text"
+                   id="dateFrom"
+                   class="form-control"
+                   placeholder="From"
+                   datepicker-popup="{{admin.format}}"
+                   ng-model="admin.dtFrom"
+                   is-open="admin.dateFromIsOpen"
+                   ng-click="admin.dateFromIsOpen = true;"
+                   datepicker-options="debug"
+                   date-disabled="disabled(date, mode)"
+                   ng-required="true"
+                   close-text="Close"
+                   tooltips tooltip-template="Required"
+                   tooltips tooltip-side="right"
+                   tooltips tooltip-hidden="{{admin.startDateEntered}}"
+                   ng-style="(admin.startDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
+                   ng-blur="admin.setStartDateEntered()"/>
         </div>
 
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label for="AcademicYear" class="col-sm-5 control-label">Academic Year</label>
-                <div class="col-sm-7">
-                    <input id="AcademicYear"
-                           type="text"
-                           placeholder="2016"
-                           class="form-control"
-                           ng-model="admin.academicYear"
-                           maxlength="4"
-                           tooltips tooltip-template="Required"
-                           tooltips tooltip-side="right"
-                           tooltips tooltip-hidden="{{admin.yearEntered}}"
-                           tooltips tooltip-size
-                           ng-style="(admin.yearEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
-                           ng-keyup="admin.setYearEntered()"/>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="dateFrom" class="col-sm-5 control-label">From</label>
-                <div class="col-sm-7">
-                    <input type="text"
-                           class="form-control date"
-                           id="dateFrom"
-                           placeholder="From"
-                           ng-click="admin.dateFrom=true"
-                           datepicker-popup="{{admin.format}}"
-                           ng-model="admin.dtFrom"
-                           is-open="admin.dateFrom"
-                           datepicker-options="admin.dateOptions"
-                           date-disabled="disabled(date, mode)"
-                           ng-required="true"
-                           close-text="Close"
-                           tooltips tooltip-template="Required"
-                           tooltips tooltip-side="right"
-                           tooltips tooltip-hidden="{{admin.startDateEntered}}"
-                           ng-style="(admin.startDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
-                           ng-blur="admin.setStartDateEntered()"/>
-                </div>
-            </div>
+        <div class="col-sm-3 col-sm-push-3">
+            <label for="dateTo">To</label>
+            <input type="text"
+                   id="dateTo"
+                   class="form-control"
+                   placeholder="From"
+                   datepicker-popup="{{admin.format}}"
+                   ng-model="admin.dtTo"
+                   is-open="admin.dateToIsOpen"
+                   ng-click="admin.dateToIsOpen = true;"
+                   datepicker-options="debug"
+                   date-disabled="disabled(date, mode)"
+                   ng-required="true"
+                   close-text="Close"
+                   tooltips tooltip-template="Required"
+                   tooltips tooltip-side="right"
+                   tooltips tooltip-hidden="{{admin.endDateEntered}}"
+                   ng-style="(admin.endDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
+                   ng-blur="admin.setStartDateEntered()"/>
+        </div>
+    </div>
 
-            <div class="form-group">
-                <label for="dateTo" class="col-sm-5 control-label">To</label>
-                <div class="col-sm-7">
-                    <input type="text"
-                           class="form-control date"
-                           id="dateTo"
-                           placeholder="To"
-                           ng-click="admin.dateTo=true"
-                           datepicker-popup="{{admin.format}}"
-                           ng-model="admin.dtTo"
-                           is-open="admin.dateTo"
-                           datepicker-options="admin.dateOptions"
-                           date-disabled="disabled(date, mode)"
-                           ng-required="true"
-                           close-text="Close"
-                           tooltips tooltip-template="Required"
-                           tooltips tooltip-side="right"
-                           tooltips tooltip-hidden="{{admin.endDateEntered}}"
-                           ng-style="(admin.endDateEntered) ? {'border-color' : '#47a447', 'border-width' : '3px' } : {'border-color' : '#d2322d', 'border-width' : '3px' }"
-                           ng-blur="admin.setEndDateEntered()"/>
-
-                </div>
-            </div>
-
-            <div class="form-group" style="text-align: left;">
-                <div class="col-sm-push-5 col-sm-7">
-                    <button ng-click="admin.submit()" data-loading-text="Loading..."
-                            class="button3D">{{ admin.submitButton }}
-                    </button>
-                </div>
-            </div>
-        </form>
+    <div class="row">
+        <button ng-click="admin.submit()" data-loading-text="Loading..."
+                class="button3D" style="margin-left: 420px;">{{ admin.submitButton }}
+        </button>
     </div>
 </div>
 

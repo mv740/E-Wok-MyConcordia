@@ -5,10 +5,14 @@
         .module('myApp')
         .controller('AdminController', AdminController);
 
-    AdminController.$inject = ['$http', 'myConfig', 'studentService'];
+    AdminController.$inject = ['$http', 'myConfig', 'studentService', 'dateParsingService', '$filter'];
 
-    function AdminController($http, myConfig, studentService) {
+    function AdminController($http, myConfig, studentService, dateParsingService, $filter) {
         var self = this;
+
+        self.dtFrom = new Date();
+        self.dateFromIsOpen = true;
+        self.dateToIsOpen = true;
 
         var defaultStartDate = "18-12-2016";
         var defaultEndDate = "24-18-2016";
@@ -22,10 +26,18 @@
         self.loading = true;
 
         studentService.getUpdatePeriod().then(function(value) {
+
+            self.dataObtained = value.data;
+
+            // only parse the dates if a date is set i.e. not set to default
             if (value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
-                self.currentUpdatePeriod = "Academic Year: " + value.data.year
-                    + ", from " + value.data.startDate
-                    + " to " + value.data.endDate;
+                var year = $filter('date')(value.data.year, 'yyyy');
+                self.startDate = $filter('date')(value.data.startDate, self.format);
+                self.endDate = $filter('date')(value.data.endDate, self.format);
+
+                self.currentUpdatePeriod = "Academic Year: " + year
+                    + ", from " + self.startDate.month + " " + self.startDate.day + ", " + self.startDate.year
+                    + " to " + self.endDate.month + " " + self.endDate.day + ", " + self.endDate.year;
             }
             else {
                 self.currentUpdatePeriod = "There is no update period currently set";
@@ -47,7 +59,7 @@
 
         };
 
-        self.format = 'dd-MM-yyyy';
+        self.format = 'MMMM d, yyyy';
 
         self.submit = function UpdatePeriod() {
             self.submitButton = "Checking...";
@@ -102,5 +114,12 @@
             self.endDateEntered = self.dtTo != null;
         }
 
+        var currentDate = new Date();
+        var currentYear = currentDate.getFullYear();
+
+        self.academicYearOptions = [];
+        for (var i = 0; i < 5; i++) {
+            self.academicYearOptions[i] = currentYear + i;
+        }
     }
 })();
