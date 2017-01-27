@@ -43,7 +43,6 @@
 
         self.submitButton = "Submit";
 
-        self.format = 'MMMM d, yyyy';
 
         self.submit = function UpdatePeriod() {
             self.submitButton = "Checking...";
@@ -59,17 +58,26 @@
                 };
 
 
-            self.yearEntered = self.academicYear != "Academic Year" && self.academicYear.length == lengthOfAYearString;
+            self.yearEntered = self.academicYear != null;
             self.startDateEntered = self.dtFrom != undefined;
             self.endDateEntered = self.dtTo != undefined;
 
+            var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
+
             if (self.yearEntered && self.startDateEntered && self.endDateEntered) {
-                self.submitButton = "Sending...";
-                $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
-                    .then(function success(response) {
-                        self.submitButton = "Submit";
-                    }, function failure(response) {
-                    });
+                self.submitButton = "Checking...";
+                if (validDateRange) {
+                    self.submitButton = "Sending...";
+                    $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
+                        .then(function success(response) {
+                            self.submitButton = "Submit";
+                        }, function failure(response) {
+                        });
+                }
+                else {
+                    alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
+                    self.submitButton = "Submit";
+                }
             }
             else {
                 self.submitButton = "Submit";
