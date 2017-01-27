@@ -27,9 +27,9 @@
 
             // only parse the dates if a date is set i.e. not set to default
             if (value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
-                var year = $filter('date')(value.data.year, 'yyyy');
-                self.startDate = $filter('date')(value.data.startDate, self.format);
-                self.endDate = $filter('date')(value.data.endDate, self.format);
+                var year = value.data.year;
+                self.startDate = dateParsingService.parseUpdatePeriod(value.data.startDate);
+                self.endDate = dateParsingService.parseUpdatePeriod(value.data.endDate);
 
                 self.currentUpdatePeriod = "Academic Year: " + year
                     + ", from " + self.startDate.month + " " + self.startDate.day + ", " + self.startDate.year
