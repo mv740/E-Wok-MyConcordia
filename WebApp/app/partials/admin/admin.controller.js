@@ -62,9 +62,10 @@
             self.startDateEntered = self.dtFrom != undefined;
             self.endDateEntered = self.dtTo != undefined;
 
-            var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
-
             if (self.yearEntered && self.startDateEntered && self.endDateEntered) {
+
+                var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
+
                 self.submitButton = "Checking...";
                 if (validDateRange) {
                     self.submitButton = "Sending...";

@@ -297,6 +297,12 @@ h2 {
   height: 30px;
   width: 30px; }
 
+.ok-icon {
+  padding-top: 5px;
+  font-size: x-large;
+  color: #47a447;
+  padding-left: 5px; }
+
 .select-admin {
   -webkit-appearance: none;
   padding: 8px;
