@@ -10,15 +10,11 @@
     function AdminController($http, myConfig, studentService, dateParsingService, $filter) {
         var self = this;
 
-        self.dtFrom = new Date();
-        self.dateFromIsOpen = true;
-        self.dateToIsOpen = true;
-
         var defaultStartDate = "18-12-2016";
         var defaultEndDate = "24-18-2016";
-        var invalidDateString = "Invalid Date";
         var lengthOfAYearString = 4; // number of characters for a year to be valid
 
+        self.academicYear = null;
         self.yearEntered = false;
         self.startDateEntered = false;
         self.endDateEntered = false;
@@ -46,47 +42,26 @@
         });
 
         self.submitButton = "Submit";
-        self.someProp = 'Check This value displays.. confirms controller initalised';
-        self.opened = {};
-        self.open = function ($event) {
-
-            $event.preventDefault();
-            $event.stopPropagation();
-
-            self.opened = {};
-            self.opened[$event.target.id] = true;
-
-
-        };
 
         self.format = 'MMMM d, yyyy';
 
         self.submit = function UpdatePeriod() {
             self.submitButton = "Checking...";
 
-            var startDate = new Date(self.dtFrom);
-            var endDate = new Date(self.dtTo);
-
-            var startString = startDate.toDateString();
-            var lengthStart = startString.length;
-
-            var endString = endDate.toDateString();
-            var lengthEnd = endString.length;
-
-            var dateStart = startString.substring(4, lengthStart);
-            var dateEnd = endString.substring(4, lengthEnd);
+            self.dateStart = $filter('date')(self.dtFrom, 'dd-MM-yyyy');
+            self.dateEnd = $filter('date')(self.dtTo, 'dd-MM-yyyy');
 
             var data =
                 {
                     "year": self.academicYear,
-                    "startDate": dateStart,
-                    "endDate": dateEnd
+                    "startDate": self.dateStart,
+                    "endDate": self.dateEnd
                 };
 
 
-            self.yearEntered = self.academicYear != "" && self.academicYear.length == lengthOfAYearString;
-            self.startDateEntered = !startString.includes(invalidDateString);
-            self.endDateEntered = !endString.includes(invalidDateString);
+            self.yearEntered = self.academicYear != "Academic Year" && self.academicYear.length == lengthOfAYearString;
+            self.startDateEntered = self.dtFrom != undefined;
+            self.endDateEntered = self.dtTo != undefined;
 
             if (self.yearEntered && self.startDateEntered && self.endDateEntered) {
                 self.submitButton = "Sending...";
@@ -103,7 +78,7 @@
         };
 
         self.setYearEntered = function() {
-            self.yearEntered = self.academicYear != "" && self.academicYear.length == lengthOfAYearString;
+            self.yearEntered = self.academicYear != null;
         };
 
         self.setStartDateEntered = function() {

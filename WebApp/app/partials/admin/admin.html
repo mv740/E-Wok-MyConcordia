@@ -11,10 +11,16 @@
         </h4>
     </div>
 
-    <div class="row">
-        <select class="col-sm-10 border-standard select-admin" id="AcademicYearDropDown">
-            <option selected disabled>Academic year</option>
-            <option ng-repeat="academicYearOption in admin.academicYearOptions">{{academicYearOption}}</option>
+    <div class="row"
+         tooltips tooltip-template="Required"
+         tooltips tooltip-side="top"
+         tooltips tooltip-hidden="{{admin.yearEntered}}">
+        <select class="col-sm-10 border-standard select-admin"
+                id="AcademicYearDropDown"
+                ng-model="admin.academicYear"
+                ng-click="admin.setYearEntered()">
+            <option value="" selected disabled>Academic year</option>
+            <option ng-repeat="academicYearOption in admin.academicYearOptions" value="{{academicYearOption}}">{{academicYearOption}}</option>
         </select>
     </div>
 
@@ -24,27 +30,30 @@
             <label for="dateFrom" class="row">From</label>
             <div class="calendar-display row">
                 <div   type="text"
+                       datepicker-options="admin.dateOptions"
                        id="dateFrom"
                        datepicker={{admin.format}}"
+                       ng-click="admin.setStartDateEntered()"
                        ng-model="admin.dtFrom"
                        ng-required="true"
                        tooltips tooltip-template="Required"
-                       tooltips tooltip-side="right"
+                       tooltips tooltip-side="bottom"
                        tooltips tooltip-hidden="{{admin.startDateEntered}}"></div>
             </div>
         </div>
 
         <div class="col-sm-3 col-sm-push-2">
-            <label for="dateTo" clas="row">To</label>
+            <label for="dateTo" class="row">To</label>
             <div class="calendar-display" class="row">
                 <div   type="text"
                        id="dateTo"
                        placeholder="From"
                        datepicker="{{admin.format}}"
+                       ng-click="admin.setEndDateEntered()"
                        ng-model="admin.dtTo"
                        ng-required="true"
                        tooltips tooltip-template="Required"
-                       tooltips tooltip-side="right"
+                       tooltips tooltip-side="bottom"
                        tooltips tooltip-hidden="{{admin.endDateEntered}}"></div>
             </div>
         </div>

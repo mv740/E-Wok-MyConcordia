@@ -1,5 +1,6 @@
 @import "mixins/horizontalCenter";
 @import "mixins/verticalCenter";
+@import "variables";
 
 .center{
   @include center();
