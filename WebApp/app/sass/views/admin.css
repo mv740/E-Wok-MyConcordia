@@ -86,9 +86,8 @@
   transform: translateY(-50%); }
 
 .atBottom {
-  bottom: 0px;
-  left: 0px;
-  position: absolute; }
+  position: absolute;
+  bottom: 50px; }
 
 .textCenter {
   text-align: center; }
@@ -100,8 +99,8 @@ html, body {
     margin: 0;
     padding: 0; }
 
-#ng-view {
-  overflow: auto; }
+#main #ng-view {
+  overflow: hidden; }
 
 .modal-content {
   height: 0px; }
@@ -161,6 +160,24 @@ h2 {
     .btn-circle.btn-no.greyed-out {
       background-color: grey; }
 
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.no-top-buffer {
+  margin-top: 0px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
 .container2D {
   background-color: #a1325e;
   width: 750px;
@@ -177,6 +194,9 @@ h2 {
   position: absolute;
   top: 25%; }
 
+.datepicker-container {
+  margin-bottom: 300px; }
+
 .center {
   display: block;
   margin-left: auto;
@@ -190,9 +210,41 @@ h2 {
   transform: translateY(-50%); }
 
 .atBottom {
-  bottom: 0px;
-  left: 0px;
-  position: absolute; }
+  position: absolute;
+  bottom: 50px; }
 
 .textCenter {
   text-align: center; }
+
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.no-top-buffer {
+  margin-top: 0px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
+.calendar-icon {
+  height: 30px;
+  width: 30px; }
+
+.select-admin {
+  -webkit-appearance: none;
+  padding: 8px;
+  margin-bottom: 35px;
+  background: url("../../images/icons/ic_arrow_drop_down_black_24dp_2x.png") no-repeat right; }
+
+.border-standard {
+  border-color: #a1325e;
+  border-width: initial;
+  border-radius: 4px; }

@@ -84,7 +84,7 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
     }
 
     function submitComment(){
-        studentService.submitComment(studentModal.comment);
+        studentService.submitComment(studentModal.student.pendingPicture.iD_PK, studentModal.comments);
     }
 
 }

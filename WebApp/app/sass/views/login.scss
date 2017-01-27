@@ -3,10 +3,18 @@
 @import "../components/buttons";
 @import "../base/mixins/verticalCenter";
 @import "../components/containers";
+@import "../base/sizes";
+@import "../base/backgrounds";
+@import "../base/buffers";
+@import "../base/paddings";
+@import "../base/positioning";
 
 #loginContainer{
 
-
-
+background: url("../../images/concordia_bg.jpg");
+background-position-y: bottom;
+  h1{
+    border-color:black;
+  }
 
 }

@@ -15,10 +15,12 @@ html, body{
 }
 
 
-  #ng-view {
-    overflow: auto;
-  }
+#main {
 
+  #ng-view {
+    overflow: hidden;
+  }
+}
 
 //fix for custom modals when using angular-bootstrop
 .modal-content{

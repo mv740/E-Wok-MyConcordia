@@ -1,0 +1,43 @@
+@import "variables";
+
+.side-padding{
+  padding-left:$buffer-md;
+  padding-right:$buffer-md;
+}
+
+.no-padding{
+  padding:0px;
+}
+
+.all-side-padding-xs{
+  padding:$buffer-xs;
+}
+
+.all-side-padding-sm{
+  padding:$buffer-sm;
+}
+
+.all-side-padding{
+  padding:$buffer-md;
+}
+
+.top-padding{
+  padding-top:$buffer-md;
+}
+
+.bottom-padding{
+  padding-bottom:$buffer-md;
+}
+
+.bottom-padding-sm{
+  padding-bottom:$buffer-sm;
+}
+
+.bottom-padding-xs{
+  padding-bottom:$buffer-xs;
+}
+
+.top-bottom-padding-sm{
+  padding-top:$buffer-sm;
+  padding-bottom:$buffer-sm;
+}

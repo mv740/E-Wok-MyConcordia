@@ -21,9 +21,8 @@
   transform: translateY(-50%); }
 
 .atBottom {
-  bottom: 0px;
-  left: 0px;
-  position: absolute; }
+  position: absolute;
+  bottom: 50px; }
 
 .textCenter {
   text-align: center; }
@@ -35,8 +34,8 @@ html, body {
     margin: 0;
     padding: 0; }
 
-#ng-view {
-  overflow: auto; }
+#main #ng-view {
+  overflow: hidden; }
 
 .modal-content {
   height: 0px; }
@@ -131,6 +130,24 @@ h2 {
   top: 60px;
   position: relative; }
 
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.no-top-buffer {
+  margin-top: 0px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
 .container2D {
   background-color: #a1325e;
   width: 750px;
@@ -147,8 +164,14 @@ h2 {
   position: absolute;
   top: 25%; }
 
+.datepicker-container {
+  margin-bottom: 300px; }
+
 .top-buffer-sm {
   margin-top: 20px; }
+
+.no-top-buffer {
+  margin-top: 0px; }
 
 .top-buffer {
   margin-top: 30px; }
@@ -159,12 +182,15 @@ h2 {
 .all-side-margin-sm {
   margin: 20px; }
 
-.all-side-margin {
-  margin: 30px; }
+.left-buffer-sm {
+  marin-left: 20px; }
 
 .side-padding {
   padding-left: 30px;
   padding-right: 30px; }
+
+.no-padding {
+  padding: 0px; }
 
 .all-side-padding-xs {
   padding: 10px; }
@@ -321,10 +347,14 @@ h2 {
   height: 375px; }
   .validationModal .cardHolder {
     height: 375px; }
-  .validationModal .commentBox textarea {
-    height: 100px;
-    resize: none;
-    color: black; }
+  .validationModal .pictureAttributes {
+    height: 187.5px; }
+  .validationModal .commentBox {
+    padding-top: 57.5px;
+    height: 187.5px; }
+    .validationModal .commentBox input {
+      height: 100px;
+      color: black; }
   .validationModal .yesnoContainer {
     position: relative;
     bottom: 80px; }
@@ -334,10 +364,14 @@ h2 {
   height: 450px; }
   .validationModal-xl .cardHolder {
     height: 450px; }
-  .validationModal-xl .commentBox textarea {
-    height: 100px;
-    resize: none;
-    color: black; }
+  .validationModal-xl .pictureAttributes {
+    height: 225px; }
+  .validationModal-xl .commentBox {
+    padding-top: 95px;
+    height: 225px; }
+    .validationModal-xl .commentBox input {
+      height: 100px;
+      color: black; }
   .validationModal-xl .yesnoContainer {
     position: relative;
     bottom: 80px; }

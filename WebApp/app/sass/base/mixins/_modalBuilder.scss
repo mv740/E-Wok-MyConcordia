@@ -8,11 +8,17 @@
     height: $height;
   }
 
+  .pictureAttributes{
+    height: $height / 2;
+  }
+
   .commentBox {
-    textarea {
+    //19px is the size of the span above the commentboxb
+    padding-top: $height / 2 - $commentBoxHeight - $buffer-md;
+    height: $height / 2;
+    input {
       height: $commentBoxHeight;
-      resize: none;
-      color:black;
+      color: black;
     }
   }
 

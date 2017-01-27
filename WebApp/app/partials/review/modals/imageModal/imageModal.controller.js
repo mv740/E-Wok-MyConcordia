@@ -54,7 +54,7 @@ function ImageModalCtrl($rootScope, $modalInstance, studentService, dateParsingS
     }
 
     function submitComment(){
-        studentService.submitComment(imageModal.image.comment);
+        studentService.submitComment(imageModal.image.iD_PK, imageModal.image.comments);
     }
 
 }
