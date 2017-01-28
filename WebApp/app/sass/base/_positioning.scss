@@ -1,6 +1,5 @@
 @import "mixins/horizontalCenter";
 @import "mixins/verticalCenter";
-@import "variables";
 
 .center{
   @include center();
@@ -11,15 +10,13 @@
 }
 
 .atBottom{
-  position:absolute;
-  bottom:50px;
+  bottom: 0px;
+  left: 0px;
+  position: absolute;
 }
 
 .textCenter{
   text-align:center;
 }
 
-.btn-admin-submit-center{
-  margin-left: $btn-admin-submit-center;
-}
 
