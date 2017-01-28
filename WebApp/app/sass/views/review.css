@@ -154,7 +154,7 @@ h2 {
 
 .container2D {
   background-color: #a1325e;
-  width: 750px;
+  width: 800px;
   padding: 0px;
   color: white; }
 
@@ -243,7 +243,7 @@ h2 {
   border-bottom: 375px solid #a1325e;
   border-right: 28px solid transparent;
   position: absolute;
-  right: 347px;
+  right: 372px;
   z-index: 2; }
 
 #sideMenuContainer {
@@ -345,16 +345,16 @@ h2 {
     margin-left: 8px; }
 
 .app-modal-window .modal-dialog {
-  width: 750px; }
+  width: 800px; }
 
 .app-modal-window-xl .modal-dialog {
   width: 900px; }
 
 .validationModal {
   color: white;
-  height: 375px; }
+  height: 400px; }
   .validationModal .cardHolder {
-    height: 375px; }
+    height: 400px; }
   .validationModal .commentBox textarea {
     height: 100px;
     resize: none;
