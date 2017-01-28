@@ -1,5 +1,6 @@
 @import "mixins/horizontalCenter";
 @import "mixins/verticalCenter";
+@import "variables";
 
 .center{
   @include center();
@@ -18,4 +19,7 @@
   text-align:center;
 }
 
+.btn-admin-submit-center{
+  margin-left: $btn-admin-submit-center;
+}
 

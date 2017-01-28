@@ -27,6 +27,9 @@
 .textCenter {
   text-align: center; }
 
+.btn-admin-submit-center {
+  margin-left: 420px; }
+
 html, body {
   font: 1em 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
@@ -132,10 +135,10 @@ h2 {
 
 .top-buffer-sm {
   margin-top: 20px; }
-
+  
 .no-top-buffer {
   margin-top: 0px; }
-
+  
 .top-buffer {
   margin-top: 30px; }
 
@@ -144,53 +147,10 @@ h2 {
 
 .all-side-margin-sm {
   margin: 20px; }
-
-.left-buffer-sm {
-  marin-left: 20px; }
-
-.container2D {
-  background-color: #a1325e;
-  width: 750px;
-  padding: 0px;
-  color: white; }
-
-.container2D-xl {
-  background-color: #a1325e;
-  width: 900px;
-  padding: 0px;
-  color: white; }
-
-.cardHolderComponent {
-  position: absolute;
-  top: 25%; }
-
-.datepicker-container {
-  margin-bottom: 300px; }
-
-.top-buffer-sm {
-  margin-top: 20px; }
-
-.no-top-buffer {
-  margin-top: 0px; }
-
-.top-buffer {
-  margin-top: 30px; }
-
-.bottom-buffer {
-  margin-bottom: 30px; }
-
-.all-side-margin-sm {
-  margin: 20px; }
-
-.left-buffer-sm {
-  marin-left: 20px; }
 
 .side-padding {
   padding-left: 30px;
   padding-right: 30px; }
-
-.no-padding {
-  padding: 0px; }
 
 .all-side-padding-xs {
   padding: 10px; }
@@ -216,6 +176,32 @@ h2 {
 .top-bottom-padding-sm {
   padding-top: 20px;
   padding-bottom: 20px; }
+
+.left-buffer-sm {
+  margin-left: 20px; }
+
+.container2D {
+  background-color: #a1325e;
+  width: 750px;
+  padding: 0px;
+  color: white; }
+
+.container2D-xl {
+  background-color: #a1325e;
+  width: 900px;
+  padding: 0px;
+  color: white; }
+
+.cardHolderComponent {
+  position: absolute;
+  top: 25%; }
+
+.datepicker-container {
+  margin-bottom: 80px;
+  padding-left: 70px; }
+
+.no-padding {
+  padding: 0px; }
 
 .overflow-auto {
   overflow: auto; }

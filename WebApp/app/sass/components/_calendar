@@ -1,0 +1,5 @@
+.calendar-display{
+  display: inline;
+  min-height: 290px;
+  min-width: 323px;
+}
