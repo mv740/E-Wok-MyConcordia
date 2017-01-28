@@ -101,6 +101,9 @@ h2 {
 .top-buffer-sm {
   margin-top: 20px; }
 
+.no-top-buffer {
+  margin-top: 0px; }
+
 .top-buffer {
   margin-top: 30px; }
 
@@ -109,7 +112,6 @@ h2 {
 
 .all-side-margin-sm {
   margin: 20px; }
-
 .side-padding {
   padding-left: 30px;
   padding-right: 30px; }
@@ -140,7 +142,7 @@ h2 {
   padding-bottom: 20px; }
 
 .left-buffer-sm {
-  marin-left: 20px; }
+  margin-left: 20px; }
 
 .container2D {
   background-color: #a1325e;
@@ -161,3 +163,43 @@ h2 {
 .datepicker-container {
   margin-bottom: 80px;
   padding-left: 70px; }
+
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.8); }
+
+.light-overlay {
+  background-color: rgba(255, 255, 255, 0.5); }
+
+.no-padding {
+  padding: 0px; } 	
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
+.textCenter {
+  text-align: center; }
+
+#loginContainer {
+  background: url("../../images/concordia_bg.jpg");
+  background-position-y: bottom; }
+  #loginContainer h1 {
+    border-color: black; }

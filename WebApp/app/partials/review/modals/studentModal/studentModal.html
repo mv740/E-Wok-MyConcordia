@@ -5,9 +5,9 @@
     </div>
 
     <div ng-if="!studentModal.loading" id="modal-body">
-        <div class="cardHolder side-padding modal-element col-xs-6">
+        <div class="cardHolder modal-element col-xs-6">
 
-            <div class="pictureAttributes text-left">
+            <div class="pictureAttributes side-padding text-left">
 
                 <h2 class="top-padding"><span>{{studentModal.student.firstname}} {{studentModal.student.lastname}}</span>
                 </h2>
@@ -22,9 +22,10 @@
                 </div>
 
             </div>
-            <div class="commentBox col-xs-12">
+            <div class="commentBox col-xs-12 atBottom all-side-padding">
             <span>You can add a comment here:</span>
-            <input type="text" class="col-xs-12">
+                <input ng-model="studentModal.student.pendingPicture.comments" class="col-xs-12"></input>
+                <button ng-click="studentModal.submitComment()" class="col-xs-12 top-buffer-sm button3D">Submit comment</button>
             </div>
         </div>
         <div class="cardHolder col-xs-6">

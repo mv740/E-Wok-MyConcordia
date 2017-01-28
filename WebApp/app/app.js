@@ -21,7 +21,8 @@ angular.module('myApp', [
     "getLogs": "log/",
     "search": "student/search",
     "getUpdatePeriod": "admin/UpdatePeriod",
-    "validateArchived": "student/RevalidatePicture"
+    "validateArchived": "student/RevalidatePicture",
+    "submitComment": "student/comment"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 

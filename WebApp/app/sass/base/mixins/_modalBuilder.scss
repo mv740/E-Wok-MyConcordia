@@ -14,10 +14,11 @@
 
   .commentBox {
     //19px is the size of the span above the commentboxb
-    padding-top: $height / 2 - $commentBoxHeight - 19px - $buffer-md;
+    padding-top: $height / 2 - $commentBoxHeight - $buffer-md;
     height: $height / 2;
     input {
       height: $commentBoxHeight;
+      color: black;
     }
   }
 

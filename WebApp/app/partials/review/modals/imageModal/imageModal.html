@@ -1,9 +1,9 @@
 <div class="validationModal-xl container2D-xl">
 
     <div id="modal-body">
-        <div class="cardHolder side-padding modal-element col-xs-6">
+        <div class="cardHolder modal-element col-xs-6">
 
-            <div class="pictureAttributes text-left">
+            <div class="pictureAttributes side-padding text-left">
 
                 <h2 class="top-padding"><span>{{imageModal.image.status}} on {{imageModal.image.updated.month}} {{imageModal.image.updated.day}} {{imageModal.image.updated.year}}</span>
                 </h2>
@@ -11,9 +11,10 @@
                     <span>Created on {{imageModal.image.created.month}} {{imageModal.image.created.day}} {{imageModal.image.created.year}}</span>
                 </div>
             </div>
-            <div class="commentBox col-xs-12">
+            <div class="commentBox col-xs-12 atBottom all-side-margin">
                 <span>You can add a comment here:</span>
-                <input type="text" class="col-xs-12">
+                <input ng-model="imageModal.image.comments" class="col-xs-12"></input>
+                <button ng-click="imageModal.submitComment()" class="col-xs-12 top-buffer-sm button3D">Submit comment</button>
             </div>
         </div>
         <div class="cardHolder col-xs-6">

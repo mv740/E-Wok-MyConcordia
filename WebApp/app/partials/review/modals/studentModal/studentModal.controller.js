@@ -13,6 +13,7 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
     studentModal.sendValidation = sendValidation;
     studentModal.enlargeImage = enlargeImage;
     studentModal.loadLogs = loadLogs;
+    studentModal.submitComment = submitComment;
     studentModal.close = $modalInstance.close;
     studentModal.loading = true;
     studentModal.emptyProfilePicture = 'images/empty-profile.png';
@@ -80,6 +81,10 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
 
     function resetModal(){
         studentModal.logs = undefined;
+    }
+
+    function submitComment(){
+        studentService.submitComment(studentModal.student.pendingPicture.iD_PK, studentModal.comments);
     }
 
 }
