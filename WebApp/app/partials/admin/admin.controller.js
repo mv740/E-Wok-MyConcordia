@@ -105,5 +105,7 @@
         for (var i = 0; i < 5; i++) {
             self.academicYearOptions[i] = currentYear + i;
         }
+
+        Mousetrap.bind('enter', self.submit);
     }
 })();
