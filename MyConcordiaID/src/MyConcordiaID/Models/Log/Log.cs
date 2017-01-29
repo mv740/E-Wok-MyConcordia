@@ -9,6 +9,7 @@ namespace MyConcordiaID.Models.Log
     {
         public enum Action
         {
+            AddComment,
             SendPicture,
             ApprovePicture,
             DeniedPicture,

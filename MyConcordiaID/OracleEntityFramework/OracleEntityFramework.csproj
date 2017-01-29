@@ -80,9 +80,6 @@
     <Compile Include="PICTURE.cs">
       <DependentUpon>OracleEntityDataModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="PICTUREARCHIVE.cs">
-      <DependentUpon>OracleEntityDataModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="PICTUREUPDATESETTING.cs">
       <DependentUpon>OracleEntityDataModel.tt</DependentUpon>
     </Compile>

@@ -14,14 +14,12 @@ namespace MyConcordiaID.Controllers
     public class AdminController : Controller
     {
 
-        private readonly DatabaseEntities _database;
         private IAdminRepository _adminRepo { get; set; }
         private ILogRepository _logRepo { get; set; }
 
-        public AdminController(IAdminRepository admins, ILogRepository logs, DatabaseEntities context)
+        public AdminController(IAdminRepository admins, ILogRepository logs)
         {
             _adminRepo = admins;
-            _database = context;
             _logRepo = logs;
         }
 

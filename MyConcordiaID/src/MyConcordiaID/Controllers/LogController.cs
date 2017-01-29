@@ -15,7 +15,6 @@ namespace MyConcordiaID.Controllers
     public class LogController : Controller
     {
 
-        private readonly DatabaseEntities _database;
         private ILogRepository _logRepo { get; set; }
 
 

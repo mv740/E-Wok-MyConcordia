@@ -97,8 +97,8 @@ namespace MyConcordiaID.Models.Admin
                 PeriodSetting periodFormat = new PeriodSetting
                 {
                     year = period.YEAR,
-                    startDate = period.STARDATE.ToString("dd-MM-yyyy"),
-                    endDate = period.ENDDATE.ToString("dd-MM-yyyy")
+                    startDate = period.STARDATE.ToString(),
+                    endDate = period.ENDDATE.ToString()
 
                    
                 };
@@ -111,6 +111,11 @@ namespace MyConcordiaID.Models.Admin
             return null;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="year"></param>
+        /// <returns></returns>
         public PICTUREUPDATESETTING GetUpdatePicturePeriod(int year)
         {
             var info = _database.PICTUREUPDATESETTINGs

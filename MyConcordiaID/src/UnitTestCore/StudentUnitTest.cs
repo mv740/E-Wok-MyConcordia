@@ -413,12 +413,19 @@ namespace UnitTestCore
             var bigFirstName = "abcdefghijklmnop";
             var bigLastName = "abcdefghijklmnop";
 
+            var firstNameTest2 = "Francis";
+            var lastNameTest2 = "Côté-Tremblay";
+
+
+
             var netName = StudentHelper.GenerateNetName(firstName, lastName);
             var bigNetName = StudentHelper.GenerateNetName(bigFirstName, bigLastName);
+            var netNameTest2 = StudentHelper.GenerateNetName(firstNameTest2, lastNameTest2);
 
             var result = "f_cotetr";
 
             Assert.AreEqual(result, netName);
+            Assert.AreEqual(result, netNameTest2);
             Assert.AreEqual("a_abcdef", bigNetName);
 
 
