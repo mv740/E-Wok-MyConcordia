@@ -86,11 +86,15 @@
   transform: translateY(-50%); }
 
 .atBottom {
-  position: absolute;
-  bottom: 50px; }
+  bottom: 0px;
+  left: 0px;
+  position: absolute; }
 
 .textCenter {
   text-align: center; }
+
+.btn-admin-submit-center {
+  margin-left: 420px; }
 
 html, body {
   font: 1em 'Montserrat Alternates'; }
@@ -99,8 +103,8 @@ html, body {
     margin: 0;
     padding: 0; }
 
-#main #ng-view {
-  overflow: hidden; }
+#ng-view {
+  overflow: auto; }
 
 .modal-content {
   height: 0px; }
@@ -160,9 +164,30 @@ h2 {
     .btn-circle.btn-no.greyed-out {
       background-color: grey; }
 
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.no-top-buffer {
+  margin-top: 0px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
 .container2D {
   background-color: #a1325e;
-  width: 750px;
+  width: 800px;
   padding: 0px;
   color: white; }
 
@@ -175,6 +200,10 @@ h2 {
 .cardHolderComponent {
   position: absolute;
   top: 25%; }
+
+.datepicker-container {
+  margin-bottom: 80px;
+  padding-left: 70px; }
 
 .center {
   display: block;
@@ -189,8 +218,54 @@ h2 {
   transform: translateY(-50%); }
 
 .atBottom {
-  position: absolute;
-  bottom: 50px; }
+  bottom: 0px;
+  left: 0px;
+  position: absolute; }
 
 .textCenter {
   text-align: center; }
+
+.btn-admin-submit-center {
+  margin-left: 420px; }
+
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.no-top-buffer {
+  margin-top: 0px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
+.calendar-icon {
+  height: 30px;
+  width: 30px; }
+
+.ok-icon {
+  padding-top: 5px;
+  font-size: x-large;
+  color: #47a447;
+  padding-left: 5px; }
+
+.select-admin {
+  -webkit-appearance: none;
+  padding: 8px;
+  margin-bottom: 35px;
+  background: url("../../images/icons/ic_arrow_drop_down_black_24dp_2x.png") no-repeat right; }
+
+.border-standard {
+  border-color: #a1325e;
+  border-width: initial;
+  border-radius: 4px; }

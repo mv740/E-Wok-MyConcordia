@@ -1,0 +1,13 @@
+@import "../base/colors";
+
+.calendar-icon{
+  height: 30px;
+  width: 30px;
+}
+
+.ok-icon{
+  padding-top: 5px;
+  font-size: x-large;
+  color: $yes-color;
+  padding-left: 5px;
+}

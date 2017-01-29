@@ -1,0 +1,8 @@
+@import "../base/colors";
+
+.select-admin{
+  -webkit-appearance: none;
+  padding: 8px;
+  margin-bottom: 35px;
+  background: url("../../images/icons/ic_arrow_drop_down_black_24dp_2x.png") no-repeat right;
+}

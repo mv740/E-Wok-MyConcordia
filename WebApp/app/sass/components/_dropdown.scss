@@ -1,0 +1,5 @@
+
+
+.admin-update-period-container{
+  @include buildDropDown2D($stingers-light-shade, $buffer-xs, 0, auto, $radius-sm);
+}

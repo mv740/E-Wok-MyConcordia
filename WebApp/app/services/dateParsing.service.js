@@ -8,11 +8,13 @@ angular
     .module('myApp')
     .factory('dateParsingService', dateParsingService);
 
+dateParsingService.$inject = ['$filter'];
 
-function dateParsingService() {
+function dateParsingService($filter) {
 
     var service = {
-        parse: parse
+        parse: parse,
+        parseUpdatePeriod: parseUpdatePeriod
     };
 
     return service;
@@ -23,10 +25,31 @@ function dateParsingService() {
 
         date.year = datetime.substring(0,4);
         var monthNum = datetime.substring(5,7);
-        date.month = months[parseInt(monthNum)];
+        date.month = months[parseInt(monthNum - 1)];
         date.day = datetime.substring(8,10);
 
         return date;
+    }
+
+    function parseUpdatePeriod(updatePeriod){
+        var dateSplit = updatePeriod.split("/"); // the format provided by oracle is M/d/yyyy
+        dateSplit[2] = dateSplit[2].substring(0,4);
+
+        var year = dateSplit[2];
+        var month = dateSplit[0] - 1; // have to do -1 because date object in angular uses 0 indexed months.
+        var day = dateSplit[1];
+
+
+        var date = new Date(year, month, day);
+
+
+
+        var result = {};
+        result.year = $filter('date')(date, 'yyyy');
+        result.day = $filter('date')(date, 'd');
+        result.month = $filter('date')(date, 'MMMM');
+
+        return result;
     }
 
 }

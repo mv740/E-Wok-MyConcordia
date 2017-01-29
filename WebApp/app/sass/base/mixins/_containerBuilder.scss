@@ -4,3 +4,12 @@
   padding:0px;
   color:white;
 }
+
+@mixin buildAdminContainer2D($background-color, $top-padding, $right-margin, $height, $radius) {
+  background-color: $background-color;
+  padding-top: $top-padding;
+  margin-right: $right-margin;
+  height: $height;
+  color:white;
+  border-radius: $radius;
+}

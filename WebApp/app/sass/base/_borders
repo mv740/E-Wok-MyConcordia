@@ -1,0 +1,7 @@
+@import "colors";
+
+.border-standard{
+  border-color: $concordia-background-color;
+  border-width: initial;
+  border-radius: 4px;
+}

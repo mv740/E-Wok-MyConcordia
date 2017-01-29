@@ -21,11 +21,15 @@
   transform: translateY(-50%); }
 
 .atBottom {
-  position: absolute;
-  bottom: 50px; }
+  bottom: 0px;
+  left: 0px;
+  position: absolute; }
 
 .textCenter {
   text-align: center; }
+
+.btn-admin-submit-center {
+  margin-left: 420px; }
 
 html, body {
   font: 1em 'Montserrat Alternates'; }
@@ -34,8 +38,8 @@ html, body {
     margin: 0;
     padding: 0; }
 
-#main #ng-view {
-  overflow: hidden; }
+#ng-view {
+  overflow: auto; }
 
 .modal-content {
   height: 0px; }
@@ -95,9 +99,30 @@ h2 {
     .btn-circle.btn-no.greyed-out {
       background-color: grey; }
 
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.no-top-buffer {
+  margin-top: 0px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
 .container2D {
   background-color: #a1325e;
-  width: 750px;
+  width: 800px;
   padding: 0px;
   color: white; }
 
@@ -110,3 +135,101 @@ h2 {
 .cardHolderComponent {
   position: absolute;
   top: 25%; }
+
+.datepicker-container {
+  margin-bottom: 80px;
+  padding-left: 70px; }
+
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.8); }
+
+.light-overlay {
+  background-color: rgba(255, 255, 255, 0.5); }
+
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.no-top-buffer {
+  margin-top: 0px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
+.left-buffer-sm {
+  marin-left: 20px; }
+
+.side-padding {
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.no-padding {
+  padding: 0px; }
+
+.all-side-padding-xs {
+  padding: 10px; }
+
+.all-side-padding-sm {
+  padding: 20px; }
+
+.all-side-padding {
+  padding: 30px; }
+
+.top-padding {
+  padding-top: 30px; }
+
+.bottom-padding {
+  padding-bottom: 30px; }
+
+.bottom-padding-sm {
+  padding-bottom: 20px; }
+
+.bottom-padding-xs {
+  padding-bottom: 10px; }
+
+.top-bottom-padding-sm {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.atBottom {
+  bottom: 0px;
+  left: 0px;
+  position: absolute; }
+
+.textCenter {
+  text-align: center; }
+
+.btn-admin-submit-center {
+  margin-left: 420px; }
+
+#loginContainer {
+  background: url("../../images/concordia_bg.jpg");
+  background-position-y: bottom; }
+  #loginContainer h1 {
+    border-color: black; }
