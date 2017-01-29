@@ -28,6 +28,9 @@
 .textCenter {
   text-align: center; }
 
+.btn-admin-submit-center {
+  margin-left: 420px; }
+
 html, body {
   font: 1em 'Montserrat Alternates'; }
   html ul, html li, body ul, body li {
@@ -221,6 +224,9 @@ h2 {
 
 .textCenter {
   text-align: center; }
+
+.btn-admin-submit-center {
+  margin-left: 420px; }
 
 #loginContainer {
   background: url("../../images/concordia_bg.jpg");
