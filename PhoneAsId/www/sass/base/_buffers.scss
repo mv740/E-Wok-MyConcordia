@@ -1,0 +1,108 @@
+@import "variables";
+
+.no-top-buffer{
+  margin-top:0px;
+}
+
+.no-left-buffer{
+  margin-left:0px;
+}
+
+.left-buffer-xs{
+  margin-left: $buffer-xs;
+}
+.right-buffer-xs{
+  margin-right: $buffer-xs;
+}
+
+.no-buffer{
+  margin:0px;
+}
+
+.top-buffer-xs{
+  margin-top:$buffer-xs;
+}
+
+.top-buffer-sm{
+  margin-top:$buffer-sm;
+}
+
+.top-buffer{
+  margin-top:$buffer-md;
+}
+.top-buffer-lg{
+  margin-top:$buffer-lg;
+}
+
+.bottom-buffer{
+  margin-bottom:$buffer-md;
+}
+
+.side-buffer-sm{
+  margin-left:$buffer-sm;
+  margin-right:$buffer-sm;
+}
+
+.all-side-margin-sm{
+  margin: $buffer-sm;
+}
+
+.all-side-margin{
+  margin: $buffer-md;
+}
+
+.no-padding{
+  padding:0px;
+}
+
+.side-padding{
+  padding-left:$buffer-md;
+  padding-right:$buffer-md;
+}
+
+.side-padding-sm{
+  padding-left:$buffer-sm;
+  padding-right:$buffer-sm;
+}
+
+.side-padding-xs{
+  padding-left:$buffer-xs;
+  padding-right:$buffer-xs;
+}
+
+.all-side-padding-xs{
+  padding:$buffer-xs;
+}
+
+.all-side-padding-sm{
+  padding:$buffer-sm;
+}
+
+.all-side-padding{
+  padding:$buffer-md;
+}
+
+.top-padding{
+  padding-top:$buffer-md;
+}
+
+.top-padding-xs{
+  padding-top:$buffer-xs;
+}
+
+.bottom-padding{
+  padding-bottom:$buffer-md;
+}
+
+.bottom-padding-sm{
+  padding-bottom:$buffer-sm;
+}
+
+.bottom-padding-xs{
+  padding-bottom:$buffer-xs;
+}
+
+.top-bottom-padding-sm{
+  padding-top:$buffer-sm;
+  padding-bottom:$buffer-sm;
+}

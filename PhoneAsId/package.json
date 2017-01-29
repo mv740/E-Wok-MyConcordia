@@ -22,19 +22,21 @@
     "shelljs": "^0.3.0"
   },
   "cordovaPlugins": [
+    "cordova-plugin-device",
+    "cordova-plugin-whitelist",
+    "cordova-plugin-statusbar",
+    "cordova-plugin-console",
+    "cordova-plugin-splashscreen",
+    "ionic-plugin-keyboard",
     "cordova-plugin-camera",
     "cordova-plugin-compat",
-    "cordova-plugin-whitelist",
-    "cordova-plugin-device",
-    "cordova-plugin-inappbrowser",
-    "cordova-plugin-splashscreen",
-    "cordova-plugin-console",
-    "cordova-plugin-statusbar",
-    "ionic-plugin-keyboard",
     "cordova-plugin-file-transfer",
     "cordova-plugin-file",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-network-information",
     "cordova-plugin-screen-orientation",
-    "cordova-plugin-network-information"
+    "phonegap-plugin-barcodescanner",
+    "cordova-plugin-nativeaudio"
   ],
   "cordovaPlatforms": [
     {

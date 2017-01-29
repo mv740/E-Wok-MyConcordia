@@ -1,0 +1,69 @@
+@import "../base/reset";
+@import "../base/buffers";
+@import "../base/positioning";
+@import "../base/mixins/containerBuilder";
+
+$concordia-color-1:#ad4c73;
+$concordia-color-2:#c47f9b;
+$concordia-color-3-font: #b86687;
+$concordia-color-3:#dbb2c3;
+$concordia-color-2-font: #e7ccd7;
+$concordia-color-4:#f3e5eb;
+
+$list-li-height:80px;
+
+.cam-container {
+  height: 100%;
+  background-color: #8A0037;
+  font-size: 150%;
+  font-weight: bold;
+
+  ul {
+    li {
+      margin-top: -5px;
+      div {
+        height: $list-li-height;
+        padding-top: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+        text-align: center;
+        border-radius: 5px;
+
+      }
+    }
+    li:first-child {
+      div {
+        @include buildContainer2D($concordia-color-1, auto);
+        color: $concordia-color-4;
+      }
+    }
+    li:nth-child(2) {
+      div {
+        @include buildContainer2D($concordia-color-2, auto);
+        color: $concordia-color-2-font;
+      }
+    }
+    li:nth-child(3) {
+      div {
+        @include buildContainer2D($concordia-color-3, auto);
+        color: $concordia-color-3-font;
+      }
+    }
+    li:nth-child(4) {
+      div {
+        @include buildContainer2D($concordia-color-4, auto);
+        color: $concordia-color-1;
+      }
+    }
+  }
+    #cameraActions {
+      height: $list-li-height;
+
+      button {
+        height: 100%;
+        border-radius: 5px;
+        width:45.9%;
+      }
+    }
+
+}

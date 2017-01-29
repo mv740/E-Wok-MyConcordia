@@ -1,0 +1,204 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
+.text-left {
+  text-align: left; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
+.textCenter {
+  text-align: center; }
+
+.absolutePos {
+  position: absolute; }
+
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
+
+html, body {
+  font-family: 'Montserrat Alternates'; }
+  html ul, html li, body ul, body li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+  html h1, html h2, html h3, html h4, body h1, body h2, body h3, body h4 {
+    font-family: 'Montserrat Alternates'; }
+
+.no-top-buffer {
+  margin-top: 0px; }
+
+.no-left-buffer {
+  margin-left: 0px; }
+
+.left-buffer-xs {
+  margin-left: 10px; }
+
+.right-buffer-xs {
+  margin-right: 10px; }
+
+.no-buffer {
+  margin: 0px; }
+
+.top-buffer-xs {
+  margin-top: 10px; }
+
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.top-buffer-lg {
+  margin-top: 40px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.side-buffer-sm {
+  margin-left: 20px;
+  margin-right: 20px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.all-side-margin {
+  margin: 30px; }
+
+.no-padding {
+  padding: 0px; }
+
+.side-padding {
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.side-padding-sm {
+  padding-left: 20px;
+  padding-right: 20px; }
+
+.side-padding-xs {
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.all-side-padding-xs {
+  padding: 10px; }
+
+.all-side-padding-sm {
+  padding: 20px; }
+
+.all-side-padding {
+  padding: 30px; }
+
+.top-padding {
+  padding-top: 30px; }
+
+.top-padding-xs {
+  padding-top: 10px; }
+
+.bottom-padding {
+  padding-bottom: 30px; }
+
+.bottom-padding-sm {
+  padding-bottom: 20px; }
+
+.bottom-padding-xs {
+  padding-bottom: 10px; }
+
+.top-bottom-padding-sm {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
+.textCenter {
+  text-align: center; }
+
+.absolutePos {
+  position: absolute; }
+
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
+
+.cam-container {
+  height: 100%;
+  background-color: #8A0037;
+  font-size: 150%;
+  font-weight: bold; }
+  .cam-container ul li {
+    margin-top: -5px; }
+    .cam-container ul li div {
+      height: 80px;
+      padding-top: 20px;
+      padding-left: 10px;
+      padding-right: 10px;
+      text-align: center;
+      border-radius: 5px; }
+  .cam-container ul li:first-child div {
+    background-color: #ad4c73;
+    width: auto;
+    color: white;
+    color: #f3e5eb; }
+  .cam-container ul li:nth-child(2) div {
+    background-color: #c47f9b;
+    width: auto;
+    color: white;
+    color: #e7ccd7; }
+  .cam-container ul li:nth-child(3) div {
+    background-color: #dbb2c3;
+    width: auto;
+    color: white;
+    color: #b86687; }
+  .cam-container ul li:nth-child(4) div {
+    background-color: #f3e5eb;
+    width: auto;
+    color: white;
+    color: #ad4c73; }
+  .cam-container #cameraActions {
+    height: 80px; }
+    .cam-container #cameraActions button {
+      height: 100%;
+      border-radius: 5px;
+      width: 45.9%; }

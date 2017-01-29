@@ -1,0 +1,19 @@
+@import "sizes";
+@import "colors";
+@import "fonts";
+@import "positioning";
+
+html, body{
+  font-family: 'Montserrat Alternates';
+
+  ul, li {
+    list-style:none;
+    margin:0;
+    padding:0;
+  }
+
+  h1, h2, h3, h4{
+    font-family: 'Montserrat Alternates';
+  }
+}
+

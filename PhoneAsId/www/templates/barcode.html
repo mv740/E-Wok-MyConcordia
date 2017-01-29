@@ -1,0 +1,22 @@
+<ion-view>
+  <ion-content>
+
+    <div >
+      <p>Barcode Scanner</p>
+      <button  ng-click="bc.scanBarcode()">SCAN</button>
+
+      <div ng-if="bc.scanData.length == 0 ">
+        No data has been scanned yet
+      </div>
+
+      <div ng-if="bc.scanData.length > 0 ">
+        Here are the values that were scanned:
+        <p ng-repeat="data in bc.scanData">{{data}}</p>
+      </div>
+
+      </div>
+
+    </div>
+
+  </ion-content>
+</ion-view>

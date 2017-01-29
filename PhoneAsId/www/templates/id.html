@@ -1,71 +1,47 @@
 <ion-view>
-  <ion-content>
+  <ion-content scroll="false">
 
-    <div class="overseeing">
+    <div class="overseeing full-height">
       <!-- template used if for portrait -->
 
       <div class="main_content">
 
-
-        <div class="row">
-          <div class="col">
-            <div class="card removeMarginTop">
-              <div class="item item-text-wrap centerText">
-                <p class="graduateStatus">{{vm.uGradStatus}}</p>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="item item-divider">
-                <p>Expire</p>
-              </div>
-              <div class="item item-text-wrap centerText">
-                <p>{{vm.expireDate}}</p>
-              </div>
-            </div>
-
-
+        <div class="col col-100 no-padding pictureHolder">
+          <!-- display picture if it's there. If pending review, display pending approval pic. else, placeholder.-->
+          <div ng-if="vm.valid">
+            <img class="col col-100 no-padding" ng-src="data:image/PNG;base64,{{vm.profilePicture}}">
           </div>
-          <div class="col">
+          <div ng-if="!vm.valid && vm.pending">
+            <img class="col col-100 no-padding" src="img/pending_approval.jpg">
+          </div>
+          <div ng-if="!vm.valid && !vm.pending">
+            <img class="col col-100 no-padding" src="img/placeholder_profile_pic.jpg">
+          </div>
+
+          <div class="col col-100 headerInfo absolutePos">
+            <span class="floatLeft all-side-padding-xs">{{vm.dob}}</span>
+            <span class="floatRight all-side-padding-xs" ng-if="vm.uGradStatus == 'U'">Undergraduate</span>
+            <span class="floatRight all-side-padding-xs" ng-if="vm.uGradStatus != 'U'">Graduate</span>
+          </div>
+          <div class="col col-100 textCenter bottomInfo top-padding relativePos">
             <div>
-              <!-- display picture if it's there. If pending review, display pending approval pic. else, placeholder.-->
-              <div ng-if="vm.valid">
-                <img ng-src="data:image/PNG;base64,{{vm.profilePicture}}" width="200" height="200">
-              </div>
-              <div ng-if="!vm.valid && vm.pending">
-                <img src="img/pending_approval.jpg" width="200" height="200">
-              </div>
-              <div ng-if="!vm.valid && !vm.pending">
-                <img src="img/placeholder_profile_pic.jpg" width="200" height="200">
-              </div>
+              <h2 class="no-buffer">{{vm.firstName}} {{vm.lastName}}</h2>
             </div>
-
+            <div>
+              <p id="id">{{vm.id}}</p>
+            </div>
+            <hr class="side-buffer-sm top-buffer-xs">
           </div>
+
         </div>
 
-        <!--information card-->
-        <div class="list card removeMarginTop">
-          <div class="item item-icon-left">
-            <i class="icon ion-person"></i>
-            <p>{{vm.firstName}}</p>
-          </div>
+        <div class="belowPicture relativePos side-padding-xs">
 
-          <div class="item item-icon-left">
-            <i class="icon ion-person"></i>
-            <p>{{vm.lastName}}</p>
-          </div>
+            <div class="col col-100 textCenter top-padding-xs">
+              <span>Expires on {{vm.expireDate}}</span>
+            </div>
 
-          <div class="item item-icon-left">
-            <i class="icon ion-android-calendar"></i>
-            <p>{{vm.dob}}</p>
-          </div>
-
-          <div class="item item-icon-left">
-            <i class="icon ion-card"></i>
-            <p>{{vm.id}}</p>
-          </div>
-
-          <div class="barcodeId">
+          <div class="col col-100 barcodeId textCenter no-padding">
             <barcode-directive bcode="vm.id" height="50" font-size="15"></barcode-directive>
           </div>
         </div>

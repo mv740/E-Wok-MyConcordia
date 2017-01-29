@@ -1,0 +1,38 @@
+@import "../base/reset";
+@import "../base/buffers";
+@import "../base/positioning";
+@import "../base/sizes";
+
+
+$bottom-info-height: 80px;
+
+.pictureHolder{
+
+  .headerInfo{
+    top:0px;
+    background: linear-gradient(black, rgba(0,0,0,0));
+  }
+
+  .bottomInfo{
+    height: $bottom-info-height;
+    top: - $bottom-info-height + 1px;
+    background: linear-gradient(rgba(0,0,0,0), white);
+    p, h2 {
+      color: black;
+    }
+    #id{
+      font-size:20px;
+    }
+  }
+
+  p, h2, h3, span{
+    color:white;
+  }
+}
+
+.belowPicture{
+  top: -$bottom-info-height + $buffer-sm;
+}
+
+
+

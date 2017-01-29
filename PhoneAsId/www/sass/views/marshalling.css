@@ -1,0 +1,194 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
+.text-left {
+  text-align: left; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
+.textCenter {
+  text-align: center; }
+
+.absolutePos {
+  position: absolute; }
+
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
+
+html, body {
+  font-family: 'Montserrat Alternates'; }
+  html ul, html li, body ul, body li {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+  html h1, html h2, html h3, html h4, body h1, body h2, body h3, body h4 {
+    font-family: 'Montserrat Alternates'; }
+
+.no-top-buffer {
+  margin-top: 0px; }
+
+.no-left-buffer {
+  margin-left: 0px; }
+
+.left-buffer-xs {
+  margin-left: 10px; }
+
+.right-buffer-xs {
+  margin-right: 10px; }
+
+.no-buffer {
+  margin: 0px; }
+
+.top-buffer-xs {
+  margin-top: 10px; }
+
+.top-buffer-sm {
+  margin-top: 20px; }
+
+.top-buffer {
+  margin-top: 30px; }
+
+.top-buffer-lg {
+  margin-top: 40px; }
+
+.bottom-buffer {
+  margin-bottom: 30px; }
+
+.side-buffer-sm {
+  margin-left: 20px;
+  margin-right: 20px; }
+
+.all-side-margin-sm {
+  margin: 20px; }
+
+.all-side-margin {
+  margin: 30px; }
+
+.no-padding {
+  padding: 0px; }
+
+.side-padding {
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.side-padding-sm {
+  padding-left: 20px;
+  padding-right: 20px; }
+
+.side-padding-xs {
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.all-side-padding-xs {
+  padding: 10px; }
+
+.all-side-padding-sm {
+  padding: 20px; }
+
+.all-side-padding {
+  padding: 30px; }
+
+.top-padding {
+  padding-top: 30px; }
+
+.top-padding-xs {
+  padding-top: 10px; }
+
+.bottom-padding {
+  padding-bottom: 30px; }
+
+.bottom-padding-sm {
+  padding-bottom: 20px; }
+
+.bottom-padding-xs {
+  padding-bottom: 10px; }
+
+.top-bottom-padding-sm {
+  padding-top: 20px;
+  padding-bottom: 20px; }
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
+.textCenter {
+  text-align: center; }
+
+.absolutePos {
+  position: absolute; }
+
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
+
+.overall {
+  background-color: white; }
+
+.date {
+  font-size: 110%; }
+
+.marshall {
+  font-size: 150%;
+  font-weight: bold; }
+
+.name {
+  font-weight: bolder;
+  font-size: 200%; }
+
+.marshData {
+  height: 65%;
+  padding-top: 5%;
+  text-align: center;
+  font-size: 120%;
+  line-height: 180%; }
+
+.bottom {
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  margin-bottom: 10px; }
+
+.barcodegen {
+  display: block;
+  margin: auto; }

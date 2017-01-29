@@ -1,0 +1,47 @@
+@import "../base/reset";
+@import "../base/buffers";
+@import "../base/positioning";
+
+.overall{
+  background-color: white;
+}
+
+.date{
+  font-size: 110%;
+}
+
+.marshall{
+  font-size: 150%;
+  font-weight: bold;
+}
+
+.name{
+  font-weight: bolder;
+  font-size: 200%;
+}
+
+
+.marshData{
+  height: 65%;
+  padding-top: 5%;
+  text-align: center;
+  font-size: 120%;
+  line-height: 180%;
+}
+
+.bottom{
+  bottom: 0;
+  width: 100%;
+  position: absolute;
+  margin-bottom: 10px;
+}
+
+.barcodegen{
+  display: block;
+  margin: auto;
+}
+
+
+
+
+

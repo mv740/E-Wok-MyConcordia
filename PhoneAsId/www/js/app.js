@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidcclient'])
+angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers', 'ngCordova', 'ng.oidcclient', 'angularCSS'])
   .constant('serverName', 'https://myconcordiaid.azurewebsites.net/api/')
 
 
@@ -75,7 +75,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
           'menuContent': {
             templateUrl: 'templates/id.html',
             controller: 'IdController as vm',
-            css: 'css/id.css'
+            css: 'sass/views/id.css'
           }
         }
       })
@@ -85,7 +85,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
           'menuContent': {
             templateUrl: 'templates/marshalling.html',
             controller: 'IdController as vm',
-            css: 'css/marshalling.css'
+            css: 'sass/views/marshalling.css'
           }
         }
       })
@@ -94,8 +94,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
         views: {
           'menuContent': {
             templateUrl: 'templates/camera.html',
-            controller: 'CameraCtrl',
-            css: 'css/camera.css',
+            controller: 'CameraCtrl as camCtrl',
+            css: 'sass/views/camera.css',
 
 
             // If the student cannot update picture, restrict access to the camera.
@@ -111,13 +111,24 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ngCordova', 'ng.oidc
           }
         }
       })
+
+      .state('app.barcode', {
+        url: '/barcode',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/barcode.html',
+            controller: 'BarcodeController as bc',
+          }
+        }
+      })
+
       .state('app.login', {
         url: '/login',
         views: {
           'menuContent': {
             templateUrl: 'templates/login.html',
             controller: 'LoginController as vm',
-            css: 'css/login.css'
+            css: ['css/login.css', 'sass/views/login.css']
           }
         }
       });
