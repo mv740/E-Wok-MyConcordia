@@ -69,7 +69,7 @@
         <li ng-repeat="log in studentModal.logs">
             <p>
                 <span>{{log.action}}:</span>
-                <span>{{log.timestamp}}</span>
+                <span>{{log.timestamp | date}}</span>
             </p>
         </li>
     </ul>
