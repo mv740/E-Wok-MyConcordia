@@ -27,7 +27,7 @@ angular.module('myApp', [
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
 
-        var link = "https://myconcordiaid.azurewebsites.net/";
+        var link = "https://concordia.michalwozniak.ca/";
 
         ngOidcClientProvider.setSettings({
             authority: link,
