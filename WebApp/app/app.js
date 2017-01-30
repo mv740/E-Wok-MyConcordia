@@ -12,7 +12,7 @@ angular.module('myApp', [
     '720kb.tooltips'
 
 ]).constant("myConfig", {
-    "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
+    "baseUrl": "https://concordia.michalwozniak.ca/api/",
     "validatePhoto": "student/ValidatePicture",
     "searchStudent": "student/",
     "getStudentPictures": "student/picture/",
