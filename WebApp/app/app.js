@@ -32,9 +32,9 @@ angular.module('myApp', [
         ngOidcClientProvider.setSettings({
             authority: link,
             client_id: "oidcWebClient",
-            redirect_uri: "https://concordiaidclient.netlify.com/WebApp/app/callback.html",
-            post_logout_redirect_uri: "https://concordiaidclient.netlify.com/WebApp/app/oidc",
-            silent_redirect_uri: "https://concordiaidclient.netlify.com/WebApp/app/oidc",
+            redirect_uri: "https://www.myconcordiaid.me/callback.html",
+            post_logout_redirect_uri: "https://www.myconcordiaid.me/oidc",
+            silent_redirect_uri: "https://www.myconcordiaid.me/oidc",
             //redirect_uri: "https://localhost/oidc",
             //post_logout_redirect_uri: "https://localhost/oidc",
             //silent_redirect_uri: "https://localhost/oidc",
