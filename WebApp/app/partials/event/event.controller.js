@@ -59,13 +59,13 @@ function EventController(eventService) {
     }
 
     function getEvent(eventId) {
-        eventService.getEvent(eventId).then(function(result) {
+        eventService.getThisEvent(eventId).then(function(result) {
                 event.selectedEvent = result;
         });
 
     }
 
-    function getAllEvents() {
+    function getEvents() {
         eventService.getAllEvents().then(function(result) {
             event.events = result;
         });

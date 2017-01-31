@@ -25,8 +25,8 @@ angular.module('myApp', [
     "getUpdatePeriod": "admin/UpdatePeriod",
     "validateArchived": "student/RevalidatePicture",
     "submitComment": "student/comment",
-    "getEvent": "events/",
-    "submitEvent": "events/submitEvent"
+    "event": "event",
+    "getEvent": "event/"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
