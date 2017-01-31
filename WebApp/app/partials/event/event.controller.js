@@ -58,4 +58,16 @@ function EventController(eventService) {
         eventService.submit(event.creating);
     }
 
+    function getEvent(eventId) {
+        eventService.getEvent(eventId).then(function(result) {
+                event.selectedEvent = result;
+        });
+
+    }
+
+    function getAllEvents() {
+        eventService.getAllEvents().then(function(result) {
+            event.events = result;
+        });
+    }
 };

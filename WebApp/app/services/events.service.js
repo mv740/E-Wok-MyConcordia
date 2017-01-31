@@ -7,7 +7,8 @@ angular
 function eventService() {
 
     var service = {
-        getEvent: getEvent
+        getEvent: getEvent,
+        getAllEvents: getAllEvents
     }
 
     return service;
@@ -28,4 +29,15 @@ function eventService() {
 
     }
 
+    function getAllEvents() {
+        var deferred = $q.defer();
+
+        $http.get(myConfig.baseUrl + myConfig.getEvent).then(function (value) {
+            deferred.resolve(value);
+        },function (failure) {
+            console.log('getAllEvents failure');
+        });
+
+        return deferred.promise;
+    }
 }
