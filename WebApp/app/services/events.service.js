@@ -10,7 +10,8 @@ function eventService() {
         getThisEvent: getThisEvent,
         getAllEvents: getAllEvents,
         submit: submit,
-        updateEvent: updateEvent
+        updateEvent: updateEvent,
+        deleteEvent: deleteEvent
     }
 
     return service;

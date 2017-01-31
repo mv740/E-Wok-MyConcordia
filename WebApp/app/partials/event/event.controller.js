@@ -70,4 +70,8 @@ function EventController(eventService) {
             event.events = result;
         });
     }
+
+    function modifyEvent(eventTarget) {
+        event.creating = eventTarget;
+    }
 };
