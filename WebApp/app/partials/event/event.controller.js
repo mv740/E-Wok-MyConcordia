@@ -11,6 +11,9 @@ angular
 EventController.$inject = ['eventService'];
 
 function EventController(eventService) {
+
+
+
     var event = this;
 
     event.creating = {};
@@ -36,6 +39,18 @@ function EventController(eventService) {
         navigation: false,
         keyboardScrolling: false
     };
+
+    setTimeout(function(){
+        //destroying
+        if (typeof $.fn.fullpage.destroy == 'function') {
+            $.fn.fullpage.destroy('all');
+        }
+
+//initializing
+        $('#fpEvent').fullpage(event.fpOptions);
+    });
+
+
     //having a timeout allows to execute after digest
     setTimeout(function(){
         $.fn.fullpage.setMouseWheelScrolling(false);

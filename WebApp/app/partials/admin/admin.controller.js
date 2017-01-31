@@ -14,6 +14,18 @@
             navigation: false,
             keyboardScrolling: false,
         };
+
+        setTimeout(function(){
+            //destroying
+            if (typeof $.fn.fullpage.destroy == 'function') {
+                $.fn.fullpage.destroy('all');
+            }
+
+//initializing
+            $('#fpAdmin').fullpage(admin.fpOptions);
+        });
+
+
         //having a timeout allows to execute after digest
         setTimeout(function(){
             $.fn.fullpage.setMouseWheelScrolling(false);
