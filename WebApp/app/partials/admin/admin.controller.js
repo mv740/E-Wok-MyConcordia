@@ -12,12 +12,16 @@
 
         self.fpOptions = {
             navigation: false,
-            keyboardScrolling: false
+            keyboardScrolling: false,
         };
+        //having a timeout allows to execute after digest
+        setTimeout(function(){
+            $.fn.fullpage.setMouseWheelScrolling(false);
+            $.fn.fullpage.setAllowScrolling(false);
+        })
+
 
         self.moveSectionDown = moveSectionDown;
-        self.moveToSection2 = moveToSection2;
-        self.moveToSection3 = moveToSection3;
         self.moveSectionUp = moveSectionUp;
 
 
@@ -59,21 +63,12 @@
             $.fn.fullpage.moveSectionDown();
         }
 
-        function moveToSection2(){
-            if (self.academicYear) $.fn.fullpage.moveSectionDown();
-        }
-
-        function moveToSection3(){
-            if (self.dtFrom) $.fn.fullpage.moveSectionDown();
-        }
-
         function moveSectionUp(){
             $.fn.fullpage.moveSectionUp();
         }
 
         self.submit = function UpdatePeriod() {
 
-            if (self.dtFrom) {
                 self.submitButton = "Checking...";
 
                 self.dateStart = $filter('date')(self.dtFrom, 'dd-MM-yyyy');
@@ -112,7 +107,6 @@
                 else {
                     self.submitButton = "Submit";
                 }
-            }
         };
 
         self.setYearEntered = function() {

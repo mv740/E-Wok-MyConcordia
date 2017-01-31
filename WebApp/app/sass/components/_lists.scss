@@ -3,11 +3,11 @@
 
 $search-result-margin: 8px;
 
-#searchResults {
+.listResults {
   div {
     @include vertical-align();
     span {
-      margin-left: $search-result-margin;
+      margin-right: $search-result-margin;
     }
   }
 }

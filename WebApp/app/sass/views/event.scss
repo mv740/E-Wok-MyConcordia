@@ -7,11 +7,17 @@
 @import "../base/mixins/transitions";
 @import "../base/buffers";
 @import "../base/paddings";
+@import "../base/positioning";
 @import "../base/overflows";
 @import "../base/sizes";
 @import "../base/shapes";
 
 @import "../components/sideNav";
-
+@import "../components/lists";
+@import "../base/borders";
 
 #ng-view{overflow-y: hidden;}
+
+.fp-tableCell{
+  vertical-align: top;
+}

@@ -1,5 +1,10 @@
 @import "variables";
 
+.side-padding-xs{
+  padding-left:$buffer-xs;
+  padding-right:$buffer-xs;
+}
+
 .side-padding{
   padding-left:$buffer-md;
   padding-right:$buffer-md;

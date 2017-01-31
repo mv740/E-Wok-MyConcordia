@@ -35,7 +35,7 @@
                     tooltips tooltip-template="Required"
                     tooltips tooltip-side="top"
                     tooltips tooltip-hidden="{{admin.yearEntered}}">
-                <select class="col-xs-12 border-standard select-admin"
+                <select class="col-xs-12 border-dotted height-standard bottom-buffer side-padding-xs"
                         id="AcademicYearDropDown"
                         ng-model="admin.academicYear"
                         ng-click="admin.setYearEntered()">
@@ -44,7 +44,7 @@
                 </select>
             </div>
 
-            <button ng-click="admin.moveSectionUp()" class="button3D buttonSmallFormat">Back</button> <button ng-click="admin.moveToSection2()"  ng-class="{'inactive': !admin.academicYear}" class="button3D buttonSmallFormat side-buffer">Next step</button>
+            <button ng-click="admin.moveSectionUp()" class="button3D buttonSmallFormat">Back</button> <button ng-click="admin.academicYear && admin.moveSectionDown()"  ng-class="{'inactive': !admin.academicYear}" class="button3D buttonSmallFormat side-buffer">Next step</button>
 
         </div>
         <div class="section section2">
@@ -61,7 +61,7 @@
 
                 <div class="col-xs-12 top-buffer">
                     <input type="text"
-                           class="form-control date"
+                           class="form-control date border-dotted height-standard side-padding-xs"
                            id="dateFrom"
                            placeholder="From"
                            ng-click="admin.dateFrom=true"
@@ -73,7 +73,7 @@
                            ng-required="true"
                            close-text="Close">
                 </div>
-            <button ng-click="admin.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.moveToSection3()" ng-class="{'inactive': !admin.dtFrom}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
+            <button ng-click="admin.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtFrom && admin.moveSectionDown()" ng-class="{'inactive': !admin.dtFrom}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
         </div>
         <div class="section section3">
 
@@ -89,7 +89,7 @@
 
             <div class="col-xs-12 top-buffer">
                 <input type="text"
-                       class="form-control date"
+                       class="form-control date border-dotted height-standard side-padding-xs"
                        id="dateTo"
                        placeholder="To"
                        ng-click="admin.dateTo=true"
@@ -101,7 +101,7 @@
                        ng-required="true"
                        close-text="Close">
             </div>
-            <button ng-click="admin.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.submit()"  ng-class="{'inactive': !admin.dtTo}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
+            <button ng-click="admin.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtTo && admin.submit()"  ng-class="{'inactive': !admin.dtTo}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
         </div>
     </div>
 
