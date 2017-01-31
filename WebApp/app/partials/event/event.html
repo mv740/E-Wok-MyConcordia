@@ -1,0 +1,166 @@
+<div ng-controller="EventController as event" class="side-padding-xl">
+
+    <div full-page options="admin.fpOptions">
+        <div class="section">
+
+            <div class="page-header">
+                <h1>Your events</h1>
+            </div>
+            <div id="createEventButton" class="height-standard">
+            <button ng-click="event.moveSectionDown()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
+            </div>
+            <div ng-if="event.events.length > 0">
+            <ul class="listResults">
+                <li class="button3D top-buffer-sm" ng-repeat="result in event.events track by $index"
+                    ng-click="admin.eventClick(result)">
+                    <div>
+                        <span>{{result.name}},</span>
+
+                        <span>{{result.startDateStamp}} {{result.lastname}},</span>
+
+                        <span>{{result.room}},</span>
+                    </div>
+                </li>
+            </ul>
+            </div>
+
+
+
+
+
+
+        </div>
+        <div class="section">
+
+            <div class="page-header">
+                <h1>Event name</h1>
+            </div>
+
+            <div>
+                <h4>Give you new event a meaningful name</span>
+
+                </h4>
+            </div>
+            <input ng-model="event.name" class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs" type="text">
+
+            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.name && event.moveSectionDown()"  ng-class="{'inactive': !event.name}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+
+
+
+
+        </div>
+        <div class="section">
+
+            <div class="page-header">
+                <h1>Location</h1>
+            </div>
+
+            <div>
+                <h4>Where will your event happen?</span>
+
+                </h4>
+            </div>
+            <input ng-model="event.location" class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs" type="text">
+
+            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.location && event.moveSectionDown()"  ng-class="{'inactive': !event.location}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+
+
+
+
+        </div>
+        <div class="section">
+
+            <div class="page-header">
+                <h1>Room</h1>
+            </div>
+
+            <div>
+                <h4>In what room you event will take place?</span>
+
+                </h4>
+            </div>
+            <input ng-model="event.room" class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs" type="text">
+
+            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.room && event.moveSectionDown()"  ng-class="{'inactive': !event.room}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+
+
+
+
+        </div>
+
+        <div class="section">
+
+            <div class="page-header">
+                <h1>Event description</h1>
+            </div>
+
+            <div>
+                <h4>What are the details of your new event?</span>
+
+                </h4>
+            </div>
+            <textarea ng-model="event.description" class="col-xs-12 border-dotted height-xl top-buffer all-side-padding-xs"></textarea>
+
+            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.description && event.moveSectionDown()"  ng-class="{'inactive': !event.description}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+
+        </div>
+        <div class="section section2">
+
+            <div class="page-header">
+                <h1>Start date</h1>
+            </div>
+
+            <div>
+                <h4>Choose the start date for which the students will be able to send new profile picture for approval
+
+                </h4>
+            </div>
+
+            <div class="col-xs-12 top-buffer">
+                <input type="text"
+                       class="form-control date border-dotted height-standard side-padding-xs"
+                       id="dateFrom"
+                       placeholder="From"
+                       ng-click="event.dateFrom=true"
+                       datepicker-popup="{{admin.format}}"
+                       ng-model="event.startDateStamp"
+                       is-open="event.dateFrom"
+                       datepicker-options="event.dateOptions"
+                       date-disabled="disabled(date, mode)"
+                       ng-required="true"
+                       close-text="Close">
+            </div>
+            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.startDateStamp && event.moveSectionDown()" ng-class="{'inactive': !event.startDateStamp}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
+        </div>
+        <div class="section section3">
+
+            <div class="page-header">
+                <h1>End date</h1>
+            </div>
+
+            <div>
+                <h4>Choose the end date for which the students will be able to send new profile picture for approval
+
+                </h4>
+            </div>
+
+            <div class="col-xs-12 top-buffer">
+                <input type="text"
+                       class="form-control date border-dotted height-standard side-padding-xs"
+                       id="dateTo"
+                       placeholder="To"
+                       ng-click="event.dateTo=true"
+                       datepicker-popup="{{admin.format}}"
+                       ng-model="event.endStartStamp"
+                       is-open="event.dateTo"
+                       datepicker-options="event.dateOptions"
+                       date-disabled="disabled(date, mode)"
+                       ng-required="true"
+                       close-text="Close">
+            </div>
+            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.endStartStamp && event.submit()"  ng-class="{'inactive': !event.endStartStamp}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
+        </div>
+    </div>
+
+</div>
+

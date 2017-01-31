@@ -1,5 +1,9 @@
 
 
-.admin-update-period-container{
+.input-outline{
   @include buildDropDown2D($stingers-light-shade, $buffer-xs, 0, auto, $radius-sm);
+}
+
+.input-standard{
+
 }

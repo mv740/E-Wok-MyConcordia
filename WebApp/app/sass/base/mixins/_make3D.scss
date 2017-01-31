@@ -16,6 +16,14 @@
   }
 }
 
+@mixin make-button-3d-no-hover($button3D-shadow-color){
+  &:not(.nohover):hover {
+    top:0px;
+    left:0px;
+    box-shadow: 1px 1px 0 $button3D-shadow-color, 2px 2px 0 $button3D-shadow-color, 3px 3px 0 $button3D-shadow-color, 4px 4px 0 $button3D-shadow-color, 5px 5px 0 $button3D-shadow-color, 6px 6px 0 $button3D-shadow-color, 7px 7px 0 $button3D-shadow-color;
+  }
+}
+
 @mixin make-container-3d($concordia-background-color, $concordia-color, $text-color, $border-radius-container, $button3D-shadow-color){
   @include make-button-3d($border-radius-container, $button3D-shadow-color);
   text-align: center;

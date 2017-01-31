@@ -1,0 +1,15 @@
+@import "colors";
+
+.border-standard{
+  border-style:solid;
+  border-color: $concordia-background-color;
+  border-width: initial;
+  border-radius: 4px;
+}
+
+.border-dotted{
+  border-style: dotted;
+  border-color: $concordia-background-color;
+  border-width: initial;
+  border-radius: 4px;
+}

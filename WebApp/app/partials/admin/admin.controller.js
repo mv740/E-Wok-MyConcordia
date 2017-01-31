@@ -10,6 +10,21 @@
     function AdminController($http, myConfig, studentService, dateParsingService, $filter) {
         var self = this;
 
+        self.fpOptions = {
+            navigation: false,
+            keyboardScrolling: false,
+        };
+        //having a timeout allows to execute after digest
+        setTimeout(function(){
+            $.fn.fullpage.setMouseWheelScrolling(false);
+            $.fn.fullpage.setAllowScrolling(false);
+        })
+
+
+        self.moveSectionDown = moveSectionDown;
+        self.moveSectionUp = moveSectionUp;
+
+
         var defaultStartDate = "18-12-2016";
         var defaultEndDate = "24-18-2016";
         var lengthOfAYearString = 4; // number of characters for a year to be valid
@@ -44,46 +59,54 @@
         self.submitButton = "Submit";
 
 
+        function moveSectionDown(){
+            $.fn.fullpage.moveSectionDown();
+        }
+
+        function moveSectionUp(){
+            $.fn.fullpage.moveSectionUp();
+        }
+
         self.submit = function UpdatePeriod() {
-            self.submitButton = "Checking...";
-
-            self.dateStart = $filter('date')(self.dtFrom, 'dd-MM-yyyy');
-            self.dateEnd = $filter('date')(self.dtTo, 'dd-MM-yyyy');
-
-            var data =
-                {
-                    "year": self.academicYear,
-                    "startDate": self.dateStart,
-                    "endDate": self.dateEnd
-                };
-
-
-            self.yearEntered = self.academicYear != null;
-            self.startDateEntered = self.dtFrom != undefined;
-            self.endDateEntered = self.dtTo != undefined;
-
-            if (self.yearEntered && self.startDateEntered && self.endDateEntered) {
-
-                var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
 
                 self.submitButton = "Checking...";
-                if (validDateRange) {
-                    self.submitButton = "Sending...";
-                    $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
-                        .then(function success(response) {
-                            self.submitButton = "Submit";
-                        }, function failure(response) {
-                        });
+
+                self.dateStart = $filter('date')(self.dtFrom, 'dd-MM-yyyy');
+                self.dateEnd = $filter('date')(self.dtTo, 'dd-MM-yyyy');
+
+                var data =
+                    {
+                        "year": self.academicYear,
+                        "startDate": self.dateStart,
+                        "endDate": self.dateEnd
+                    };
+
+
+                self.yearEntered = self.academicYear != null;
+                self.startDateEntered = self.dtFrom != undefined;
+                self.endDateEntered = self.dtTo != undefined;
+
+                if (self.yearEntered && self.startDateEntered && self.endDateEntered) {
+
+                    var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
+
+                    self.submitButton = "Checking...";
+                    if (validDateRange) {
+                        self.submitButton = "Sending...";
+                        $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
+                            .then(function success(response) {
+                                self.submitButton = "Submit";
+                            }, function failure(response) {
+                            });
+                    }
+                    else {
+                        alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
+                        self.submitButton = "Submit";
+                    }
                 }
                 else {
-                    alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
                     self.submitButton = "Submit";
                 }
-            }
-            else {
-                self.submitButton = "Submit";
-            }
-
         };
 
         self.setYearEntered = function() {

@@ -7,24 +7,17 @@
 @import "../base/mixins/transitions";
 @import "../base/buffers";
 @import "../base/paddings";
+@import "../base/positioning";
 @import "../base/overflows";
 @import "../base/sizes";
 @import "../base/shapes";
 
 @import "../components/sideNav";
-@import "../components/searchBox";
 @import "../components/lists";
-@import "../components/modals";
-@import "../components/gallery";
+@import "../base/borders";
 
+#ng-view{overflow-y: hidden;}
 
-#viewport.middle{
-        top:28%;
-    }
-
-#viewport{
-  @include transition();
-  position: relative;
-  top:-88px;
-  overflow: visible;
+.fp-tableCell{
+  vertical-align: top;
 }
