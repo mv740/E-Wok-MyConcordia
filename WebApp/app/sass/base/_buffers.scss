@@ -11,10 +11,25 @@
 .top-buffer{
   margin-top:$buffer-md;
 }
+.top-buffer-lg{
+  margin-top:$buffer-lg;
+}
+.top-buffer-xl{
+  margin-top:$buffer-xl;
+}
+
+.side-buffer-sm{
+  margin-left: $buffer-sm;
+  margin-right: $buffer-sm;
+}
 
 .side-buffer{
   margin-left: $buffer-md;
   margin-right: $buffer-md;
+}
+
+.bottom-buffer-sm{
+  margin-bottom:$buffer-sm;
 }
 
 .bottom-buffer{

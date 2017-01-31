@@ -8,18 +8,20 @@ angular
     .module('myApp')
     .controller('EventController', EventController);
 
-EventController.$inject = ['eventService'];
+EventController.$inject = ['$modal', 'eventService'];
 
-function EventController(eventService) {
+function EventController($modal, eventService) {
 
 
 
     var event = this;
 
-    event.creating = {};
     event.moveSectionUp = moveSectionUp;
     event.moveSectionDown = moveSectionDown;
     event.submit = submit;
+    event.modify = modify;
+    event.openEventModal = openEventModal;
+    event.create = create;
 
 
     //TEMPORARY BEGIN
@@ -32,7 +34,17 @@ function EventController(eventService) {
         description: "omg so nice event",
         location: "at ma' place"
     };
-    event.events = [tmpEvent,tmpEvent,tmpEvent,tmpEvent];
+
+    var tmpEvent2 = {
+        id: "134",
+        name: "colEvent",
+        room: "cenreBell",
+        startDateStamp: "1597-07-16T19:20:30.45+01:00",
+        endDateStamp: "1297-07-16T19:20:30.45+01:00",
+        description: "og so nice event",
+        location: "a ma' place"
+    }
+    event.events = [tmpEvent,tmpEvent2];
     //TEMPORARY END
 
     event.fpOptions = {
@@ -73,7 +85,7 @@ function EventController(eventService) {
         eventService.submit(event.creating);
     }
 
-    function getEvent(eventId) {
+    function get(eventId) {
         eventService.getThisEvent(eventId).then(function(result) {
                 event.selectedEvent = result;
         });
@@ -86,7 +98,25 @@ function EventController(eventService) {
         });
     }
 
-    function modifyEvent(eventTarget) {
+    function create(){
+        event.creating = {};
+        moveSectionDown();
+    }
+
+    function modify(eventTarget) {
         event.creating = eventTarget;
+        moveSectionDown();
+    }
+
+    function openEventModal(eventTarget){
+        $modal.open({templateUrl: "partials/event/eventModal/eventModal.html",
+            controller: 'EventModalCtrl as eventModal',
+            windowClass: 'app-modal-window',
+            keyboard: true,
+            resolve: {
+                event: function () {
+                    return eventTarget;
+                }
+            }});
     }
 };

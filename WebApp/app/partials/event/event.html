@@ -7,18 +7,23 @@
                 <h1>Your events</h1>
             </div>
             <div id="createEventButton" class="height-standard">
-            <button ng-click="event.moveSectionDown()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
+            <button ng-click="event.create()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
             </div>
-            <div ng-if="event.events.length > 0">
+            <div class="top-buffer-sm" ng-if="event.events.length > 0">
             <ul class="listResults">
-                <li class="button3D top-buffer-sm" ng-repeat="result in event.events track by $index"
-                    ng-click="admin.eventClick(result)">
-                    <div>
+                <li class="top-buffer-sm" ng-repeat="result in event.events track by $index" >
+                    <div class="height-standard">
+                    <button class="button3D textLeft col-xs-12" ng-click="result.expanded = !result.expanded">
                         <span>{{result.name}},</span>
 
                         <span>{{result.startDateStamp}} {{result.lastname}},</span>
 
                         <span>{{result.room}},</span>
+                    </button>
+                    </div>
+                    <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
+                        <button ng-click="event.modify(result)" class="button3D purple buttonSmallFormat">Modify</button>
+                        <button ng-click="event.openEventModal(result)" class="button3D purple side-buffer-sm buttonSmallFormat">View details</button>
                     </div>
                 </li>
             </ul>

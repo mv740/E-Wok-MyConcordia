@@ -1,0 +1,84 @@
+<div class="validationModal container2D">
+
+    <div class="progressCircularContainer" ng-if="studentModal.loading">
+        <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+    </div>
+
+    <div ng-if="!studentModal.loading" id="modal-body">
+        <div class="cardHolder modal-element col-xs-6">
+
+            <div class="pictureAttributes side-padding text-left">
+
+                <h2 class="top-padding"><span>{{studentModal.student.firstname}} {{studentModal.student.lastname}}</span>
+                </h2>
+                <div>
+                    <span>{{studentModal.student.birthdate.month}} {{studentModal.student.birthdate.day}} {{studentModal.student.birthdate.year}}</span>
+                </div>
+                <div>
+                    <span>{{studentModal.student.netname}}</span>
+                </div>
+                <div>
+                    <span>{{studentModal.student.id}}</span>
+                </div>
+
+            </div>
+            <div class="commentBox col-xs-12 atBottom all-side-padding">
+            <span>You can add a comment here:</span>
+                <textarea ng-model="studentModal.student.pendingPicture.comments" class="col-xs-12"></textarea>
+                <button ng-click="studentModal.submitComment()" class="col-xs-12 top-buffer-sm button3D">Submit comment</button>
+            </div>
+        </div>
+        <div class="cardHolder col-xs-6">
+
+            <img class="full-width" ng-if="studentModal.student.pendingPicture"
+                 ng-src="data:image/JPEG;base64,{{studentModal.student.pendingPicture.picturE_DATA}}"/>
+            <img class="full-width" ng-if="studentModal.student.pendingPicture == null"
+                 ng-src="{{studentModal.emptyProfilePicture}}"/>
+
+            <div ng-if="studentModal.student.pendingPicture" class="row yesnoContainer">
+                <button ng-click="studentModal.sendValidation(studentModal.student.id, true)" type="button"
+                        class="btn-circle btn-yes button3D"><i class="glyphicon glyphicon-ok"></i></button>
+                <button ng-click="studentModal.sendValidation(studentModal.student.id, false)" type="button"
+                        class="btn-circle btn-no button3D"><i class="glyphicon glyphicon-remove"></i></button>
+            </div>
+
+            <div class="full-width cardHolderComponent progressCircularContainer"
+                 ng-if="studentModal.student.sendingValidation">
+                <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+            </div>
+
+            <div class="cardHolderComponent americanPieBox full-width">
+                <span class="validated all-side-padding-xs all-side-margin-sm" ng-if="studentModal.student.pendingPicture == null">NO PENDING PICTURE</span>
+                <span class="validated all-side-padding-xs all-side-margin-sm"
+                      ng-if="studentModal.student.pendingPicture && studentModal.student.wasValidated">VALIDATED</span>
+                <span class="revoked all-side-padding-xs" ng-if="studentModal.student.pendingPicture && studentModal.student.wasRevoked">REVOKED</span>
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="logsContainer" class="container2D overflow-hidden top-buffer">
+
+    <div class="side-padding top-buffer">
+    <button class="col-xs-12 button3D" ng-click="studentModal.loadLogs()"> Show logs</button>
+    <ul class="col-xs-12 top-buffer">
+        <li ng-repeat="log in studentModal.logs">
+            <p>
+                <span>{{log.action}}:</span>
+                <span>{{log.timestamp | date}}</span>
+            </p>
+        </li>
+    </ul>
+    </div>
+</div>
+
+<div id="galleryContainer" ng-if="studentModal.student.previousPictures.length > 0" class="container2D top-buffer"
+     ng-include="'partials/review/modals/studentModal/gallery/gallery.html'">
+</div>
+
+
+

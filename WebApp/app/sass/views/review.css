@@ -175,9 +175,22 @@ input, button, select, textarea {
 .top-buffer {
   margin-top: 30px; }
 
+.top-buffer-lg {
+  margin-top: 40px; }
+
+.top-buffer-xl {
+  margin-top: 50px; }
+
+.side-buffer-sm {
+  margin-left: 20px;
+  margin-right: 20px; }
+
 .side-buffer {
   margin-left: 30px;
   margin-right: 30px; }
+
+.bottom-buffer-sm {
+  margin-bottom: 20px; }
 
 .bottom-buffer {
   margin-bottom: 30px; }
@@ -220,9 +233,22 @@ input, button, select, textarea {
 .top-buffer {
   margin-top: 30px; }
 
+.top-buffer-lg {
+  margin-top: 40px; }
+
+.top-buffer-xl {
+  margin-top: 50px; }
+
+.side-buffer-sm {
+  margin-left: 20px;
+  margin-right: 20px; }
+
 .side-buffer {
   margin-left: 30px;
   margin-right: 30px; }
+
+.bottom-buffer-sm {
+  margin-bottom: 20px; }
 
 .bottom-buffer {
   margin-bottom: 30px; }
@@ -397,14 +423,8 @@ input, button, select, textarea {
     background-color: #8A0037;
     color: white; }
 
-.listResults div {
-  position: relative;
-  top: 49%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%); }
-  .listResults div span {
-    margin-right: 8px; }
+.listResults div span {
+  margin-right: 8px; }
 
 .app-modal-window .modal-dialog {
   width: 800px; }
