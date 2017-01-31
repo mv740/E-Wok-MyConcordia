@@ -9,7 +9,9 @@ angular.module('myApp', [
     'ui.bootstrap',
     'angularCSS',
     'ng.oidcclient',
-    '720kb.tooltips'
+    '720kb.tooltips',
+    'fullPage.js'
+
 
 ]).constant("myConfig", {
     "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
@@ -60,8 +62,7 @@ angular.module('myApp', [
             controller: 'LoginController',
             controllerAs: 'vm',
             authenticate : false
-        })
-        .when('/admin', {
+        }).when('/admin', {
             templateUrl : 'partials/admin/admin.html',
             css: 'sass/views/admin.css',
             authenticate : true
@@ -69,7 +70,11 @@ angular.module('myApp', [
             templateUrl: 'partials/review/review.html',
             css: 'sass/views/review.css',
             authenticate : true
-        })
+        }).when('/event', {
+        templateUrl: 'partials/event/event.html',
+        css: 'sass/views/event.css',
+        authenticate : true
+    })
         .otherwise({ redirectTo: '/login' });
 
 

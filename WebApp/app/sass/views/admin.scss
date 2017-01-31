@@ -4,6 +4,19 @@
 @import "../components/containers";
 @import "../base/positioning";
 @import "../base/buffers";
+@import "../base/paddings";
 @import "../components/icons";
 @import "../components/select";
 @import "../base/borders";
+
+#ng-view{overflow-y: hidden;}
+
+tooltip{
+  //to fix bug where width behave in an unpredicatble way
+  width:100%;
+}
+
+.fp-tableCell{
+  position: relative;
+  top:-70px;
+}

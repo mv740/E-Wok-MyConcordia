@@ -65,6 +65,9 @@ $sideNav-icon-size:25px;
     .adminIcon{
       @include setBackground($admin-icon, $sideNav-icon-size);
     }
+    .eventIcon{
+      @include setBackground($event-icon, $sideNav-icon-size);
+    }
   }
 
 
