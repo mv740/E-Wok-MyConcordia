@@ -8,14 +8,18 @@ angular
     .module('myApp')
     .controller('EventController', EventController);
 
-EventController.$inject = [];
+EventController.$inject = ['eventService'];
 
-function EventController() {
+function EventController(eventService) {
     var event = this;
 
+    event.creating = {};
     event.moveSectionUp = moveSectionUp;
     event.moveSectionDown = moveSectionDown;
+    event.submit = submit;
 
+
+    //TEMPORARY BEGIN
     var tmpEvent = {
         id: "1234",
         name: "coolEvent",
@@ -26,6 +30,7 @@ function EventController() {
         location: "at ma' place"
     };
     event.events = [tmpEvent,tmpEvent,tmpEvent,tmpEvent];
+    //TEMPORARY END
 
     event.fpOptions = {
         navigation: false,
@@ -37,12 +42,20 @@ function EventController() {
         $.fn.fullpage.setAllowScrolling(false);
     })
 
+
+
+    ////////////////////////////////////////////////////////////
+
     function moveSectionUp(){
         $.fn.fullpage.moveSectionUp();
     }
 
     function moveSectionDown(){
         $.fn.fullpage.moveSectionDown();
+    }
+
+    function submit(){
+        eventService.submit(event.creating);
     }
 
 };
