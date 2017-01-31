@@ -463,6 +463,38 @@ input, button, select, textarea {
   100% {
     opacity: 0; } }
 
+.app-modal-window .modal-dialog {
+  width: 800px; }
+
+.app-modal-window-xl .modal-dialog {
+  width: 900px; }
+
+.validationModal {
+  color: white;
+  height: 400px; }
+  .validationModal .cardHolder {
+    height: 400px; }
+  .validationModal .commentBox textarea {
+    height: 100px;
+    resize: none;
+    color: black; }
+  .validationModal .yesnoContainer {
+    position: relative;
+    bottom: 80px; }
+
+.validationModal-xl {
+  color: white;
+  height: 450px; }
+  .validationModal-xl .cardHolder {
+    height: 450px; }
+  .validationModal-xl .commentBox textarea {
+    height: 100px;
+    resize: none;
+    color: black; }
+  .validationModal-xl .yesnoContainer {
+    position: relative;
+    bottom: 80px; }
+
 #ng-view {
   overflow-y: hidden; }
 

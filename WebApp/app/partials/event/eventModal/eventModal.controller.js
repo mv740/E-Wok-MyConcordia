@@ -12,7 +12,7 @@ function EventModalCtrl($scope, $modal, $modalInstance, eventService, event) {
 
     eventModal.enlargeImage = enlargeImage;
     eventModal.close = $modalInstance.close;
-    eventModal.loading = true;
+    eventModal.loading = false;
     eventModal.emptyProfilePicture = 'images/empty-profile.png';
 
     $scope.$on("eventModal.updateEvent", updateEvent);
@@ -23,7 +23,7 @@ function EventModalCtrl($scope, $modal, $modalInstance, eventService, event) {
     function updateEvent() {
         eventModal.event = event;
 
-        eventService.getEventPictures(event.id).then(function (value) {
+        /*eventService.getEventPictures(event.id).then(function (value) {
             eventModal.event.pendingPicture = value.data.pendingPicture;
 
             var archivedPictures = value.data.archivedPictures;
@@ -34,7 +34,7 @@ function EventModalCtrl($scope, $modal, $modalInstance, eventService, event) {
             eventModal.event.previousPictures = archivedPictures;
 
             eventModal.loading = false;
-        });
+        });*/
     }
 
     function enlargeImage(image) {
