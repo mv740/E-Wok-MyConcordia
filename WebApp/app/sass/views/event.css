@@ -440,8 +440,36 @@ input, button, select, textarea {
   border-width: initial;
   border-radius: 4px; }
 
+.ng-hide-add {
+  animation: 0.3s lightSpeedOut ease; }
+
+/* when showing the picture */
+.ng-hide-remove {
+  animation: 0.3s flipInX ease; }
+
+/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
+/* flip in */
+@keyframes flipInX {
+  0% {
+    transition-timing-function: ease-in;
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+/* light speed out */
+@keyframes lightSpeedOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
 #ng-view {
   overflow-y: hidden; }
 
 .fp-tableCell {
   vertical-align: top; }
+
+.listResults li {
+  transition: ease 0.2s; }
+  .listResults li.expanded {
+    height: 112px; }
