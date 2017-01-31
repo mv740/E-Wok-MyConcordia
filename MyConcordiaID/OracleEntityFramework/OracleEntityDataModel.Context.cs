@@ -30,5 +30,7 @@ namespace OracleEntityFramework
         public virtual DbSet<PICTUREUPDATESETTING> PICTUREUPDATESETTINGs { get; set; }
         public virtual DbSet<LOG> LOGs { get; set; }
         public virtual DbSet<PICTURE> PICTUREs { get; set; }
+        public virtual DbSet<EVENT_USERS> EVENT_USERS { get; set; }
+        public virtual DbSet<EVENT> EVENTS { get; set; }
     }
 }

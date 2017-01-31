@@ -20,6 +20,7 @@ namespace OracleEntityFramework
             this.LOGs = new HashSet<LOG>();
             this.PICTUREs = new HashSet<PICTURE>();
             this.PICTUREs1 = new HashSet<PICTURE>();
+            this.EVENT_USERS = new HashSet<EVENT_USERS>();
         }
     
         public string NETNAME { get; set; }
@@ -39,5 +40,7 @@ namespace OracleEntityFramework
         public virtual ICollection<PICTURE> PICTUREs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PICTURE> PICTUREs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EVENT_USERS> EVENT_USERS { get; set; }
     }
 }
