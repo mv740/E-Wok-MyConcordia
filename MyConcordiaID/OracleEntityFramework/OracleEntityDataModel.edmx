@@ -9,11 +9,11 @@
           <Key>
             <PropertyRef Name="ID_PK" />
           </Key>
-          <Property Name="ID_PK" Type="varchar2" MaxLength="20" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="EVENT_ID_FK" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="EVENT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="STUDENT_NETNAME_FK" Type="varchar2" MaxLength="8" Nullable="false" />
           <Property Name="ROLE" Type="varchar2" MaxLength="20" Nullable="false" />
           <Property Name="STATUS" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ID_PK" Type="varchar2" MaxLength="20" Nullable="false" StoreGeneratedPattern="Identity" />
         </EntityType>
         <EntityType Name="EVENTS">
           <Key>
@@ -27,7 +27,6 @@
           <Property Name="TIME_BEGIN" Type="date" Nullable="false" />
           <Property Name="TIME_END" Type="date" Nullable="false" />
           <Property Name="TYPE" Type="varchar2" MaxLength="20" Nullable="false" />
-          <Property Name="EVENT_USER_ID" Type="varchar2" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="LOG">
           <Key>
@@ -83,7 +82,7 @@
               <PropertyRef Name="ID_PK" />
             </Principal>
             <Dependent Role="EVENT_USERS">
-              <PropertyRef Name="EVENT_ID_FK" />
+              <PropertyRef Name="EVENT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -96,18 +95,6 @@
             </Principal>
             <Dependent Role="EVENT_USERS">
               <PropertyRef Name="STUDENT_NETNAME_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EVENTS_USER_FK">
-          <End Role="EVENT_USERS" Type="Self.EVENT_USERS" Multiplicity="1" />
-          <End Role="EVENTS" Type="Self.EVENTS" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EVENT_USERS">
-              <PropertyRef Name="ID_PK" />
-            </Principal>
-            <Dependent Role="EVENTS">
-              <PropertyRef Name="EVENT_USER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -162,10 +149,6 @@
             <End Role="STUDENTS" EntitySet="STUDENTS" />
             <End Role="EVENT_USERS" EntitySet="EVENT_USERS" />
           </AssociationSet>
-          <AssociationSet Name="EVENTS_USER_FK" Association="Self.EVENTS_USER_FK">
-            <End Role="EVENT_USERS" EntitySet="EVENT_USERS" />
-            <End Role="EVENTS" EntitySet="EVENTS" />
-          </AssociationSet>
           <AssociationSet Name="LOG_FK1" Association="Self.LOG_FK1">
             <End Role="STUDENTS" EntitySet="STUDENTS" />
             <End Role="LOG" EntitySet="LOG" />
@@ -209,10 +192,6 @@
           <AssociationSet Name="EVENT_USER_NETNAME_FK" Association="OracleDataModel.EVENT_USER_NETNAME_FK">
             <End Role="STUDENT" EntitySet="STUDENTS" />
             <End Role="EVENT_USERS" EntitySet="EVENT_USERS" />
-          </AssociationSet>
-          <AssociationSet Name="EVENTS_USER_FK" Association="OracleDataModel.EVENTS_USER_FK">
-            <End Role="EVENT_USERS" EntitySet="EVENT_USERS" />
-            <End Role="EVENT" EntitySet="EVENTS" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="STUDENT">
@@ -308,14 +287,13 @@
           <Key>
             <PropertyRef Name="ID_PK" />
           </Key>
-          <Property Name="ID_PK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="EVENT_ID_FK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="EVENT_ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="STUDENT_NETNAME_FK" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Name="ROLE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="STATUS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_PK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Identity" />
           <NavigationProperty Name="EVENT" Relationship="OracleDataModel.EVENT_ID_FK" FromRole="EVENT_USERS" ToRole="EVENT" />
           <NavigationProperty Name="STUDENT" Relationship="OracleDataModel.EVENT_USER_NETNAME_FK" FromRole="EVENT_USERS" ToRole="STUDENT" />
-          <NavigationProperty Name="EVENTS" Relationship="OracleDataModel.EVENTS_USER_FK" FromRole="EVENT_USERS" ToRole="EVENT" />
         </EntityType>
         <EntityType Name="EVENT">
           <Key>
@@ -329,9 +307,7 @@
           <Property Name="TIME_BEGIN" Type="DateTime" Nullable="false" />
           <Property Name="TIME_END" Type="DateTime" Nullable="false" />
           <Property Name="TYPE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="EVENT_USER_ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EVENT_USERS" Relationship="OracleDataModel.EVENT_ID_FK" FromRole="EVENT" ToRole="EVENT_USERS" />
-          <NavigationProperty Name="EVENT_USERS1" Relationship="OracleDataModel.EVENTS_USER_FK" FromRole="EVENT" ToRole="EVENT_USERS" />
         </EntityType>
         <Association Name="EVENT_ID_FK">
           <End Type="OracleDataModel.EVENT" Role="EVENT" Multiplicity="1" />
@@ -341,7 +317,7 @@
               <PropertyRef Name="ID_PK" />
             </Principal>
             <Dependent Role="EVENT_USERS">
-              <PropertyRef Name="EVENT_ID_FK" />
+              <PropertyRef Name="EVENT_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -354,18 +330,6 @@
             </Principal>
             <Dependent Role="EVENT_USERS">
               <PropertyRef Name="STUDENT_NETNAME_FK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="EVENTS_USER_FK">
-          <End Type="OracleDataModel.EVENT_USERS" Role="EVENT_USERS" Multiplicity="1" />
-          <End Type="OracleDataModel.EVENT" Role="EVENT" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="EVENT_USERS">
-              <PropertyRef Name="ID_PK" />
-            </Principal>
-            <Dependent Role="EVENT">
-              <PropertyRef Name="EVENT_USER_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -428,18 +392,17 @@
           <EntitySetMapping Name="EVENT_USERS">
             <EntityTypeMapping TypeName="OracleDataModel.EVENT_USERS">
               <MappingFragment StoreEntitySet="EVENT_USERS">
+                <ScalarProperty Name="ID_PK" ColumnName="ID_PK" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="ROLE" ColumnName="ROLE" />
                 <ScalarProperty Name="STUDENT_NETNAME_FK" ColumnName="STUDENT_NETNAME_FK" />
-                <ScalarProperty Name="EVENT_ID_FK" ColumnName="EVENT_ID_FK" />
-                <ScalarProperty Name="ID_PK" ColumnName="ID_PK" />
+                <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EVENTS">
             <EntityTypeMapping TypeName="OracleDataModel.EVENT">
               <MappingFragment StoreEntitySet="EVENTS">
-                <ScalarProperty Name="EVENT_USER_ID" ColumnName="EVENT_USER_ID" />
                 <ScalarProperty Name="TYPE" ColumnName="TYPE" />
                 <ScalarProperty Name="TIME_END" ColumnName="TIME_END" />
                 <ScalarProperty Name="TIME_BEGIN" ColumnName="TIME_BEGIN" />

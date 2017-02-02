@@ -12,11 +12,10 @@
         <EntityTypeShape EntityType="OracleDataModel.PICTURE" Width="1.875" PointX="3.25" PointY="0.5" />
         <AssociationConnector Association="OracleDataModel.PICTURE_ADMIN_FK" />
         <AssociationConnector Association="OracleDataModel.PICTURE_STUDENT_FK" />
-        <EntityTypeShape EntityType="OracleDataModel.EVENT_USERS" Width="1.5" PointX="3.5" PointY="4.25" />
-        <EntityTypeShape EntityType="OracleDataModel.EVENT" Width="1.5" PointX="6.125" PointY="3.875" />
+        <EntityTypeShape EntityType="OracleDataModel.EVENT_USERS" Width="2.375" PointX="3.625" PointY="4.25" />
+        <EntityTypeShape EntityType="OracleDataModel.EVENT" Width="2.125" PointX="7" PointY="3.875" />
         <AssociationConnector Association="OracleDataModel.EVENT_ID_FK" />
         <AssociationConnector Association="OracleDataModel.EVENT_USER_NETNAME_FK" />
-        <AssociationConnector Association="OracleDataModel.EVENTS_USER_FK" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

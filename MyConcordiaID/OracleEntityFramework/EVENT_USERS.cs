@@ -14,21 +14,13 @@ namespace OracleEntityFramework
     
     public partial class EVENT_USERS
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public EVENT_USERS()
-        {
-            this.EVENTS = new HashSet<EVENT>();
-        }
-    
-        public string ID_PK { get; set; }
-        public string EVENT_ID_FK { get; set; }
+        public string EVENT_ID { get; set; }
         public string STUDENT_NETNAME_FK { get; set; }
         public string ROLE { get; set; }
         public string STATUS { get; set; }
+        public string ID_PK { get; set; }
     
         public virtual EVENT EVENT { get; set; }
         public virtual STUDENT STUDENT { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<EVENT> EVENTS { get; set; }
     }
 }

@@ -28,10 +28,8 @@ namespace OracleEntityFramework
         public System.DateTime TIME_BEGIN { get; set; }
         public System.DateTime TIME_END { get; set; }
         public string TYPE { get; set; }
-        public string EVENT_USER_ID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EVENT_USERS> EVENT_USERS { get; set; }
-        public virtual EVENT_USERS EVENT_USERS1 { get; set; }
     }
 }
