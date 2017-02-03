@@ -89,6 +89,15 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
           }
         }
       })
+      .state('app.events', {
+        url: '/events',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/events.html',
+            controller: 'EventsController as ev'
+          }
+        }
+      })
       .state('app.camera', {
         url: '/camera',
         views: {
