@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MyConcordiaID.Models.Event
 {
     public enum Role { Creator, Mod, Scanner, Attendee }
 
+    /// <summary>
+    ///  Tracking : used for statistic purpose only
+    ///  Registered/Attending : used for closed event 
+    ///  
+    /// </summary>
+    public enum UserStatus { Registered, Attending, Tracking, EventOrganizer }
+
     public class EventUser
     {
-        //can use user id or netname to add user to event
-        public int? UserId { get; set; }
-        public string UserNetname { get; set; }
+
+        [Required]
+        public string UserId { get; set; }
+
         public Role Role { get; set; }
-        public string EventID { get; set; }
-        public TYPE EventType { get; set; }
+
     }
 }

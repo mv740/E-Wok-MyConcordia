@@ -5,15 +5,20 @@ using System.Threading.Tasks;
 
 namespace MyConcordiaID.Models.Event
 {
-    interface IEventRepository
+    public interface IEventRepository
     {
 
-        ActionResult InsertUser(EventUser user);
-        void RemoveUser(EventUser user);
-        void InsertEvent(EventInformation information, string Netname);
-        void UpdateEvent(EventInformation information);
-        void RemoveEvent(EventCancellation cancellation);
-        IEnumerable<dynamic> GetEvents();
-        dynamic GetEvent(string eventId);
+        EventActionResult InsertUser(NewEventUser user);
+        EventActionResult RemoveUser(EventUser user);
+        void InsertEvent(NewEvent newEvent, string Netname);
+        EventActionResult UpdateEvent(EventInformation information);
+        EventActionResult RemoveEvent(EventCancelled cancellation);
+        IEnumerable<EventInformation> GetEvents();
+        IEnumerable<EventInformation> GetEventsByStatus(EventStatusType status);
+        IEnumerable<EventInformation> GetActiveEvents();
+        EventInformation GetEventById(string eventId);
+        IEnumerable<EventUserInformation> GetEventUsers(string eventId);
+        IEnumerable<dynamic> GetAdminEvents(string netname);
+        IEnumerable<dynamic> GetAttendeeEvents(string netname);
     }
 }

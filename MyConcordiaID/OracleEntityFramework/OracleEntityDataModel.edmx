@@ -27,6 +27,7 @@
           <Property Name="TIME_BEGIN" Type="date" Nullable="false" />
           <Property Name="TIME_END" Type="date" Nullable="false" />
           <Property Name="TYPE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="LOG">
           <Key>
@@ -308,6 +309,7 @@
           <Property Name="TIME_END" Type="DateTime" Nullable="false" />
           <Property Name="TYPE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="EVENT_USERS" Relationship="OracleDataModel.EVENT_ID_FK" FromRole="EVENT" ToRole="EVENT_USERS" />
+          <Property Name="STATUS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="EVENT_ID_FK">
           <End Type="OracleDataModel.EVENT" Role="EVENT" Multiplicity="1" />
@@ -403,6 +405,7 @@
           <EntitySetMapping Name="EVENTS">
             <EntityTypeMapping TypeName="OracleDataModel.EVENT">
               <MappingFragment StoreEntitySet="EVENTS">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="TYPE" ColumnName="TYPE" />
                 <ScalarProperty Name="TIME_END" ColumnName="TIME_END" />
                 <ScalarProperty Name="TIME_BEGIN" ColumnName="TIME_BEGIN" />
