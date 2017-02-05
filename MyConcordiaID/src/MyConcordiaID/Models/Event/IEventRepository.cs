@@ -20,5 +20,6 @@ namespace MyConcordiaID.Models.Event
         IEnumerable<EventUserInformation> GetEventUsers(string eventId);
         IEnumerable<dynamic> GetAdminEvents(string netname);
         IEnumerable<dynamic> GetAttendeeEvents(string netname);
+        ScannerResult RegisterScannedUser(ScannerUser user);
     }
 }

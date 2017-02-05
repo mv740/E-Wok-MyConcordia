@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyConcordiaID.Helper;
+using MyConcordiaID.Models.Event;
 using MyConcordiaID.Models.Student;
 using OracleEntityFramework;
 using System;
@@ -32,15 +33,15 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.TIME_END > today)
                 .Select(e => new EventInformation
                 {
-                   EventID = e.ID_PK,
-                   Name = e.NAME,
-                   Description = e.DESCRIPTION,
-                   Location = e.LOCATION,
-                   Room = e.ROOM,
-                   TimeBegin = e.TIME_BEGIN,
-                   TimeEnd = e.TIME_END,
-                   Type = e.TYPE,
-                   Status = e.STATUS
+                    EventID = e.ID_PK,
+                    Name = e.NAME,
+                    Description = e.DESCRIPTION,
+                    Location = e.LOCATION,
+                    Room = e.ROOM,
+                    TimeBegin = e.TIME_BEGIN,
+                    TimeEnd = e.TIME_END,
+                    Type = e.TYPE,
+                    Status = e.STATUS
                 })
                 .OrderByDescending(e => e.TimeBegin);
 
@@ -76,7 +77,7 @@ namespace MyConcordiaID.Models.Event
                 return studentEvents;
             }
             return null;
-            
+
         }
 
         /// <summary>
@@ -93,7 +94,7 @@ namespace MyConcordiaID.Models.Event
 
             // event can't be canceled or expired 
             var events = _database.EVENT_USERS
-                .Where(e => e.STUDENT_NETNAME_FK == netname && e.EVENT.STATUS != cancelled && e.EVENT.TIME_END > today )
+                .Where(e => e.STUDENT_NETNAME_FK == netname && e.EVENT.STATUS != cancelled && e.EVENT.TIME_END > today)
                 .Select(e => new AvailableEvent
                 {
                     UserRole = e.ROLE,
@@ -112,12 +113,12 @@ namespace MyConcordiaID.Models.Event
                 });
 
             var open = EventType.Open.ToString();
-            
+
 
             // event must be open & not canceled or expired
 
             var publicEvents = _database.EVENTS
-                .Where(e => e.TYPE == open && e.STATUS !=cancelled && e.TIME_END > today)
+                .Where(e => e.TYPE == open && e.STATUS != cancelled && e.TIME_END > today)
                 .Select(e => new AvailableEvent
                 {
                     UserRole = attendee,
@@ -139,7 +140,7 @@ namespace MyConcordiaID.Models.Event
             //merge list & order events
             events
                 .Concat(publicEvents)
-                .OrderByDescending(e=>e.Information.TimeBegin);
+                .OrderByDescending(e => e.Information.TimeBegin);
 
 
             return events;
@@ -238,7 +239,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.ID_PK == eventId)
                 .FirstOrDefault();
 
-            if(selectedEvent != null)
+            if (selectedEvent != null)
             {
                 var eventUsers = _database.EVENT_USERS
                     .Where(user => user.EVENT_ID == eventId)
@@ -311,7 +312,7 @@ namespace MyConcordiaID.Models.Event
         /// <returns></returns>
         public EventActionResult InsertUser(NewEventUser user)
         {
-            
+
             var selectedEvent = _database.EVENTS
                 .Where(e => e.ID_PK == user.EventID)
                 .FirstOrDefault();
@@ -347,7 +348,7 @@ namespace MyConcordiaID.Models.Event
                     //student does exist 
 
                     var status = UserStatus.Tracking.ToString(); ;
-                    if (string.Equals(selectedEvent.TYPE ,EventType.Closed.ToString(), StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(selectedEvent.TYPE, EventType.Closed.ToString(), StringComparison.OrdinalIgnoreCase))
                     {
                         status = UserStatus.Registered.ToString();
                     }
@@ -379,7 +380,69 @@ namespace MyConcordiaID.Models.Event
             else
             {
                 return EventActionResult.EventNotFound;
-            }           
+            }
+        }
+
+        /// <summary>
+        ///  Register user to a event 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public ScannerResult RegisterScannedUser(ScannerUser user)
+        {
+
+            ScannerResult processResult = new ScannerResult
+            {
+                Status = ScannerStatus.IdNotFound
+            };
+
+            var currentUser = _database.STUDENTS
+                .Where(e => e.ID == user.StudentId)
+                .FirstOrDefault();
+
+            if (currentUser != null)
+            {
+                //tracking user
+                if (user.Type == EventType.Open)
+                {
+                    EVENT_USERS newUser = new EVENT_USERS
+                    {
+                        STUDENT_NETNAME_FK = currentUser.NETNAME,
+                        ROLE = Role.Attendee.ToString(),
+                        STATUS = UserStatus.Tracking.ToString(),
+                        EVENT_ID = user.EventID,
+                    };
+
+                    _database.EVENT_USERS.Add(newUser);
+                    processResult.Status = ScannerStatus.Success;
+                }
+                else
+                {
+                    //validating his registation 
+                    var registeredUser = _database.EVENT_USERS
+                        .Where(r => r.EVENT_ID == user.EventID && r.STUDENT_NETNAME_FK == currentUser.NETNAME)
+                        .FirstOrDefault();
+
+                    if (registeredUser != null)
+                    {
+                        registeredUser.STATUS = UserStatus.Attending.ToString();
+                        _database.SaveChanges();
+                        processResult.Status = ScannerStatus.Success;
+
+                    }
+                    else
+                    {
+                        processResult.Status = ScannerStatus.UserWasNotRegistered;
+                    }
+
+
+                }
+
+
+            }
+
+            return processResult;
+
         }
 
         /// <summary>
@@ -394,7 +457,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.ID_PK == cancellation.EventId)
                 .FirstOrDefault();
 
-            if(removeEvent != null)
+            if (removeEvent != null)
             {
                 //canceled event
                 removeEvent.STATUS = EventStatusType.Cancelled.ToString();
@@ -419,7 +482,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(u => u.ID_PK == user.UserId)
                 .FirstOrDefault();
 
-            if(userToRemove != null)
+            if (userToRemove != null)
             {
                 _database.EVENT_USERS.Remove(userToRemove);
                 _database.SaveChanges();
@@ -445,7 +508,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.ID_PK == information.EventID)
                 .FirstOrDefault();
 
-            if(updateEvent != null)
+            if (updateEvent != null)
             {
                 updateEvent.NAME = information.Name;
                 updateEvent.DESCRIPTION = information.Description;

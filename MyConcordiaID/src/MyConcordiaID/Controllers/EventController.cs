@@ -292,16 +292,47 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="netname"></param>
         /// <returns></returns>
+        /// <remarks>Must be authenticated!</remarks>
         /// <response code="200">List of events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
+        [Authorize]
         [HttpGet]
-        [Route("user/{netname}")]
-        public IActionResult GetAttendeeEvents(string netname)
+        [Route("user")]
+        public IActionResult GetAttendeeEvents()
         {
-            var events = _eventRepo.GetAttendeeEvents(netname);
+            var authenticatedUser = getAuthenticatedUserNetname();
+            var events = _eventRepo.GetAttendeeEvents(authenticatedUser);
 
             return new ObjectResult(events);
         }
+
+        /// <summary>
+        /// FOR MOBILE
+        ///  Scanned user is registed to a event
+        /// </summary>
+        /// <remarks>Must be authenticated!</remarks>
+        /// <returns></returns>
+        /// <response code="200">User was found </response>
+        /// <response code="404">User id not found </response>
+        [Authorize]
+        [HttpPost]
+        [Route("scanner")]
+        [ProducesResponseType(typeof(ScannerResult), 200)]
+        public IActionResult PostRegisterScannedUser([FromBody] ScannerUser user)
+        {
+            var scannerResult = _eventRepo.RegisterScannedUser(user);
+            
+            if(scannerResult.Status == ScannerStatus.IdNotFound)
+            {
+                return NotFound();
+            }
+
+            return new ObjectResult(scannerResult);
+        }
+
+
+
+
 
         [ApiExplorerSettings(IgnoreApi = true)]
         public string getAuthenticatedUserNetname()
