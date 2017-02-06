@@ -20,18 +20,19 @@
         console.log("enter");
 
         getEventList();
+        
       }
     });
 
 
-    ev.second = "2nd item"
-
     function getEventList(){
       StudentService.fetchEvents()
         .then(function successCallback(response){
-          ev.value = response;
+          ev.value = response.data[0].eventID;
+          ev.second = response.data[0];
+          ev.events = response.data;
+
         }, function errorCallback(response){
-          ev.value = response;
           console.log(response);
         });
     }

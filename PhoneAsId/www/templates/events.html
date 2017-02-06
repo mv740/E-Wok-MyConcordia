@@ -2,14 +2,12 @@
   <ion-content>
     <ion-list >
 
-      <ion-item>
-        <p>{{ev.value}}</p>
+      <ion-item ng-repeat="event in ev.events">
+        <p>Event name: {{event.name}}</p>
+        <p>Event location: {{event.location}}</p>
+        <p>Event time: From {{event.timeBegin}} To {{event.timeEnd}}</p>
       </ion-item>
 
-
-      <ion-item>
-        <p> {{ev.second}}</p>
-      </ion-item>
 
 
     </ion-list>
