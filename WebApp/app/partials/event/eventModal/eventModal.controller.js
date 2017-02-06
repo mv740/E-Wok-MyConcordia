@@ -12,7 +12,6 @@ function EventModalCtrl($scope, $modal, $modalInstance, eventService, event) {
 
     eventModal.enlargeImage = enlargeImage;
     eventModal.close = $modalInstance.close;
-    eventModal.loading = false;
     eventModal.emptyProfilePicture = 'images/empty-profile.png';
 
     $scope.$on("eventModal.updateEvent", updateEvent);

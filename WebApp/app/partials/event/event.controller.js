@@ -22,6 +22,7 @@ function EventController($modal, eventService) {
     event.modify = modify;
     event.openEventModal = openEventModal;
     event.create = create;
+    var toast;
 
 
     //TEMPORARY BEGIN
@@ -82,19 +83,41 @@ function EventController($modal, eventService) {
     }
 
     function submit(){
-        eventService.submit(event.creating);
+        toast = $mdToast.show(
+            $mdToast.simple()
+                .textContent('Working...')
+                .position("bottom right")
+                .hideDelay(0)
+        );
+        eventService.submit(event.creating).then(function(){
+            $mdToast.hide(toast);
+        });
     }
 
     function get(eventId) {
+        toast = $mdToast.show(
+            $mdToast.simple()
+                .textContent('Working...')
+                .position("bottom right")
+                .hideDelay(0)
+        );
         eventService.getThisEvent(eventId).then(function(result) {
                 event.selectedEvent = result;
+            $mdToast.hide(toast);
         });
 
     }
 
     function getEvents() {
+        toast = $mdToast.show(
+            $mdToast.simple()
+                .textContent('Working...')
+                .position("bottom right")
+                .hideDelay(0)
+        );
         eventService.getAllEvents().then(function(result) {
             event.events = result;
+            $mdToast.hide(toast);
         });
     }
 

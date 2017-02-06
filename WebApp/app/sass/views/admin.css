@@ -132,6 +132,9 @@ h2 {
 input, button, select, textarea {
   outline: none; }
 
+md-toast {
+  z-index: 10000; }
+
 .button3D {
   background-color: white;
   height: 46px;

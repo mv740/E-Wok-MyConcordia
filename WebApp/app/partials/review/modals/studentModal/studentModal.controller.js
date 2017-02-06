@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .controller('StudentModalCtrl', StudentModalCtrl);
 
-StudentModalCtrl.$inject = ['$scope', '$modal', '$modalInstance', 'studentService', 'student'];
+StudentModalCtrl.$inject = ['$scope', '$mdToast', '$modal', '$modalInstance', 'studentService', 'student'];
 
-function StudentModalCtrl($scope, $modal, $modalInstance, studentService, student) {
+function StudentModalCtrl($scope, $mdToast, $modal, $modalInstance, studentService, student) {
 
     var studentModal = this;
 
@@ -15,7 +15,12 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
     studentModal.loadLogs = loadLogs;
     studentModal.submitComment = submitComment;
     studentModal.close = $modalInstance.close;
-    studentModal.loading = true;
+    var toast = $mdToast.show(
+        $mdToast.simple()
+            .textContent('Working...')
+            .position("bottom right")
+            .hideDelay(0)
+    );
     studentModal.emptyProfilePicture = 'images/empty-profile.png';
 
     $scope.$on("StudentModal.updateStudent", updateStudent);
@@ -25,11 +30,16 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
     //////////////////////////
 
     function sendValidation(id, valid){
-        studentModal.student.sendingValidation = true;
+        toast = $mdToast.show(
+            $mdToast.simple()
+                .textContent('Sending validation...')
+                .position("bottom right")
+                .hideDelay(0)
+        );
         studentModal.student.valid = valid;
         studentService.sendValidation(id,valid).then(
             function(){
-                studentModal.student.sendingValidation = false;
+                $mdToast.hide(toast);
                 if (studentModal.student.valid) studentModal.student.wasValidated = true;
                 else if (!studentModal.student.valid) studentModal.student.wasRevoked = true;
 
@@ -57,7 +67,7 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
             }
             studentModal.student.previousPictures = archivedPictures;
 
-            studentModal.loading = false;
+            $mdToast.hide(toast);
         });
     }
 

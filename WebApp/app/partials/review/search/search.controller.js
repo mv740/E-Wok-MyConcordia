@@ -8,9 +8,9 @@ angular
     .module('myApp')
     .controller('SearchCtrl', SearchCtrl);
 
-SearchCtrl.$inject = ['$modal', 'studentService', 'searchParsingService', 'dateParsingService'];
+SearchCtrl.$inject = ['$mdToast', '$modal', 'studentService', 'searchParsingService', 'dateParsingService'];
 
-function SearchCtrl($modal, studentService, searchParsingService, dateParsingService) {
+function SearchCtrl($mdToast, $modal, studentService, searchParsingService, dateParsingService) {
 
     var search = this;
 
@@ -20,11 +20,18 @@ function SearchCtrl($modal, studentService, searchParsingService, dateParsingSer
     search.input = "";
     search.emptyResults = false;
 
+    var toast;
+
     ///////////////////
 
     function find() {
         search.initialState = false;
-        search.searching = true;
+        toast = $mdToast.show(
+            $mdToast.simple()
+                .textContent('Working...')
+                .position("bottom right")
+                .hideDelay(0)
+        );
         search.results = [];
         search.emptyResults = false;
 
@@ -62,7 +69,7 @@ function SearchCtrl($modal, studentService, searchParsingService, dateParsingSer
     }
 
     function setResults(results) {
-        search.searching = false;
+        $mdToast.hide(toast);
         search.results = results;
         search.emptyResults = search.results.length == 0;
         parseDOB();

@@ -4,15 +4,16 @@ angular
     .module('myApp')
     .controller('ImageModalCtrl', ImageModalCtrl);
 
-ImageModalCtrl.$inject = ['$rootScope', '$modalInstance', 'studentService', 'dateParsingService', 'image'];
+ImageModalCtrl.$inject = ['$rootScope', '$mdToast', '$modalInstance', 'studentService', 'dateParsingService', 'image'];
 
-function ImageModalCtrl($rootScope, $modalInstance, studentService, dateParsingService, image) {
+function ImageModalCtrl($rootScope, $mdToast, $modalInstance, studentService, dateParsingService, image) {
 
     var imageModal = this;
     imageModal.close = $modalInstance.close;
     imageModal.sendValidation = sendValidation;
     imageModal.approved = approved;
     imageModal.denied = denied;
+    var toast;
 
     $modalInstance.opened.then(setImage);
 
@@ -27,9 +28,14 @@ function ImageModalCtrl($rootScope, $modalInstance, studentService, dateParsingS
     function sendValidation(id, valid){
         //allow to send validation only if the request applies to the status of the picture. eg validate a previously denied picture
         if ((valid && denied()) || (!valid && approved())){
-            imageModal.sendingBackToValidation = true;
+            toast = $mdToast.show(
+                $mdToast.simple()
+                    .textContent('Working...')
+                    .position("bottom right")
+                    .hideDelay(0)
+            );
             studentService.validateArchived(id, valid).then(function(){
-                imageModal.sendingBackToValidation = false;
+                $mdToast.hide(toast);
                 if (valid){
                     imageModal.wasValidated = true;
                 }

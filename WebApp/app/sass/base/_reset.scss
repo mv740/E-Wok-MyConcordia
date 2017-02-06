@@ -34,3 +34,7 @@ h2{
 input, button, select, textarea{
   outline:none;
 }
+
+md-toast{
+  z-index:10000;
+}

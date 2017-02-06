@@ -5,11 +5,11 @@
         .module('myApp')
         .controller('AdminController', AdminController);
 
-    AdminController.$inject = ['$http', 'myConfig', 'studentService', 'dateParsingService', '$filter'];
+    AdminController.$inject = ['$http', '$mdToast', 'myConfig', 'studentService', 'dateParsingService', '$filter'];
 
-    function AdminController($http, myConfig, studentService, dateParsingService, $filter) {
+    function AdminController($http, $mdToast, myConfig, studentService, dateParsingService, $filter) {
         var self = this;
-
+var toast;
         self.fpOptions = {
             navigation: false,
             keyboardScrolling: false,
@@ -68,7 +68,6 @@
             self.loading = false;
         });
 
-        self.submitButton = "Submit";
 
 
         function moveSectionDown(){
@@ -81,7 +80,6 @@
 
         self.submit = function UpdatePeriod() {
 
-                self.submitButton = "Checking...";
 
                 self.dateStart = $filter('date')(self.dtFrom, 'dd-MM-yyyy');
                 self.dateEnd = $filter('date')(self.dtTo, 'dd-MM-yyyy');
@@ -102,22 +100,26 @@
 
                     var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
 
-                    self.submitButton = "Checking...";
                     if (validDateRange) {
-                        self.submitButton = "Sending...";
+                        toast = $mdToast.show(
+                            $mdToast.simple()
+                                .textContent('Working...')
+                                .position("bottom right")
+                                .hideDelay(0)
+                        );
                         $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
                             .then(function success(response) {
-                                self.submitButton = "Submit";
+                                $mdToast.hide(toast);
                             }, function failure(response) {
                             });
                     }
                     else {
                         alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
-                        self.submitButton = "Submit";
+                        $mdToast.hide(toast);
                     }
                 }
                 else {
-                    self.submitButton = "Submit";
+                    $mdToast.hide(toast);
                 }
         };
 
