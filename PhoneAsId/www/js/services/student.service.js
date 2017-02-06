@@ -41,5 +41,9 @@ angular.module('starter.services', [])
       return $http.get(urlBase +'/student/UpdatePeriod');
     };
 
+    StudentService.fetchEvents = function(){
+      return $http.get(urlBase +'/Event');
+    };
+
     return StudentService;
   }]);
