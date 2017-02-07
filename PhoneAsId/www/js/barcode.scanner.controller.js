@@ -16,7 +16,15 @@
 
     bc.scanData = [];
     $cordovaNativeAudio.preloadSimple('beep', 'audio/beep.mp3');
-    bc.eventData = EventService.data;
+
+    $scope.$on('$ionicView.enter', function (e) {
+      if (e.targetScope !== $scope) {
+        return;
+      } else {
+        bc.eventData = EventService.data;
+      }
+    });
+
 
     bc.scanBarcode = function() {
       $cordovaBarcodeScanner.scan().then(function(imageData) {

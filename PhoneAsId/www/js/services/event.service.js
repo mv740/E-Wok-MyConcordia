@@ -7,9 +7,6 @@ angular.module('starter.services')
 
     var EventService = {};
 
-    EventService.addEvent = function(event){
-      EventService.data = event;
-    };
 
     return EventService;
   });

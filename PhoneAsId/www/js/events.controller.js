@@ -15,7 +15,7 @@
 
     ev.seeEventDetails = function(eventid){
       console.log(eventid);//eventid is the index where the clicked event data is
-      EventService.addEvent(ev.events[eventid]);
+      EventService.data = ev.events[eventid];
       $state.go('app.barcode');
     };
 
