@@ -13,6 +13,11 @@
   function EventsController($rootScope, $scope, $state, StudentService){
     var ev = this;
 
+    ev.seeEventDetails = function(eventid){
+      console.log(eventid);//eventid is the index where the clicked event data is
+      $state.go('app.barcode');
+    };
+
     $scope.$on('$ionicView.enter', function (e){
       if (e.targetScope !== $scope) {
         return;

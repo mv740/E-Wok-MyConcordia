@@ -2,7 +2,7 @@
   <ion-content>
     <ion-list >
 
-      <ion-item ng-repeat="event in ev.events">
+      <ion-item ng-repeat="event in ev.events" ng-click="ev.seeEventDetails($index)">
         <p>Event name: {{event.name}}</p>
         <p>Event location: {{event.location}}</p>
         <p>Event time: From {{event.timeBegin}} To {{event.timeEnd}}</p>
