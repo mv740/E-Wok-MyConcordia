@@ -3,6 +3,7 @@
 
     <div >
       <p>Barcode Scanner</p>
+      <p>{{bc.eventData}}</p>
       <button  ng-click="bc.scanBarcode()">SCAN</button>
 
       <div ng-if="bc.scanData.length == 0 ">

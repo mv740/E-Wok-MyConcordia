@@ -9,13 +9,14 @@
     .module('starter')
     .controller('BarcodeController', BarcodeController);
 
-  BarcodeController.$inject = ['$rootScope', '$scope', '$state', '$cordovaBarcodeScanner', '$cordovaNativeAudio'];
+  BarcodeController.$inject = ['$rootScope', '$scope', '$state', '$cordovaBarcodeScanner', '$cordovaNativeAudio', 'EventService'];
 
-  function BarcodeController($rootScope, $scope, $state, $cordovaBarcodeScanner, $cordovaNativeAudio) {
+  function BarcodeController($rootScope, $scope, $state, $cordovaBarcodeScanner, $cordovaNativeAudio, EventService) {
     var bc = this;
 
     bc.scanData = [];
     $cordovaNativeAudio.preloadSimple('beep', 'audio/beep.mp3');
+    bc.eventData = EventService.data;
 
     bc.scanBarcode = function() {
       $cordovaBarcodeScanner.scan().then(function(imageData) {

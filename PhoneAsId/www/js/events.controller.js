@@ -8,13 +8,14 @@
     .module('starter')
     .controller('EventsController', EventsController);
 
-  EventsController.$inject = ['$rootScope', '$scope', '$state', 'StudentService'];
+  EventsController.$inject = ['$rootScope', '$scope', '$state', 'StudentService', 'EventService'];
 
-  function EventsController($rootScope, $scope, $state, StudentService){
+  function EventsController($rootScope, $scope, $state, StudentService, EventService){
     var ev = this;
 
     ev.seeEventDetails = function(eventid){
       console.log(eventid);//eventid is the index where the clicked event data is
+      EventService.addEvent(ev.events[eventid]);
       $state.go('app.barcode');
     };
 
@@ -33,8 +34,6 @@
     function getEventList(){
       StudentService.fetchEvents()
         .then(function successCallback(response){
-          ev.value = response.data[0].eventID;
-          ev.second = response.data[0];
           ev.events = response.data;
 
         }, function errorCallback(response){
