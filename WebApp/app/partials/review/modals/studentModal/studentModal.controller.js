@@ -15,17 +15,13 @@ function StudentModalCtrl($scope, $mdToast, $modal, $modalInstance, studentServi
     studentModal.loadLogs = loadLogs;
     studentModal.submitComment = submitComment;
     studentModal.close = $modalInstance.close;
-    var toast = $mdToast.show(
-        $mdToast.simple()
-            .textContent('Working...')
-            .position("bottom right")
-            .hideDelay(0)
-    );
+    var toast;
     studentModal.emptyProfilePicture = 'images/empty-profile.png';
 
     $scope.$on("StudentModal.updateStudent", updateStudent);
     $modalInstance.opened.then(updateStudent);
     $modalInstance.result.then(resetModal);
+    $modalInstance.closed.then(resetModal);
 
     //////////////////////////
 
@@ -44,7 +40,8 @@ function StudentModalCtrl($scope, $mdToast, $modal, $modalInstance, studentServi
                 else if (!studentModal.student.valid) studentModal.student.wasRevoked = true;
 
                 setTimeout(function(){
-                    $modalInstance.close();
+                    resetModal();
+                    //$modalInstance.close();
                     updateStudent();
                 }, 2000);
             },
@@ -55,6 +52,12 @@ function StudentModalCtrl($scope, $mdToast, $modal, $modalInstance, studentServi
     }
 
     function updateStudent() {
+            toast = $mdToast.show(
+            $mdToast.simple()
+                .textContent('Working...')
+                .position("bottom right")
+                .hideDelay(0)
+        );
         studentModal.student = student;
 
         studentService.getStudentPictures(student.id).then(function (value) {
@@ -91,6 +94,7 @@ function StudentModalCtrl($scope, $mdToast, $modal, $modalInstance, studentServi
 
     function resetModal(){
         studentModal.logs = undefined;
+        studentModal.student = undefined;
     }
 
     function submitComment(){
