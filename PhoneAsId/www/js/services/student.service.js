@@ -42,7 +42,7 @@ angular.module('starter.services', [])
     };
 
     StudentService.fetchEvents = function(){
-      return $http.get(urlBase +'/Event');
+      return $http.get(urlBase +'/Event/user');
     };
 
     return StudentService;
