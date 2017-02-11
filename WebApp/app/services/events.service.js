@@ -11,7 +11,8 @@ function eventService() {
         getAllEvents: getAllEvents,
         submit: submit,
         updateEvent: updateEvent,
-        deleteEvent: deleteEvent
+        deleteEvent: deleteEvent,
+        setUserRole: setUserRole
     }
 
     return service;
@@ -103,6 +104,29 @@ function eventService() {
             },
             function (failure) {
                 console.log('deleteEvent failure');
+                deferred.resolve(failure);
+            });
+
+        return deferred.promise;
+    }
+
+    function setUserRole(role) {
+        var deferred = $q.defer();
+
+        $http({
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'PUT',
+            url: myConfig.baseUrl + myConfig.eventUser,
+            data: role
+        }).then(
+            function (value) {
+                deferred.resolve(value);
+            },
+            function (failure) {
+                console.log('setUserRole failure');
                 deferred.resolve(failure);
             });
 
