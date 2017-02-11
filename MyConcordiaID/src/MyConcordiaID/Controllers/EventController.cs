@@ -163,6 +163,25 @@ namespace MyConcordiaID.Controllers
         }
 
         /// <summary>
+        ///  update a user's role
+        /// </summary>
+        /// <param name="user"></param>
+        /// <response code="200">user update</response>
+        /// <response code="404">user invalid</response>
+        [AllowAnonymous]
+        [HttpPut]
+        [Route("user")]
+        public IActionResult UpdateEventUser([FromBody] EventUser user)
+        {
+            var result = _eventRepo.UpdateUser(user);
+            if (result != EventActionResult.Success)
+            {
+                return NotFound();
+            }
+            return Ok();
+        }
+
+        /// <summary>
         ///  remove a user from an event
         /// </summary>
         /// <param name="user"></param>
@@ -180,6 +199,7 @@ namespace MyConcordiaID.Controllers
             }
             return Ok();
         }
+
 
         /// <summary>
         ///  Retrieve a specific event's users
@@ -298,6 +318,7 @@ namespace MyConcordiaID.Controllers
         [Authorize]
         [HttpGet]
         [Route("user")]
+        [ProducesResponseType(typeof(IEnumerable<AvailableEvent>), 200)]
         public IActionResult GetAttendeeEvents()
         {
             var authenticatedUser = getAuthenticatedUserNetname();

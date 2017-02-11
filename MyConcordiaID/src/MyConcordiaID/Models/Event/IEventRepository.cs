@@ -9,6 +9,7 @@ namespace MyConcordiaID.Models.Event
     {
 
         EventActionResult InsertUser(NewEventUser user);
+        EventActionResult UpdateUser(EventUser user);
         EventActionResult RemoveUser(EventUser user);
         void InsertEvent(NewEvent newEvent, string Netname);
         EventActionResult UpdateEvent(EventInformation information);
@@ -19,7 +20,7 @@ namespace MyConcordiaID.Models.Event
         EventInformation GetEventById(string eventId);
         IEnumerable<EventUserInformation> GetEventUsers(string eventId);
         IEnumerable<dynamic> GetAdminEvents(string netname);
-        IEnumerable<dynamic> GetAttendeeEvents(string netname);
+        IEnumerable<AvailableEvent> GetAttendeeEvents(string netname);
         ScannerResult RegisterScannedUser(ScannerUser user);
     }
 }

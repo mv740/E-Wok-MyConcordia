@@ -85,7 +85,7 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="netname"></param>
         /// <returns>List of events</returns>
-        public IEnumerable<dynamic> GetAttendeeEvents(string netname)
+        public IEnumerable<AvailableEvent> GetAttendeeEvents(string netname)
         {
             var today = DateTime.UtcNow;
             var cancelled = EventStatusType.Cancelled.ToString();
@@ -110,7 +110,8 @@ namespace MyConcordiaID.Models.Event
                         Type = e.EVENT.TYPE,
                         Status = e.EVENT.STATUS
                     }
-                });
+                })
+                .ToList();
 
             var open = EventType.Open.ToString();
 
@@ -134,13 +135,15 @@ namespace MyConcordiaID.Models.Event
                         Type = e.TYPE,
                         Status = e.STATUS
                     }
-                });
+                })
+                .ToList();
 
 
             //merge list & order events
-            events
+            events = events
                 .Concat(publicEvents)
-                .OrderByDescending(e => e.Information.TimeBegin);
+                .OrderByDescending(e => e.Information.TimeBegin)
+                .ToList();
 
 
             return events;
@@ -536,6 +539,23 @@ namespace MyConcordiaID.Models.Event
                 return EventActionResult.EventNotFound;
             }
 
+        }
+
+        public EventActionResult UpdateUser(EventUser user)
+        {
+            var existingUser = _database.EVENT_USERS
+                .Where(u => u.ID_PK == user.UserId)
+                .FirstOrDefault();
+
+            if(existingUser != null)
+            {
+                existingUser.ROLE = user.Role.ToString();
+                _database.SaveChanges();
+
+                return EventActionResult.Success;
+            }
+
+            return EventActionResult.UserNotFound;
         }
     }
 }
