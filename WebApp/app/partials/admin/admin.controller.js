@@ -5,11 +5,11 @@
         .module('myApp')
         .controller('AdminController', AdminController);
 
-    AdminController.$inject = ['$http', '$mdToast', 'myConfig', 'studentService', 'dateParsingService', '$filter'];
+    AdminController.$inject = ['$http', 'myConfig', 'studentService', 'dateParsingService', '$filter'];
 
-    function AdminController($http, $mdToast, myConfig, studentService, dateParsingService, $filter) {
+    function AdminController($http, myConfig, studentService, dateParsingService, $filter) {
         var self = this;
-var toast;
+
         self.fpOptions = {
             navigation: false,
             keyboardScrolling: false,
@@ -101,25 +101,19 @@ var toast;
                     var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
 
                     if (validDateRange) {
-                        toast = $mdToast.show(
-                            $mdToast.simple()
-                                .textContent('Working...')
-                                .position("bottom right")
-                                .hideDelay(0)
-                        );
                         $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
                             .then(function success(response) {
-                                $mdToast.hide(toast);
+
                             }, function failure(response) {
                             });
                     }
                     else {
                         alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
-                        $mdToast.hide(toast);
+
                     }
                 }
                 else {
-                    $mdToast.hide(toast);
+
                 }
         };
 

@@ -4,7 +4,9 @@ angular
     .module('myApp')
     .factory('eventService', eventService);
 
-function eventService() {
+eventService.$inject = [ '$q', 'toastedHttpService', 'myConfig'];
+
+function eventService($q, toastedHttp, myConfig) {
 
     var service = {
         getThisEvent: getThisEvent,
@@ -20,7 +22,7 @@ function eventService() {
     function getThisEvent(id) {
         var deferred = $q.defer();
 
-        $http.get(myConfig.baseUrl + myConfig.getEvent + id).then(function (value) {
+        toastedHttp.get({param:id, topUrl: myConfig.getEvent}).then(function (value) {
             deferred.resolve(value);
         },function (failure) {
             console.log('getThisEvent failure');
@@ -32,15 +34,7 @@ function eventService() {
     function submit(event){
         var deferred = $q.defer();
 
-        $http({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            url: myConfig.baseUrl + myConfig.event,
-            data: event
-        }).then(
+        toastedHttp.post(event, myConfig.event).then(
             function (value) {
                 deferred.resolve(value);
             },
@@ -55,7 +49,7 @@ function eventService() {
     function getAllEvents() {
         var deferred = $q.defer();
 
-        $http.get(myConfig.baseUrl + myConfig.event).then(function (value) {
+       toastedHttp.get({topUrl: myConfig.event}).then(function (value) {
             deferred.resolve(value);
         },function (failure) {
             console.log('getAllEvents failure');
@@ -67,15 +61,7 @@ function eventService() {
     function updateEvent(event) {
         var deferred = $q.defer();
 
-        $http({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'PUT',
-            url: myConfig.baseUrl + myConfig.event,
-            data: event
-        }).then(
+        toastedHttp.put(event, myConfig.event).then(
             function (value) {
                 deferred.resolve(value);
             },
@@ -90,15 +76,7 @@ function eventService() {
     function deleteEvent(event) {
         var deferred = $q.defer();
 
-        $http({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'DELETE',
-            url: myConfig.baseUrl + myConfig.event,
-            data: event
-        }).then(
+        toastedHttp.del(event, myConfig.event).then(
             function (value) {
                 deferred.resolve(value);
             },
@@ -113,15 +91,7 @@ function eventService() {
     function setUserRole(role) {
         var deferred = $q.defer();
 
-        $http({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'PUT',
-            url: myConfig.baseUrl + myConfig.eventUser,
-            data: role
-        }).then(
+        toastedHttp.put(role, myConfig.eventUser).then(
             function (value) {
                 deferred.resolve(value);
             },

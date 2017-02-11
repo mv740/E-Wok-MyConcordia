@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .controller('StudentModalCtrl', StudentModalCtrl);
 
-StudentModalCtrl.$inject = ['$scope', '$mdToast', '$modal', '$modalInstance', 'studentService', 'student'];
+StudentModalCtrl.$inject = ['$scope', '$modal', '$modalInstance', 'studentService', 'student'];
 
-function StudentModalCtrl($scope, $mdToast, $modal, $modalInstance, studentService, student) {
+function StudentModalCtrl($scope, $modal, $modalInstance, studentService, student) {
 
     var studentModal = this;
 
@@ -15,27 +15,18 @@ function StudentModalCtrl($scope, $mdToast, $modal, $modalInstance, studentServi
     studentModal.loadLogs = loadLogs;
     studentModal.submitComment = submitComment;
     studentModal.close = $modalInstance.close;
-    var toast;
     studentModal.emptyProfilePicture = 'images/empty-profile.png';
 
     $scope.$on("StudentModal.updateStudent", updateStudent);
     $modalInstance.opened.then(updateStudent);
     $modalInstance.result.then(resetModal);
-    $modalInstance.closed.then(resetModal);
 
     //////////////////////////
 
     function sendValidation(id, valid){
-        toast = $mdToast.show(
-            $mdToast.simple()
-                .textContent('Sending validation...')
-                .position("bottom right")
-                .hideDelay(0)
-        );
         studentModal.student.valid = valid;
         studentService.sendValidation(id,valid).then(
             function(){
-                $mdToast.hide(toast);
                 if (studentModal.student.valid) studentModal.student.wasValidated = true;
                 else if (!studentModal.student.valid) studentModal.student.wasRevoked = true;
 
@@ -52,12 +43,6 @@ function StudentModalCtrl($scope, $mdToast, $modal, $modalInstance, studentServi
     }
 
     function updateStudent() {
-            toast = $mdToast.show(
-            $mdToast.simple()
-                .textContent('Working...')
-                .position("bottom right")
-                .hideDelay(0)
-        );
         studentModal.student = student;
 
         studentService.getStudentPictures(student.id).then(function (value) {
@@ -70,7 +55,7 @@ function StudentModalCtrl($scope, $mdToast, $modal, $modalInstance, studentServi
             }
             studentModal.student.previousPictures = archivedPictures;
 
-            $mdToast.hide(toast);
+
         });
     }
 
