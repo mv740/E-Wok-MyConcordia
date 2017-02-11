@@ -1,21 +1,33 @@
 <ion-view>
   <ion-content>
 
-    <div >
-      <p>Barcode Scanner</p>
-      <p>{{bc.eventData}}</p>
-      <button  ng-click="bc.scanBarcode()">SCAN</button>
+    <div>
+      <h1>Event Details</h1>
 
-      <div ng-if="bc.scanData.length == 0 ">
-        No data has been scanned yet
+      <p>Name: {{bc.eventData.information.name}}</p>
+      <p>Description: {{bc.eventData.information.description}}</p>
+      <p>Location: {{bc.eventData.information.location}}</p>
+      <p>Room: {{bc.eventData.information.room}}</p>
+      <p>Start time: {{bc.eventData.information.timeBegin}}</p>
+      <p>End time: {{bc.eventData.information.timeEnd}}</p>
+      <p>Type: {{bc.eventData.information.type}}</p>
+      <p>Status: {{bc.eventData.information.status}}</p>
+      <br><br>
+
+      <button ng-if="bc.eventData.userRole == 'Mod'" ng-click="bc.scanBarcode()">SCAN</button>
+      <br><br>
+
+      <div ng-if="bc.eventData.userRole == 'Mod' && bc.scanData.length == 0 ">
+        You are registered as a moderator for this event. Press the scan button to begin registering attendees.
       </div>
 
-      <div ng-if="bc.scanData.length > 0 ">
-        Here are the values that were scanned:
-        <p ng-repeat="data in bc.scanData">{{data}}</p>
+      <div ng-if="bc.eventData.userRole == 'Mod' && bc.scanData.length > 0">
+        <p>Barcode ID: {{bc.barcodeID}}</p>
+        <p>Response: {{bc.responseMsg}}</p>
       </div>
 
-      </div>
+
+    </div>
 
     </div>
 
