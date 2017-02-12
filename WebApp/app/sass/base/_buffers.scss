@@ -18,6 +18,11 @@
   margin-top:$buffer-xl;
 }
 
+.side-buffer-xs-inverse{
+  margin-left: -$buffer-xs;
+  margin-right: -$buffer-xs;
+}
+
 .side-buffer-sm{
   margin-left: $buffer-sm;
   margin-right: $buffer-sm;

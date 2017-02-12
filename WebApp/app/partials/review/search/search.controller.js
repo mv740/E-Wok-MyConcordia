@@ -36,7 +36,7 @@ function SearchCtrl($modal, studentService, searchParsingService, dateParsingSer
             var params = searchParsingService.parseSearchInput(search.input);
             console.log(JSON.stringify(params));
             studentService.search(params).then(function (value) {
-                setResults(value.data);
+                setResults(value);
             });
         }
 
@@ -45,7 +45,7 @@ function SearchCtrl($modal, studentService, searchParsingService, dateParsingSer
     //temporary until find can parse parameters
     function getAllStudents() {
         studentService.getStudents().then(function (value) {
-            setResults(value.data);
+            setResults(value);
         });
     }
 

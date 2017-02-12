@@ -184,6 +184,10 @@ md-toast {
 .top-buffer-xl {
   margin-top: 50px; }
 
+.side-buffer-xs-inverse {
+  margin-left: -10px;
+  margin-right: -10px; }
+
 .side-buffer-sm {
   margin-left: 20px;
   margin-right: 20px; }
@@ -241,6 +245,10 @@ md-toast {
 
 .top-buffer-xl {
   margin-top: 50px; }
+
+.side-buffer-xs-inverse {
+  margin-left: -10px;
+  margin-right: -10px; }
 
 .side-buffer-sm {
   margin-left: 20px;
@@ -497,6 +505,16 @@ md-toast {
   .validationModal-xl .yesnoContainer {
     position: relative;
     bottom: 80px; }
+
+.sleekScrollable {
+  overflow-y: auto; }
+  .sleekScrollable::-webkit-scrollbar {
+    width: 1em; }
+  .sleekScrollable::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
+  .sleekScrollable::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey; }
 
 #ng-view {
   overflow-y: hidden; }

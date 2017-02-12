@@ -20,28 +20,7 @@ function EventController($modal, $timeout, eventService) {
     event.openEventModal = openEventModal;
     event.create = create;
 
-    //TEMPORARY BEGIN
-    var tmpEvent = {
-        id: "1234",
-        name: "coolEvent",
-        room: "centreBell",
-        startDateStamp: "1997-07-16T19:20:30.45+01:00",
-        endDateStamp: "1997-07-16T19:20:30.45+01:00",
-        description: "omg so nice event",
-        location: "at ma' place"
-    };
-
-    var tmpEvent2 = {
-        id: "134",
-        name: "colEvent",
-        room: "cenreBell",
-        startDateStamp: "1597-07-16T19:20:30.45+01:00",
-        endDateStamp: "1297-07-16T19:20:30.45+01:00",
-        description: "og so nice event",
-        location: "a ma' place"
-    }
-    event.events = [tmpEvent,tmpEvent2];
-    //TEMPORARY END
+    getEvents();
 
     event.fpOptions = {
         navigation: false,

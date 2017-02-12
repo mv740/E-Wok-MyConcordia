@@ -149,6 +149,10 @@ md-toast {
 .top-buffer-xl {
   margin-top: 50px; }
 
+.side-buffer-xs-inverse {
+  margin-left: -10px;
+  margin-right: -10px; }
+
 .side-buffer-sm {
   margin-left: 20px;
   margin-right: 20px; }
@@ -224,6 +228,10 @@ md-toast {
 
 .top-buffer-xl {
   margin-top: 50px; }
+
+.side-buffer-xs-inverse {
+  margin-left: -10px;
+  margin-right: -10px; }
 
 .side-buffer-sm {
   margin-left: 20px;

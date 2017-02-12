@@ -29,13 +29,13 @@
 
         studentService.getUpdatePeriod().then(function(value) {
 
-            self.dataObtained = value.data;
+            self.dataObtained = value;
 
             // only parse the dates if a date is set i.e. not set to default
-            if (value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
-                var year = value.data.year;
-                self.startDate = dateParsingService.parseUpdatePeriod(value.data.startDate);
-                self.endDate = dateParsingService.parseUpdatePeriod(value.data.endDate);
+            if (value.startDate != defaultStartDate && value.endDate != defaultEndDate) {
+                var year = value.year;
+                self.startDate = dateParsingService.parseUpdatePeriod(value.startDate);
+                self.endDate = dateParsingService.parseUpdatePeriod(value.endDate);
 
                 self.currentUpdatePeriod = "Academic Year: " + year
                     + ", from " + self.startDate.month + " " + self.startDate.day + ", " + self.startDate.year

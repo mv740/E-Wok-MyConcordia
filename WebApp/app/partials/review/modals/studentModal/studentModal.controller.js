@@ -46,12 +46,12 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
         studentModal.student = student;
 
         studentService.getStudentPictures(student.id).then(function (value) {
-            studentModal.student.pendingPicture = value.data.pendingPicture;
+            studentModal.student.pendingPicture = value.pendingPicture;
 
-            var archivedPictures = value.data.archivedPictures;
+            var archivedPictures = value.archivedPictures;
 
-            if (value.data.profilePicture){
-                archivedPictures.unshift(value.data.profilePicture);
+            if (value.profilePicture){
+                archivedPictures.unshift(value.profilePicture);
             }
             studentModal.student.previousPictures = archivedPictures;
 
@@ -73,7 +73,7 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
 
     function loadLogs(){
         studentService.getStudentLogs(studentModal.student.netname).then(function(value){
-            studentModal.logs = value.data;
+            studentModal.logs = value;
         });
     }
 

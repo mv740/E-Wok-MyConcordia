@@ -36,7 +36,7 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
         var deferred = $q.defer();
 
         $http.get(myConfig.baseUrl + topUrl + param).then(function (success) {
-            deferred.resolve(success);
+            deferred.resolve(success.data);
             $mdToast.hide(toast);
         },function (failure) {
             deferred.reject((failure));
@@ -67,7 +67,7 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
             data: data
         }).then(
             function (success) {
-                deferred.resolve(success);
+                deferred.resolve(success.data);
                 $mdToast.hide(toast);
             },
             function (failure) {
@@ -99,7 +99,7 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
             data: data
         }).then(
             function (success) {
-                deferred.resolve(success);
+                deferred.resolve(success.data);
                 $mdToast.hide(toast);
             },
             function (failure) {
@@ -131,7 +131,7 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
             data: data
         }).then(
             function (success) {
-                deferred.resolve(success);
+                deferred.resolve(success.data);
                 $mdToast.hide(toast);
             },
             function (failure) {

@@ -6,6 +6,7 @@
             <div class="page-header">
                 <h1>Your events</h1>
             </div>
+            <div style="height:500px;" class="sleekScrollable side-buffer-xs-inverse side-padding-xs">
             <div id="createEventButton" class="height-standard">
             <button ng-click="event.fpControls.slideDown()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
             </div>
@@ -16,7 +17,7 @@
                     <button class="button3D textLeft col-xs-12" ng-click="result.expanded = !result.expanded">
                         <span>{{result.name}},</span>
 
-                        <span>{{result.startDateStamp}} {{result.lastname}},</span>
+                        <span>{{result.timeBegin | date}},</span>
 
                         <span>{{result.room}},</span>
                     </button>
@@ -27,6 +28,7 @@
                     </div>
                 </li>
             </ul>
+            </div>
             </div>
 
 
