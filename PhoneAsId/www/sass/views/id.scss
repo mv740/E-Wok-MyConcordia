@@ -34,7 +34,7 @@ $bottom-info-height: 80px;
   top: -$bottom-info-height + $buffer-sm;
 }
 
-.barcodeId {
+.platform-ios .barcodeId {
   text-align: center;
   transform: translate(-6%, 0);
   position: relative;
