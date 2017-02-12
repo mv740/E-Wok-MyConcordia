@@ -65,6 +65,13 @@ input, button, select, textarea {
 md-toast {
   z-index: 10000; }
 
+*::-webkit-scrollbar {
+  width: 0.5em; }
+
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey; }
+
 .button3D {
   background-color: white;
   height: 46px;
@@ -315,6 +322,9 @@ md-toast {
 
 .overflow-auto {
   overflow: auto; }
+
+.overflow-y-auto {
+  overflow-y: auto; }
 
 .overflow-hidden {
   overflow: hidden; }

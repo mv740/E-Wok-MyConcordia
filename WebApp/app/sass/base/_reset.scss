@@ -38,3 +38,13 @@ input, button, select, textarea{
 md-toast{
   z-index:10000;
 }
+
+//scrollbar mod
+*::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}

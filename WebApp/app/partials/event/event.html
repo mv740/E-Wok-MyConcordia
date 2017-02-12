@@ -1,16 +1,16 @@
-<div ng-controller="EventController as event" class="side-padding-xl">
+<div ng-controller="EventController as event" >
 
     <div id="fpEvent" full-page options="event.fpOptions" controls="event.fpControls" allowScrolling=false>
         <div class="section">
-
+            <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
             <div class="page-header">
                 <h1>Your events</h1>
             </div>
-            <div style="height:500px;" class="sleekScrollable side-buffer-xs-inverse side-padding-xs">
+
             <div id="createEventButton" class="height-standard">
             <button ng-click="event.fpControls.slideDown()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
             </div>
-            <div class="top-buffer-sm" ng-if="event.events.length > 0">
+            <div class="top-buffer-sm bottom-buffer-sm" ng-if="event.events.length > 0">
             <ul class="listResults">
                 <li class="top-buffer-sm height-standard" ng-class="{'expanded': result.expanded}" ng-repeat="result in event.events track by $index" >
                     <div class="height-standard">
@@ -37,7 +37,7 @@
 
 
         </div>
-        <div class="section">
+        <div class="section side-padding-xl">
 
             <div class="page-header">
                 <h1>Event name</h1>
@@ -58,7 +58,7 @@
 
 
         </div>
-        <div class="section">
+        <div class="section side-padding-xl">
 
             <div class="page-header">
                 <h1>Location</h1>
@@ -78,7 +78,7 @@
 
 
         </div>
-        <div class="section">
+        <div class="section side-padding-xl">
 
             <div class="page-header">
                 <h1>Room</h1>
@@ -99,7 +99,7 @@
 
         </div>
 
-        <div class="section">
+        <div class="section side-padding-xl">
 
             <div class="page-header">
                 <h1>Event description</h1>
@@ -116,7 +116,7 @@
             <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.description"  ng-class="{'inactive': !event.creating.description}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
 
         </div>
-        <div class="section section2">
+        <div class="section side-padding-xl">
 
             <div class="page-header">
                 <h1>Start date</h1>
@@ -145,7 +145,7 @@
             <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
             <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.startDateStamp" ng-class="{'inactive': !event.creating.startDateStamp}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
         </div>
-        <div class="section section3">
+        <div class="section side-padding-xl">
 
             <div class="page-header">
                 <h1>End date</h1>

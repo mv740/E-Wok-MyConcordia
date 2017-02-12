@@ -65,6 +65,13 @@ input, button, select, textarea {
 md-toast {
   z-index: 10000; }
 
+*::-webkit-scrollbar {
+  width: 0.5em; }
+
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey; }
+
 .button3D {
   background-color: white;
   height: 46px;
@@ -342,6 +349,9 @@ md-toast {
 .overflow-auto {
   overflow: auto; }
 
+.overflow-y-auto {
+  overflow-y: auto; }
+
 .overflow-hidden {
   overflow: hidden; }
 
@@ -505,16 +515,6 @@ md-toast {
   .validationModal-xl .yesnoContainer {
     position: relative;
     bottom: 80px; }
-
-.sleekScrollable {
-  overflow-y: auto; }
-  .sleekScrollable::-webkit-scrollbar {
-    width: 1em; }
-  .sleekScrollable::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3); }
-  .sleekScrollable::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    outline: 1px solid slategrey; }
 
 #ng-view {
   overflow-y: hidden; }

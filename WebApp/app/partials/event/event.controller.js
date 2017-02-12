@@ -46,6 +46,7 @@ function EventController($modal, $timeout, eventService) {
     function getEvents() {
         eventService.getAllEvents().then(function(result) {
             event.events = result;
+            event.events.push.apply(event.events, result);
         });
     }
 
