@@ -82,7 +82,7 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
 
         toast = $mdToast.show(
             $mdToast.simple()
-                .textContent('Sending validation...')
+                .textContent('Working...')
                 .position("bottom right")
                 .hideDelay(0)
         );
@@ -114,7 +114,7 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
 
         toast = $mdToast.show(
             $mdToast.simple()
-                .textContent('Sending validation...')
+                .textContent('Working...')
                 .position("bottom right")
                 .hideDelay(0)
         );

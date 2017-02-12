@@ -23,7 +23,7 @@
                     </button>
                     </div>
                     <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
-                        <button ng-click="event.modify(result)" class="button3D purple buttonSmallFormat">Modify</button>
+                        <button ng-click="event.modify(result); event.fpControls.slideDown();" class="button3D purple buttonSmallFormat">Modify</button>
                         <button ng-click="event.openEventModal(result)" class="button3D purple side-buffer-sm buttonSmallFormat">View details</button>
                     </div>
                 </li>
@@ -135,7 +135,7 @@
                        placeholder="From"
                        ng-click="event.dateFrom=true"
                        datepicker-popup="{{event.format}}"
-                       ng-model="event.creating.startDateStamp"
+                       ng-model="event.creating.timeBegin"
                        is-open="event.dateFrom"
                        datepicker-options="event.dateOptions"
                        date-disabled="disabled(date, mode)"
@@ -143,7 +143,7 @@
                        close-text="Close">
             </div>
             <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
-            <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.startDateStamp" ng-class="{'inactive': !event.creating.startDateStamp}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
+            <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.timeBegin" ng-class="{'inactive': !event.creating.timeBegin}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
         </div>
         <div class="section side-padding-xl">
 
@@ -164,7 +164,7 @@
                        placeholder="To"
                        ng-click="event.dateTo=true"
                        datepicker-popup="{{event.format}}"
-                       ng-model="event.creating.endStartStamp"
+                       ng-model="event.creating.timeEnd"
                        is-open="event.dateTo"
                        datepicker-options="event.dateOptions"
                        date-disabled="disabled(date, mode)"
@@ -172,7 +172,7 @@
                        close-text="Close">
             </div>
             <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
-            <button ng-disabled="!event.creating.endStartStamp" ng-click="event.submit()"  ng-class="{'inactive': !event.creating.endStartStamp}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
+            <button ng-disabled="!event.creating.timeEnd" ng-click="event.submit()"  ng-class="{'inactive': !event.creating.timeEnd}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
         </div>
     </div>
 

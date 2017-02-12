@@ -31,9 +31,8 @@ function EventController($modal, $timeout, eventService) {
 
 
     function submit(){
-        eventService.submit(event.creating).then(function(){
-
-        });
+        if (event.creating.eventID) eventService.updateEvent(event.creating),then(function(){});
+        else eventService.submit(event.creating).then(function(){});
     }
 
     function get(eventId) {
@@ -46,18 +45,15 @@ function EventController($modal, $timeout, eventService) {
     function getEvents() {
         eventService.getAllEvents().then(function(result) {
             event.events = result;
-            event.events.push.apply(event.events, result);
         });
     }
 
     function create(){
         event.creating = {};
-        event.fpControls.slideDown();
     }
 
     function modify(eventTarget) {
         event.creating = eventTarget;
-        event.fpControls.slideDown();
     }
 
     function openEventModal(eventTarget){
