@@ -1,6 +1,6 @@
 ﻿<div ng-controller="AdminController as admin" class="side-padding-xl">
 
-    <div id="fpAdmin" full-page options="admin.fpOptions">
+    <div id="fpAdmin" full-page options="admin.fpOptions" controls="admin.fpControls">
         <div class="section section1">
 
             <div class="page-header">
@@ -13,7 +13,7 @@
                 </h4>
             </div>
 
-            <button ng-click="admin.moveSectionDown()" class="button3D buttonSmallFormat top-buffer">Modify</button>
+            <button ng-click="admin.fpControls.slideDown()" class="button3D buttonSmallFormat top-buffer">Modify</button>
 
 
 
@@ -44,7 +44,7 @@
                 </select>
             </div>
 
-            <button ng-click="admin.moveSectionUp()" class="button3D buttonSmallFormat">Back</button> <button ng-click="admin.academicYear && admin.moveSectionDown()"  ng-class="{'inactive': !admin.academicYear}" class="button3D buttonSmallFormat side-buffer">Next step</button>
+            <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat">Back</button> <button ng-click="admin.academicYear && admin.fpControls.slideDown()"  ng-class="{'inactive': !admin.academicYear}" class="button3D buttonSmallFormat side-buffer">Next step</button>
 
         </div>
         <div class="section section2">
@@ -73,7 +73,7 @@
                            ng-required="true"
                            close-text="Close">
                 </div>
-            <button ng-click="admin.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtFrom && admin.moveSectionDown()" ng-class="{'inactive': !admin.dtFrom}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
+            <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtFrom && admin.fpControls.slideDown()" ng-class="{'inactive': !admin.dtFrom}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
         </div>
         <div class="section section3">
 
@@ -101,7 +101,7 @@
                        ng-required="true"
                        close-text="Close">
             </div>
-            <button ng-click="admin.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtTo && admin.submit()"  ng-class="{'inactive': !admin.dtTo}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
+            <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtTo && admin.submit()"  ng-class="{'inactive': !admin.dtTo}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
         </div>
     </div>
 

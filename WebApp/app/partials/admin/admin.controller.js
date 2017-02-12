@@ -15,27 +15,6 @@
             keyboardScrolling: false,
         };
 
-        setTimeout(function(){
-            //destroying
-            if (typeof $.fn.fullpage.destroy == 'function') {
-                $.fn.fullpage.destroy('all');
-            }
-
-//initializing
-            $('#fpAdmin').fullpage(admin.fpOptions);
-        });
-
-
-        //having a timeout allows to execute after digest
-        setTimeout(function(){
-            $.fn.fullpage.setMouseWheelScrolling(false);
-            $.fn.fullpage.setAllowScrolling(false);
-        })
-
-
-        self.moveSectionDown = moveSectionDown;
-        self.moveSectionUp = moveSectionUp;
-
 
         var defaultStartDate = "18-12-2016";
         var defaultEndDate = "24-18-2016";
@@ -68,15 +47,6 @@
             self.loading = false;
         });
 
-
-
-        function moveSectionDown(){
-            $.fn.fullpage.moveSectionDown();
-        }
-
-        function moveSectionUp(){
-            $.fn.fullpage.moveSectionUp();
-        }
 
         self.submit = function UpdatePeriod() {
 

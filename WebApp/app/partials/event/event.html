@@ -1,13 +1,13 @@
 <div ng-controller="EventController as event" class="side-padding-xl">
 
-    <div id="fpEvent" full-page options="admin.fpOptions">
+    <div id="fpEvent" full-page options="event.fpOptions" controls="event.fpControls" allowScrolling=false>
         <div class="section">
 
             <div class="page-header">
                 <h1>Your events</h1>
             </div>
             <div id="createEventButton" class="height-standard">
-            <button ng-click="event.create()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
+            <button ng-click="event.fpControls.slideDown()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
             </div>
             <div class="top-buffer-sm" ng-if="event.events.length > 0">
             <ul class="listResults">
@@ -46,9 +46,11 @@
 
                 </h4>
             </div>
+
             <input ng-model="event.creating.name" class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs" type="text">
 
-            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.creating.name && event.moveSectionDown()"  ng-class="{'inactive': !event.creating.name}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+            <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
+            <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.name"  ng-class="{'inactive': !event.creating.name}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
 
 
 
@@ -67,7 +69,8 @@
             </div>
             <input ng-model="event.creating.location" class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs" type="text">
 
-            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.creating.location && event.moveSectionDown()"  ng-class="{'inactive': !event.creating.location}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+            <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
+            <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.location" ng-class="{'inactive': !event.creating.location}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
 
 
 
@@ -86,7 +89,8 @@
             </div>
             <input ng-model="event.creating.room" class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs" type="text">
 
-            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.creating.room && event.moveSectionDown()"  ng-class="{'inactive': !event.creating.room}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+            <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
+            <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.room"  ng-class="{'inactive': !event.creating.room}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
 
 
 
@@ -106,7 +110,8 @@
             </div>
             <textarea ng-model="event.creating.description" class="col-xs-12 border-dotted height-xl top-buffer all-side-padding-xs"></textarea>
 
-            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.creating.description && event.moveSectionDown()"  ng-class="{'inactive': !event.creating.description}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+            <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
+            <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.description"  ng-class="{'inactive': !event.creating.description}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
 
         </div>
         <div class="section section2">
@@ -135,7 +140,8 @@
                        ng-required="true"
                        close-text="Close">
             </div>
-            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.creating.startDateStamp && event.moveSectionDown()" ng-class="{'inactive': !event.creating.startDateStamp}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
+            <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
+            <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.startDateStamp" ng-class="{'inactive': !event.creating.startDateStamp}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
         </div>
         <div class="section section3">
 
@@ -163,7 +169,8 @@
                        ng-required="true"
                        close-text="Close">
             </div>
-            <button ng-click="event.moveSectionUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="event.creating.endStartStamp && event.submit()"  ng-class="{'inactive': !event.creating.endStartStamp}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
+            <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
+            <button ng-disabled="!event.creating.endStartStamp" ng-click="event.submit()"  ng-class="{'inactive': !event.creating.endStartStamp}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
         </div>
     </div>
 

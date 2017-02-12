@@ -8,21 +8,17 @@ angular
     .module('myApp')
     .controller('EventController', EventController);
 
-EventController.$inject = ['$modal', 'eventService'];
+EventController.$inject = ['$modal', '$timeout', 'eventService'];
 
-function EventController($modal, eventService) {
+function EventController($modal, $timeout, eventService) {
 
 
 
     var event = this;
-
-    event.moveSectionUp = moveSectionUp;
-    event.moveSectionDown = moveSectionDown;
     event.submit = submit;
     event.modify = modify;
     event.openEventModal = openEventModal;
     event.create = create;
-
 
     //TEMPORARY BEGIN
     var tmpEvent = {
@@ -52,34 +48,8 @@ function EventController($modal, eventService) {
         keyboardScrolling: false
     };
 
-    setTimeout(function(){
-        //destroying
-        if (typeof $.fn.fullpage.destroy == 'function') {
-            $.fn.fullpage.destroy('all');
-        }
-
-//initializing
-        $('#fpEvent').fullpage(event.fpOptions);
-    });
-
-
-    //having a timeout allows to execute after digest
-    setTimeout(function(){
-        $.fn.fullpage.setMouseWheelScrolling(false);
-        $.fn.fullpage.setAllowScrolling(false);
-    })
-
-
-
     ////////////////////////////////////////////////////////////
 
-    function moveSectionUp(){
-        $.fn.fullpage.moveSectionUp();
-    }
-
-    function moveSectionDown(){
-        $.fn.fullpage.moveSectionDown();
-    }
 
     function submit(){
         eventService.submit(event.creating).then(function(){
