@@ -52,12 +52,12 @@ function EventController($modal, $timeout, eventService) {
 
     function create(){
         event.creating = {};
-        moveSectionDown();
+        event.fpControls.slideDown();
     }
 
     function modify(eventTarget) {
         event.creating = eventTarget;
-        moveSectionDown();
+        event.fpControls.slideDown();
     }
 
     function openEventModal(eventTarget){
