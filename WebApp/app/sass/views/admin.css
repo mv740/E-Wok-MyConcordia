@@ -132,6 +132,16 @@ h2 {
 input, button, select, textarea {
   outline: none; }
 
+md-toast {
+  z-index: 10000; }
+
+*::-webkit-scrollbar {
+  width: 0.5em; }
+
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey; }
+
 .button3D {
   background-color: white;
   height: 46px;
@@ -210,9 +220,26 @@ input, button, select, textarea {
 .top-buffer {
   margin-top: 30px; }
 
+.top-buffer-lg {
+  margin-top: 40px; }
+
+.top-buffer-xl {
+  margin-top: 50px; }
+
+.side-buffer-xs-inverse {
+  margin-left: -10px;
+  margin-right: -10px; }
+
+.side-buffer-sm {
+  margin-left: 20px;
+  margin-right: 20px; }
+
 .side-buffer {
   margin-left: 30px;
   margin-right: 30px; }
+
+.bottom-buffer-sm {
+  margin-bottom: 20px; }
 
 .bottom-buffer {
   margin-bottom: 30px; }
@@ -281,9 +308,26 @@ input, button, select, textarea {
 .top-buffer {
   margin-top: 30px; }
 
+.top-buffer-lg {
+  margin-top: 40px; }
+
+.top-buffer-xl {
+  margin-top: 50px; }
+
+.side-buffer-xs-inverse {
+  margin-left: -10px;
+  margin-right: -10px; }
+
+.side-buffer-sm {
+  margin-left: 20px;
+  margin-right: 20px; }
+
 .side-buffer {
   margin-left: 30px;
   margin-right: 30px; }
+
+.bottom-buffer-sm {
+  margin-bottom: 20px; }
 
 .bottom-buffer {
   margin-bottom: 30px; }

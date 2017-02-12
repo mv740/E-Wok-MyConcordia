@@ -10,7 +10,11 @@
   function fullPage($timeout) {
     var directive = {
       restrict: 'A',
-      scope: {options: '='},
+      scope: {
+        options: '=',
+        controls: '=',
+          allowScrolling: '='
+      },
       link: link
     };
 
@@ -22,6 +26,11 @@
       var afterRender;
       var onLeave;
       var onSlideLeave;
+
+      scope.controls = {
+        slideUp: slideUp,
+          slideDown: slideDown
+      }
 
       if (typeof scope.options === 'object') {
         if (scope.options.afterRender) {
@@ -39,14 +48,24 @@
         scope.options = {};
       }
 
-      var rebuild = function() {
-        destroyFullPage();
+      function rebuild() {
+        console.log("REBUILD");
+        //IMPORTANT: USE $TIMEOUT not settimeout
+        //having a $timeout here fixed using fullpage.js on multiple views. using timeout make angular execute this statement at the end of its digest cycle
+        $timeout(function(){
+            destroyFullPage();
 
-        $(element).fullpage(sanatizeOptions(scope.options));
+            $(element).fullpage(sanatizeOptions(scope.options));
 
-        if (typeof afterRender === 'function') {
-          afterRender();
-        }
+            if (typeof afterRender === 'function') {
+                afterRender();
+            }
+
+            if (!scope.allowScrolling){
+                disableScrolling();
+            }
+        }, 0);
+
       };
 
       var destroyFullPage = function() {
@@ -91,23 +110,33 @@
           }
         }
 
-        //if we are using a ui-router, we need to be able to handle anchor clicks without 'href="#thing"'
-        $(document).on('click', '[data-menuanchor]', function () {
-          $.fn.fullpage.moveTo($(this).attr('data-menuanchor'));
-        });
+
 
         return options;
       };
 
-      var watchNodes = function() {
-        return element[0].getElementsByTagName('*').length;
-      };
-
-      scope.$watch(watchNodes, rebuild);
-
-      scope.$watch('options', rebuild, true);
-
       element.on('$destroy', destroyFullPage);
+
+      function slideUp(){
+          $.fn.fullpage.moveSectionUp();
+      }
+
+      function slideDown(){
+          $.fn.fullpage.moveSectionDown();
+      }
+
+      function disableScrolling(){
+         $.fn.fullpage.setMouseWheelScrolling(false);
+         $.fn.fullpage.setAllowScrolling(false);
+      }
+
+        //if we are using a ui-router, we need to be able to handle anchor clicks without 'href="#thing"'
+        $(document).on('click', '[data-menuanchor]', function () {
+            $.fn.fullpage.moveTo($(this).attr('data-menuanchor'));
+        });
+
+      rebuild();
+
     }
   }
 

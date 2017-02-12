@@ -14,15 +14,6 @@
             navigation: false,
             keyboardScrolling: false,
         };
-        //having a timeout allows to execute after digest
-        setTimeout(function(){
-            $.fn.fullpage.setMouseWheelScrolling(false);
-            $.fn.fullpage.setAllowScrolling(false);
-        })
-
-
-        self.moveSectionDown = moveSectionDown;
-        self.moveSectionUp = moveSectionUp;
 
 
         var defaultStartDate = "18-12-2016";
@@ -38,13 +29,13 @@
 
         studentService.getUpdatePeriod().then(function(value) {
 
-            self.dataObtained = value.data;
+            self.dataObtained = value;
 
             // only parse the dates if a date is set i.e. not set to default
-            if (value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
-                var year = value.data.year;
-                self.startDate = dateParsingService.parseUpdatePeriod(value.data.startDate);
-                self.endDate = dateParsingService.parseUpdatePeriod(value.data.endDate);
+            if (value.startDate != defaultStartDate && value.endDate != defaultEndDate) {
+                var year = value.year;
+                self.startDate = dateParsingService.parseUpdatePeriod(value.startDate);
+                self.endDate = dateParsingService.parseUpdatePeriod(value.endDate);
 
                 self.currentUpdatePeriod = "Academic Year: " + year
                     + ", from " + self.startDate.month + " " + self.startDate.day + ", " + self.startDate.year
@@ -56,20 +47,9 @@
             self.loading = false;
         });
 
-        self.submitButton = "Submit";
-
-
-        function moveSectionDown(){
-            $.fn.fullpage.moveSectionDown();
-        }
-
-        function moveSectionUp(){
-            $.fn.fullpage.moveSectionUp();
-        }
 
         self.submit = function UpdatePeriod() {
 
-                self.submitButton = "Checking...";
 
                 self.dateStart = $filter('date')(self.dtFrom, 'dd-MM-yyyy');
                 self.dateEnd = $filter('date')(self.dtTo, 'dd-MM-yyyy');
@@ -90,22 +70,20 @@
 
                     var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
 
-                    self.submitButton = "Checking...";
                     if (validDateRange) {
-                        self.submitButton = "Sending...";
                         $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
                             .then(function success(response) {
-                                self.submitButton = "Submit";
+
                             }, function failure(response) {
                             });
                     }
                     else {
                         alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
-                        self.submitButton = "Submit";
+
                     }
                 }
                 else {
-                    self.submitButton = "Submit";
+
                 }
         };
 

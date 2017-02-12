@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .factory('studentService', studentService);
 
-studentService.$inject = ['$http', '$q', 'myConfig'];
+studentService.$inject = ['$q', 'toastedHttpService', 'myConfig'];
 
-function studentService($http, $q, myConfig) {
+function studentService($q, toastedHttp, myConfig) {
 
     var service = {
         sendValidation: sendValidation,
@@ -30,21 +30,13 @@ function studentService($http, $q, myConfig) {
             valid: valid
         };
 
-        $http({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            url: myConfig.baseUrl + myConfig.validatePhoto,
-            data: json
-        }).then(
-        function (success) {
+        toastedHttp.post(json, myConfig.validatePhoto).then(function(success) {
             deferred.resolve(success);
         },
-        function (failure) {
-            console.log('validate failure');
-        });
+            function(failure){
+                console.log('validate failure');
+            }
+        );
 
         return deferred.promise;
     }
@@ -52,7 +44,7 @@ function studentService($http, $q, myConfig) {
     function getStudentPictures(id) {
         var deferred = $q.defer();
 
-        $http.get(myConfig.baseUrl + myConfig.getStudentPictures + id).then(function (value) {
+        toastedHttp.get({param: id, topUrl: myConfig.getStudentPictures}).then(function (value) {
             deferred.resolve(value);
         },function (failure) {
             console.log('getStudentPicture failure');
@@ -64,7 +56,7 @@ function studentService($http, $q, myConfig) {
     function getStudentLogs(netname) {
         var deferred = $q.defer();
 
-        $http.get(myConfig.baseUrl + myConfig.getLogs + netname).then(function (value) {
+        toastedHttp.get({param: netname, topUrl: myConfig.getLogs}).then(function (value) {
             deferred.resolve(value);
         },function (failure) {
             console.log('getStudentLogs failure');
@@ -76,7 +68,7 @@ function studentService($http, $q, myConfig) {
     function getStudents() {
         var deferred = $q.defer();
 
-        $http.get(myConfig.baseUrl + myConfig.getStudents).then(function (value) {
+        toastedHttp.get({topUrl: myConfig.getStudents}).then(function (value) {
             deferred.resolve(value);
         },function (failure) {
             console.log('getStudents failure');
@@ -88,15 +80,7 @@ function studentService($http, $q, myConfig) {
     function search(params) {
         var deferred = $q.defer();
 
-        $http({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            method: 'POST',
-            url: myConfig.baseUrl + myConfig.search,
-            data: params
-        }).then(
+        toastedHttp.post(params, myConfig.search).then(
         function (value) {
             deferred.resolve(value);
         },
@@ -111,7 +95,7 @@ function studentService($http, $q, myConfig) {
     function getUpdatePeriod() {
         var deferred = $q.defer();
 
-        $http.get(myConfig.baseUrl + myConfig.getUpdatePeriod).then(function (value) {
+        toastedHttp.get({topUrl: myConfig.getUpdatePeriod}).then(function (value) {
             deferred.resolve(value);
         },function (failure) {
             console.log('updating period failure');
@@ -124,18 +108,10 @@ function studentService($http, $q, myConfig) {
 
         var deferred = $q.defer();
 
-        var req = {
-            method: 'POST',
-            url: myConfig.baseUrl + myConfig.validateArchived,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            data: { id: id,
-            valid: valid}
-        }
+        var json = { id: id,
+            valid: valid};
 
-        $http(req).then(function (value) {
+        toastedHttp.post(json, myConfig.validateArchived).then(function (value) {
             deferred.resolve(value);
         }, function(){
             console.log("sendPictureBackToValidation failure");
@@ -149,18 +125,10 @@ function studentService($http, $q, myConfig) {
 
         var deferred = $q.defer();
 
-        var req = {
-            method: 'POST',
-            url: myConfig.baseUrl + myConfig.submitComment,
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            data: { id: id,
-                comment: comment}
-        }
+        var json = { id: id,
+            comment: comment};
 
-        $http(req).then(function (value) {
+        toastedHttp.post(json, myConfig.submitComment).then(function (value) {
             deferred.resolve(value);
         }, function(){
             console.log("submitComment failure");

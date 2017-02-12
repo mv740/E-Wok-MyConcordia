@@ -15,9 +15,21 @@
 @import "../components/sideNav";
 @import "../components/lists";
 @import "../base/borders";
+@import "../base/animations";
+@import "../components/modals";
 
 #ng-view{overflow-y: hidden;}
 
 .fp-tableCell{
   vertical-align: top;
+}
+
+.listResults{
+   li{
+     transition: ease 0.2s;
+
+     &.expanded{
+       height:112px;
+     }
+  }
 }

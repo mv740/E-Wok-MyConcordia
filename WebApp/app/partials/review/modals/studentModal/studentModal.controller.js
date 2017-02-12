@@ -15,7 +15,6 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
     studentModal.loadLogs = loadLogs;
     studentModal.submitComment = submitComment;
     studentModal.close = $modalInstance.close;
-    studentModal.loading = true;
     studentModal.emptyProfilePicture = 'images/empty-profile.png';
 
     $scope.$on("StudentModal.updateStudent", updateStudent);
@@ -25,16 +24,15 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
     //////////////////////////
 
     function sendValidation(id, valid){
-        studentModal.student.sendingValidation = true;
         studentModal.student.valid = valid;
         studentService.sendValidation(id,valid).then(
             function(){
-                studentModal.student.sendingValidation = false;
                 if (studentModal.student.valid) studentModal.student.wasValidated = true;
                 else if (!studentModal.student.valid) studentModal.student.wasRevoked = true;
 
                 setTimeout(function(){
-                    $modalInstance.close();
+                    resetModal();
+                    //$modalInstance.close();
                     updateStudent();
                 }, 2000);
             },
@@ -48,16 +46,16 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
         studentModal.student = student;
 
         studentService.getStudentPictures(student.id).then(function (value) {
-            studentModal.student.pendingPicture = value.data.pendingPicture;
+            studentModal.student.pendingPicture = value.pendingPicture;
 
-            var archivedPictures = value.data.archivedPictures;
+            var archivedPictures = value.archivedPictures;
 
-            if (value.data.profilePicture){
-                archivedPictures.unshift(value.data.profilePicture);
+            if (value.profilePicture){
+                archivedPictures.unshift(value.profilePicture);
             }
             studentModal.student.previousPictures = archivedPictures;
 
-            studentModal.loading = false;
+
         });
     }
 
@@ -75,12 +73,13 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
 
     function loadLogs(){
         studentService.getStudentLogs(studentModal.student.netname).then(function(value){
-            studentModal.logs = value.data;
+            studentModal.logs = value;
         });
     }
 
     function resetModal(){
         studentModal.logs = undefined;
+        studentModal.student = undefined;
     }
 
     function submitComment(){
