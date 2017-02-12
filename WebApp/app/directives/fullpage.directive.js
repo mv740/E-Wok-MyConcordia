@@ -49,6 +49,7 @@
       }
 
       function rebuild() {
+        console.log("REBUILD");
         //IMPORTANT: USE $TIMEOUT not settimeout
         //having a $timeout here fixed using fullpage.js on multiple views. using timeout make angular execute this statement at the end of its digest cycle
         $timeout(function(){
@@ -114,14 +115,6 @@
         return options;
       };
 
-      var watchNodes = function() {
-        return element[0].getElementsByTagName('*').length;
-      };
-
-      scope.$watch(watchNodes, rebuild);
-
-      scope.$watch('options', rebuild, false);
-
       element.on('$destroy', destroyFullPage);
 
       function slideUp(){
@@ -141,6 +134,8 @@
         $(document).on('click', '[data-menuanchor]', function () {
             $.fn.fullpage.moveTo($(this).attr('data-menuanchor'));
         });
+
+      rebuild();
 
     }
   }
