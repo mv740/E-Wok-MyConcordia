@@ -31,7 +31,7 @@ function EventController($modal, $timeout, eventService) {
 
 
     function submit(){
-        if (event.creating.eventID) eventService.updateEvent(event.creating),then(function(){});
+        if (event.creating.eventID) eventService.updateEvent(event.creating).then(function(){});
         else eventService.submit(event.creating).then(function(){});
     }
 
