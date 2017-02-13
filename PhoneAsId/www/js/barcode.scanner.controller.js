@@ -46,7 +46,8 @@
           console.log("Barcode ID: " + bc.barcodeID);
 
           var userParameter = {};
-          // userParameter.studentId = 58125910;
+          userParameter.studentId = 58125910;
+          // userParameter.studentId = 66703328;
           userParameter.studentId = bc.barcodeID;
           userParameter.type = bc.eventData.information.type;
           userParameter.eventID = bc.eventData.information.eventID;
@@ -63,10 +64,10 @@
       StudentService.validateEventAttendee(userParameter)
         .then(function successCallback(response) {
           console.log(response.data);
-          bc.responseMsg = "SUCCESS";
+          bc.responseMsg = response.data.status;
         }, function errorCallback(response) {
           console.log(response);
-          bc.responseMsg = "FAIL";
+          bc.responseMsg = "FAIL - ID does not exist";
         });
     }
   }
