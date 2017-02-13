@@ -1,0 +1,46 @@
+<div class="validationModal container2D">
+    <div ng-if="!eventModal.loading" id="modal-body">
+        <div class="cardHolder modal-element col-xs-6">
+
+            <div class="pictureAttributes side-padding text-left">
+
+                <h2 class="top-padding"><span>{{eventModal.event.name}}</span>
+                </h2>
+                <div>
+                    <span>{{eventModal.event.location}}</span>
+                </div>
+                <div>
+                    <span>{{eventModal.event.room}}</span>
+                </div>
+                <div>
+                    <span>{{eventModal.event.startDateStamp | date}}</span>
+                </div>
+                <div>
+                    <span>{{eventModal.event.endtDateStamp | date}}</span>
+                </div>
+                <div>
+                    <span>{{eventModal.event.description}}</span>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="cardHolder col-xs-6">
+
+            <img class="full-width" ng-if="eventModal.event.profilPicture"
+                 ng-src="data:image/JPEG;base64,{{eventModal.event.profilPicture.picturE_DATA}}"/>
+            <img class="full-width" ng-if="eventModal.event.profilPicture == null"
+                 ng-src="{{eventModal.emptyProfilePicture}}"/>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div id="galleryContainer" ng-if="eventModal.event.previousPictures.length > 0" class="container2D top-buffer"
+     ng-include="'partials/review/modals/eventModal/gallery/gallery.html'">
+</div>
+
+
+

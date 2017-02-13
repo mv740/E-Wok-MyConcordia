@@ -1,0 +1,28 @@
+.ng-hide-add         { animation:0.3s lightSpeedOut ease; }
+
+/* when showing the picture */
+.ng-hide-remove      { animation:0.3s flipInX ease; }
+
+/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
+/* flip in */
+@keyframes flipInX {
+  0% {
+    transition-timing-function: ease-in;
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* light speed out */
+@keyframes lightSpeedOut {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

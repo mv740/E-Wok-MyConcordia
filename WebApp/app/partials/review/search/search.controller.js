@@ -20,11 +20,11 @@ function SearchCtrl($modal, studentService, searchParsingService, dateParsingSer
     search.input = "";
     search.emptyResults = false;
 
+
     ///////////////////
 
     function find() {
         search.initialState = false;
-        search.searching = true;
         search.results = [];
         search.emptyResults = false;
 
@@ -36,7 +36,7 @@ function SearchCtrl($modal, studentService, searchParsingService, dateParsingSer
             var params = searchParsingService.parseSearchInput(search.input);
             console.log(JSON.stringify(params));
             studentService.search(params).then(function (value) {
-                setResults(value.data);
+                setResults(value);
             });
         }
 
@@ -45,7 +45,7 @@ function SearchCtrl($modal, studentService, searchParsingService, dateParsingSer
     //temporary until find can parse parameters
     function getAllStudents() {
         studentService.getStudents().then(function (value) {
-            setResults(value.data);
+            setResults(value);
         });
     }
 
@@ -62,7 +62,6 @@ function SearchCtrl($modal, studentService, searchParsingService, dateParsingSer
     }
 
     function setResults(results) {
-        search.searching = false;
         search.results = results;
         search.emptyResults = search.results.length == 0;
         parseDOB();
