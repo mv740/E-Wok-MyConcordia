@@ -59,6 +59,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EVENT.cs">
+      <DependentUpon>OracleEntityDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EVENT_USERS.cs">
+      <DependentUpon>OracleEntityDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LOG.cs">
       <DependentUpon>OracleEntityDataModel.tt</DependentUpon>
     </Compile>

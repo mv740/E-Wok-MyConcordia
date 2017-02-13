@@ -5,6 +5,30 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="OracleDataModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="EVENT_USERS">
+          <Key>
+            <PropertyRef Name="ID_PK" />
+          </Key>
+          <Property Name="EVENT_ID" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="STUDENT_NETNAME_FK" Type="varchar2" MaxLength="8" Nullable="false" />
+          <Property Name="ROLE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="ID_PK" Type="varchar2" MaxLength="20" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="EVENTS">
+          <Key>
+            <PropertyRef Name="ID_PK" />
+          </Key>
+          <Property Name="ID_PK" Type="varchar2" MaxLength="20" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="255" Nullable="false" />
+          <Property Name="LOCATION" Type="varchar2" MaxLength="50" />
+          <Property Name="ROOM" Type="varchar2" MaxLength="20" />
+          <Property Name="TIME_BEGIN" Type="date" Nullable="false" />
+          <Property Name="TIME_END" Type="date" Nullable="false" />
+          <Property Name="TYPE" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
         <EntityType Name="LOG">
           <Key>
             <PropertyRef Name="ID_PK" />
@@ -51,6 +75,30 @@
           <Property Name="EXPIREDATE" Type="date" Nullable="false" />
           <Property Name="UPDATEPICTURE" Type="number" Precision="1" Scale="0" Nullable="false" />
         </EntityType>
+        <Association Name="EVENT_ID_FK">
+          <End Role="EVENTS" Type="Self.EVENTS" Multiplicity="1" />
+          <End Role="EVENT_USERS" Type="Self.EVENT_USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENTS">
+              <PropertyRef Name="ID_PK" />
+            </Principal>
+            <Dependent Role="EVENT_USERS">
+              <PropertyRef Name="EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_USER_NETNAME_FK">
+          <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
+          <End Role="EVENT_USERS" Type="Self.EVENT_USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENTS">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="EVENT_USERS">
+              <PropertyRef Name="STUDENT_NETNAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="LOG_FK1">
           <End Role="STUDENTS" Type="Self.STUDENTS" Multiplicity="1" />
           <End Role="LOG" Type="Self.LOG" Multiplicity="*" />
@@ -88,10 +136,20 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="OracleDataModelStoreContainer">
+          <EntitySet Name="EVENT_USERS" EntityType="Self.EVENT_USERS" Schema="MV740" store:Type="Tables" />
+          <EntitySet Name="EVENTS" EntityType="Self.EVENTS" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="LOG" EntityType="Self.LOG" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTURE" EntityType="Self.PICTURE" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="PICTUREUPDATESETTING" EntityType="Self.PICTUREUPDATESETTING" Schema="MV740" store:Type="Tables" />
           <EntitySet Name="STUDENTS" EntityType="Self.STUDENTS" Schema="MV740" store:Type="Tables" />
+          <AssociationSet Name="EVENT_ID_FK" Association="Self.EVENT_ID_FK">
+            <End Role="EVENTS" EntitySet="EVENTS" />
+            <End Role="EVENT_USERS" EntitySet="EVENT_USERS" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_USER_NETNAME_FK" Association="Self.EVENT_USER_NETNAME_FK">
+            <End Role="STUDENTS" EntitySet="STUDENTS" />
+            <End Role="EVENT_USERS" EntitySet="EVENT_USERS" />
+          </AssociationSet>
           <AssociationSet Name="LOG_FK1" Association="Self.LOG_FK1">
             <End Role="STUDENTS" EntitySet="STUDENTS" />
             <End Role="LOG" EntitySet="LOG" />
@@ -126,6 +184,16 @@
             <End Role="STUDENT" EntitySet="STUDENTS" />
             <End Role="PICTURE" EntitySet="PICTUREs" />
           </AssociationSet>
+          <EntitySet Name="EVENT_USERS" EntityType="OracleDataModel.EVENT_USERS" />
+          <EntitySet Name="EVENTS" EntityType="OracleDataModel.EVENT" />
+          <AssociationSet Name="EVENT_ID_FK" Association="OracleDataModel.EVENT_ID_FK">
+            <End Role="EVENT" EntitySet="EVENTS" />
+            <End Role="EVENT_USERS" EntitySet="EVENT_USERS" />
+          </AssociationSet>
+          <AssociationSet Name="EVENT_USER_NETNAME_FK" Association="OracleDataModel.EVENT_USER_NETNAME_FK">
+            <End Role="STUDENT" EntitySet="STUDENTS" />
+            <End Role="EVENT_USERS" EntitySet="EVENT_USERS" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="STUDENT">
           <Key>
@@ -144,6 +212,7 @@
           <NavigationProperty Name="LOGs" Relationship="OracleDataModel.LOG_FK1" FromRole="STUDENT" ToRole="LOG" />
           <NavigationProperty Name="PICTUREs" Relationship="OracleDataModel.PICTURE_ADMIN_FK" FromRole="STUDENT" ToRole="PICTURE" />
           <NavigationProperty Name="PICTUREs1" Relationship="OracleDataModel.PICTURE_STUDENT_FK" FromRole="STUDENT" ToRole="PICTURE" />
+          <NavigationProperty Name="EVENT_USERS" Relationship="OracleDataModel.EVENT_USER_NETNAME_FK" FromRole="STUDENT" ToRole="EVENT_USERS" />
           </EntityType>
         <EntityType Name="PICTUREUPDATESETTING">
           <Key>
@@ -215,6 +284,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EVENT_USERS">
+          <Key>
+            <PropertyRef Name="ID_PK" />
+          </Key>
+          <Property Name="EVENT_ID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STUDENT_NETNAME_FK" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="ROLE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="STATUS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ID_PK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="EVENT" Relationship="OracleDataModel.EVENT_ID_FK" FromRole="EVENT_USERS" ToRole="EVENT" />
+          <NavigationProperty Name="STUDENT" Relationship="OracleDataModel.EVENT_USER_NETNAME_FK" FromRole="EVENT_USERS" ToRole="STUDENT" />
+        </EntityType>
+        <EntityType Name="EVENT">
+          <Key>
+            <PropertyRef Name="ID_PK" />
+          </Key>
+          <Property Name="ID_PK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NAME" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LOCATION" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ROOM" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TIME_BEGIN" Type="DateTime" Nullable="false" />
+          <Property Name="TIME_END" Type="DateTime" Nullable="false" />
+          <Property Name="TYPE" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="EVENT_USERS" Relationship="OracleDataModel.EVENT_ID_FK" FromRole="EVENT" ToRole="EVENT_USERS" />
+          <Property Name="STATUS" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="EVENT_ID_FK">
+          <End Type="OracleDataModel.EVENT" Role="EVENT" Multiplicity="1" />
+          <End Type="OracleDataModel.EVENT_USERS" Role="EVENT_USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EVENT">
+              <PropertyRef Name="ID_PK" />
+            </Principal>
+            <Dependent Role="EVENT_USERS">
+              <PropertyRef Name="EVENT_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="EVENT_USER_NETNAME_FK">
+          <End Type="OracleDataModel.STUDENT" Role="STUDENT" Multiplicity="1" />
+          <End Type="OracleDataModel.EVENT_USERS" Role="EVENT_USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="STUDENT">
+              <PropertyRef Name="NETNAME" />
+            </Principal>
+            <Dependent Role="EVENT_USERS">
+              <PropertyRef Name="STUDENT_NETNAME_FK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -267,6 +387,32 @@
                 <ScalarProperty Name="CREATED" ColumnName="CREATED" />
                 <ScalarProperty Name="STATUS" ColumnName="STATUS" />
                 <ScalarProperty Name="PICTURE_DATA" ColumnName="PICTURE_DATA" />
+                <ScalarProperty Name="ID_PK" ColumnName="ID_PK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENT_USERS">
+            <EntityTypeMapping TypeName="OracleDataModel.EVENT_USERS">
+              <MappingFragment StoreEntitySet="EVENT_USERS">
+                <ScalarProperty Name="ID_PK" ColumnName="ID_PK" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="ROLE" ColumnName="ROLE" />
+                <ScalarProperty Name="STUDENT_NETNAME_FK" ColumnName="STUDENT_NETNAME_FK" />
+                <ScalarProperty Name="EVENT_ID" ColumnName="EVENT_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EVENTS">
+            <EntityTypeMapping TypeName="OracleDataModel.EVENT">
+              <MappingFragment StoreEntitySet="EVENTS">
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+                <ScalarProperty Name="TYPE" ColumnName="TYPE" />
+                <ScalarProperty Name="TIME_END" ColumnName="TIME_END" />
+                <ScalarProperty Name="TIME_BEGIN" ColumnName="TIME_BEGIN" />
+                <ScalarProperty Name="ROOM" ColumnName="ROOM" />
+                <ScalarProperty Name="LOCATION" ColumnName="LOCATION" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="NAME" ColumnName="NAME" />
                 <ScalarProperty Name="ID_PK" ColumnName="ID_PK" />
               </MappingFragment>
             </EntityTypeMapping>

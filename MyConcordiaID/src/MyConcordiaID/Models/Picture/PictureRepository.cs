@@ -109,7 +109,8 @@ namespace MyConcordiaID.Models.Picture
                 PICTURE_DATA = picture,
                 STATUS = Status.Pending.ToString(),
                 CREATED = DateTime.UtcNow,
-                STUDENT_NETNAME = netname,
+                STUDENT_NETNAME = netname
+
             };
 
             _database.PICTUREs.Add(pendingPicture);

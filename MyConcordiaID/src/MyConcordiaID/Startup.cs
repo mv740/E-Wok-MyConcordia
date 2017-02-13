@@ -23,6 +23,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
 using Microsoft.Extensions.PlatformAbstractions;
 using MyConcordiaID.Models.Picture;
+using MyConcordiaID.Models.Event;
 
 namespace MyConcordiaID
 {
@@ -95,6 +96,7 @@ namespace MyConcordiaID
             services.AddSingleton<IPictureRepository, PictureRepository>();
             services.AddSingleton<ILogRepository, LogRepository>();
             services.AddSingleton<IGraduationRepository, GraduationRepository>();
+            services.AddSingleton<IEventRepository, EventRepository>();
 
             services.AddSwaggerGen(c =>
             {
