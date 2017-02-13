@@ -343,7 +343,7 @@ namespace MyConcordiaID.Controllers
         {
             var scannerResult = _eventRepo.RegisterScannedUser(user);
             
-            if(scannerResult.Status == ScannerStatus.IdNotFound)
+            if(scannerResult.Status == ScannerStatus.IdNotFound.ToString())
             {
                 return NotFound();
             }

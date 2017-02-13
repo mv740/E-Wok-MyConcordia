@@ -396,7 +396,7 @@ namespace MyConcordiaID.Models.Event
 
             ScannerResult processResult = new ScannerResult
             {
-                Status = ScannerStatus.IdNotFound
+                Status = ScannerStatus.IdNotFound.ToString()
             };
 
             var currentUser = _database.STUDENTS
@@ -417,7 +417,7 @@ namespace MyConcordiaID.Models.Event
                     };
 
                     _database.EVENT_USERS.Add(newUser);
-                    processResult.Status = ScannerStatus.Success;
+                    processResult.Status = ScannerStatus.Success.ToString();
                 }
                 else
                 {
@@ -430,12 +430,12 @@ namespace MyConcordiaID.Models.Event
                     {
                         registeredUser.STATUS = UserStatus.Attending.ToString();
                         _database.SaveChanges();
-                        processResult.Status = ScannerStatus.Success;
+                        processResult.Status = ScannerStatus.Success.ToString();
 
                     }
                     else
                     {
-                        processResult.Status = ScannerStatus.UserWasNotRegistered;
+                        processResult.Status = ScannerStatus.UserWasNotRegistered.ToString();
                     }
 
 

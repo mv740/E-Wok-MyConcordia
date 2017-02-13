@@ -12,7 +12,7 @@ namespace MyConcordiaID.Models.Event
     public class ScannerResult
     {
         [Required]
-        public ScannerStatus Status { get; set; }
+        public string Status { get; set; }
         public string Message { get; set; }
     }
 }
