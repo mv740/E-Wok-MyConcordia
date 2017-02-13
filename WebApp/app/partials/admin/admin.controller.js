@@ -104,7 +104,12 @@
 
         self.academicYearOptions = [];
         for (var i = 0; i < 5; i++) {
-            self.academicYearOptions[i] = currentYear + i;
+            self.academicYearOptions[i] = currentYear + i - 1;
+            /*
+             Calculated this way so that the academic periods include at least the current academic year. For academic
+             year 2016-2017, if we are in 2017, it will display at least 2017 + 0 - 1 = 2016. In 2016, it will display
+             2016 + 0 - 1 = 2015.
+             */
         }
 
         Mousetrap.bind('enter', self.submit);
