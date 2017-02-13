@@ -336,7 +336,6 @@ md-toast {
   margin-left: 420px; }
 
 #loginContainer {
-  background: url("../../images/concordia_bg.jpg");
-  background-position-y: bottom; }
+  background: url("../../images/concordia_bg.jpg") bottom/cover; }
   #loginContainer h1 {
     border-color: black; }
