@@ -41,5 +41,20 @@ angular.module('starter.services', [])
       return $http.get(urlBase +'/student/UpdatePeriod');
     };
 
+
+    /**
+     * Rest api call for moderators of events to use to validate registration after scanning barcode ID
+     *
+     * @return HttpPromise which will say if a user is registered or not
+     */
+    StudentService.validateEventAttendee = function(userParameter){
+      console.log('validateEventAttendee called');
+      return $http.post(urlBase +'/Event/scanner', userParameter);
+    };
+
+    StudentService.fetchEvents = function(){
+      return $http.get(urlBase +'/Event/user');
+    };
+
     return StudentService;
   }]);
