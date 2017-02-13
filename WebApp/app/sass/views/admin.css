@@ -244,6 +244,9 @@ md-toast {
 .bottom-buffer {
   margin-bottom: 30px; }
 
+.bottom-buffer-xl {
+  margin-bottom: 50px; }
+
 .all-side-margin-sm {
   margin: 20px; }
 
@@ -331,6 +334,9 @@ md-toast {
 
 .bottom-buffer {
   margin-bottom: 30px; }
+
+.bottom-buffer-xl {
+  margin-bottom: 50px; }
 
 .all-side-margin-sm {
   margin: 20px; }
