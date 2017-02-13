@@ -94,7 +94,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
         views: {
           'menuContent': {
             templateUrl: 'templates/events.html',
-            controller: 'EventsController as ev'
+            controller: 'EventsController as ev',
+            css: 'sass/views/event.css'
           }
         }
       })
@@ -127,6 +128,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
           'menuContent': {
             templateUrl: 'templates/barcode.html',
             controller: 'BarcodeController as bc',
+            css: 'sass/views/barcode.css'
           }
         }
       })

@@ -1,0 +1,9 @@
+@import "../base/reset";
+@import "../base/colors";
+@import "../base/buffers";
+@import "../base/mixins/verticalCenter";
+@import "../components/containers";
+
+ion-content:first-child{
+  background-color: #8A0037;
+}
