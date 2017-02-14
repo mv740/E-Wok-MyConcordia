@@ -22,7 +22,8 @@
     "es6-shim": "^0.35.1",
     "angular-tooltips": "^1.1.8",
     "angular-hotkeys": "chieffancypants/angular-hotkeys#^1.7.0",
-    "mousetrap": "^1.6.0"
+    "mousetrap": "^1.6.0",
+    "fullpage.js": "^2.9.2"
   },
   "resolutions": {
     "angular": "1.5.8",

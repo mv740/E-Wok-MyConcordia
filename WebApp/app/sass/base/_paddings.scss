@@ -1,8 +1,18 @@
 @import "variables";
 
+.side-padding-xs{
+  padding-left:$buffer-xs;
+  padding-right:$buffer-xs;
+}
+
 .side-padding{
   padding-left:$buffer-md;
   padding-right:$buffer-md;
+}
+
+.side-padding-xl{
+  padding-left:$buffer-xl;
+  padding-right:$buffer-xl;
 }
 
 .no-padding{

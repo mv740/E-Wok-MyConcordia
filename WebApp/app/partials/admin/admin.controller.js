@@ -10,6 +10,12 @@
     function AdminController($http, myConfig, studentService, dateParsingService, $filter) {
         var self = this;
 
+        self.fpOptions = {
+            navigation: false,
+            keyboardScrolling: false,
+        };
+
+
         var defaultStartDate = "18-12-2016";
         var defaultEndDate = "24-18-2016";
         var lengthOfAYearString = 4; // number of characters for a year to be valid
@@ -23,13 +29,13 @@
 
         studentService.getUpdatePeriod().then(function(value) {
 
-            self.dataObtained = value.data;
+            self.dataObtained = value;
 
             // only parse the dates if a date is set i.e. not set to default
-            if (value.data.startDate != defaultStartDate && value.data.endDate != defaultEndDate) {
-                var year = value.data.year;
-                self.startDate = dateParsingService.parseUpdatePeriod(value.data.startDate);
-                self.endDate = dateParsingService.parseUpdatePeriod(value.data.endDate);
+            if (value.startDate != defaultStartDate && value.endDate != defaultEndDate) {
+                var year = value.year;
+                self.startDate = dateParsingService.parseUpdatePeriod(value.startDate);
+                self.endDate = dateParsingService.parseUpdatePeriod(value.endDate);
 
                 self.currentUpdatePeriod = "Academic Year: " + year
                     + ", from " + self.startDate.month + " " + self.startDate.day + ", " + self.startDate.year
@@ -41,49 +47,44 @@
             self.loading = false;
         });
 
-        self.submitButton = "Submit";
-
 
         self.submit = function UpdatePeriod() {
-            self.submitButton = "Checking...";
-
-            self.dateStart = $filter('date')(self.dtFrom, 'dd-MM-yyyy');
-            self.dateEnd = $filter('date')(self.dtTo, 'dd-MM-yyyy');
-
-            var data =
-                {
-                    "year": self.academicYear,
-                    "startDate": self.dateStart,
-                    "endDate": self.dateEnd
-                };
 
 
-            self.yearEntered = self.academicYear != null;
-            self.startDateEntered = self.dtFrom != undefined;
-            self.endDateEntered = self.dtTo != undefined;
+                self.dateStart = $filter('date')(self.dtFrom, 'dd-MM-yyyy');
+                self.dateEnd = $filter('date')(self.dtTo, 'dd-MM-yyyy');
 
-            if (self.yearEntered && self.startDateEntered && self.endDateEntered) {
+                var data =
+                    {
+                        "year": self.academicYear,
+                        "startDate": self.dateStart,
+                        "endDate": self.dateEnd
+                    };
 
-                var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
 
-                self.submitButton = "Checking...";
-                if (validDateRange) {
-                    self.submitButton = "Sending...";
-                    $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
-                        .then(function success(response) {
-                            self.submitButton = "Submit";
-                        }, function failure(response) {
-                        });
+                self.yearEntered = self.academicYear != null;
+                self.startDateEntered = self.dtFrom != undefined;
+                self.endDateEntered = self.dtTo != undefined;
+
+                if (self.yearEntered && self.startDateEntered && self.endDateEntered) {
+
+                    var validDateRange = self.dtFrom.getTime() < self.dtTo.getTime();
+
+                    if (validDateRange) {
+                        $http.post(myConfig.baseUrl + myConfig.picturePeriod, data)
+                            .then(function success(response) {
+
+                            }, function failure(response) {
+                            });
+                    }
+                    else {
+                        alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
+
+                    }
                 }
                 else {
-                    alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
-                    self.submitButton = "Submit";
-                }
-            }
-            else {
-                self.submitButton = "Submit";
-            }
 
+                }
         };
 
         self.setYearEntered = function() {

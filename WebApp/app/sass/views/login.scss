@@ -11,10 +11,8 @@
 
 #loginContainer{
 
-background: url("../../images/concordia_bg.jpg");
-background-position-y: bottom;
+background: url("../../images/concordia_bg.jpg") bottom/cover;
   h1{
     border-color:black;
   }
-
 }

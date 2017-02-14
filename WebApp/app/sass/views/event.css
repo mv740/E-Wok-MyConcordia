@@ -1,74 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Montserrat+Alternates);
-#sideMenuContainer {
-  height: 100%;
-  float: left; }
-  #sideMenuContainer div {
-    z-index: 2; }
-  #sideMenuContainer a {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    display: block;
-    color: #323232;
-    height: 60px;
-    line-height: 60px;
-    text-align: center; }
-  #sideMenuContainer a:first-child {
-    margin-top: 20px; }
-  #sideMenuContainer a.selected {
-    background-color: white; }
-  #sideMenuContainer #sideMenuStatic {
-    position: relative;
-    background-color: #a1325e;
-    width: 60px;
-    float: left;
-    height: 100%;
-    box-shadow: 1px 0px 10px #888888; }
-    #sideMenuContainer #sideMenuStatic .hamburger {
-      width: 25px; }
-      #sideMenuContainer #sideMenuStatic .hamburger div {
-        transform: scale(0.23);
-        margin-left: -13px;
-        margin-right: auto;
-        display: block;
-        width: 25px;
-        height: 25px; }
-    #sideMenuContainer #sideMenuStatic .goToReviewIcon {
-      background-image: url("../../images/icons/review-icon.png");
-      background-size: 25px;
-      background-repeat: no-repeat;
-      background-position: center; }
-    #sideMenuContainer #sideMenuStatic .logoffIcon {
-      background-image: url("../../images/icons/logoff-icon.png");
-      background-size: 25px;
-      background-repeat: no-repeat;
-      background-position: center; }
-    #sideMenuContainer #sideMenuStatic .adminIcon {
-      background-image: url("../../images/icons/settings-icon.png");
-      background-size: 25px;
-      background-repeat: no-repeat;
-      background-position: center; }
-    #sideMenuContainer #sideMenuStatic .eventIcon {
-      background-image: url("../../images/icons/event-icon.png");
-      background-size: 25px;
-      background-repeat: no-repeat;
-      background-position: center; }
-  #sideMenuContainer .sideNavDrawer {
-    height: 100%;
-    /* 100% Full-height */
-    width: 0;
-    /* 0 width - change this with JavaScript */
-    position: fixed;
-    /* Stay in place */
-    top: 0;
-    left: 0;
-    background-color: white;
-    overflow-x: hidden;
-    /* Disable horizontal scroll */
-    transition: 0.5s;
-    /* 0.5 second transition effect to slide in the sidenav */
-    padding-left: 60px; }
-
 .full-height {
   height: 100%; }
 
@@ -211,6 +141,41 @@ md-toast {
     .btn-circle.btn-no.greyed-out {
       background-color: grey; }
 
+.americanPieBox {
+  text-align: center; }
+  .americanPieBox span {
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 40px; }
+    .americanPieBox span.revoked {
+      background-color: rgba(255, 0, 0, 0.1);
+      border: 3px solid #d2322d;
+      color: #d2322d;
+      transform: rotate(7deg);
+      -ms-transform: rotate(7deg);
+      /* IE 9 */
+      -webkit-transform: rotate(7deg);
+      /* Chrome, Safari, Opera */ }
+    .americanPieBox span.validated {
+      background-color: rgba(0, 255, 0, 0.1);
+      border: 3px solid #47a447;
+      color: #47a447;
+      transform: rotate(-7deg);
+      -ms-transform: rotate(-7deg);
+      /* IE 9 */
+      -webkit-transform: rotate(-7deg);
+      /* Chrome, Safari, Opera */ }
+    .americanPieBox span.redClickable {
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.3);
+      border: 3px solid #d2322d;
+      color: #d2322d; }
+
+.progressCircularContainer {
+  text-align: center;
+  top: 60px;
+  position: relative; }
+
 .top-buffer-sm {
   margin-top: 20px; }
 
@@ -275,32 +240,6 @@ md-toast {
 .datepicker-container {
   margin-bottom: 80px;
   padding-left: 70px; }
-
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto; }
-
-.verticalCenter {
-  position: relative;
-  top: 49%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%); }
-
-.atBottom {
-  bottom: 0px;
-  left: 0px;
-  position: absolute; }
-
-.textCenter {
-  text-align: center; }
-
-.textLeft {
-  text-align: left; }
-
-.btn-admin-submit-center {
-  margin-left: 420px; }
 
 .top-buffer-sm {
   margin-top: 20px; }
@@ -387,21 +326,134 @@ md-toast {
   padding-top: 20px;
   padding-bottom: 20px; }
 
-.calendar-icon {
-  height: 30px;
-  width: 30px; }
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
 
-.ok-icon {
-  padding-top: 5px;
-  font-size: x-large;
-  color: #47a447;
-  padding-left: 5px; }
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
 
-.select-admin {
-  -webkit-appearance: none;
-  padding: 8px;
-  margin-bottom: 35px;
-  background: url("../../images/icons/ic_arrow_drop_down_black_24dp_2x.png") no-repeat right; }
+.atBottom {
+  bottom: 0px;
+  left: 0px;
+  position: absolute; }
+
+.textCenter {
+  text-align: center; }
+
+.textLeft {
+  text-align: left; }
+
+.btn-admin-submit-center {
+  margin-left: 420px; }
+
+.overflow-auto {
+  overflow: auto; }
+
+.overflow-y-auto {
+  overflow-y: auto; }
+
+.overflow-hidden {
+  overflow: hidden; }
+
+.full-height {
+  height: 100%; }
+
+.full-width {
+  width: 100%; }
+
+.height-standard {
+  height: 46px; }
+
+.height-xl {
+  height: 200px; }
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-bottom: 375px solid #a1325e;
+  border-right: 28px solid transparent;
+  position: absolute;
+  right: 372px;
+  z-index: 2; }
+
+#sideMenuContainer {
+  height: 100%;
+  float: left; }
+  #sideMenuContainer div {
+    z-index: 2; }
+  #sideMenuContainer a {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    color: #323232;
+    height: 60px;
+    line-height: 60px;
+    text-align: center; }
+  #sideMenuContainer a:first-child {
+    margin-top: 20px; }
+  #sideMenuContainer a.selected {
+    background-color: white; }
+  #sideMenuContainer #sideMenuStatic {
+    position: relative;
+    background-color: #a1325e;
+    width: 60px;
+    float: left;
+    height: 100%;
+    box-shadow: 1px 0px 10px #888888; }
+    #sideMenuContainer #sideMenuStatic .hamburger {
+      width: 25px; }
+      #sideMenuContainer #sideMenuStatic .hamburger div {
+        transform: scale(0.23);
+        margin-left: -13px;
+        margin-right: auto;
+        display: block;
+        width: 25px;
+        height: 25px; }
+    #sideMenuContainer #sideMenuStatic .goToReviewIcon {
+      background-image: url("../../images/icons/review-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
+    #sideMenuContainer #sideMenuStatic .logoffIcon {
+      background-image: url("../../images/icons/logoff-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
+    #sideMenuContainer #sideMenuStatic .adminIcon {
+      background-image: url("../../images/icons/settings-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
+    #sideMenuContainer #sideMenuStatic .eventIcon {
+      background-image: url("../../images/icons/event-icon.png");
+      background-size: 25px;
+      background-repeat: no-repeat;
+      background-position: center; }
+  #sideMenuContainer .sideNavDrawer {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    top: 0;
+    left: 0;
+    background-color: white;
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.5s;
+    /* 0.5 second transition effect to slide in the sidenav */
+    padding-left: 60px; }
+
+.listResults div span {
+  margin-right: 8px; }
 
 .border-standard {
   border-style: solid;
@@ -415,11 +467,68 @@ md-toast {
   border-width: initial;
   border-radius: 4px; }
 
+.ng-hide-add {
+  animation: 0.3s lightSpeedOut ease; }
+
+/* when showing the picture */
+.ng-hide-remove {
+  animation: 0.3s flipInX ease; }
+
+/* ANIMATIONS (FROM ANIMATE.CSS) ======================== */
+/* flip in */
+@keyframes flipInX {
+  0% {
+    transition-timing-function: ease-in;
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+/* light speed out */
+@keyframes lightSpeedOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+.app-modal-window .modal-dialog {
+  width: 800px; }
+
+.app-modal-window-xl .modal-dialog {
+  width: 900px; }
+
+.validationModal {
+  color: white;
+  height: 400px; }
+  .validationModal .cardHolder {
+    height: 400px; }
+  .validationModal .commentBox textarea {
+    height: 100px;
+    resize: none;
+    color: black; }
+  .validationModal .yesnoContainer {
+    position: relative;
+    bottom: 80px; }
+
+.validationModal-xl {
+  color: white;
+  height: 450px; }
+  .validationModal-xl .cardHolder {
+    height: 450px; }
+  .validationModal-xl .commentBox textarea {
+    height: 100px;
+    resize: none;
+    color: black; }
+  .validationModal-xl .yesnoContainer {
+    position: relative;
+    bottom: 80px; }
+
 #ng-view {
   overflow-y: hidden; }
 
-tooltip {
-  width: 100%; }
-
 .fp-tableCell {
   vertical-align: top; }
+
+.listResults li {
+  transition: ease 0.2s; }
+  .listResults li.expanded {
+    height: 112px; }

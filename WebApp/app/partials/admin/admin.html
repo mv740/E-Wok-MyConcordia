@@ -1,69 +1,109 @@
-﻿<div ng-controller="AdminController as admin" class="container container3D top-buffer">
-    <div class="page-header">
-        <h1>Admin Setting</h1>
-    </div>
+﻿<div ng-controller="AdminController as admin" class="side-padding-xl">
 
-    <div class="row bottom-buffer">
-        <h4><img src="images/icons/ic_date_range_black_24dp.png" class="calendar-icon"/>Update period currently set to: <span ng-if="!admin.loading">{{admin.currentUpdatePeriod}}</span>
-            <div class="progressCircularContainer" ng-if="admin.loading">
-                <md-progress-circular md-mode="indeterminate" value="..."></md-progress-circular>
+    <div id="fpAdmin" full-page options="admin.fpOptions" controls="admin.fpControls">
+        <div class="section section1">
+
+            <div class="page-header">
+                <h1>Update period</h1>
             </div>
-        </h4>
-    </div>
 
-    <div class="row"
-         tooltips tooltip-template="Required"
-         tooltips tooltip-side="top"
-         tooltips tooltip-hidden="{{admin.yearEntered}}">
-        <select class="col-sm-10 border-standard select-admin"
-                id="AcademicYearDropDown"
-                ng-model="admin.academicYear"
-                ng-click="admin.setYearEntered()">
-            <option value="" selected disabled>Academic year</option>
-            <option ng-repeat="academicYearOption in admin.academicYearOptions" value="{{academicYearOption}}">{{academicYearOption}}</option>
-        </select>
-        <div class="glyphicon glyphicon-ok ok-icon" ng-if="admin.yearEntered"></div>
-    </div>
+            <div>
+                <h4>Currently set to: <span ng-if="!admin.loading">{{admin.currentUpdatePeriod}}</span>
 
-
-    <div class="row datepicker-container">
-        <div class="col-sm-3">
-            <label for="dateFrom" class="row">From</label>
-            <div class="calendar-display row">
-                <div   type="text"
-                       datepicker-options="admin.dateOptions"
-                       id="dateFrom"
-                       datepicker
-                       ng-click="admin.setStartDateEntered()"
-                       ng-model="admin.dtFrom"
-                       ng-required="true"
-                       tooltips tooltip-template="Required"
-                       tooltips tooltip-side="bottom"
-                       tooltips tooltip-hidden="{{admin.startDateEntered}}"></div>
+                </h4>
             </div>
+
+            <button ng-click="admin.fpControls.slideDown()" class="button3D buttonSmallFormat top-buffer">Modify</button>
+
+
+
+
         </div>
+        <div class="section">
 
-        <div class="col-sm-3 col-sm-push-2">
-            <label for="dateTo" class="row">To</label>
-            <div class="calendar-display" class="row">
-                <div   type="text"
+            <div class="page-header">
+                <h1>Year</h1>
+            </div>
+
+            <div>
+                <h4>Choose the year for which the students will be able to send new profile picture for approval
+
+                </h4>
+            </div>
+
+            <div class="top-buffer col-xs-12"
+                    tooltips tooltip-template="Required"
+                    tooltips tooltip-side="top"
+                    tooltips tooltip-hidden="{{admin.yearEntered}}">
+                <select class="col-xs-12 border-dotted height-standard bottom-buffer side-padding-xs"
+                        id="AcademicYearDropDown"
+                        ng-model="admin.academicYear"
+                        ng-click="admin.setYearEntered()">
+                    <option value="" selected disabled>Academic year</option>
+                    <option ng-repeat="academicYearOption in admin.academicYearOptions" value="{{academicYearOption}}">{{academicYearOption}}</option>
+                </select>
+            </div>
+
+            <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat">Back</button> <button ng-click="admin.academicYear && admin.fpControls.slideDown()"  ng-class="{'inactive': !admin.academicYear}" class="button3D buttonSmallFormat side-buffer">Next step</button>
+
+        </div>
+        <div class="section section2">
+
+            <div class="page-header">
+                <h1>Start date</h1>
+            </div>
+
+            <div>
+                <h4>Choose the start date for which the students will be able to send new profile picture for approval
+
+                </h4>
+            </div>
+
+                <div class="col-xs-12 top-buffer">
+                    <input type="text"
+                           class="form-control date border-dotted height-standard side-padding-xs"
+                           id="dateFrom"
+                           placeholder="From"
+                           ng-click="admin.dateFrom=true"
+                           datepicker-popup="{{admin.format}}"
+                           ng-model="admin.dtFrom"
+                           is-open="admin.dateFrom"
+                           datepicker-options="admin.dateOptions"
+                           date-disabled="disabled(date, mode)"
+                           ng-required="true"
+                           close-text="Close">
+                </div>
+            <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtFrom && admin.fpControls.slideDown()" ng-class="{'inactive': !admin.dtFrom}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
+        </div>
+        <div class="section section3">
+
+            <div class="page-header">
+                <h1>End date</h1>
+            </div>
+
+            <div>
+                <h4>Choose the end date for which the students will be able to send new profile picture for approval
+
+                </h4>
+            </div>
+
+            <div class="col-xs-12 top-buffer">
+                <input type="text"
+                       class="form-control date border-dotted height-standard side-padding-xs"
                        id="dateTo"
-                       placeholder="From"
-                       datepicker
-                       ng-click="admin.setEndDateEntered()"
+                       placeholder="To"
+                       ng-click="admin.dateTo=true"
+                       datepicker-popup="{{admin.format}}"
                        ng-model="admin.dtTo"
+                       is-open="admin.dateTo"
+                       datepicker-options="admin.dateOptions"
+                       date-disabled="disabled(date, mode)"
                        ng-required="true"
-                       tooltips tooltip-template="Required"
-                       tooltips tooltip-side="bottom"
-                       tooltips tooltip-hidden="{{admin.endDateEntered}}"></div>
+                       close-text="Close">
             </div>
+            <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtTo && admin.submit()"  ng-class="{'inactive': !admin.dtTo}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
         </div>
     </div>
 
-    <div class="row">
-        <button ng-click="admin.submit()" data-loading-text="Loading..."
-                class="button3D btn-admin-submit-center">{{ admin.submitButton }}
-        </button>
-    </div>
 </div>
 

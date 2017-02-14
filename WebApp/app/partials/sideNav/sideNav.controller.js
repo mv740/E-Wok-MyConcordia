@@ -28,6 +28,7 @@ function SideNavCtrl(AuthenticationService, $scope) {
     function changeSelectedSideNavIcon(next){
         sideNav.isOnReviewPage = false;
         sideNav.isOnAdminPage = false;
+        sideNav.isOnEventPage = false;
         if (typeof next.$$route != "undefined") {
             if (next.$$route.originalPath.match("review")) {
                 sideNav.isOnReviewPage = true;
@@ -36,6 +37,11 @@ function SideNavCtrl(AuthenticationService, $scope) {
             }
             else if (next.$$route.originalPath.match("admin")) {
                 sideNav.isOnAdminPage = true;
+                //temporary
+                sideNav.isLoggedIn = true
+            }
+            else if (next.$$route.originalPath.match("event")) {
+                sideNav.isOnEventPage = true;
                 //temporary
                 sideNav.isLoggedIn = true
             }
