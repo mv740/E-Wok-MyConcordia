@@ -11,6 +11,21 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
 
   .run(function ($ionicPlatform, $rootScope) {
     $ionicPlatform.ready(function () {
+
+      hockeyapp.start(success, fail, "0723638003684a1b8b3a6476e3816afd");
+
+
+      function success() {
+        console.log("success");
+
+        hockeyapp.checkForUpdate();
+      }
+
+
+      function fail() {
+        console.log("fail");
+      }
+
       // LOCK ORIENTATION TO PORTRAIT.
       screen.lockOrientation('portrait');
 

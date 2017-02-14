@@ -39,10 +39,12 @@
               if (user) {
                 $ionicSideMenuDelegate.canDragContent(true);
                 $ionicNavBarDelegate.showBar(true);
+                hockeyapp.trackEvent(null, null, "LOGIN_SUCCESS");
                 $state.go('app.id');
               }
             },
             function (rejected) {
+              hockeyapp.trackEvent(null, null, "LOGIN_FAILED");
               failedLoginAlert(rejected);
             }
           );
