@@ -1,5 +1,10 @@
 'use strict';
 
+var defaultHeaders = {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+};
+
 angular
     .module('myApp')
     .factory('toastedHttpService', toastedHttpService);
@@ -24,18 +29,12 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
     function get(settings){
         var param = "";
         if (settings.param != undefined) param = settings.param;
-        var topUrl = settings.topUrl;
 
-        toast = $mdToast.show(
-            $mdToast.simple()
-                .textContent('Working...')
-                .position("bottom right")
-                .hideDelay(0)
-        );
+        toast = $mdToast.show(buildSimple());
 
         var deferred = $q.defer();
 
-        $http.get(myConfig.baseUrl + topUrl + param).then(function (success) {
+        $http.get(myConfig.baseUrl + settings.topUrl + param).then(function (success) {
             deferred.resolve(success.data);
             $mdToast.hide(toast);
         },function (failure) {
@@ -48,20 +47,12 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
 
     function post(data, topUrl){
 
-        toast = $mdToast.show(
-            $mdToast.simple()
-                .textContent('Working...')
-                .position("bottom right")
-                .hideDelay(0)
-        );
+        toast = $mdToast.show(buildSimple());
 
         var deferred = $q.defer();
 
         $http({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers: defaultHeaders,
             method: 'POST',
             url: myConfig.baseUrl + topUrl,
             data: data
@@ -80,20 +71,12 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
 
     function put(data, topUrl){
 
-        toast = $mdToast.show(
-            $mdToast.simple()
-                .textContent('Working...')
-                .position("bottom right")
-                .hideDelay(0)
-        );
+        toast = $mdToast.show(buildSimple());
 
         var deferred = $q.defer();
 
         $http({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers: defaultHeaders,
             method: 'PUT',
             url: myConfig.baseUrl + topUrl,
             data: data
@@ -112,20 +95,12 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
 
     function del(data, topUrl){
 
-        toast = $mdToast.show(
-            $mdToast.simple()
-                .textContent('Working...')
-                .position("bottom right")
-                .hideDelay(0)
-        );
+        toast = $mdToast.show(buildSimple());
 
         var deferred = $q.defer();
 
         $http({
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
+            headers: defaultHeaders,
             method: 'DELETE',
             url: myConfig.baseUrl + topUrl,
             data: data
@@ -140,6 +115,14 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
             });
 
         return deferred.promise;
+    }
+
+    function buildSimple(msg){
+        if (!msg) msg = "Working...";
+        return $mdToast.simple()
+            .textContent(msg)
+            .position("bottom right")
+            .hideDelay(0)
     }
 
 }
