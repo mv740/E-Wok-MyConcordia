@@ -117,8 +117,7 @@ namespace MyConcordiaID.Models.Event
 
 
             // event must be open & not canceled or expired
-
-            var publicEvents = _database.EVENTS
+            var openEvents = _database.EVENTS
                 .Where(e => e.TYPE == open && e.STATUS != cancelled && e.TIME_END > today)
                 .Select(e => new AvailableEvent
                 {
@@ -139,11 +138,16 @@ namespace MyConcordiaID.Models.Event
                 .ToList();
 
 
-            //merge list & order events
+            //merge list
+            // remove duplicate : if you created a open event, you will be a creator thus part of the Event_users
+            //                    When we get all available open event you will have an duplicate "attendee object" 
+            //order events
             events = events
-                .Concat(publicEvents)
-                .OrderByDescending(e => e.Information.TimeBegin)
-                .ToList();
+               .Concat(openEvents)
+               .GroupBy(x => x.Information.EventID)
+               .Select(s => s.First())
+               .OrderByDescending(e => e.Information.TimeBegin)
+               .ToList();
 
 
             return events;
@@ -547,7 +551,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(u => u.ID_PK == user.UserId)
                 .FirstOrDefault();
 
-            if(existingUser != null)
+            if (existingUser != null)
             {
                 existingUser.ROLE = user.Role.ToString();
                 _database.SaveChanges();
