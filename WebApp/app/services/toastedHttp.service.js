@@ -9,9 +9,9 @@ angular
     .module('myApp')
     .factory('toastedHttpService', toastedHttpService);
 
-toastedHttpService.$inject = ['$http', '$q','$mdToast', 'myConfig'];
+toastedHttpService.$inject = ['$http', '$q', '$timeout', '$mdToast', 'myConfig'];
 
-function toastedHttpService($http, $q, $mdToast, myConfig) {
+function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
 
     var service = {
         get: get,
@@ -60,6 +60,10 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
             function (success) {
                 deferred.resolve(success.data);
                 $mdToast.hide(toast);
+                $timeout(function(){
+                    toast = $mdToast.show(buildSimple("Sent &#10003"));
+                }, 800);
+
             },
             function (failure) {
                 deferred.reject(failure);
@@ -84,6 +88,9 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
             function (success) {
                 deferred.resolve(success.data);
                 $mdToast.hide(toast);
+                $timeout(function(){
+                    toast = $mdToast.show(buildSimple("Modified &#9998"));
+                }, 800);
             },
             function (failure) {
                 deferred.reject(failure);
@@ -108,6 +115,9 @@ function toastedHttpService($http, $q, $mdToast, myConfig) {
             function (success) {
                 deferred.resolve(success.data);
                 $mdToast.hide(toast);
+                $timeout(function(){
+                    toast = $mdToast.show(buildSimple("Deleted &#10005"));
+                }, 800);
             },
             function (failure) {
                 deferred.reject(failure);
