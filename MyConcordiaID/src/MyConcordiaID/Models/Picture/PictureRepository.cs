@@ -19,72 +19,53 @@ namespace MyConcordiaID.Models.Picture
                 .Where(s => s.ID == id)
                 .FirstOrDefault();
 
+            var aproved = Status.Approved.ToString();
+            var pending = Status.Pending.ToString();
+            var denied = Status.Denied.ToString();
+
+
             if (student != null)
             {
-                var studentNetname = student.NETNAME;
-
-                var aproved = Status.Approved.ToString();
-                var profile = _database.PICTUREs
-                    .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS == aproved)
-                    .Select(s => new
+                var myPictures = _database.PICTUREs
+                    .Where(s => s.STUDENT_NETNAME == student.NETNAME)
+                    .GroupBy(item => item.STATUS)
+                    .Select(group => new
                     {
-                        s.ID_PK,
-                        s.PICTURE_DATA,
-                        s.STATUS,
-                        s.CREATED,
-                        s.UPDATED,
-                        s.COMMENTS
-
-                    })
-                    .FirstOrDefault();
-
-                var pending = Status.Pending.ToString();
-                var pendingPicture = _database.PICTUREs
-                    .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS == pending)
-                    .Select(s => new
-                    {
-                        s.ID_PK,
-                        s.PICTURE_DATA,
-                        s.STATUS,
-                        s.CREATED,
-                        s.UPDATED,
-                        s.COMMENTS
-                    
-
-                    })
-                    .FirstOrDefault();
-
-                //all picture that aren't a profile or a pending
-                var remainingPicture = _database.PICTUREs
-                    .Where(p => p.STUDENT_NETNAME == studentNetname && p.STATUS != aproved && p.STATUS != pending)
-                    .Select(s => new
-                    {
-                        s.ID_PK,
-                        s.PICTURE_DATA,
-                        s.STATUS,
-                        s.CREATED,
-                        s.UPDATED,
-                        s.COMMENTS
-
-                    })
-                    .OrderByDescending(s => s.CREATED)
-                    .ToList();
-
-
-                //all pictures by status
-
-
+                        Status = group.Key,
+                        Items = group.Select(item => new
+                        {
+                            item.ID_PK,
+                            item.PICTURE_DATA,
+                            item.STATUS,
+                            item.CREATED,
+                            item.UPDATED,
+                            item.COMMENTS
+                        })
+                    });
 
                 StudentPictures pictures = new StudentPictures
                 {
-                    profilePicture = profile,
-                    pendingPicture = pendingPicture,
-                    archivedPictures = remainingPicture
+                    profilePicture = myPictures
+                        .Where(item => item.Status == aproved)
+                        .Select(list => list.Items.FirstOrDefault())
+                        .FirstOrDefault(),
+
+                    pendingPicture = myPictures
+                        .Where(item => item.Status == pending)
+                        .Select(list => list.Items.FirstOrDefault())
+                        .FirstOrDefault(),
+
+                    archivedPictures = myPictures
+                        .Where(item => item.Status != aproved && item.Status != pending)
+                        .SelectMany(list => list.Items)
+                        .OrderByDescending(order => order.CREATED)
                 };
 
                 return pictures;
+
             }
 
+            
             return null;// student not found;
         }
 
