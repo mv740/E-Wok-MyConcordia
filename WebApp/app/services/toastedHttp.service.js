@@ -30,16 +30,16 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
         var param = "";
         if (settings.param != undefined) param = settings.param;
 
-        toast = $mdToast.show(buildSimple());
+        toast = showToast();
 
         var deferred = $q.defer();
 
         $http.get(myConfig.baseUrl + settings.topUrl + param).then(function (success) {
             deferred.resolve(success.data);
-            $mdToast.hide(toast);
+            hideToast();
         },function (failure) {
             deferred.reject((failure));
-            $mdToast.hide(toast);
+            hideToast();
         });
 
         return deferred.promise;
@@ -47,7 +47,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
 
     function post(data, topUrl){
 
-        toast = $mdToast.show(buildSimple());
+        toast = showToast();
 
         var deferred = $q.defer();
 
@@ -59,15 +59,15 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
         }).then(
             function (success) {
                 deferred.resolve(success.data);
-                $mdToast.hide(toast);
+                hideToast();
                 $timeout(function(){
-                    toast = $mdToast.show(buildSimple("Sent &#10003"));
+                    showToast({msg:"Sent", delay: 3000});
                 }, 800);
 
             },
             function (failure) {
                 deferred.reject(failure);
-                $mdToast.hide(toast);
+                hideToast();
             });
 
         return deferred.promise;
@@ -75,7 +75,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
 
     function put(data, topUrl){
 
-        toast = $mdToast.show(buildSimple());
+        toast = showToast();
 
         var deferred = $q.defer();
 
@@ -87,14 +87,14 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
         }).then(
             function (success) {
                 deferred.resolve(success.data);
-                $mdToast.hide(toast);
+                hideToast();
                 $timeout(function(){
-                    toast = $mdToast.show(buildSimple("Modified &#9998"));
+                    showToast({msg:"Modified", delay: 3000});
                 }, 800);
             },
             function (failure) {
                 deferred.reject(failure);
-                $mdToast.hide(toast);
+                hideToast();
             });
 
         return deferred.promise;
@@ -102,7 +102,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
 
     function del(data, topUrl){
 
-        toast = $mdToast.show(buildSimple());
+        toast = showToast();
 
         var deferred = $q.defer();
 
@@ -114,25 +114,41 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
         }).then(
             function (success) {
                 deferred.resolve(success.data);
-                $mdToast.hide(toast);
+                hideToast();
                 $timeout(function(){
-                    toast = $mdToast.show(buildSimple("Deleted &#10005"));
+                    showToast({msg:"Deleted", delay: 3000});
                 }, 800);
             },
             function (failure) {
                 deferred.reject(failure);
-                $mdToast.hide(toast);
+                hideToast();
             });
 
         return deferred.promise;
     }
 
-    function buildSimple(msg){
-        if (!msg) msg = "Working...";
+    function hideToast(){
+        if (toast) {
+            $mdToast.hide(toast);
+            toast = null;
+        }
+    }
+
+    function showToast(options){
+        if (!toast) {
+            return $mdToast.show(buildSimple(options));
+        }
+    }
+
+    function buildSimple(options){
+        var msg = "Loading...";
+        var delay = 6000;
+        if (options && options.msg) msg = options.msg;
+        if (options && options.delay) delay = options.delay;
         return $mdToast.simple()
             .textContent(msg)
             .position("bottom right")
-            .hideDelay(0)
+            .hideDelay(delay)
     }
 
 }

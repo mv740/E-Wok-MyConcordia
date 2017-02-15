@@ -19,6 +19,7 @@ function EventController($modal, $timeout, eventService) {
     event.modify = modify;
     event.openEventModal = openEventModal;
     event.create = create;
+    event.del = del;
 
     getEvents();
 
@@ -32,7 +33,10 @@ function EventController($modal, $timeout, eventService) {
 
     function submit(){
         if (event.creating.eventID) eventService.updateEvent(event.creating).then(function(){});
-        else eventService.submit(event.creating).then(function(){});
+        else eventService.submit(event.creating).then(function(){
+            event.fpControls.moveTo(1);
+            getEvents();
+        });
     }
 
     function get(eventId) {
@@ -54,6 +58,11 @@ function EventController($modal, $timeout, eventService) {
 
     function modify(eventTarget) {
         event.creating = eventTarget;
+    }
+
+    function del(eventTarget){
+        eventService.deleteEvent(eventTarget);
+        getEvents();
     }
 
     function openEventModal(eventTarget){
