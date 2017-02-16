@@ -1,6 +1,8 @@
 ﻿using OracleEntityFramework;
 using System;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MyConcordiaID.Models.Picture
 {
@@ -13,11 +15,11 @@ namespace MyConcordiaID.Models.Picture
             _database = context;
         }
 
-        public StudentPictures FindStudentPictures(int id)
+        public async Task<StudentPictures> FindStudentPictures(int id)
         {
-            var student = _database.STUDENTS
+            var student = await _database.STUDENTS
                 .Where(s => s.ID == id)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             var aproved = Status.Approved.ToString();
             var pending = Status.Pending.ToString();
@@ -26,7 +28,7 @@ namespace MyConcordiaID.Models.Picture
 
             if (student != null)
             {
-                var myPictures = _database.PICTUREs
+                var myPictures = await _database.PICTUREs
                     .Where(s => s.STUDENT_NETNAME == student.NETNAME)
                     .GroupBy(item => item.STATUS)
                     .Select(group => new
@@ -41,7 +43,8 @@ namespace MyConcordiaID.Models.Picture
                             item.UPDATED,
                             item.COMMENTS
                         })
-                    });
+                    })
+                    .ToListAsync();
 
                 StudentPictures pictures = new StudentPictures
                 {

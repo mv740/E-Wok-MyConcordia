@@ -15,6 +15,7 @@ using System.Security.Claims;
 using System.Threading;
 using Microsoft.AspNetCore.Http;
 using MyConcordiaID.Models.Picture;
+using System.Data.Entity.Infrastructure;
 
 namespace UnitTestCore
 {
@@ -32,10 +33,10 @@ namespace UnitTestCore
         private void ConnectMocksToDataStore(IEnumerable<STUDENT> data_store)
         {
             var data_source = data_store.AsQueryable();
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<STUDENT>(data_source.Provider));
             _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(data_source.Expression);
             _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            _mySetStudent.As<IDbAsyncEnumerable<STUDENT>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<STUDENT>(data_source.GetEnumerator()));
             _context.Setup(a => a.STUDENTS).Returns(_mySetStudent.Object);
         }
 
@@ -43,10 +44,10 @@ namespace UnitTestCore
         private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> data_store)
         {
             var data_source = data_store.AsQueryable();
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<PICTURE>(data_source.Provider));
             _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(data_source.Expression);
             _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            _mySetPicture.As<IDbAsyncEnumerable<PICTURE>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<PICTURE>(data_source.GetEnumerator()));
             _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
 

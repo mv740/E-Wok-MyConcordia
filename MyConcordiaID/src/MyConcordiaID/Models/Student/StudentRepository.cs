@@ -4,6 +4,8 @@ using System.Linq;
 using OracleEntityFramework;
 using MyConcordiaID.Models.Picture;
 using MyConcordiaID.Helper;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace MyConcordiaID.Models.Student
 {
@@ -17,9 +19,9 @@ namespace MyConcordiaID.Models.Student
             _database = context;
         }
 
-        public StudentAccount FindById(int id)
+        public async Task<StudentAccount> FindById(int id)
         {
-            var student = _database.STUDENTS
+            var student = await _database.STUDENTS
                  .Where(s => s.ID == id)
                  .Select(s => new
                  {
@@ -34,7 +36,7 @@ namespace MyConcordiaID.Models.Student
                      s.EXPIREDATE,
                      s.UPDATEPICTURE
                  })
-                 .SingleOrDefault();
+                 .SingleOrDefaultAsync();
 
             if (student != null)
             {
@@ -55,9 +57,9 @@ namespace MyConcordiaID.Models.Student
                 {
                     //retrieve pending picture
                     string pending = Status.Pending.ToString();
-                    var pendingPicture = _database.PICTUREs
+                    var pendingPicture = await _database.PICTUREs
                         .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == pending)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     account.PendingPicture = pendingPicture.PICTURE_DATA;
 
@@ -67,9 +69,9 @@ namespace MyConcordiaID.Models.Student
                 {
                     //retrieve profile  picture
                     string aproved = Status.Approved.ToString();
-                    var profilePicture = _database.PICTUREs
+                    var profilePicture = await _database.PICTUREs
                         .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == aproved)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     account.ProfilePicture = profilePicture.PICTURE_DATA;
 
@@ -82,9 +84,9 @@ namespace MyConcordiaID.Models.Student
             return null;
         }
 
-        public StudentAccount FindByNetName(string netName)
+        public async Task<StudentAccount> FindByNetName(string netName)
         {
-            var student = _database.STUDENTS
+            var student = await _database.STUDENTS
                  .Where(s => s.NETNAME == netName)
                  .Select(s => new
                  {
@@ -99,8 +101,9 @@ namespace MyConcordiaID.Models.Student
                      s.EXPIREDATE,
                      s.UPDATEPICTURE
                  })
-                 .SingleOrDefault();
+                 .SingleOrDefaultAsync();
 
+            
             if(student != null)
             {
                 StudentAccount account = new StudentAccount
@@ -121,9 +124,9 @@ namespace MyConcordiaID.Models.Student
                 {
                     //retrieve pending picture
                     string pending = Status.Pending.ToString();
-                    var pendingPicture = _database.PICTUREs
+                    var pendingPicture = await _database.PICTUREs
                         .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == pending)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     account.PendingPicture = pendingPicture.PICTURE_DATA;
 
@@ -133,9 +136,9 @@ namespace MyConcordiaID.Models.Student
                 {
                     //retrieve profile  picture
                     var approved = Status.Approved.ToString();
-                    var profilePicture = _database.PICTUREs
+                    var profilePicture = await _database.PICTUREs
                         .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == approved)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     account.ProfilePicture = profilePicture.PICTURE_DATA;
 
@@ -152,10 +155,10 @@ namespace MyConcordiaID.Models.Student
         ///  Retrieve all the students basic informations
         /// </summary>
         /// <returns></returns>
-        public dynamic GetAll()
+        public async Task<dynamic> GetAll()
         {
 
-            var students = _database.STUDENTS
+            var students = await _database.STUDENTS
                 .Select(s => new
                 {
                     s.ID,
@@ -164,7 +167,7 @@ namespace MyConcordiaID.Models.Student
                     s.LASTNAME,
                     s.DOB
                 })
-                .ToList();
+                .ToListAsync();
 
             return students;
         }

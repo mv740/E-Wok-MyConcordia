@@ -39,7 +39,10 @@ namespace MyConcordiaID.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return new ObjectResult(_studentsRepo.GetAll());
+
+            var students = _studentsRepo.GetAll().Result;
+
+            return new ObjectResult(students);
         }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetById(int id)
         {
 
-            var student = _studentsRepo.FindById(id);
+            var student = _studentsRepo.FindById(id).Result;
 
             if (student == null)
             {
@@ -77,7 +80,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetStudentPictures(int id)
         {
 
-            var studentPictures = _pictureRepo.FindStudentPictures(id);
+            var studentPictures = _pictureRepo.FindStudentPictures(id).Result;
 
             if (studentPictures == null)
             {
@@ -99,7 +102,7 @@ namespace MyConcordiaID.Controllers
         [Route("account")]
         public IActionResult GetAccount()
         {
-            var result = _studentsRepo.FindByNetName(getAuthenticatedUserNetname());
+            var result = _studentsRepo.FindByNetName(getAuthenticatedUserNetname()).Result;
 
             if (result == null)
             {

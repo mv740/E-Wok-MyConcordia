@@ -8,6 +8,7 @@ using OracleEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -30,20 +31,20 @@ namespace UnitTestCore
         private void ConnectMocksToDataStore(IEnumerable<STUDENT> data_store)
         {
             var data_source = data_store.AsQueryable();
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<STUDENT>(data_source.Provider));
             _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(data_source.Expression);
             _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            _mySetStudent.As<IDbAsyncEnumerable<STUDENT>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<STUDENT>(data_source.GetEnumerator()));
             _context.Setup(a => a.STUDENTS).Returns(_mySetStudent.Object);
         }
 
         private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> data_store)
         {
             var data_source = data_store.AsQueryable();
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<PICTURE>(data_source.Provider));
             _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(data_source.Expression);
             _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            _mySetPicture.As<IDbAsyncEnumerable<PICTURE>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<PICTURE>(data_source.GetEnumerator()));
             _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
         /// <summary>
@@ -135,7 +136,7 @@ namespace UnitTestCore
             ConnectMocksToDataStore(users);
 
 
-            var student = _repo.FindById(21941097);
+            var student = _repo.FindById(21941097).Result;
             Assert.AreEqual(21941097, student.ID);
             Assert.AreEqual("testFirst", student.FirstName);
 
@@ -174,7 +175,7 @@ namespace UnitTestCore
             _mySetStudent.Object.AddRange(users);
             ConnectMocksToDataStore(users);
 
-            var result = _repo.GetAll();
+            var result = _repo.GetAll().Result;
 
             Assert.AreEqual(2, Enumerable.Count(result));
 
@@ -386,7 +387,7 @@ namespace UnitTestCore
 
             _repo.ValidatePicture(validationMessage, "test");
 
-            var studentPictures = _picture.FindStudentPictures(21941097);
+            var studentPictures = _picture.FindStudentPictures(21941097).Result;
 
             decimal id = -1;
             string status = "";
