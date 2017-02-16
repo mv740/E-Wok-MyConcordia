@@ -27,7 +27,7 @@ namespace MyConcordiaID.Models.Event
     {
 
         [Required]
-        public string EventID { get; set; }
+        public string EventId { get; set; }
 
         [Required]
         public string Name { get; set; }
