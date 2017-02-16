@@ -33,7 +33,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.TIME_END > today)
                 .Select(e => new EventInformation
                 {
-                    EventID = e.ID_PK,
+                    EventId = e.ID_PK,
                     Name = e.NAME,
                     Description = e.DESCRIPTION,
                     Location = e.LOCATION,
@@ -100,7 +100,7 @@ namespace MyConcordiaID.Models.Event
                     UserRole = e.ROLE,
                     Information = new EventInformation
                     {
-                        EventID = e.EVENT.ID_PK,
+                        EventId = e.EVENT.ID_PK,
                         Name = e.EVENT.NAME,
                         Description = e.EVENT.DESCRIPTION,
                         Location = e.EVENT.LOCATION,
@@ -124,7 +124,7 @@ namespace MyConcordiaID.Models.Event
                     UserRole = attendee,
                     Information = new EventInformation
                     {
-                        EventID = e.ID_PK,
+                        EventId = e.ID_PK,
                         Name = e.NAME,
                         Description = e.DESCRIPTION,
                         Location = e.LOCATION,
@@ -144,7 +144,7 @@ namespace MyConcordiaID.Models.Event
             //order events
             events = events
                .Concat(openEvents)
-               .GroupBy(x => x.Information.EventID)
+               .GroupBy(x => x.Information.EventId)
                .Select(s => s.First())
                .OrderByDescending(e => e.Information.TimeBegin)
                .ToList();
@@ -166,7 +166,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.ID_PK == eventId)
                 .Select(e => new EventInformation
                 {
-                    EventID = e.ID_PK,
+                    EventId = e.ID_PK,
                     Name = e.NAME,
                     Description = e.DESCRIPTION,
                     Location = e.LOCATION,
@@ -190,7 +190,7 @@ namespace MyConcordiaID.Models.Event
             var events = _database.EVENTS
                 .Select(e => new EventInformation
                 {
-                    EventID = e.ID_PK,
+                    EventId = e.ID_PK,
                     Name = e.NAME,
                     Description = e.DESCRIPTION,
                     Location = e.LOCATION,
@@ -218,7 +218,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.STATUS == status)
                 .Select(e => new EventInformation
                 {
-                    EventID = e.ID_PK,
+                    EventId = e.ID_PK,
                     Name = e.NAME,
                     Description = e.DESCRIPTION,
                     Location = e.LOCATION,
@@ -512,7 +512,7 @@ namespace MyConcordiaID.Models.Event
         public EventActionResult UpdateEvent(EventInformation information)
         {
             var updateEvent = _database.EVENTS
-                .Where(e => e.ID_PK == information.EventID)
+                .Where(e => e.ID_PK == information.EventId)
                 .FirstOrDefault();
 
             if (updateEvent != null)
