@@ -24,7 +24,8 @@
                     </div>
                     <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
                         <button ng-click="event.modify(result); event.fpControls.slideDown();" class="button3D purple buttonSmallFormat">Modify</button>
-                        <button ng-click="event.openEventModal(result)" class="button3D purple side-buffer-sm buttonSmallFormat">View details</button>
+                        <button ng-click="event.openEventModal(result)" class="button3D purple left-buffer-sm buttonSmallFormat">View details</button>
+                        <button ng-click="event.del(result)" class="button3D purple left-buffer-sm buttonSmallFormat">Delete</button>
                     </div>
                 </li>
             </ul>

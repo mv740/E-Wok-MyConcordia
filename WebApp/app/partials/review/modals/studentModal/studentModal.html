@@ -18,7 +18,7 @@
                 </div>
 
             </div>
-            <div class="commentBox col-xs-12 atBottom all-side-padding">
+            <div class="commentBox col-xs-12 atBottom all-side-padding" ng-if="studentModal.student.pendingPicture">
             <span>You can add a comment here:</span>
                 <textarea ng-model="studentModal.student.pendingPicture.comments" class="col-xs-12"></textarea>
                 <button ng-click="studentModal.submitComment()" class="col-xs-12 top-buffer-sm button3D">Submit comment</button>

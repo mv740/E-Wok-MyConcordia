@@ -40,7 +40,7 @@
                         ng-model="admin.academicYear"
                         ng-click="admin.setYearEntered()">
                     <option value="" selected disabled>Academic year</option>
-                    <option ng-repeat="academicYearOption in admin.academicYearOptions" value="{{academicYearOption}}">{{academicYearOption}}</option>
+                    <option ng-repeat="academicYearOption in admin.academicYearOptions" value="{{academicYearOption}}">{{academicYearOption}}-{{academicYearOption + 1}}</option>
                 </select>
             </div>
 
