@@ -119,6 +119,7 @@ namespace MyConcordiaID
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddEventLog(LogLevel.Information);
 
             //remove when oauth is functional 
             app.UseDeveloperExceptionPage();
