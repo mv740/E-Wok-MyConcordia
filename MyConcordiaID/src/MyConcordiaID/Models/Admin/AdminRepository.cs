@@ -1,11 +1,9 @@
-﻿using MyConcordiaID.Models.Picture;
-using OracleEntityFramework;
+﻿using OracleEntityFramework;
 using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
-using Microsoft.DocAsCode.Common;
 
 namespace MyConcordiaID.Models.Admin
 {

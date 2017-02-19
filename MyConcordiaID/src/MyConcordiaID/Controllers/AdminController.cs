@@ -5,7 +5,6 @@ using MyConcordiaID.Helper;
 using MyConcordiaID.Models;
 using MyConcordiaID.Models.Admin;
 using MyConcordiaID.Models.Log;
-using OracleEntityFramework;
 using System.Security.Claims;
 
 namespace MyConcordiaID.Controllers
