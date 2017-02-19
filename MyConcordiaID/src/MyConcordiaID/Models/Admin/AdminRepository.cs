@@ -3,6 +3,9 @@ using OracleEntityFramework;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Threading.Tasks;
+using Microsoft.DocAsCode.Common;
 
 namespace MyConcordiaID.Models.Admin
 {
@@ -20,24 +23,22 @@ namespace MyConcordiaID.Models.Admin
         /// <param name="setting"></param>
         public bool SetYearUpdatePicturePeriod(PeriodSetting setting)
         {
+            var updatedPreviousPeriod = false; //logging purposes
 
-            bool updatedPreviousPeriod = false; //logging purposes
+            var start = setting.startDate;
+            var end = setting.endDate;
 
-            string start = setting.startDate;
-            string end = setting.endDate;
+            var startDateTime = DateTime.Parse(start);
+            var endDateTime = DateTime.Parse(end);
 
-            DateTime startDateTime = DateTime.Parse(start);
-            DateTime endDateTime = DateTime.Parse(end);
-
-            short year = (short)setting.year;
+            var year = (short)setting.year;
 
             var found = _database.PICTUREUPDATESETTINGs
-                 .Where(p => p.YEAR == year)
-                 .FirstOrDefault();
+                .FirstOrDefault(p => p.YEAR == year);
 
             if (found == null)
             {
-                PICTUREUPDATESETTING updateSetting = new PICTUREUPDATESETTING
+                var updateSetting = new PICTUREUPDATESETTING
                 {
                     YEAR = year,
                     STARDATE = startDateTime,
@@ -58,9 +59,7 @@ namespace MyConcordiaID.Models.Admin
 
             allStudents.ForEach(s => s.UPDATEPICTURE = true);
 
-
             _database.SaveChanges();
-
 
             return updatedPreviousPeriod;
         }
@@ -69,68 +68,86 @@ namespace MyConcordiaID.Models.Admin
         ///  Get current Academic Update picture period
         /// </summary>
         /// <returns></returns>
-        public PeriodSetting GetUpdatePicturePeriod()
+        public async Task<PeriodSetting> GetUpdatePicturePeriodAsync()
         {
             // May 1st 2016 start of academic year 2016-17 : summer 2016, fall 16, winter 17
-
-            int month = DateTime.Now.Month;
-            int year = DateTime.Now.Year;
-
+            var currentMonth = DateTime.Now.Month;
+            var currentYear = DateTime.Now.Year;
+            const int newAcademicYearMonth = 5;
 
             int academicYear;
-            if (month >= 5)
+            if (currentMonth >= newAcademicYearMonth)
             {
-                academicYear = year;
+                academicYear = currentYear;
             }
             else
             {
-                academicYear = year - 1;
+                academicYear = currentYear - 1;
             }
 
-            var period = _database.PICTUREUPDATESETTINGs
-                .Where(p => p.YEAR == academicYear)
-                .FirstOrDefault();
+            //Get require no tracking
+            var period = await _database.PICTUREUPDATESETTINGs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.YEAR == academicYear);
 
 
-            if(period != null)
+            if (period != null)
             {
-                PeriodSetting periodFormat = new PeriodSetting
+                var periodFormat = new PeriodSetting
                 {
                     year = period.YEAR,
                     startDate = period.STARDATE.ToString(),
                     endDate = period.ENDDATE.ToString()
-
-                   
                 };
 
                 return periodFormat;
             }
-
-
-
             return null;
         }
 
         /// <summary>
-        /// 
+        ///  Retrieve an academic update period 
         /// </summary>
         /// <param name="year"></param>
         /// <returns></returns>
-        public PICTUREUPDATESETTING GetUpdatePicturePeriod(int year)
+        public async Task<PeriodSetting> GetUpdatePicturePeriodAsync(int year)
         {
-            var info = _database.PICTUREUPDATESETTINGs
-               .Where(i => i.YEAR == year)
-               .SingleOrDefault();
+            var period = await _database.PICTUREUPDATESETTINGs
+                .AsNoTracking()
+                .FirstOrDefaultAsync(p => p.YEAR == year);
 
-            return info;
+            if (period != null)
+            {
+                var periodFormat = new PeriodSetting
+                {
+                    year = period.YEAR,
+                    startDate = period.STARDATE.ToString(),
+                    endDate = period.ENDDATE.ToString()
+                };
+
+                return periodFormat;
+            }
+            return null;
         }
 
-        public List<PICTUREUPDATESETTING> GetAllUpdatePicturePeriod()
+        /// <summary>
+        /// Retrieve a list of all update periods
+        /// </summary>
+        /// <returns></returns>
+        public async Task<List<PeriodSetting>> GetAllUpdatePicturePeriodAsync()
         {
-            var info = _database.PICTUREUPDATESETTINGs
-               .ToList();
+            var info = await _database.PICTUREUPDATESETTINGs
+                .AsNoTracking()
+                .ToListAsync();
 
-            return info;
+            var periodList = info.Select(period => new PeriodSetting
+            {
+                year = period.YEAR,
+                startDate = period.STARDATE.ToString(),
+                endDate = period.ENDDATE.ToString()
+            }).ToList();
+
+            return periodList;
         }
 
     }

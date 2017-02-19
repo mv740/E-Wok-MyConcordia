@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyConcordiaID.Helper;
 using MyConcordiaID.Models;
@@ -36,17 +37,13 @@ namespace MyConcordiaID.Controllers
         [Route("PicturePeriod")]
         public IActionResult SetPicturePeriod([FromBody] PeriodSetting setting)
         {
-            var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
             var hasUpdatedPeriodSetting = _adminRepo.SetYearUpdatePicturePeriod(setting);
-            if (hasUpdatedPeriodSetting)
-            {
-                _logRepo.Logger(authenticatedUser, Log.Action.ModifiedPictureUpdatePeriod, null);
-            }
-            else
-            {
-                _logRepo.Logger(authenticatedUser, Log.Action.CreatePictureUpdatePeriod, null);
-            }
+
+            _logRepo.Logger(authenticatedUser,
+                hasUpdatedPeriodSetting ? Log.Action.ModifiedPictureUpdatePeriod : Log.Action.CreatePictureUpdatePeriod,
+                null);
 
 
             return Ok();
@@ -60,9 +57,10 @@ namespace MyConcordiaID.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriod")]
+        [ProducesResponseType(typeof(PeriodSetting), 200)]
         public IActionResult GetUpdatePicturePeriod()
         {
-            var result = _adminRepo.GetUpdatePicturePeriod();
+            var result = _adminRepo.GetUpdatePicturePeriodAsync().Result;
 
             if(result == null)
             {
@@ -81,9 +79,10 @@ namespace MyConcordiaID.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriod/{year}")]
+        [ProducesResponseType(typeof(PeriodSetting), 200)]
         public IActionResult GetUpdatePicturePeriod(int year)
         {
-            var result = _adminRepo.GetUpdatePicturePeriod(year);
+            var result = _adminRepo.GetUpdatePicturePeriodAsync(year).Result;
 
             if(result == null)
             {
@@ -100,21 +99,21 @@ namespace MyConcordiaID.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriods")]
+        [ProducesResponseType(typeof(List<PeriodSetting>), 200)]
         public IActionResult GetAllUpdatePicturePeriod()
         {
-            var result = _adminRepo.GetAllUpdatePicturePeriod();
+            var result = _adminRepo.GetAllUpdatePicturePeriodAsync().Result;
 
             return new ObjectResult(result);
         }
+
+
         [ApiExplorerSettings(IgnoreApi = true)]
-        public string getAuthenticatedUserNetname()
+        private string GetAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName);
             var lastName = User.FindFirstValue(ClaimTypes.Surname);
             return StudentHelper.GenerateNetName(firstName, lastName);
         }
-
-
-
     }
 }
