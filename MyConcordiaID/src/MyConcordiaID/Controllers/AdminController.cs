@@ -40,7 +40,7 @@ namespace MyConcordiaID.Controllers
 
             var hasUpdatedPeriodSetting = _adminRepo.SetYearUpdatePicturePeriod(setting);
 
-            _logRepo.Logger(authenticatedUser,
+            _logRepo.LoggerAsync(authenticatedUser,
                 hasUpdatedPeriodSetting ? Log.Action.ModifiedPictureUpdatePeriod : Log.Action.CreatePictureUpdatePeriod,
                 null);
 

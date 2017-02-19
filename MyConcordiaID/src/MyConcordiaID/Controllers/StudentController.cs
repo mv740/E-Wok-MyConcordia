@@ -150,7 +150,7 @@ namespace MyConcordiaID.Controllers
                 }
             }
 
-            _logRepo.Logger(authenticatedUser, Log.Action.SendPicture, null);
+            _logRepo.LoggerAsync(authenticatedUser, Log.Action.SendPicture, null);
             
 
 
@@ -178,7 +178,7 @@ namespace MyConcordiaID.Controllers
                 return NotFound();
             }
 
-            _logRepo.Logger(authenticatedUser, Log.Action.AddComment, affectedUser);
+            _logRepo.LoggerAsync(authenticatedUser, Log.Action.AddComment, affectedUser);
 
             return Ok();
         }

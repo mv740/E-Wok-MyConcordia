@@ -18,9 +18,15 @@ namespace MyConcordiaID.Models.Log
         }
 
 
-        public async Task<IEnumerable<dynamic>> GetLalestLogs(int count)
+        /// <summary>
+        /// Get lastest logs, take only {count} ammount 
+        /// </summary>
+        /// <param name="count"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<dynamic>> GetLalestLogsAsync(int count)
         {
             var logs = await _database.LOGs
+                .AsNoTracking()
                 .Select(log => new
                 {
                     log.NETNAME,
@@ -35,9 +41,16 @@ namespace MyConcordiaID.Models.Log
             return logs;
         }
 
-        public async Task<IEnumerable<dynamic>> GetStudentLogs(string netName)
+
+        /// <summary>
+        ///  Retrieve latest 10 logs related to a specific user
+        /// </summary>
+        /// <param name="netName"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<dynamic>> GetStudentLogsAsync(string netName)
         {
             var logs = await _database.LOGs
+                .AsNoTracking()
                 .Where(s => s.NETNAME == netName || s.AFFECTED_USER == netName)
                 .Select(log => new
                 {
@@ -59,11 +72,9 @@ namespace MyConcordiaID.Models.Log
         /// <param name="netname"></param>
         /// <param name="action"></param>
         /// <param name="affectedUser"></param>
-        public void Logger(string netname, Log.Action action, string affectedUser)
+        public async Task LoggerAsync(string netname, Log.Action action, string affectedUser)
         {
-
-           
-            LOG currentLog = new LOG
+            var currentLog = new LOG
             {
                 NETNAME = netname,
                 ACTION = action.ToString(),
@@ -73,7 +84,7 @@ namespace MyConcordiaID.Models.Log
             };
 
             _database.LOGs.Add(currentLog);
-            _database.SaveChangesAsync();
+            await _database.SaveChangesAsync();
         }
 
     }

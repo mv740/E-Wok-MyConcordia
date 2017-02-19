@@ -1,14 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MyConcordiaID.Models.Log;
-using OracleEntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Controllers
-{   
+{
 
     [Authorize]
     [Route("api/[controller]")]
@@ -31,7 +26,7 @@ namespace MyConcordiaID.Controllers
         [HttpGet]
         public IActionResult GetLatest50()
         {
-            var logs = _logRepo.GetLalestLogs(50);
+            var logs = _logRepo.GetLalestLogsAsync(50);
 
             return new ObjectResult(logs.Result);
         }
@@ -46,7 +41,7 @@ namespace MyConcordiaID.Controllers
         [Route("{value:int}")]
         public IActionResult GetLatestLogs(int value)
         {
-            var logs = _logRepo.GetLalestLogs(value);
+            var logs = _logRepo.GetLalestLogsAsync(value);
 
             return new ObjectResult(logs.Result);
         }
@@ -56,7 +51,7 @@ namespace MyConcordiaID.Controllers
         [Route("{netname}")]
         public IActionResult GetStudentLogs(string netName)
         {
-            var logs = _logRepo.GetStudentLogs(netName);
+            var logs = _logRepo.GetStudentLogsAsync(netName);
 
             return new ObjectResult(logs.Result);
         }
