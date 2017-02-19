@@ -12,6 +12,11 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
   .run(function ($ionicPlatform, $rootScope) {
     $ionicPlatform.ready(function () {
 
+      //workaround for white screen showing after splash screen
+      setTimeout(function() {
+        navigator.splashscreen.hide();
+      }, 100);
+      
       hockeyapp.start(success, fail, "0723638003684a1b8b3a6476e3816afd");
 
 
