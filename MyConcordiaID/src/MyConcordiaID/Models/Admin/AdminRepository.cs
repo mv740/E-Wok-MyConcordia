@@ -23,13 +23,13 @@ namespace MyConcordiaID.Models.Admin
         {
             var updatedPreviousPeriod = false; //logging purposes
 
-            var start = setting.startDate;
-            var end = setting.endDate;
+            var start = setting.StartDate;
+            var end = setting.EndDate;
 
             var startDateTime = DateTime.Parse(start);
             var endDateTime = DateTime.Parse(end);
 
-            var year = (short)setting.year;
+            var year = (short)setting.Year;
 
             var found = _database.PICTUREUPDATESETTINGs
                 .FirstOrDefault(p => p.YEAR == year);
@@ -93,9 +93,9 @@ namespace MyConcordiaID.Models.Admin
             {
                 var periodFormat = new PeriodSetting
                 {
-                    year = period.YEAR,
-                    startDate = period.STARDATE.ToString(),
-                    endDate = period.ENDDATE.ToString()
+                    Year = period.YEAR,
+                    StartDate = period.STARDATE.ToString(),
+                    EndDate = period.ENDDATE.ToString()
                 };
 
                 return periodFormat;
@@ -118,9 +118,9 @@ namespace MyConcordiaID.Models.Admin
             {
                 var periodFormat = new PeriodSetting
                 {
-                    year = period.YEAR,
-                    startDate = period.STARDATE.ToString(),
-                    endDate = period.ENDDATE.ToString()
+                    Year = period.YEAR,
+                    StartDate = period.STARDATE.ToString(),
+                    EndDate = period.ENDDATE.ToString()
                 };
 
                 return periodFormat;
@@ -140,9 +140,9 @@ namespace MyConcordiaID.Models.Admin
 
             var periodList = info.Select(period => new PeriodSetting
             {
-                year = period.YEAR,
-                startDate = period.STARDATE.ToString(),
-                endDate = period.ENDDATE.ToString()
+                Year = period.YEAR,
+                StartDate = period.STARDATE.ToString(),
+                EndDate = period.ENDDATE.ToString()
             }).ToList();
 
             return periodList;

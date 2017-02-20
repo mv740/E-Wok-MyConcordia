@@ -42,11 +42,11 @@ namespace MyConcordiaID.Models.Student
             {
                 StudentAccount account = new StudentAccount
                 {
-                    ID = student.ID,
+                    Id = student.ID,
                     NetName = student.NETNAME,
                     FirstName = student.FIRSTNAME,
                     LastName = student.LASTNAME,
-                    DOB = student.DOB,
+                    Dob = student.DOB,
                     Valid = student.VALID,
                     Pending = student.PENDING,
                     UGradStatus = student.UGRADSTATUS,
@@ -108,11 +108,11 @@ namespace MyConcordiaID.Models.Student
             {
                 StudentAccount account = new StudentAccount
                 {
-                    ID = student.ID,
+                    Id = student.ID,
                     NetName = student.NETNAME,
                     FirstName = student.FIRSTNAME,
                     LastName = student.LASTNAME,
-                    DOB = student.DOB,
+                    Dob = student.DOB,
                     Valid = student.VALID,
                     Pending = student.PENDING,
                     UGradStatus = student.UGRADSTATUS,
@@ -183,7 +183,7 @@ namespace MyConcordiaID.Models.Student
         {
 
             var student = _database.STUDENTS
-                .Where(s => s.ID == pictureValidation.id)
+                .Where(s => s.ID == pictureValidation.Id)
                 .FirstOrDefault();
 
             var studentNetname = student.NETNAME;
@@ -194,7 +194,7 @@ namespace MyConcordiaID.Models.Student
                 Where(p => p.STATUS == pending && p.STUDENT_NETNAME == studentNetname)
                 .FirstOrDefault();
 
-            if(pictureValidation.valid)
+            if(pictureValidation.Valid)
             {
                 pendingPicture.STATUS = Status.Approved.ToString();
 
@@ -240,7 +240,7 @@ namespace MyConcordiaID.Models.Student
 
             //find selected picture
             var selectedPicture = _database.PICTUREs
-                 .Where(p => p.ID_PK == pictureValidation.id)
+                 .Where(p => p.ID_PK == pictureValidation.Id)
                  .FirstOrDefault();
 
             var studentNetname = selectedPicture.STUDENT_NETNAME;
@@ -252,7 +252,7 @@ namespace MyConcordiaID.Models.Student
                 .FirstOrDefault();
 
 
-            if (pictureValidation.valid)
+            if (pictureValidation.Valid)
             {
                 if(currentProfilePicture !=null)
                 {
@@ -346,9 +346,9 @@ namespace MyConcordiaID.Models.Student
 
                 PicturePeriod picturePeriod = new PicturePeriod
                 {
-                    canUpdatePicture = canUpdate,
-                    startDate = period.STARDATE.ToString(),
-                    endDate = period.ENDDATE.ToString()
+                    CanUpdatePicture = canUpdate,
+                    StartDate = period.STARDATE.ToString(),
+                    EndDate = period.ENDDATE.ToString()
                 };
 
                 return picturePeriod;
@@ -357,9 +357,9 @@ namespace MyConcordiaID.Models.Student
             {
                 PicturePeriod picturePeriod = new PicturePeriod
                 {
-                    canUpdatePicture = false,
-                    startDate = string.Empty,
-                    endDate = string.Empty
+                    CanUpdatePicture = false,
+                    StartDate = string.Empty,
+                    EndDate = string.Empty
                 };
                 return picturePeriod;
             }
@@ -375,7 +375,7 @@ namespace MyConcordiaID.Models.Student
         {
 
             //empty 
-            if(string.IsNullOrEmpty(searchOptions.birthdate) && !searchOptions.id.HasValue && searchOptions.name.Capacity == 0 && string.IsNullOrEmpty(searchOptions.netname))
+            if(string.IsNullOrEmpty(searchOptions.Birthdate) && !searchOptions.Id.HasValue && searchOptions.Name.Capacity == 0 && string.IsNullOrEmpty(searchOptions.Netname))
             {
                 return Enumerable.Empty<STUDENT>();
             }
@@ -384,30 +384,30 @@ namespace MyConcordiaID.Models.Student
             IQueryable<STUDENT> student = _database.STUDENTS;
 
             //each if statement will try to build the where clauses and it only be executed when ToList() is called 
-            if (searchOptions.id.HasValue)
+            if (searchOptions.Id.HasValue)
             {
-                if (StudentHelper.ValidId(searchOptions.id.Value))
+                if (StudentHelper.ValidId(searchOptions.Id.Value))
                 {
-                    student = student.Where(s => s.ID == searchOptions.id.Value);
+                    student = student.Where(s => s.ID == searchOptions.Id.Value);
                 }
             }
-            if (searchOptions.name.Count != 0)
+            if (searchOptions.Name.Count != 0)
             {
-                foreach (var name in searchOptions.name)
+                foreach (var name in searchOptions.Name)
                 {
                     student = student.Where(s => s.FIRSTNAME.Contains(name.ToLower()) || s.LASTNAME.Contains(name.ToLower()));
                 }
             }
-            if (!string.IsNullOrEmpty(searchOptions.birthdate))
+            if (!string.IsNullOrEmpty(searchOptions.Birthdate))
             {
                 DateTime dateValue;
-                DateTime.TryParse(searchOptions.birthdate, out dateValue);
+                DateTime.TryParse(searchOptions.Birthdate, out dateValue);
 
                 student = student.Where(s => s.DOB == dateValue);
             }
-            if (!string.IsNullOrEmpty(searchOptions.netname))
+            if (!string.IsNullOrEmpty(searchOptions.Netname))
             {
-                student = student.Where(s => s.NETNAME.Contains(searchOptions.netname));
+                student = student.Where(s => s.NETNAME.Contains(searchOptions.Netname));
             }
 
             return student.ToList();

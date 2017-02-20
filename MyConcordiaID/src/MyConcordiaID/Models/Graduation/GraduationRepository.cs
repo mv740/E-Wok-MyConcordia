@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Models.Graduation
 {
@@ -15,7 +12,7 @@ namespace MyConcordiaID.Models.Graduation
             //if student can graduate then he will have a marshalling card
 
 
-            MarshallingCard card = new MarshallingCard
+            var card = new MarshallingCard
             {
                 Semester = "Fall",
                 Year = 2016,
@@ -27,7 +24,7 @@ namespace MyConcordiaID.Models.Graduation
                 SID = 29649727
             };
 
-            GraduationStatus status = new GraduationStatus
+            var status = new GraduationStatus
             {
                 Status = true,
                 Card = card
@@ -38,7 +35,7 @@ namespace MyConcordiaID.Models.Graduation
 
         public GraduationStatus GetMarshallingCardRequestDenied(string netName)
         {
-            GraduationStatus status = new GraduationStatus
+            var status = new GraduationStatus
             {
                 Status = false,
                 Card = null

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using System.Threading.Tasks;
 using MyConcordiaID.Models.Student;
 using MyConcordiaID.Controllers;
 using MyConcordiaID.Models.Log;
@@ -11,8 +10,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.Entity;
 using MyConcordiaID.Helper;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using System.Threading;
 using Microsoft.AspNetCore.Http;
 using MyConcordiaID.Models.Picture;
 using System.Data.Entity.Infrastructure;
@@ -71,11 +68,11 @@ namespace UnitTestCore
             var properties = source.GetType().GetProperties();
             foreach (var property in properties)
             {
-                var PropertyName = property.Name;
+                var propertyName = property.Name;
 
-                var PropetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
+                var propetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
 
-                Console.Write(PropertyName + " : " + PropetyValue);
+                Console.Write(propertyName + " : " + propetyValue);
                 Console.WriteLine();
             }
         }
@@ -99,14 +96,14 @@ namespace UnitTestCore
             _repo = null;
         }
 
-        public void SetBasicMockDb()
+        private void SetBasicMockDb()
         {
             //Set Database items
-            var name = "testFirst";
-            var lastName = "testLast";
+            const string name = "testFirst";
+            const string lastName = "testLast";
 
 
-            List<STUDENT> users = new List<STUDENT>()
+            var users = new List<STUDENT>()
             {
                 new STUDENT
             {
@@ -138,7 +135,7 @@ namespace UnitTestCore
         };
 
 
-            List<PICTURE> pictures = new List<PICTURE>();
+            var pictures = new List<PICTURE>();
 
             _mySetStudent.Object.AddRange(users);
             _mySetPicture.Object.AddRange(pictures);
@@ -161,7 +158,7 @@ namespace UnitTestCore
 
             //Assert
             Assert.AreEqual(200, StatusCodes.Status200OK);
-            Assert.AreEqual(21941097, student.ID);
+            Assert.AreEqual(21941097, student.Id);
             Assert.AreEqual("testFirst", student.FirstName);            
         }
 

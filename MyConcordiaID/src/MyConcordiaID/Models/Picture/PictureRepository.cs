@@ -46,17 +46,17 @@ namespace MyConcordiaID.Models.Picture
 
                 StudentPictures pictures = new StudentPictures
                 {
-                    profilePicture = myPictures
+                    ProfilePicture = myPictures
                         .Where(item => item.Status == aproved)
                         .Select(list => list.Items.FirstOrDefault())
                         .FirstOrDefault(),
 
-                    pendingPicture = myPictures
+                    PendingPicture = myPictures
                         .Where(item => item.Status == pending)
                         .Select(list => list.Items.FirstOrDefault())
                         .FirstOrDefault(),
 
-                    archivedPictures = myPictures
+                    ArchivedPictures = myPictures
                         .Where(item => item.Status != aproved && item.Status != pending)
                         .SelectMany(list => list.Items)
                         .OrderByDescending(order => order.CREATED)

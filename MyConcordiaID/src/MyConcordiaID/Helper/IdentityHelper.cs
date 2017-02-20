@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Helper
 {
@@ -19,7 +15,7 @@ namespace MyConcordiaID.Helper
         public static void SetUser(string givenName, string surname, Controller controller)
         {
             //mock  user
-            var user = new ClaimsPrincipal(new ClaimsIdentity(new Claim[]
+            var user = new ClaimsPrincipal(new ClaimsIdentity(new[]
             {
                 new Claim(ClaimTypes.GivenName, givenName),
                 new Claim(ClaimTypes.Surname, surname)

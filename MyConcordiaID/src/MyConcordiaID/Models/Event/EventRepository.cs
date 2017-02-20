@@ -1,14 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MyConcordiaID.Helper;
-using MyConcordiaID.Models.Event;
-using MyConcordiaID.Models.Student;
+﻿using MyConcordiaID.Models.Student;
 using OracleEntityFramework;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Claims;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Models.Event
 {
@@ -267,7 +261,7 @@ namespace MyConcordiaID.Models.Event
                         Status = u.STATUS,
                         StudentAccount = new StudentBasicInformation
                         {
-                            ID = u.STUDENT.ID,
+                            Id = u.STUDENT.ID,
                             NetName = u.STUDENT.NETNAME,
                             FirstName = u.STUDENT.FIRSTNAME,
                             LastName = u.STUDENT.LASTNAME
@@ -290,7 +284,7 @@ namespace MyConcordiaID.Models.Event
         public void InsertEvent(NewEvent information, string netname)
         {
 
-            EVENT newEvent = new EVENT
+            var newEvent = new EVENT
             {
                 NAME = information.Name,
                 DESCRIPTION = information.Description,
@@ -306,7 +300,7 @@ namespace MyConcordiaID.Models.Event
             _database.SaveChanges();
 
 
-            EVENT_USERS newOwner = new EVENT_USERS
+            var newOwner = new EVENT_USERS
             {
                 STUDENT_NETNAME_FK = netname,
                 ROLE = Role.Creator.ToString(),
@@ -376,7 +370,7 @@ namespace MyConcordiaID.Models.Event
                     }
 
 
-                    EVENT_USERS newUser = new EVENT_USERS
+                    var newUser = new EVENT_USERS
                     {
                         STUDENT_NETNAME_FK = user.UserNetname,
                         ROLE = user.Role.ToString(),
@@ -408,7 +402,7 @@ namespace MyConcordiaID.Models.Event
         public ScannerResult RegisterScannedUser(ScannerUser user)
         {
 
-            ScannerResult processResult = new ScannerResult
+            var processResult = new ScannerResult
             {
                 Status = ScannerStatus.IdNotFound.ToString()
             };
@@ -422,7 +416,7 @@ namespace MyConcordiaID.Models.Event
                 //tracking user
                 if (user.Type == EventType.Open)
                 {
-                    EVENT_USERS newUser = new EVENT_USERS
+                    var newUser = new EVENT_USERS
                     {
                         STUDENT_NETNAME_FK = currentUser.NETNAME,
                         ROLE = Role.Attendee.ToString(),
@@ -561,15 +555,12 @@ namespace MyConcordiaID.Models.Event
                 .Where(u => u.ID_PK == user.UserId)
                 .FirstOrDefault();
 
-            if (existingUser != null)
-            {
-                existingUser.ROLE = user.Role.ToString();
-                _database.SaveChanges();
+            if (existingUser == null) return EventActionResult.UserNotFound;
 
-                return EventActionResult.Success;
-            }
+            existingUser.ROLE = user.Role.ToString();
+            _database.SaveChanges();
 
-            return EventActionResult.UserNotFound;
+            return EventActionResult.Success;
         }
     }
 }

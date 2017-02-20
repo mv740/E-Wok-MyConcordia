@@ -34,7 +34,6 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">List of students</response>
-       
         [AllowAnonymous]
         [HttpGet]
         public IActionResult GetAll()
@@ -74,7 +73,6 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Return pictures</response>
         /// <response code="404">user was not found </response>
-        [AllowAnonymous]
         [HttpGet]
         [Route("picture/{id}")]
         public IActionResult GetStudentPictures(int id)
@@ -97,7 +95,6 @@ namespace MyConcordiaID.Controllers
         /// <remarks>Must be authenticated!</remarks>
         /// <response code="200">return account information</response>
         /// <response code="401">Not authenticated</response>
-        [Authorize]
         [HttpGet]
         [Route("account")]
         public IActionResult GetAccount()
@@ -121,7 +118,6 @@ namespace MyConcordiaID.Controllers
         /// <response code="400">Missing the picture or invalid</response>
         /// <response code="401">Unauthorized</response>
         [ApiExplorerSettings(IgnoreApi =true)]
-        [Authorize]
         [HttpPost]
         [Route("ProfilePicture")]
         public ActionResult PostProfilePicture(IFormFile file)
@@ -163,7 +159,6 @@ namespace MyConcordiaID.Controllers
         /// <response code="200">Comment Submited</response>
         /// <response code="404">Missing the picture or invalid</response>
         /// <response code="401">Unauthorized</response>
-        [Authorize]
         [HttpPost]
         [Route("comment")]
         public IActionResult PostPictureComment([FromBody] PictureComment comment)
@@ -218,7 +213,7 @@ namespace MyConcordiaID.Controllers
 
             var netName = _studentsRepo.ValidatePicture(picture, authenticatedUser);
 
-            _logRepo.LoggerAsync(authenticatedUser, picture.valid ? Log.Action.ApprovePicture : Log.Action.DeniedPicture,
+            _logRepo.LoggerAsync(authenticatedUser, picture.Valid ? Log.Action.ApprovePicture : Log.Action.DeniedPicture,
                 netName);
 
 
@@ -239,7 +234,7 @@ namespace MyConcordiaID.Controllers
 
             var netName = _studentsRepo.RevalidatePicture(picture, authenticatedUser);
 
-            _logRepo.LoggerAsync(authenticatedUser, picture.valid ? Log.Action.ReApprovedPicture : Log.Action.DeniedPicture,
+            _logRepo.LoggerAsync(authenticatedUser, picture.Valid ? Log.Action.ReApprovedPicture : Log.Action.DeniedPicture,
                 netName);
 
 

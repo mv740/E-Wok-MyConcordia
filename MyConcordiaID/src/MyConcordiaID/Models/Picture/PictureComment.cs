@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MyConcordiaID.Models.Picture
+﻿namespace MyConcordiaID.Models.Picture
 {
     public class PictureComment
     {

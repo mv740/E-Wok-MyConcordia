@@ -1,19 +1,18 @@
-﻿using MyConcordiaID.Models.Student;
-using OracleEntityFramework;
+﻿using OracleEntityFramework;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Helper
 {
+    /// <summary>
+    /// Helpers functions to create a student
+    /// </summary>
     public class StudentHelper
     {
         public static int GenerateRandomId()
         {
-            Random rnd = new Random();
+            var rnd = new Random();
             return rnd.Next(20000000, 99999999);
         }
 
@@ -53,10 +52,9 @@ namespace MyConcordiaID.Helper
         /// <returns></returns>
         public static string RemoveSpecialCharacters(string specialString)
         {
-            byte[] tempBytes = Encoding.GetEncoding("ISO-8859-8").GetBytes(specialString);
+            var tempBytes = Encoding.GetEncoding("ISO-8859-8").GetBytes(specialString);
 
             return Encoding.UTF8.GetString(tempBytes);
-
         }
 
         /// <summary>
@@ -77,24 +75,24 @@ namespace MyConcordiaID.Helper
             // we should return Empty.
             catch (RegexMatchTimeoutException)
             {
-                return String.Empty;
+                return string.Empty;
             }
         }
 
         public static bool ValidId(int id)
         {
             //21941097 = 8 characters
-            return (id.ToString().Length == 8) ?  true : false;
+            return (id.ToString().Length == 8);
         }
 
 
-        public static STUDENT createStudent(string firstName, string lastname)
+        public static STUDENT CreateStudent(string firstName, string lastname)
         {
 
             var firstNameLowerCase = firstName.ToLower();
             var lastNameLowerCase = lastname.ToLower();
 
-            STUDENT newStudent = new STUDENT
+            var newStudent = new STUDENT
             {
                 NETNAME = GenerateNetName(firstNameLowerCase, lastNameLowerCase),
                 ID = GenerateRandomId(),
@@ -105,8 +103,6 @@ namespace MyConcordiaID.Helper
             };
 
             return newStudent;
-
-
         }
     }
 }

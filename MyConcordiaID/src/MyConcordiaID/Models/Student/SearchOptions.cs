@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MyConcordiaID.Models.Student
 {
     public class SearchOptions
     {
-        public int? id { get; set; }
-        public string netname { get; set; }
-        public string birthdate { get; set; }
-        public List<string> name { get; set; }
+        public int? Id { get; set; }
+        public string Netname { get; set; }
+        public string Birthdate { get; set; }
+        public List<string> Name { get; set; }
     }
 }

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace MyConcordiaID.Models.Admin
+﻿namespace MyConcordiaID.Models.Admin
 {
+    /// <summary>
+    ///  Model Class for valid picture update period 
+    /// </summary>
     public class PeriodSetting
     {
-        public int year { get; set; }
-        public string startDate { get; set; }
-        public string endDate { get; set; }
+        public int Year { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
     }
 }

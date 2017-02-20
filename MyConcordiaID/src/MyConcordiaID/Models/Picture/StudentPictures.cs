@@ -1,15 +1,11 @@
-﻿using OracleEntityFramework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MyConcordiaID.Models.Picture
 {
     public class StudentPictures
     {
-        public dynamic profilePicture { get; set; }
-        public dynamic pendingPicture { get; set; }
-        public IEnumerable<dynamic> archivedPictures { get; set; }
+        public dynamic ProfilePicture { get; set; }
+        public dynamic PendingPicture { get; set; }
+        public IEnumerable<dynamic> ArchivedPictures { get; set; }
     }
 }
