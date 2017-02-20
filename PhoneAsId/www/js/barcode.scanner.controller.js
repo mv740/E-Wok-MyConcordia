@@ -22,7 +22,7 @@
 
     $cordovaNativeAudio.preloadSimple('beep', 'audio/beep.mp3');
 
-    $scope.$on('$ionicView.enter', function (e) {
+    $scope.$on('$ionicView.beforeEnter', function (e) {
       if (e.targetScope !== $scope) {
         return;
       } else {
