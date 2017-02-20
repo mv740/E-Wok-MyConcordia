@@ -19,6 +19,7 @@ function EventController($modal, $timeout, eventService) {
     event.modify = modify;
     event.openEventModal = openEventModal;
     event.create = create;
+    event.setAttendees = setAttendees;
 
     getEvents();
 
@@ -66,5 +67,9 @@ function EventController($modal, $timeout, eventService) {
                     return eventTarget;
                 }
             }});
+    }
+
+    function setAttendees(eventTarget) {
+        event.attendees = eventService.getEventAttendees(eventTarget.id);
     }
 };

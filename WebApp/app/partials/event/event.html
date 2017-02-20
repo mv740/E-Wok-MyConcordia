@@ -5,7 +5,7 @@
             <div class="slide">
                 <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
                     <div class="page-header">
-                        <h1>Your events</h1>
+                        <h1>Your Events</h1>
                     </div>
 
                     <div id="createEventButton" class="height-standard">
@@ -26,7 +26,7 @@
                                 <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
                                     <button ng-click="event.modify(result); event.fpControls.slideDown();" class="button3D purple buttonSmallFormat">Modify</button>
                                     <button ng-click="event.openEventModal(result)" class="button3D purple side-buffer-sm buttonSmallFormat">View details</button>
-                                    <button ng-click="event.setRoles(result); event.fpControls.slideRight();" class="button3D purple buttonSmallFormat">Modify Roles</button>
+                                    <button ng-click="event.setAttendees(result); event.fpControls.slideRight();" class="button3D purple buttonSmallFormat">Attendees</button>
                                 </div>
                             </li>
                         </ul>
@@ -38,6 +38,12 @@
                     <div class="page-header">
                         <h1>Event Attendees</h1>
                     </div>
+                    <ul class="listResults">
+                        <li class="top-buffer-sm height-standard" ng-repeat="attendee in event.attendees track by $index">
+                            <span>{{attendee.studentAccount.firstName}} </span>
+                            <span>{{attendee.studentAccount.lastName}}</span>
+                        </li>
+                    </ul>
                     <button ng-click="event.fpControls.slideLeft()" class="button3D purple buttonSmallFormat">Go Back</button>
                 </div>
             </div>
