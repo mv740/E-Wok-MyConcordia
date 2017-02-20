@@ -202,43 +202,87 @@
         var file_contents = JSON.stringify(vision_api_json);
 
 
-        $cordovaFile.writeFile(
-          cordova.file.applicationStorageDirectory,
-          'file.json',
-          file_contents,
-          true
-        ).then(function (result) {
+        if(ionic.Platform.isAndroid()){
 
-          var headers = {
-            'Content-Type': 'application/json'
-          };
+          $cordovaFile.writeFile(
+            cordova.file.applicationStorageDirectory,
+            'file.json',
+            file_contents,
+            true
+          ).then(function (result) {
 
-          options.headers = headers;
+            var headers = {
+              'Content-Type': 'application/json'
+            };
 
-          var server = 'https://vision.googleapis.com/v1/images:annotate?key=' + google_api_key;
-          var filePath = cordova.file.applicationStorageDirectory + 'file.json';
+            options.headers = headers;
 
-          $cordovaFileTransfer.upload(server, filePath, options, true)
-            .then(function (result) {
+            var server = 'https://vision.googleapis.com/v1/images:annotate?key=' + google_api_key;
+            var filePath = cordova.file.applicationStorageDirectory + 'file.json';
 
-              var res = JSON.parse(result.response);
-              var key = visionObj.detection_types[visionObj.detection_type] + 'Annotation';
+            $cordovaFileTransfer.upload(server, filePath, options, true)
+              .then(function (result) {
 
-              visionObj.image_description = res.responses[0][key].adult;
-              camCtrl.description = visionObj.image_description;
-              if (visionObj.image_description == visionObj.safe_search_result['V_UNL'] || visionObj.image_description == visionObj.safe_search_result['UNL'] || visionObj.image_description == visionObj.safe_search_result['POS']) {
-                safeToSend = true;
-              } else {
-                safeToSend = false;
-              }
+                var res = JSON.parse(result.response);
+                var key = visionObj.detection_types[visionObj.detection_type] + 'Annotation';
 
-            }, function (err) {
-              alert(JSON.stringify(err));
-              //alert('An error occurred while uploading the file');
-            });
-        }, function (err) {
-          alert('An error occurred while trying to write the file');
-        });
+                visionObj.image_description = res.responses[0][key].adult;
+                camCtrl.description = visionObj.image_description;
+                if (visionObj.image_description == visionObj.safe_search_result['V_UNL'] || visionObj.image_description == visionObj.safe_search_result['UNL'] || visionObj.image_description == visionObj.safe_search_result['POS']) {
+                  safeToSend = true;
+                } else {
+                  safeToSend = false;
+                }
+
+              }, function (err) {
+                alert(JSON.stringify(err));
+                //alert('An error occurred while uploading the file');
+              });
+          }, function (err) {
+            alert('An error occurred while trying to write the file');
+          });
+        }
+
+        if(ionic.Platform.isIOS()){
+
+          $cordovaFile.writeFile(
+            cordova.file.dataDirectory,
+            'file.json',
+            file_contents,
+            true
+          ).then(function (result) {
+
+            var headers = {
+              'Content-Type': 'application/json'
+            };
+
+            options.headers = headers;
+
+            var server = 'https://vision.googleapis.com/v1/images:annotate?key=' + google_api_key;
+            var filePath = cordova.file.dataDirectory + 'file.json';
+
+            $cordovaFileTransfer.upload(server, filePath, options, true)
+              .then(function (result) {
+
+                var res = JSON.parse(result.response);
+                var key = visionObj.detection_types[visionObj.detection_type] + 'Annotation';
+
+                visionObj.image_description = res.responses[0][key].adult;
+                camCtrl.description = visionObj.image_description;
+                if (visionObj.image_description == visionObj.safe_search_result['V_UNL'] || visionObj.image_description == visionObj.safe_search_result['UNL'] || visionObj.image_description == visionObj.safe_search_result['POS']) {
+                  safeToSend = true;
+                } else {
+                  safeToSend = false;
+                }
+
+              }, function (err) {
+                alert(JSON.stringify(err));
+                //alert('An error occurred while uploading the file');
+              });
+          }, function (err) {
+            alert('An error occurred while trying to write the file');
+          });
+        }
 
       }
 

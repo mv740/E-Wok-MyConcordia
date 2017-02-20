@@ -132,7 +132,20 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
             resolve: {
               security: ['$q', '$rootScope', function ($q, $rootScope) {
                 if (!$rootScope.canUpdate || !$rootScope.validPeriod) {
-                  alert("Cannot update picture at the moment. Please contact Birks for more details.");
+                  if(ionic.Platform.isIOS()){
+                     document.addEventListener("deviceready", onDeviceReady, true);
+                     function onDeviceReady() {
+                        navigator.notification.alert(
+                            'Cannot update picture at the moment. Please contact Birks for more details.',
+                            function(){},
+                            'Alert',
+                            'OK'
+                        );
+                     }
+                  }
+                  if(ionic.Platform.isAndroid()){
+                      alert("Cannot update picture at the moment. Please contact Birks for more details.");
+                  }
                   return $q.reject("Not Authorized");
                 }
               }]
