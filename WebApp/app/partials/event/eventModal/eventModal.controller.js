@@ -4,7 +4,7 @@ angular
     .module('myApp')
     .controller('EventModalCtrl', EventModalCtrl);
 
-EventModalCtrl.$inject = ['$scope', '$modal', '$modalInstance', 'eventService', 'event'];
+EventModalCtrl.$inject = ['$scope', '$uibModal', '$uibModalInstance', 'eventService', 'event'];
 
 function EventModalCtrl($scope, $modal, $modalInstance, eventService, event) {
 

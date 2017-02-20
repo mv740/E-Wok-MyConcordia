@@ -137,17 +137,13 @@
 
             <div class="col-xs-12 top-buffer">
                 <input type="text"
-                       class="form-control date border-dotted height-standard side-padding-xs"
-                       id="dateFrom"
                        placeholder="From"
-                       ng-click="event.dateFrom=true"
-                       datepicker-popup="{{event.format}}"
+                       class="form-control date border-dotted height-standard side-padding-xs"
+                       datetime-picker="MM/dd/yyyy HH:mm"
                        ng-model="event.creating.timeBegin"
-                       is-open="event.dateFrom"
-                       datepicker-options="event.dateOptions"
-                       date-disabled="disabled(date, mode)"
-                       ng-required="true"
-                       close-text="Close">
+                       ng-click="event.openTimeBegin = true"
+                       is-open="event.openTimeBegin">
+
             </div>
             <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
             <button ng-click="event.fpControls.slideDown()" ng-disabled="!event.creating.timeBegin" ng-class="{'inactive': !event.creating.timeBegin}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
@@ -166,17 +162,12 @@
 
             <div class="col-xs-12 top-buffer">
                 <input type="text"
-                       class="form-control date border-dotted height-standard side-padding-xs"
-                       id="dateTo"
                        placeholder="To"
-                       ng-click="event.dateTo=true"
-                       datepicker-popup="{{event.format}}"
+                       class="form-control date border-dotted height-standard side-padding-xs"
+                       datetime-picker="MM/dd/yyyy HH:mm"
                        ng-model="event.creating.timeEnd"
-                       is-open="event.dateTo"
-                       datepicker-options="event.dateOptions"
-                       date-disabled="disabled(date, mode)"
-                       ng-required="true"
-                       close-text="Close">
+                       ng-click="event.openTimeEnd = true"
+                       is-open="event.openTimeEnd">
             </div>
             <button ng-click="event.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
             <button ng-disabled="!event.creating.timeEnd" ng-click="event.submit()"  ng-class="{'inactive': !event.creating.timeEnd}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>

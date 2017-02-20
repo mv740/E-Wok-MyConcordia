@@ -7,6 +7,7 @@ angular.module('myApp', [
     'ngMaterial',
     'ngHamburger',
     'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
     'angularCSS',
     'ng.oidcclient',
     '720kb.tooltips',

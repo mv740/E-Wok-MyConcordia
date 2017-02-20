@@ -8,9 +8,9 @@ angular
     .module('myApp')
     .controller('EventController', EventController);
 
-EventController.$inject = ['$modal', '$timeout', 'eventService'];
+EventController.$inject = ['$uibModal', 'eventService'];
 
-function EventController($modal, $timeout, eventService) {
+function EventController($modal, eventService) {
 
 
 
