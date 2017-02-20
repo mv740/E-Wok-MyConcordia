@@ -16,7 +16,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
       setTimeout(function() {
         navigator.splashscreen.hide();
       }, 100);
-      
+
       hockeyapp.start(success, fail, "0723638003684a1b8b3a6476e3816afd");
 
 
@@ -131,7 +131,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
             // If the student cannot update picture, restrict access to the camera.
             resolve: {
               security: ['$q', '$rootScope', function ($q, $rootScope) {
-                if (!$rootScope.canUpdate || !$rootScope.validPeriod) {
+                // if (!$rootScope.canUpdate && $rootScope.valid && !$rootScope.validPeriod) {
+                if ((!$rootScope.canUpdate || !$rootScope.validPeriod) && $rootScope.valid && $rootScope.pending) {
                   alert("Cannot update picture at the moment. Please contact Birks for more details.");
                   return $q.reject("Not Authorized");
                 }

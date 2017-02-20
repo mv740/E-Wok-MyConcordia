@@ -56,6 +56,9 @@
           vm.netname = data.netname;
           vm.pending = data.pending;
 
+          $rootScope.valid = data.valid;
+          $rootScope.pending = data.pending;
+
           if (vm.valid == false && vm.pending == false) {
             $state.go('app.camera');
           }
