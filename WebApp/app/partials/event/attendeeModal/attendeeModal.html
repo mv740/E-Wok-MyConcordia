@@ -1,0 +1,23 @@
+<div class="validationModal container2D">
+    <div ng-if="!attendeeModal.loading" id="hello">
+        <div class="cardHolder modal-element col-xs-6">
+
+            <div class="pictureAttributes side-padding text-left">
+
+            </div>
+
+        </div>
+        <div class="cardHolder col-xs-6">
+
+            <img class="full-width" ng-if="attendeeModal.event.profilPicture"
+                 ng-src="data:image/JPEG;base64,{{attendeeModal.event.profilPicture.picturE_DATA}}"/>
+            <img class="full-width" ng-if="attendeeModal.event.profilPicture == null"
+                 ng-src="{{attendeeModal.emptyProfilePicture}}"/>
+
+        </div>
+
+    </div>
+
+</div>
+
+

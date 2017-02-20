@@ -26,7 +26,7 @@
                                 <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
                                     <button ng-click="event.modify(result); event.fpControls.slideDown();" class="button3D purple buttonSmallFormat">Modify</button>
                                     <button ng-click="event.openEventModal(result)" class="button3D purple side-buffer-sm buttonSmallFormat">View details</button>
-                                    <button ng-click="event.setAttendees(result); event.fpControls.slideRight();" class="button3D purple buttonSmallFormat">Attendees</button>
+                                    <button ng-click="event.checkAttendees(result); event.fpControls.slideRight();" class="button3D purple buttonSmallFormat">Attendees</button>
                                 </div>
                             </li>
                         </ul>
@@ -40,11 +40,15 @@
                     </div>
                     <ul class="listResults">
                         <li class="top-buffer-sm height-standard" ng-repeat="attendee in event.attendees track by $index">
-                            <span>{{attendee.studentAccount.firstName}} </span>
-                            <span>{{attendee.studentAccount.lastName}}</span>
+                            <div class="height-standard">
+                                <button class="button3D textLeft col-xs-12" ng-click="event.openAttendeeModal(result)">
+                                    <span>{{attendee.studentAccount.firstName}} </span>
+                                    <span>{{attendee.studentAccount.lastName}}</span>
+                                </button>
+                            </div>
                         </li>
                     </ul>
-                    <button ng-click="event.fpControls.slideLeft()" class="button3D purple buttonSmallFormat">Go Back</button>
+                    <button ng-click="event.fpControls.slideLeft()" class="button3D purple buttonSmallFormat top-buffer-sm">Go Back</button>
                 </div>
             </div>
         </div>

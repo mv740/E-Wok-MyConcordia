@@ -29,7 +29,7 @@ angular.module('myApp', [
     "getEvent": "Event/",
     "eventUser": "Event/user",
     "eventsCreated": "Event/admin/",
-    "eventAttendees": "Event/IDTOKEN/user"
+    "eventAttendees": "Event/IDTOKEN/users"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 

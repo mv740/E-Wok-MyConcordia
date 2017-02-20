@@ -19,7 +19,8 @@ function EventController($modal, $timeout, eventService) {
     event.modify = modify;
     event.openEventModal = openEventModal;
     event.create = create;
-    event.setAttendees = setAttendees;
+    event.checkAttendees = checkAttendees;
+    event.openAttendeeModal = openAttendeeModal;
 
     getEvents();
 
@@ -69,7 +70,21 @@ function EventController($modal, $timeout, eventService) {
             }});
     }
 
-    function setAttendees(eventTarget) {
-        event.attendees = eventService.getEventAttendees(eventTarget.id);
+    function checkAttendees(eventTarget) {
+        eventService.getEventAttendees(eventTarget.eventId).then(function (result) {
+            event.attendees = result;
+        });
+    }
+
+    function openAttendeeModal(result) {
+        $modal.open({templateUrl: "partials/event/attendeeModal/attendeeModal.html",
+            controller: 'AttendeeModalCtrl as attendeeModal',
+            windowClass: 'app-modal-window',
+            keyboard: true,
+            resolve: {
+                event: function () {
+                    return attendeeTarget;
+                }
+            }})
     }
 };
