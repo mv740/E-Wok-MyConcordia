@@ -15,7 +15,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using MyConcordiaID.Models;
 using MyConcordiaID.Helpers;
 using MyConcordiaID.Models.Student;
-using OracleEntityFramework;
 using MyConcordiaID.Helper;
 
 namespace MyConcordiaID.Controllers

@@ -23,8 +23,6 @@ namespace MyConcordiaID.Models.Picture
 
             var aproved = Status.Approved.ToString();
             var pending = Status.Pending.ToString();
-            var denied = Status.Denied.ToString();
-
 
             if (student != null)
             {

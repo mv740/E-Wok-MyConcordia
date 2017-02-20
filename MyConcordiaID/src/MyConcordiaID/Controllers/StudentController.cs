@@ -102,7 +102,7 @@ namespace MyConcordiaID.Controllers
         [Route("account")]
         public IActionResult GetAccount()
         {
-            var result = _studentsRepo.FindByNetName(getAuthenticatedUserNetname()).Result;
+            var result = _studentsRepo.FindByNetName(GetAuthenticatedUserNetname()).Result;
 
             if (result == null)
             {
@@ -137,9 +137,9 @@ namespace MyConcordiaID.Controllers
             var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
 
 
-            var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
-            using (Stream stream = file.OpenReadStream())
+            using (var stream = file.OpenReadStream())
             {
                 using (var binaryReader = new BinaryReader(stream))
                 {
@@ -152,8 +152,6 @@ namespace MyConcordiaID.Controllers
 
             _logRepo.LoggerAsync(authenticatedUser, Log.Action.SendPicture, null);
             
-
-
             return Ok();
         }
 
@@ -170,7 +168,7 @@ namespace MyConcordiaID.Controllers
         [Route("comment")]
         public IActionResult PostPictureComment([FromBody] PictureComment comment)
         {
-            var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
             var affectedUser = _pictureRepo.AddPictureComment(comment);
             if(string.IsNullOrEmpty(affectedUser))
@@ -212,25 +210,16 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="picture"></param>
         /// <returns>student netname</returns>
-        [AllowAnonymous]
         [HttpPost]
         [Route("ValidatePicture")]
         public IActionResult PostValidatePicture([FromBody] PictureValidation picture)
         {
-           // var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
+            var netName = _studentsRepo.ValidatePicture(picture, authenticatedUser);
 
-            //m_woznia is default admin name input until we activated autorize on this api  
-            var netName = _studentsRepo.ValidatePicture(picture, "m_woznia");
-
-            //if (picture.valid)
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture, netName);
-            //}
-            //else
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture, netName);
-            //}
+            _logRepo.LoggerAsync(authenticatedUser, picture.valid ? Log.Action.ApprovePicture : Log.Action.DeniedPicture,
+                netName);
 
 
             return Ok();
@@ -242,23 +231,16 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="picture"></param>
         /// <returns>student netname</returns>
-        [AllowAnonymous]
         [HttpPost]
         [Route("RevalidatePicture")]
         public IActionResult PostRevalidatePicture([FromBody] PictureValidation picture)
         {
-            // var authenticatedUser = getAuthenticatedUserNetname();
+             var authenticatedUser = GetAuthenticatedUserNetname();
 
-            var netName = _studentsRepo.RevalidatePicture(picture, "m_woznia");
+            var netName = _studentsRepo.RevalidatePicture(picture, authenticatedUser);
 
-            //if (picture.valid)
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture, netName);
-            //}
-            //else
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture, netName);
-            //}
+            _logRepo.LoggerAsync(authenticatedUser, picture.valid ? Log.Action.ReApprovedPicture : Log.Action.DeniedPicture,
+                netName);
 
 
             return Ok();
@@ -270,7 +252,6 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200"></response>
-        [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriod")]
         public IActionResult GetUpdatePicturePeriod()
@@ -288,27 +269,20 @@ namespace MyConcordiaID.Controllers
         [Route("Search")]
         public IActionResult SearchByParameters([FromBody] SearchOptions searchOptions)
         {
-
             var result = _studentsRepo.Search(searchOptions);
             if(!result.Any())
             {
                 return NotFound();
             }
-
-            return new ObjectResult(result);
-            
+            return new ObjectResult(result);   
         }
 
-
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public string getAuthenticatedUserNetname()
+        private string GetAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName); 
             var lastName = User.FindFirstValue(ClaimTypes.Surname); 
             return StudentHelper.GenerateNetName(firstName, lastName);
         }
-
-
 
     }
 }

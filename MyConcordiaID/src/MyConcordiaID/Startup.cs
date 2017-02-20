@@ -64,7 +64,7 @@ namespace MyConcordiaID
 
   
 
-            /// set default authentication middleware // it is required for api oauth2
+            // set default authentication middleware // it is required for api oauth2
             services.AddAuthentication(options =>
             {
                 options.SignInScheme = "ServerCookie";
