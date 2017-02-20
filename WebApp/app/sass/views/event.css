@@ -526,3 +526,6 @@ md-toast {
   transition: ease 0.2s; }
   .listResults li.expanded {
     height: 112px; }
+
+.selectedChip {
+  color: #a1325e; }

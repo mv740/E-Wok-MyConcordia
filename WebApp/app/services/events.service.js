@@ -4,16 +4,16 @@ angular
     .module('myApp')
     .factory('eventService', eventService);
 
-eventService.$inject = [ '$q', 'toastedHttpService', 'myConfig'];
+eventService.$inject = ['toastedHttpService', 'myConfig'];
 
-function eventService($q, toastedHttp, myConfig) {
+function eventService(toastedHttp, myConfig) {
 
     var service = {
         getThisEvent: getThisEvent,
         getAllEvents: getAllEvents,
         submit: submit,
         updateEvent: updateEvent,
-        deleteEvent: deleteEvent,
+        cancelEvent: cancelEvent,
         setUserRole: setUserRole
     }
 
@@ -30,18 +30,18 @@ function eventService($q, toastedHttp, myConfig) {
     }
 
     function getAllEvents() {
-       return toastedHttp.get({topUrl: myConfig.event});
+       return toastedHttp.get({topUrl: myConfig.getEvents});
     }
 
     function updateEvent(event) {
         return toastedHttp.put(event, myConfig.event);
     }
 
-    function deleteEvent(event) {
+    function cancelEvent(event) {
         return toastedHttp.del(event, myConfig.event);
     }
 
     function setUserRole(role) {
-        return toastedHttp.put(role, myConfig.eventUser);
+        return toastedHttp.put(role, myConfig.setEventUserRole);
     }
 }

@@ -6,26 +6,32 @@
             <div class="page-header">
                 <h1>Your events</h1>
             </div>
-
+                <div>
+                    <md-chips ng-model="event.filters" readonly="event.readonly" md-removable="event.removable">
+                        <md-chip-template  ng-class="{'selectedChip': $chip == event.currentFilter}">
+                            <span ng-click="event.setFilter($chip)"> <strong>{{$chip}}</strong> </span>
+                        </md-chip-template>
+                    </md-chips>
+                </div>
             <div id="createEventButton" class="height-standard">
             <button ng-click="event.fpControls.slideDown()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
             </div>
             <div class="top-buffer-sm bottom-buffer-xl" ng-if="event.events.length > 0">
             <ul class="listResults">
-                <li class="top-buffer-sm height-standard" ng-class="{'expanded': result.expanded}" ng-repeat="result in event.events track by $index" >
+                <li ng-if="event.isFilterTarget(result)" class="top-buffer-sm height-standard" ng-class="{'expanded': result.expanded}" ng-repeat="result in event.events track by $index" >
                     <div class="height-standard">
                     <button class="button3D textLeft col-xs-12" ng-click="result.expanded = !result.expanded">
-                        <span>{{result.name}},</span>
+                        <span>{{result.information.name}},</span>
 
-                        <span>{{result.timeBegin | date}},</span>
+                        <span>{{result.information.timeBegin | date}},</span>
 
-                        <span>{{result.room}},</span>
+                        <span>{{result.information.room}},</span>
                     </button>
                     </div>
                     <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
                         <button ng-click="event.modify(result); event.fpControls.slideDown();" class="button3D purple buttonSmallFormat">Modify</button>
                         <button ng-click="event.openEventModal(result)" class="button3D purple left-buffer-sm buttonSmallFormat">View details</button>
-                        <button ng-click="event.del(result)" class="button3D purple left-buffer-sm buttonSmallFormat">Delete</button>
+                        <button ng-click="event.cancel(result)" class="button3D purple left-buffer-sm buttonSmallFormat">Delete</button>
                     </div>
                 </li>
             </ul>

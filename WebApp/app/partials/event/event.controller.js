@@ -19,7 +19,22 @@ function EventController($modal, $timeout, eventService) {
     event.modify = modify;
     event.openEventModal = openEventModal;
     event.create = create;
-    event.del = del;
+    event.cancel = cancel;
+    event.setFilter = setFilter;
+    event.isFilterTarget = isFilterTarget;
+    event.filters = [
+        "All",
+        "Cancelled",
+        "Postponed",
+        "Rescheduled",
+        "Scheduled",
+        "Open",
+        "Closed"
+    ];
+
+
+    event.readonly = true;
+    event.removable = false;
 
     getEvents();
 
@@ -57,12 +72,13 @@ function EventController($modal, $timeout, eventService) {
     }
 
     function modify(eventTarget) {
-        event.creating = eventTarget;
+        event.creating = eventTarget.information;
     }
 
-    function del(eventTarget){
-        eventService.deleteEvent(eventTarget);
-        getEvents();
+    function cancel(eventTarget){
+        eventService.cancelEvent(eventTarget.information).then(function(){
+            getEvents();
+        });
     }
 
     function openEventModal(eventTarget){
@@ -75,5 +91,13 @@ function EventController($modal, $timeout, eventService) {
                     return eventTarget;
                 }
             }});
+    }
+
+    function setFilter(filter){
+        event.currentFilter = filter;
+    }
+
+    function isFilterTarget(result){
+        return !event.currentFilter || (event.currentFilter == "All" || result.information.status == event.currentFilter || result.information.type == event.currentFilter);
     }
 };
