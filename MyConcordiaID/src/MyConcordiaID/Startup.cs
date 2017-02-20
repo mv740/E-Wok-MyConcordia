@@ -83,6 +83,7 @@ namespace MyConcordiaID
                 .AddJsonOptions(option =>
                 {
                     option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    option.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
                 });
 
             services.Configure<MvcOptions>(options =>
