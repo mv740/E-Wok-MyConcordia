@@ -47,6 +47,7 @@
         ngOidcClient.signinPopup()
           .then(
             function (user) {
+              $scope.hide($ionicLoading);
               console.log("user:" + JSON.stringify(user));
               if (user) {
                 $ionicSideMenuDelegate.canDragContent(true);
@@ -59,10 +60,7 @@
               hockeyapp.trackEvent(null, null, "LOGIN_FAILED");
               failedLoginAlert(rejected);
             }
-          )
-          .finally(function ($ionicLoading) {
-            $scope.hide($ionicLoading);
-          });
+          );
 
       } else {
         $ionicPopup.alert({
