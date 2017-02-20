@@ -1,23 +1,33 @@
 <ion-view>
   <ion-content>
 
-    <div >
-      <p>Barcode Scanner</p>
-      <p>{{bc.eventData}}</p>
-      <button  ng-click="bc.scanBarcode()">SCAN</button>
+    <div class="card">
 
-      <div ng-if="bc.scanData.length == 0 ">
-        No data has been scanned yet
+      <div class="item item-body">
+        <img class="full-image" src="img\concordia_ev_pic.png">
+        <h1>From {{bc.eventData.information.timeBegin | date}}</h1>
+        <h2> To {{bc.eventData.information.timeEnd | date}}</h2>
+        <h2>Room: {{bc.eventData.information.room}}</h2>
+        <p>{{bc.eventData.information.description}}
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget pharetra tortor. Proin quis eros imperdiet, facilisis nisi in, tincidunt orci. Nam tristique elit massa, quis faucibus augue finibus ac.
+        </p>
+        <p>Type: {{bc.eventData.information.type}}</p>
+        <p>Status: {{bc.eventData.information.status}}</p>
+
+        <button ng-if="bc.eventData.userRole == 'Mod'" ng-click="bc.scanBarcode()">SCAN</button>
+        <br><br>
+
+        <div ng-if="bc.eventData.userRole == 'Mod' && bc.scanData.length == 0 ">
+          You are registered as a moderator for this event. Press the scan button to begin registering attendees.
+        </div>
+
+        <div ng-if="bc.eventData.userRole == 'Mod' && bc.scanData.length > 0">
+          <p>Barcode ID: {{bc.barcodeID}}</p>
+          <p>Response: {{bc.responseMsg}}</p>
+        </div>
       </div>
-
-      <div ng-if="bc.scanData.length > 0 ">
-        Here are the values that were scanned:
-        <p ng-repeat="data in bc.scanData">{{data}}</p>
-      </div>
-
-      </div>
-
     </div>
+
 
   </ion-content>
 </ion-view>

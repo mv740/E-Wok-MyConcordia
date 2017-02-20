@@ -10,16 +10,16 @@
     .module('starter')
     .factory('AuthenticationService', AuthenticationService);
 
-  AuthenticationService.$inject = ['SessionService', '$state','ngOidcClient', '$cordovaInAppBrowser','$rootScope','$ionicSideMenuDelegate','$ionicNavBarDelegate', '$ionicPopup', '$cordovaNetwork'];
+  AuthenticationService.$inject = ['SessionService', '$state', 'ngOidcClient', '$cordovaInAppBrowser', '$rootScope', '$ionicSideMenuDelegate', '$ionicNavBarDelegate', '$ionicPopup', '$cordovaNetwork', '$ionicLoading'];
 
-  function AuthenticationService(SessionService, $state, ngOidcClient, $cordovaInAppBrowser, $rootScope,$ionicSideMenuDelegate,$ionicNavBarDelegate, $ionicPopup, $cordovaNetwork) {
-    var failedLoginAlert = function() {
+  function AuthenticationService(SessionService, $state, ngOidcClient, $cordovaInAppBrowser, $rootScope, $ionicSideMenuDelegate, $ionicNavBarDelegate, $ionicPopup, $cordovaNetwork, $ionicLoading) {
+    var failedLoginAlert = function () {
       var alertPopup = $ionicPopup.alert({
         title: 'Failed to login',
         template: 'There was an error. Please make sure you are connected\nto the internet and try logging in again'
       });
 
-      alertPopup.then(function(res) {
+      alertPopup.then(function (res) {
         $state.go("app.login");
         console.log('redirected to login page.');
       });
@@ -28,10 +28,22 @@
     var authService = {};
 
     /*
-      start the oauth process
+     start the oauth process
      */
-    authService.signIn = function () {
+
+
+    authService.signIn = function ($scope) {
+      $scope.show = function() {
+        $ionicLoading.show({
+          template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+        });
+      };
+      $scope.hide = function(){
+        $ionicLoading.hide();
+      };
+
       if ($cordovaNetwork.isOnline()) {
+        $scope.show($ionicLoading);
         ngOidcClient.signinPopup()
           .then(
             function (user) {
@@ -39,26 +51,31 @@
               if (user) {
                 $ionicSideMenuDelegate.canDragContent(true);
                 $ionicNavBarDelegate.showBar(true);
+                hockeyapp.trackEvent(null, null, "LOGIN_SUCCESS");
                 $state.go('app.id');
               }
             },
             function (rejected) {
+              hockeyapp.trackEvent(null, null, "LOGIN_FAILED");
               failedLoginAlert(rejected);
             }
-          );
+          )
+          .finally(function ($ionicLoading) {
+            $scope.hide($ionicLoading);
+          });
 
       } else {
         $ionicPopup.alert({
           title: 'Failed to login',
           template: 'There was an error. Please make sure you are connected\nto the internet and try logging in again'
-        }).then(function(res) {
+        }).then(function (res) {
           console.log('redirected to login page.');
         });
       }
     };
 
     /*
-      clear the session from the inappbrowser which will log you out of third party system (google)
+     clear the session from the inappbrowser which will log you out of third party system (google)
      */
     authService.logOut = function () {
       //taken from
@@ -67,12 +84,12 @@
       var options = {
         location: 'yes',
         clearcache: 'yes',
-        clearsessioncache : 'yes',
+        clearsessioncache: 'yes',
         toolbar: 'no',
         hidden: 'yes'
       };
       // _blank loads in background
-      $rootScope.$on('$cordovaInAppBrowser:loadstop', function(e, event){
+      $rootScope.$on('$cordovaInAppBrowser:loadstop', function (e, event) {
         $cordovaInAppBrowser.close();
       });
       $cordovaInAppBrowser.open('http://www.google.com', '_blank', options);

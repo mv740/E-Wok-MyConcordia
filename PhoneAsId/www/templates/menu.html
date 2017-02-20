@@ -6,42 +6,45 @@
       <!--</ion-nav-back-button>-->
 
       <ion-nav-buttons side="left" >
-        <button class="button button-icon button-clear" ng-click="toggleDrawer(); vm.toggleDrawer();" menu-toggle="left">
+        <button class="button button-icon button-clear" menu-toggle="left">
           <img src="img/icon.png" style="height: 33px">
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
-  <drawer side="left" on-swipe-left="vm.onSwipeLeft()">
-    <ion-header-bar align-title="center">
-      <h1 class="title" ng-click="toggleDrawer(); vm.toggleDrawer();">Close</h1>
+
+  <ion-side-menu side="left" >
+    <ion-header-bar class="bar-stable">
+      <h1 class="title">Options</h1>
     </ion-header-bar>
     <ion-content>
-      <ion-list class="bet-type-list">
-        <ion-item menu-close ng-click="toggleDrawer(); vm.toggleDrawer();" href="#/app/login">
+      <ion-list>
+        <ion-item menu-close href="#/app/login">
           Login
         </ion-item>
-        <ion-item menu-close ng-click="toggleDrawer(); vm.toggleDrawer();" href="#/app/id">
+        <ion-item menu-close href="#/app/id" ng-click="vm.logViewId()">
           Id Card
         </ion-item>
-        <ion-item menu-close ng-click="toggleDrawer(); vm.toggleDrawer();" href="#/app/marshalling">
+        <ion-item menu-close href="#/app/marshalling" ng-click="vm.logViewMarshallingCard()">
           marshalling Card
         </ion-item>
-        <ion-item menu-close ng-click="toggleDrawer(); vm.toggleDrawer();" href="#/app/camera">
+        <ion-item menu-close href="#/app/camera" ng-click="vm.logUpdatePicture">
           Update Picture
         </ion-item>
-        <ion-item menu-close ng-click="toggleDrawer(); vm.toggleDrawer();" href="#/app/events">
+        <ion-item menu-close href="#/app/events" ng-click="vm.logViewEvents()">
           Events
         </ion-item>
-        <ion-item menu-close ng-click="toggleDrawer(); vm.toggleDrawer();" href="#/app/barcode">
+        <ion-item menu-close href="#/app/barcode">
           Barcode Scanner
         </ion-item>
         <ion-item menu-close ng-click="vm.logOut()">
           Logout
         </ion-item>
+        <ion-item menu-close ng-click="vm.feedback()">
+          Provide Feedback
+        </ion-item>
+      </ion-list>
     </ion-content>
-
-    <div ng-show="vm.overlay" class="drawerOverlay full-height absolutePos"></div>
-  </drawer>
+  </ion-side-menu>
 </ion-side-menus>
