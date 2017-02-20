@@ -57,6 +57,7 @@ namespace MyConcordiaID.Models.Event
         {
 
             var user = _database.STUDENTS
+                .AsNoTracking()
                 .Where(u => u.NETNAME == netname)
                 .FirstOrDefault();
 
@@ -66,12 +67,21 @@ namespace MyConcordiaID.Models.Event
 
                 var studentEvents = _database.EVENT_USERS
                     .Where(e => e.STUDENT_NETNAME_FK == netname && e.ROLE != attendee)
-                    .Select(e => new
+                    .Select(e => new AvailableEvent
                     {
-                        e.ROLE,
-                        e.STATUS,
-                        e.EVENT_ID,
-                        e.EVENT
+                        UserRole = e.ROLE,
+                        Information = new EventInformation
+                        {
+                            EventId = e.EVENT.ID_PK,
+                            Name = e.EVENT.NAME,
+                            Description = e.EVENT.DESCRIPTION,
+                            Location = e.EVENT.LOCATION,
+                            Room = e.EVENT.ROOM,
+                            TimeBegin = e.EVENT.TIME_BEGIN,
+                            TimeEnd = e.EVENT.TIME_END,
+                            Type = e.EVENT.TYPE,
+                            Status = e.EVENT.STATUS
+                        }
                     });
 
                 return studentEvents;

@@ -293,6 +293,7 @@ namespace MyConcordiaID.Controllers
         [AllowAnonymous]
         [HttpGet]
         [Route("admin/{netname}")]
+        [ProducesResponseType(typeof(IEnumerable<AvailableEvent>), 200)]
         public IActionResult GetMyAdminEvents(string netname)
         {
             var events = _eventRepo.GetAdminEvents(netname);
