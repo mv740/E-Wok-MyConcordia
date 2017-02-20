@@ -189,6 +189,14 @@ html, body {
   position: absolute;
   margin-bottom: 10px; }
 
-.barcodegen {
+.platform-android .barcodegen {
   display: block;
   margin: auto; }
+
+.platform-ios .barcodegen {
+  text-align: center;
+  display: block;
+  margin: auto;
+  width: 100%;
+  position: fixed;
+  bottom: 0px; }

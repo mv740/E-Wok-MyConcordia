@@ -186,3 +186,10 @@ html, body {
 
 .belowPicture {
   top: -60px; }
+
+.platform-ios .barcodeId {
+  text-align: center;
+  transform: translate(-6%, 0);
+  position: relative;
+  display: block;
+  width: 100%; }
