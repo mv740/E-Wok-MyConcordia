@@ -49,10 +49,10 @@
 
 
         self.submit = function UpdatePeriod() {
+                var dateFormat = 'MM-dd-yyyy';
 
-
-                self.dateStart = $filter('date')(self.dtFrom, 'dd-MM-yyyy');
-                self.dateEnd = $filter('date')(self.dtTo, 'dd-MM-yyyy');
+                self.dateStart = $filter('date')(self.dtFrom, dateFormat);
+                self.dateEnd = $filter('date')(self.dtTo, dateFormat);
 
                 var data =
                     {
