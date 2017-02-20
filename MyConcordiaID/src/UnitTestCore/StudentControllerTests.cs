@@ -27,24 +27,24 @@ namespace UnitTestCore
         private Mock<DbSet<STUDENT>> _mySetStudent;
         private Mock<DbSet<PICTURE>> _mySetPicture;
 
-        private void ConnectMocksToDataStore(IEnumerable<STUDENT> data_store)
+        private void ConnectMocksToDataStore(IEnumerable<STUDENT> dataStore)
         {
-            var data_source = data_store.AsQueryable();
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<STUDENT>(data_source.Provider));
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetStudent.As<IDbAsyncEnumerable<STUDENT>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<STUDENT>(data_source.GetEnumerator()));
+            var dataSource = dataStore.AsQueryable();
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<STUDENT>(dataSource.Provider));
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(dataSource.Expression);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(dataSource.ElementType);
+            _mySetStudent.As<IDbAsyncEnumerable<STUDENT>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<STUDENT>(dataSource.GetEnumerator()));
             _context.Setup(a => a.STUDENTS).Returns(_mySetStudent.Object);
         }
 
 
-        private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> data_store)
+        private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> dataStore)
         {
-            var data_source = data_store.AsQueryable();
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<PICTURE>(data_source.Provider));
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetPicture.As<IDbAsyncEnumerable<PICTURE>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<PICTURE>(data_source.GetEnumerator()));
+            var dataSource = dataStore.AsQueryable();
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<PICTURE>(dataSource.Provider));
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(dataSource.Expression);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(dataSource.ElementType);
+            _mySetPicture.As<IDbAsyncEnumerable<PICTURE>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<PICTURE>(dataSource.GetEnumerator()));
             _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
 
@@ -154,10 +154,8 @@ namespace UnitTestCore
             var result = controller.GetById(21941097) as ObjectResult;
             var student = result.Value as StudentAccount;
 
-            var resultStatus = controller.GetById(21941097) as StatusCodeResult;
-
+           
             //Assert
-            Assert.AreEqual(200, StatusCodes.Status200OK);
             Assert.AreEqual(21941097, student.Id);
             Assert.AreEqual("testFirst", student.FirstName);            
         }
@@ -170,10 +168,10 @@ namespace UnitTestCore
             var controller = new StudentController(_repo,_pictures, _logs);
 
             //Act
-            var result = controller.GetById(21111111) as StatusCodeResult;
+            var result = controller.GetById(21111111);
 
             //Assert
-            Assert.AreEqual(404, StatusCodes.Status404NotFound);
+            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
 
         }
 

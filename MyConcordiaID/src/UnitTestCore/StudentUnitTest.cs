@@ -28,23 +28,23 @@ namespace UnitTestCore
         private Mock<DbSet<STUDENT>> _mySetStudent;
         private Mock<DbSet<PICTURE>> _mySetPicture;
 
-        private void ConnectMocksToDataStore(IEnumerable<STUDENT> data_store)
+        private void ConnectMocksToDataStore(IEnumerable<STUDENT> dataStore)
         {
-            var data_source = data_store.AsQueryable();
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<STUDENT>(data_source.Provider));
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetStudent.As<IDbAsyncEnumerable<STUDENT>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<STUDENT>(data_source.GetEnumerator()));
+            var dataSource = dataStore.AsQueryable();
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<STUDENT>(dataSource.Provider));
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(dataSource.Expression);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(dataSource.ElementType);
+            _mySetStudent.As<IDbAsyncEnumerable<STUDENT>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<STUDENT>(dataSource.GetEnumerator()));
             _context.Setup(a => a.STUDENTS).Returns(_mySetStudent.Object);
         }
 
-        private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> data_store)
+        private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> dataStore)
         {
-            var data_source = data_store.AsQueryable();
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<PICTURE>(data_source.Provider));
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetPicture.As<IDbAsyncEnumerable<PICTURE>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<PICTURE>(data_source.GetEnumerator()));
+            var dataSource = dataStore.AsQueryable();
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<PICTURE>(dataSource.Provider));
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(dataSource.Expression);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(dataSource.ElementType);
+            _mySetPicture.As<IDbAsyncEnumerable<PICTURE>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<PICTURE>(dataSource.GetEnumerator()));
             _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
         /// <summary>
@@ -54,7 +54,7 @@ namespace UnitTestCore
         /// <param name="source"></param>
         /// <param name="property"></param>
         /// <returns></returns>
-        public static object ReflectPropertyValue(object source, string property)
+        private static object ReflectPropertyValue(object source, string property)
         {
             return source.GetType().GetProperty(property).GetValue(source, null);
         }
@@ -62,16 +62,16 @@ namespace UnitTestCore
         ///  For Viewing all available properties of a dynamic object
         /// </summary>
         /// <param name="source"></param>
-        public static void PrintPropertiesOfDynamicObject(object source)
+        private static void PrintPropertiesOfDynamicObject(object source)
         {
             var properties = source.GetType().GetProperties();
             foreach (var property in properties)
             {
-                var PropertyName = property.Name;
+                var propertyName = property.Name;
 
-                var PropetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
+                var propetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
 
-                Console.Write(PropertyName + " : " + PropetyValue);
+                Console.Write(propertyName + " : " + propetyValue);
                 Console.WriteLine();
             }
         }
