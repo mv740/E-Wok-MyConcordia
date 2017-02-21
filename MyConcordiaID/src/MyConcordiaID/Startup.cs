@@ -229,8 +229,8 @@ namespace MyConcordiaID
                 {
                     ApplicationID = "oidcWebClient",
                     DisplayName = "My client application",
-                    RedirectUri = "https://concordiaidclient.netlify.com/WebApp/app/callback.html",
-                    LogoutRedirectUri = "https://concordiaidclient.netlify.com/WebApp/app/oidc"
+                    RedirectUri = "https://www.myconcordiaid.me/callback.html",
+                    LogoutRedirectUri = "https://www.myconcordiaid.me/oidc"
                     // Secret = "secret_secret_secret"
                 });
 
