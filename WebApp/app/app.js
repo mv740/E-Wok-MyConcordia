@@ -14,7 +14,7 @@ angular.module('myApp', [
 
 
 ]).constant("myConfig", {
-    "baseUrl": "https://concordia.michalwozniak.ca/api/",
+    "baseUrl": "https://api.myconcordiaid.me/api/",
     "validatePhoto": "student/ValidatePicture",
     "searchStudent": "student/",
     "getStudentPictures": "student/picture/",
@@ -33,7 +33,7 @@ angular.module('myApp', [
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
 
-        var link = "https://concordia.michalwozniak.ca/";
+        var link = "https://api.myconcordiaid.me/";
 
         ngOidcClientProvider.setSettings({
             authority: link,
