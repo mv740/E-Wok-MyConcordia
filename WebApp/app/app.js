@@ -102,7 +102,7 @@ angular.module('myApp', [
 
             if (!SessionService.isAuthenticated()) {
 
-                ngOidcClient.getUser().then(function (user) {
+                ngOidcClient.getUserInfo().then(function (user) {
                     console.log("test user");
                     console.log(user);
                 });
