@@ -97,17 +97,10 @@ angular.module('myApp', [
 }])
     .run(['$rootScope','SessionService','$location','ngOidcClient',function ($rootScope, SessionService,$location, ngOidcClient) {
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
-
-
-
+            
             if (!SessionService.isAuthenticated()) {
-
-                ngOidcClient.getUserInfo().then(function (user) {
-                    console.log("test user");
-                    console.log(user);
-                });
-
-
+                var user = ngOidcClient.getUserInfo();
+                console.log(user);
                 // reload the login route
                 console.log('Unauthorized access');
                 $location.path('/login');
