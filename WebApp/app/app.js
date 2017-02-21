@@ -98,10 +98,10 @@ angular.module('myApp', [
     .run(['$rootScope','SessionService','$location',function ($rootScope, SessionService,$location) {
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
 
-            // if (!prev.authenticate && !SessionService.isAuthenticated()) {
-            //     // reload the login route
-            //     $location.path('/login');
-            // }
+            if (!prev.authenticate && !SessionService.isAuthenticated()) {
+                // reload the login route
+                $location.path('/login');
+            }
 
         })
     }]);
