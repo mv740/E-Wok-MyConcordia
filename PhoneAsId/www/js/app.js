@@ -57,7 +57,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
   .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
 
-    var link = "https://myconcordiaid.azurewebsites.net/";
+    var link = "https://api.myconcordiaid.me/";
 
     ngOidcClientProvider.setSettings({
       authority: link,
