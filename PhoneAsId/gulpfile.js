@@ -6,6 +6,7 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var templateCache = require('gulp-angular-templatecache');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -48,4 +49,13 @@ gulp.task('git-check', function(done) {
     process.exit(1);
   }
   done();
+});
+
+gulp.task('template', function(done){
+  gulp.src('./www/templates/**/*.html')
+    .pipe(templateCache({
+      standalone:true,
+      root: 'templates'}))
+    .pipe(gulp.dest('./www/lib'))
+    .on('end', done);
 });
