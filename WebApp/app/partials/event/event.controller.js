@@ -76,13 +76,13 @@ function EventController($modal, $timeout, eventService) {
         });
     }
 
-    function openAttendeeModal(result) {
+    function openAttendeeModal(attendeeTarget) {
         $modal.open({templateUrl: "partials/event/attendeeModal/attendeeModal.html",
             controller: 'AttendeeModalCtrl as attendeeModal',
             windowClass: 'app-modal-window',
             keyboard: true,
             resolve: {
-                event: function () {
+                attendee: function () {
                     return attendeeTarget;
                 }
             }})

@@ -49,8 +49,4 @@ function eventService($q, toastedHttp, myConfig) {
     function getEventAttendees(id) {
         return toastedHttp.get({topUrl: myConfig.eventAttendees.replace("IDTOKEN", id)});
     }
-
-    function addUserToEvent() {
-
-    }
 }
