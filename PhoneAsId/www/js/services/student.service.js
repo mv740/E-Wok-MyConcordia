@@ -5,7 +5,7 @@
 angular.module('starter.services', [])
 
   .factory('StudentService', ['$http', function ($http) {
-    var urlBase = 'https://myconcordiaid.azurewebsites.net/api';
+    var urlBase = 'https://api.myconcordiaid.me/api';
     var StudentService = {};
     StudentService.studentInfo = '';
 
