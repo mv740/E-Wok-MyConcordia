@@ -95,13 +95,24 @@ angular.module('myApp', [
 
         $httpProvider.interceptors.push('AuthInterceptorService');
 }])
-    .run(['$rootScope','SessionService','$location',function ($rootScope, SessionService,$location) {
+    .run(['$rootScope','SessionService','$location','ngOidcClient',function ($rootScope, SessionService,$location, ngOidcClient) {
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
 
+
+
             if (!SessionService.isAuthenticated()) {
+
+                ngOidcClient.getUser().then(function (user) {
+                    console.log("test user");
+                    console.log(user);
+                });
+
+
                 // reload the login route
                 console.log('Unauthorized access');
                 $location.path('/login');
+                // Prevent state change
+                event.preventDefault();
             }
 
         })
