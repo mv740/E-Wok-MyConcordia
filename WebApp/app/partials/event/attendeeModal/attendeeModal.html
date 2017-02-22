@@ -13,7 +13,7 @@
                 </div>
                 <md-input-container class="top-buffer">
                     <label>Role</label>
-                    <md-select ng-model="attendeeModal.attendeeRole" ">
+                    <md-select ng-model="attendeeModal.attendeeRole">
                         <md-option ng-repeat="role in attendeeModal.attendeeRoles"
                                    value="{{role}}"
                                    ng-selected="attendeeModal.attendee.role == role">{{role}}</md-option>
