@@ -42,8 +42,8 @@ function eventService($q, toastedHttp, myConfig) {
         return toastedHttp.del(event, myConfig.event);
     }
 
-    function setUserRole(role) {
-        return toastedHttp.put(role, myConfig.eventUser);
+    function setUserRole(user) {
+        return toastedHttp.put(user, myConfig.eventUser);
     }
 
     function getEventAttendees(id) {

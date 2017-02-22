@@ -78,12 +78,14 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
 
     function openAttendeeDialog(attendeeTarget) {
         $mdDialog.show({
-            controller: 'AttendeeModalCtrl as attendeeModal',
-            templateUrl: "partials/event/attendeeModal/attendeeModal.html",
+            controller: 'AttendeeDialogCtrl as attendeeDialog',
+            templateUrl: "partials/event/attendeeDialog/attendeeDialog.html",
             parent: angular.element(document.body),
             targetEvent: attendeeTarget,
             clickOutsideToClose:true,
-            locals: { attendee: attendeeTarget }
+            locals: { attendee: attendeeTarget },
+            openFrom: { top: -50, width: 30, height: 80 },
+            closeTo: { left: 1500 }
         })
             .then(function(answer) {
                 eventService.setUserRole(answer).then(
