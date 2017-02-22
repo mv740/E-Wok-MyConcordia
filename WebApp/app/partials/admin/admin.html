@@ -61,17 +61,12 @@
 
                 <div class="col-xs-12 top-buffer">
                     <input type="text"
+                           placeholder="To"
                            class="form-control date border-dotted height-standard side-padding-xs"
-                           id="dateFrom"
-                           placeholder="From"
-                           ng-click="admin.dateFrom=true"
-                           datepicker-popup="{{admin.format}}"
+                           datetime-picker="MM/dd/yyyy HH:mm"
                            ng-model="admin.dtFrom"
-                           is-open="admin.dateFrom"
-                           datepicker-options="admin.dateOptions"
-                           date-disabled="disabled(date, mode)"
-                           ng-required="true"
-                           close-text="Close">
+                           ng-click="admin.dtFromOpened = true"
+                           is-open="admin.dtFromOpened">
                 </div>
             <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtFrom && admin.fpControls.slideDown()" ng-class="{'inactive': !admin.dtFrom}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
         </div>
@@ -89,17 +84,12 @@
 
             <div class="col-xs-12 top-buffer">
                 <input type="text"
-                       class="form-control date border-dotted height-standard side-padding-xs"
-                       id="dateTo"
                        placeholder="To"
-                       ng-click="admin.dateTo=true"
-                       datepicker-popup="{{admin.format}}"
+                       class="form-control date border-dotted height-standard side-padding-xs"
+                       datetime-picker="MM/dd/yyyy HH:mm"
                        ng-model="admin.dtTo"
-                       is-open="admin.dateTo"
-                       datepicker-options="admin.dateOptions"
-                       date-disabled="disabled(date, mode)"
-                       ng-required="true"
-                       close-text="Close">
+                       ng-click="admin.dtToOpened = true"
+                       is-open="admin.dtToOpened">
             </div>
             <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtTo && admin.submit()"  ng-class="{'inactive': !admin.dtTo}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
         </div>
