@@ -4,25 +4,29 @@ angular
     .module('myApp')
     .controller('AttendeeModalCtrl', AttendeeModalCtrl);
 
-AttendeeModalCtrl.$inject = ['$scope', '$modal', '$modalInstance', 'attendee'];
+AttendeeModalCtrl.$inject = ['$mdDialog', 'attendee'];
 
-function AttendeeModalCtrl($scope, $modal, $modalInstance, attendee) {
+function AttendeeModalCtrl($mdDialog, attendee) {
 
     var attendeeModal = this;
-    var attendeeRoles = ['Creator', 'Mod', 'Scanner', 'Attendee'];
+    attendeeModal.attendee = attendee;
+    attendeeModal.attendeeRoles = ['Creator', 'Mod', 'Scanner', 'Attendee'];
 
-    attendeeModal.close = $modalInstance.close;
 
-    $scope.$on("attendeeModal.updateAttendee", updateAttendee);
-    $modalInstance.opened.then(updateAttendee);
 
     //////////////////////////
 
-    function updateAttendee() {
-        attendeeModal.attendee = attendee;
-    }
 
+    attendeeModal.hide = function() {
+        if (attendeeModal.attendee.role == attendee.role)
+            $mdDialog.hide();
+        else
+            $mdDialog.hide(attendeeModal.attendee.role);
+    };
 
+    attendeeModal.cancel = function() {
+        $mdDialog.cancel();
+    };
 
 }
 

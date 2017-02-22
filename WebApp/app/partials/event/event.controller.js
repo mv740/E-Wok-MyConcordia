@@ -8,9 +8,9 @@ angular
     .module('myApp')
     .controller('EventController', EventController);
 
-EventController.$inject = ['$modal', '$timeout', 'eventService'];
+EventController.$inject = ['$modal', '$timeout', '$mdDialog', 'eventService'];
 
-function EventController($modal, $timeout, eventService) {
+function EventController($modal, $timeout, $mdDialog, eventService) {
 
 
 
@@ -20,7 +20,7 @@ function EventController($modal, $timeout, eventService) {
     event.openEventModal = openEventModal;
     event.create = create;
     event.checkAttendees = checkAttendees;
-    event.openAttendeeModal = openAttendeeModal;
+    event.openAttendeeDialog = openAttendeeDialog;
 
     getEvents();
 
@@ -76,15 +76,25 @@ function EventController($modal, $timeout, eventService) {
         });
     }
 
-    function openAttendeeModal(attendeeTarget) {
-        $modal.open({templateUrl: "partials/event/attendeeModal/attendeeModal.html",
+    function openAttendeeDialog(attendeeTarget) {
+        $mdDialog.show({
             controller: 'AttendeeModalCtrl as attendeeModal',
-            windowClass: 'app-modal-window',
-            keyboard: true,
-            resolve: {
-                attendee: function () {
-                    return attendeeTarget;
-                }
-            }})
+            templateUrl: "partials/event/attendeeModal/attendeeModal.html",
+            parent: angular.element(document.body),
+            targetEvent: attendeeTarget,
+            clickOutsideToClose:true,
+            locals: { attendee: attendeeTarget }
+        })
+            .then(function(answer) {
+                eventService.setUserRole(answer).then(
+                    function(response) {
+                        console.log("attendee role modified successfully");
+                    },
+                    function (failure) {
+                        console.log("failed to modify attendee role");
+                    });
+            }, function() {
+                console.log("no role was set for this attendee");
+            });
     }
 };

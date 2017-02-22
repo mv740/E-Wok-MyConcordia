@@ -1,21 +1,29 @@
-<div class="validationModal container2D">
-    <div ng-if="!attendeeModal.loading" class="side-padding">
-        <h2 class="top-padding">
-            <span>{{attendeeModal.attendee.studentAccount.firstName}} {{attendeeModal.attendee.studentAccount.lastName}}</span>
-        </h2>
-        <div>
-            netname: <span>{{attendeeModal.attendee.studentAccount.netName}}</span>
+<md-dialog aria-label="Sample Dialog">
+    <md-dialog-content>
+        <div class="validationModal container2D">
+            <div ng-if="!attendeeModal.loading" class="side-padding">
+                <h2 class="top-padding">
+                    <span>{{attendeeModal.attendee.studentAccount.firstName}} {{attendeeModal.attendee.studentAccount.lastName}}</span>
+                </h2>
+                <div>
+                    netname: <span>{{attendeeModal.attendee.studentAccount.netName}}</span>
+                </div>
+                <div>
+                    id: <span>{{attendeeModal.attendee.studentAccount.id}}</span>
+                </div>
+                <md-input-container class="top-buffer">
+                    <label>Role</label>
+                    <md-select ng-model="attendeeModal.attendeeRole" ">
+                        <md-option ng-repeat="role in attendeeModal.attendeeRoles"
+                                   value="{{role}}"
+                                   ng-selected="attendeeModal.attendee.role == role">{{role}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <md-button type="submit" ng-show="attendeeModal.roleChanged" class="buttonSmallFormat">Set Role</md-button>
+            </div>
         </div>
-        <div>
-            id: <span>{{attendeeModal.attendee.studentAccount.id}}</span>
-        </div>
-        <div>
-            <md-input-container>
-            </md-input-container>
-        </div>
+    </md-dialog-content>
+</md-dialog>
 
-    </div>
-
-</div>
 
 

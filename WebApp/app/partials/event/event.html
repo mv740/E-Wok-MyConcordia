@@ -41,7 +41,7 @@
                     <ul class="listResults">
                         <li class="top-buffer-sm height-standard" ng-repeat="attendee in event.attendees track by $index">
                             <div class="height-standard">
-                                <button class="button3D textLeft col-xs-12" ng-click="event.openAttendeeModal(attendee)">
+                                <button class="button3D textLeft col-xs-12" ng-click="event.openAttendeeDialog(attendee)">
                                     <span>{{attendee.studentAccount.firstName}} </span>
                                     <span>{{attendee.studentAccount.lastName}}</span>
                                 </button>
