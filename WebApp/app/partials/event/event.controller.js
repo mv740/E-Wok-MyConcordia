@@ -108,7 +108,7 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
             if (userNetnameOrId.match(/^[0-9]*$/g) != null) {
                 newUser.userId = event.newUserNetnameOrId;
             }
-            else if (userNetnameOrId.match(/^[a-zA-Z]*_[a-zA-Z]*$/g) != null){
+            else if (userNetnameOrId.match(/^[a-zA-Z]*_?[a-zA-Z]*$/g) != null){
                 newUser.userNetname = event.newUserNetnameOrId;
             }
             eventService.addUser(newUser)
