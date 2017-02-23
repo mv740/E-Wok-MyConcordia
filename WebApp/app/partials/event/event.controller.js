@@ -85,7 +85,8 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
             clickOutsideToClose:true,
             locals: { attendee: attendeeTarget },
             openFrom: { top: -50, width: 30, height: 80 },
-            closeTo: { left: 1500 }
+            closeTo: { left: 1500 },
+            preserveScope: false
         })
             .then(function(answer) {
                 eventService.setUserRole(answer).then(
