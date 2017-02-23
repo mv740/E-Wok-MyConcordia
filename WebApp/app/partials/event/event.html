@@ -26,7 +26,7 @@
                                 <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
                                     <button ng-click="event.modify(result); event.fpControls.slideDown();" class="button3D purple buttonSmallFormat">Modify</button>
                                     <button ng-click="event.openEventModal(result)" class="button3D purple side-buffer-sm buttonSmallFormat">View details</button>
-                                    <button ng-click="event.checkAttendees(result); event.fpControls.slideRight();" class="button3D purple buttonSmallFormat">Attendees</button>
+                                    <button ng-click="event.checkAttendees(result); event.fpControls.slideRight(); event.selectThisEvent(result);" class="button3D purple buttonSmallFormat">Attendees</button>
                                 </div>
                             </li>
                         </ul>
@@ -38,7 +38,13 @@
                     <div class="page-header">
                         <h1>Event Attendees</h1>
                     </div>
-                    <ul class="listResults">
+                    <div class="searchBoxContainer bottom-buffer">
+                        <div class="field" code="13" kb-press="event.addUser()" >
+                            <input type="text" code="13" kb-press="event.addUser()" ng-model="event.newUserNetnameOrId" placeholder="User's netname or ID" />
+                            <button ng-click="event.addUser()" type="button">Add Attendee!</button>
+                        </div>
+                    </div>
+                    <ul class="listResults top-buffer">
                         <li class="top-buffer-sm height-standard" ng-repeat="attendee in event.attendees track by $index">
                             <div class="height-standard">
                                 <button class="button3D textLeft col-xs-12" ng-click="event.openAttendeeDialog(attendee)">

@@ -21,6 +21,8 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
     event.create = create;
     event.checkAttendees = checkAttendees;
     event.openAttendeeDialog = openAttendeeDialog;
+    event.addUser = addUser;
+    event.selectThisEvent = selectThisEvent;
 
     getEvents();
 
@@ -35,13 +37,6 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
     function submit(){
         if (event.creating.eventID) eventService.updateEvent(event.creating).then(function(){});
         else eventService.submit(event.creating).then(function(){});
-    }
-
-    function get(eventId) {
-        eventService.getThisEvent(eventId).then(function(result) {
-                event.selectedEvent = result;
-        });
-
     }
 
     function getEvents() {
@@ -100,4 +95,36 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
                 console.log("no role was set for this attendee");
             });
     }
-};
+
+    function addUser() {
+        var userNetnameOrId = event.newUserNetnameOrId;
+        if (userNetnameOrId != "") {
+            var newUser = {
+                userId: "",
+                userNetname: "",
+                role: "Attendee",
+                eventID: event.selectedEvent.eventId
+            };
+            if (userNetnameOrId.match(/^[0-9]*$/g) != null) {
+                newUser.userId = event.newUserNetnameOrId;
+            }
+            else if (userNetnameOrId.match(/^[a-zA-Z]*_[a-zA-Z]*$/g) != null){
+                newUser.userNetname = event.newUserNetnameOrId;
+            }
+            eventService.addUser(newUser)
+                .then(
+                    function(result) {
+                        console.log("successfully added new user");
+                        event.newUserNetnameOrId = "";
+                    },
+                    function(failure) {
+                        console.log("failed to add new user");
+                    }
+                );
+        }
+    }
+
+    function selectThisEvent(eventTarget) {
+        event.selectedEvent = eventTarget;
+    }
+}
