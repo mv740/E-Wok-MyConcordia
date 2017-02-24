@@ -11,10 +11,13 @@
                 <div>
                     id: <span>{{attendeeDialog.attendee.studentAccount.id}}</span>
                 </div>
-                <md-input-container class="top-buffer bottom-buffer-xl">
+                <div ng-if="!attendeeDialog.userCanModifyRole(attendeeDialog.attendee)">
+                    Role: {{attendeeDialog.attendee.role}}
+                </div>
+                <md-input-container ng-if="attendeeDialog.userCanModifyRole(attendeeDialog.attendee)" class="top-buffer bottom-buffer-xl">
                     <label>Role</label>
                     <md-select ng-model="attendeeDialog.attendee.role">
-                        <md-option ng-repeat="role in attendeeDialog.attendeeRoles"
+                        <md-option ng-repeat="role in attendeeDialog.listOfSettableRoles"
                                    value="{{role}}"
                                    ng-selected="attendeeDialog.attendee.role == role">{{role}}</md-option>
                     </md-select>

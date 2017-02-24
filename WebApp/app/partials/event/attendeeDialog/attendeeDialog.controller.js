@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .controller('AttendeeDialogCtrl', AttendeeDialogCtrl);
 
-AttendeeDialogCtrl.$inject = ['$mdDialog', 'attendee', 'eventService'];
+AttendeeDialogCtrl.$inject = ['$mdDialog', 'attendee', 'loggedInAttendee', 'eventService'];
 
-function AttendeeDialogCtrl($mdDialog, attendee, eventService) {
+function AttendeeDialogCtrl($mdDialog, attendee, loggedInAttendee, eventService) {
 
     var attendeeDialog = this;
 
@@ -24,7 +24,6 @@ function AttendeeDialogCtrl($mdDialog, attendee, eventService) {
     };
 
     attendeeDialog.attendee = attendeeCopy;
-    attendeeDialog.attendeeRoles = ['Creator', 'Mod', 'Scanner', 'Attendee'];
     attendeeDialog.attendeeOriginalRole = attendeeCopy.role;
 
 
@@ -34,6 +33,8 @@ function AttendeeDialogCtrl($mdDialog, attendee, eventService) {
     attendeeDialog.setNewRole = setNewRole;
     attendeeDialog.hide = hide;
     attendeeDialog.cancel = cancel;
+    attendeeDialog.userCanModifyRole = userCanModifyRole;
+    attendeeDialog.getListOfSettableRoles = getListOfSettableRoles();
 
     function setNewRole() {
         var attendeeID = attendeeDialog.attendee.id;
@@ -54,7 +55,26 @@ function AttendeeDialogCtrl($mdDialog, attendee, eventService) {
 
     function cancel() {
         $mdDialog.cancel();
-    };
+    }
 
+    function userCanModifyRole(attendee) {
+        if (loggedInAttendee.id != attendee.id) { // User can't modify his or her own role
+            if (loggedInAttendee.role == "Creator") // The Creator can modify any attendee's role except his or hers.
+                return true;
+            else if (loggedInAttendee.role == "Mod") // The Mod can modify the roles of Scanners and Attendees only.
+                return attendee.role != "Mod" && attendee.role != "Creator";
+            else // Scanners and Attendees cannot modify roles
+                return false;
+        }
+        else
+            return false;
+    }
+
+    function getListOfSettableRoles() {
+        if (loggedInAttendee.role == "Creator") // The Creator can modify any attendee's role except his or hers.
+            attendeeDialog.listOfSettableRoles = ['Mod', 'Scanner', 'Attendee'];
+        else if (loggedInAttendee.role == "Mod")
+            attendeeDialog.listOfSettableRoles = ['Scanner', 'Attendee'];
+    }
 }
 

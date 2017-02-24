@@ -68,6 +68,7 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
     function checkAttendees(eventTarget) {
         eventService.getEventAttendees(eventTarget.eventId).then(function (result) {
             event.attendees = result;
+            event.loggedInAttendee = event.attendees[0];
         });
     }
 
@@ -78,7 +79,7 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
             parent: angular.element(document.body),
             targetEvent: attendeeTarget,
             clickOutsideToClose:true,
-            locals: { attendee: attendeeTarget },
+            locals: { attendee: attendeeTarget, loggedInAttendee: event.loggedInAttendee },
             openFrom: { top: -50, width: 30, height: 80 },
             closeTo: { left: 1500 },
             preserveScope: false
