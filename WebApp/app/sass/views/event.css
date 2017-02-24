@@ -556,3 +556,6 @@ md-toast {
   transition: ease 0.2s; }
   .listResults li.expanded {
     height: 112px; }
+
+.fp-controlArrow {
+  display: none; }

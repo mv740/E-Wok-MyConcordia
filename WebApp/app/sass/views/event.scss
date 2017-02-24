@@ -34,3 +34,8 @@
      }
   }
 }
+
+// Required to remove the fullpage slider arrows
+.fp-controlArrow {
+  display: none;
+}
