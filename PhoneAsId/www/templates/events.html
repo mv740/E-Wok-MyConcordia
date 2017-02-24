@@ -2,19 +2,6 @@
   <ion-content overflow-scroll="true">
     <ion-list >
 
-      <div class="card" ng-repeat="event in ev.events" ng-click="ev.seeEventDetails($index)">
-        <div class="item item-avatar">
-          <img src="img\concordia_ev_pic.png">
-          <h2>{{event.information.name}}</h2>
-          <h3>{{event.information.location}}</h3>
-        </div>
-
-        <div class="item item-body">
-          <img class="full-image" src="img\concordia_ev_pic.png">
-          <h1>From {{event.information.timeBegin | date}}</h1>
-          <h2> To {{event.information.timeEnd | date}}</h2>
-        </div>
-      </div>
 
       <div class="card" ng-repeat="event in ev.events" ng-click="ev.seeEventDetails($index)">
         <div class="item item-avatar">
@@ -25,24 +12,12 @@
 
         <div class="item item-body">
           <img class="full-image" src="img\concordia_ev_pic.png">
-          <h1>From {{event.information.timeBegin | date}}</h1>
-          <h2> To {{event.information.timeEnd | date}}</h2>
+          <h2><b>From {{event.information.timeBegin | date:"MM/dd/yyyy 'at' h:mma"}}</b></h2>
+          <h2><b>To {{event.information.timeEnd | date: "MM/dd/yyyy 'at' h:mma"}}</b></h2>
         </div>
       </div>
 
-      <div class="card" ng-repeat="event in ev.events" ng-click="ev.seeEventDetails($index)">
-        <div class="item item-avatar">
-          <img src="img\concordia_ev_pic.png">
-          <h2>{{event.information.name}}</h2>
-          <h3>{{event.information.location}}</h3>
-        </div>
 
-        <div class="item item-body">
-          <img class="full-image" src="img\concordia_ev_pic.png">
-          <h1>From {{event.information.timeBegin | date}}</h1>
-          <h2> To {{event.information.timeEnd | date}}</h2>
-        </div>
-      </div>
 
 
 
