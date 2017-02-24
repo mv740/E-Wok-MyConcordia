@@ -127,4 +127,6 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
     function selectThisEvent(eventTarget) {
         event.selectedEvent = eventTarget;
     }
+
+    Mousetrap.bind('enter', event.addUser);
 }
