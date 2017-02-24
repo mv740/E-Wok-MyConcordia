@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .controller('StudentModalCtrl', StudentModalCtrl);
 
-StudentModalCtrl.$inject = ['$scope', '$timeout', '$uibModal', '$uibModalInstance', 'studentService', 'student'];
+StudentModalCtrl.$inject = ['$scope', '$uibModal', '$uibModalInstance', 'studentService', 'student'];
 
-function StudentModalCtrl($scope, $timeout, $modal, $modalInstance, studentService, student) {
+function StudentModalCtrl($scope, $modal, $modalInstance, studentService, student) {
 
     var studentModal = this;
 
@@ -30,9 +30,11 @@ function StudentModalCtrl($scope, $timeout, $modal, $modalInstance, studentServi
                 if (studentModal.student.valid) studentModal.student.wasValidated = true;
                 else if (!studentModal.student.valid) studentModal.student.wasRevoked = true;
 
-                $timeout(function(){
+                setTimeout(function(){
                     resetModal();
-                }, 1000);
+                    //$modalInstance.close();
+                    updateStudent();
+                }, 2000);
             },
             function(){
                 alert("Validation failed");
@@ -78,7 +80,6 @@ function StudentModalCtrl($scope, $timeout, $modal, $modalInstance, studentServi
     function resetModal(){
         studentModal.logs = undefined;
         studentModal.student = undefined;
-        updateStudent();
     }
 
     function submitComment(){
