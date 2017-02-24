@@ -16,17 +16,15 @@ function SideNavCtrl(AuthenticationService, $scope) {
     sideNav.toggleNav = toggleNav;
     sideNav.closeNav = closeNav;
     sideNav.logout = logout;
-    sideNav.isLoggedIn = isLoggedIn;
+    sideNav.isLoggedIn = false;
 
     //////////////////
 
-    $scope.$on('$routeChangeStart', function (event, next, current) {
+    $scope.$on('$routeChangeSuccess', function (event, next, current) {
         changeSelectedSideNavIcon(next);
+        sideNav.isLoggedIn = AuthenticationService.isAuthenticated();
     });
 
-    function isLoggedIn(){
-        return AuthenticationService.isAuthenticated();
-    }
 
     function changeSelectedSideNavIcon(next){
         sideNav.isOnReviewPage = false;
