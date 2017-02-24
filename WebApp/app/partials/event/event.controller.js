@@ -8,21 +8,21 @@ angular
     .module('myApp')
     .controller('EventController', EventController);
 
-EventController.$inject = ['$uibModal', 'eventService'];
+EventController.$inject = ['$filter', '$uibModal', 'eventService'];
 
-function EventController($modal, eventService) {
+function EventController($filter, $modal, eventService) {
 
 
 
-    var event = this;
-    event.submit = submit;
-    event.modify = modify;
-    event.openEventModal = openEventModal;
-    event.create = create;
-    event.cancel = cancel;
-    event.setFilter = setFilter;
-    event.isFilterTarget = isFilterTarget;
-    event.filters = [
+    var eventTab = this;
+    eventTab.submit = submit;
+    eventTab.modify = modify;
+    eventTab.openEventModal = openEventModal;
+    eventTab.create = create;
+    eventTab.cancel = cancel;
+    eventTab.setFilter = setFilter;
+    eventTab.isFilterTarget = isFilterTarget;
+    eventTab.filters = [
         "All",
         "Cancelled",
         "Postponed",
@@ -33,12 +33,12 @@ function EventController($modal, eventService) {
     ];
 
 
-    event.readonly = true;
-    event.removable = false;
+    eventTab.readonly = true;
+    eventTab.removable = false;
 
     getEvents();
 
-    event.fpOptions = {
+    eventTab.fpOptions = {
         navigation: false,
         keyboardScrolling: false
     };
@@ -47,32 +47,35 @@ function EventController($modal, eventService) {
 
 
     function submit(){
-        if (event.creating.eventID) eventService.updateEvent(event.creating).then(function(){});
-        else eventService.submit(event.creating).then(function(){
-            event.fpControls.moveTo(1);
+        var dateFormat = 'MM-dd-yyyyTHH:mm:ss';
+        eventTab.creating.timeBegin = $filter('date')(eventTab.creating.timeBegin, dateFormat);
+        eventTab.creating.timeEnd = $filter('date')(eventTab.creating.timeEnd, dateFormat);
+        if (eventTab.creating.eventID) eventService.updateEvent(eventTab.creating).then(function(){});
+        else eventService.submit(eventTab.creating).then(function(){
+            eventTab.fpControls.moveTo(1);
             getEvents();
         });
     }
 
     function get(eventId) {
         eventService.getThisEvent(eventId).then(function(result) {
-                event.selectedEvent = result;
+                eventTab.selectedEvent = result;
         });
 
     }
 
     function getEvents() {
         eventService.getAllEvents().then(function(result) {
-            event.events = result;
+            eventTab.events = result;
         });
     }
 
     function create(){
-        event.creating = {};
+        eventTab.creating = {};
     }
 
     function modify(eventTarget) {
-        event.creating = eventTarget.information;
+        eventTab.creating = eventTarget.information;
     }
 
     function cancel(eventTarget){
@@ -94,10 +97,10 @@ function EventController($modal, eventService) {
     }
 
     function setFilter(filter){
-        event.currentFilter = filter;
+        eventTab.currentFilter = filter;
     }
 
     function isFilterTarget(result){
-        return !event.currentFilter || (event.currentFilter == "All" || result.information.status == event.currentFilter || result.information.type == event.currentFilter);
+        return !eventTab.currentFilter || (eventTab.currentFilter == "All" || result.information.status == eventTab.currentFilter || result.information.type == eventTab.currentFilter);
     }
 };
