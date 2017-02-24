@@ -5,6 +5,7 @@ using MyConcordiaID.Models.Event;
 using MyConcordiaID.Models.Log;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace MyConcordiaID.Controllers
 {
@@ -23,8 +24,6 @@ namespace MyConcordiaID.Controllers
             _logRepo = logs;
             _eventRepo = events;
         }
-
-
 
         /// <summary>
         /// Retrieve all the events
@@ -153,12 +152,18 @@ namespace MyConcordiaID.Controllers
         [Route("user")]
         public IActionResult PostEventUser([FromBody] NewEventUser user)
         {
-            var result =_eventRepo.InsertUser(user);
-            if(result != EventActionResult.Success)
+            var result = _eventRepo.InsertUser(user);
+            if (result == EventActionResult.EventNotFound)
             {
                 return NotFound();
             }
- 
+            if (result == EventActionResult.DuplicateUser)
+            {
+                var returnAction = CreatedAtAction("PostEventUser", user);
+                returnAction.StatusCode = StatusCodes.Status409Conflict;
+                return returnAction;
+            }
+
             return Ok();
         }
 
@@ -193,7 +198,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult DeleteEventUser([FromBody] EventUser user)
         {
             var result = _eventRepo.RemoveUser(user);
-            if(result != EventActionResult.Success)
+            if (result != EventActionResult.Success)
             {
                 return NotFound();
             }
@@ -210,16 +215,18 @@ namespace MyConcordiaID.Controllers
         /// <response code="404">Event not found</response>
         [ProducesResponseType(typeof(IEnumerable<EventUserInformation>), 200)]
         [AllowAnonymous]
-        [HttpGet("{id}/users")]
-        public IActionResult GetEventUser(string id)
+        [HttpGet("{id}/users/{order:bool?}")]
+        public IActionResult GetEventUser(string id, [FromRoute] bool order = false)
         {
-            var users = _eventRepo.GetEventUsers(id);
-            if(users == null)
+            //var authenticatedUser = GetAuthenticatedUserNetname();
+
+            var users = _eventRepo.GetEventUsers(id, order, "m_woznia");
+            if (users == null)
             {
                 //event not found
                 return NotFound();
             }
-            
+
             return new ObjectResult(users);
         }
 
@@ -236,7 +243,6 @@ namespace MyConcordiaID.Controllers
 
             //need to oauth to get the creator's netname
 
-            //TODO: find a way to catch insert error --> future sprint part of log issue
             _eventRepo.InsertEvent(newEvent, "m_woznia"); //default user for now until everything is tested
 
             return Ok();
@@ -253,10 +259,8 @@ namespace MyConcordiaID.Controllers
         [HttpPut]
         public IActionResult UpdateEvent([FromBody] EventInformation information)
         {
-
-            //TODO: find a way to catch insert error --> future sprint part of log issue
             var selectedEvent = _eventRepo.UpdateEvent(information); //default user for now until everything is tested
-            if(selectedEvent != EventActionResult.Success)
+            if (selectedEvent != EventActionResult.Success)
             {
                 return NotFound();
             }
@@ -274,8 +278,8 @@ namespace MyConcordiaID.Controllers
         [HttpDelete]
         public IActionResult CancelEvent([FromBody] EventCancelled cancelEvent)
         {
-            var result =_eventRepo.RemoveEvent(cancelEvent);
-            if(result != EventActionResult.Success)
+            var result = _eventRepo.RemoveEvent(cancelEvent);
+            if (result != EventActionResult.Success)
             {
                 return NotFound();
             }
@@ -297,13 +301,11 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetMyAdminEvents(string netname)
         {
             var events = _eventRepo.GetAdminEvents(netname);
-            if(events == null)
+            if (events == null)
             {
                 //user not found
                 return NotFound();
             }
-
-
             return new ObjectResult(events);
         }
 
@@ -322,7 +324,7 @@ namespace MyConcordiaID.Controllers
         [ProducesResponseType(typeof(IEnumerable<AvailableEvent>), 200)]
         public IActionResult GetAttendeeEvents()
         {
-            var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
             var events = _eventRepo.GetAttendeeEvents(authenticatedUser);
 
             return new ObjectResult(events);
@@ -343,8 +345,8 @@ namespace MyConcordiaID.Controllers
         public IActionResult PostRegisterScannedUser([FromBody] ScannerUser user)
         {
             var scannerResult = _eventRepo.RegisterScannedUser(user);
-            
-            if(scannerResult.Status == ScannerStatus.IdNotFound.ToString())
+
+            if (scannerResult.Status == ScannerStatus.IdNotFound.ToString())
             {
                 return NotFound();
             }
@@ -352,12 +354,7 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(scannerResult);
         }
 
-
-
-
-
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public string getAuthenticatedUserNetname()
+        private string GetAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName);
             var lastName = User.FindFirstValue(ClaimTypes.Surname);

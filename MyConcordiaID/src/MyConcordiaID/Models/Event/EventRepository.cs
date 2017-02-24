@@ -242,8 +242,10 @@ namespace MyConcordiaID.Models.Event
         ///  Find all the users going to a specific event
         /// </summary>
         /// <param name="eventId"></param>
+        /// <param name="orderUserOnTop"></param>
+        /// <param name="netName"></param>
         /// <returns></returns>
-        public IEnumerable<EventUserInformation> GetEventUsers(string eventId)
+        public IEnumerable<EventUserInformation> GetEventUsers(string eventId, bool orderUserOnTop, string netName)
         {
 
             var selectedEvent = _database.EVENTS
@@ -266,7 +268,16 @@ namespace MyConcordiaID.Models.Event
                             FirstName = u.STUDENT.FIRSTNAME,
                             LastName = u.STUDENT.LASTNAME
                         }
-                    });
+                    })
+                    .ToList();
+
+                if (orderUserOnTop)
+                {
+                    //authenticated user will be the first user of the list
+                    eventUsers = eventUsers
+                        .OrderByDescending(order => order.StudentAccount.NetName == netName)
+                        .ToList();
+                }
 
                 return eventUsers;
             }
@@ -357,6 +368,18 @@ namespace MyConcordiaID.Models.Event
                 if (!string.IsNullOrEmpty(netName))
                 {
                     //student does exist 
+
+
+                    var userExist = _database.EVENT_USERS
+                        .Where(u => u.EVENT_ID == user.EventID && u.STUDENT_NETNAME_FK == netName)
+                        .FirstOrDefault();
+
+                    if (userExist != null)
+                    {
+                        //user exist thus duplicate action
+                        return EventActionResult.DuplicateUser;
+
+                    }
 
                     var status = UserStatus.Tracking.ToString(); ;
                     if (string.Equals(selectedEvent.TYPE, EventType.Closed.ToString(), StringComparison.OrdinalIgnoreCase))

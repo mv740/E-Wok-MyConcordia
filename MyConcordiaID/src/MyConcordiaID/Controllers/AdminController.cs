@@ -106,8 +106,6 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(result);
         }
 
-
-        [ApiExplorerSettings(IgnoreApi = true)]
         private string GetAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName);
