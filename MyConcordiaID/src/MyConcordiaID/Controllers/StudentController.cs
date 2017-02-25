@@ -34,7 +34,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">List of students</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         public IActionResult GetAll()
         {
@@ -51,7 +51,7 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Return student information</response>
         /// <response code="404">id is invalid, user doesn't exist</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet("{id}", Name = "GetStudent")]
         public IActionResult GetById(int id)
         {
@@ -73,6 +73,7 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Return pictures</response>
         /// <response code="404">user was not found </response>
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("picture/{id}")]
         public IActionResult GetStudentPictures(int id)
@@ -182,7 +183,8 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [AllowAnonymous]
+        /// <response code="200"></response>
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("PendingPicture/{id}")]
         public IActionResult GetPendingPicture(int id)
@@ -205,6 +207,8 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="picture"></param>
         /// <returns>student netname</returns>
+        /// <response code="200"></response>
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("ValidatePicture")]
         public IActionResult PostValidatePicture([FromBody] PictureValidation picture)
@@ -226,6 +230,8 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="picture"></param>
         /// <returns>student netname</returns>
+        /// <response code="200"></response>
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("RevalidatePicture")]
         public IActionResult PostRevalidatePicture([FromBody] PictureValidation picture)
@@ -247,6 +253,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200"></response>
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("UpdatePeriod")]
         public IActionResult GetUpdatePicturePeriod()
@@ -259,7 +266,8 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="searchOptions"></param>
         /// <returns></returns>
-        [AllowAnonymous]
+        /// <response code="200"></response>
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("Search")]
         public IActionResult SearchByParameters([FromBody] SearchOptions searchOptions)

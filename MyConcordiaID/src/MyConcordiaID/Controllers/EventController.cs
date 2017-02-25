@@ -30,7 +30,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">List of events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
         public IActionResult GetAll()
@@ -47,7 +47,7 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Return event information</response>
         /// <response code="404">id is invalid, event doesn't exist</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet("{id}", Name = "GetEvent")]
         [ProducesResponseType(typeof(EventInformation), 200)]
         public IActionResult GetById(string id)
@@ -67,7 +67,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return canceled events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/canceled")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -83,7 +83,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return Postponed events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/postponed")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -98,7 +98,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return Rescheduled events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/rescheduled")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -114,7 +114,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return scheduled events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/scheduled")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -130,7 +130,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return scheduled events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/active")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -147,7 +147,7 @@ namespace MyConcordiaID.Controllers
         /// <param name="user"></param>
         /// <response code="200">user Submited</response>
         /// <response code="404">user invalid or event not found</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("user")]
         public IActionResult PostEventUser([FromBody] NewEventUser user)
@@ -173,7 +173,7 @@ namespace MyConcordiaID.Controllers
         /// <param name="user"></param>
         /// <response code="200">user update</response>
         /// <response code="404">user invalid</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpPut]
         [Route("user")]
         public IActionResult UpdateEventUser([FromBody] EventUser user)
@@ -192,7 +192,7 @@ namespace MyConcordiaID.Controllers
         /// <param name="user"></param>
         /// <response code="200">user removed</response>
         /// <response code="404">user invalid</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpDelete]
         [Route("user")]
         public IActionResult DeleteEventUser([FromBody] EventUser user)
@@ -213,14 +213,14 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Return event users</response>
         /// <response code="404">Event not found</response>
+        /// <response code="401">Unauthorized</response>
         [ProducesResponseType(typeof(IEnumerable<EventUserInformation>), 200)]
-        [AllowAnonymous]
         [HttpGet("{id}/users/{order:bool?}")]
         public IActionResult GetEventUser(string id, [FromRoute] bool order = false)
         {
-            //var authenticatedUser = GetAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
-            var users = _eventRepo.GetEventUsers(id, order, "m_woznia");
+            var users = _eventRepo.GetEventUsers(id, order, authenticatedUser);
             if (users == null)
             {
                 //event not found
@@ -236,14 +236,14 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="newEvent"></param>
         /// <response code="200">event Submited</response>
+        /// <response code="401">Unauthorized</response>
         [AllowAnonymous]
         [HttpPost]
         public IActionResult PostEvent([FromBody] NewEvent newEvent)
         {
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
-            //need to oauth to get the creator's netname
-
-            _eventRepo.InsertEvent(newEvent, "m_woznia"); //default user for now until everything is tested
+            _eventRepo.InsertEvent(newEvent, authenticatedUser); //default user for now until everything is tested
 
             return Ok();
         }
@@ -255,7 +255,7 @@ namespace MyConcordiaID.Controllers
         /// <param name="information"></param>
         /// <response code="200">event updated</response>
         /// <response code="404">event not found</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpPut]
         public IActionResult UpdateEvent([FromBody] EventInformation information)
         {
@@ -274,7 +274,7 @@ namespace MyConcordiaID.Controllers
         /// <param name="cancelEvent"></param>
         /// <response code="200">event canceled</response>
         /// <response code="404">event not found</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpDelete]
         public IActionResult CancelEvent([FromBody] EventCancelled cancelEvent)
         {
@@ -294,13 +294,15 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">List of event</response>
         /// <response code="404">user not found</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("admin/{netname}")]
         [ProducesResponseType(typeof(IEnumerable<AvailableEvent>), 200)]
-        public IActionResult GetMyAdminEvents(string netname)
+        public IActionResult GetMyAdminEvents()
         {
-            var events = _eventRepo.GetAdminEvents(netname);
+            var authenticatedUser = GetAuthenticatedUserNetname();
+
+            var events = _eventRepo.GetAdminEvents(authenticatedUser);
             if (events == null)
             {
                 //user not found
@@ -318,7 +320,6 @@ namespace MyConcordiaID.Controllers
         /// <remarks>Must be authenticated!</remarks>
         /// <response code="200">List of events</response>
         /// <response code="401">Unauthorized</response>
-        [Authorize]
         [HttpGet]
         [Route("user")]
         [ProducesResponseType(typeof(IEnumerable<AvailableEvent>), 200)]
@@ -338,7 +339,7 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">User was found </response>
         /// <response code="404">User id not found </response>
-        [Authorize]
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("scanner")]
         [ProducesResponseType(typeof(ScannerResult), 200)]

@@ -21,7 +21,8 @@ namespace MyConcordiaID.Controllers
         ///  Get Marshalling card if your graduation status is positive
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
+        /// <response code="200">return Marshalling card</response>
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         public IActionResult GetMarshallingCard()
         {
@@ -35,7 +36,8 @@ namespace MyConcordiaID.Controllers
         /// Debug graduation status false
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
+        /// <response code="200">Denied card</response>
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("test")]
         public IActionResult GetMarshallingCardRequestDenied()

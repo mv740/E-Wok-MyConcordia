@@ -31,7 +31,6 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Submited new period</response>
         /// <response code="401">Not authenticated</response>
-        [Authorize]
         [HttpPost]
         [Route("PicturePeriod")]
         public IActionResult SetPicturePeriod([FromBody] PeriodSetting setting)
@@ -53,7 +52,6 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <response code="200">update picture period</response>
         /// <response code="404">No update picture period have been set for this year</response>
-        [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriod")]
         [ProducesResponseType(typeof(PeriodSetting), 200)]
@@ -75,7 +73,6 @@ namespace MyConcordiaID.Controllers
         /// <param name="year"></param>
         /// <response code="200">Return picture period</response>
         /// <response code="404">update picture period doesn't exist for that year</response>
-        [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriod/{year}")]
         [ProducesResponseType(typeof(PeriodSetting), 200)]
@@ -95,7 +92,6 @@ namespace MyConcordiaID.Controllers
         ///  Retrives all update picture periods 
         /// </summary>
         /// <returns></returns>
-        [AllowAnonymous]
         [HttpGet]
         [Route("UpdatePeriods")]
         [ProducesResponseType(typeof(List<PeriodSetting>), 200)]
