@@ -58,6 +58,7 @@ namespace MyConcordiaID.Models.Event
             if (user != null)
             {
                 var attendee = Role.Attendee.ToString();
+                var today = DateTime.UtcNow;
 
                 var studentEvents = _database.EVENT_USERS
                     .Where(e => e.STUDENT_NETNAME_FK == netname && e.ROLE != attendee)
@@ -76,7 +77,14 @@ namespace MyConcordiaID.Models.Event
                             Type = e.EVENT.TYPE,
                             Status = e.EVENT.STATUS
                         }
-                    });
+                    })
+                    .ToList();
+
+                //Sort list of dates closest to current date
+                studentEvents = studentEvents
+                    .OrderBy(n => (today - n.Information.TimeBegin).Duration())
+                    .ThenBy(n => (today - n.Information.TimeEnd).Duration())
+                    .ToList();
 
                 return studentEvents;
             }
@@ -145,14 +153,14 @@ namespace MyConcordiaID.Models.Event
             //merge list
             // remove duplicate : if you created a open event, you will be a creator thus part of the Event_users
             //                    When we get all available open event you will have an duplicate "attendee object" 
-            //order events
+            //Sort list of dates closest to current date
             events = events
                .Concat(openEvents)
                .GroupBy(x => x.Information.EventId)
                .Select(s => s.First())
-               .OrderByDescending(e => e.Information.TimeBegin)
+               .OrderBy(n => (today - n.Information.TimeBegin).Duration())
+               .ThenBy(n => (today - n.Information.TimeEnd).Duration())
                .ToList();
-
 
             return events;
 
