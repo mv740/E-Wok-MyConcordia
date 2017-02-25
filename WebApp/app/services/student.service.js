@@ -14,7 +14,6 @@ function studentService($q, toastedHttp, myConfig) {
         getStudentLogs: getStudentLogs,
         getStudents: getStudents,
         search: search,
-        getUpdatePeriod: getUpdatePeriod,
         validateArchived: validateArchived,
         submitComment: submitComment
     };
@@ -47,9 +46,7 @@ function studentService($q, toastedHttp, myConfig) {
         return toastedHttp.post(params, myConfig.search);
     }
 
-    function getUpdatePeriod() {
-        return toastedHttp.get({topUrl: myConfig.getUpdatePeriod});
-    }
+
 
     function validateArchived(id, valid){
         var json = { id: id,

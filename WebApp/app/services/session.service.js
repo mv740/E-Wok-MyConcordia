@@ -8,9 +8,9 @@
         .module('myApp')
         .factory('SessionService', SessionService);
 
-    SessionService.$inject = ['ngOidcClient'];
+    SessionService.$inject = ['ngOidcClient', '$location','$rootScope'];
 
-    function SessionService(ngOidcClient) {
+    function SessionService(ngOidcClient, $location, $rootScope) {
 
         var session = {};
 
@@ -35,7 +35,11 @@
         };
 
         session.destroy = function () {
-            ngOidcClient.removeUser();
+            ngOidcClient.removeUser().then(function successfulLogOut() {
+                $location.path('/login');
+                //trigger digest manually 
+                $rootScope.$apply()
+            });
         };
 
         return session;

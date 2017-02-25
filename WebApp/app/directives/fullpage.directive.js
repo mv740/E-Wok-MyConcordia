@@ -28,8 +28,10 @@
       var onSlideLeave;
 
       scope.controls = {
-          slideUp: slideUp,
+        slideUp: slideUp,
           slideDown: slideDown,
+          slideRight: slideRight,
+          slideLeft: slideLeft,
           moveTo: moveTo
       }
 
@@ -119,16 +121,24 @@
       element.on('$destroy', destroyFullPage);
 
       function slideUp(){
-          $.fn.fullpage.moveSectionUp();
+        $.fn.fullpage.moveSectionUp();
       }
 
       function slideDown(){
-          $.fn.fullpage.moveSectionDown();
+        $.fn.fullpage.moveSectionDown();
+      }
+
+      function slideRight(){
+        $.fn.fullpage.moveSlideRight();
+      }
+
+      function slideLeft() {
+        $.fn.fullpage.moveSlideLeft();
       }
 
       function disableScrolling(){
-         $.fn.fullpage.setMouseWheelScrolling(false);
-         $.fn.fullpage.setAllowScrolling(false);
+        $.fn.fullpage.setMouseWheelScrolling(false);
+        $.fn.fullpage.setAllowScrolling(false);
       }
 
       function moveTo(slideNo){

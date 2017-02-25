@@ -4,17 +4,19 @@ angular
     .module('myApp')
     .factory('eventService', eventService);
 
-eventService.$inject = [ '$q', 'toastedHttpService', 'myConfig'];
+eventService.$inject = ['toastedHttpService', 'myConfig'];
 
-function eventService($q, toastedHttp, myConfig) {
+function eventService(toastedHttp, myConfig) {
 
     var service = {
         getThisEvent: getThisEvent,
         getAllEvents: getAllEvents,
         submit: submit,
         updateEvent: updateEvent,
-        deleteEvent: deleteEvent,
-        setUserRole: setUserRole
+        setUserRole: setUserRole,
+        getEventAttendees: getEventAttendees,
+        addUser: addUser,
+        cancelEvent: cancelEvent
     }
 
     return service;
@@ -30,18 +32,26 @@ function eventService($q, toastedHttp, myConfig) {
     }
 
     function getAllEvents() {
-       return toastedHttp.get({topUrl: myConfig.event});
+       return toastedHttp.get({topUrl: myConfig.getEvents});
     }
 
     function updateEvent(event) {
         return toastedHttp.put(event, myConfig.event);
     }
 
-    function deleteEvent(event) {
+    function cancelEvent(event) {
         return toastedHttp.del(event, myConfig.event);
     }
 
-    function setUserRole(role) {
-        return toastedHttp.put(role, myConfig.eventUser);
+    function setUserRole(user) {
+        return toastedHttp.put(user, myConfig.eventUser);
+    }
+
+    function getEventAttendees(id) {
+        return toastedHttp.get({topUrl: myConfig.eventAttendees.replace("IDTOKEN", id) + "/true"});
+    }
+
+    function addUser(user) {
+        return toastedHttp.post(user, myConfig.eventUser);
     }
 }

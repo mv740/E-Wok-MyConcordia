@@ -1,0 +1,36 @@
+<md-dialog>
+    <md-dialog-content>
+        <div class="validationModal container2D">
+            <div ng-if="!attendeeDialog.loading" class="side-padding">
+                <h2 class="top-padding">
+                    {{attendeeDialog.attendee.studentAccount.firstName}} {{attendeeDialog.attendee.studentAccount.lastName}}
+                </h2>
+                <div>
+                    netname: <span>{{attendeeDialog.attendee.studentAccount.netName}}</span>
+                </div>
+                <div>
+                    id: <span>{{attendeeDialog.attendee.studentAccount.id}}</span>
+                </div>
+                <div ng-if="!attendeeDialog.userCanModifyRole(attendeeDialog.attendee)">
+                    Role: {{attendeeDialog.attendee.role}}
+                </div>
+                <md-input-container ng-if="attendeeDialog.userCanModifyRole(attendeeDialog.attendee)" class="top-buffer bottom-buffer-xl">
+                    <label>Role</label>
+                    <md-select ng-model="attendeeDialog.attendee.role">
+                        <md-option ng-repeat="role in attendeeDialog.listOfSettableRoles"
+                                   value="{{role}}"
+                                   ng-selected="attendeeDialog.attendee.role == role">{{role}}</md-option>
+                    </md-select>
+                </md-input-container>
+                <div class="top-buffer">
+                    <md-button ng-click="attendeeDialog.setNewRole()"
+                            ng-show="attendeeDialog.attendeeOriginalRole != attendeeDialog.attendee.role"
+                            class="buttonSmallFormat purple button3D">Set Role</md-button>
+                </div>
+            </div>
+        </div>
+    </md-dialog-content>
+</md-dialog>
+
+
+

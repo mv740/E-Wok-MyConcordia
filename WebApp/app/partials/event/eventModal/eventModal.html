@@ -4,22 +4,22 @@
 
             <div class="pictureAttributes side-padding text-left">
 
-                <h2 class="top-padding"><span>{{eventModal.event.name}}</span>
+                <h2 class="top-padding"><span>{{eventModal.event.information.name}}</span>
                 </h2>
                 <div>
-                    <span>{{eventModal.event.location}}</span>
+                    <span>{{eventModal.event.information.location}}</span>
                 </div>
                 <div>
-                    <span>{{eventModal.event.room}}</span>
+                    <span>{{eventModal.event.information.room}}</span>
                 </div>
                 <div>
-                    <span>{{eventModal.event.startDateStamp | date}}</span>
+                    <span>{{eventModal.event.information.startDateStamp | date}}</span>
                 </div>
                 <div>
-                    <span>{{eventModal.event.endtDateStamp | date}}</span>
+                    <span>{{eventModal.event.information.endtDateStamp | date}}</span>
                 </div>
                 <div>
-                    <span>{{eventModal.event.description}}</span>
+                    <span>{{eventModal.event.information.description}}</span>
                 </div>
 
             </div>
