@@ -6,7 +6,9 @@ namespace MyConcordiaID.Models.Event
     /// <summary>
     ///  Logic result
     /// </summary>
-    public enum EventActionResult { Fail, Success, UserNotFound, EventNotFound, UnknownRole }
+    public enum EventActionResult { Fail, Success, UserNotFound, EventNotFound, UnknownRole,
+        DuplicateUser
+    }
 
     /// <summary>
     ///  OPEN : anyone can attend this event

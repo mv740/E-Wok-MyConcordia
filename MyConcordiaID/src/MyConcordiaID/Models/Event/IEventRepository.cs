@@ -15,7 +15,7 @@ namespace MyConcordiaID.Models.Event
         IEnumerable<EventInformation> GetEventsByStatus(EventStatusType status);
         IEnumerable<EventInformation> GetActiveEvents();
         EventInformation GetEventById(string eventId);
-        IEnumerable<EventUserInformation> GetEventUsers(string eventId);
+        IEnumerable<EventUserInformation> GetEventUsers(string eventId, bool orderUserOnTop, string mWoznia);
         IEnumerable<dynamic> GetAdminEvents(string netname);
         IEnumerable<AvailableEvent> GetAttendeeEvents(string netname);
         ScannerResult RegisterScannedUser(ScannerUser user);

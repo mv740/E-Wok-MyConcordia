@@ -48,35 +48,6 @@ namespace UnitTestCore
             _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
 
-        /// <summary>
-        /// http://stackoverflow.com/questions/13766198/c-sharp-accessing-property-values-dynamically-by-property-name
-        ///  Access proprerty dynamically by property name
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
-        public static object ReflectPropertyValue(object source, string property)
-        {
-            return source.GetType().GetProperty(property).GetValue(source, null);
-        }
-        /// <summary>
-        ///  For Viewing all available properties of a dynamic object
-        /// </summary>
-        /// <param name="source"></param>
-        public static void PrintPropertiesOfDynamicObject(object source)
-        {
-            var properties = source.GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                var propertyName = property.Name;
-
-                var propetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
-
-                Console.Write(propertyName + " : " + propetyValue);
-                Console.WriteLine();
-            }
-        }
-
         [TestInitialize]
         public void Initialize()
         {
@@ -182,7 +153,7 @@ namespace UnitTestCore
             SetBasicMockDb();
            
             var controller = new StudentController(_repo, _pictures, _logs);
-            IdentityHelper.SetUser("michal", "wozniak", controller);
+            UnitTestHelper.SetUser("michal", "wozniak", controller);
 
             //Act
             //var result = controller.GetAccount() as ObjectResult;

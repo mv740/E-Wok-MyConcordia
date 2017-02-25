@@ -58,6 +58,7 @@ namespace MyConcordiaID.Models.Event
             if (user != null)
             {
                 var attendee = Role.Attendee.ToString();
+                var today = DateTime.UtcNow;
 
                 var studentEvents = _database.EVENT_USERS
                     .Where(e => e.STUDENT_NETNAME_FK == netname && e.ROLE != attendee)
@@ -76,7 +77,14 @@ namespace MyConcordiaID.Models.Event
                             Type = e.EVENT.TYPE,
                             Status = e.EVENT.STATUS
                         }
-                    });
+                    })
+                    .ToList();
+
+                //Sort list of dates closest to current date
+                studentEvents = studentEvents
+                    .OrderBy(n => (today - n.Information.TimeBegin).Duration())
+                    .ThenBy(n => (today - n.Information.TimeEnd).Duration())
+                    .ToList();
 
                 return studentEvents;
             }
@@ -145,14 +153,14 @@ namespace MyConcordiaID.Models.Event
             //merge list
             // remove duplicate : if you created a open event, you will be a creator thus part of the Event_users
             //                    When we get all available open event you will have an duplicate "attendee object" 
-            //order events
+            //Sort list of dates closest to current date
             events = events
                .Concat(openEvents)
                .GroupBy(x => x.Information.EventId)
                .Select(s => s.First())
-               .OrderByDescending(e => e.Information.TimeBegin)
+               .OrderBy(n => (today - n.Information.TimeBegin).Duration())
+               .ThenBy(n => (today - n.Information.TimeEnd).Duration())
                .ToList();
-
 
             return events;
 
@@ -242,8 +250,10 @@ namespace MyConcordiaID.Models.Event
         ///  Find all the users going to a specific event
         /// </summary>
         /// <param name="eventId"></param>
+        /// <param name="orderUserOnTop"></param>
+        /// <param name="netName"></param>
         /// <returns></returns>
-        public IEnumerable<EventUserInformation> GetEventUsers(string eventId)
+        public IEnumerable<EventUserInformation> GetEventUsers(string eventId, bool orderUserOnTop, string netName)
         {
 
             var selectedEvent = _database.EVENTS
@@ -266,7 +276,16 @@ namespace MyConcordiaID.Models.Event
                             FirstName = u.STUDENT.FIRSTNAME,
                             LastName = u.STUDENT.LASTNAME
                         }
-                    });
+                    })
+                    .ToList();
+
+                if (orderUserOnTop)
+                {
+                    //authenticated user will be the first user of the list
+                    eventUsers = eventUsers
+                        .OrderByDescending(order => order.StudentAccount.NetName == netName)
+                        .ToList();
+                }
 
                 return eventUsers;
             }
@@ -357,6 +376,18 @@ namespace MyConcordiaID.Models.Event
                 if (!string.IsNullOrEmpty(netName))
                 {
                     //student does exist 
+
+
+                    var userExist = _database.EVENT_USERS
+                        .Where(u => u.EVENT_ID == user.EventID && u.STUDENT_NETNAME_FK == netName)
+                        .FirstOrDefault();
+
+                    if (userExist != null)
+                    {
+                        //user exist thus duplicate action
+                        return EventActionResult.DuplicateUser;
+
+                    }
 
                     var status = UserStatus.Tracking.ToString(); ;
                     if (string.Equals(selectedEvent.TYPE, EventType.Closed.ToString(), StringComparison.OrdinalIgnoreCase))
