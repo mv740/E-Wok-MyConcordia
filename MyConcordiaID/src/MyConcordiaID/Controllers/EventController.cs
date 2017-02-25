@@ -49,7 +49,7 @@ namespace MyConcordiaID.Controllers
         /// <response code="404">id is invalid, event doesn't exist</response>
         [AllowAnonymous]
         [HttpGet("{id}", Name = "GetEvent")]
-        [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
+        [ProducesResponseType(typeof(EventInformation), 200)]
         public IActionResult GetById(string id)
         {
             var myEvent = _eventRepo.GetEventById(id);
