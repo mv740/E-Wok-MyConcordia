@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Threading.Tasks;
+using MyConcordiaID.Helper;
 
 namespace MyConcordiaID.Models.Admin
 {
@@ -23,11 +24,8 @@ namespace MyConcordiaID.Models.Admin
         {
             var updatedPreviousPeriod = false; //logging purposes
 
-            var start = setting.StartDate;
-            var end = setting.EndDate;
-
-            var startDateTime = DateTime.Parse(start);
-            var endDateTime = DateTime.Parse(end);
+            var startDateTime = FormatHelper.ConvertToDateTime(setting.StartDate);
+            var endDateTime = FormatHelper.ConvertToDateTime(setting.EndDate);
 
             var year = (short)setting.Year;
 
