@@ -8,6 +8,14 @@
                         <h1>Your Events</h1>
                     </div>
 
+                    <div>
+                        <md-chips ng-model="eventTab.filters" readonly="eventTab.readonly" md-removable="eventTab.removable">
+                            <md-chip-template  ng-class="{'selectedChip': $chip == eventTab.currentFilter}">
+                                <span ng-click="eventTab.setFilter($chip)"> <strong>{{$chip}}</strong> </span>
+                            </md-chip-template>
+                        </md-chips>
+                    </div>
+
                     <div id="createEventButton" class="height-standard">
                         <button ng-click="eventTab.fpControls.slideDown()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
                     </div>
