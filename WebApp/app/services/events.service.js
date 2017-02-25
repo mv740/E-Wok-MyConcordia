@@ -15,8 +15,8 @@ function eventService(toastedHttp, myConfig) {
         updateEvent: updateEvent,
         setUserRole: setUserRole,
         getEventAttendees: getEventAttendees,
-        addUser: addUser
-        cancelEvent: cancelEvent,
+        addUser: addUser,
+        cancelEvent: cancelEvent
     }
 
     return service;
