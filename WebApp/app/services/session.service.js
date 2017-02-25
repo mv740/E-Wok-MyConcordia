@@ -35,7 +35,9 @@
         };
 
         session.destroy = function () {
-            ngOidcClient.removeUser();
+            ngOidcClient.removeUser().then(function successfulLogOut() {
+                $location.path('/login');
+            });
         };
 
         return session;
