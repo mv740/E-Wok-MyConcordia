@@ -14,14 +14,14 @@
         <p>Type: {{bc.eventData.information.type}}</p>
         <p>Status: {{bc.eventData.information.status}}</p>
 
-        <button ng-if="bc.eventData.userRole == 'Mod'" ng-click="bc.scanBarcode()">SCAN</button>
+        <button ng-if="bc.eventData.userRole == 'Creator' || bc.eventData.userRole == 'Scanner' || bc.eventData.userRole == 'Mod'" ng-click="bc.scanBarcode()">SCAN</button>
         <br><br>
 
-        <div ng-if="bc.eventData.userRole == 'Mod' && bc.scanData.length == 0 ">
+        <div ng-if="(bc.eventData.userRole == 'Creator' || bc.eventData.userRole == 'Scanner' || bc.eventData.userRole == 'Mod') && bc.scanData.length == 0 ">
           You are registered as a moderator for this event. Press the scan button to begin registering attendees.
         </div>
 
-        <div ng-if="bc.eventData.userRole == 'Mod' && bc.scanData.length > 0">
+        <div ng-if="(bc.eventData.userRole == 'Creator' || bc.eventData.userRole == 'Scanner' || bc.eventData.userRole == 'Mod') && bc.scanData.length > 0">
           <p>Barcode ID: {{bc.barcodeID}}</p>
           <p>Response: {{bc.responseMsg}}</p>
         </div>
