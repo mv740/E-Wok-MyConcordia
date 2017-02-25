@@ -28,7 +28,9 @@ angular.module('myApp', [
     "submitComment": "student/comment",
     "event": "Event",
     "getEvent": "Event/",
-    "setEventUserRole": "Event/user",
+    "eventUser": "Event/user",
+    "eventsCreated": "Event/admin/",
+    "eventAttendees": "Event/IDTOKEN/users",
     "getEvents": "Event/admin/m_woznia"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {

@@ -13,8 +13,10 @@ function eventService(toastedHttp, myConfig) {
         getAllEvents: getAllEvents,
         submit: submit,
         updateEvent: updateEvent,
-        cancelEvent: cancelEvent,
-        setUserRole: setUserRole
+        setUserRole: setUserRole,
+        getEventAttendees: getEventAttendees,
+        addUser: addUser,
+        cancelEvent: cancelEvent
     }
 
     return service;
@@ -41,7 +43,15 @@ function eventService(toastedHttp, myConfig) {
         return toastedHttp.del(event, myConfig.event);
     }
 
-    function setUserRole(role) {
-        return toastedHttp.put(role, myConfig.setEventUserRole);
+    function setUserRole(user) {
+        return toastedHttp.put(user, myConfig.eventUser);
+    }
+
+    function getEventAttendees(id) {
+        return toastedHttp.get({topUrl: myConfig.eventAttendees.replace("IDTOKEN", id) + "/true"});
+    }
+
+    function addUser(user) {
+        return toastedHttp.post(user, myConfig.eventUser);
     }
 }

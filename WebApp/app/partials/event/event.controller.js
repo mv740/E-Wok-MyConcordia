@@ -8,9 +8,10 @@ angular
     .module('myApp')
     .controller('EventController', EventController);
 
-EventController.$inject = ['$filter', '$uibModal', 'eventService'];
 
-function EventController($filter, $modal, eventService) {
+EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', 'eventService'];
+
+function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
 
 
 
@@ -20,6 +21,10 @@ function EventController($filter, $modal, eventService) {
     eventTab.openEventModal = openEventModal;
     eventTab.create = create;
     eventTab.cancel = cancel;
+    eventTab.checkAttendees = checkAttendees;
+    eventTab.openAttendeeDialog = openAttendeeDialog;
+    eventTab.addUser = addUser;
+    eventTab.selectThisEvent = selectThisEvent;
     eventTab.setFilter = setFilter;
     eventTab.isFilterTarget = isFilterTarget;
     eventTab.filters = [
@@ -57,13 +62,6 @@ function EventController($filter, $modal, eventService) {
         });
     }
 
-    function get(eventId) {
-        eventService.getThisEvent(eventId).then(function(result) {
-                eventTab.selectedEvent = result;
-        });
-
-    }
-
     function getEvents() {
         eventService.getAllEvents().then(function(result) {
             eventTab.events = result;
@@ -96,6 +94,72 @@ function EventController($filter, $modal, eventService) {
             }});
     }
 
+    function checkAttendees(eventTarget) {
+        eventService.getEventAttendees(eventTarget.information.eventId).then(function (result) {
+            eventTab.attendees = result;
+            eventTab.loggedInAttendee = eventTab.attendees[0];
+        });
+    }
+
+    function openAttendeeDialog(attendeeTarget) {
+        $mdDialog.show({
+            controller: 'AttendeeDialogCtrl as attendeeDialog',
+            templateUrl: "partials/event/attendeeDialog/attendeeDialog.html",
+            parent: angular.element(document.body),
+            targetEvent: attendeeTarget,
+            clickOutsideToClose:true,
+            locals: { attendee: attendeeTarget, loggedInAttendee: eventTab.loggedInAttendee },
+            openFrom: { top: -50, width: 30, height: 80 },
+            closeTo: { left: 1500 },
+            preserveScope: false
+        })
+            .then(function(answer) {
+                eventService.setUserRole(answer).then(
+                    function(response) {
+                        console.log("attendee role modified successfully");
+                    },
+                    function (failure) {
+                        console.log("failed to modify attendee role");
+                    });
+            }, function() { // On close events handled here because we are currently not using the answer dialog the way angular-materials is
+                console.log("dialog closed and attendees refreshed");
+                checkAttendees(eventTab.selectedEvent);
+            });
+    }
+
+    function addUser() {
+        var userNetnameOrId = eventTab.newUserNetnameOrId;
+        if (userNetnameOrId != "") {
+            var newUser = {
+                userId: "",
+                userNetname: "",
+                role: "Attendee",
+                eventID: eventTab.selectedEvent.information.eventId
+            };
+            if (userNetnameOrId.match(/^[0-9]*$/g) != null) {
+                newUser.userId = eventTab.newUserNetnameOrId;
+            }
+            else if (userNetnameOrId.match(/^[a-zA-Z]*_?[a-zA-Z]*$/g) != null){
+                newUser.userNetname = eventTab.newUserNetnameOrId;
+            }
+            eventService.addUser(newUser)
+                .then(
+                    function(result) {
+                        console.log("successfully added new user");
+                        eventTab.newUserNetnameOrId = "";
+                        checkAttendees(eventTab.selectedEvent);
+                    },
+                    function(failure) {
+                        console.log("failed to add new user");
+                    }
+                );
+        }
+    }
+
+    function selectThisEvent(eventTarget) {
+        eventTab.selectedEvent = eventTarget;
+    }
+  
     function setFilter(filter){
         eventTab.currentFilter = filter;
     }
@@ -103,4 +167,6 @@ function EventController($filter, $modal, eventService) {
     function isFilterTarget(result){
         return !eventTab.currentFilter || (eventTab.currentFilter == "All" || result.information.status == eventTab.currentFilter || result.information.type == eventTab.currentFilter);
     }
-};
+
+    Mousetrap.bind('enter', eventTab.addUser);
+}

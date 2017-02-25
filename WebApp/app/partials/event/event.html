@@ -1,48 +1,72 @@
 <div ng-controller="EventController as eventTab" >
 
     <div id="fpEvent" full-page options="eventTab.fpOptions" controls="eventTab.fpControls" allowScrolling=false>
-        <div class="section">
-            <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
-            <div class="page-header">
-                <h1>Your events</h1>
-            </div>
-                <div>
-                    <md-chips ng-model="eventTab.filters" readonly="eventTab.readonly" md-removable="eventTab.removable">
-                        <md-chip-template  ng-class="{'selectedChip': $chip == eventTab.currentFilter}">
-                            <span ng-click="eventTab.setFilter($chip)"> <strong>{{$chip}}</strong> </span>
-                        </md-chip-template>
-                    </md-chips>
+        <div class="section side-padding-xl">
+            <div class="slide">
+                <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
+                    <div class="page-header">
+                        <h1>Your Events</h1>
+                    </div>
+
+                    <div>
+                        <md-chips ng-model="eventTab.filters" readonly="eventTab.readonly" md-removable="eventTab.removable">
+                            <md-chip-template  ng-class="{'selectedChip': $chip == eventTab.currentFilter}">
+                                <span ng-click="eventTab.setFilter($chip)"> <strong>{{$chip}}</strong> </span>
+                            </md-chip-template>
+                        </md-chips>
+                    </div>
+
+                    <div id="createEventButton" class="height-standard">
+                        <button ng-click="eventTab.fpControls.slideDown()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
+                    </div>
+                    <div class="top-buffer-sm bottom-buffer-xl" ng-if="eventTab.events.length > 0">
+                        <ul class="listResults">
+                            <li class="top-buffer-sm height-standard" ng-class="{'expanded': result.expanded}" ng-repeat="result in eventTab.events track by $index" >
+                                <div class="height-standard">
+                                    <button class="button3D textLeft col-xs-12" ng-click="result.expanded = !result.expanded">
+                                        <span>{{result.information.name}},</span>
+
+                                        <span>{{result.information.timeBegin | date}},</span>
+
+                                        <span>{{result.information.room}}</span>
+                                    </button>
+                                </div>
+                                <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
+                                    <button ng-click="eventTab.modify(result); eventTab.fpControls.slideDown();" class="button3D purple buttonSmallFormat">Modify</button>
+                                    <button ng-click="eventTab.openEventModal(result)" class="button3D purple side-buffer-sm buttonSmallFormat">View details</button>
+                                    <button ng-click="eventTab.checkAttendees(result); eventTab.fpControls.slideRight(); eventTab.selectThisEvent(result);" class="button3D purple buttonSmallFormat">Attendees</button>
+                                    <button ng-click="eventTab.cancel(result)" class="button3D purple left-buffer-sm buttonSmallFormat">Delete</button>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-            <div id="createEventButton" class="height-standard">
-            <button ng-click="eventTab.fpControls.slideDown()" class="button3D purple col-xs-12 textLeft">Create a new eventTab</button>
             </div>
-            <div class="top-buffer-sm bottom-buffer-xl" ng-if="eventTab.events.length > 0">
-            <ul class="listResults">
-                <li ng-if="eventTab.isFilterTarget(result)" class="top-buffer-sm height-standard" ng-class="{'expanded': result.expanded}" ng-repeat="result in eventTab.events track by $index" >
-                    <div class="height-standard">
-                    <button class="button3D textLeft col-xs-12" ng-click="result.expanded = !result.expanded">
-                        <span>{{result.information.name}},</span>
 
-                        <span>{{result.information.timeBegin | date}},</span>
-
-                        <span>{{result.information.room}},</span>
-                    </button>
+            <div class="slide">
+                <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
+                    <div class="page-header">
+                        <h1>Event Attendees</h1>
                     </div>
-                    <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
-                        <button ng-click="eventTab.modify(result); eventTab.fpControls.slideDown();" class="button3D purple buttonSmallFormat">Modify</button>
-                        <button ng-click="eventTab.openEventModal(result)" class="button3D purple left-buffer-sm buttonSmallFormat">View details</button>
-                        <button ng-click="eventTab.cancel(result)" class="button3D purple left-buffer-sm buttonSmallFormat">Delete</button>
+                    <div class="searchBoxContainer bottom-buffer">
+                        <div class="field" code="13" kb-press="eventTab.addUser()" >
+                            <input type="text" code="13" kb-press="eventTab.addUser()" ng-model="eventTab.newUserNetnameOrId" placeholder="User's netname or ID" />
+                            <button ng-click="eventTab.addUser()" type="button">Add Attendee!</button>
+                        </div>
                     </div>
-                </li>
-            </ul>
+                    <ul class="listResults top-buffer">
+                        <li class="top-buffer-sm height-standard" ng-repeat="attendee in eventTab.attendees track by $index">
+                            <div class="height-standard">
+                                <button class="button3D textLeft col-xs-12" ng-click="eventTab.openAttendeeDialog(attendee)">
+                                    <span>{{attendee.studentAccount.firstName}} </span>
+                                    <span>{{attendee.studentAccount.lastName}}</span>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                    <button ng-click="eventTab.fpControls.slideLeft()" class="button3D purple buttonSmallFormat top-buffer-sm">Go Back</button>
+                </div>
             </div>
-            </div>
-
-
-
-
-
-
         </div>
         <div class="section side-padding-xl">
 
@@ -51,7 +75,7 @@
             </div>
 
             <div>
-                <h4>Give your new event a meaningful name</span>
+                <h4>Give your new event a meaningful name
 
                 </h4>
             </div>
@@ -72,7 +96,7 @@
             </div>
 
             <div>
-                <h4>Where will your event happen?</span>
+                <h4>Where will your event happen?
 
                 </h4>
             </div>
@@ -92,7 +116,7 @@
             </div>
 
             <div>
-                <h4>In what room will your event take place?</span>
+                <h4>In what room will your event take place?
 
                 </h4>
             </div>
@@ -113,7 +137,7 @@
             </div>
 
             <div>
-                <h4>What are the details of your new event?</span>
+                <h4>What are the details of your new event?
 
                 </h4>
             </div>
