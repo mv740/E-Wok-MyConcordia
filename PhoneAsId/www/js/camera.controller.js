@@ -9,9 +9,9 @@
     .module('starter')
     .controller('CameraCtrl', CameraCtrl);
 
-    CameraCtrl.$inject = ['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', '$rootScope'];
+    CameraCtrl.$inject = ['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', '$rootScope','Settings'];
 
-    function CameraCtrl(SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location, $rootScope) {
+    function CameraCtrl(SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location, $rootScope, Settings) {
       var camCtrl = this;
 
       camCtrl.pictureUrl = 'http://placehold.it/300x300';
@@ -104,7 +104,7 @@
         var ft = new FileTransfer();
         var options = new FileUploadOptions();
 
-        var serverURL = encodeURI("https://myconcordiaid.azurewebsites.net");
+        var serverURL = encodeURI(Settings.baseUrl);
 
         var token = 'Bearer ' + SessionService.getAccessToken();
         var headers = {
@@ -129,7 +129,7 @@
               camCtrl.showAlert('upload-success');
 
               //hide uploading spinner when callback succeeded
-              camCtrl.$apply(function () {
+              $scope.$apply(function () {
                 camCtrl.showUploadSpinnerGif = false;
               });
             },
@@ -140,7 +140,7 @@
               console.log("PictureURLK:::: " + camCtrl.pictureUrl);
 
               //hide uploading spinner when callback failed
-              camCtrl.$apply(function () {
+              $scope.$apply(function () {
                 camCtrl.showUploadSpinnerGif = false;
 
               });

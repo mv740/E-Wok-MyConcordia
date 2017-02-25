@@ -6,7 +6,10 @@
 // 'starter.controllers' is found in controllers.js
 
 angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers', 'ngCordova', 'ng.oidcclient', 'angularCSS', 'templates'])
-  .constant('serverName', 'https://myconcordiaid.azurewebsites.net/api/')
+  .constant('Settings', {
+    'api' : 'https://api.myconcordiaid.me/api/',
+    'baseUrl' : 'https://api.myconcordiaid.me/'
+  })
 
 
   .run(function ($ionicPlatform, $rootScope) {
@@ -54,13 +57,10 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
     });
   })
 
-  .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
-
-
-    var link = "https://api.myconcordiaid.me/";
+  .config(['ngOidcClientProvider', 'Settings', function (ngOidcClientProvider, Settings) {
 
     ngOidcClientProvider.setSettings({
-      authority: link,
+      authority: Settings.baseUrl,
       client_id: "oidcdemomobile",
       redirect_uri: "https://localhost/oidc",
       post_logout_redirect_uri: "https://localhost/oidc",
