@@ -117,9 +117,8 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
             .then(function(answer) {
                 console.log("dialog closed. answer received. attendees refreshed");
                 checkAttendees(eventTab.selectedEvent);
-            }, function() { // On close events handled here because we are currently not using the answer dialog the way angular-materials is
-                console.log("dialog closed and attendees refreshed");
-                checkAttendees(eventTab.selectedEvent);
+            }, function() { // When dialog box closes without any action, nothing happens.
+                console.log("dialog closed. no actions performed");
             });
     }
 
