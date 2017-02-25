@@ -94,7 +94,22 @@
             displayPicture();
 
           }, function (error) {
-            alert('Error occured while getting the camera');
+            //alert('Error occured while getting the camera');
+            if (ionic.Platform.isIOS()) {
+              document.addEventListener("deviceready", onDeviceReady, true);
+              function onDeviceReady() {
+                navigator.notification.alert(
+                  'Error occurred while getting the camera',
+                  function () {
+                  },
+                  'Alert',
+                  'OK'
+                );
+              }
+            }
+            if (ionic.Platform.isAndroid()) {
+              alert("Error occurred while getting the camera");
+            }
           })
       };
 
@@ -280,7 +295,17 @@
                 //alert('An error occurred while uploading the file');
               });
           }, function (err) {
-            alert('An error occurred while trying to write the file');
+            //alert('An error occurred while trying to write the file');
+            document.addEventListener("deviceready", onDeviceReady, true);
+            function onDeviceReady() {
+              navigator.notification.alert(
+                'An error occurred while trying to write the file',
+                function () {
+                },
+                'Alert',
+                'OK'
+              );
+            }
           });
         }
 
