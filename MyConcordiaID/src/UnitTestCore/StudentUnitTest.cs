@@ -47,49 +47,7 @@ namespace UnitTestCore
             _mySetPicture.As<IDbAsyncEnumerable<PICTURE>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<PICTURE>(dataSource.GetEnumerator()));
             _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
-        /// <summary>
-        /// http://stackoverflow.com/questions/13766198/c-sharp-accessing-property-values-dynamically-by-property-name
-        ///  Access proprerty dynamically by property name
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
-        private static object ReflectPropertyValue(object source, string property)
-        {
-            return source.GetType().GetProperty(property).GetValue(source, null);
-        }
-        /// <summary>
-        ///  For Viewing all available properties of a dynamic object
-        /// </summary>
-        /// <param name="source"></param>
-        private static void PrintPropertiesOfDynamicObject(object source)
-        {
-            var properties = source.GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                var propertyName = property.Name;
-
-                var propetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
-
-                Console.Write(propertyName + " : " + propetyValue);
-                Console.WriteLine();
-            }
-        }
-
-
-        private static byte[] GetImageByte(IMock<IFormFile> image)
-        {
-            var stream = image.Object.OpenReadStream();
-            byte[] byteImage;
-
-            using (var memoryStream = new MemoryStream())
-            {
-                stream.CopyTo(memoryStream);
-                byteImage = memoryStream.ToArray();
-            }
-
-            return byteImage;
-        }
+     
 
         [TestInitialize]
         public void Initialize()
@@ -246,7 +204,7 @@ namespace UnitTestCore
             fileMock.Setup(m => m.OpenReadStream()).Returns(ms);
 
 
-            _picture.AddPendingPicture(netname, GetImageByte(fileMock));
+            _picture.AddPendingPicture(netname, UnitTestHelper.GetImageByte(fileMock));
 
             _mySetPicture.Verify(m => m.Add(It.IsAny<PICTURE>()), Times.Once());
             _context.Verify(m => m.SaveChanges(), Times.Once());
@@ -394,9 +352,9 @@ namespace UnitTestCore
             // in our unit test our student has only 1 picture
             foreach(dynamic d in studentPictures.ArchivedPictures)
             {
-                PrintPropertiesOfDynamicObject(d);
-                id = ReflectPropertyValue(d, "ID_PK");
-                status = ReflectPropertyValue(d, "STATUS");
+                UnitTestHelper.PrintPropertiesOfDynamicObject(d);
+                id = UnitTestHelper.ReflectPropertyValue(d, "ID_PK");
+                status = UnitTestHelper.ReflectPropertyValue(d, "STATUS");
             }
 
             Assert.AreEqual(Status.Denied.ToString(), status);

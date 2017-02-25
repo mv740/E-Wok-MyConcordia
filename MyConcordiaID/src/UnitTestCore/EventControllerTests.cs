@@ -23,7 +23,6 @@ namespace UnitTestCore
 
         private Mock<DatabaseEntities> _context;
         private EventRepository _eventRepo;
-        private PictureRepository _pictures;
         private LogRepository _logs;
         private Mock<DbSet<EVENT_USERS>> _mySetEventUser;
         private Mock<DbSet<EVENT>> _mySetEvent;
@@ -47,35 +46,6 @@ namespace UnitTestCore
             _mySetEvent.As<IQueryable<EVENT>>().Setup(data => data.ElementType).Returns(dataSource.ElementType);
             _mySetEvent.As<IDbAsyncEnumerable<EVENT>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<EVENT>(dataSource.GetEnumerator()));
             _context.Setup(a => a.EVENTS).Returns(_mySetEvent.Object);
-        }
-
-        /// <summary>
-        /// http://stackoverflow.com/questions/13766198/c-sharp-accessing-property-values-dynamically-by-property-name
-        ///  Access proprerty dynamically by property name
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
-        public static object ReflectPropertyValue(object source, string property)
-        {
-            return source.GetType().GetProperty(property).GetValue(source, null);
-        }
-        /// <summary>
-        ///  For Viewing all available properties of a dynamic object
-        /// </summary>
-        /// <param name="source"></param>
-        public static void PrintPropertiesOfDynamicObject(object source)
-        {
-            var properties = source.GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                var propertyName = property.Name;
-
-                var propetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
-
-                Console.Write(propertyName + " : " + propetyValue);
-                Console.WriteLine();
-            }
         }
 
         [TestInitialize]
