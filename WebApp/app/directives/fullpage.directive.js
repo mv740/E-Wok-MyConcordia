@@ -31,7 +31,8 @@
         slideUp: slideUp,
           slideDown: slideDown,
           slideRight: slideRight,
-          slideLeft: slideLeft
+          slideLeft: slideLeft,
+          moveTo: moveTo
       }
 
       if (typeof scope.options === 'object') {
@@ -138,6 +139,10 @@
       function disableScrolling(){
         $.fn.fullpage.setMouseWheelScrolling(false);
         $.fn.fullpage.setAllowScrolling(false);
+      }
+
+      function moveTo(slideNo){
+          $.fn.fullpage.moveTo(slideNo);
       }
 
         //if we are using a ui-router, we need to be able to handle anchor clicks without 'href="#thing"'

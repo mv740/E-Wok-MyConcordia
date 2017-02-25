@@ -4,7 +4,7 @@ angular
     .module('myApp')
     .controller('StudentModalCtrl', StudentModalCtrl);
 
-StudentModalCtrl.$inject = ['$scope', '$modal', '$modalInstance', 'studentService', 'student'];
+StudentModalCtrl.$inject = ['$scope', '$uibModal', '$uibModalInstance', 'studentService', 'student'];
 
 function StudentModalCtrl($scope, $modal, $modalInstance, studentService, student) {
 

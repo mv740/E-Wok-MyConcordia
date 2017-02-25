@@ -29,7 +29,6 @@
         //todo need to integrated logout from backend
         authService.logOut = function () {
                 SessionService.destroy();
-                $location.path('/login');
 
 
             //

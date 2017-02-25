@@ -4,7 +4,7 @@ angular
     .module('myApp')
     .controller('ImageModalCtrl', ImageModalCtrl);
 
-ImageModalCtrl.$inject = ['$rootScope', '$modalInstance', 'studentService', 'dateParsingService', 'image'];
+ImageModalCtrl.$inject = ['$rootScope', '$uibModalInstance', 'studentService', 'dateParsingService', 'image'];
 
 function ImageModalCtrl($rootScope, $modalInstance, studentService, dateParsingService, image) {
 

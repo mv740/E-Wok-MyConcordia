@@ -8,25 +8,42 @@ angular
     .module('myApp')
     .controller('EventController', EventController);
 
-EventController.$inject = ['$modal', '$timeout', '$mdDialog', 'eventService'];
 
-function EventController($modal, $timeout, $mdDialog, eventService) {
+EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', 'eventService'];
+
+function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
 
 
 
-    var event = this;
-    event.submit = submit;
-    event.modify = modify;
-    event.openEventModal = openEventModal;
-    event.create = create;
-    event.checkAttendees = checkAttendees;
-    event.openAttendeeDialog = openAttendeeDialog;
-    event.addUser = addUser;
-    event.selectThisEvent = selectThisEvent;
+    var eventTab = this;
+    eventTab.submit = submit;
+    eventTab.modify = modify;
+    eventTab.openEventModal = openEventModal;
+    eventTab.create = create;
+    eventTab.cancel = cancel;
+    eventTab.checkAttendees = checkAttendees;
+    eventTab.openAttendeeDialog = openAttendeeDialog;
+    eventTab.addUser = addUser;
+    eventTab.selectThisEvent = selectThisEvent;
+    eventTab.setFilter = setFilter;
+    eventTab.isFilterTarget = isFilterTarget;
+    eventTab.filters = [
+        "All",
+        "Cancelled",
+        "Postponed",
+        "Rescheduled",
+        "Scheduled",
+        "Open",
+        "Closed"
+    ];
+
+
+    eventTab.readonly = true;
+    eventTab.removable = false;
 
     getEvents();
 
-    event.fpOptions = {
+    eventTab.fpOptions = {
         navigation: false,
         keyboardScrolling: false
     };
@@ -35,22 +52,34 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
 
 
     function submit(){
-        if (event.creating.eventID) eventService.updateEvent(event.creating).then(function(){});
-        else eventService.submit(event.creating).then(function(){});
+        var dateFormat = 'MM-dd-yyyyTHH:mm:ss';
+        eventTab.creating.timeBegin = $filter('date')(eventTab.creating.timeBegin, dateFormat);
+        eventTab.creating.timeEnd = $filter('date')(eventTab.creating.timeEnd, dateFormat);
+        if (eventTab.creating.eventID) eventService.updateEvent(eventTab.creating).then(function(){});
+        else eventService.submit(eventTab.creating).then(function(){
+            eventTab.fpControls.moveTo(1);
+            getEvents();
+        });
     }
 
     function getEvents() {
         eventService.getAllEvents().then(function(result) {
-            event.events = result;
+            eventTab.events = result;
         });
     }
 
     function create(){
-        event.creating = {};
+        eventTab.creating = {};
     }
 
     function modify(eventTarget) {
-        event.creating = eventTarget;
+        eventTab.creating = eventTarget.information;
+    }
+
+    function cancel(eventTarget){
+        eventService.cancelEvent(eventTarget.information).then(function(){
+            getEvents();
+        });
     }
 
     function openEventModal(eventTarget){
@@ -67,8 +96,8 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
 
     function checkAttendees(eventTarget) {
         eventService.getEventAttendees(eventTarget.eventId).then(function (result) {
-            event.attendees = result;
-            event.loggedInAttendee = event.attendees[0];
+            eventTab.attendees = result;
+            eventTab.loggedInAttendee = eventTab.attendees[0];
         });
     }
 
@@ -79,7 +108,7 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
             parent: angular.element(document.body),
             targetEvent: attendeeTarget,
             clickOutsideToClose:true,
-            locals: { attendee: attendeeTarget, loggedInAttendee: event.loggedInAttendee },
+            locals: { attendee: attendeeTarget, loggedInAttendee: eventTab.loggedInAttendee },
             openFrom: { top: -50, width: 30, height: 80 },
             closeTo: { left: 1500 },
             preserveScope: false
@@ -98,25 +127,25 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
     }
 
     function addUser() {
-        var userNetnameOrId = event.newUserNetnameOrId;
+        var userNetnameOrId = eventTab.newUserNetnameOrId;
         if (userNetnameOrId != "") {
             var newUser = {
                 userId: "",
                 userNetname: "",
                 role: "Attendee",
-                eventID: event.selectedEvent.eventId
+                eventID: eventTab.selectedEvent.eventId
             };
             if (userNetnameOrId.match(/^[0-9]*$/g) != null) {
-                newUser.userId = event.newUserNetnameOrId;
+                newUser.userId = eventTab.newUserNetnameOrId;
             }
             else if (userNetnameOrId.match(/^[a-zA-Z]*_?[a-zA-Z]*$/g) != null){
-                newUser.userNetname = event.newUserNetnameOrId;
+                newUser.userNetname = eventTab.newUserNetnameOrId;
             }
             eventService.addUser(newUser)
                 .then(
                     function(result) {
                         console.log("successfully added new user");
-                        event.newUserNetnameOrId = "";
+                        eventTab.newUserNetnameOrId = "";
                     },
                     function(failure) {
                         console.log("failed to add new user");
@@ -126,8 +155,16 @@ function EventController($modal, $timeout, $mdDialog, eventService) {
     }
 
     function selectThisEvent(eventTarget) {
-        event.selectedEvent = eventTarget;
+        eventTab.selectedEvent = eventTarget;
+    }
+  
+    function setFilter(filter){
+        eventTab.currentFilter = filter;
     }
 
-    Mousetrap.bind('enter', event.addUser);
+    function isFilterTarget(result){
+        return !eventTab.currentFilter || (eventTab.currentFilter == "All" || result.information.status == eventTab.currentFilter || result.information.type == eventTab.currentFilter);
+    }
+
+    Mousetrap.bind('enter', eventTab.addUser);
 }

@@ -8,7 +8,7 @@ angular
     .module('myApp')
     .controller('SearchCtrl', SearchCtrl);
 
-SearchCtrl.$inject = ['$modal', 'studentService', 'searchParsingService', 'dateParsingService'];
+SearchCtrl.$inject = ['$uibModal', 'studentService', 'searchParsingService', 'dateParsingService'];
 
 function SearchCtrl($modal, studentService, searchParsingService, dateParsingService) {
 

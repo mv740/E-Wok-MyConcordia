@@ -7,6 +7,7 @@ angular.module('myApp', [
     'ngMaterial',
     'ngHamburger',
     'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
     'angularCSS',
     'ng.oidcclient',
     '720kb.tooltips',
@@ -29,7 +30,8 @@ angular.module('myApp', [
     "getEvent": "Event/",
     "eventUser": "Event/user",
     "eventsCreated": "Event/admin/",
-    "eventAttendees": "Event/IDTOKEN/users"
+    "eventAttendees": "Event/IDTOKEN/users",
+    "getEvents": "Event/admin/m_woznia"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
