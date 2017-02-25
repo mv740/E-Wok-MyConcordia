@@ -121,8 +121,9 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
                     function (failure) {
                         console.log("failed to modify attendee role");
                     });
-            }, function() {
-                console.log("no role was set for this attendee");
+            }, function() { // On close events handled here because we are currently not using the answer dialog the way angular-materials is
+                console.log("dialog closed and attendees refreshed");
+                checkAttendees(eventTab.selectedEvent);
             });
     }
 
@@ -146,6 +147,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
                     function(result) {
                         console.log("successfully added new user");
                         eventTab.newUserNetnameOrId = "";
+                        checkAttendees(eventTab.selectedEvent);
                     },
                     function(failure) {
                         console.log("failed to add new user");
