@@ -8,9 +8,9 @@
         .module('myApp')
         .factory('SessionService', SessionService);
 
-    SessionService.$inject = ['ngOidcClient'];
+    SessionService.$inject = ['ngOidcClient', '$location'];
 
-    function SessionService(ngOidcClient) {
+    function SessionService(ngOidcClient, $location) {
 
         var session = {};
 
