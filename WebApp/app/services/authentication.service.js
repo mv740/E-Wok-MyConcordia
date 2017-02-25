@@ -9,9 +9,9 @@
         .module('myApp')
         .factory('AuthenticationService', AuthenticationService);
 
-    AuthenticationService.$inject = ['SessionService','ngOidcClient','$rootScope'];
+    AuthenticationService.$inject = ['SessionService', '$location','ngOidcClient','$rootScope'];
 
-    function AuthenticationService(SessionService, ngOidcClient, $rootScope) {
+    function AuthenticationService(SessionService, $location, ngOidcClient, $rootScope) {
 
         var authService = {};
 
