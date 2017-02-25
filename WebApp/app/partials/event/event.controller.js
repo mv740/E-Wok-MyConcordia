@@ -95,7 +95,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
     }
 
     function checkAttendees(eventTarget) {
-        eventService.getEventAttendees(eventTarget.eventId).then(function (result) {
+        eventService.getEventAttendees(eventTarget.information.eventId).then(function (result) {
             eventTab.attendees = result;
             eventTab.loggedInAttendee = eventTab.attendees[0];
         });
@@ -133,7 +133,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
                 userId: "",
                 userNetname: "",
                 role: "Attendee",
-                eventID: eventTab.selectedEvent.eventId
+                eventID: eventTab.selectedEvent.information.eventId
             };
             if (userNetnameOrId.match(/^[0-9]*$/g) != null) {
                 newUser.userId = eventTab.newUserNetnameOrId;
