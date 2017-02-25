@@ -31,10 +31,12 @@ function AttendeeDialogCtrl($mdDialog, attendee, loggedInAttendee, eventService)
 
 
     attendeeDialog.setNewRole = setNewRole;
+    attendeeDialog.answer = answer;
     attendeeDialog.hide = hide;
     attendeeDialog.cancel = cancel;
     attendeeDialog.userCanModifyRole = userCanModifyRole;
     attendeeDialog.getListOfSettableRoles = getListOfSettableRoles();
+    attendeeDialog.deleteAttendee = deleteAttendee;
 
     function setNewRole() {
         var attendeeID = attendeeDialog.attendee.id;
@@ -43,10 +45,15 @@ function AttendeeDialogCtrl($mdDialog, attendee, loggedInAttendee, eventService)
             userId: attendeeID,
             role: attendeeNewRole
         }).then(function(result) {
-            console.log("Successfully updated user role. Status: " + result.status);
+            console.log("Successfully updated user role");
+            attendeeDialog.answer(true);
         }, function(failure) {
-           console.log("Failed to update user role. Status: " + failure.status);
+            console.log("Failed to update user role");
         });
+    }
+
+    function answer(answer) {
+        $mdDialog.hide(answer);
     }
 
     function hide() {
@@ -75,6 +82,21 @@ function AttendeeDialogCtrl($mdDialog, attendee, loggedInAttendee, eventService)
             attendeeDialog.listOfSettableRoles = ['Mod', 'Scanner', 'Attendee'];
         else if (loggedInAttendee.role == "Mod")
             attendeeDialog.listOfSettableRoles = ['Scanner', 'Attendee'];
+    }
+
+    function deleteAttendee() {
+        var attendeeID = attendeeDialog.attendee.id;
+        var attendeeRole = attendeeDialog.attendee.role;
+        eventService.deleteUser({
+            userId: attendeeID,
+            role: attendeeRole
+        }).then(function (result) {
+            console.log("Successfully deleted user");
+            attendeeDialog.answer(true);
+        },
+        function (failure) {
+            console.log("Failed to delete user");
+        });
     }
 }
 

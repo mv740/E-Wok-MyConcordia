@@ -95,6 +95,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
     }
 
     function checkAttendees(eventTarget) {
+        eventTab.attendees = [];
         eventService.getEventAttendees(eventTarget.information.eventId).then(function (result) {
             eventTab.attendees = result;
             eventTab.loggedInAttendee = eventTab.attendees[0];
@@ -114,13 +115,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
             preserveScope: false
         })
             .then(function(answer) {
-                eventService.setUserRole(answer).then(
-                    function(response) {
-                        console.log("attendee role modified successfully");
-                    },
-                    function (failure) {
-                        console.log("failed to modify attendee role");
-                    });
+
             }, function() { // On close events handled here because we are currently not using the answer dialog the way angular-materials is
                 console.log("dialog closed and attendees refreshed");
                 checkAttendees(eventTab.selectedEvent);
