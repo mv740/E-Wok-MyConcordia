@@ -8,6 +8,5 @@ namespace MyConcordiaID.Models
             : base(options) { }
 
         public DbSet<Application> Applications { get; set; }
-        public object STUDENTS { get; internal set; }
     }
 }
