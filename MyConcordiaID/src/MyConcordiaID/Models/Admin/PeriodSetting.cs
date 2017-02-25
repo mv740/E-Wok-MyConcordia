@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MyConcordiaID.Models.Admin
+﻿namespace MyConcordiaID.Models.Admin
 {
     /// <summary>
     ///  Model Class for valid picture update period 
@@ -8,7 +6,7 @@ namespace MyConcordiaID.Models.Admin
     public class PeriodSetting
     {
         public int Year { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
     }
 }

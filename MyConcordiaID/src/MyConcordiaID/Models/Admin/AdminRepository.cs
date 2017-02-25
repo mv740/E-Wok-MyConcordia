@@ -26,8 +26,8 @@ namespace MyConcordiaID.Models.Admin
             var start = setting.StartDate;
             var end = setting.EndDate;
 
-            //var startDateTime = DateTime.Parse(start);
-            //var endDateTime = DateTime.Parse(end);
+            var startDateTime = DateTime.Parse(start);
+            var endDateTime = DateTime.Parse(end);
 
             var year = (short)setting.Year;
 
@@ -39,8 +39,8 @@ namespace MyConcordiaID.Models.Admin
                 var updateSetting = new PICTUREUPDATESETTING
                 {
                     YEAR = year,
-                    STARDATE = setting.StartDate,
-                    ENDDATE = setting.EndDate
+                    STARDATE = startDateTime,
+                    ENDDATE = endDateTime
                 };
 
                 _database.PICTUREUPDATESETTINGs.Add(updateSetting);
@@ -48,8 +48,8 @@ namespace MyConcordiaID.Models.Admin
             else
             {
                 //else update values
-                found.STARDATE = setting.StartDate;
-                found.ENDDATE = setting.EndDate;
+                found.STARDATE = startDateTime;
+                found.ENDDATE = endDateTime;
                 updatedPreviousPeriod = true;
             }
 
@@ -94,8 +94,8 @@ namespace MyConcordiaID.Models.Admin
                 var periodFormat = new PeriodSetting
                 {
                     Year = period.YEAR,
-                    StartDate = period.STARDATE,
-                    EndDate = period.ENDDATE
+                    StartDate = period.STARDATE.ToString(),
+                    EndDate = period.ENDDATE.ToString()
                 };
 
                 return periodFormat;
@@ -119,8 +119,8 @@ namespace MyConcordiaID.Models.Admin
                 var periodFormat = new PeriodSetting
                 {
                     Year = period.YEAR,
-                    StartDate = period.STARDATE,
-                    EndDate = period.ENDDATE
+                    StartDate = period.STARDATE.ToString(),
+                    EndDate = period.ENDDATE.ToString()
                 };
 
                 return periodFormat;
@@ -141,8 +141,8 @@ namespace MyConcordiaID.Models.Admin
             var periodList = info.Select(period => new PeriodSetting
             {
                 Year = period.YEAR,
-                StartDate = period.STARDATE,
-                EndDate = period.ENDDATE
+                StartDate = period.STARDATE.ToString(),
+                EndDate = period.ENDDATE.ToString()
             }).ToList();
 
             return periodList;
