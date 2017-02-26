@@ -131,6 +131,37 @@ html, body {
   padding-top: 20px;
   padding-bottom: 20px; }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto; }
+
+.verticalCenter {
+  position: relative;
+  top: 49%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%); }
+
+.atBottom {
+  position: absolute;
+  bottom: 50px; }
+
+.textCenter {
+  text-align: center; }
+
+.absolutePos {
+  position: absolute; }
+
+.relativePos {
+  position: relative; }
+
+.floatLeft {
+  float: left; }
+
+.floatRight {
+  float: right; }
+
 .cam-container {
   height: 100%;
   background-color: #8A0037;
@@ -171,3 +202,8 @@ html, body {
       height: 100%;
       border-radius: 5px;
       width: 45.9%; }
+
+.platform-ios .cam-container #cameraActions button {
+  height: 100%;
+  border-radius: 5px;
+  width: 40%; }
