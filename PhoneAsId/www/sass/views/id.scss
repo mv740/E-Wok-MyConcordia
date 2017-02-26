@@ -34,5 +34,11 @@ $bottom-info-height: 80px;
   top: -$bottom-info-height + $buffer-sm;
 }
 
-
+.platform-ios .barcodeId {
+  text-align: center;
+  transform: translate(-6%, 0);
+  position: relative;
+  display: block;
+  width: 100%;
+}
 

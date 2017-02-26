@@ -17,8 +17,11 @@
     vm.logIn = signIn;
     hideSideMenu();
 
+
+    
+
     function signIn() {
-      AuthenticationService.signIn();
+      AuthenticationService.signIn($scope);
     }
 
 

@@ -20,26 +20,23 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/login">
-          Login
-        </ion-item>
-        <ion-item menu-close href="#/app/id">
+        <ion-item menu-close href="#/app/id" ng-click="vm.logViewId()">
           Id Card
         </ion-item>
-        <ion-item menu-close href="#/app/marshalling">
-          marshalling Card
+        <ion-item menu-close href="#/app/marshalling" ng-click="vm.logViewMarshallingCard()">
+          Marshalling Card
         </ion-item>
-        <ion-item menu-close href="#/app/camera">
+        <ion-item menu-close href="#/app/camera" ng-click="vm.logUpdatePicture">
           Update Picture
         </ion-item>
-        <ion-item menu-close href="#/app/events">
+        <ion-item menu-close href="#/app/events" ng-click="vm.logViewEvents()">
           Events
-        </ion-item>
-        <ion-item menu-close href="#/app/barcode">
-          Barcode Scanner
         </ion-item>
         <ion-item menu-close ng-click="vm.logOut()">
           Logout
+        </ion-item>
+        <ion-item menu-close ng-click="vm.feedback()">
+          Provide Feedback
         </ion-item>
       </ion-list>
     </ion-content>

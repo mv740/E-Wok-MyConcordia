@@ -6,6 +6,10 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var templateCache = require('gulp-angular-templatecache');
+var ngAnnotate = require('gulp-ng-annotate');
+var useref = require('gulp-useref');
+var uglify = require("gulp-uglify");
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -49,3 +53,28 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+gulp.task('caching', function(done){
+  gulp.src('./www/templates/**/*.html')
+    .pipe(templateCache({
+      standalone:true,
+      root: 'templates'}))
+    .pipe(gulp.dest('./www/cache'))
+    .on('end', done);
+});
+
+gulp.task('html', function (done) {
+  return gulp.src('./www/templates/**/*.html')
+    .pipe(useref())
+    .pipe(gulp.dest('./www/cache'));
+});
+
+gulp.task('minjs', function (done) {
+  gulp.src('./public/*.js')
+    .pipe(ngAnnotate({single_quotes: true}))
+    .pipe(uglify())
+    .pipe(gulp.dest('./www/cache'))
+    .on('end', done);
+});
+
+gulp.task('template', ['caching', 'html', 'minjs']);

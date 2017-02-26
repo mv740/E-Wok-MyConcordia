@@ -5,12 +5,35 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers', 'ngCordova', 'ng.oidcclient', 'angularCSS'])
-  .constant('serverName', 'https://myconcordiaid.azurewebsites.net/api/')
+angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers', 'ngCordova', 'ng.oidcclient', 'angularCSS', 'templates'])
+  .constant('Settings', {
+    'api' : 'https://api.myconcordiaid.me/api/',
+    'baseUrl' : 'https://api.myconcordiaid.me/'
+  })
 
 
   .run(function ($ionicPlatform, $rootScope) {
     $ionicPlatform.ready(function () {
+
+      //workaround for white screen showing after splash screen
+      setTimeout(function () {
+        navigator.splashscreen.hide();
+      }, 100);
+
+      hockeyapp.start(success, fail, "0723638003684a1b8b3a6476e3816afd");
+
+
+      function success() {
+        console.log("success");
+
+        hockeyapp.checkForUpdate();
+      }
+
+
+      function fail() {
+        console.log("fail");
+      }
+
       // LOCK ORIENTATION TO PORTRAIT.
       screen.lockOrientation('portrait');
 
@@ -34,13 +57,10 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
     });
   })
 
-  .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
-
-
-    var link = "https://myconcordiaid.azurewebsites.net/";
+  .config(['ngOidcClientProvider', 'Settings', function (ngOidcClientProvider, Settings) {
 
     ngOidcClientProvider.setSettings({
-      authority: link,
+      authority: Settings.baseUrl,
       client_id: "oidcdemomobile",
       redirect_uri: "https://localhost/oidc",
       post_logout_redirect_uri: "https://localhost/oidc",
@@ -94,7 +114,8 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
         views: {
           'menuContent': {
             templateUrl: 'templates/events.html',
-            controller: 'EventsController as ev'
+            controller: 'EventsController as ev',
+            css: 'sass/views/event.css'
           }
         }
       })
@@ -110,8 +131,25 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
             // If the student cannot update picture, restrict access to the camera.
             resolve: {
               security: ['$q', '$rootScope', function ($q, $rootScope) {
-                if (!$rootScope.canUpdate || !$rootScope.validPeriod) {
-                  alert("Cannot update picture at the moment. Please contact Birks for more details.");
+                // If !valid & !pending, picture should be updated regardless of canUpdate or validPeriod. Otherwise...
+                // If your picture is pending, then you can't update picture.
+                // If !pending and are valid, if you can't update or aren't within the valid period, you can't update picture.
+                if (($rootScope.pending) || (($rootScope.valid && !$rootScope.pending) && (!$rootScope.canUpdate || !$rootScope.validPeriod))) {
+                  if (ionic.Platform.isIOS()) {
+                    document.addEventListener("deviceready", onDeviceReady, true);
+                    function onDeviceReady() {
+                      navigator.notification.alert(
+                        'Cannot update picture at the moment. Please contact Birks for more details.',
+                        function () {
+                        },
+                        'Alert',
+                        'OK'
+                      );
+                    }
+                  }
+                  if (ionic.Platform.isAndroid()) {
+                    alert("Cannot update picture at the moment. Please contact Birks for more details.");
+                  }
                   return $q.reject("Not Authorized");
                 }
               }]
@@ -127,6 +165,7 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
           'menuContent': {
             templateUrl: 'templates/barcode.html',
             controller: 'BarcodeController as bc',
+            css: 'sass/views/barcode.css'
           }
         }
       })

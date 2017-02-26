@@ -131,43 +131,6 @@ html, body {
   padding-top: 20px;
   padding-bottom: 20px; }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto; }
-
-.verticalCenter {
-  position: relative;
-  top: 49%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%); }
-
-.atBottom {
-  position: absolute;
-  bottom: 50px; }
-
-.textCenter {
-  text-align: center; }
-
-.absolutePos {
-  position: absolute; }
-
-.relativePos {
-  position: relative; }
-
-.floatLeft {
-  float: left; }
-
-.floatRight {
-  float: right; }
-
-.full-height {
-  height: 100%; }
-
-.full-width {
-  width: 100%; }
-
 .pictureHolder .headerInfo {
   top: 0px;
   background: linear-gradient(black, transparent); }
@@ -186,3 +149,10 @@ html, body {
 
 .belowPicture {
   top: -60px; }
+
+.platform-ios .barcodeId {
+  text-align: center;
+  transform: translate(-6%, 0);
+  position: relative;
+  display: block;
+  width: 100%; }

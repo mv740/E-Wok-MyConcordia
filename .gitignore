@@ -19,3 +19,4 @@ app/.idea/
 .idea
 node_modules/
 PhoneAsId/www/lib/
+PhoneAsId/www/cache

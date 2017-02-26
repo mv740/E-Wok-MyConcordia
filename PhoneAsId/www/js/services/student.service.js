@@ -4,8 +4,7 @@
 
 angular.module('starter.services', [])
 
-  .factory('StudentService', ['$http', function ($http) {
-    var urlBase = 'https://myconcordiaid.azurewebsites.net/api';
+  .factory('StudentService', ['$http','Settings', function ($http,Settings) {
     var StudentService = {};
     StudentService.studentInfo = '';
 
@@ -17,7 +16,7 @@ angular.module('starter.services', [])
 
     StudentService.fetchStudentIdInfo = function () {
       console.log('fetchStudentIdInfo called');
-      return $http.get(urlBase + "/student/account");
+      return $http.get(Settings.api + "/student/account");
     };
 
     /**
@@ -28,7 +27,7 @@ angular.module('starter.services', [])
 
     StudentService.fetchMarshallingCardInfo = function () {
       console.log('fetchMarshallingCardInfo called');
-      return $http.get(urlBase + "/graduation");
+      return $http.get(Settings.api + "/graduation");
     };
 
     /**
@@ -38,7 +37,7 @@ angular.module('starter.services', [])
      */
     StudentService.fetchUpdatePeriod = function(){
       console.log('fetchUpdatePeriod called');
-      return $http.get(urlBase +'/student/UpdatePeriod');
+      return $http.get(Settings.api +'/student/UpdatePeriod');
     };
 
 
@@ -49,11 +48,11 @@ angular.module('starter.services', [])
      */
     StudentService.validateEventAttendee = function(userParameter){
       console.log('validateEventAttendee called');
-      return $http.post(urlBase +'/Event/scanner', userParameter);
+      return $http.post(Settings.api +'/Event/scanner', userParameter);
     };
 
     StudentService.fetchEvents = function(){
-      return $http.get(urlBase +'/Event/user');
+      return $http.get(Settings.api +'/Event/user');
     };
 
     return StudentService;

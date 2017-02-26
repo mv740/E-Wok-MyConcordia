@@ -131,37 +131,6 @@ html, body {
   padding-top: 20px;
   padding-bottom: 20px; }
 
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto; }
-
-.verticalCenter {
-  position: relative;
-  top: 49%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%); }
-
-.atBottom {
-  position: absolute;
-  bottom: 50px; }
-
-.textCenter {
-  text-align: center; }
-
-.absolutePos {
-  position: absolute; }
-
-.relativePos {
-  position: relative; }
-
-.floatLeft {
-  float: left; }
-
-.floatRight {
-  float: right; }
-
 .overall {
   background-color: white; }
 
@@ -189,6 +158,14 @@ html, body {
   position: absolute;
   margin-bottom: 10px; }
 
-.barcodegen {
+.platform-android .barcodegen {
   display: block;
   margin: auto; }
+
+.platform-ios .barcodegen {
+  text-align: center;
+  display: block;
+  margin: auto;
+  width: 100%;
+  position: fixed;
+  bottom: 0px; }

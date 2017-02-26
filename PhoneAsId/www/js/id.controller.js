@@ -21,7 +21,7 @@
 
 
     //refresh on every load of this page
-    $scope.$on('$ionicView.enter', function (e) {
+    $scope.$on('$ionicView.beforeEnter', function (e) {
 
       //http://stackoverflow.com/questions/30236425/ionic-framework-ionicview-entered-event-fired-twice
       //prevent entered event fired twice
@@ -55,6 +55,9 @@
           vm.valid = data.valid;
           vm.netname = data.netname;
           vm.pending = data.pending;
+
+          $rootScope.valid = data.valid;
+          $rootScope.pending = data.pending;
 
           if (vm.valid == false && vm.pending == false) {
             $state.go('app.camera');
