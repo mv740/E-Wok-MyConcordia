@@ -153,15 +153,16 @@ namespace MyConcordiaID.Controllers
         public IActionResult PostEventUser([FromBody] NewEventUser user)
         {
             var result = _eventRepo.InsertUser(user);
-            if (result == EventActionResult.EventNotFound)
+            switch (result)
             {
-                return NotFound();
-            }
-            if (result == EventActionResult.DuplicateUser)
-            {
-                var returnAction = CreatedAtAction("PostEventUser", user);
-                returnAction.StatusCode = StatusCodes.Status409Conflict;
-                return returnAction;
+                case EventActionResult.EventNotFound:
+                case EventActionResult.UserNotFound:
+                    return NotFound();
+                case EventActionResult.DuplicateUser:
+                    var returnAction = CreatedAtAction("PostEventUser", user);
+                    returnAction.StatusCode = StatusCodes.Status409Conflict;
+                    return returnAction;
+
             }
 
             return Ok();
