@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Models.Event
 {
     /// <summary>
     ///  Logic result
     /// </summary>
-    public enum EventActionResult { Fail, Success, UserNotFound, EventNotFound, UnknownRole }
+    public enum EventActionResult { Fail, Success, UserNotFound, EventNotFound, UnknownRole,
+        DuplicateUser
+    }
 
     /// <summary>
     ///  OPEN : anyone can attend this event
@@ -27,7 +26,7 @@ namespace MyConcordiaID.Models.Event
     {
 
         [Required]
-        public string EventID { get; set; }
+        public string EventId { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -49,7 +48,6 @@ namespace MyConcordiaID.Models.Event
 
         [Required]
         public string Type { get; set; }
-
 
         public string Status { get; set; }
 

@@ -8,6 +8,7 @@ using OracleEntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -27,68 +28,26 @@ namespace UnitTestCore
         private Mock<DbSet<STUDENT>> _mySetStudent;
         private Mock<DbSet<PICTURE>> _mySetPicture;
 
-        private void ConnectMocksToDataStore(IEnumerable<STUDENT> data_store)
+        private void ConnectMocksToDataStore(IEnumerable<STUDENT> dataStore)
         {
-            var data_source = data_store.AsQueryable();
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(data_source.Provider);
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            var dataSource = dataStore.AsQueryable();
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<STUDENT>(dataSource.Provider));
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.Expression).Returns(dataSource.Expression);
+            _mySetStudent.As<IQueryable<STUDENT>>().Setup(data => data.ElementType).Returns(dataSource.ElementType);
+            _mySetStudent.As<IDbAsyncEnumerable<STUDENT>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<STUDENT>(dataSource.GetEnumerator()));
             _context.Setup(a => a.STUDENTS).Returns(_mySetStudent.Object);
         }
 
-        private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> data_store)
+        private void ConnectPictureMocksToDataStore(IEnumerable<PICTURE> dataStore)
         {
-            var data_source = data_store.AsQueryable();
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(data_source.Provider);
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            var dataSource = dataStore.AsQueryable();
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Provider).Returns(new TestDbAsyncQueryProvider<PICTURE>(dataSource.Provider));
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.Expression).Returns(dataSource.Expression);
+            _mySetPicture.As<IQueryable<PICTURE>>().Setup(data => data.ElementType).Returns(dataSource.ElementType);
+            _mySetPicture.As<IDbAsyncEnumerable<PICTURE>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<PICTURE>(dataSource.GetEnumerator()));
             _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
-        /// <summary>
-        /// http://stackoverflow.com/questions/13766198/c-sharp-accessing-property-values-dynamically-by-property-name
-        ///  Access proprerty dynamically by property name
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="property"></param>
-        /// <returns></returns>
-        public static object ReflectPropertyValue(object source, string property)
-        {
-            return source.GetType().GetProperty(property).GetValue(source, null);
-        }
-        /// <summary>
-        ///  For Viewing all available properties of a dynamic object
-        /// </summary>
-        /// <param name="source"></param>
-        public static void PrintPropertiesOfDynamicObject(object source)
-        {
-            var properties = source.GetType().GetProperties();
-            foreach (var property in properties)
-            {
-                var PropertyName = property.Name;
-
-                var PropetyValue = source.GetType().GetProperty(property.Name).GetValue(source, null);
-
-                Console.Write(PropertyName + " : " + PropetyValue);
-                Console.WriteLine();
-            }
-        }
-
-
-        public static byte[] getImageByte(Mock<IFormFile> image)
-        {
-            Stream stream = image.Object.OpenReadStream();
-            byte[] byteImage = null;
-
-            using (var memoryStream = new MemoryStream())
-            {
-                stream.CopyTo(memoryStream);
-                byteImage = memoryStream.ToArray();
-            }
-
-            return byteImage;
-        }
+     
 
         [TestInitialize]
         public void Initialize()
@@ -112,11 +71,11 @@ namespace UnitTestCore
         [TestMethod]
         public void FindById()
         {
-            var name = "testFirst";
-            var lastName = "testLast";
+            const string name = "testFirst";
+            const string lastName = "testLast";
 
 
-            List<STUDENT> users = new List<STUDENT>()
+            var users = new List<STUDENT>()
             {
                 new STUDENT
             {
@@ -135,8 +94,8 @@ namespace UnitTestCore
             ConnectMocksToDataStore(users);
 
 
-            var student = _repo.FindById(21941097);
-            Assert.AreEqual(21941097, student.ID);
+            var student = _repo.FindById(21941097).Result;
+            Assert.AreEqual(21941097, student.Id);
             Assert.AreEqual("testFirst", student.FirstName);
 
         }
@@ -144,11 +103,11 @@ namespace UnitTestCore
         [TestMethod]
         public void GetAll()
         {
-            var name = "testFirst";
-            var lastName = "testLast";
+            const string name = "testFirst";
+            const string lastName = "testLast";
 
 
-            List<STUDENT> users = new List<STUDENT>()
+            var users = new List<STUDENT>()
             {
                 new STUDENT
             {
@@ -174,7 +133,7 @@ namespace UnitTestCore
             _mySetStudent.Object.AddRange(users);
             ConnectMocksToDataStore(users);
 
-            var result = _repo.GetAll();
+            var result = _repo.GetAll().Result;
 
             Assert.AreEqual(2, Enumerable.Count(result));
 
@@ -183,13 +142,13 @@ namespace UnitTestCore
         [TestMethod]
         public void AddPendingPicture()
         {
-            var name = "testFirst";
-            var lastName = "testLast";
+            const string name = "testFirst";
+            const string lastName = "testLast";
 
             var netname = StudentHelper.GenerateNetName(name, lastName);
             var netname2 = StudentHelper.GenerateNetName("test", "test");
 
-            List<STUDENT> users = new List<STUDENT>()
+            var users = new List<STUDENT>()
             {
                 new STUDENT
             {
@@ -218,7 +177,7 @@ namespace UnitTestCore
             ConnectMocksToDataStore(users);
 
 
-            List<PICTURE> pictures = new List<PICTURE>()
+            var pictures = new List<PICTURE>()
             {
                 new PICTURE
                 {
@@ -236,7 +195,7 @@ namespace UnitTestCore
 
             var fileMock = new Mock<IFormFile>();
             //Setup mock file using a memory stream
-            var s = "Hello World from a Fake File"; // Testing purpose string byte array 
+            const string s = "Hello World from a Fake File"; // Testing purpose string byte array 
             var ms = new MemoryStream();
             var writer = new StreamWriter(ms);
             writer.Write(s);
@@ -245,7 +204,7 @@ namespace UnitTestCore
             fileMock.Setup(m => m.OpenReadStream()).Returns(ms);
 
 
-            _picture.AddPendingPicture(netname, getImageByte(fileMock));
+            _picture.AddPendingPicture(netname, UnitTestHelper.GetImageByte(fileMock));
 
             _mySetPicture.Verify(m => m.Add(It.IsAny<PICTURE>()), Times.Once());
             _context.Verify(m => m.SaveChanges(), Times.Once());
@@ -255,13 +214,13 @@ namespace UnitTestCore
         [TestMethod]
         public void FindPendingPicture()
         {
-            var name = "testFirst";
-            var lastName = "testLast";
+            const string name = "testFirst";
+            const string lastName = "testLast";
 
 
             var netname = StudentHelper.GenerateNetName(name, lastName);
 
-            List<STUDENT> users = new List<STUDENT>()
+            var users = new List<STUDENT>()
             {
                 new STUDENT
             {
@@ -289,7 +248,7 @@ namespace UnitTestCore
 
 
 
-            List<PICTURE> pictures = new List<PICTURE>()
+            var pictures = new List<PICTURE>()
             {
                 new PICTURE
             {
@@ -321,11 +280,11 @@ namespace UnitTestCore
         [TestMethod]
         public void ValidatePicture()
         {
-            var name = "testFirst";
-            var lastName = "testLast";
+            const string name = "testFirst";
+            const string lastName = "testLast";
             var netname = StudentHelper.GenerateNetName(name, lastName);
 
-            List<STUDENT> users = new List<STUDENT>()
+            var users = new List<STUDENT>()
             {
                 new STUDENT
                 {
@@ -351,7 +310,7 @@ namespace UnitTestCore
             _mySetStudent.Object.AddRange(users);
             ConnectMocksToDataStore(users);
 
-            List<PICTURE> pictures = new List<PICTURE>()
+            var pictures = new List<PICTURE>()
             {
                 new PICTURE
             {
@@ -375,31 +334,31 @@ namespace UnitTestCore
 
 
             // Admin deny the picture
-            PictureValidation validationMessage = new PictureValidation
+            var validationMessage = new PictureValidation
             {
-                id = 21941097,
-                valid = false
+                Id = 21941097,
+                Valid = false
             };
 
             var picturePending = _picture.FindPendingPicture(21941097);
-            var pictureID = picturePending.ID_PK;
+            var pictureId = picturePending.ID_PK;
 
             _repo.ValidatePicture(validationMessage, "test");
 
-            var studentPictures = _picture.FindStudentPictures(21941097);
+            var studentPictures = _picture.FindStudentPictures(21941097).Result;
 
             decimal id = -1;
-            string status = "";
+            var status = "";
             // in our unit test our student has only 1 picture
-            foreach(dynamic d in studentPictures.archivedPictures)
+            foreach(dynamic d in studentPictures.ArchivedPictures)
             {
-                PrintPropertiesOfDynamicObject(d);
-                id = ReflectPropertyValue(d, "ID_PK");
-                status = ReflectPropertyValue(d, "STATUS");
+                UnitTestHelper.PrintPropertiesOfDynamicObject(d);
+                id = UnitTestHelper.ReflectPropertyValue(d, "ID_PK");
+                status = UnitTestHelper.ReflectPropertyValue(d, "STATUS");
             }
 
             Assert.AreEqual(Status.Denied.ToString(), status);
-            Assert.AreEqual(pictureID, id);
+            Assert.AreEqual(pictureId, id);
 
 
         }
@@ -407,14 +366,14 @@ namespace UnitTestCore
         [TestMethod]
         public void GenerateStudentNetName()
         {
-            var firstName = "francis";
-            var lastName = "cote-tremblay";
+            const string firstName = "francis";
+            const string lastName = "cote-tremblay";
 
-            var bigFirstName = "abcdefghijklmnop";
-            var bigLastName = "abcdefghijklmnop";
+            const string bigFirstName = "abcdefghijklmnop";
+            const string bigLastName = "abcdefghijklmnop";
 
-            var firstNameTest2 = "Francis";
-            var lastNameTest2 = "Côté-Tremblay";
+            const string firstNameTest2 = "Francis";
+            const string lastNameTest2 = "Côté-Tremblay";
 
 
 
@@ -422,17 +381,11 @@ namespace UnitTestCore
             var bigNetName = StudentHelper.GenerateNetName(bigFirstName, bigLastName);
             var netNameTest2 = StudentHelper.GenerateNetName(firstNameTest2, lastNameTest2);
 
-            var result = "f_cotetr";
+            const string result = "f_cotetr";
 
             Assert.AreEqual(result, netName);
             Assert.AreEqual(result, netNameTest2);
             Assert.AreEqual("a_abcdef", bigNetName);
-
-
-
-
-
-
         }
     }
 }

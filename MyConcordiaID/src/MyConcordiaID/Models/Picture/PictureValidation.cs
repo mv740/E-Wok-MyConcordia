@@ -1,8 +1,8 @@
 ﻿namespace MyConcordiaID.Models.Picture
 {
-    public class PictureComment
+    public class PictureValidation
     {
         public int Id { get; set; }
-        public string Comment { get; set; }
+        public bool Valid { get; set; }
     }
 }

@@ -34,12 +34,14 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">List of students</response>
-       
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         public IActionResult GetAll()
         {
-            return new ObjectResult(_studentsRepo.GetAll());
+
+            var students = _studentsRepo.GetAll().Result;
+
+            return new ObjectResult(students);
         }
 
         /// <summary>
@@ -49,12 +51,12 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Return student information</response>
         /// <response code="404">id is invalid, user doesn't exist</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet("{id}", Name = "GetStudent")]
         public IActionResult GetById(int id)
         {
 
-            var student = _studentsRepo.FindById(id);
+            var student = _studentsRepo.FindById(id).Result;
 
             if (student == null)
             {
@@ -71,13 +73,13 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Return pictures</response>
         /// <response code="404">user was not found </response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("picture/{id}")]
         public IActionResult GetStudentPictures(int id)
         {
 
-            var studentPictures = _pictureRepo.FindStudentPictures(id);
+            var studentPictures = _pictureRepo.FindStudentPictures(id).Result;
 
             if (studentPictures == null)
             {
@@ -94,12 +96,11 @@ namespace MyConcordiaID.Controllers
         /// <remarks>Must be authenticated!</remarks>
         /// <response code="200">return account information</response>
         /// <response code="401">Not authenticated</response>
-        [Authorize]
         [HttpGet]
         [Route("account")]
         public IActionResult GetAccount()
         {
-            var result = _studentsRepo.FindByNetName(getAuthenticatedUserNetname());
+            var result = _studentsRepo.FindByNetName(GetAuthenticatedUserNetname()).Result;
 
             if (result == null)
             {
@@ -118,7 +119,6 @@ namespace MyConcordiaID.Controllers
         /// <response code="400">Missing the picture or invalid</response>
         /// <response code="401">Unauthorized</response>
         [ApiExplorerSettings(IgnoreApi =true)]
-        [Authorize]
         [HttpPost]
         [Route("ProfilePicture")]
         public ActionResult PostProfilePicture(IFormFile file)
@@ -134,9 +134,9 @@ namespace MyConcordiaID.Controllers
             var parsedContentDisposition = ContentDispositionHeaderValue.Parse(file.ContentDisposition);
 
 
-            var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
-            using (Stream stream = file.OpenReadStream())
+            using (var stream = file.OpenReadStream())
             {
                 using (var binaryReader = new BinaryReader(stream))
                 {
@@ -147,10 +147,8 @@ namespace MyConcordiaID.Controllers
                 }
             }
 
-            _logRepo.Logger(authenticatedUser, Log.Action.SendPicture, null);
+            _logRepo.LoggerAsync(authenticatedUser, Log.Action.SendPicture, null);
             
-
-
             return Ok();
         }
 
@@ -162,12 +160,11 @@ namespace MyConcordiaID.Controllers
         /// <response code="200">Comment Submited</response>
         /// <response code="404">Missing the picture or invalid</response>
         /// <response code="401">Unauthorized</response>
-        [Authorize]
         [HttpPost]
         [Route("comment")]
         public IActionResult PostPictureComment([FromBody] PictureComment comment)
         {
-            var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
             var affectedUser = _pictureRepo.AddPictureComment(comment);
             if(string.IsNullOrEmpty(affectedUser))
@@ -175,7 +172,7 @@ namespace MyConcordiaID.Controllers
                 return NotFound();
             }
 
-            _logRepo.Logger(authenticatedUser, Log.Action.AddComment, affectedUser);
+            _logRepo.LoggerAsync(authenticatedUser, Log.Action.AddComment, affectedUser);
 
             return Ok();
         }
@@ -186,7 +183,8 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [AllowAnonymous]
+        /// <response code="200"></response>
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("PendingPicture/{id}")]
         public IActionResult GetPendingPicture(int id)
@@ -209,25 +207,18 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="picture"></param>
         /// <returns>student netname</returns>
-        [AllowAnonymous]
+        /// <response code="200"></response>
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("ValidatePicture")]
         public IActionResult PostValidatePicture([FromBody] PictureValidation picture)
         {
-           // var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
+            var netName = _studentsRepo.ValidatePicture(picture, authenticatedUser);
 
-            //m_woznia is default admin name input until we activated autorize on this api  
-            var netName = _studentsRepo.ValidatePicture(picture, "m_woznia");
-
-            //if (picture.valid)
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture, netName);
-            //}
-            //else
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture, netName);
-            //}
+            _logRepo.LoggerAsync(authenticatedUser, picture.Valid ? Log.Action.ApprovePicture : Log.Action.DeniedPicture,
+                netName);
 
 
             return Ok();
@@ -239,23 +230,18 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="picture"></param>
         /// <returns>student netname</returns>
-        [AllowAnonymous]
+        /// <response code="200"></response>
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("RevalidatePicture")]
         public IActionResult PostRevalidatePicture([FromBody] PictureValidation picture)
         {
-            // var authenticatedUser = getAuthenticatedUserNetname();
+             var authenticatedUser = GetAuthenticatedUserNetname();
 
-            var netName = _studentsRepo.RevalidatePicture(picture, "m_woznia");
+            var netName = _studentsRepo.RevalidatePicture(picture, authenticatedUser);
 
-            //if (picture.valid)
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.ApprovePicture, netName);
-            //}
-            //else
-            //{
-            //    _logRepo.Logger(authenticatedUser, Log.Action.DeniedPicture, netName);
-            //}
+            _logRepo.LoggerAsync(authenticatedUser, picture.Valid ? Log.Action.ReApprovedPicture : Log.Action.DeniedPicture,
+                netName);
 
 
             return Ok();
@@ -267,7 +253,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200"></response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("UpdatePeriod")]
         public IActionResult GetUpdatePicturePeriod()
@@ -280,32 +266,26 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="searchOptions"></param>
         /// <returns></returns>
-        [AllowAnonymous]
+        /// <response code="200"></response>
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("Search")]
         public IActionResult SearchByParameters([FromBody] SearchOptions searchOptions)
         {
-
             var result = _studentsRepo.Search(searchOptions);
             if(!result.Any())
             {
                 return NotFound();
             }
-
-            return new ObjectResult(result);
-            
+            return new ObjectResult(result);   
         }
 
-
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public string getAuthenticatedUserNetname()
+        private string GetAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName); 
             var lastName = User.FindFirstValue(ClaimTypes.Surname); 
             return StudentHelper.GenerateNetName(firstName, lastName);
         }
-
-
 
     }
 }

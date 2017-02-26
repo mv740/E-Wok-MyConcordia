@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace MyConcordiaID.Models.Event
 {
@@ -18,7 +15,7 @@ namespace MyConcordiaID.Models.Event
         IEnumerable<EventInformation> GetEventsByStatus(EventStatusType status);
         IEnumerable<EventInformation> GetActiveEvents();
         EventInformation GetEventById(string eventId);
-        IEnumerable<EventUserInformation> GetEventUsers(string eventId);
+        IEnumerable<EventUserInformation> GetEventUsers(string eventId, bool orderUserOnTop, string mWoznia);
         IEnumerable<dynamic> GetAdminEvents(string netname);
         IEnumerable<AvailableEvent> GetAttendeeEvents(string netname);
         ScannerResult RegisterScannedUser(ScannerUser user);

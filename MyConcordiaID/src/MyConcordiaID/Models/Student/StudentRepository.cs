@@ -4,6 +4,8 @@ using System.Linq;
 using OracleEntityFramework;
 using MyConcordiaID.Models.Picture;
 using MyConcordiaID.Helper;
+using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace MyConcordiaID.Models.Student
 {
@@ -17,9 +19,9 @@ namespace MyConcordiaID.Models.Student
             _database = context;
         }
 
-        public StudentAccount FindById(int id)
+        public async Task<StudentAccount> FindById(int id)
         {
-            var student = _database.STUDENTS
+            var student = await _database.STUDENTS
                  .Where(s => s.ID == id)
                  .Select(s => new
                  {
@@ -34,17 +36,17 @@ namespace MyConcordiaID.Models.Student
                      s.EXPIREDATE,
                      s.UPDATEPICTURE
                  })
-                 .SingleOrDefault();
+                 .SingleOrDefaultAsync();
 
             if (student != null)
             {
                 StudentAccount account = new StudentAccount
                 {
-                    ID = student.ID,
+                    Id = student.ID,
                     NetName = student.NETNAME,
                     FirstName = student.FIRSTNAME,
                     LastName = student.LASTNAME,
-                    DOB = student.DOB,
+                    Dob = student.DOB,
                     Valid = student.VALID,
                     Pending = student.PENDING,
                     UGradStatus = student.UGRADSTATUS,
@@ -55,9 +57,9 @@ namespace MyConcordiaID.Models.Student
                 {
                     //retrieve pending picture
                     string pending = Status.Pending.ToString();
-                    var pendingPicture = _database.PICTUREs
+                    var pendingPicture = await _database.PICTUREs
                         .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == pending)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     account.PendingPicture = pendingPicture.PICTURE_DATA;
 
@@ -67,9 +69,9 @@ namespace MyConcordiaID.Models.Student
                 {
                     //retrieve profile  picture
                     string aproved = Status.Approved.ToString();
-                    var profilePicture = _database.PICTUREs
+                    var profilePicture = await _database.PICTUREs
                         .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == aproved)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     account.ProfilePicture = profilePicture.PICTURE_DATA;
 
@@ -82,9 +84,9 @@ namespace MyConcordiaID.Models.Student
             return null;
         }
 
-        public StudentAccount FindByNetName(string netName)
+        public async Task<StudentAccount> FindByNetName(string netName)
         {
-            var student = _database.STUDENTS
+            var student = await _database.STUDENTS
                  .Where(s => s.NETNAME == netName)
                  .Select(s => new
                  {
@@ -99,17 +101,18 @@ namespace MyConcordiaID.Models.Student
                      s.EXPIREDATE,
                      s.UPDATEPICTURE
                  })
-                 .SingleOrDefault();
+                 .SingleOrDefaultAsync();
 
+            
             if(student != null)
             {
                 StudentAccount account = new StudentAccount
                 {
-                    ID = student.ID,
+                    Id = student.ID,
                     NetName = student.NETNAME,
                     FirstName = student.FIRSTNAME,
                     LastName = student.LASTNAME,
-                    DOB = student.DOB,
+                    Dob = student.DOB,
                     Valid = student.VALID,
                     Pending = student.PENDING,
                     UGradStatus = student.UGRADSTATUS,
@@ -121,9 +124,9 @@ namespace MyConcordiaID.Models.Student
                 {
                     //retrieve pending picture
                     string pending = Status.Pending.ToString();
-                    var pendingPicture = _database.PICTUREs
+                    var pendingPicture = await _database.PICTUREs
                         .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == pending)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     account.PendingPicture = pendingPicture.PICTURE_DATA;
 
@@ -133,9 +136,9 @@ namespace MyConcordiaID.Models.Student
                 {
                     //retrieve profile  picture
                     var approved = Status.Approved.ToString();
-                    var profilePicture = _database.PICTUREs
+                    var profilePicture = await _database.PICTUREs
                         .Where(p => p.STUDENT_NETNAME == student.NETNAME && p.STATUS == approved)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     account.ProfilePicture = profilePicture.PICTURE_DATA;
 
@@ -152,10 +155,10 @@ namespace MyConcordiaID.Models.Student
         ///  Retrieve all the students basic informations
         /// </summary>
         /// <returns></returns>
-        public dynamic GetAll()
+        public async Task<dynamic> GetAll()
         {
 
-            var students = _database.STUDENTS
+            var students = await _database.STUDENTS
                 .Select(s => new
                 {
                     s.ID,
@@ -164,7 +167,7 @@ namespace MyConcordiaID.Models.Student
                     s.LASTNAME,
                     s.DOB
                 })
-                .ToList();
+                .ToListAsync();
 
             return students;
         }
@@ -180,7 +183,7 @@ namespace MyConcordiaID.Models.Student
         {
 
             var student = _database.STUDENTS
-                .Where(s => s.ID == pictureValidation.id)
+                .Where(s => s.ID == pictureValidation.Id)
                 .FirstOrDefault();
 
             var studentNetname = student.NETNAME;
@@ -191,7 +194,7 @@ namespace MyConcordiaID.Models.Student
                 Where(p => p.STATUS == pending && p.STUDENT_NETNAME == studentNetname)
                 .FirstOrDefault();
 
-            if(pictureValidation.valid)
+            if(pictureValidation.Valid)
             {
                 pendingPicture.STATUS = Status.Approved.ToString();
 
@@ -237,7 +240,7 @@ namespace MyConcordiaID.Models.Student
 
             //find selected picture
             var selectedPicture = _database.PICTUREs
-                 .Where(p => p.ID_PK == pictureValidation.id)
+                 .Where(p => p.ID_PK == pictureValidation.Id)
                  .FirstOrDefault();
 
             var studentNetname = selectedPicture.STUDENT_NETNAME;
@@ -249,7 +252,7 @@ namespace MyConcordiaID.Models.Student
                 .FirstOrDefault();
 
 
-            if (pictureValidation.valid)
+            if (pictureValidation.Valid)
             {
                 if(currentProfilePicture !=null)
                 {
@@ -343,9 +346,9 @@ namespace MyConcordiaID.Models.Student
 
                 PicturePeriod picturePeriod = new PicturePeriod
                 {
-                    canUpdatePicture = canUpdate,
-                    startDate = period.STARDATE.ToString(),
-                    endDate = period.ENDDATE.ToString()
+                    CanUpdatePicture = canUpdate,
+                    StartDate = period.STARDATE.ToString(),
+                    EndDate = period.ENDDATE.ToString()
                 };
 
                 return picturePeriod;
@@ -354,9 +357,9 @@ namespace MyConcordiaID.Models.Student
             {
                 PicturePeriod picturePeriod = new PicturePeriod
                 {
-                    canUpdatePicture = false,
-                    startDate = string.Empty,
-                    endDate = string.Empty
+                    CanUpdatePicture = false,
+                    StartDate = string.Empty,
+                    EndDate = string.Empty
                 };
                 return picturePeriod;
             }
@@ -372,7 +375,7 @@ namespace MyConcordiaID.Models.Student
         {
 
             //empty 
-            if(string.IsNullOrEmpty(searchOptions.birthdate) && !searchOptions.id.HasValue && searchOptions.name.Capacity == 0 && string.IsNullOrEmpty(searchOptions.netname))
+            if(string.IsNullOrEmpty(searchOptions.Birthdate) && !searchOptions.Id.HasValue && searchOptions.Name.Capacity == 0 && string.IsNullOrEmpty(searchOptions.Netname))
             {
                 return Enumerable.Empty<STUDENT>();
             }
@@ -381,30 +384,30 @@ namespace MyConcordiaID.Models.Student
             IQueryable<STUDENT> student = _database.STUDENTS;
 
             //each if statement will try to build the where clauses and it only be executed when ToList() is called 
-            if (searchOptions.id.HasValue)
+            if (searchOptions.Id.HasValue)
             {
-                if (StudentHelper.ValidId(searchOptions.id.Value))
+                if (StudentHelper.ValidId(searchOptions.Id.Value))
                 {
-                    student = student.Where(s => s.ID == searchOptions.id.Value);
+                    student = student.Where(s => s.ID == searchOptions.Id.Value);
                 }
             }
-            if (searchOptions.name.Count != 0)
+            if (searchOptions.Name.Count != 0)
             {
-                foreach (var name in searchOptions.name)
+                foreach (var name in searchOptions.Name)
                 {
                     student = student.Where(s => s.FIRSTNAME.Contains(name.ToLower()) || s.LASTNAME.Contains(name.ToLower()));
                 }
             }
-            if (!string.IsNullOrEmpty(searchOptions.birthdate))
+            if (!string.IsNullOrEmpty(searchOptions.Birthdate))
             {
                 DateTime dateValue;
-                DateTime.TryParse(searchOptions.birthdate, out dateValue);
+                DateTime.TryParse(searchOptions.Birthdate, out dateValue);
 
                 student = student.Where(s => s.DOB == dateValue);
             }
-            if (!string.IsNullOrEmpty(searchOptions.netname))
+            if (!string.IsNullOrEmpty(searchOptions.Netname))
             {
-                student = student.Where(s => s.NETNAME.Contains(searchOptions.netname));
+                student = student.Where(s => s.NETNAME.Contains(searchOptions.Netname));
             }
 
             return student.ToList();

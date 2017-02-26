@@ -5,6 +5,7 @@ using MyConcordiaID.Models.Event;
 using MyConcordiaID.Models.Log;
 using System.Collections.Generic;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Http;
 
 namespace MyConcordiaID.Controllers
 {
@@ -24,14 +25,12 @@ namespace MyConcordiaID.Controllers
             _eventRepo = events;
         }
 
-
-
         /// <summary>
         /// Retrieve all the events
         /// </summary>
         /// <returns></returns>
         /// <response code="200">List of events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
         public IActionResult GetAll()
@@ -48,9 +47,9 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Return event information</response>
         /// <response code="404">id is invalid, event doesn't exist</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet("{id}", Name = "GetEvent")]
-        [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
+        [ProducesResponseType(typeof(EventInformation), 200)]
         public IActionResult GetById(string id)
         {
             var myEvent = _eventRepo.GetEventById(id);
@@ -68,7 +67,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return canceled events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/canceled")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -84,7 +83,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return Postponed events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/postponed")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -99,7 +98,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return Rescheduled events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/rescheduled")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -115,7 +114,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return scheduled events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/scheduled")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -131,7 +130,7 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <returns></returns>
         /// <response code="200">Return scheduled events</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("status/active")]
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
@@ -148,17 +147,23 @@ namespace MyConcordiaID.Controllers
         /// <param name="user"></param>
         /// <response code="200">user Submited</response>
         /// <response code="404">user invalid or event not found</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("user")]
         public IActionResult PostEventUser([FromBody] NewEventUser user)
         {
-            var result =_eventRepo.InsertUser(user);
-            if(result != EventActionResult.Success)
+            var result = _eventRepo.InsertUser(user);
+            if (result == EventActionResult.EventNotFound)
             {
                 return NotFound();
             }
- 
+            if (result == EventActionResult.DuplicateUser)
+            {
+                var returnAction = CreatedAtAction("PostEventUser", user);
+                returnAction.StatusCode = StatusCodes.Status409Conflict;
+                return returnAction;
+            }
+
             return Ok();
         }
 
@@ -168,7 +173,7 @@ namespace MyConcordiaID.Controllers
         /// <param name="user"></param>
         /// <response code="200">user update</response>
         /// <response code="404">user invalid</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpPut]
         [Route("user")]
         public IActionResult UpdateEventUser([FromBody] EventUser user)
@@ -187,13 +192,13 @@ namespace MyConcordiaID.Controllers
         /// <param name="user"></param>
         /// <response code="200">user removed</response>
         /// <response code="404">user invalid</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpDelete]
         [Route("user")]
         public IActionResult DeleteEventUser([FromBody] EventUser user)
         {
             var result = _eventRepo.RemoveUser(user);
-            if(result != EventActionResult.Success)
+            if (result != EventActionResult.Success)
             {
                 return NotFound();
             }
@@ -208,18 +213,20 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">Return event users</response>
         /// <response code="404">Event not found</response>
+        /// <response code="401">Unauthorized</response>
         [ProducesResponseType(typeof(IEnumerable<EventUserInformation>), 200)]
-        [AllowAnonymous]
-        [HttpGet("{id}/users")]
-        public IActionResult GetEventUser(string id)
+        [HttpGet("{id}/users/{order:bool?}")]
+        public IActionResult GetEventUser(string id, [FromRoute] bool order = false)
         {
-            var users = _eventRepo.GetEventUsers(id);
-            if(users == null)
+            var authenticatedUser = GetAuthenticatedUserNetname();
+
+            var users = _eventRepo.GetEventUsers(id, order, authenticatedUser);
+            if (users == null)
             {
                 //event not found
                 return NotFound();
             }
-            
+
             return new ObjectResult(users);
         }
 
@@ -229,15 +236,14 @@ namespace MyConcordiaID.Controllers
         /// </summary>
         /// <param name="newEvent"></param>
         /// <response code="200">event Submited</response>
+        /// <response code="401">Unauthorized</response>
         [AllowAnonymous]
         [HttpPost]
         public IActionResult PostEvent([FromBody] NewEvent newEvent)
         {
+            var authenticatedUser = GetAuthenticatedUserNetname();
 
-            //need to oauth to get the creator's netname
-
-            //TODO: find a way to catch insert error --> future sprint part of log issue
-            _eventRepo.InsertEvent(newEvent, "m_woznia"); //default user for now until everything is tested
+            _eventRepo.InsertEvent(newEvent, authenticatedUser); //default user for now until everything is tested
 
             return Ok();
         }
@@ -249,14 +255,12 @@ namespace MyConcordiaID.Controllers
         /// <param name="information"></param>
         /// <response code="200">event updated</response>
         /// <response code="404">event not found</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpPut]
         public IActionResult UpdateEvent([FromBody] EventInformation information)
         {
-
-            //TODO: find a way to catch insert error --> future sprint part of log issue
             var selectedEvent = _eventRepo.UpdateEvent(information); //default user for now until everything is tested
-            if(selectedEvent != EventActionResult.Success)
+            if (selectedEvent != EventActionResult.Success)
             {
                 return NotFound();
             }
@@ -270,12 +274,12 @@ namespace MyConcordiaID.Controllers
         /// <param name="cancelEvent"></param>
         /// <response code="200">event canceled</response>
         /// <response code="404">event not found</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpDelete]
         public IActionResult CancelEvent([FromBody] EventCancelled cancelEvent)
         {
-            var result =_eventRepo.RemoveEvent(cancelEvent);
-            if(result != EventActionResult.Success)
+            var result = _eventRepo.RemoveEvent(cancelEvent);
+            if (result != EventActionResult.Success)
             {
                 return NotFound();
             }
@@ -290,19 +294,20 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">List of event</response>
         /// <response code="404">user not found</response>
-        [AllowAnonymous]
+        /// <response code="401">Unauthorized</response>
         [HttpGet]
         [Route("admin/{netname}")]
-        public IActionResult GetMyAdminEvents(string netname)
+        [ProducesResponseType(typeof(IEnumerable<AvailableEvent>), 200)]
+        public IActionResult GetMyAdminEvents()
         {
-            var events = _eventRepo.GetAdminEvents(netname);
-            if(events == null)
+            var authenticatedUser = GetAuthenticatedUserNetname();
+
+            var events = _eventRepo.GetAdminEvents(authenticatedUser);
+            if (events == null)
             {
                 //user not found
                 return NotFound();
             }
-
-
             return new ObjectResult(events);
         }
 
@@ -315,13 +320,12 @@ namespace MyConcordiaID.Controllers
         /// <remarks>Must be authenticated!</remarks>
         /// <response code="200">List of events</response>
         /// <response code="401">Unauthorized</response>
-        [Authorize]
         [HttpGet]
         [Route("user")]
         [ProducesResponseType(typeof(IEnumerable<AvailableEvent>), 200)]
         public IActionResult GetAttendeeEvents()
         {
-            var authenticatedUser = getAuthenticatedUserNetname();
+            var authenticatedUser = GetAuthenticatedUserNetname();
             var events = _eventRepo.GetAttendeeEvents(authenticatedUser);
 
             return new ObjectResult(events);
@@ -335,15 +339,15 @@ namespace MyConcordiaID.Controllers
         /// <returns></returns>
         /// <response code="200">User was found </response>
         /// <response code="404">User id not found </response>
-        [Authorize]
+        /// <response code="401">Unauthorized</response>
         [HttpPost]
         [Route("scanner")]
         [ProducesResponseType(typeof(ScannerResult), 200)]
         public IActionResult PostRegisterScannedUser([FromBody] ScannerUser user)
         {
             var scannerResult = _eventRepo.RegisterScannedUser(user);
-            
-            if(scannerResult.Status == ScannerStatus.IdNotFound.ToString())
+
+            if (scannerResult.Status == ScannerStatus.IdNotFound.ToString())
             {
                 return NotFound();
             }
@@ -351,12 +355,7 @@ namespace MyConcordiaID.Controllers
             return new ObjectResult(scannerResult);
         }
 
-
-
-
-
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public string getAuthenticatedUserNetname()
+        private string GetAuthenticatedUserNetname()
         {
             var firstName = User.FindFirstValue(ClaimTypes.GivenName);
             var lastName = User.FindFirstValue(ClaimTypes.Surname);

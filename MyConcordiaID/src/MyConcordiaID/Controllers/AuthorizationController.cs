@@ -15,7 +15,6 @@ using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using MyConcordiaID.Models;
 using MyConcordiaID.Helpers;
 using MyConcordiaID.Models.Student;
-using OracleEntityFramework;
 using MyConcordiaID.Helper;
 
 namespace MyConcordiaID.Controllers
@@ -176,7 +175,7 @@ namespace MyConcordiaID.Controllers
 
             if(!_studentsRepo.DoesStudentExist(firstName, lastname))
             {
-                var newStudent = StudentHelper.createStudent(firstName, lastname);
+                var newStudent = StudentHelper.CreateStudent(firstName, lastname);
 
                 _studentsRepo.Add(newStudent);
 

@@ -1,14 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MyConcordiaID.Helper;
-using MyConcordiaID.Models.Event;
-using MyConcordiaID.Models.Student;
+﻿using MyConcordiaID.Models.Student;
 using OracleEntityFramework;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.IdentityModel.Claims;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MyConcordiaID.Models.Event
 {
@@ -33,7 +27,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.TIME_END > today)
                 .Select(e => new EventInformation
                 {
-                    EventID = e.ID_PK,
+                    EventId = e.ID_PK,
                     Name = e.NAME,
                     Description = e.DESCRIPTION,
                     Location = e.LOCATION,
@@ -57,22 +51,40 @@ namespace MyConcordiaID.Models.Event
         {
 
             var user = _database.STUDENTS
+                .AsNoTracking()
                 .Where(u => u.NETNAME == netname)
                 .FirstOrDefault();
 
             if (user != null)
             {
                 var attendee = Role.Attendee.ToString();
+                var today = DateTime.UtcNow;
 
                 var studentEvents = _database.EVENT_USERS
                     .Where(e => e.STUDENT_NETNAME_FK == netname && e.ROLE != attendee)
-                    .Select(e => new
+                    .Select(e => new AvailableEvent
                     {
-                        e.ROLE,
-                        e.STATUS,
-                        e.EVENT_ID,
-                        e.EVENT
-                    });
+                        UserRole = e.ROLE,
+                        Information = new EventInformation
+                        {
+                            EventId = e.EVENT.ID_PK,
+                            Name = e.EVENT.NAME,
+                            Description = e.EVENT.DESCRIPTION,
+                            Location = e.EVENT.LOCATION,
+                            Room = e.EVENT.ROOM,
+                            TimeBegin = e.EVENT.TIME_BEGIN,
+                            TimeEnd = e.EVENT.TIME_END,
+                            Type = e.EVENT.TYPE,
+                            Status = e.EVENT.STATUS
+                        }
+                    })
+                    .ToList();
+
+                //Sort list of dates closest to current date
+                studentEvents = studentEvents
+                    .OrderBy(n => (today - n.Information.TimeBegin).Duration())
+                    .ThenBy(n => (today - n.Information.TimeEnd).Duration())
+                    .ToList();
 
                 return studentEvents;
             }
@@ -100,7 +112,7 @@ namespace MyConcordiaID.Models.Event
                     UserRole = e.ROLE,
                     Information = new EventInformation
                     {
-                        EventID = e.EVENT.ID_PK,
+                        EventId = e.EVENT.ID_PK,
                         Name = e.EVENT.NAME,
                         Description = e.EVENT.DESCRIPTION,
                         Location = e.EVENT.LOCATION,
@@ -117,15 +129,14 @@ namespace MyConcordiaID.Models.Event
 
 
             // event must be open & not canceled or expired
-
-            var publicEvents = _database.EVENTS
+            var openEvents = _database.EVENTS
                 .Where(e => e.TYPE == open && e.STATUS != cancelled && e.TIME_END > today)
                 .Select(e => new AvailableEvent
                 {
                     UserRole = attendee,
                     Information = new EventInformation
                     {
-                        EventID = e.ID_PK,
+                        EventId = e.ID_PK,
                         Name = e.NAME,
                         Description = e.DESCRIPTION,
                         Location = e.LOCATION,
@@ -139,12 +150,17 @@ namespace MyConcordiaID.Models.Event
                 .ToList();
 
 
-            //merge list & order events
+            //merge list
+            // remove duplicate : if you created a open event, you will be a creator thus part of the Event_users
+            //                    When we get all available open event you will have an duplicate "attendee object" 
+            //Sort list of dates closest to current date
             events = events
-                .Concat(publicEvents)
-                .OrderByDescending(e => e.Information.TimeBegin)
-                .ToList();
-
+               .Concat(openEvents)
+               .GroupBy(x => x.Information.EventId)
+               .Select(s => s.First())
+               .OrderBy(n => (today - n.Information.TimeBegin).Duration())
+               .ThenBy(n => (today - n.Information.TimeEnd).Duration())
+               .ToList();
 
             return events;
 
@@ -162,7 +178,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.ID_PK == eventId)
                 .Select(e => new EventInformation
                 {
-                    EventID = e.ID_PK,
+                    EventId = e.ID_PK,
                     Name = e.NAME,
                     Description = e.DESCRIPTION,
                     Location = e.LOCATION,
@@ -186,7 +202,7 @@ namespace MyConcordiaID.Models.Event
             var events = _database.EVENTS
                 .Select(e => new EventInformation
                 {
-                    EventID = e.ID_PK,
+                    EventId = e.ID_PK,
                     Name = e.NAME,
                     Description = e.DESCRIPTION,
                     Location = e.LOCATION,
@@ -214,7 +230,7 @@ namespace MyConcordiaID.Models.Event
                 .Where(e => e.STATUS == status)
                 .Select(e => new EventInformation
                 {
-                    EventID = e.ID_PK,
+                    EventId = e.ID_PK,
                     Name = e.NAME,
                     Description = e.DESCRIPTION,
                     Location = e.LOCATION,
@@ -234,8 +250,10 @@ namespace MyConcordiaID.Models.Event
         ///  Find all the users going to a specific event
         /// </summary>
         /// <param name="eventId"></param>
+        /// <param name="orderUserOnTop"></param>
+        /// <param name="netName"></param>
         /// <returns></returns>
-        public IEnumerable<EventUserInformation> GetEventUsers(string eventId)
+        public IEnumerable<EventUserInformation> GetEventUsers(string eventId, bool orderUserOnTop, string netName)
         {
 
             var selectedEvent = _database.EVENTS
@@ -253,12 +271,21 @@ namespace MyConcordiaID.Models.Event
                         Status = u.STATUS,
                         StudentAccount = new StudentBasicInformation
                         {
-                            ID = u.STUDENT.ID,
+                            Id = u.STUDENT.ID,
                             NetName = u.STUDENT.NETNAME,
                             FirstName = u.STUDENT.FIRSTNAME,
                             LastName = u.STUDENT.LASTNAME
                         }
-                    });
+                    })
+                    .ToList();
+
+                if (orderUserOnTop)
+                {
+                    //authenticated user will be the first user of the list
+                    eventUsers = eventUsers
+                        .OrderByDescending(order => order.StudentAccount.NetName == netName)
+                        .ToList();
+                }
 
                 return eventUsers;
             }
@@ -276,7 +303,7 @@ namespace MyConcordiaID.Models.Event
         public void InsertEvent(NewEvent information, string netname)
         {
 
-            EVENT newEvent = new EVENT
+            var newEvent = new EVENT
             {
                 NAME = information.Name,
                 DESCRIPTION = information.Description,
@@ -292,7 +319,7 @@ namespace MyConcordiaID.Models.Event
             _database.SaveChanges();
 
 
-            EVENT_USERS newOwner = new EVENT_USERS
+            var newOwner = new EVENT_USERS
             {
                 STUDENT_NETNAME_FK = netname,
                 ROLE = Role.Creator.ToString(),
@@ -350,6 +377,18 @@ namespace MyConcordiaID.Models.Event
                 {
                     //student does exist 
 
+
+                    var userExist = _database.EVENT_USERS
+                        .Where(u => u.EVENT_ID == user.EventID && u.STUDENT_NETNAME_FK == netName)
+                        .FirstOrDefault();
+
+                    if (userExist != null)
+                    {
+                        //user exist thus duplicate action
+                        return EventActionResult.DuplicateUser;
+
+                    }
+
                     var status = UserStatus.Tracking.ToString(); ;
                     if (string.Equals(selectedEvent.TYPE, EventType.Closed.ToString(), StringComparison.OrdinalIgnoreCase))
                     {
@@ -362,7 +401,7 @@ namespace MyConcordiaID.Models.Event
                     }
 
 
-                    EVENT_USERS newUser = new EVENT_USERS
+                    var newUser = new EVENT_USERS
                     {
                         STUDENT_NETNAME_FK = user.UserNetname,
                         ROLE = user.Role.ToString(),
@@ -394,7 +433,7 @@ namespace MyConcordiaID.Models.Event
         public ScannerResult RegisterScannedUser(ScannerUser user)
         {
 
-            ScannerResult processResult = new ScannerResult
+            var processResult = new ScannerResult
             {
                 Status = ScannerStatus.IdNotFound.ToString()
             };
@@ -408,7 +447,7 @@ namespace MyConcordiaID.Models.Event
                 //tracking user
                 if (user.Type == EventType.Open)
                 {
-                    EVENT_USERS newUser = new EVENT_USERS
+                    var newUser = new EVENT_USERS
                     {
                         STUDENT_NETNAME_FK = currentUser.NETNAME,
                         ROLE = Role.Attendee.ToString(),
@@ -508,7 +547,7 @@ namespace MyConcordiaID.Models.Event
         public EventActionResult UpdateEvent(EventInformation information)
         {
             var updateEvent = _database.EVENTS
-                .Where(e => e.ID_PK == information.EventID)
+                .Where(e => e.ID_PK == information.EventId)
                 .FirstOrDefault();
 
             if (updateEvent != null)
@@ -547,15 +586,12 @@ namespace MyConcordiaID.Models.Event
                 .Where(u => u.ID_PK == user.UserId)
                 .FirstOrDefault();
 
-            if(existingUser != null)
-            {
-                existingUser.ROLE = user.Role.ToString();
-                _database.SaveChanges();
+            if (existingUser == null) return EventActionResult.UserNotFound;
 
-                return EventActionResult.Success;
-            }
+            existingUser.ROLE = user.Role.ToString();
+            _database.SaveChanges();
 
-            return EventActionResult.UserNotFound;
+            return EventActionResult.Success;
         }
     }
 }

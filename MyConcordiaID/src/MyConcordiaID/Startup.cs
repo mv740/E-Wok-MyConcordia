@@ -64,7 +64,7 @@ namespace MyConcordiaID
 
   
 
-            /// set default authentication middleware // it is required for api oauth2
+            // set default authentication middleware // it is required for api oauth2
             services.AddAuthentication(options =>
             {
                 options.SignInScheme = "ServerCookie";
@@ -119,6 +119,7 @@ namespace MyConcordiaID
 
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            loggerFactory.AddEventLog(LogLevel.Information);
 
             //remove when oauth is functional 
             app.UseDeveloperExceptionPage();
@@ -228,8 +229,8 @@ namespace MyConcordiaID
                 {
                     ApplicationID = "oidcWebClient",
                     DisplayName = "My client application",
-                    RedirectUri = "https://concordiaidclient.netlify.com/WebApp/app/callback.html",
-                    LogoutRedirectUri = "https://concordiaidclient.netlify.com/WebApp/app/oidc"
+                    RedirectUri = "https://www.myconcordiaid.me/callback.html",
+                    LogoutRedirectUri = "https://www.myconcordiaid.me/oidc"
                     // Secret = "secret_secret_secret"
                 });
 
