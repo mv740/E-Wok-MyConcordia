@@ -200,29 +200,6 @@ namespace UnitTestCore
 
         }
 
-        [TestMethod]
-        public void DeleteEventUserNotFound()
-        {
-            //Arrange
-            SetBasicMockDb();
-            var controller = new EventController(_logs, _eventRepo);
-
-            var newEventInfo = new EventInformation()
-            {
-                EventId = "0",
-                Name = "newName",
-                Description = "newDescription",
-                Location = "newLocation",
-                Room = "newRoom"
-            };
-
-            //Act
-            var result = controller.UpdateEvent(newEventInfo);
-
-            //Assert
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
-
-        }
 
     }
 }
