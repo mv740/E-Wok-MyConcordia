@@ -68,9 +68,15 @@ $list-li-height:80px;
 
 }
 
-.platform-ios .cam-container #cameraActions button {
+.platform-ios .cam-container {
+  height: 100%;
+  background-color: #8A0037;
+  font-size: 120%;
+  font-weight: bold;
 
+  #cameraActions button {
   height: 100%;
   border-radius: 5px;
-  width:40%;
+  width: 40%;
+  }
 }

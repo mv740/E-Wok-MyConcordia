@@ -203,7 +203,12 @@ html, body {
       border-radius: 5px;
       width: 45.9%; }
 
-.platform-ios .cam-container #cameraActions button {
+.platform-ios .cam-container {
   height: 100%;
-  border-radius: 5px;
-  width: 40%; }
+  background-color: #8A0037;
+  font-size: 120%;
+  font-weight: bold; }
+  .platform-ios .cam-container #cameraActions button {
+    height: 100%;
+    border-radius: 5px;
+    width: 40%; }
