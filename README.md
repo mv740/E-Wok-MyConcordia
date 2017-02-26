@@ -23,15 +23,27 @@ Soen 490
 * Update your picture during the valid period
 * access your marshalling card 
 
+* View available events
+* Event administrator can scan user id ( track attendance) 
+
 ##MyConcordiaID
 
 ####Web application
 * Administrator validate the profile picture of each student  
 * revalidate previous picture, discard current valid picture 
 * View log of each transaction on each student account
+* Can leave a comment on a picture
+
+* Create a public or private event 
 
 
-###MyConcordiaId Api server Live : https://myconcordiaid.azurewebsites.net/swagger/
+### MyConcordiaId Api server Live 
+https://myconcordiaid.azurewebsites.net/swagger/
 
-###Web Client Live :https://concordiaidclient.netlify.com/WebApp/app/login
+### Web Client Live :
+Dev : https://concordiaidclient.netlify.com/WebApp/app/login
+Production : https://www.myconcordiaid.me
+
+### android application download 
+https://android.myconcordiaid.me 
 
