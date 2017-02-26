@@ -131,7 +131,10 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
             // If the student cannot update picture, restrict access to the camera.
             resolve: {
               security: ['$q', '$rootScope', function ($q, $rootScope) {
-                if ((!$rootScope.canUpdate || !$rootScope.validPeriod) && $rootScope.valid && $rootScope.pending) {
+                // If !valid & !pending, picture should be updated regardless of canUpdate or validPeriod. Otherwise...
+                // If your picture is pending, then you can't update picture.
+                // If !pending and are valid, if you can't update or aren't within the valid period, you can't update picture.
+                if (($rootScope.pending) || (($rootScope.valid && !$rootScope.pending) && (!$rootScope.canUpdate || !$rootScope.validPeriod))) {
                   if (ionic.Platform.isIOS()) {
                     document.addEventListener("deviceready", onDeviceReady, true);
                     function onDeviceReady() {
