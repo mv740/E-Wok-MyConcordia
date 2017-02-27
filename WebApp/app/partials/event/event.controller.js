@@ -40,6 +40,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
 
     eventTab.readonly = true;
     eventTab.removable = false;
+    eventTab.eventTypes = ['Open', 'Closed'];
 
     getEvents();
 
@@ -52,9 +53,6 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
 
 
     function submit(){
-        var dateFormat = 'MM-dd-yyyyTHH:mm:ss';
-        eventTab.creating.timeBegin = $filter('date')(eventTab.creating.timeBegin, dateFormat);
-        eventTab.creating.timeEnd = $filter('date')(eventTab.creating.timeEnd, dateFormat);
         if (eventTab.creating.eventID) eventService.updateEvent(eventTab.creating).then(function(){});
         else eventService.submit(eventTab.creating).then(function(){
             eventTab.fpControls.moveTo(1);
@@ -95,6 +93,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
     }
 
     function checkAttendees(eventTarget) {
+        eventTab.attendees = [];
         eventService.getEventAttendees(eventTarget.information.eventId).then(function (result) {
             eventTab.attendees = result;
             eventTab.loggedInAttendee = eventTab.attendees[0];
@@ -114,16 +113,10 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
             preserveScope: false
         })
             .then(function(answer) {
-                eventService.setUserRole(answer).then(
-                    function(response) {
-                        console.log("attendee role modified successfully");
-                    },
-                    function (failure) {
-                        console.log("failed to modify attendee role");
-                    });
-            }, function() { // On close events handled here because we are currently not using the answer dialog the way angular-materials is
-                console.log("dialog closed and attendees refreshed");
+                console.log("dialog closed. answer received. attendees refreshed");
                 checkAttendees(eventTab.selectedEvent);
+            }, function() { // When dialog box closes without any action, nothing happens.
+                console.log("dialog closed. no actions performed");
             });
     }
 

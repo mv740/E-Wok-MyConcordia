@@ -16,7 +16,8 @@ function eventService(toastedHttp, myConfig) {
         setUserRole: setUserRole,
         getEventAttendees: getEventAttendees,
         addUser: addUser,
-        cancelEvent: cancelEvent
+        cancelEvent: cancelEvent,
+        deleteUser: deleteUser
     }
 
     return service;
@@ -53,5 +54,9 @@ function eventService(toastedHttp, myConfig) {
 
     function addUser(user) {
         return toastedHttp.post(user, myConfig.eventUser);
+    }
+
+    function deleteUser(user) {
+        return toastedHttp.del(user, myConfig.eventUser);
     }
 }

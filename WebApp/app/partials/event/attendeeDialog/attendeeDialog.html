@@ -24,8 +24,11 @@
                 </md-input-container>
                 <div class="top-buffer">
                     <md-button ng-click="attendeeDialog.setNewRole()"
-                            ng-show="attendeeDialog.attendeeOriginalRole != attendeeDialog.attendee.role"
-                            class="buttonSmallFormat purple button3D">Set Role</md-button>
+                               ng-if="attendeeDialog.attendeeOriginalRole != attendeeDialog.attendee.role"
+                               class="buttonSmallFormat purple button3D">Set Role</md-button>
+                    <md-button ng-click="attendeeDialog.deleteAttendee()"
+                               ng-if="attendeeDialog.userCanModifyRole(attendeeDialog.attendee)"
+                               class="buttonSmallFormat purple button3D">Delete</md-button>
                 </div>
             </div>
         </div>
