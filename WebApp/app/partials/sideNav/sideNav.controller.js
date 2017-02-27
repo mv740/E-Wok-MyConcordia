@@ -16,14 +16,17 @@ function SideNavCtrl(AuthenticationService, $scope) {
     sideNav.toggleNav = toggleNav;
     sideNav.closeNav = closeNav;
     sideNav.logout = logout;
-    sideNav.isLoggedIn = false;
+    sideNav.isLoggedIn = isLoggedIn;
 
     //////////////////
 
     $scope.$on('$routeChangeStart', function (event, next, current) {
-        sideNav.isLoggedIn = AuthenticationService.isAuthenticated();
         changeSelectedSideNavIcon(next);
     });
+
+    function isLoggedIn(){
+        return AuthenticationService.isAuthenticated();
+    }
 
     function changeSelectedSideNavIcon(next){
         sideNav.isOnReviewPage = false;
@@ -32,18 +35,12 @@ function SideNavCtrl(AuthenticationService, $scope) {
         if (typeof next.$$route != "undefined") {
             if (next.$$route.originalPath.match("review")) {
                 sideNav.isOnReviewPage = true;
-                //temporary
-                sideNav.isLoggedIn = true
             }
             else if (next.$$route.originalPath.match("admin")) {
                 sideNav.isOnAdminPage = true;
-                //temporary
-                sideNav.isLoggedIn = true
             }
             else if (next.$$route.originalPath.match("event")) {
                 sideNav.isOnEventPage = true;
-                //temporary
-                sideNav.isLoggedIn = true
             }
         }
     }

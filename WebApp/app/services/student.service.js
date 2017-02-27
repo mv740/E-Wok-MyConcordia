@@ -14,7 +14,6 @@ function studentService($q, toastedHttp, myConfig) {
         getStudentLogs: getStudentLogs,
         getStudents: getStudents,
         search: search,
-        getUpdatePeriod: getUpdatePeriod,
         validateArchived: validateArchived,
         submitComment: submitComment
     };
@@ -23,119 +22,45 @@ function studentService($q, toastedHttp, myConfig) {
     /////////////////////
 
     function sendValidation(id, valid) {
-        var deferred = $q.defer();
-
         var json = {
             id: parseInt(id),
             valid: valid
         };
 
-        toastedHttp.post(json, myConfig.validatePhoto).then(function(success) {
-            deferred.resolve(success);
-        },
-            function(failure){
-                console.log('validate failure');
-            }
-        );
-
-        return deferred.promise;
+        return toastedHttp.post(json, myConfig.validatePhoto);
     }
 
     function getStudentPictures(id) {
-        var deferred = $q.defer();
-
-        toastedHttp.get({param: id, topUrl: myConfig.getStudentPictures}).then(function (value) {
-            deferred.resolve(value);
-        },function (failure) {
-            console.log('getStudentPicture failure');
-        });
-
-        return deferred.promise;
+        return toastedHttp.get({param: id, topUrl: myConfig.getStudentPictures});
     }
 
     function getStudentLogs(netname) {
-        var deferred = $q.defer();
-
-        toastedHttp.get({param: netname, topUrl: myConfig.getLogs}).then(function (value) {
-            deferred.resolve(value);
-        },function (failure) {
-            console.log('getStudentLogs failure');
-        });
-
-        return deferred.promise;
+        return toastedHttp.get({param: netname, topUrl: myConfig.getLogs});
     }
 
     function getStudents() {
-        var deferred = $q.defer();
-
-        toastedHttp.get({topUrl: myConfig.getStudents}).then(function (value) {
-            deferred.resolve(value);
-        },function (failure) {
-            console.log('getStudents failure');
-        });
-
-        return deferred.promise;
+        return toastedHttp.get({topUrl: myConfig.getStudents});
     }
 
     function search(params) {
-        var deferred = $q.defer();
-
-        toastedHttp.post(params, myConfig.search).then(
-        function (value) {
-            deferred.resolve(value);
-        },
-        function (failure) {
-            console.log('search failure');
-            deferred.resolve(failure);
-        });
-
-        return deferred.promise;
+        return toastedHttp.post(params, myConfig.search);
     }
 
-    function getUpdatePeriod() {
-        var deferred = $q.defer();
 
-        toastedHttp.get({topUrl: myConfig.getUpdatePeriod}).then(function (value) {
-            deferred.resolve(value);
-        },function (failure) {
-            console.log('updating period failure');
-        });
-
-        return deferred.promise;
-    }
 
     function validateArchived(id, valid){
-
-        var deferred = $q.defer();
-
         var json = { id: id,
             valid: valid};
 
-        toastedHttp.post(json, myConfig.validateArchived).then(function (value) {
-            deferred.resolve(value);
-        }, function(){
-            console.log("sendPictureBackToValidation failure");
-        });
-
-        return deferred.promise;
+        return toastedHttp.post(json, myConfig.validateArchived);
 
     }
 
     function submitComment(id, comment){
-
-        var deferred = $q.defer();
-
         var json = { id: id,
             comment: comment};
 
-        toastedHttp.post(json, myConfig.submitComment).then(function (value) {
-            deferred.resolve(value);
-        }, function(){
-            console.log("submitComment failure");
-        });
-
-        return deferred.promise;
-
+        return toastedHttp.post(json, myConfig.submitComment);
     }
 
 }

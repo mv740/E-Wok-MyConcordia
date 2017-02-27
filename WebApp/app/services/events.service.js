@@ -4,102 +4,59 @@ angular
     .module('myApp')
     .factory('eventService', eventService);
 
-eventService.$inject = [ '$q', 'toastedHttpService', 'myConfig'];
+eventService.$inject = ['toastedHttpService', 'myConfig'];
 
-function eventService($q, toastedHttp, myConfig) {
+function eventService(toastedHttp, myConfig) {
 
     var service = {
         getThisEvent: getThisEvent,
         getAllEvents: getAllEvents,
         submit: submit,
         updateEvent: updateEvent,
-        deleteEvent: deleteEvent,
-        setUserRole: setUserRole
+        setUserRole: setUserRole,
+        getEventAttendees: getEventAttendees,
+        addUser: addUser,
+        cancelEvent: cancelEvent,
+        deleteUser: deleteUser
     }
 
     return service;
 
+    //////////////////////////////////////
+
     function getThisEvent(id) {
-        var deferred = $q.defer();
-
-        toastedHttp.get({param:id, topUrl: myConfig.getEvent}).then(function (value) {
-            deferred.resolve(value);
-        },function (failure) {
-            console.log('getThisEvent failure');
-        });
-
-        return deferred.promise;
+        return toastedHttp.get({param:id, topUrl: myConfig.getEvent});
     }
 
     function submit(event){
-        var deferred = $q.defer();
-
-        toastedHttp.post(event, myConfig.event).then(
-            function (value) {
-                deferred.resolve(value);
-            },
-            function (failure) {
-                console.log('submitEvent failure');
-                deferred.resolve(failure);
-            });
-
-        return deferred.promise;
+        return toastedHttp.post(event, myConfig.event);
     }
 
     function getAllEvents() {
-        var deferred = $q.defer();
-
-       toastedHttp.get({topUrl: myConfig.event}).then(function (value) {
-            deferred.resolve(value);
-        },function (failure) {
-            console.log('getAllEvents failure');
-        });
-
-        return deferred.promise;
+       return toastedHttp.get({topUrl: myConfig.getEvents});
     }
 
     function updateEvent(event) {
-        var deferred = $q.defer();
-
-        toastedHttp.put(event, myConfig.event).then(
-            function (value) {
-                deferred.resolve(value);
-            },
-            function (failure) {
-                console.log('updateEvent failure');
-                deferred.resolve(failure);
-            });
-
-        return deferred.promise;
+        return toastedHttp.put(event, myConfig.event);
     }
 
-    function deleteEvent(event) {
-        var deferred = $q.defer();
-
-        toastedHttp.del(event, myConfig.event).then(
-            function (value) {
-                deferred.resolve(value);
-            },
-            function (failure) {
-                console.log('deleteEvent failure');
-                deferred.resolve(failure);
-            });
-
-        return deferred.promise;
+    function cancelEvent(event) {
+        return toastedHttp.del(event, myConfig.event);
     }
 
-    function setUserRole(role) {
-        var deferred = $q.defer();
+    function setUserRole(user) {
+        return toastedHttp.put(user, myConfig.eventUser);
+    }
 
-        toastedHttp.put(role, myConfig.eventUser).then(
-            function (value) {
-                deferred.resolve(value);
-            },
-            function (failure) {
-                console.log('setUserRole failure');
-                deferred.resolve(failure);
-            });
+    function getEventAttendees(id) {
+        return toastedHttp.get({topUrl: myConfig.eventAttendees.replace("IDTOKEN", id) + "/true"});
+    }
 
-        return deferred.promise;
+    function addUser(user) {
+        return toastedHttp.post(user, myConfig.eventUser);
+    }
+
+    function deleteUser(user) {
+        return toastedHttp.del(user, myConfig.eventUser);
     }
 }

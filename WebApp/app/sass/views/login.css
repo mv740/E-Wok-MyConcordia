@@ -174,14 +174,14 @@ md-toast {
 .bottom-buffer {
   margin-bottom: 30px; }
 
+.bottom-buffer-xl {
+  margin-bottom: 50px; }
+
 .all-side-margin-sm {
   margin: 20px; }
 
 .left-buffer-sm {
-  marin-left: 20px; }
-
-.left-buffer-sm {
-  marin-left: 20px; }
+  margin-left: 20px; }
 
 .container2D {
   background-color: #a1325e;
@@ -254,14 +254,14 @@ md-toast {
 .bottom-buffer {
   margin-bottom: 30px; }
 
+.bottom-buffer-xl {
+  margin-bottom: 50px; }
+
 .all-side-margin-sm {
   margin: 20px; }
 
 .left-buffer-sm {
-  marin-left: 20px; }
-
-.left-buffer-sm {
-  marin-left: 20px; }
+  margin-left: 20px; }
 
 .side-padding-xs {
   padding-left: 10px;
@@ -330,7 +330,6 @@ md-toast {
   margin-left: 420px; }
 
 #loginContainer {
-  background: url("../../images/concordia_bg.jpg");
-  background-position-y: bottom; }
+  background: url("../../images/concordia_bg.jpg") bottom/cover; }
   #loginContainer h1 {
     border-color: black; }

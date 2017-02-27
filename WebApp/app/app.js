@@ -7,6 +7,7 @@ angular.module('myApp', [
     'ngMaterial',
     'ngHamburger',
     'ui.bootstrap',
+    'ui.bootstrap.datetimepicker',
     'angularCSS',
     'ng.oidcclient',
     '720kb.tooltips',
@@ -14,7 +15,7 @@ angular.module('myApp', [
 
 
 ]).constant("myConfig", {
-    "baseUrl": "https://myconcordiaid.azurewebsites.net/api/",
+    "baseUrl": "https://api.myconcordiaid.me/api/",
     "validatePhoto": "student/ValidatePicture",
     "searchStudent": "student/",
     "getStudentPictures": "student/picture/",
@@ -28,19 +29,21 @@ angular.module('myApp', [
     "event": "Event",
     "getEvent": "Event/",
     "eventUser": "Event/user",
-    "eventsCreated": "Event/admin/"
+    "eventsCreated": "Event/admin/",
+    "eventAttendees": "Event/IDTOKEN/users",
+    "getEvents": "Event/admin"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
 
-        var link = "https://myconcordiaid.azurewebsites.net/";
+        var link = "https://api.myconcordiaid.me/";
 
         ngOidcClientProvider.setSettings({
             authority: link,
             client_id: "oidcWebClient",
-            redirect_uri: "https://concordiaidclient.netlify.com/WebApp/app/callback.html",
-            post_logout_redirect_uri: "https://concordiaidclient.netlify.com/WebApp/app/oidc",
-            silent_redirect_uri: "https://concordiaidclient.netlify.com/WebApp/app/oidc",
+            redirect_uri: "https://www.myconcordiaid.me/callback.html",
+            post_logout_redirect_uri: "https://www.myconcordiaid.me/oidc",
+            silent_redirect_uri: "https://www.myconcordiaid.me/oidc",
             //redirect_uri: "https://localhost/oidc",
             //post_logout_redirect_uri: "https://localhost/oidc",
             //silent_redirect_uri: "https://localhost/oidc",
@@ -95,13 +98,18 @@ angular.module('myApp', [
 
         $httpProvider.interceptors.push('AuthInterceptorService');
 }])
-    .run(['$rootScope','SessionService','$location',function ($rootScope, SessionService,$location) {
+    .run(['$rootScope','SessionService','$location','ngOidcClient',function ($rootScope, SessionService,$location, ngOidcClient) {
+
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
 
-            // if (!prev.authenticate && !SessionService.isAuthenticated()) {
-            //     // reload the login route
-            //     $location.path('/login');
-            // }
+            var user = ngOidcClient.getUserInfo();
+            console.log(user);
+            console.log(user.isAuthenticated);
 
-        })
+            if (!SessionService.isAuthenticated()) {
+                // reload the login route
+                console.log('Unauthorized access');
+                $location.path('/login');
+            }
+        });
     }]);

@@ -1,6 +1,6 @@
-﻿<div ng-controller="AdminController as admin" class="side-padding-xl">
+﻿<div ng-controller="AdminController as adminTab" class="side-padding-xl">
 
-    <div id="fpAdmin" full-page options="admin.fpOptions" controls="admin.fpControls">
+    <div id="fpAdmin" full-page options="adminTab.fpOptions" controls="adminTab.fpControls">
         <div class="section section1">
 
             <div class="page-header">
@@ -8,12 +8,12 @@
             </div>
 
             <div>
-                <h4>Currently set to: <span ng-if="!admin.loading">{{admin.currentUpdatePeriod}}</span>
+                <h4>Currently set to: <span ng-if="!adminTab.loading">{{adminTab.currentUpdatePeriod}}</span>
 
                 </h4>
             </div>
 
-            <button ng-click="admin.fpControls.slideDown()" class="button3D buttonSmallFormat top-buffer">Modify</button>
+            <button ng-click="adminTab.fpControls.slideDown()" class="button3D buttonSmallFormat top-buffer">Modify</button>
 
 
 
@@ -34,17 +34,17 @@
             <div class="top-buffer col-xs-12"
                     tooltips tooltip-template="Required"
                     tooltips tooltip-side="top"
-                    tooltips tooltip-hidden="{{admin.yearEntered}}">
+                    tooltips tooltip-hidden="{{adminTab.yearEntered}}">
                 <select class="col-xs-12 border-dotted height-standard bottom-buffer side-padding-xs"
                         id="AcademicYearDropDown"
-                        ng-model="admin.academicYear"
-                        ng-click="admin.setYearEntered()">
+                        ng-model="adminTab.academicYear"
+                        ng-click="adminTab.setYearEntered()">
                     <option value="" selected disabled>Academic year</option>
-                    <option ng-repeat="academicYearOption in admin.academicYearOptions" value="{{academicYearOption}}">{{academicYearOption}}</option>
+                    <option ng-repeat="academicYearOption in adminTab.academicYearOptions" value="{{academicYearOption}}">{{academicYearOption}}-{{academicYearOption + 1}}</option>
                 </select>
             </div>
 
-            <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat">Back</button> <button ng-click="admin.academicYear && admin.fpControls.slideDown()"  ng-class="{'inactive': !admin.academicYear}" class="button3D buttonSmallFormat side-buffer">Next step</button>
+            <button ng-click="adminTab.fpControls.slideUp()" class="button3D buttonSmallFormat">Back</button> <button ng-click="adminTab.academicYear && adminTab.fpControls.slideDown()"  ng-class="{'inactive': !adminTab.academicYear}" class="button3D buttonSmallFormat side-buffer">Next step</button>
 
         </div>
         <div class="section section2">
@@ -61,19 +61,14 @@
 
                 <div class="col-xs-12 top-buffer">
                     <input type="text"
+                           placeholder="To"
                            class="form-control date border-dotted height-standard side-padding-xs"
-                           id="dateFrom"
-                           placeholder="From"
-                           ng-click="admin.dateFrom=true"
-                           datepicker-popup="{{admin.format}}"
-                           ng-model="admin.dtFrom"
-                           is-open="admin.dateFrom"
-                           datepicker-options="admin.dateOptions"
-                           date-disabled="disabled(date, mode)"
-                           ng-required="true"
-                           close-text="Close">
+                           datetime-picker="MM/dd/yyyy HH:mm"
+                           ng-model="adminTab.dtFrom"
+                           ng-click="adminTab.dtFromOpened = true"
+                           is-open="adminTab.dtFromOpened">
                 </div>
-            <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtFrom && admin.fpControls.slideDown()" ng-class="{'inactive': !admin.dtFrom}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
+            <button ng-click="adminTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="adminTab.dtFrom && adminTab.fpControls.slideDown()" ng-class="{'inactive': !adminTab.dtFrom}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
         </div>
         <div class="section section3">
 
@@ -89,19 +84,14 @@
 
             <div class="col-xs-12 top-buffer">
                 <input type="text"
-                       class="form-control date border-dotted height-standard side-padding-xs"
-                       id="dateTo"
                        placeholder="To"
-                       ng-click="admin.dateTo=true"
-                       datepicker-popup="{{admin.format}}"
-                       ng-model="admin.dtTo"
-                       is-open="admin.dateTo"
-                       datepicker-options="admin.dateOptions"
-                       date-disabled="disabled(date, mode)"
-                       ng-required="true"
-                       close-text="Close">
+                       class="form-control date border-dotted height-standard side-padding-xs"
+                       datetime-picker="MM/dd/yyyy HH:mm"
+                       ng-model="adminTab.dtTo"
+                       ng-click="adminTab.dtToOpened = true"
+                       is-open="adminTab.dtToOpened">
             </div>
-            <button ng-click="admin.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="admin.dtTo && admin.submit()"  ng-class="{'inactive': !admin.dtTo}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
+            <button ng-click="adminTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button> <button ng-click="adminTab.dtTo && adminTab.submit()"  ng-class="{'inactive': !adminTab.dtTo}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
         </div>
     </div>
 

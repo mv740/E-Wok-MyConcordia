@@ -29,7 +29,10 @@
 
       scope.controls = {
         slideUp: slideUp,
-          slideDown: slideDown
+          slideDown: slideDown,
+          slideRight: slideRight,
+          slideLeft: slideLeft,
+          moveTo: moveTo
       }
 
       if (typeof scope.options === 'object') {
@@ -118,16 +121,28 @@
       element.on('$destroy', destroyFullPage);
 
       function slideUp(){
-          $.fn.fullpage.moveSectionUp();
+        $.fn.fullpage.moveSectionUp();
       }
 
       function slideDown(){
-          $.fn.fullpage.moveSectionDown();
+        $.fn.fullpage.moveSectionDown();
+      }
+
+      function slideRight(){
+        $.fn.fullpage.moveSlideRight();
+      }
+
+      function slideLeft() {
+        $.fn.fullpage.moveSlideLeft();
       }
 
       function disableScrolling(){
-         $.fn.fullpage.setMouseWheelScrolling(false);
-         $.fn.fullpage.setAllowScrolling(false);
+        $.fn.fullpage.setMouseWheelScrolling(false);
+        $.fn.fullpage.setAllowScrolling(false);
+      }
+
+      function moveTo(slideNo){
+          $.fn.fullpage.moveTo(slideNo);
       }
 
         //if we are using a ui-router, we need to be able to handle anchor clicks without 'href="#thing"'

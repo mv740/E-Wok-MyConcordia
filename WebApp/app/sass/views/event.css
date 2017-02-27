@@ -209,14 +209,14 @@ md-toast {
 .bottom-buffer {
   margin-bottom: 30px; }
 
+.bottom-buffer-xl {
+  margin-bottom: 50px; }
+
 .all-side-margin-sm {
   margin: 20px; }
 
 .left-buffer-sm {
-  marin-left: 20px; }
-
-.left-buffer-sm {
-  marin-left: 20px; }
+  margin-left: 20px; }
 
 .container2D {
   background-color: #a1325e;
@@ -271,14 +271,14 @@ md-toast {
 .bottom-buffer {
   margin-bottom: 30px; }
 
+.bottom-buffer-xl {
+  margin-bottom: 50px; }
+
 .all-side-margin-sm {
   margin: 20px; }
 
 .left-buffer-sm {
-  marin-left: 20px; }
-
-.left-buffer-sm {
-  marin-left: 20px; }
+  margin-left: 20px; }
 
 .side-padding-xs {
   padding-left: 10px;
@@ -516,6 +516,30 @@ md-toast {
     position: relative;
     bottom: 80px; }
 
+.searchBoxContainer .field {
+  display: flex;
+  flex-direction: row;
+  border: 0.2em solid #8A0037;
+  position: relative;
+  border-radius: 4px;
+  box-shadow: 1px 1px 0 #600026, 2px 2px 0 #600026, 3px 3px 0 #600026, 4px 4px 0 #600026, 5px 5px 0 #600026, 6px 6px 0 #600026, 7px 7px 0 #600026; }
+  .searchBoxContainer .field:not(.nohover):hover {
+    top: 3px;
+    left: 3px;
+    box-shadow: 0.7px 0.7px 0 #600026, 1.4px 1.4px 0 #600026, 2.1px 2.1px 0 #600026, 2.8px 2.8px 0 #600026, 3.5px 3.5px 0 #600026, 4.2px 4.2px 0 #600026, 4.9px 4.9px 0 #600026; }
+  .searchBoxContainer .field input[type=text],
+  .searchBoxContainer .field button {
+    display: block; }
+  .searchBoxContainer .field input[type=text] {
+    flex: 1;
+    padding: 0.6em; }
+  .searchBoxContainer .field button {
+    border: 0px;
+    border-left: 0.2em solid #8A0037;
+    padding: 0.6em 0.8em;
+    background-color: #8A0037;
+    color: white; }
+
 #ng-view {
   overflow-y: hidden; }
 
@@ -526,3 +550,9 @@ md-toast {
   transition: ease 0.2s; }
   .listResults li.expanded {
     height: 112px; }
+
+.fp-controlArrow {
+  display: none; }
+
+.selectedChip {
+  color: #a1325e; }
