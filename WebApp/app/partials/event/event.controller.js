@@ -40,6 +40,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
 
     eventTab.readonly = true;
     eventTab.removable = false;
+    eventTab.eventTypes = ['Open', 'Closed'];
 
     getEvents();
 

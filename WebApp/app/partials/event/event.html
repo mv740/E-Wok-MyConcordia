@@ -71,6 +71,29 @@
         <div class="section side-padding-xl">
 
             <div class="page-header">
+                <h1>Event Type</h1>
+            </div>
+
+            <div>
+                <h4>
+                    Is this an open or closed event?
+                </h4>
+            </div>
+
+            <md-input-container class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs">
+                <label>Event Type</label>
+                <md-select ng-model="eventTab.creating.type">
+                    <md-option value="{{eventType}}" ng-repeat="eventType in eventTab.eventTypes">{{eventType}}</md-option>
+                </md-select>
+            </md-input-container>
+
+            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
+            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.type"  ng-class="{'inactive': !eventTab.creating.type}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+
+        </div>
+        <div class="section side-padding-xl">
+
+            <div class="page-header">
                 <h1>Event name</h1>
             </div>
 
