@@ -53,9 +53,6 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
 
 
     function submit(){
-        var dateFormat = 'MM-dd-yyyyTHH:mm:ss';
-        eventTab.creating.timeBegin = $filter('date')(eventTab.creating.timeBegin, dateFormat);
-        eventTab.creating.timeEnd = $filter('date')(eventTab.creating.timeEnd, dateFormat);
         if (eventTab.creating.eventID) eventService.updateEvent(eventTab.creating).then(function(){});
         else eventService.submit(eventTab.creating).then(function(){
             eventTab.fpControls.moveTo(1);
