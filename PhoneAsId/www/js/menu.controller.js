@@ -48,7 +48,7 @@
     }
 
     function logViewMarshallingCard() {
-      hockeyapp.trackEvent(success, null, "VIEW_MARSHALLING_CARD");
+      hockeyapp.trackEvent(null, null, "VIEW_MARSHALLING_CARD");
     }
 
     function logUpdatePicture() {
