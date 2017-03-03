@@ -37,7 +37,7 @@ Soen 490
 * Create a public or private event 
 
 
-### MyConcordiaId Api server Live 
+### MyConcordiaId Api server Live [![Build Status](http://173.176.41.65:1111/job/MyConcordiaID/badge/icon)](http://173.176.41.65:1111/job/MyConcordiaID/)
 https://myconcordiaid.azurewebsites.net/swagger/
 
 ### Web Client Live :
