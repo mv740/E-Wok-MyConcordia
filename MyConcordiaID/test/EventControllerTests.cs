@@ -2,23 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using Moq;
-using MyConcordiaID.Models.Student;
 using MyConcordiaID.Controllers;
 using MyConcordiaID.Models.Log;
 using OracleEntityFramework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.Entity;
-using MyConcordiaID.Helper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using MyConcordiaID.Models.Picture;
 using System.Data.Entity.Infrastructure;
 using MyConcordiaID.Models.Event;
+using Xunit;
 
-namespace UnitTestCore
+namespace Tests
 {
-    [TestClass]
-    public class EventControllerTests
+
+    public class EventControllerTests : IDisposable
     {
 
         private Mock<DatabaseEntities> _context;
@@ -26,6 +22,24 @@ namespace UnitTestCore
         private LogRepository _logs;
         private Mock<DbSet<EVENT_USERS>> _mySetEventUser;
         private Mock<DbSet<EVENT>> _mySetEvent;
+
+        public EventControllerTests()
+        {
+            _context = new Mock<DatabaseEntities>();
+            _mySetEventUser = new Mock<DbSet<EVENT_USERS>>();
+            _mySetEvent = new Mock<DbSet<EVENT>>();
+            _eventRepo = new EventRepository(_context.Object);
+            _logs = new LogRepository(_context.Object);
+        }
+
+        public void Dispose()
+        {
+            _context = null;
+            _mySetEventUser = null;
+            _mySetEvent = null;
+            _logs = null;
+        }
+
 
         private void ConnectUsersMocksToDataStore(IEnumerable<EVENT_USERS> dataStore)
         {
@@ -46,25 +60,6 @@ namespace UnitTestCore
             _mySetEvent.As<IQueryable<EVENT>>().Setup(data => data.ElementType).Returns(dataSource.ElementType);
             _mySetEvent.As<IDbAsyncEnumerable<EVENT>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<EVENT>(dataSource.GetEnumerator()));
             _context.Setup(a => a.EVENTS).Returns(_mySetEvent.Object);
-        }
-
-        [TestInitialize]
-        public void Initialize()
-        {
-            _context = new Mock<DatabaseEntities>();
-            _mySetEventUser = new Mock<DbSet<EVENT_USERS>>();
-            _mySetEvent = new Mock<DbSet<EVENT>>();
-            _eventRepo = new EventRepository(_context.Object);
-            _logs = new LogRepository(_context.Object);
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            _context = null;
-            _mySetEventUser = null;
-            _mySetEvent = null;
-            _logs = null;
         }
 
         private void SetBasicMockDb()
@@ -123,7 +118,7 @@ namespace UnitTestCore
             ConnectEventMocksToDataStore(events);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetEventById()
         {
             //Arrange
@@ -136,12 +131,12 @@ namespace UnitTestCore
 
 
             //Assert
-            Assert.AreEqual("eventName1", myEvent.Name);
-            Assert.AreEqual(EventStatusType.Scheduled.ToString(), myEvent.Status);
+            Assert.Equal("eventName1", myEvent.Name);
+            Assert.Equal(EventStatusType.Scheduled.ToString(), myEvent.Status);
         
         }
 
-        [TestMethod]
+        [Fact]
         public void GetEventByIdNotFound()
         {
             //Arrange
@@ -152,11 +147,11 @@ namespace UnitTestCore
             var result = controller.GetById("0"); 
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            Assert.IsType<NotFoundResult>(result);
 
         }
 
-        [TestMethod]
+        [Fact]
         public void CancelEventNotFound()
         {
             //Arrange
@@ -172,11 +167,11 @@ namespace UnitTestCore
             var result = controller.CancelEvent(cancel);
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            Assert.IsType<NotFoundResult>(result);
 
         }
 
-        [TestMethod]
+        [Fact]
         public void UpdateEventNotFound()
         {
             //Arrange
@@ -196,7 +191,7 @@ namespace UnitTestCore
             var result = controller.UpdateEvent(newEventInfo);
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            Assert.IsType<NotFoundResult>(result);
 
         }
 

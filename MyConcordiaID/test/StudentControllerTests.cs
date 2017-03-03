@@ -6,18 +6,16 @@ using MyConcordiaID.Models.Student;
 using MyConcordiaID.Controllers;
 using MyConcordiaID.Models.Log;
 using OracleEntityFramework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data.Entity;
 using MyConcordiaID.Helper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
 using MyConcordiaID.Models.Picture;
 using System.Data.Entity.Infrastructure;
+using Xunit;
 
-namespace UnitTestCore
+namespace Tests
 {
-    [TestClass]
-    public class StudentControllerTests
+    public class StudentControllerTests : IDisposable
     {
 
         private Mock<DatabaseEntities> _context;
@@ -26,6 +24,24 @@ namespace UnitTestCore
         private LogRepository _logs;
         private Mock<DbSet<STUDENT>> _mySetStudent;
         private Mock<DbSet<PICTURE>> _mySetPicture;
+
+        public StudentControllerTests()
+        {
+            _context = new Mock<DatabaseEntities>();
+            _mySetStudent = new Mock<DbSet<STUDENT>>();
+            _mySetPicture = new Mock<DbSet<PICTURE>>();
+            _repo = new StudentRepository(_context.Object);
+            _logs = new LogRepository(_context.Object);
+        }
+
+
+        public void Dispose()
+        {
+            _context = null;
+            _mySetPicture = null;
+            _mySetStudent = null;
+            _repo = null;
+        }
 
         private void ConnectMocksToDataStore(IEnumerable<STUDENT> dataStore)
         {
@@ -48,24 +64,6 @@ namespace UnitTestCore
             _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
 
-        [TestInitialize]
-        public void Initialize()
-        {
-            _context = new Mock<DatabaseEntities>();
-            _mySetStudent = new Mock<DbSet<STUDENT>>();
-            _mySetPicture = new Mock<DbSet<PICTURE>>();
-            _repo = new StudentRepository(_context.Object);
-            _logs = new LogRepository(_context.Object);
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            _context = null;
-            _mySetPicture = null;
-            _mySetStudent = null;
-            _repo = null;
-        }
 
         private void SetBasicMockDb()
         {
@@ -114,7 +112,7 @@ namespace UnitTestCore
             ConnectPictureMocksToDataStore(pictures);
         }
 
-        [TestMethod]
+        [Fact]
         public void GetStudentById()
         {
             //Arrange
@@ -127,11 +125,11 @@ namespace UnitTestCore
 
            
             //Assert
-            Assert.AreEqual(21941097, student.Id);
-            Assert.AreEqual("testFirst", student.FirstName);            
+            Assert.Equal(21941097, student.Id);
+            Assert.Equal("testFirst", student.FirstName);            
         }
 
-        [TestMethod]
+        [Fact]
         public void GetStudentByIdNotFound()
         {
             //Arrange
@@ -142,11 +140,11 @@ namespace UnitTestCore
             var result = controller.GetById(21111111);
 
             //Assert
-            Assert.IsInstanceOfType(result, typeof(NotFoundResult));
+            Assert.IsType< NotFoundResult>(result);
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GetAccountFound()
         {
             //Arrange
@@ -162,11 +160,11 @@ namespace UnitTestCore
 
             var account = result.Value as StudentAccount;
 
-            Console.WriteLine(result.Value);
+            //Console.WriteLine(result.Value);
 
             //assert
-            Assert.AreEqual("michal", account.FirstName);
-            Assert.AreEqual("wozniak", account.LastName);
+            Assert.Equal("michal", account.FirstName);
+            Assert.Equal("wozniak", account.LastName);
         }
 
     }

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace UnitTestCore
+namespace Tests
 {
 
     /// <summary>
