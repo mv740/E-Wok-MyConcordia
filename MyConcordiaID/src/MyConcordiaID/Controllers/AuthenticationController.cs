@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using MyConcordiaID.Extensions;
 using MyConcordiaID.Helper;
 
 namespace MyConcordiaID.Controllers

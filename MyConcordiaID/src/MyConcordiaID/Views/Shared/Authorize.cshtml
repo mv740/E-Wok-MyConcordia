@@ -1,7 +1,7 @@
 ﻿@using AspNet.Security.OpenIdConnect.Extensions
 @using Microsoft.IdentityModel.Protocols.OpenIdConnect
 @using MyConcordiaID.Models
-@model Tuple<AspNet.Security.OpenIdConnect.Primitives.OpenIdConnectRequest, Application>
+@model Tuple<OpenIdConnectMessage, Application>
 
 @{
     Layout = "~/Views/Shared/_LayoutMobile.cshtml";
@@ -24,7 +24,7 @@
             <div class="center">
                 <form enctype="application/x-www-form-urlencoded" method="post">
                     @Html.AntiForgeryToken()
-                    @foreach (var parameter in Model.Item1.GetParameters())
+                    @foreach (var parameter in Model.Item1.Parameters)
                     {
                         <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
                     }
