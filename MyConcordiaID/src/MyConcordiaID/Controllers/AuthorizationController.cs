@@ -1,17 +1,17 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 using AspNet.Security.OpenIdConnect.Extensions;
+using AspNet.Security.OpenIdConnect.Primitives;
 using AspNet.Security.OpenIdConnect.Server;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Authentication;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using MyConcordiaID.Models;
 using MyConcordiaID.Helpers;
 using MyConcordiaID.Models.Student;
@@ -48,7 +48,7 @@ namespace MyConcordiaID.Controllers
             var request = HttpContext.GetOpenIdConnectRequest();
             if (request == null)
             {
-                return View("Error", new OpenIdConnectMessage
+                return View("Error", new OpenIdConnectResponse
                 {
                     Error = OpenIdConnectConstants.Errors.ServerError,
                     ErrorDescription = "An internal error has occurred"
@@ -62,7 +62,7 @@ namespace MyConcordiaID.Controllers
             var application = await GetApplicationAsync(request.ClientId, cancellationToken);
             if (application == null)
             {
-                return View("Error", new OpenIdConnectMessage
+                return View("Error", new OpenIdConnectResponse
                 {
                     Error = OpenIdConnectConstants.Errors.InvalidClient,
                     ErrorDescription = "Details concerning the calling client application cannot be found in the database"
@@ -86,7 +86,7 @@ namespace MyConcordiaID.Controllers
             var request = HttpContext.GetOpenIdConnectRequest();
             if (request == null)
             {
-                return View("Error", new OpenIdConnectMessage
+                return View("Error", new OpenIdConnectResponse
                 {
                     Error = OpenIdConnectConstants.Errors.ServerError,
                     ErrorDescription = "An internal error has occurred"
@@ -132,7 +132,7 @@ namespace MyConcordiaID.Controllers
             var application = await GetApplicationAsync(request.ClientId, cancellationToken);
             if (application == null)
             {
-                return View("Error", new OpenIdConnectMessage
+                return View("Error", new OpenIdConnectResponse
                 {
                     Error = OpenIdConnectConstants.Errors.InvalidClient,
                     ErrorDescription = "Details concerning the calling client application cannot be found in the database"
@@ -200,7 +200,7 @@ namespace MyConcordiaID.Controllers
             var request = HttpContext.GetOpenIdConnectRequest();
             if (request == null)
             {
-                return View("Error", new OpenIdConnectMessage
+                return View("Error", new OpenIdConnectResponse
                 {
                     Error = OpenIdConnectConstants.Errors.ServerError,
                     ErrorDescription = "An internal error has occurred"
@@ -230,7 +230,7 @@ namespace MyConcordiaID.Controllers
             var request = HttpContext.GetOpenIdConnectRequest();
             if (request == null)
             {
-                return View("Error", new OpenIdConnectMessage
+                return View("Error", new OpenIdConnectResponse
                 {
                     Error = OpenIdConnectConstants.Errors.ServerError,
                     ErrorDescription = "An internal error has occurred"

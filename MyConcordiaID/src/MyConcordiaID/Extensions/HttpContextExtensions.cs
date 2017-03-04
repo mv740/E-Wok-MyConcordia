@@ -4,8 +4,11 @@ using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Authentication;
 
-namespace MyConcordiaID.Helper
+namespace MyConcordiaID.Extensions
 {
+    /// <summary>
+    /// https://github.com/aspnet-contrib/AspNet.Security.OpenIdConnect.Samples/tree/master/samples/Mvc/Mvc.Server/Extensions
+    /// </summary>
     public static class HttpContextExtensions
     {
         public static IEnumerable<AuthenticationDescription> GetExternalProviders(this HttpContext context)

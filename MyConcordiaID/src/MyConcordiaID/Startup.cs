@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,6 +20,8 @@ using Microsoft.AspNetCore.Mvc.Cors.Internal;
 using MyConcordiaID.Models.Graduation;
 using Swashbuckle.AspNetCore.Swagger;
 using System.IO;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.Extensions.PlatformAbstractions;
 using MyConcordiaID.Models.Picture;
 using MyConcordiaID.Models.Event;
@@ -44,8 +45,6 @@ namespace MyConcordiaID
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddApplicationInsightsTelemetry(Configuration);
 
             ////Add framework services.
             //services.AddDbContext<DatabaseContext>(options =>
@@ -77,6 +76,12 @@ namespace MyConcordiaID
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
+
+            services.AddResponseCompression(options =>
+            {
+                options.EnableForHttps = true;
+                options.Providers.Add<GzipCompressionProvider>();
+            });
 
             services
                 .AddMvc()
@@ -134,8 +139,6 @@ namespace MyConcordiaID
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            // Add Application Insights monitoring to the request pipeline as a very first middleware.
-            app.UseApplicationInsightsRequestTelemetry();
             app.UseStaticFiles();
 
            // app.UseIdentity();
@@ -155,7 +158,7 @@ namespace MyConcordiaID
 
             //api documentation
             app.UseSwagger();
-            app.UseSwaggerUi(c =>
+            app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "MyConcordiaID V1");
                
@@ -204,6 +207,8 @@ namespace MyConcordiaID
                 // options.AccessTokenHandler = new JwtSecurityTokenHandler();
             });
 
+            //Enable gzip compression 
+            app.UseResponseCompression();
 
             app.UseMvc(routes =>
             {

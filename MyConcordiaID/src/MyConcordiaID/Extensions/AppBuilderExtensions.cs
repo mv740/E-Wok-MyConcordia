@@ -2,8 +2,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 
-namespace MyConcordiaID.Helper
+namespace MyConcordiaID.Extensions
 {
+    /// <summary>
+    /// https://github.com/aspnet-contrib/AspNet.Security.OpenIdConnect.Samples/blob/master/samples/Mvc/Mvc.Server/Extensions/AppBuilderExtensions.cs
+    /// </summary>
     public static class AppBuilderExtensions
     {
         public static IApplicationBuilder UseWhen(this IApplicationBuilder app,
@@ -27,12 +30,14 @@ namespace MyConcordiaID.Helper
             var builder = app.New();
             configuration(builder);
 
-            return app.Use(next => {
+            return app.Use(next =>
+            {
                 builder.Run(next);
 
                 var branch = builder.Build();
 
-                return context => {
+                return context =>
+                {
                     if (condition(context))
                     {
                         return branch(context);
