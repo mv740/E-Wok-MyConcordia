@@ -24,7 +24,7 @@
             <div class="center">
                 <form enctype="application/x-www-form-urlencoded" method="post">
                     @Html.AntiForgeryToken()
-                    @foreach (var parameter in Model.Item1.Parameters)
+                    @foreach (var parameter in Model.Item1.GetParameters())
                     {
                         <input type="hidden" name="@parameter.Key" value="@parameter.Value" />
                     }
