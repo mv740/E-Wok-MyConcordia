@@ -42,7 +42,13 @@
           bc.barcodeData = imageData.text;
           console.log("Barcode Data: " + bc.barcodeData);
 
-          bc.barcodeID = bc.barcodeData.substring(4, 12);
+          console.log("Barcode id length: " + bc.barcodeID.length);
+          if(bc.barcodeData.length == 8) { //handles barcode ids generated on the phone
+            bc.barcodeID = bc.barcodeData;
+          } else if (bc.barcodeData.length == 14) { //handles barcodes ids from physical card
+            bc.barcodeID = bc.barcodeData.substring(4, 12);
+
+          }
           console.log("Barcode ID: " + bc.barcodeID);
 
           var userParameter = {};
