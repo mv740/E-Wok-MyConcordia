@@ -371,6 +371,7 @@ namespace MyConcordiaID.Models.Event
                     {
                         netName = student.NETNAME;
                     }
+
                 }
 
                 if (!string.IsNullOrEmpty(netName))
@@ -403,7 +404,7 @@ namespace MyConcordiaID.Models.Event
 
                     var newUser = new EVENT_USERS
                     {
-                        STUDENT_NETNAME_FK = user.UserNetname,
+                        STUDENT_NETNAME_FK = netName,
                         ROLE = user.Role.ToString(),
                         STATUS = status,
                         EVENT_ID = user.EventID,

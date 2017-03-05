@@ -1,0 +1,25 @@
+{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+    "System.Runtime.Serialization.Primitives": "4.3.0",
+    "xunit": "2.2.0",
+    "dotnet-test-xunit": "2.2.0-preview2-build1029",
+    "MyConcordiaID": "1.0.0-*",
+    "Moq": "4.7.1",
+    "Microsoft.CodeCoverage": "1.0.2"
+  },
+  "testRunner": "xunit",
+  "frameworks": {
+    "net461": {
+      "dependencies": {
+        "OracleEntityFramework": {
+          "target": "project"
+        }
+
+      }
+    }
+  }
+}

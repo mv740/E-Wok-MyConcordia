@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using MyConcordiaID.Helper;
 using MyConcordiaID.Models.Picture;
@@ -12,14 +11,12 @@ using System.Data.Entity.Infrastructure;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Xunit;
 
-namespace UnitTestCore
+namespace Tests
 {
-    /// <summary>
-    /// Testing with mocking framework https://msdn.microsoft.com/en-us/library/dn314429(v=vs.113).aspx
-    /// </summary>
-    [TestClass]
-    public class StudentUnitTest
+   
+    public class StudentRepositoryTest :IDisposable
     {
 
         private Mock<DatabaseEntities> _context;
@@ -27,6 +24,25 @@ namespace UnitTestCore
         private PictureRepository _picture;
         private Mock<DbSet<STUDENT>> _mySetStudent;
         private Mock<DbSet<PICTURE>> _mySetPicture;
+
+
+        public StudentRepositoryTest()
+        {
+            _context = new Mock<DatabaseEntities>();
+            _mySetStudent = new Mock<DbSet<STUDENT>>();
+            _mySetPicture = new Mock<DbSet<PICTURE>>();
+            _repo = new StudentRepository(_context.Object);
+            _picture = new PictureRepository(_context.Object);
+        }
+
+        public void Dispose()
+        {
+            _context = null;
+            _mySetPicture = null;
+            _mySetStudent = null;
+            _repo = null;
+
+        }
 
         private void ConnectMocksToDataStore(IEnumerable<STUDENT> dataStore)
         {
@@ -47,28 +63,9 @@ namespace UnitTestCore
             _mySetPicture.As<IDbAsyncEnumerable<PICTURE>>().Setup(data => data.GetAsyncEnumerator()).Returns(new TestDbAsyncEnumerator<PICTURE>(dataSource.GetEnumerator()));
             _context.Setup(a => a.PICTUREs).Returns(_mySetPicture.Object);
         }
-     
 
-        [TestInitialize]
-        public void Initialize()
-        {
-            _context = new Mock<DatabaseEntities>();
-            _mySetStudent = new Mock<DbSet<STUDENT>>();
-            _mySetPicture = new Mock<DbSet<PICTURE>>();
-            _repo = new StudentRepository(_context.Object);
-            _picture = new PictureRepository(_context.Object);
-        }
-
-        [TestCleanup]
-        public void Cleanup()
-        {
-            _context = null;
-            _mySetPicture = null;
-            _mySetStudent = null;
-            _repo = null;
-        }
-
-        [TestMethod]
+        
+        [Fact]
         public void FindById()
         {
             const string name = "testFirst";
@@ -88,19 +85,19 @@ namespace UnitTestCore
             }
             };
 
-   
+
             _mySetStudent.Object.AddRange(users);
 
             ConnectMocksToDataStore(users);
 
 
             var student = _repo.FindById(21941097).Result;
-            Assert.AreEqual(21941097, student.Id);
-            Assert.AreEqual("testFirst", student.FirstName);
+            Assert.Equal(21941097, student.Id);
+            Assert.Equal("testFirst", student.FirstName);
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GetAll()
         {
             const string name = "testFirst";
@@ -135,11 +132,11 @@ namespace UnitTestCore
 
             var result = _repo.GetAll().Result;
 
-            Assert.AreEqual(2, Enumerable.Count(result));
+            Assert.Equal(2, Enumerable.Count(result));
 
         }
 
-        [TestMethod]
+        [Fact]
         public void AddPendingPicture()
         {
             const string name = "testFirst";
@@ -208,10 +205,10 @@ namespace UnitTestCore
 
             _mySetPicture.Verify(m => m.Add(It.IsAny<PICTURE>()), Times.Once());
             _context.Verify(m => m.SaveChanges(), Times.Once());
-            
+
         }
 
-        [TestMethod]
+        [Fact]
         public void FindPendingPicture()
         {
             const string name = "testFirst";
@@ -273,11 +270,11 @@ namespace UnitTestCore
 
             var picture = _picture.FindPendingPicture(21941097);
 
-            Assert.AreEqual(Status.Approved.ToString(), picture.STATUS);
+            Assert.Equal(Status.Approved.ToString(), picture.STATUS);
 
         }
 
-        [TestMethod]
+        [Fact]
         public void ValidatePicture()
         {
             const string name = "testFirst";
@@ -350,20 +347,20 @@ namespace UnitTestCore
             decimal id = -1;
             var status = "";
             // in our unit test our student has only 1 picture
-            foreach(dynamic d in studentPictures.ArchivedPictures)
+            foreach (dynamic d in studentPictures.ArchivedPictures)
             {
                 UnitTestHelper.PrintPropertiesOfDynamicObject(d);
                 id = UnitTestHelper.ReflectPropertyValue(d, "ID_PK");
                 status = UnitTestHelper.ReflectPropertyValue(d, "STATUS");
             }
 
-            Assert.AreEqual(Status.Denied.ToString(), status);
-            Assert.AreEqual(pictureId, id);
+            Assert.Equal(Status.Denied.ToString(), status);
+            Assert.Equal(pictureId, id);
 
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GenerateStudentNetName()
         {
             const string firstName = "francis";
@@ -383,9 +380,10 @@ namespace UnitTestCore
 
             const string result = "f_cotetr";
 
-            Assert.AreEqual(result, netName);
-            Assert.AreEqual(result, netNameTest2);
-            Assert.AreEqual("a_abcdef", bigNetName);
+            Assert.Equal(result, netName);
+            Assert.Equal(result, netNameTest2);
+            Assert.Equal("a_abcdef", bigNetName);
         }
+
     }
 }
