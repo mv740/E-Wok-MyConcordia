@@ -297,7 +297,7 @@ namespace MyConcordiaID.Controllers
         /// <response code="404">user not found</response>
         /// <response code="401">Unauthorized</response>
         [HttpGet]
-        [Route("admin/{netname}")]
+        [Route("admin")]
         [ProducesResponseType(typeof(IEnumerable<AvailableEvent>), 200)]
         public IActionResult GetMyAdminEvents()
         {
