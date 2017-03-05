@@ -11,7 +11,8 @@ angular.module('myApp', [
     'angularCSS',
     'ng.oidcclient',
     '720kb.tooltips',
-    'fullPage.js'
+    'fullPage.js',
+    'ng-fusioncharts'
 
 
 ]).constant("myConfig", {
