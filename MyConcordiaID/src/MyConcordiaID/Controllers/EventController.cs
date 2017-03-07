@@ -6,6 +6,7 @@ using MyConcordiaID.Models.Log;
 using System.Collections.Generic;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
+using MyConcordiaID.Models.Event.Statistic;
 
 namespace MyConcordiaID.Controllers
 {
@@ -222,6 +223,31 @@ namespace MyConcordiaID.Controllers
             //var authenticatedUser = GetAuthenticatedUserNetname();
 
             var users = _eventRepo.GetEventUsers(id, order, "m_woznia");
+            if (users == null)
+            {
+                //event not found
+                return NotFound();
+            }
+
+            return new ObjectResult(users);
+        }
+
+
+        /// <summary>
+        ///  Retrieve a specific event's statistic
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <response code="200">Return event statistic</response>
+        /// <response code="404">Event not found</response>
+        [ProducesResponseType(typeof(EventStatistic), 200)]
+        [AllowAnonymous]
+        [HttpGet("{id}/stats")]
+        public IActionResult GetEventStatistic(string id)
+        {
+            //var authenticatedUser = GetAuthenticatedUserNetname();
+
+            var users = _eventRepo.GetEventStatistic(id).Result;
             if (users == null)
             {
                 //event not found

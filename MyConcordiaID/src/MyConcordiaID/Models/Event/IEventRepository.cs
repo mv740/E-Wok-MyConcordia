@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using MyConcordiaID.Models.Event.Statistic;
 
 namespace MyConcordiaID.Models.Event
 {
@@ -19,5 +21,6 @@ namespace MyConcordiaID.Models.Event
         IEnumerable<dynamic> GetAdminEvents(string netname);
         IEnumerable<AvailableEvent> GetAttendeeEvents(string netname);
         ScannerResult RegisterScannedUser(ScannerUser user);
+        Task<EventStatistic> GetEventStatistic(string eventId);
     }
 }
