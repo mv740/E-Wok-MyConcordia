@@ -18,11 +18,29 @@ function adminService(toastedHttp, myConfig) {
     //////////////////////////////////////
 
     function submitUpdatePeriod(updatePeriod){
-        return toastedHttp.post(updatePeriod, myConfig.picturePeriod);
+        var settings = {
+            data: updatePeriod,
+            topUrl: myConfig.picturePeriod,
+            responseMsg: "Period updated",
+            failureMsg: {
+                401: "Please Login",
+                404: "Update Period not found",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.post(settings);
     }
 
     function getUpdatePeriod() {
-        return toastedHttp.get({topUrl: myConfig.getUpdatePeriod});
+        var settings = {
+            topUrl: myConfig.getUpdatePeriod,
+            failureMsg: {
+                401: "Please Login",
+                404: "Update Period not found",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.get(settings);
     }
 
 }

@@ -25,38 +25,122 @@ function eventService(toastedHttp, myConfig) {
     //////////////////////////////////////
 
     function getThisEvent(id) {
-        return toastedHttp.get({param:id, topUrl: myConfig.getEvent});
+        var settings = {
+            param: id,
+            topUrl: myConfig.getEvent,
+            failureMsg: {
+                401: "Please Login",
+                404: "Event not found",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.get(settings);
     }
 
     function submit(event){
-        return toastedHttp.post(event, myConfig.event);
+        var settings = {
+            data: event,
+            topUrl: myConfig.event,
+            responseMsg: "Event created",
+            failureMsg: {
+                401: "Please Login",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.post(settings);
     }
 
     function getAllEvents() {
-       return toastedHttp.get({topUrl: myConfig.getEvents});
+        var settings = {
+            topUrl: myConfig.getEvents,
+            failureMsg: {
+                401: "Please Login",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+       return toastedHttp.get(settings);
     }
 
     function updateEvent(event) {
-        return toastedHttp.put(event, myConfig.event);
+        var settings = {
+            data: event,
+            topUrl: myConfig.event,
+            responseMsg: "Event updated",
+            failureMsg: {
+                401: "Please Login",
+                404: "Event not found",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.put(settings);
     }
 
     function cancelEvent(event) {
-        return toastedHttp.del(event, myConfig.event);
+        var settings = {
+            data: event,
+            topUrl: myConfig.event,
+            responseMsg: "Event cancelled",
+            failureMsg: {
+                401: "Please Login",
+                404: "Event not found",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.del(settings);
     }
 
     function setUserRole(user) {
-        return toastedHttp.put(user, myConfig.eventUser);
+        var settings = {
+            data: user,
+            topUrl: myConfig.eventUser,
+            responseMsg: "Role updated",
+            failureMsg: {
+                401: "Please Login",
+                404: "User not found",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.put(settings);
     }
 
     function getEventAttendees(id) {
-        return toastedHttp.get({topUrl: myConfig.eventAttendees.replace("IDTOKEN", id) + "/true"});
+        var settings = {
+            topUrl: myConfig.eventAttendees.replace("IDTOKEN", id) + "/true",
+            failureMsg: {
+                401: "Please Login",
+                404: "User not found",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.get(settings);
     }
 
     function addUser(user) {
-        return toastedHttp.post(user, myConfig.eventUser);
+        var settings = {
+            data: user,
+            topUrl: myConfig.eventUser,
+            responseMsg: "Attendee added",
+            failureMsg: {
+                401: "Please Login",
+                404: "User not found",
+                409: "Attendee already added",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.post(settings);
     }
 
     function deleteUser(user) {
-        return toastedHttp.del(user, myConfig.eventUser);
+        var settings = {
+            data: user,
+            topUrl: myConfig.eventUser,
+            responseMsg: "Attendee removed",
+            failureMsg: {
+                401: "Please Login",
+                404: "User not found",
+                500: "Sorry! Our servers are down :("
+            }
+        };
+        return toastedHttp.del(settings);
     }
 }
