@@ -4,9 +4,10 @@ angular
     .module('myApp')
     .factory('eventService', eventService);
 
-eventService.$inject = ['toastedHttpService', 'myConfig'];
 
-function eventService(toastedHttp, myConfig) {
+eventService.$inject = ['toastedHttpService', 'myConfig', 'eventToastFeedback'];
+
+function eventService(toastedHttp, myConfig, eventToastFeedback) {
 
     var service = {
         getThisEvent: getThisEvent,
@@ -28,11 +29,7 @@ function eventService(toastedHttp, myConfig) {
         var settings = {
             param: id,
             topUrl: myConfig.getEvent,
-            failureMsg: {
-                401: "Please Login",
-                404: "Event not found",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: eventToastFeedback.getThisEvent.failureMsg
         };
         return toastedHttp.get(settings);
     }
@@ -41,11 +38,8 @@ function eventService(toastedHttp, myConfig) {
         var settings = {
             data: event,
             topUrl: myConfig.event,
-            responseMsg: "Event created",
-            failureMsg: {
-                401: "Please Login",
-                500: "Sorry! Our servers are down :("
-            }
+            responseMsg: eventToastFeedback.submit.responseMsg,
+            failureMsg: eventToastFeedback.submit.failureMsg
         };
         return toastedHttp.post(settings);
     }
@@ -53,10 +47,7 @@ function eventService(toastedHttp, myConfig) {
     function getAllEvents() {
         var settings = {
             topUrl: myConfig.getEvents,
-            failureMsg: {
-                401: "Please Login",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: eventToastFeedback.getAllEvents.failureMsg
         };
        return toastedHttp.get(settings);
     }
@@ -65,12 +56,8 @@ function eventService(toastedHttp, myConfig) {
         var settings = {
             data: event,
             topUrl: myConfig.event,
-            responseMsg: "Event updated",
-            failureMsg: {
-                401: "Please Login",
-                404: "Event not found",
-                500: "Sorry! Our servers are down :("
-            }
+            responseMsg: eventToastFeedback.updateEvent.responseMsg,
+            failureMsg: eventToastFeedback.updateEvent.failureMsg
         };
         return toastedHttp.put(settings);
     }
@@ -79,12 +66,8 @@ function eventService(toastedHttp, myConfig) {
         var settings = {
             data: event,
             topUrl: myConfig.event,
-            responseMsg: "Event cancelled",
-            failureMsg: {
-                401: "Please Login",
-                404: "Event not found",
-                500: "Sorry! Our servers are down :("
-            }
+            responseMsg: eventToastFeedback.cancelEvent.responseMsg,
+            failureMsg: eventToastFeedback.cancelEvent.failureMsg
         };
         return toastedHttp.del(settings);
     }
@@ -93,12 +76,8 @@ function eventService(toastedHttp, myConfig) {
         var settings = {
             data: user,
             topUrl: myConfig.eventUser,
-            responseMsg: "Role updated",
-            failureMsg: {
-                401: "Please Login",
-                404: "User not found",
-                500: "Sorry! Our servers are down :("
-            }
+            responseMsg: eventToastFeedback.setUserRole.responseMsg,
+            failureMsg: eventToastFeedback.setUserRole.failureMsg
         };
         return toastedHttp.put(settings);
     }
@@ -106,11 +85,7 @@ function eventService(toastedHttp, myConfig) {
     function getEventAttendees(id) {
         var settings = {
             topUrl: myConfig.eventAttendees.replace("IDTOKEN", id) + "/true",
-            failureMsg: {
-                401: "Please Login",
-                404: "User not found",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: eventToastFeedback.getEventAttendees.failureMsg
         };
         return toastedHttp.get(settings);
     }
@@ -119,13 +94,8 @@ function eventService(toastedHttp, myConfig) {
         var settings = {
             data: user,
             topUrl: myConfig.eventUser,
-            responseMsg: "Attendee added",
-            failureMsg: {
-                401: "Please Login",
-                404: "User not found",
-                409: "Attendee already added",
-                500: "Sorry! Our servers are down :("
-            }
+            responseMsg: eventToastFeedback.addUser.responseMsg,
+            failureMsg: eventToastFeedback.addUser.failureMsg
         };
         return toastedHttp.post(settings);
     }
@@ -134,12 +104,8 @@ function eventService(toastedHttp, myConfig) {
         var settings = {
             data: user,
             topUrl: myConfig.eventUser,
-            responseMsg: "Attendee removed",
-            failureMsg: {
-                401: "Please Login",
-                404: "User not found",
-                500: "Sorry! Our servers are down :("
-            }
+            responseMsg: eventToastFeedback.deleteUser.responseMsg,
+            failureMsg: eventToastFeedback.deleteUser.failureMsg
         };
         return toastedHttp.del(settings);
     }

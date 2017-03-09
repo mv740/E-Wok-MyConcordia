@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .factory('adminService', adminService);
 
-adminService.$inject = ['toastedHttpService', 'myConfig'];
+adminService.$inject = ['toastedHttpService', 'myConfig', 'adminToastFeedback'];
 
-function adminService(toastedHttp, myConfig) {
+function adminService(toastedHttp, myConfig, adminToastFeedback) {
 
     var service = {
         submitUpdatePeriod: submitUpdatePeriod,
@@ -21,12 +21,8 @@ function adminService(toastedHttp, myConfig) {
         var settings = {
             data: updatePeriod,
             topUrl: myConfig.picturePeriod,
-            responseMsg: "Period updated",
-            failureMsg: {
-                401: "Please Login",
-                404: "Update Period not found",
-                500: "Sorry! Our servers are down :("
-            }
+            responseMsg: adminToastFeedback.submitUpdatePeriod.responseMsg,
+            failureMsg: adminToastFeedback.submitUpdatePeriod.failureMsg
         };
         return toastedHttp.post(settings);
     }
@@ -34,11 +30,7 @@ function adminService(toastedHttp, myConfig) {
     function getUpdatePeriod() {
         var settings = {
             topUrl: myConfig.getUpdatePeriod,
-            failureMsg: {
-                401: "Please Login",
-                404: "Update Period not found",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: adminToastFeedback.getUpdatePeriod.failureMsg
         };
         return toastedHttp.get(settings);
     }

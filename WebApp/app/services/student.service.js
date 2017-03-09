@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .factory('studentService', studentService);
 
-studentService.$inject = ['$q', 'toastedHttpService', 'myConfig'];
+studentService.$inject = ['$q', 'toastedHttpService', 'myConfig', 'studentToastFeedback'];
 
-function studentService($q, toastedHttp, myConfig) {
+function studentService($q, toastedHttp, myConfig, studentToastFeedback) {
 
     var service = {
         sendValidation: sendValidation,
@@ -31,17 +31,13 @@ function studentService($q, toastedHttp, myConfig) {
             data: json,
             topUrl: myConfig.validatePhoto,
             responseMsg: "",
-            failureMsg: {
-                401: "Please Login",
-                404: "No picture found",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: studentToastFeedback.sendValidation.failureMsg
         };
 
         if (valid)
-            settings.responseMsg = "Picture Validated";
+            settings.responseMsg = studentToastFeedback.sendValidation.response.valid;
         else
-            settings.responseMsg = "Picture Revoked";
+            settings.responseMsg = studentToastFeedback.sendValidation.response.invalid;
 
         return toastedHttp.post(settings);
     }
@@ -50,11 +46,7 @@ function studentService($q, toastedHttp, myConfig) {
         var settings = {
             param: id,
             topUrl: myConfig.getStudentPictures,
-            failureMsg: {
-                401: "Please Login",
-                404: "No student found",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: studentToastFeedback.getStudentPictures.failureMsg
         };
         return toastedHttp.get(settings);
     }
@@ -63,11 +55,7 @@ function studentService($q, toastedHttp, myConfig) {
         var settings = {
             param: netname,
             topUrl: myConfig.getLogs,
-            failureMsg: {
-                401: "Please Login",
-                404: "No logs found",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: studentToastFeedback.getStudentLogs.failureMsg
         };
         return toastedHttp.get(settings);
     }
@@ -75,11 +63,7 @@ function studentService($q, toastedHttp, myConfig) {
     function getStudents() {
         var settings = {
             topUrl: myConfig.getStudents,
-            failureMsg: {
-                401: "Please Login",
-                404: "Error",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: studentToastFeedback.getStudents.failureMsg
         };
         return toastedHttp.get(settings);
     }
@@ -89,11 +73,7 @@ function studentService($q, toastedHttp, myConfig) {
             data: params,
             topUrl: myConfig.search,
             responseMsg: "Student found",
-            failureMsg: {
-                401: "Please Login",
-                404: "Error",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: studentToastFeedback.search.failureMsg
         };
         return toastedHttp.post(settings);
     }
@@ -110,17 +90,13 @@ function studentService($q, toastedHttp, myConfig) {
             data: json,
             topUrl: myConfig.validateArchived,
             responseMsg: "",
-            failureMsg: {
-                401: "Please Login",
-                404: "No archive picture found",
-                500: "Sorry! Our servers are down :("
-            }
+            failureMsg: studentToastFeedback.validateArchived.failureMsg
         };
 
         if (valid)
-            settings.responseMsg = "Archive picture validated";
+            settings.responseMsg = studentToastFeedback.validateArchived.responseMsg.valid;
         else
-            settings.responseMsg = "Archive picture revoked";
+            settings.responseMsg = studentToastFeedback.validateArchived.responseMsg.invalid;
 
         return toastedHttp.post(settings);
     }
@@ -132,12 +108,8 @@ function studentService($q, toastedHttp, myConfig) {
         var settings = {
             data: json,
             topUrl: myConfig.submitComment,
-            responseMsg: "Commented",
-            failureMsg: {
-                401: "Please Login",
-                404: "Couldn't comment. Student not found",
-                500: "Sorry! Our servers are down :("
-            }
+            responseMsg: studentToastFeedback.submitComment.responseMsg,
+            failureMsg: studentToastFeedback.submitComment.failureMsg
         };
         return toastedHttp.post(settings);
     }
