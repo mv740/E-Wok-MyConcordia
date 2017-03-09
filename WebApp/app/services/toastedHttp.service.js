@@ -73,7 +73,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
                         showToast({msg:"Sent", delay: 3000});
                     else
                         showToast({msg:settings.responseMsg, delay: 3000});
-                }, 2200);
+                }, 800);
 
             },
             function (failure) {
@@ -90,7 +90,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
                         showToast({msg: settings.failureMsg[409], delay: 3000});
                     else if (failure.status == 500)
                         showToast({msg: settings.failureMsg[500], delay: 3000});
-                }, 2200);
+                }, 800);
 
             });
 
@@ -117,7 +117,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
                         showToast({msg:"Modified", delay: 3000});
                     else
                         showToast({msg:settings.responseMsg, delay: 3000});
-                }, 2200);
+                }, 800);
             },
             function (failure) {
                 deferred.reject(failure);
@@ -131,7 +131,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
                         showToast({msg: settings.failureMsg[404], delay: 3000});
                     else if (failure.status == 500)
                         showToast({msg: settings.failureMsg[500], delay: 3000});
-                }, 2200);
+                }, 800);
             });
 
         return deferred.promise;
@@ -157,7 +157,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
                         showToast({msg:"Deleted", delay: 3000});
                     else
                         showToast({msg:settings.responseMsg, delay: 3000});
-                }, 2200);
+                }, 800);
             },
             function (failure) {
                 deferred.reject(failure);
@@ -171,7 +171,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
                         showToast({msg: settings.failureMsg[404], delay: 3000});
                     else if (failure.status == 500)
                         showToast({msg: settings.failureMsg[500], delay: 3000});
-                }, 2200);
+                }, 800);
             });
 
         return deferred.promise;
