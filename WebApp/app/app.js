@@ -88,11 +88,7 @@ angular.module('myApp', [
 
 
         $locationProvider.html5Mode({
-            //release mode:
             enabled: true,
-            //dev mode:
-            //you can browse different pages by adding # before the webpage name. (eg. http://localhost:63342/WebApp/app/review becomes http://localhost:63342/WebApp/app/#review)
-            //enabled: false,
             requireBase: true
         });
 

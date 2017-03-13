@@ -376,6 +376,9 @@ md-toast {
   right: 372px;
   z-index: 2; }
 
+.no-outline {
+  outline: none; }
+
 #sideMenuContainer {
   height: 100%;
   float: left; }
