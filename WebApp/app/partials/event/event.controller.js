@@ -158,7 +158,12 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
     }
 
     function isFilterTarget(result){
-        return !eventTab.currentFilter || (eventTab.currentFilter == "All" || result.information.status == eventTab.currentFilter || result.information.type == eventTab.currentFilter);
+        var isCancelledAndTargetted = eventTab.currentFilter == "Cancelled" && result.information.status == "Cancelled";
+
+        var noCurrentFilterAndNotCancelled = !eventTab.currentFilter && result.information.status != "Cancelled";
+        var eventTargettedByFilter = eventTab.currentFilter == "All" || (result.information.status == eventTab.currentFilter || result.information.type == eventTab.currentFilter);
+        var eventTargettedByFilterButIsNotCancelled = result.information.status != "Cancelled" && eventTargettedByFilter;
+        return noCurrentFilterAndNotCancelled || ( isCancelledAndTargetted || eventTargettedByFilterButIsNotCancelled);
     }
 
     Mousetrap.bind('enter', eventTab.addUser);
