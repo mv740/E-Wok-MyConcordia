@@ -67,9 +67,35 @@
                         </li>
                     </ul>
                     <button ng-click="eventTab.fpControls.slideLeft()" class="button3D purple buttonSmallFormat top-buffer-sm">Go Back</button>
+                    <button ng-click="eventTab.fpControls.slideRight(); eventTab.updateStatistics();" class="button3D purple buttonSmallFormat all-side-margin-sm">Statistics</button>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
+                    <div class="page-header">
+                        <h1>{{eventTab.selectedEvent.information.name}}</h1>
+                    </div>
+                    <div id="stats" class="top-buffer">
+                        <fusioncharts
+                                width="400"
+                                height="300"
+                                type="column2d"
+                                datasource="{{eventTab.stats}}">
+
+                        </fusioncharts>
+                    </div>
+                    <div ng-if="eventTab.selectedEvent.information.type == 'Closed'" class="top-buffer">
+                        <fusioncharts
+                            width="400"
+                            height="400"
+                            type="pie3d"
+                            datasource="{{eventTab.pie}}"
+                    ></fusioncharts></div>
+                    <button ng-click="eventTab.fpControls.slideLeft()" class="button3D purple buttonSmallFormat top-buffer-sm">Go Back</button>
                 </div>
             </div>
         </div>
+
         <div class="section">
 
             <div class="page-header">
