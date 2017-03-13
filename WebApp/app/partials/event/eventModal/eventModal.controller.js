@@ -19,50 +19,44 @@ function EventModalCtrl($scope, $modal, $modalInstance, eventService, event) {
 
     eventModal.stats = {
         chart: {
-            caption: "Harry's SuperMart",
-            subCaption: "Top 5 stores in last month by revenue",
-            numberPrefix: "$",
-            theme: "ocean"
+            caption: "Administration and attendees statistics",
+            subCaption: "",
+            numberPrefix: "",
+            theme: "zune"
         },
-        data: [{
-            label: "Bakersfield Central",
-            value: "880000"
-        },
-            {
-                label: "Garden Groove harbour",
-                value: "730000"
-            },
-            {
-                label: "Los Angeles Topanga",
-                value: "590000"
-            },
-            {
-                label: "Compton-Rancho Dom",
-                value: "520000"
-            },
-            {
-                label: "Daly City Serramonte",
-                value: "330000"
-            }]
+        data: []
     };
 
     //////////////////////////
 
     function updateEvent() {
         eventModal.event = event;
+        eventService.getStats(eventModal.event.information.eventId).then(function(value){
+            eventModal.stats.data = [
+                {
+                    label: "Mods",
+                    value: value.administration.mods
+                },
+                {
+                    label: "Scanners",
+                    value: value.administration.scanners
+                },
+                {
+                    label: "Registered",
+                    value: value.attendees.registered
+                },
+                {
+                    label: "Attending",
+                    value: value.attendees.registered
+                },
+                {
+                    label: "Tracking",
+                    value: value.attendees.tracking
+                }
+            ];
 
-        /*eventService.getEventPictures(event.id).then(function (value) {
-            eventModal.event.pendingPicture = value.data.pendingPicture;
+        });
 
-            var archivedPictures = value.data.archivedPictures;
-
-            if (value.data.profilePicture){
-                archivedPictures.unshift(value.data.profilePicture);
-            }
-            eventModal.event.previousPictures = archivedPictures;
-
-            eventModal.loading = false;
-        });*/
     }
 
     function enlargeImage(image) {
