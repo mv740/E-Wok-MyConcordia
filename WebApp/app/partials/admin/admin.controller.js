@@ -36,7 +36,7 @@
                 adminTab.startDate = dateParsingService.parseUpdatePeriod(value.startDate);
                 adminTab.endDate = dateParsingService.parseUpdatePeriod(value.endDate);
 
-                adminTab.currentUpdatePeriod = "Academic Year: " + year
+                adminTab.currentUpdatePeriod = "Academic Year: " + year + "-" + (year + 1)
                     + ", from " + adminTab.startDate.month + " " + adminTab.startDate.day + ", " + adminTab.startDate.year
                     + " to " + adminTab.endDate.month + " " + adminTab.endDate.day + ", " + adminTab.endDate.year;
             }
