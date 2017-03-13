@@ -67,8 +67,8 @@ WE ARE PIZZA. with pepperoni.
 <div id="logsContainer" class="container2D overflow-hidden top-buffer">
 
     <div class="side-padding top-buffer">
-    <button class="col-xs-12 button3D" ng-click="studentModal.loadLogs()"> Show logs</button>
-    <ul class="col-xs-12 top-buffer">
+    <button class="col-xs-12 button3D" ng-click="studentModal.toggleLogs()"> Show logs</button>
+    <ul ng-show="studentModal.logsOpened" class="col-xs-12 top-buffer">
         <li ng-repeat="log in studentModal.logs">
             <p>
                 <span>{{log.action}}:</span>
