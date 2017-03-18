@@ -27,6 +27,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
     eventTab.selectThisEvent = selectThisEvent;
     eventTab.setFilter = setFilter;
     eventTab.isFilterTarget = isFilterTarget;
+    eventTab.updateStatistics = updateStatistics;
     eventTab.filters = [
         "All",
         "Cancelled",
@@ -49,8 +50,74 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
         keyboardScrolling: false
     };
 
+    eventTab.stats = {
+        chart: {
+            caption: "Administration and attendees statistics",
+            subCaption: "",
+            numberPrefix: "",
+            theme: "zune"
+        },
+        data: []
+    };
+
+    eventTab.pie = {
+        chart: {
+            caption: "Percentage of people who attended",
+            //subcaption: "",
+            startingangle: "120",
+            //showlabels: "0",
+            //showlegend: "0",
+            enablemultislicing: "0",
+            slicingdistance: "15",
+            showpercentvalues: "1",
+            showpercentintooltip: "0",
+            //plottooltext: "Age group : $label Total visit : $datavalue",
+            theme: "fint"
+        },
+        data: []
+    }
+
     ////////////////////////////////////////////////////////////
 
+    function updateStatistics() {
+        eventService.getStats(eventTab.selectedEvent.information.eventId).then(function(value){
+            eventTab.stats.data = [
+                {
+                    label: "Mods",
+                    value: value.administration.mods
+                },
+                {
+                    label: "Scanners",
+                    value: value.administration.scanners
+                },
+                {
+                    label: "Registered",
+                    value: value.attendees.registered
+                },
+                {
+                    label: "Attending",
+                    value: value.attendees.attending
+                },
+                {
+                    label: "Tracking",
+                    value: value.attendees.tracking
+                }
+            ];
+
+            var registered = value.attendees.registered - value.administration.mods - value.administration.scanners - value.administration.creator;
+            eventTab.pie.data = [
+                {
+                    label: "Attending",
+                    value: value.attendees.attending
+                },
+                {
+                    label: "Did not come",
+                    value: registered
+                }
+            ];
+        });
+
+    }
 
     function submit(){
         if (eventTab.creating.eventID) eventService.updateEvent(eventTab.creating).then(function(){});
@@ -158,7 +225,12 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
     }
 
     function isFilterTarget(result){
-        return !eventTab.currentFilter || (eventTab.currentFilter == "All" || result.information.status == eventTab.currentFilter || result.information.type == eventTab.currentFilter);
+        var isCancelledAndTargetted = eventTab.currentFilter == "Cancelled" && result.information.status == "Cancelled";
+
+        var noCurrentFilterAndNotCancelled = !eventTab.currentFilter && result.information.status != "Cancelled";
+        var eventTargettedByFilter = eventTab.currentFilter == "All" || (result.information.status == eventTab.currentFilter || result.information.type == eventTab.currentFilter);
+        var eventTargettedByFilterButIsNotCancelled = result.information.status != "Cancelled" && eventTargettedByFilter;
+        return noCurrentFilterAndNotCancelled || ( isCancelledAndTargetted || eventTargettedByFilterButIsNotCancelled);
     }
 
     Mousetrap.bind('enter', eventTab.addUser);

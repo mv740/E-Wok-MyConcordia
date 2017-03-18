@@ -18,7 +18,8 @@ function eventService(toastedHttp, myConfig, eventToastFeedback) {
         getEventAttendees: getEventAttendees,
         addUser: addUser,
         cancelEvent: cancelEvent,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        getStats: getStats
     }
 
     return service;
@@ -108,5 +109,9 @@ function eventService(toastedHttp, myConfig, eventToastFeedback) {
             failureMsg: eventToastFeedback.deleteUser.failureMsg
         };
         return toastedHttp.del(settings);
+    }
+
+    function getStats(eventId){
+        return toastedHttp.get({topUrl: myConfig.getEventStats.replace("IDTOKEN", eventId)});
     }
 }

@@ -1,3 +1,4 @@
+
 <div class="validationModal container2D">
 
     <div ng-if="!studentModal.loading" id="modal-body">
@@ -52,11 +53,22 @@
 
 </div>
 
+<!--
+We are governed by the rules of the pizza. We will rise. We will prevail.
+WE ARE PIZZA. with pepperoni.
+   __
+ // ""--.._
+||  (_)  _ "-._
+||    _ (_)    '-.
+||   (_)   __..-'
+ \\__..--""
+ -->
+
 <div id="logsContainer" class="container2D overflow-hidden top-buffer">
 
     <div class="side-padding top-buffer">
-    <button class="col-xs-12 button3D" ng-click="studentModal.loadLogs()"> Show logs</button>
-    <ul class="col-xs-12 top-buffer">
+    <button class="col-xs-12 button3D bottom-buffer" ng-click="studentModal.toggleLogs()"> Show logs</button>
+    <ul ng-show="studentModal.logsOpened" class="col-xs-12">
         <li ng-repeat="log in studentModal.logs">
             <p>
                 <span>{{log.action}}:</span>
