@@ -59,31 +59,30 @@ angular.module('myApp', [
     }])
 
 
-    .config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider,$httpProvider) {
-    //$locationProvider.hashPrefix('!');
+    .config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
+        //$locationProvider.hashPrefix('!');
 
-    $routeProvider
-        .when('/login' , {
-            templateUrl : 'partials/login/login.html',
-            css: 'sass/views/login.css',
-            controller: 'LoginController',
-            controllerAs: 'vm',
-            authenticate : false
-        }).when('/admin', {
-            templateUrl : 'partials/admin/admin.html',
+        $routeProvider
+            .when('/login', {
+                templateUrl: 'partials/login/login.html',
+                css: 'sass/views/login.css',
+                controller: 'LoginController',
+                controllerAs: 'vm',
+                authenticate: false
+            }).when('/admin', {
+            templateUrl: 'partials/admin/admin.html',
             css: 'sass/views/admin.css',
-            authenticate : true
+            authenticate: true
         }).when('/review', {
             templateUrl: 'partials/review/review.html',
             css: 'sass/views/review.css',
-            authenticate : true
+            authenticate: true
         }).when('/event', {
-        templateUrl: 'partials/event/event.html',
-        css: 'sass/views/event.css',
-        authenticate : true
-    })
-        .otherwise({ redirectTo: '/login' });
-
+            templateUrl: 'partials/event/event.html',
+            css: 'sass/views/event.css',
+            authenticate: true
+        })
+            .otherwise({redirectTo: '/login'});
 
 
         $locationProvider.html5Mode({
@@ -97,20 +96,16 @@ angular.module('myApp', [
 
 
         $httpProvider.interceptors.push('AuthInterceptorService');
-}])
-    .run(['$rootScope','SessionService','$location',function ($rootScope, SessionService,$location) {
+    }])
+    .run(['$rootScope', 'SessionService', '$location', function ($rootScope, SessionService, $location) {
 
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
 
             if (!SessionService.isAuthenticated()) {
-
-                //active session take more time to load, but we can still detect if it exist for refreshed window
-                if(!SessionService.hasActiveSession())
-                {
-                    // redirect to the login route
-                    console.log('Unauthorized access');
-                    $location.path('/login');
-                }
+                
+                // redirect to the login route
+                console.log('Unauthorized access');
+                $location.path('/login');
             }
         });
     }]);
