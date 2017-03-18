@@ -41,13 +41,13 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
             deferred.reject((failure));
             hideToast();
             if (settings.failureMsg == null)
-                showToast({msg: "Failed", delay: 3000});
+                showToast({msg: "Failed", delay: 3000, responseFailed: true});
             else if (failure.status == 401)
-                showToast({msg: settings.failureMsg[401], delay: 3000});
+                showToast({msg: settings.failureMsg[401], delay: 3000, responseFailed: true});
             else if (failure.status == 404)
-                showToast({msg: settings.failureMsg[409], delay: 3000});
+                showToast({msg: settings.failureMsg[409], delay: 3000, responseFailed: true});
             else if (failure.status == 500)
-                showToast({msg: settings.failureMsg[500], delay: 3000});
+                showToast({msg: settings.failureMsg[500], delay: 3000, responseFailed: true});
         });
 
         return deferred.promise;
@@ -83,13 +83,13 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
                     if (settings.failureMsg == null)
                         showToast({msg: "Failed", delay: 3000});
                     else if (failure.status == 401)
-                        showToast({msg: settings.failureMsg[401], delay: 3000});
+                        showToast({msg: settings.failureMsg[401], delay: 3000, responseFailed: true});
                     else if (failure.status == 404)
-                        showToast({msg: settings.failureMsg[404], delay: 3000});
+                        showToast({msg: settings.failureMsg[404], delay: 3000, responseFailed: true});
                     else if (failure.status == 409)
-                        showToast({msg: settings.failureMsg[409], delay: 3000});
+                        showToast({msg: settings.failureMsg[409], delay: 3000, responseFailed: true});
                     else if (failure.status == 500)
-                        showToast({msg: settings.failureMsg[500], delay: 3000});
+                        showToast({msg: settings.failureMsg[500], delay: 3000, responseFailed: true});
                 }, 800);
 
             });
@@ -124,13 +124,13 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
                 hideToast();
                 $timeout(function() {
                     if (settings.failureMsg == null)
-                        showToast({msg: "Failed", delay: 3000});
+                        showToast({msg: "Failed", delay: 3000, responseFailed: true});
                     else if (failure.status == 401)
-                        showToast({msg: settings.failureMsg[401], delay: 3000});
+                        showToast({msg: settings.failureMsg[401], delay: 3000, responseFailed: true});
                     else if (failure.status == 404)
-                        showToast({msg: settings.failureMsg[404], delay: 3000});
+                        showToast({msg: settings.failureMsg[404], delay: 3000, responseFailed: true});
                     else if (failure.status == 500)
-                        showToast({msg: settings.failureMsg[500], delay: 3000});
+                        showToast({msg: settings.failureMsg[500], delay: 3000, responseFailed: true});
                 }, 800);
             });
 
@@ -164,13 +164,13 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
                 hideToast();
                 $timeout(function() {
                     if (settings.failureMsg == null)
-                        showToast({msg: "Failed", delay: 3000});
+                        showToast({msg: "Failed", delay: 3000, responseFailed: true});
                     else if (failure.status == 401)
-                        showToast({msg: settings.failureMsg[401], delay: 3000});
+                        showToast({msg: settings.failureMsg[401], delay: 3000, responseFailed: true});
                     else if (failure.status == 404)
-                        showToast({msg: settings.failureMsg[404], delay: 3000});
+                        showToast({msg: settings.failureMsg[404], delay: 3000, responseFailed: true});
                     else if (failure.status == 500)
-                        showToast({msg: settings.failureMsg[500], delay: 3000});
+                        showToast({msg: settings.failureMsg[500], delay: 3000, responseFailed: true});
                 }, 800);
             });
 
@@ -192,13 +192,16 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
 
     function buildSimple(options){
         var msg = "Loading...";
+        var theme = "";
         var delay = 6000;
+        if (options && options.responseFailed) theme = "error-toast";
         if (options && options.msg) msg = options.msg;
         if (options && options.delay) delay = options.delay;
         return $mdToast.simple()
             .textContent(msg)
             .position("bottom right")
             .hideDelay(delay)
+            .theme(theme)
     }
 
 }

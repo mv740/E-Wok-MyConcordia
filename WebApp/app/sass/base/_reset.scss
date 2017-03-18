@@ -48,3 +48,12 @@ md-toast{
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
+
+md-toast.md-error-toast-theme .md-toast-content{
+  background-color: red;
+  text-align: center;
+}
+
+md-toast.md-error-toast-theme {
+  width: 100%;
+}
