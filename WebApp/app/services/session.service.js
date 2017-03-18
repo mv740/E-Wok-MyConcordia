@@ -15,10 +15,14 @@
         var session = {};
 
         session.getAccessToken = function () {
-            var userInfo = ngOidcClient.getUserInfo();
-            if (userInfo && userInfo.user) {
-                return userInfo.user.access_token;
-            }
+            //
+            // var userInfo = ngOidcClient.getUserInfo();
+            // if (userInfo && userInfo.user) {
+            //     return userInfo.user.access_token;
+            // }
+
+            return JSON.parse(Object.values(sessionStorage)).access_token;
+
         };
 
         session.getAccessTokenType = function () {
