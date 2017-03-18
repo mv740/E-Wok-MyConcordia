@@ -2,6 +2,7 @@
 
 namespace MyConcordiaID.Models.Event
 {
+    
     public enum Role { Creator, Mod, Scanner, Attendee }
 
     /// <summary>
