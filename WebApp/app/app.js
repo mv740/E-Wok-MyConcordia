@@ -82,7 +82,7 @@ angular.module('myApp', [
             css: 'sass/views/event.css',
             authenticate: true
         })
-            .otherwise({redirectTo: '/login'});
+            .otherwise({redirectTo: '/review'});
 
 
         $locationProvider.html5Mode({
@@ -102,10 +102,12 @@ angular.module('myApp', [
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
 
             if (!SessionService.isAuthenticated()) {
-                
+
                 // redirect to the login route
                 console.log('Unauthorized access');
                 $location.path('/login');
             }
+
+
         });
     }]);
