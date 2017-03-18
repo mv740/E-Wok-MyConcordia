@@ -35,7 +35,7 @@
            } 
             
            var storage =  Object.keys(sessionStorage);
-           return storage.find(findOidcUser())
+           return storage.find(findOidcUser)
         };
 
         session.isAuthenticated = function () {
