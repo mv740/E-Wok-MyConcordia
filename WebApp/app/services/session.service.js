@@ -28,6 +28,16 @@
             }
         };
 
+        //if user refresh page, will detect if we still have an active session
+        session.hasActiveSession = function () {
+           function findOidcUser(value) {
+               return value.includes('oidc.user')
+           } 
+            
+           var storage =  Object.keys(sessionStorage);
+           return storage.find(findOidcUser())
+        };
+
         session.isAuthenticated = function () {
             var userInfo = ngOidcClient.getUserInfo();
             return userInfo.isAuthenticated;

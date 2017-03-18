@@ -98,18 +98,19 @@ angular.module('myApp', [
 
         $httpProvider.interceptors.push('AuthInterceptorService');
 }])
-    .run(['$rootScope','SessionService','$location','ngOidcClient',function ($rootScope, SessionService,$location, ngOidcClient) {
+    .run(['$rootScope','SessionService','$location',function ($rootScope, SessionService,$location) {
 
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
 
-            var user = ngOidcClient.getUserInfo();
-            console.log(user);
-            console.log(user.isAuthenticated);
-
             if (!SessionService.isAuthenticated()) {
-                // reload the login route
-                console.log('Unauthorized access');
-                $location.path('/login');
+
+                //active session take more time to load, but we can still detect if it exist for refreshed window
+                if(!SessionService.hasActiveSession())
+                {
+                    // redirect to the login route
+                    console.log('Unauthorized access');
+                    $location.path('/login');
+                }
             }
         });
     }]);
