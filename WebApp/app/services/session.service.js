@@ -38,8 +38,9 @@
             }
 
             var storage =  Object.keys(sessionStorage);
-            return storage.find(findOidcUser)
+            var result =  storage.find(findOidcUser);
 
+            return !!result; 
         };
 
         session.destroy = function () {
