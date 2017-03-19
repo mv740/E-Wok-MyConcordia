@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .factory('adminService', adminService);
 
-adminService.$inject = ['toastedHttpService', 'myConfig'];
+adminService.$inject = ['toastedHttpService', 'myConfig', 'adminToastFeedback'];
 
-function adminService(toastedHttp, myConfig) {
+function adminService(toastedHttp, myConfig, adminToastFeedback) {
 
     var service = {
         submitUpdatePeriod: submitUpdatePeriod,
@@ -18,11 +18,21 @@ function adminService(toastedHttp, myConfig) {
     //////////////////////////////////////
 
     function submitUpdatePeriod(updatePeriod){
-        return toastedHttp.post(updatePeriod, myConfig.picturePeriod);
+        var settings = {
+            data: updatePeriod,
+            topUrl: myConfig.picturePeriod,
+            responseMsg: adminToastFeedback.submitUpdatePeriod.responseMsg,
+            failureMsg: adminToastFeedback.submitUpdatePeriod.failureMsg
+        };
+        return toastedHttp.post(settings);
     }
 
     function getUpdatePeriod() {
-        return toastedHttp.get({topUrl: myConfig.getUpdatePeriod});
+        var settings = {
+            topUrl: myConfig.getUpdatePeriod,
+            failureMsg: adminToastFeedback.getUpdatePeriod.failureMsg
+        };
+        return toastedHttp.get(settings);
     }
 
 }

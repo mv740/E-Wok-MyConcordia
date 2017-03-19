@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .factory('studentService', studentService);
 
-studentService.$inject = ['$q', 'toastedHttpService', 'myConfig'];
+studentService.$inject = ['$q', 'toastedHttpService', 'myConfig', 'studentToastFeedback'];
 
-function studentService($q, toastedHttp, myConfig) {
+function studentService($q, toastedHttp, myConfig, studentToastFeedback) {
 
     var service = {
         sendValidation: sendValidation,
@@ -27,40 +27,91 @@ function studentService($q, toastedHttp, myConfig) {
             valid: valid
         };
 
-        return toastedHttp.post(json, myConfig.validatePhoto);
+        var settings = {
+            data: json,
+            topUrl: myConfig.validatePhoto,
+            responseMsg: "",
+            failureMsg: studentToastFeedback.sendValidation.failureMsg
+        };
+
+        if (valid)
+            settings.responseMsg = studentToastFeedback.sendValidation.response.valid;
+        else
+            settings.responseMsg = studentToastFeedback.sendValidation.response.invalid;
+
+        return toastedHttp.post(settings);
     }
 
     function getStudentPictures(id) {
-        return toastedHttp.get({param: id, topUrl: myConfig.getStudentPictures});
+        var settings = {
+            param: id,
+            topUrl: myConfig.getStudentPictures,
+            failureMsg: studentToastFeedback.getStudentPictures.failureMsg
+        };
+        return toastedHttp.get(settings);
     }
 
     function getStudentLogs(netname) {
-        return toastedHttp.get({param: netname, topUrl: myConfig.getLogs});
+        var settings = {
+            param: netname,
+            topUrl: myConfig.getLogs,
+            failureMsg: studentToastFeedback.getStudentLogs.failureMsg
+        };
+        return toastedHttp.get(settings);
     }
 
     function getStudents() {
-        return toastedHttp.get({topUrl: myConfig.getStudents});
+        var settings = {
+            topUrl: myConfig.getStudents,
+            failureMsg: studentToastFeedback.getStudents.failureMsg
+        };
+        return toastedHttp.get(settings);
     }
 
     function search(params) {
-        return toastedHttp.post(params, myConfig.search);
+        var settings = {
+            data: params,
+            topUrl: myConfig.search,
+            responseMsg: "Student found",
+            failureMsg: studentToastFeedback.search.failureMsg
+        };
+        return toastedHttp.post(settings);
     }
 
 
 
     function validateArchived(id, valid){
-        var json = { id: id,
-            valid: valid};
+        var json = {
+            id: id,
+            valid: valid
+        };
 
-        return toastedHttp.post(json, myConfig.validateArchived);
+        var settings = {
+            data: json,
+            topUrl: myConfig.validateArchived,
+            responseMsg: "",
+            failureMsg: studentToastFeedback.validateArchived.failureMsg
+        };
 
+        if (valid)
+            settings.responseMsg = studentToastFeedback.validateArchived.responseMsg.valid;
+        else
+            settings.responseMsg = studentToastFeedback.validateArchived.responseMsg.invalid;
+
+        return toastedHttp.post(settings);
     }
 
     function submitComment(id, comment){
         var json = { id: id,
             comment: comment};
 
-        return toastedHttp.post(json, myConfig.submitComment);
+        var settings = {
+            data: json,
+            topUrl: myConfig.submitComment,
+            responseMsg: studentToastFeedback.submitComment.responseMsg,
+            failureMsg: studentToastFeedback.submitComment.failureMsg
+        };
+        return toastedHttp.post(settings);
     }
 
 }

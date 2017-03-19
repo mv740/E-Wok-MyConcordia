@@ -66,7 +66,7 @@
                             </div>
                         </li>
                     </ul>
-                    <button ng-click="eventTab.fpControls.slideLeft()" class="button3D purple buttonSmallFormat top-buffer-sm">Go Back</button>
+                    <button ng-click="eventTab.fpControls.slideLeft(); eventTab.attendees = [];" class="button3D purple buttonSmallFormat top-buffer-sm">Go Back</button>
                     <button ng-click="eventTab.fpControls.slideRight(); eventTab.updateStatistics();" class="button3D purple buttonSmallFormat all-side-margin-sm">Statistics</button>
                 </div>
             </div>
