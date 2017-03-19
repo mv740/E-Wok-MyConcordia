@@ -56,16 +56,13 @@
                     var validDateRange = adminTab.dtFrom.getTime() < adminTab.dtTo.getTime();
 
                     if (validDateRange) {
-                        adminTab.fpControls.moveTo(1);
-                        resetForm();
-                        fetchUpdatePeriod();
-                        // adminService.submitUpdatePeriod(updatePeriod)
-                        //     .then(function success(response) {
-                        //         adminTab.fpControls.moveTo(1);
-                        //         resetForm();
-                        //         fetchUpdatePeriod();
-                        //     }, function failure(response) {
-                        //     });
+                        adminService.submitUpdatePeriod(updatePeriod)
+                            .then(function success(response) {
+                                adminTab.fpControls.moveTo(1);
+                                resetForm();
+                                fetchUpdatePeriod();
+                            }, function failure(response) {
+                            });
                     }
                     else {
                         alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
