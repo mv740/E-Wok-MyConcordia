@@ -70,7 +70,7 @@
                     if (validDateRange) {
                         adminService.submitUpdatePeriod(updatePeriod)
                             .then(function success(response) {
-
+                                adminTab.fpControls.moveTo(1);
                             }, function failure(response) {
                             });
                     }
