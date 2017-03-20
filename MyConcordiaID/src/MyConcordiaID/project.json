@@ -1,4 +1,5 @@
 {
+  "testRunner": "xunit",
   "dependencies": {
     "AspNet.Security.OAuth.Validation": "1.0.0-alpha2-final",
     "AspNet.Security.OpenIdConnect.Server": "1.0.0-beta6-final",
@@ -22,6 +23,7 @@
     "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
     "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
     "Microsoft.AspNetCore.StaticFiles": "1.0.0",
+    "Microsoft.CodeCoverage": "1.0.2",
     "Microsoft.EntityFrameworkCore": "1.0.1",
     "Microsoft.EntityFrameworkCore.InMemory": "1.0.1",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.0.1",
@@ -34,6 +36,7 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "odp.net.x64": "112.3.20",
+    "OpenCover": "4.6.519",
     "Oracle.ManagedDataAccess": "12.1.24160719",
     "Oracle.ManagedDataAccess.EntityFramework": "12.1.2400",
     "Swashbuckle.AspNetCore": "1.0.0-rc1"
@@ -58,7 +61,8 @@
   "buildOptions": {
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
-    "xmlDoc": true
+    "xmlDoc": true,
+    "debugType": "full"
   },
 
   "runtimeOptions": {

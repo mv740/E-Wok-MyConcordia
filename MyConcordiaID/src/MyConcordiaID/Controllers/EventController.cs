@@ -179,6 +179,14 @@ namespace MyConcordiaID.Controllers
         [Route("user")]
         public IActionResult UpdateEventUser([FromBody] EventUser user)
         {
+
+            var authenticatedUser = GetAuthenticatedUserNetname();
+
+            if (!_eventRepo.IsAuthorized(user.UserId, authenticatedUser))
+            {
+                return Forbid();
+            }
+
             var result = _eventRepo.UpdateUser(user);
             if (result != EventActionResult.Success)
             {
@@ -276,9 +284,17 @@ namespace MyConcordiaID.Controllers
         /// <response code="200">event canceled</response>
         /// <response code="404">event not found</response>
         /// <response code="401">Unauthorized</response>
+        /// <response code="403">Forbidden, insufficient credentials</response>
         [HttpDelete]
         public IActionResult CancelEvent([FromBody] EventCancelled cancelEvent)
         {
+
+            var authenticatedUser = GetAuthenticatedUserNetname();
+            if (!_eventRepo.IsAuthorized(cancelEvent.EventId, authenticatedUser, Role.Creator, true))
+            {
+                return Forbid();
+            }
+
             var result = _eventRepo.RemoveEvent(cancelEvent);
             if (result != EventActionResult.Success)
             {
@@ -297,7 +313,7 @@ namespace MyConcordiaID.Controllers
         /// <response code="404">user not found</response>
         /// <response code="401">Unauthorized</response>
         [HttpGet]
-        [Route("admin/{netname}")]
+        [Route("admin")]
         [ProducesResponseType(typeof(IEnumerable<AvailableEvent>), 200)]
         public IActionResult GetMyAdminEvents()
         {

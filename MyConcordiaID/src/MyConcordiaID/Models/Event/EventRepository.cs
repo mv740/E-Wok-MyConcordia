@@ -371,6 +371,7 @@ namespace MyConcordiaID.Models.Event
                     {
                         netName = student.NETNAME;
                     }
+
                 }
 
                 if (!string.IsNullOrEmpty(netName))
@@ -403,7 +404,7 @@ namespace MyConcordiaID.Models.Event
 
                     var newUser = new EVENT_USERS
                     {
-                        STUDENT_NETNAME_FK = user.UserNetname,
+                        STUDENT_NETNAME_FK = netName,
                         ROLE = user.Role.ToString(),
                         STATUS = status,
                         EVENT_ID = user.EventID,
@@ -593,5 +594,66 @@ namespace MyConcordiaID.Models.Event
 
             return EventActionResult.Success;
         }
+
+        /// <summary>
+        ///  Validating is an user has the required permision to do a specific action on a user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="authenticatedUser"></param>
+        /// <returns></returns>
+        public bool IsAuthorized(string userId, string authenticatedUser)
+        {
+            var userData = _database.EVENT_USERS
+                .FirstOrDefault(u => u.ID_PK == userId);
+
+            if(userData == null) return false;
+
+            var authenticatedUserData = _database.EVENT_USERS
+                .FirstOrDefault(u => u.EVENT_ID == userData.EVENT_ID && u.STUDENT_NETNAME_FK == authenticatedUser);
+
+            if (authenticatedUserData == null) return false;
+
+            Role userRole;
+            Enum.TryParse(userData.ROLE, out userRole);
+
+            Role authenticatedUserRole;
+            Enum.TryParse(authenticatedUserData.ROLE, out authenticatedUserRole);
+
+
+            // Creator, Mod, Scanner, Attendee
+            // 0, 1, 2, 3 ranks  lower is better 
+            return userRole >= authenticatedUserRole;
+            
+        }
+
+        /// <summary>
+        ///  Validating if an user has the required permision to do a specific action on a event
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <param name="authenticatedUser"></param>
+        /// <param name="requiredRole"></param>
+        /// <param name="exactRole"></param>
+        /// <returns></returns>
+        public bool IsAuthorized(string eventId, string authenticatedUser, Role requiredRole, bool exactRole)
+        {
+            var eventUserData = _database.EVENT_USERS
+                .FirstOrDefault(e => e.EVENT_ID == eventId && e.STUDENT_NETNAME_FK == authenticatedUser);
+
+            if (eventUserData == null) return false;
+
+
+            Role currentRole;
+            Enum.TryParse(eventUserData.ROLE, out currentRole);
+
+            if (exactRole)
+            {
+                return currentRole == requiredRole;
+            }
+
+            // Creator, Mod, Scanner, Attendee
+            // 0, 1, 2, 3 ranks  lower is better 
+            return requiredRole >= currentRole;
+        }
+
     }
 }

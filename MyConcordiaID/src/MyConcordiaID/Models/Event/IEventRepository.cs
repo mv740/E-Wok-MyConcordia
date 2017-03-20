@@ -19,5 +19,9 @@ namespace MyConcordiaID.Models.Event
         IEnumerable<dynamic> GetAdminEvents(string netname);
         IEnumerable<AvailableEvent> GetAttendeeEvents(string netname);
         ScannerResult RegisterScannedUser(ScannerUser user);
+        bool IsAuthorized(string userId, string authenticatedUser);
+        bool IsAuthorized(string eventId, string authenticatedUser, Role requiredRole, bool exactRole);
+        
+
     }
 }

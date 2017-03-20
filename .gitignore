@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 MyConcordiaID/.vs/
 MyConcordiaID/src/MyConcordiaID/obj/
 MyConcordiaID/src/MyConcordiaID/bin/
@@ -20,3 +19,5 @@ app/.idea/
 node_modules/
 PhoneAsId/www/lib/
 PhoneAsId/www/cache
+MyConcordiaID/test/obj/
+
