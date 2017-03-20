@@ -94,22 +94,7 @@
             displayPicture();
 
           }, function (error) {
-            //alert('Error occured while getting the camera');
-            if (ionic.Platform.isIOS()) {
-              document.addEventListener("deviceready", onDeviceReady, true);
-              function onDeviceReady() {
-                navigator.notification.alert(
-                  'Error occurred while getting the camera',
-                  function () {
-                  },
-                  'Alert',
-                  'OK'
-                );
-              }
-            }
-            if (ionic.Platform.isAndroid()) {
-              alert("Error occurred while getting the camera");
-            }
+
           })
       };
 

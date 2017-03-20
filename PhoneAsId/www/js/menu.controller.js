@@ -8,9 +8,9 @@
     .module('starter')
     .controller('MenuController', MenuController);
 
-  MenuController.$inject = ['AuthenticationService'];
+  MenuController.$inject = ['AuthenticationService', '$ionicPopup'];
 
-  function MenuController(AuthenticationService) {
+  function MenuController(AuthenticationService, $ionicPopup) {
     var vm = this;
     vm.overlay = false;
 
@@ -24,7 +24,20 @@
     vm.logUpdatePicture = logUpdatePicture;
 
     function logOut() {
-      AuthenticationService.logOut();
+      // A confirm dialog
+      var confirmPopup = $ionicPopup.confirm({
+        title: '<b>Logout</b>',
+        template: 'Are you sure you want to logout?'
+      });
+
+      confirmPopup.then(function(res) {
+        if(res) {
+          console.log('Logout OK');
+          AuthenticationService.logOut();
+        } else {
+          console.log('Logout cancel');
+        }
+      });
     }
 
     function toggleDrawer(){
@@ -48,7 +61,7 @@
     }
 
     function logViewMarshallingCard() {
-      hockeyapp.trackEvent(success, null, "VIEW_MARSHALLING_CARD");
+      hockeyapp.trackEvent(null, null, "VIEW_MARSHALLING_CARD");
     }
 
     function logUpdatePicture() {
