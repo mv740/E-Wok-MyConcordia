@@ -19,7 +19,7 @@ angular
                 500: "Sorry! Our servers are down :("
             }
         },
-        getAllEvents: {
+        "getAllEvents": {
             failureMsg: {
                 401: "Please Login",
                 500: "Sorry! Our servers are down :("
@@ -37,6 +37,7 @@ angular
             responseMsg: "Event cancelled",
             failureMsg: {
                 401: "Please Login",
+                403: "Not permitted to cancel this event",
                 404: "Event not found",
                 500: "Sorry! Our servers are down :("
             }
@@ -45,6 +46,7 @@ angular
             responseMsg: "Role updated",
             failureMsg: {
                 401: "Please Login",
+                403: "Not permitted to change this user's role",
                 404: "User not found",
                 500: "Sorry! Our servers are down :("
             }
@@ -69,6 +71,7 @@ angular
             responseMsg: "Attendee removed",
             failureMsg: {
                 401: "Please Login",
+                403: "Not permitted to remove users from this event",
                 404: "User not found",
                 500: "Sorry! Our servers are down :("
             }
