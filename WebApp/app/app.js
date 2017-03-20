@@ -11,7 +11,8 @@ angular.module('myApp', [
     'angularCSS',
     'ng.oidcclient',
     '720kb.tooltips',
-    'fullPage.js'
+    'fullPage.js',
+    'ng-fusioncharts'
 
 
 ]).constant("myConfig", {
@@ -31,7 +32,8 @@ angular.module('myApp', [
     "eventUser": "Event/user",
     "eventsCreated": "Event/admin/",
     "eventAttendees": "Event/IDTOKEN/users",
-    "getEvents": "Event/admin"
+    "getEvents": "Event/admin",
+    "getEventStats": "Event/IDTOKEN/stats"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
@@ -59,57 +61,51 @@ angular.module('myApp', [
     }])
 
 
-    .config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider,$httpProvider) {
-    //$locationProvider.hashPrefix('!');
+    .config(['$locationProvider', '$routeProvider', '$httpProvider', function ($locationProvider, $routeProvider, $httpProvider) {
+        //$locationProvider.hashPrefix('!');
 
-    $routeProvider
-        .when('/login' , {
-            templateUrl : 'partials/login/login.html',
-            css: 'sass/views/login.css',
-            controller: 'LoginController',
-            controllerAs: 'vm',
-            authenticate : false
-        }).when('/admin', {
-            templateUrl : 'partials/admin/admin.html',
+        $routeProvider
+            .when('/login', {
+                templateUrl: 'partials/login/login.html',
+                css: 'sass/views/login.css',
+                controller: 'LoginController',
+                controllerAs: 'vm',
+                authenticate: false
+            }).when('/admin', {
+            templateUrl: 'partials/admin/admin.html',
             css: 'sass/views/admin.css',
-            authenticate : true
+            authenticate: true
         }).when('/review', {
             templateUrl: 'partials/review/review.html',
             css: 'sass/views/review.css',
-            authenticate : true
+            authenticate: true
         }).when('/event', {
-        templateUrl: 'partials/event/event.html',
-        css: 'sass/views/event.css',
-        authenticate : true
-    })
-        .otherwise({ redirectTo: '/login' });
-
+            templateUrl: 'partials/event/event.html',
+            css: 'sass/views/event.css',
+            authenticate: true
+        })
+            .otherwise({redirectTo: '/review'});
 
 
         $locationProvider.html5Mode({
-            //release mode:
             enabled: true,
-            //dev mode:
-            //you can browse different pages by adding # before the webpage name. (eg. http://localhost:63342/WebApp/app/review becomes http://localhost:63342/WebApp/app/#review)
-            //enabled: false,
             requireBase: true
         });
 
 
         $httpProvider.interceptors.push('AuthInterceptorService');
-}])
-    .run(['$rootScope','SessionService','$location','ngOidcClient',function ($rootScope, SessionService,$location, ngOidcClient) {
+    }])
+    .run(['$rootScope', 'SessionService', '$location', function ($rootScope, SessionService, $location) {
 
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
 
-            var user = ngOidcClient.getUserInfo();
-            console.log(user);
-            console.log(user.isAuthenticated);
-
             if (!SessionService.isAuthenticated()) {
-                // reload the login route
+
+                // redirect to the login route
                 console.log('Unauthorized access');
                 $location.path('/login');
             }
+
+
         });
     }]);

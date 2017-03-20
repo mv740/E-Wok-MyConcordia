@@ -15,10 +15,14 @@
         var session = {};
 
         session.getAccessToken = function () {
-            var userInfo = ngOidcClient.getUserInfo();
-            if (userInfo && userInfo.user) {
-                return userInfo.user.access_token;
-            }
+            //
+            // var userInfo = ngOidcClient.getUserInfo();
+            // if (userInfo && userInfo.user) {
+            //     return userInfo.user.access_token;
+            // }
+
+            return JSON.parse(Object.values(sessionStorage)).access_token;
+
         };
 
         session.getAccessTokenType = function () {
@@ -29,9 +33,18 @@
         };
 
         session.isAuthenticated = function () {
-            var userInfo = ngOidcClient.getUserInfo();
-            return userInfo.isAuthenticated;
+            //var userInfo = ngOidcClient.getUserInfo();
+            //return userInfo.isAuthenticated;
 
+            //if user refresh page, will detect if we still have an active session
+            function findOidcUser(value) {
+                return value.includes('oidc.user')
+            }
+
+            var storage =  Object.keys(sessionStorage);
+            var result =  storage.find(findOidcUser);
+
+            return !!result;
         };
 
         session.destroy = function () {

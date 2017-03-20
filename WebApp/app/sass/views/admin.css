@@ -142,6 +142,14 @@ md-toast {
   background-color: darkgrey;
   outline: 1px solid slategrey; }
 
+md-toast.md-error-toast-theme .md-toast-content {
+  background-color: red;
+  text-align: center;
+  max-width: 100%; }
+
+md-toast.md-error-toast-theme {
+  width: 100%; }
+
 .button3D {
   background-color: white;
   height: 46px;

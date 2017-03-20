@@ -4,9 +4,10 @@ angular
     .module('myApp')
     .factory('eventService', eventService);
 
-eventService.$inject = ['toastedHttpService', 'myConfig'];
 
-function eventService(toastedHttp, myConfig) {
+eventService.$inject = ['toastedHttpService', 'myConfig', 'eventToastFeedback'];
+
+function eventService(toastedHttp, myConfig, eventToastFeedback) {
 
     var service = {
         getThisEvent: getThisEvent,
@@ -17,7 +18,8 @@ function eventService(toastedHttp, myConfig) {
         getEventAttendees: getEventAttendees,
         addUser: addUser,
         cancelEvent: cancelEvent,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        getStats: getStats
     }
 
     return service;
@@ -25,38 +27,91 @@ function eventService(toastedHttp, myConfig) {
     //////////////////////////////////////
 
     function getThisEvent(id) {
-        return toastedHttp.get({param:id, topUrl: myConfig.getEvent});
+        var settings = {
+            param: id,
+            topUrl: myConfig.getEvent,
+            failureMsg: eventToastFeedback.getThisEvent.failureMsg
+        };
+        return toastedHttp.get(settings);
     }
 
     function submit(event){
-        return toastedHttp.post(event, myConfig.event);
+        var settings = {
+            data: event,
+            topUrl: myConfig.event,
+            responseMsg: eventToastFeedback.submit.responseMsg,
+            failureMsg: eventToastFeedback.submit.failureMsg
+        };
+        return toastedHttp.post(settings);
     }
 
     function getAllEvents() {
-       return toastedHttp.get({topUrl: myConfig.getEvents});
+        var settings = {
+            topUrl: myConfig.getEvents,
+            failureMsg: eventToastFeedback.getAllEvents.failureMsg
+        };
+       return toastedHttp.get(settings);
     }
 
     function updateEvent(event) {
-        return toastedHttp.put(event, myConfig.event);
+        var settings = {
+            data: event,
+            topUrl: myConfig.event,
+            responseMsg: eventToastFeedback.updateEvent.responseMsg,
+            failureMsg: eventToastFeedback.updateEvent.failureMsg
+        };
+        return toastedHttp.put(settings);
     }
 
     function cancelEvent(event) {
-        return toastedHttp.del(event, myConfig.event);
+        var settings = {
+            data: event,
+            topUrl: myConfig.event,
+            responseMsg: eventToastFeedback.cancelEvent.responseMsg,
+            failureMsg: eventToastFeedback.cancelEvent.failureMsg
+        };
+        return toastedHttp.del(settings);
     }
 
     function setUserRole(user) {
-        return toastedHttp.put(user, myConfig.eventUser);
+        var settings = {
+            data: user,
+            topUrl: myConfig.eventUser,
+            responseMsg: eventToastFeedback.setUserRole.responseMsg,
+            failureMsg: eventToastFeedback.setUserRole.failureMsg
+        };
+        return toastedHttp.put(settings);
     }
 
     function getEventAttendees(id) {
-        return toastedHttp.get({topUrl: myConfig.eventAttendees.replace("IDTOKEN", id) + "/true"});
+        var settings = {
+            topUrl: myConfig.eventAttendees.replace("IDTOKEN", id) + "/true",
+            failureMsg: eventToastFeedback.getEventAttendees.failureMsg
+        };
+        return toastedHttp.get(settings);
     }
 
     function addUser(user) {
-        return toastedHttp.post(user, myConfig.eventUser);
+        var settings = {
+            data: user,
+            topUrl: myConfig.eventUser,
+            responseMsg: eventToastFeedback.addUser.responseMsg,
+            failureMsg: eventToastFeedback.addUser.failureMsg
+        };
+        return toastedHttp.post(settings);
     }
 
     function deleteUser(user) {
-        return toastedHttp.del(user, myConfig.eventUser);
+        var settings = {
+            data: user,
+            topUrl: myConfig.eventUser,
+            responseMsg: eventToastFeedback.deleteUser.responseMsg,
+            failureMsg: eventToastFeedback.deleteUser.failureMsg
+        };
+        return toastedHttp.del(settings);
+    }
+
+    function getStats(eventId){
+        return toastedHttp.get({topUrl: myConfig.getEventStats.replace("IDTOKEN", eventId)});
     }
 }

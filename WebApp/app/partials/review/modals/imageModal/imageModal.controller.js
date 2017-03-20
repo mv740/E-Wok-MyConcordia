@@ -13,6 +13,7 @@ function ImageModalCtrl($rootScope, $modalInstance, studentService, dateParsingS
     imageModal.sendValidation = sendValidation;
     imageModal.approved = approved;
     imageModal.denied = denied;
+    imageModal.submitComment = submitComment;
 
     $modalInstance.opened.then(setImage);
 
