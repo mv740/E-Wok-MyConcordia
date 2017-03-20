@@ -12,7 +12,7 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
 
     studentModal.sendValidation = sendValidation;
     studentModal.enlargeImage = enlargeImage;
-    studentModal.loadLogs = loadLogs;
+    studentModal.toggleLogs = toggleLogs;
     studentModal.submitComment = submitComment;
     studentModal.close = $modalInstance.close;
     studentModal.emptyProfilePicture = 'images/empty-profile.png';
@@ -71,10 +71,13 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
             }});
     }
 
-    function loadLogs(){
-        studentService.getStudentLogs(studentModal.student.netname).then(function(value){
-            studentModal.logs = value;
-        });
+    function toggleLogs(){
+        studentModal.logsOpened = !studentModal.logsOpened;
+        if (!studentModal.logs) {
+            studentService.getStudentLogs(studentModal.student.netname).then(function (value) {
+                studentModal.logs = value;
+            });
+        }
     }
 
     function resetModal(){

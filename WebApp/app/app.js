@@ -11,7 +11,8 @@ angular.module('myApp', [
     'angularCSS',
     'ng.oidcclient',
     '720kb.tooltips',
-    'fullPage.js'
+    'fullPage.js',
+    'ng-fusioncharts'
 
 
 ]).constant("myConfig", {
@@ -32,6 +33,7 @@ angular.module('myApp', [
     "eventsCreated": "Event/admin/",
     "eventAttendees": "Event/IDTOKEN/users",
     "getEvents": "Event/admin"
+    "getEventStats": "Event/IDTOKEN/stats"
 })
     .config(['ngOidcClientProvider', function (ngOidcClientProvider) {
 
@@ -86,11 +88,7 @@ angular.module('myApp', [
 
 
         $locationProvider.html5Mode({
-            //release mode:
             enabled: true,
-            //dev mode:
-            //you can browse different pages by adding # before the webpage name. (eg. http://localhost:63342/WebApp/app/review becomes http://localhost:63342/WebApp/app/#review)
-            //enabled: false,
             requireBase: true
         });
 

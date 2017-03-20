@@ -27,24 +27,12 @@
 
         adminTab.loading = true;
 
-        adminService.getUpdatePeriod().then(function(value) {
+        fetchUpdatePeriod();
+        resetForm();
 
 
-            // only parse the dates if a date is set i.e. not set to default
-            if (value.startDate != defaultStartDate && value.endDate != defaultEndDate) {
-                var year = value.year;
-                adminTab.startDate = dateParsingService.parseUpdatePeriod(value.startDate);
-                adminTab.endDate = dateParsingService.parseUpdatePeriod(value.endDate);
 
-                adminTab.currentUpdatePeriod = "Academic Year: " + year + "-" + (year + 1)
-                    + ", from " + adminTab.startDate.month + " " + adminTab.startDate.day + ", " + adminTab.startDate.year
-                    + " to " + adminTab.endDate.month + " " + adminTab.endDate.day + ", " + adminTab.endDate.year;
-            }
-            else {
-                adminTab.currentUpdatePeriod = "There is no update period currently set";
-            }
-            adminTab.loading = false;
-        });
+
 
 
         adminTab.submit = function UpdatePeriod() {
@@ -70,7 +58,9 @@
                     if (validDateRange) {
                         adminService.submitUpdatePeriod(updatePeriod)
                             .then(function success(response) {
-
+                                adminTab.fpControls.moveTo(1);
+                                resetForm();
+                                fetchUpdatePeriod();
                             }, function failure(response) {
                             });
                     }
@@ -107,6 +97,33 @@
              year 2016-2017, if we are in 2017, it will display at least 2017 + 0 - 1 = 2016. In 2016, it will display
              2016 + 0 - 1 = 2015.
              */
+        }
+
+        function fetchUpdatePeriod() {
+            adminService.getUpdatePeriod().then(function(value) {
+
+                // only parse the dates if a date is set i.e. not set to default
+                if (value.startDate != defaultStartDate && value.endDate != defaultEndDate) {
+                    var year = value.year;
+                    adminTab.startDate = dateParsingService.parseUpdatePeriod(value.startDate);
+                    adminTab.endDate = dateParsingService.parseUpdatePeriod(value.endDate);
+
+                    adminTab.currentUpdatePeriod = "Academic Year: " + year + "-" + (year + 1)
+                        + ", from " + adminTab.startDate.month + " " + adminTab.startDate.day + ", " + adminTab.startDate.year
+                        + " to " + adminTab.endDate.month + " " + adminTab.endDate.day + ", " + adminTab.endDate.year;
+                }
+                else {
+                    adminTab.currentUpdatePeriod = "There is no update period currently set";
+                }
+                adminTab.loading = false;
+            });
+        }
+
+        function resetForm() {
+            adminTab.academicYear = "";
+            adminTab.dtFrom = "";
+            adminTab.dtTo = "";
+            adminTab.currentUpdatePeriod = "";
         }
 
         Mousetrap.bind('enter', adminTab.submit);
