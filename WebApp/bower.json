@@ -26,7 +26,8 @@
     "fullpage.js": "^2.9.2",
     "bootstrap-ui-datetime-picker": "^2.5.4",
     "bootstrap-timepicker": "^0.5.2",
-    "fusioncharts": "^3.11.3"
+    "fusioncharts": "^3.11.3",
+    "angular-translate": "^2.15.1"
   },
   "resolutions": {
     "angular": "1.5.8",
