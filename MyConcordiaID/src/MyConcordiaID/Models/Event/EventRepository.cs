@@ -2,7 +2,10 @@
 using OracleEntityFramework;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
+using MyConcordiaID.Models.Event.Statistic;
 
 namespace MyConcordiaID.Models.Event
 {
@@ -584,8 +587,7 @@ namespace MyConcordiaID.Models.Event
         public EventActionResult UpdateUser(EventUser user)
         {
             var existingUser = _database.EVENT_USERS
-                .Where(u => u.ID_PK == user.UserId)
-                .FirstOrDefault();
+                .FirstOrDefault(u => u.ID_PK == user.UserId);
 
             if (existingUser == null) return EventActionResult.UserNotFound;
 
@@ -655,5 +657,79 @@ namespace MyConcordiaID.Models.Event
             return requiredRole >= currentRole;
         }
 
+        /// <summary>
+        ///  Retieve specific statistic about an event 
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <returns></returns>
+        public async Task<EventStatistic> GetEventStatistic(string eventId)
+        {
+            var myEvent = await _database.EVENTS
+                .AsNoTracking()
+                .FirstOrDefaultAsync(e => e.ID_PK == eventId);
+
+            if (myEvent == null) return null;
+
+            //event exist therefore we can look for the users
+            var users = await _database.EVENT_USERS
+                .Where(user => user.EVENT_ID == eventId)
+                .GroupBy(item => item.ROLE)
+                .Select(group => new 
+                {
+                    Role = @group.Key,
+                    Items = @group.Select(item => new
+                    {
+                        Role = item.ROLE,
+                        EventId = item.EVENT_ID,
+                        Status = item.STATUS,
+                        NetName = item.STUDENT_NETNAME_FK
+                        
+                    })
+                } )
+                .ToListAsync();
+
+            //return users;
+
+
+            //Each user type
+            var attendees = users
+                .FirstOrDefault(s => s.Role == Role.Attendee.ToString());
+
+            var mods = users
+                .FirstOrDefault(m => m.Role == Role.Mod.ToString());
+
+            var scanners = users
+                .FirstOrDefault(s => s.Role == Role.Scanner.ToString());
+
+            //How many of each attendee status type
+            // var registered = attendees.
+            var nbOfAttendees =
+                attendees?.Items.Where(a => a.Status == UserStatus.Attending.ToString()).ToList().Count ?? 0;
+
+            var nbOfRegistered =
+                attendees?.Items.Where(a => a.Status == UserStatus.Registered.ToString()).ToList().Count ?? 0;
+
+            var nbOfTracking =
+                attendees?.Items.Where(a => a.Status == UserStatus.Tracking.ToString()).ToList().Count ?? 0;
+
+            var statistic = new EventStatistic()
+            {
+                Administration = new Administration()
+                {
+                    Creator = 1,
+                    Mods = mods?.Items.Count() ?? 0,
+                    Scanners = scanners?.Items.Count() ??0
+                },
+
+                Attendees = new Attendees()
+                {
+                    Attending = nbOfAttendees,
+                    Registered = nbOfRegistered,
+                    Tracking = nbOfTracking 
+                }
+            };
+
+            return statistic;
+        }
     }
 }

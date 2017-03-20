@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using MyConcordiaID.Models.Event.Statistic;
 
 namespace MyConcordiaID.Models.Event
 {
@@ -21,7 +23,6 @@ namespace MyConcordiaID.Models.Event
         ScannerResult RegisterScannedUser(ScannerUser user);
         bool IsAuthorized(string userId, string authenticatedUser);
         bool IsAuthorized(string eventId, string authenticatedUser, Role requiredRole, bool exactRole);
-        
-
+        Task<EventStatistic> GetEventStatistic(string eventId);
     }
 }
