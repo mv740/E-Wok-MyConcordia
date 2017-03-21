@@ -20,8 +20,8 @@
 
           <div class="col col-100 headerInfo absolutePos">
             <span class="floatLeft all-side-padding-xs">{{vm.dob}}</span>
-            <span class="floatRight all-side-padding-xs" ng-if="vm.uGradStatus == 'U'">{{"undergraduate" | translate}}</span>
-            <span class="floatRight all-side-padding-xs" ng-if="vm.uGradStatus != 'U'">Graduate</span>
+            <span class="floatRight all-side-padding-xs" ng-if="vm.uGradStatus == 'U'">{{"undergraduate_status" | translate}}</span>
+            <span class="floatRight all-side-padding-xs" ng-if="vm.uGradStatus != 'U'">{{"graduate_status" | translate}}</span>
           </div>
           <div class="col col-100 textCenter bottomInfo top-padding relativePos">
             <div>
@@ -38,7 +38,7 @@
         <div class="belowPicture relativePos side-padding-xs">
 
             <div class="col col-100 textCenter top-padding-xs">
-              <span>Expires on {{vm.expireDate}}</span>
+              <span>{{"expires_label" | translate}} {{vm.expireDate}}</span>
             </div>
 
           <div class="col col-100 barcodeId textCenter no-padding">

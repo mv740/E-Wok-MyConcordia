@@ -27,7 +27,7 @@
       // A confirm dialog
       var confirmPopup = $ionicPopup.confirm({
         title: '<b>Logout</b>',
-        template: 'Are you sure you want to logout?'
+        template: '{{"popup_logout_txt" | translate}}'
       });
 
       confirmPopup.then(function(res) {

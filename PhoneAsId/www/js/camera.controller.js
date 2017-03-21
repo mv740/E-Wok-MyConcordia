@@ -163,7 +163,7 @@
 
           alertPopup = $ionicPopup.alert({
             title: 'Upload successful',
-            template: 'The picture has been successfully sent. Please visit the Birks Student Service Centre in person to have your photo validated.'
+            template: '{{"popup_upload_succ" | translate}}'
           });
           alertPopup.then(function (res) {
             console.log('Thank you for not eating my delicious ice cream cone');
@@ -172,7 +172,7 @@
         } else if (alertType = "upload-fail") {
           alertPopup = $ionicPopup.alert({
             title: 'Upload failed',
-            template: 'Uh oh, looks like something went wrong. Please try sending the photo again.'
+            template: '{{"popup_upload_fail" | translate}}'
           });
         }
       };

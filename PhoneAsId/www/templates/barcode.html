@@ -6,26 +6,24 @@
       <div class="item item-body">
         <img class="full-image" src="img\concordia_ev_pic.png">
         <h1>{{bc.eventData.information.name}}</h1>
-        <h2>From {{bc.eventData.information.timeBegin | date:"MM/dd/yyyy 'at' h:mma"}}</h2>
-        <h2>To {{bc.eventData.information.timeEnd | date:"MM/dd/yyyy 'at' h:mma"}}</h2>
-        <p>{{bc.eventData.information.description}}
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eget pharetra tortor. Proin quis eros imperdiet, facilisis nisi in, tincidunt orci. Nam tristique elit massa, quis faucibus augue finibus ac.
-        </p>
-        <p>Location: {{bc.eventData.information.location}}</p>
-        <p>Room: {{bc.eventData.information.room}}</p>
-        <p>Type: {{bc.eventData.information.type}}</p>
-        <p>Status: {{bc.eventData.information.status}}</p>
+        <h2>{{"event_from" | translate}} {{bc.eventData.information.timeBegin | date:"MM/dd/yyyy 'at' h:mma"}}</h2>
+        <h2>{{"event_to" | translate}} {{bc.eventData.information.timeEnd | date:"MM/dd/yyyy 'at' h:mma"}}</h2>
+        <p>{{bc.eventData.information.description}}</p>
+        <p>{{"event_location" | translate}} {{bc.eventData.information.location}}</p>
+        <p>{{"event_room" | translate}} {{bc.eventData.information.room}}</p>
+        <p>{{"event_type" | translate}} {{bc.eventData.information.type}}</p>
+        <p>{{"event_status" | translate}} {{bc.eventData.information.status}}</p>
 
         <button ng-if="bc.eventData.userRole == 'Creator' || bc.eventData.userRole == 'Scanner' || bc.eventData.userRole == 'Mod'" ng-click="bc.scanBarcode()">SCAN</button>
         <br><br>
 
         <div ng-if="(bc.eventData.userRole == 'Creator' || bc.eventData.userRole == 'Scanner' || bc.eventData.userRole == 'Mod') && bc.scanData.length == 0 ">
-          You are registered as a moderator for this event. Press the scan button to begin registering attendees.
+          {{"event_scan_msg" | translate}}
         </div>
 
         <div ng-if="(bc.eventData.userRole == 'Creator' || bc.eventData.userRole == 'Scanner' || bc.eventData.userRole == 'Mod') && bc.scanData.length > 0">
-          <p>Barcode ID: {{bc.barcodeID}}</p>
-          <p>Response: {{bc.responseMsg}}</p>
+          <p>{{"event_barcode" | translate}} {{bc.barcodeID}}</p>
+          <p>{{"event_response" | translate}} {{bc.responseMsg}}</p>
         </div>
       </div>
     </div>

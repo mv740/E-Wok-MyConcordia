@@ -16,7 +16,7 @@
     var failedLoginAlert = function () {
       var alertPopup = $ionicPopup.alert({
         title: 'Failed to login',
-        template: 'There was an error. Please make sure you are connected\nto the internet and try logging in again'
+        template: '{{"popup_login_fail" | translate}}'
       });
 
       alertPopup.then(function (res) {
@@ -35,7 +35,7 @@
     authService.signIn = function ($scope) {
       $scope.show = function() {
         $ionicLoading.show({
-          template: '<p>Loading...</p><ion-spinner></ion-spinner>'
+          template: '<p>{{"popup_loading" | translate}}</p><ion-spinner></ion-spinner>'
         });
       };
       $scope.hide = function(){
@@ -65,7 +65,7 @@
       } else {
         $ionicPopup.alert({
           title: 'Failed to login',
-          template: 'There was an error. Please make sure you are connected\nto the internet and try logging in again'
+          template: '{{"popup_login_fail" | translate}}'
         }).then(function (res) {
           console.log('redirected to login page.');
         });

@@ -198,12 +198,88 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
   }])
   .config(function($stateProvider, $urlRouterProvider, $translateProvider) {
     $translateProvider.translations('en', {
-      undergraduate: "ENGLISH - Undergraduate",
-      concordia_university: "ENGLISH - Concordia university"
+      //id page
+      undergraduate_status: "EN - Undergraduate",
+      graduate_status: "EN - Graduate",
+      expires_label: "EN - Expires on",
+
+      //marshalling page
+      university_name: "EN - Concordia university",
+      convocation: "EN - Convocation",
+      marshalling_card: "EN - Marshalling Card",
+
+      //events
+      event_from: "EN - From",
+      event_to: "EN - To",
+      event_location: "EN - Location:",
+      event_room: "EN - Room:",
+      event_type: "EN - Type:",
+      event_status: "EN - Status:",
+      event_scan_msg: "EN - You are registered as a moderator for this event. Press the scan button to begin registering attendees.",
+      event_barcode: "EN - Barcode ID:",
+      event_response: "EN - Response:",
+
+      //camera
+      cam_instruct_1 : "EN - Try to find a white or pale wall",
+      cam_instruct_2 : "EN - Place the camera at your eye level",
+      cam_instruct_3 : "EN - Ensure that there is enough light in the picture",
+      cam_instruct_4 : "EN - Your face must be facing the camera straight",
+
+      //menu
+      id_card: "EN - Id Card",
+      update_picture: "EN - Update Picture",
+      events: "EN - Events",
+      logout: "EN - Logout",
+      feedback: "En - Provide Feedback",
+
+      //popups
+      popup_upload_succ: "EN - The picture has been successfully sent. Please visit the Birks Student Service Centre in person to have your photo validated.",
+      popup_upload_fail: "EN - Uh oh, looks like something went wrong. Please try sending the photo again.",
+      popup_logout_txt: "EN - Are you sure you want to logout?",
+      popup_login_fail: "EN - There was an error. Please make sure you are connected\nto the internet and try logging in again",
+      popup_loading: "EN - Loading..."
     });
     $translateProvider.translations('fr', {
-      undergraduate: "FRENCH - Premier cycle",
-      concordia_university: "FRENCH - Universite de Concordia"
+      //id page
+      undergraduate_status: "FR - Undergraduate",
+      graduate_status: "FR - Graduate",
+      expires_label: "FR - Expires on",
+
+      //marshalling page
+      university_name: "FR - Concordia university",
+      convocation: "FR - Convocation",
+      marshalling_card: "FR - Marshalling Card",
+
+      //events
+      event_from: "FR - From",
+      event_to: "FR - To",
+      event_location: "FR - Location:",
+      event_room: "FR - Room:",
+      event_type: "FR - Type:",
+      event_status: "FR - Status:",
+      event_scan_msg: "FR - You are registered as a moderator for this event. Press the scan button to begin registering attendees.",
+      event_barcode: "FR - Barcode ID:",
+      event_response: "FR - Response:",
+
+      //camera
+      cam_instruct_1 : "FR - Try to find a white or pale wall",
+      cam_instruct_2 : "FR - Place the camera at your eye level",
+      cam_instruct_3 : "FR - Ensure that there is enough light in the picture",
+      cam_instruct_4 : "FR - Your face must be facing the camera straight",
+
+      //menu
+      id_card: "FR - Id Card",
+      update_picture: "FR - Update Picture",
+      events: "FR - Events",
+      logout: "FR - Logout",
+      feedback: "FR - Provide Feedback",
+
+      //popups
+      popup_upload_succ: "FR - The picture has been successfully sent. Please visit the Birks Student Service Centre in person to have your photo validated.",
+      popup_upload_fail: "FR - Uh oh, looks like something went wrong. Please try sending the photo again.",
+      popup_logout_txt: "FR - Are you sure you want to logout?",
+      popup_login_fail: "FR - There was an error. Please make sure you are connected\nto the internet and try logging in again",
+      popup_loading: "FR - Loading..."
     });
     $translateProvider.preferredLanguage("en");
     $translateProvider.fallbackLanguage("en");
