@@ -5,15 +5,26 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
 
-angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers', 'ngCordova', 'ng.oidcclient', 'angularCSS', 'templates'])
+angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers', 'ngCordova', 'ng.oidcclient', 'angularCSS', 'templates', 'pascalprecht.translate'])
   .constant('Settings', {
     'api' : 'https://api.myconcordiaid.me/api/',
     'baseUrl' : 'https://api.myconcordiaid.me/'
   })
 
 
-  .run(function ($ionicPlatform, $rootScope) {
+  .run(function ($ionicPlatform, $rootScope, $translate) {
     $ionicPlatform.ready(function () {
+
+      //gets preferred language and sets it for translations
+      if(typeof navigator.globalization !== "undefined") {
+        navigator.globalization.getPreferredLanguage(function(language) {
+          $translate.use((language.value).split("-")[0]).then(function(data) {
+            console.log("LANGUAGE SUCCESS -> " + data);
+          }, function(error) {
+            console.log("LANGUAGE ERROR -> " + error);
+          });
+        }, null);
+      }
 
       //workaround for white screen showing after splash screen
       setTimeout(function () {
@@ -184,4 +195,16 @@ angular.module('starter', ['ionic', 'ionic.contrib.drawer', 'starter.controllers
     $urlRouterProvider.otherwise('/app/login');
 
     $httpProvider.interceptors.push('AuthInterceptorService');
-  }]);
+  }])
+  .config(function($stateProvider, $urlRouterProvider, $translateProvider) {
+    $translateProvider.translations('en', {
+      undergraduate: "ENGLISH - Undergraduate",
+      concordia_university: "ENGLISH - Concordia university"
+    });
+    $translateProvider.translations('fr', {
+      undergraduate: "FRENCH - Premier cycle",
+      concordia_university: "FRENCH - Universite de Concordia"
+    });
+    $translateProvider.preferredLanguage("en");
+    $translateProvider.fallbackLanguage("en");
+  });
