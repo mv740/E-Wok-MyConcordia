@@ -9,9 +9,9 @@ angular
     .controller('EventController', EventController);
 
 
-EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', 'eventService'];
+EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', '$translate', 'eventService'];
 
-function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
+function EventController($filter, $modal, $timeout, $mdDialog, $translate, eventService) {
 
 
 
@@ -28,6 +28,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
     eventTab.setFilter = setFilter;
     eventTab.isFilterTarget = isFilterTarget;
     eventTab.updateStatistics = updateStatistics;
+    eventTab.localize = localize;
     eventTab.filters = [
         "All",
         "Cancelled",
@@ -75,7 +76,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
             theme: "fint"
         },
         data: []
-    }
+    };
 
     ////////////////////////////////////////////////////////////
 
@@ -233,5 +234,9 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
         return noCurrentFilterAndNotCancelled || ( isCancelledAndTargetted || eventTargettedByFilterButIsNotCancelled);
     }
 
+    function localize(langKey) {
+        $translate.use(langKey);
+        eventTab.frenchSelected = langKey == 'fr';
+    }
     Mousetrap.bind('enter', eventTab.addUser);
 }

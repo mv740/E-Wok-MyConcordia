@@ -1,0 +1,15 @@
+{
+  "TOASTFEEDBACK": {
+    "EVENTS": {
+      "SETUSERROLE": {
+        "responseMsg": "Role updated",
+        "failureMsg": {
+          "401": "Please Login",
+          "403": "Not permitted to change this user's role",
+          "404": "User not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      }
+    }
+  }
+}

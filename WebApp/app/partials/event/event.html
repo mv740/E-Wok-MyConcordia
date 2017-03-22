@@ -49,6 +49,8 @@
                 <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
                     <div class="page-header">
                         <h1>{{eventTab.selectedEvent.information.name}}</h1>
+                        <a ng-click="eventTab.localize('en')">En</a>
+                        <a ng-click="eventTab.localize('fr')">FR</a>
                     </div>
                     <div class="searchBoxContainer bottom-buffer">
                         <div class="field" code="13" kb-press="eventTab.addUser()" >
@@ -72,6 +74,7 @@
             </div>
             <div class="slide">
                 <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
+
                     <div class="page-header">
                         <h1>{{eventTab.selectedEvent.information.name}}</h1>
                     </div>

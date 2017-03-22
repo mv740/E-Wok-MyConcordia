@@ -5,9 +5,9 @@ angular
     .factory('eventService', eventService);
 
 
-eventService.$inject = ['toastedHttpService', 'myConfig', 'eventToastFeedback'];
+eventService.$inject = ['$q', '$translate', 'toastedHttpService', 'myConfig', 'eventToastFeedback'];
 
-function eventService(toastedHttp, myConfig, eventToastFeedback) {
+function eventService($q, $translate, toastedHttp, myConfig, eventToastFeedback) {
 
     var service = {
         getThisEvent: getThisEvent,
@@ -74,13 +74,28 @@ function eventService(toastedHttp, myConfig, eventToastFeedback) {
     }
 
     function setUserRole(user) {
-        var settings = {
-            data: user,
-            topUrl: myConfig.eventUser,
-            responseMsg: eventToastFeedback.setUserRole.responseMsg,
-            failureMsg: eventToastFeedback.setUserRole.failureMsg
-        };
-        return toastedHttp.put(settings);
+        var settings = {};
+        $translate(['TOASTFEEDBACK.EVENTS.SETUSERROLE.responseMsg',
+            'TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.401',
+            'TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.403',
+            'TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.404',
+            'TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.500'])
+            .then(function(translations) {
+                var failureMsg = {
+                    401: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.401'],
+                    403: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.403'],
+                    404: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.404'],
+                    500: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.500']
+                };
+                settings = {
+                    data: user,
+                    topUrl: myConfig.eventUser,
+                    responseMsg: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.responseMsg'],
+                    failureMsg: failureMsg
+                };
+                return toastedHttp.put(settings);
+            });
+
     }
 
     function getEventAttendees(id) {
@@ -114,4 +129,5 @@ function eventService(toastedHttp, myConfig, eventToastFeedback) {
     function getStats(eventId){
         return toastedHttp.get({topUrl: myConfig.getEventStats.replace("IDTOKEN", eventId)});
     }
+
 }

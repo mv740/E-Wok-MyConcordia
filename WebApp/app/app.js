@@ -12,7 +12,8 @@ angular.module('myApp', [
     'ng.oidcclient',
     '720kb.tooltips',
     'fullPage.js',
-    'ng-fusioncharts'
+    'ng-fusioncharts',
+    'pascalprecht.translate'
 
 
 ]).constant("myConfig", {
@@ -95,7 +96,20 @@ angular.module('myApp', [
 
 
         $httpProvider.interceptors.push('AuthInterceptorService');
-}])
+    }])
+    .config(['$translateProvider', function($translateProvider) {
+        $translateProvider.useStaticFilesLoader({
+            files: [{
+                prefix: "localization/json/locale-",
+                suffix: ".json"
+            }, {
+                prefix: "localization/json/locale-",
+                suffix: ".json"
+            }]
+        });
+        $translateProvider.preferredLanguage('en');
+        $translateProvider.useSanitizeValueStrategy('escape');
+    }])
     .run(['$rootScope','SessionService','$location',function ($rootScope, SessionService,$location) {
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
 
