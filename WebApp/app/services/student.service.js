@@ -35,9 +35,9 @@ function studentService($q, toastedHttp, myConfig, studentToastFeedback) {
         };
 
         if (valid)
-            settings.responseMsg = studentToastFeedback.sendValidation.response.valid;
+            settings.responseMsg = studentToastFeedback.sendValidation.responseMsg.valid;
         else
-            settings.responseMsg = studentToastFeedback.sendValidation.response.invalid;
+            settings.responseMsg = studentToastFeedback.sendValidation.responseMsg.invalid;
 
         return toastedHttp.post(settings);
     }
