@@ -185,9 +185,7 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
     }
 
     function showToast(options){
-        if (!toast) {
-            return $mdToast.show(buildSimple(options));
-        }
+        return $mdToast.show(buildSimple(options));
     }
 
     function buildSimple(options){
