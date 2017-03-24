@@ -80,6 +80,67 @@
           "500": "Mille excuses! Nos serveurs sont en pane :("
         }
       }
+    },
+    "STUDENT": {
+      "SENDVALIDATION": {
+        "responseMsg": {
+          "valid": "Photo Validée",
+          "invalid": "Photo révoquée"
+        },
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Photo non trouvée",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETSTUDENTPICTURES": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Étudiant(e) non trouvé(e)",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETSTUDENTLOGS": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Registres non trouvés",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETSTUDENTS": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Étudiant(e)s non trouvé(e)s",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "SEARCH": {
+        "responseMsg": "Étudiant(e) trouvé(e)",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Étudiant(e) non trouvé(e)",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "VALIDATEARCHIVED": {
+        "responseMsg": {
+          "valid": "Archive picture validated",
+          "invalid": "Archive picture revoked"
+        },
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Photo archivée non trouvée",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "SUBMITCOMMENT": {
+        "responseMsg": "Commenté",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Impossible de commenter. Étudiant(e) non trouvé(e)",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      }
     }
   }
 }

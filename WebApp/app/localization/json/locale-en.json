@@ -80,6 +80,67 @@
           "500": "Sorry! Our servers are down :("
         }
       }
+    },
+    "STUDENT": {
+      "SENDVALIDATION": {
+        "responseMsg": {
+          "valid": "Picture Validated",
+          "invalid": "Picture Revoked"
+        },
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "No picture found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETSTUDENTPICTURES": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "No student found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETSTUDENTLOGS": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "No logs found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETSTUDENTS": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Students not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "SEARCH": {
+        "responseMsg": "Student found",
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Student not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "VALIDATEARCHIVED": {
+        "responseMsg": {
+          "valid": "Archive picture validated",
+          "invalid": "Archive picture revoked"
+        },
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "No archive picture found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "SUBMITCOMMENT": {
+        "responseMsg": "Commented",
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Couldn't comment. Student not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      }
     }
   }
 }
