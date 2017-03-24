@@ -141,6 +141,23 @@
           "500": "Mille excuses! Nos serveurs sont en pane :("
         }
       }
+    },
+    "ADMIN": {
+      "SUBMITUPDATEPERIOD": {
+        "responseMsg": "Période actualisée",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Période d'actualisation non trouvée",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETUPDATEPERIOD": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Période d'actualisation non trouvée",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      }
     }
   }
 }

@@ -303,6 +303,7 @@ function eventService($q, $translate, toastedHttp, myConfig, eventToastFeedback)
                 500: ""
             }
         };
+
         return $q.all(localizationPromises)
             .then(function (translations) {
                 settings.failureMsg[401] = translations[401];
