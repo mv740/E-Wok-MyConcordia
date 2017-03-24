@@ -1,12 +1,82 @@
 {
   "TOASTFEEDBACK": {
+    "LOADING": "Loading...",
     "EVENTS": {
+      "GETTHISEVENT": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Event not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "SUBMIT": {
+        "responseMsg": "Event created",
+        "failureMsg": {
+          "401": "Please Login",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETALLEVENTS": {
+        "failureMsg": {
+          "401": "Please Login",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "UPDATEEVENT": {
+        "responseMsg": "Event updated",
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Event not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "CANCELEVENT": {
+        "responseMsg": "Event cancelled",
+        "failureMsg": {
+          "401": "Please Login",
+          "403": "Not permitted to cancel this event",
+          "404": "Event not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
       "SETUSERROLE": {
         "responseMsg": "Role updated",
         "failureMsg": {
           "401": "Please Login",
           "403": "Not permitted to change this user's role",
           "404": "User not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETEVENTATTENDEES": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "User not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "ADDUSER": {
+        "responseMsg": "Attendee added",
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "User not found",
+          "409": "Attendee already added",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "DELETEUSER": {
+        "responseMsg": "Attendee removed",
+        "failureMsg": {
+          "401": "Please Login",
+          "403": "Not permitted to remove users from this event",
+          "404": "User not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETSTATS": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Statistics not found",
           "500": "Sorry! Our servers are down :("
         }
       }

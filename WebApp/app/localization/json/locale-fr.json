@@ -1,12 +1,82 @@
 {
   "TOASTFEEDBACK": {
+    "LOADING": "Chargement...",
     "EVENTS": {
+      "GETTHISEVENT": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Événement non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "SUBMIT": {
+        "responseMsg": "Événement créé",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETALLEVENTS": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "UPDATEEVENT": {
+        "responseMsg": "Événement actualisé",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Événement non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "CANCELEVENT": {
+        "responseMsg": "Événement annulé",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "403": "Vous n'avez pas le droit d'annuller cet événement",
+          "404": "Événement non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
       "SETUSERROLE": {
         "responseMsg": "Rôle actualisé",
         "failureMsg": {
           "401": "Veuillez vous connecter",
           "403": "Vous n'avez pas le droit de changer le role de cet usager",
           "404": "Usager non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETEVENTATTENDEES": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Usager non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "ADDUSER": {
+        "responseMsg": "Participant ajouté",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Usager non trouvé",
+          "409": "Attendee already added",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "DELETEUSER": {
+        "responseMsg": "Participant enlevé",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "403": "Vous n'avez pas le droit d'enlever des participants de cet événement",
+          "404": "Usager non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETSTATS": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Statistiques non trouvées",
           "500": "Mille excuses! Nos serveurs sont en pane :("
         }
       }
