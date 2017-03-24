@@ -75,27 +75,36 @@ function eventService($q, $translate, toastedHttp, myConfig, eventToastFeedback)
 
     function setUserRole(user) {
         var settings = {};
-        $translate(['TOASTFEEDBACK.EVENTS.SETUSERROLE.responseMsg',
-            'TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.401',
-            'TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.403',
-            'TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.404',
-            'TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.500'])
-            .then(function(translations) {
-                var failureMsg = {
-                    401: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.401'],
-                    403: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.403'],
-                    404: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.404'],
-                    500: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.500']
-                };
-                settings = {
-                    data: user,
-                    topUrl: myConfig.eventUser,
-                    responseMsg: translations['TOASTFEEDBACK.EVENTS.SETUSERROLE.responseMsg'],
-                    failureMsg: failureMsg
-                };
-                return toastedHttp.put(settings);
-            });
+        var localizationPromises = {
+            responseMsg: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.responseMsg'),
+            401: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.401'),
+            403: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.403'),
+            404: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.404'),
+            500: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.500')
+        };
 
+        settings = {
+            data: user,
+            topUrl: myConfig.eventUser,
+            responseMsg: "",
+            failureMsg: {
+                401: "",
+                403: "",
+                404: "",
+                500: ""
+            }
+        };
+
+        return $q.all(localizationPromises)
+            .then(function (translations) {
+                settings.responseMsg = translations.responseMsg;
+                settings.failureMsg[401] = translations[401];
+                settings.failureMsg[403] = translations[403];
+                settings.failureMsg[404] = translations[404];
+                settings.failureMsg[500] = translations[500];
+                return toastedHttp.put(settings);
+
+            });
     }
 
     function getEventAttendees(id) {
@@ -130,4 +139,14 @@ function eventService($q, $translate, toastedHttp, myConfig, eventToastFeedback)
         return toastedHttp.get({topUrl: myConfig.getEventStats.replace("IDTOKEN", eventId)});
     }
 
+    function getTranslation(path) {
+        var deferred = $q.defer();
+
+        $translate(path)
+            .then(function(translation) {
+                deferred.resolve(translation);
+            });
+
+        return deferred.promise;
+    }
 }
