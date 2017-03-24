@@ -5,9 +5,9 @@ angular
     .factory('eventService', eventService);
 
 
-eventService.$inject = ['$q', '$translate', 'toastedHttpService', 'myConfig', 'eventToastFeedback'];
+eventService.$inject = ['$q', '$translate', 'toastedHttpService', 'myConfig'];
 
-function eventService($q, $translate, toastedHttp, myConfig, eventToastFeedback) {
+function eventService($q, $translate, toastedHttp, myConfig) {
 
     var service = {
         getThisEvent: getThisEvent,

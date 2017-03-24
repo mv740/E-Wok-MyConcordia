@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .factory('adminService', adminService);
 
-adminService.$inject = ['$q', '$translate','toastedHttpService', 'myConfig', 'adminToastFeedback'];
+adminService.$inject = ['$q', '$translate', 'toastedHttpService', 'myConfig'];
 
-function adminService($q, $translate,toastedHttp, myConfig, adminToastFeedback) {
+function adminService($q, $translate, toastedHttp, myConfig) {
 
     var service = {
         submitUpdatePeriod: submitUpdatePeriod,

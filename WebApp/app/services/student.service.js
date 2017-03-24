@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .factory('studentService', studentService);
 
-studentService.$inject = ['$q', '$translate', 'toastedHttpService', 'myConfig', 'studentToastFeedback'];
+studentService.$inject = ['$q', '$translate', 'toastedHttpService', 'myConfig'];
 
-function studentService($q, $translate,toastedHttp, myConfig, studentToastFeedback) {
+function studentService($q, $translate, toastedHttp, myConfig) {
 
     var service = {
         sendValidation: sendValidation,
