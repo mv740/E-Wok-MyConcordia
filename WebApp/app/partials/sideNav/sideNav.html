@@ -1,12 +1,12 @@
 <div class="full-height" ng-if="sideNav.isLoggedIn()">
     <div id="mySidenav" class="sideNavDrawer">
         <a></a>
-        <a ng-click="sideNav.translate('en')" ng-if="sideNav.frenchSelected" class="languageSelector">English</a>
-        <a ng-click="sideNav.translate('fr')" ng-if="!sideNav.frenchSelected" class="languageSelector">Français</a>
         <a href="" ng-click="sideNav.logout()">Logout</a>
         <a href="review" ng-click="sideNav.closeNav($event)">Review</a>
         <a href="admin" ng-click="sideNav.closeNav($event)">Admin</a>
         <a href="event" ng-click="sideNav.closeNav($event)">Event</a>
+        <a ng-click="sideNav.translate('en')" ng-if="sideNav.frenchSelected" class="languageSelector">English</a>
+        <a ng-click="sideNav.translate('fr')" ng-if="!sideNav.frenchSelected" class="languageSelector">Français</a>
     </div>
 
     <div id="sideMenuStatic">
