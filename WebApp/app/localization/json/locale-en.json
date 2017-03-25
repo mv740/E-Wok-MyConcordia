@@ -159,5 +159,21 @@
         }
       }
     }
+  },
+  "PARTIALS": {
+    "ADMIN": {
+      "HEADER": "Update period",
+      "CURRENTLYSET": "Currently set to",
+      "MODIFY": "Modify",
+      "YEAR": "Year",
+      "STARTDATE": "Start date",
+      "ENDDATE": "End date",
+      "CHOOSEYEAR": "Choose the year for which the students will be able to send new profile picture for approval",
+      "CHOOSESTART": "Choose the start date for which the students will be able to send new profile picture for approval",
+      "CHOOSEEND": "Choose the end date for which the students will be able to send new profile picture for approval",
+      "ACADEMICYEAR": "Academic year",
+      "BACK": "Back",
+      "NEXTSTEP": "Next step"
+    }
   }
 }

@@ -23,6 +23,10 @@ $sideNav-icon-size:25px;
     height: $sideNav-width;
     line-height:$sideNav-width;
     text-align: center;
+
+    .languageSelector{
+      margin-bottom: 30px;
+    }
   }
 
   a:first-child{
@@ -67,6 +71,15 @@ $sideNav-icon-size:25px;
     }
     .eventIcon{
       @include setBackground($event-icon, $sideNav-icon-size);
+    }
+    .languageSelector {
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: black;
+      &:hover{
+        text-decoration: none;
+        cursor: pointer;
+      }
     }
   }
 
