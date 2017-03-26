@@ -13,14 +13,14 @@ namespace MyConcordiaID.Models.Event
         void InsertEvent(NewEvent newEvent, string Netname);
         EventActionResult UpdateEvent(EventInformation information);
         EventActionResult RemoveEvent(EventCancelled cancellation);
-        IEnumerable<EventInformation> GetEvents();
-        IEnumerable<EventInformation> GetEventsByStatus(EventStatusType status);
-        IEnumerable<EventInformation> GetActiveEvents();
-        EventInformation GetEventById(string eventId);
-        IEnumerable<EventUserInformation> GetEventUsers(string eventId, bool orderUserOnTop, string mWoznia);
-        IEnumerable<dynamic> GetAdminEvents(string netname);
-        IEnumerable<AvailableEvent> GetAttendeeEvents(string netname);
+        Task<IEnumerable<EventInformation>> GetEventsAsync();
+        Task<IEnumerable<EventInformation>> GetEventsByStatusAsync(EventStatusType status);
+        Task<IEnumerable<EventInformation>> GetActiveEventsAsync();
+        Task<EventInformation> GetEventByIdAsync(string eventId);
+        Task<IEnumerable<EventUserInformation>> GetEventUsersAsync(string eventId, bool orderUserOnTop, string mWoznia);
+        Task<IEnumerable<AvailableEvent>> GetAdminEventsAsync(string netname);
+        Task<IEnumerable<AvailableEvent>> GetAttendeeEventsAsync(string netname);
         ScannerResult RegisterScannedUser(ScannerUser user);
-        Task<EventStatistic> GetEventStatistic(string eventId);
+        Task<EventStatistic> GetEventStatisticAsync(string eventId);
     }
 }
