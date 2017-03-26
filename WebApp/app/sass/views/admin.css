@@ -13,6 +13,8 @@
     height: 60px;
     line-height: 60px;
     text-align: center; }
+    #sideMenuContainer a .languageSelector {
+      margin-bottom: 30px; }
   #sideMenuContainer a:first-child {
     margin-top: 20px; }
   #sideMenuContainer a.selected {
@@ -53,6 +55,13 @@
       background-size: 25px;
       background-repeat: no-repeat;
       background-position: center; }
+    #sideMenuContainer #sideMenuStatic .languageSelector {
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: black; }
+      #sideMenuContainer #sideMenuStatic .languageSelector:hover {
+        text-decoration: none;
+        cursor: pointer; }
   #sideMenuContainer .sideNavDrawer {
     height: 100%;
     /* 100% Full-height */

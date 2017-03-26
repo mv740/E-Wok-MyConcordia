@@ -9,9 +9,9 @@ angular
     .controller('EventController', EventController);
 
 
-EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', 'eventService'];
+EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', '$translate', 'eventService'];
 
-function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
+function EventController($filter, $modal, $timeout, $mdDialog, $translate, eventService) {
 
 
 
@@ -28,20 +28,50 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
     eventTab.setFilter = setFilter;
     eventTab.isFilterTarget = isFilterTarget;
     eventTab.updateStatistics = updateStatistics;
+    eventTab.localize = localize;
     eventTab.filters = [
-        "All",
-        "Cancelled",
-        "Postponed",
-        "Rescheduled",
-        "Scheduled",
-        "Open",
-        "Closed"
+        {
+            value: "All",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.ALL"
+        },
+        {
+            value: "Cancelled",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.CANCELLED"
+        },
+        {
+            value: "Postponed",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.POSTPONED"
+        },
+        {
+            value: "Rescheduled",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.RESCHEDULED"
+        },
+        {
+            value: "Scheduled",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.SCHEDULED"
+        },
+        {
+            value: "Open",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.OPEN"
+        },
+        {
+            value: "Closed",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.CLOSED"
+        }
     ];
 
 
     eventTab.readonly = true;
     eventTab.removable = false;
-    eventTab.eventTypes = ['Open', 'Closed'];
+    eventTab.eventTypes = [
+        {
+            value: 'Open',
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.OPEN"
+        },
+        {
+            value: 'Closed',
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.CLOSED"
+        }];
 
     getEvents();
 
@@ -75,7 +105,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
             theme: "fint"
         },
         data: []
-    }
+    };
 
     ////////////////////////////////////////////////////////////
 
@@ -233,5 +263,9 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
         return noCurrentFilterAndNotCancelled || ( isCancelledAndTargetted || eventTargettedByFilterButIsNotCancelled);
     }
 
+    function localize(langKey) {
+        $translate.use(langKey);
+        eventTab.frenchSelected = langKey == 'fr';
+    }
     Mousetrap.bind('enter', eventTab.addUser);
 }

@@ -27,6 +27,11 @@ function AttendeeDialogCtrl($mdDialog, attendee, loggedInAttendee, eventService)
     attendeeDialog.attendeeOriginalRole = attendeeCopy.role;
 
 
+    attendeeDialog.attendeeRoleValueTranslationMapping = {
+        value: attendeeDialog.attendee.role,
+        translated: "PARTIALS.EVENT.ATTENDEE.ROLE." + (attendeeDialog.attendee.role).toUpperCase()
+    };
+
     //////////////////////////
 
 
@@ -79,9 +84,29 @@ function AttendeeDialogCtrl($mdDialog, attendee, loggedInAttendee, eventService)
 
     function getListOfSettableRoles() {
         if (loggedInAttendee.role == "Creator") // The Creator can modify any attendee's role except his or hers.
-            attendeeDialog.listOfSettableRoles = ['Mod', 'Scanner', 'Attendee'];
+            attendeeDialog.listOfSettableRoles = [
+                {
+                    value: 'Mod',
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.MOD"
+                },
+                {
+                    value: 'Scanner',
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.SCANNER"
+                },
+                {
+                    value: 'Attendee',
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.ATTENDEE"
+                }];
         else if (loggedInAttendee.role == "Mod")
-            attendeeDialog.listOfSettableRoles = ['Scanner', 'Attendee'];
+            attendeeDialog.listOfSettableRoles = [
+                {
+                    value: 'Scanner',
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.SCANNER"
+                },
+                {
+                    value: 'Attendee',
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.ATTENDEE"
+                }];
     }
 
     function deleteAttendee() {

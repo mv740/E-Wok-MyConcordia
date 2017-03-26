@@ -7,9 +7,9 @@ angular
     .controller('SideNavCtrl', SideNavCtrl);
 
 
-SideNavCtrl.$inject = ['AuthenticationService','$scope'];
+SideNavCtrl.$inject = ['AuthenticationService','$scope', '$translate'];
 
-function SideNavCtrl(AuthenticationService, $scope) {
+function SideNavCtrl(AuthenticationService, $scope, $translate) {
 
     var sideNav = this;
 
@@ -17,6 +17,8 @@ function SideNavCtrl(AuthenticationService, $scope) {
     sideNav.closeNav = closeNav;
     sideNav.logout = logout;
     sideNav.isLoggedIn = isLoggedIn;
+    sideNav.translate = translate;
+    sideNav.frenchSelected = $translate.proposedLanguage() == 'fr';
 
     //////////////////
 
@@ -73,5 +75,10 @@ function SideNavCtrl(AuthenticationService, $scope) {
 
     function removeOverlay() {
         $(".modal-backdrop").remove();
+    }
+
+    function translate(langKey) {
+        $translate.use(langKey);
+        sideNav.frenchSelected = !sideNav.frenchSelected;
     }
 }

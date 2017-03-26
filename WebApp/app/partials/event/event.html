@@ -5,21 +5,21 @@
             <div class="slide">
                 <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
                     <div class="page-header">
-                        <h1>Your Events</h1>
+                        <h1 translate>PARTIALS.EVENT.EVENT.HEADER</h1>
                     </div>
 
                     <div>
                         <md-chips ng-model="eventTab.filters" readonly="eventTab.readonly" md-removable="eventTab.removable">
-                            <md-chip-template  ng-class="{'selectedChip': $chip == eventTab.currentFilter}">
-                                <div class="no-outline" ng-click="eventTab.setFilter($chip)">
-                                <span> <strong>{{$chip}}</strong> </span>
+                            <md-chip-template  ng-class="{'selectedChip': $chip.value == eventTab.currentFilter}">
+                                <div class="no-outline" ng-click="eventTab.setFilter($chip.value)">
+                                <span> <strong translate>{{$chip.translated}}</strong> </span>
                                 </div>
                             </md-chip-template>
                         </md-chips>
                     </div>
 
                     <div id="createEventButton" class="height-standard">
-                        <button ng-click="eventTab.fpControls.slideDown()" class="button3D purple col-xs-12 textLeft">Create a new event</button>
+                        <button ng-click="eventTab.fpControls.slideDown()" class="button3D purple col-xs-12 textLeft" translate>PARTIALS.EVENT.EVENT.CREATEEVENT</button>
                     </div>
                     <div class="top-buffer-sm bottom-buffer-xl" ng-if="eventTab.events.length > 0">
                         <ul class="listResults">
@@ -34,10 +34,10 @@
                                     </button>
                                 </div>
                                 <div ng-show="result.expanded" class="height-standard top-buffer-sm bottom-buffer-sm">
-                                    <button ng-click="eventTab.modify(result); eventTab.fpControls.slideDown();" class="button3D purple buttonSmallFormat">Modify</button>
-                                    <button ng-click="eventTab.openEventModal(result)" class="button3D purple side-buffer-sm buttonSmallFormat">View details</button>
-                                    <button ng-click="eventTab.checkAttendees(result); eventTab.fpControls.slideRight(); eventTab.selectThisEvent(result);" class="button3D purple buttonSmallFormat">Attendees</button>
-                                    <button ng-click="eventTab.cancel(result)" class="button3D purple left-buffer-sm buttonSmallFormat">Delete</button>
+                                    <button ng-click="eventTab.modify(result); eventTab.fpControls.slideDown();" class="button3D purple buttonSmallFormat" translate>PARTIALS.EVENT.EVENT.BUTTONS.MODIFY</button>
+                                    <button ng-click="eventTab.openEventModal(result)" class="button3D purple side-buffer-sm buttonSmallFormat" translate>PARTIALS.EVENT.EVENT.BUTTONS.VIEWDETAILS</button>
+                                    <button ng-click="eventTab.checkAttendees(result); eventTab.fpControls.slideRight(); eventTab.selectThisEvent(result);" class="button3D purple buttonSmallFormat" translate>PARTIALS.EVENT.EVENT.BUTTONS.ATTENDEES</button>
+                                    <button ng-click="eventTab.cancel(result)" class="button3D purple left-buffer-sm buttonSmallFormat" translate>PARTIALS.EVENT.EVENT.BUTTONS.CANCEL</button>
                                 </div>
                             </li>
                         </ul>
@@ -52,8 +52,8 @@
                     </div>
                     <div class="searchBoxContainer bottom-buffer">
                         <div class="field" code="13" kb-press="eventTab.addUser()" >
-                            <input type="text" code="13" kb-press="eventTab.addUser()" ng-model="eventTab.newUserNetnameOrId" placeholder="User's netname or ID" />
-                            <button ng-click="eventTab.addUser()" type="button">Add Attendee!</button>
+                            <input type="text" code="13" kb-press="eventTab.addUser()" ng-model="eventTab.newUserNetnameOrId" translate-attr="{ placeholder: 'PARTIALS.EVENT.ATTENDEE.ADDUSERPLACEHOLDER' }" />
+                            <button ng-click="eventTab.addUser()" type="button" translate>PARTIALS.EVENT.ATTENDEE.ADDATTENDEE</button>
                         </div>
                     </div>
                     <ul class="listResults top-buffer">
@@ -66,12 +66,13 @@
                             </div>
                         </li>
                     </ul>
-                    <button ng-click="eventTab.fpControls.slideLeft(); eventTab.attendees = [];" class="button3D purple buttonSmallFormat top-buffer-sm">Go Back</button>
-                    <button ng-click="eventTab.fpControls.slideRight(); eventTab.updateStatistics();" class="button3D purple buttonSmallFormat all-side-margin-sm">Statistics</button>
+                    <button ng-click="eventTab.fpControls.slideLeft(); eventTab.attendees = [];" class="button3D purple buttonSmallFormat top-buffer-sm" translate>PARTIALS.BUTTONS.BACK</button>
+                    <button ng-click="eventTab.fpControls.slideRight(); eventTab.updateStatistics();" class="button3D purple buttonSmallFormat all-side-margin-sm" translate>PARTIALS.EVENT.ATTENDEE.STATISTICS</button>
                 </div>
             </div>
             <div class="slide">
                 <div class="full-height sleekScrollable side-padding-xl overflow-y-auto">
+
                     <div class="page-header">
                         <h1>{{eventTab.selectedEvent.information.name}}</h1>
                     </div>
@@ -91,7 +92,7 @@
                             type="pie3d"
                             datasource="{{eventTab.pie}}"
                     ></fusioncharts></div>
-                    <button ng-click="eventTab.fpControls.slideLeft()" class="button3D purple buttonSmallFormat top-buffer-sm">Go Back</button>
+                    <button ng-click="eventTab.fpControls.slideLeft()" class="button3D purple buttonSmallFormat top-buffer-sm" translate>PARTIALS.BUTTONS.BACK</button>
                 </div>
             </div>
         </div>
@@ -99,42 +100,42 @@
         <div class="section">
 
             <div class="page-header">
-                <h1>Event Type</h1>
+                <h1 translate>PARTIALS.EVENT.EVENT.EVENTTYPE</h1>
             </div>
 
             <div>
-                <h4>
-                    Is this an open or closed event?
+                <h4 translate>
+                    PARTIALS.EVENT.EVENT.OPENCLOSED
                 </h4>
             </div>
 
             <md-input-container class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs">
-                <label>Event Type</label>
+                <label translate>PARTIALS.EVENT.EVENT.EVENTTYPE</label>
                 <md-select ng-model="eventTab.creating.type">
-                    <md-option value="{{eventType}}" ng-repeat="eventType in eventTab.eventTypes">{{eventType}}</md-option>
+                    <md-option value="{{eventType.value}}" ng-repeat="eventType in eventTab.eventTypes">
+                        <span translate>{{eventType.translated}}</span>
+                    </md-option>
                 </md-select>
             </md-input-container>
 
-            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
-            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.type"  ng-class="{'inactive': !eventTab.creating.type}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer" translate>PARTIALS.BUTTONS.BACK</button>
+            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.type"  ng-class="{'inactive': !eventTab.creating.type}" class="button3D buttonSmallFormat side-buffer top-buffer" translate>PARTIALS.BUTTONS.NEXTSTEP</button>
 
         </div>
         <div class="section">
 
             <div class="page-header">
-                <h1>Event name</h1>
+                <h1 translate>PARTIALS.EVENT.EVENT.EVENTNAME</h1>
             </div>
 
             <div>
-                <h4>Give your new event a meaningful name
-
-                </h4>
+                <h4 translate>PARTIALS.EVENT.EVENT.EVENTNAMEDESC</h4>
             </div>
 
             <input ng-model="eventTab.creating.name" class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs" type="text">
 
-            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
-            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.name"  ng-class="{'inactive': !eventTab.creating.name}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer" translate>PARTIALS.BUTTONS.BACK</button>
+            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.name"  ng-class="{'inactive': !eventTab.creating.name}" class="button3D buttonSmallFormat side-buffer top-buffer" translate>PARTIALS.BUTTONS.NEXTSTEP</button>
 
 
 
@@ -143,18 +144,16 @@
         <div class="section">
 
             <div class="page-header">
-                <h1>Location</h1>
+                <h1 translate>PARTIALS.EVENT.EVENT.LOCATION</h1>
             </div>
 
             <div>
-                <h4>Where will your event happen?
-
-                </h4>
+                <h4 translate>PARTIALS.EVENT.EVENT.LOCATIONDESC</h4>
             </div>
             <input ng-model="eventTab.creating.location" class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs" type="text">
 
-            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
-            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.location" ng-class="{'inactive': !eventTab.creating.location}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer" translate>PARTIALS.BUTTONS.BACK</button>
+            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.location" ng-class="{'inactive': !eventTab.creating.location}" class="button3D buttonSmallFormat side-buffer top-buffer" translate>PARTIALS.BUTTONS.NEXTSTEP</button>
 
 
 
@@ -163,18 +162,16 @@
         <div class="section">
 
             <div class="page-header">
-                <h1>Room</h1>
+                <h1 translate>PARTIALS.EVENT.EVENT.ROOM</h1>
             </div>
 
             <div>
-                <h4>In what room will your event take place?
-
-                </h4>
+                <h4 translate>PARTIALS.EVENT.EVENT.ROOMDESC</h4>
             </div>
             <input ng-model="eventTab.creating.room" class="col-xs-12 border-dotted height-standard top-buffer side-padding-xs" type="text">
 
-            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
-            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.room"  ng-class="{'inactive': !eventTab.creating.room}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer" translate>PARTIALS.BUTTONS.BACK</button>
+            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.room"  ng-class="{'inactive': !eventTab.creating.room}" class="button3D buttonSmallFormat side-buffer top-buffer" translate>PARTIALS.BUTTONS.NEXTSTEP</button>
 
 
 
@@ -184,35 +181,31 @@
         <div class="section">
 
             <div class="page-header">
-                <h1>Event description</h1>
+                <h1 translate>PARTIALS.EVENT.EVENT.EVENTDESCRIPTION</h1>
             </div>
 
             <div>
-                <h4>What are the details of your new event?
-
-                </h4>
+                <h4 translate>PARTIALS.EVENT.EVENT.EVENTDESCRIPTIONDESC</h4>
             </div>
             <textarea ng-model="eventTab.creating.description" class="col-xs-12 border-dotted height-xl top-buffer all-side-padding-xs"></textarea>
 
-            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
-            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.description"  ng-class="{'inactive': !eventTab.creating.description}" class="button3D buttonSmallFormat side-buffer top-buffer">Next step</button>
+            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer" translate>PARTIALS.BUTTONS.BACK</button>
+            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.description"  ng-class="{'inactive': !eventTab.creating.description}" class="button3D buttonSmallFormat side-buffer top-buffer" translate>PARTIALS.BUTTONS.NEXTSTEP</button>
 
         </div>
         <div class="section">
 
             <div class="page-header">
-                <h1>Start date</h1>
+                <h1 translate>PARTIALS.EVENT.EVENT.STARTDATE</h1>
             </div>
 
             <div>
-                <h4>Choose the start date for which the students will be able to send new profile picture for approval
-
-                </h4>
+                <h4 translate>PARTIALS.EVENT.EVENT.STARTDATEDESC</h4>
             </div>
 
             <div class="col-xs-12 top-buffer">
                 <input type="text"
-                       placeholder="From"
+                       translate-attr="{ placeholder: 'PARTIALS.EVENT.EVENT.STARTDATELABEL' }"
                        class="form-control date border-dotted height-standard side-padding-xs"
                        datetime-picker="MM/dd/yyyy HH:mm"
                        ng-model="eventTab.creating.timeBegin"
@@ -220,32 +213,30 @@
                        is-open="eventTab.openTimeBegin">
 
             </div>
-            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
-            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.timeBegin" ng-class="{'inactive': !eventTab.creating.timeBegin}" class="button3D buttonSmallFormat top-buffer side-buffer">Next step</button>
+            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer" translate>PARTIALS.BUTTONS.BACK</button>
+            <button ng-click="eventTab.fpControls.slideDown()" ng-disabled="!eventTab.creating.timeBegin" ng-class="{'inactive': !eventTab.creating.timeBegin}" class="button3D buttonSmallFormat top-buffer side-buffer" translate>PARTIALS.BUTTONS.NEXTSTEP</button>
         </div>
         <div class="section">
 
             <div class="page-header">
-                <h1>End date</h1>
+                <h1 translate>PARTIALS.EVENT.EVENT.ENDDATE</h1>
             </div>
 
             <div>
-                <h4>Choose the end date for which the students will be able to send new profile picture for approval
-
-                </h4>
+                <h4 translate>PARTIALS.EVENT.EVENT.ENDDATEDESC</h4>
             </div>
 
             <div class="col-xs-12 top-buffer">
                 <input type="text"
-                       placeholder="To"
+                       translate-attr="{ placeholder: 'PARTIALS.EVENT.EVENT.ENDDATELABEL' }"
                        class="form-control date border-dotted height-standard side-padding-xs"
                        datetime-picker="MM/dd/yyyy HH:mm"
                        ng-model="eventTab.creating.timeEnd"
                        ng-click="eventTab.openTimeEnd = true"
                        is-open="eventTab.openTimeEnd">
             </div>
-            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer">Back</button>
-            <button ng-disabled="!eventTab.creating.timeEnd" ng-click="eventTab.submit()"  ng-class="{'inactive': !eventTab.creating.timeEnd}" class="button3D buttonSmallFormat top-buffer side-buffer">Submit</button>
+            <button ng-click="eventTab.fpControls.slideUp()" class="button3D buttonSmallFormat top-buffer" translate>PARTIALS.BUTTONS.BACK</button>
+            <button ng-disabled="!eventTab.creating.timeEnd" ng-click="eventTab.submit()"  ng-class="{'inactive': !eventTab.creating.timeEnd}" class="button3D buttonSmallFormat top-buffer side-buffer" translate>PARTIALS.BUTTONS.SUBMIT</button>
         </div>
     </div>
 

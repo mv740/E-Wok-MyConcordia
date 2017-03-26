@@ -1,0 +1,255 @@
+{
+  "TOASTFEEDBACK": {
+    "LOADING": "Loading...",
+    "EVENTS": {
+      "GETTHISEVENT": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Event not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "SUBMIT": {
+        "responseMsg": "Event created",
+        "failureMsg": {
+          "401": "Please Login",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETALLEVENTS": {
+        "failureMsg": {
+          "401": "Please Login",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "UPDATEEVENT": {
+        "responseMsg": "Event updated",
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Event not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "CANCELEVENT": {
+        "responseMsg": "Event cancelled",
+        "failureMsg": {
+          "401": "Please Login",
+          "403": "Not permitted to cancel this event",
+          "404": "Event not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "SETUSERROLE": {
+        "responseMsg": "Role updated",
+        "failureMsg": {
+          "401": "Please Login",
+          "403": "Not permitted to change this user's role",
+          "404": "User not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETEVENTATTENDEES": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "User not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "ADDUSER": {
+        "responseMsg": "Attendee added",
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "User not found",
+          "409": "Attendee already added",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "DELETEUSER": {
+        "responseMsg": "Attendee removed",
+        "failureMsg": {
+          "401": "Please Login",
+          "403": "Not permitted to remove users from this event",
+          "404": "User not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETSTATS": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Statistics not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      }
+    },
+    "STUDENT": {
+      "SENDVALIDATION": {
+        "responseMsg": {
+          "valid": "Picture Validated",
+          "invalid": "Picture Revoked"
+        },
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "No picture found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETSTUDENTPICTURES": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "No student found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETSTUDENTLOGS": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "No logs found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETSTUDENTS": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Students not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "SEARCH": {
+        "responseMsg": "Student found",
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Student not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "VALIDATEARCHIVED": {
+        "responseMsg": {
+          "valid": "Archive picture validated",
+          "invalid": "Archive picture revoked"
+        },
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "No archive picture found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "SUBMITCOMMENT": {
+        "responseMsg": "Commented",
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Couldn't comment. Student not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      }
+    },
+    "ADMIN": {
+      "SUBMITUPDATEPERIOD": {
+        "responseMsg": "Period updated",
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Update Period not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      },
+      "GETUPDATEPERIOD": {
+        "failureMsg": {
+          "401": "Please Login",
+          "404": "Update Period not found",
+          "500": "Sorry! Our servers are down :("
+        }
+      }
+    }
+  },
+  "PARTIALS": {
+    "ADMIN": {
+      "HEADER": "Update period",
+      "CURRENTLYSET": "Currently set to",
+      "MODIFY": "Modify",
+      "YEAR": "Year",
+      "STARTDATE": "Start date",
+      "ENDDATE": "End date",
+      "CHOOSEYEAR": "Choose the year for which the students will be able to send new profile picture for approval",
+      "CHOOSESTART": "Choose the start date for which the students will be able to send new profile picture for approval",
+      "CHOOSEEND": "Choose the end date for which the students will be able to send new profile picture for approval",
+      "ACADEMICYEAR": "Academic year"
+    },
+    "LOGIN": {
+      "TITLE": "Student picture review center",
+      "SIGNIN": "Sign in"
+    },
+    "EVENT": {
+      "EVENT": {
+        "HEADER": "Your events",
+        "CHIPS": {
+          "ALL": "All",
+          "CANCELLED": "Cancelled",
+          "POSTPONED": "Postponed",
+          "RESCHEDULED": "Rescheduled",
+          "SCHEDULED": "Scheduled",
+          "OPEN": "Open",
+          "CLOSED": "Closed"
+        },
+        "BUTTONS": {
+          "MODIFY": "Modify",
+          "VIEWDETAILS": "View details",
+          "ATTENDEES": "Attendees",
+          "CANCEL": "Cancel it"
+        },
+        "CREATEEVENT": "Create an event",
+        "EVENTTYPE": "Event Type",
+        "OPENCLOSED": "Is this an open or closed event?",
+        "EVENTNAME": "Event name",
+        "EVENTNAMEDESC": "Give your new event a meaningful name",
+        "LOCATION": "Location",
+        "LOCATIONDESC": "Where will your event happen?",
+        "ROOM": "Room",
+        "ROOMDESC": "In what room will your event take place?",
+        "EVENTDESCRIPTION": "Event description",
+        "EVENTDESCRIPTIONDESC": "What are the details of your new event?",
+        "STARTDATE": "Start date",
+        "STARTDATELABEL": "From",
+        "ENDDATE": "End date",
+        "ENDDATELABEL": "To",
+        "STARTDATEDESC": "Choose the start date of your event",
+        "ENDDATEDESC": "Choose the end date of your event"
+      },
+      "ATTENDEE": {
+        "DIALOG": {
+          "PLACEHOLDER": "Role",
+          "SETROLE": "Set role",
+          "REMOVE": "Remove",
+          "ROLE": {
+            "CREATOR": "Creator",
+            "MOD": "Mod",
+            "SCANNER": "Scanner",
+            "ATTENDEE": "Attendee"
+          }
+        },
+        "ADDUSERPLACEHOLDER": "User's netname or ID",
+        "ADDATTENDEE": "Add Attendee!",
+        "STATISTICS": "Statistics"
+      }
+    },
+    "REVIEW": {
+      "HEADER": "Student picture review center",
+      "SEARCHBOX": {
+        "PLACEHOLDER": "You can use the name, netname, id or alpha numeric birthdate or all of them at once! Ex: Justin Case 2999999 january 01 2010",
+        "FIND": "Find!"
+      },
+      "SEARCHRESULTS": {
+        "EMPTYFEEDBACK": "We were unable to find results matching your search."
+      }
+    },
+    "SIDENAV": {
+      "LOGOUT": "Logout",
+      "REVIEW": "Review",
+      "ADMIN": "Admin",
+      "EVENT": "Event"
+    },
+    "BUTTONS": {
+      "BACK": "Back",
+      "NEXTSTEP": "Next step",
+      "SUBMIT": "Submit"
+    }
+  }
+}
