@@ -31,7 +31,7 @@ var NgOidcClient;
         NgOidcClientProvider.prototype.setUrls = function (options) {
             this.urls = options;
         };
-        NgOidcClientProvider.prototype.$get = function ($q, $log, $rootScope) {
+        NgOidcClientProvider.prototype.$get = function ($q, $log, $rootScope, $location) {
             var _this = this;
             $log.log("NgOidcClient service started");
             if (!this.settings)
