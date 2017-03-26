@@ -13,6 +13,7 @@ angular.module('myApp', [
     '720kb.tooltips',
     'fullPage.js',
     'ng-fusioncharts',
+    'ngCookies',
     'pascalprecht.translate'
 
 
@@ -109,6 +110,7 @@ angular.module('myApp', [
         });
         $translateProvider.preferredLanguage('en');
         $translateProvider.useSanitizeValueStrategy('escape');
+        $translateProvider.useCookieStorage();
     }])
     .run(['$rootScope','SessionService','$location',function ($rootScope, SessionService,$location) {
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
