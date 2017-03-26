@@ -15,20 +15,22 @@
                     Role: {{attendeeDialog.attendee.role}}
                 </div>
                 <md-input-container ng-if="attendeeDialog.userCanModifyRole(attendeeDialog.attendee)" class="top-buffer bottom-buffer-xl">
-                    <label>Role</label>
+                    <label translate>PARTIALS.EVENT.ATTENDEE.PLACEHOLDER</label>
                     <md-select ng-model="attendeeDialog.attendee.role">
                         <md-option ng-repeat="role in attendeeDialog.listOfSettableRoles"
-                                   value="{{role}}"
-                                   ng-selected="attendeeDialog.attendee.role == role">{{role}}</md-option>
+                                   value="{{role.value}}"
+                                   ng-selected="attendeeDialog.attendeeRoleValueTranslationMapping.value == role.value"><span translate>{{role.translated}}</span></md-option>
                     </md-select>
                 </md-input-container>
                 <div class="top-buffer">
                     <md-button ng-click="attendeeDialog.setNewRole()"
                                ng-if="attendeeDialog.attendeeOriginalRole != attendeeDialog.attendee.role"
-                               class="buttonSmallFormat purple button3D">Set Role</md-button>
+                               class="buttonSmallFormat purple button3D">
+                        <span translate>PARTIALS.EVENT.ATTENDEE.SETROLE</span>
+                    </md-button>
                     <md-button ng-click="attendeeDialog.deleteAttendee()"
                                ng-if="attendeeDialog.userCanModifyRole(attendeeDialog.attendee)"
-                               class="buttonSmallFormat purple button3D">Delete</md-button>
+                               class="buttonSmallFormat purple button3D"><span translate>PARTIALS.EVENT.ATTENDEE.REMOVE</span></md-button>
                 </div>
             </div>
         </div>

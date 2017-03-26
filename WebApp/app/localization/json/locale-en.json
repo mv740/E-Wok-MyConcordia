@@ -178,6 +178,31 @@
     "LOGIN": {
       "TITLE": "Student picture review center",
       "SIGNIN": "Sign in"
+    },
+    "EVENT": {
+      "EVENT": {
+        "HEADER": "Your events",
+        "CHIPS": {
+          "ALL": "All",
+          "CANCELLED": "Cancelled",
+          "POSTPONED": "Postponed",
+          "RESCHEDULED": "Rescheduled",
+          "SCHEDULED": "Scheduled",
+          "OPEN": "Open",
+          "CLOSED": "Closed"
+        }
+      },
+      "ATTENDEE": {
+        "PLACEHOLDER": "Role",
+        "SETROLE": "Set role",
+        "REMOVE": "Remove",
+        "ROLE": {
+          "CREATOR": "Creator",
+          "MOD": "Mod",
+          "SCANNER": "Scanner",
+          "ATTENDEE": "Attendee"
+        }
+      }
     }
   }
 }

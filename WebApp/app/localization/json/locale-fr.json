@@ -178,6 +178,31 @@
     "LOGIN": {
       "TITLE": "Centre de révision de photos étudiantes",
       "SIGNIN": "Se connecter"
+    },
+    "EVENT": {
+      "EVENT": {
+        "HEADER": "Vos événements",
+        "CHIPS": {
+          "ALL": "Tout",
+          "CANCELLED": "Annulés",
+          "POSTPONED": "Replanifiés",
+          "RESCHEDULED": "Reportés",
+          "SCHEDULED": "Planifiés",
+          "OPEN": "Ouverts",
+          "CLOSED": "Fermés"
+        }
+      },
+      "ATTENDEE": {
+        "PLACEHOLDER": "Rôle",
+        "SETROLE": "Établir rôle",
+        "REMOVE": "Retirer",
+        "ROLE": {
+          "CREATOR": "Créateur",
+          "MOD": "Mod",
+          "SCANNER": "Scanneur",
+          "ATTENDEE": "Participant"
+        }
+      }
     }
   }
 }
