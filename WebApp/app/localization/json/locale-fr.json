@@ -171,9 +171,7 @@
       "CHOOSEYEAR": "Veuillez choisir l'année académique pendant laquelle les étudiants pourront faire des requêtes de photo profile",
       "CHOOSESTART": "Veuillez choisir la date de départ à partir de laquelle les étudiants pourront faire des requêtes de photo profile",
       "CHOOSEEND": "Veuillez choisir la date de fin jusqu'à laquelle les étudiants pourront faire des requêtes de photo profile",
-      "ACADEMICYEAR": "Année académique",
-      "BACK": "Retourner",
-      "NEXTSTEP": "Continuer"
+      "ACADEMICYEAR": "Année académique"
     },
     "LOGIN": {
       "TITLE": "Centre de révision de photos étudiantes",
@@ -189,8 +187,31 @@
           "RESCHEDULED": "Reportés",
           "SCHEDULED": "Planifiés",
           "OPEN": "Ouverts",
-          "CLOSED": "Fermés"
-        }
+          "CLOSED": "Privés"
+        },
+        "BUTTONS": {
+          "MODIFY": "Modifier",
+          "VIEWDETAILS": "Détailles",
+          "ATTENDEES": "Participants",
+          "CANCEL": "L'annuler"
+        },
+        "CREATEEVENT": "Créer un événement",
+        "EVENTTYPE": "Type d'événement",
+        "OPENCLOSED": "Est-ce un événement ouvert ou privé?",
+        "EVENTNAME": "Nom de l'événement",
+        "EVENTNAMEDESC": "Donnez votre événement un nom",
+        "LOCATION": "Lieu",
+        "LOCATIONDESC": "Quel est le lieu de votre événement?",
+        "ROOM": "Salle",
+        "ROOMDESC": "Dans quelle salle aura lieu votre événement?",
+        "EVENTDESCRIPTION": "Déscription de l'événement",
+        "EVENTDESCRIPTIONDESC": "Quelles sont les détailles de votre événement?",
+        "STARTDATE": "Date de départ",
+        "STARTDATELABEL": "De",
+        "ENDDATE": "Date de fin",
+        "ENDDATELABEL": "À",
+        "STARTDATEDESC": "Indiquez la date de départ de votre événement",
+        "ENDDATEDESC": "Indiquez la date de fin de votre événement"
       },
       "ATTENDEE": {
         "DIALOG": {
@@ -203,8 +224,16 @@
             "SCANNER": "Scanneur",
             "ATTENDEE": "Participant"
           }
-        }
+        },
+        "ADDUSERPLACEHOLDER": "Le netname ou ID de l'usager",
+        "ADDATTENDEE": "Ajouter Participant(e)!",
+        "STATISTICS": "Statistiques"
       }
+    },
+    "BUTTONS": {
+      "BACK": "Retourner",
+      "NEXTSTEP": "Continuer",
+      "SUBMIT": "Soumettre"
     }
   }
 }

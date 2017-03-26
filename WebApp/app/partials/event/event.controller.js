@@ -63,7 +63,15 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, event
 
     eventTab.readonly = true;
     eventTab.removable = false;
-    eventTab.eventTypes = ['Open', 'Closed'];
+    eventTab.eventTypes = [
+        {
+            value: 'Open',
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.OPEN"
+        },
+        {
+            value: 'Closed',
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.CLOSED"
+        }];
 
     getEvents();
 

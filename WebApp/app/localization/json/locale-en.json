@@ -171,9 +171,7 @@
       "CHOOSEYEAR": "Choose the year for which the students will be able to send new profile picture for approval",
       "CHOOSESTART": "Choose the start date for which the students will be able to send new profile picture for approval",
       "CHOOSEEND": "Choose the end date for which the students will be able to send new profile picture for approval",
-      "ACADEMICYEAR": "Academic year",
-      "BACK": "Back",
-      "NEXTSTEP": "Next step"
+      "ACADEMICYEAR": "Academic year"
     },
     "LOGIN": {
       "TITLE": "Student picture review center",
@@ -190,7 +188,30 @@
           "SCHEDULED": "Scheduled",
           "OPEN": "Open",
           "CLOSED": "Closed"
-        }
+        },
+        "BUTTONS": {
+          "MODIFY": "Modify",
+          "VIEWDETAILS": "View details",
+          "ATTENDEES": "Attendees",
+          "CANCEL": "Cancel it"
+        },
+        "CREATEEVENT": "Create an event",
+        "EVENTTYPE": "Event Type",
+        "OPENCLOSED": "Is this an open or closed event?",
+        "EVENTNAME": "Event name",
+        "EVENTNAMEDESC": "Give your new event a meaningful name",
+        "LOCATION": "Location",
+        "LOCATIONDESC": "Where will your event happen?",
+        "ROOM": "Room",
+        "ROOMDESC": "In what room will your event take place?",
+        "EVENTDESCRIPTION": "Event description",
+        "EVENTDESCRIPTIONDESC": "What are the details of your new event?",
+        "STARTDATE": "Start date",
+        "STARTDATELABEL": "From",
+        "ENDDATE": "End date",
+        "ENDDATELABEL": "To",
+        "STARTDATEDESC": "Choose the start date of your event",
+        "ENDDATEDESC": "Choose the end date of your event"
       },
       "ATTENDEE": {
         "DIALOG": {
@@ -203,8 +224,16 @@
             "SCANNER": "Scanner",
             "ATTENDEE": "Attendee"
           }
-        }
+        },
+        "ADDUSERPLACEHOLDER": "User's netname or ID",
+        "ADDATTENDEE": "Add Attendee!",
+        "STATISTICS": "Statistics"
       }
+    },
+    "BUTTONS": {
+      "BACK": "Back",
+      "NEXTSTEP": "Next step",
+      "SUBMIT": "Submit"
     }
   }
 }

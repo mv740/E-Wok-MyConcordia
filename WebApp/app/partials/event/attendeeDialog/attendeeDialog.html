@@ -19,7 +19,9 @@
                     <md-select ng-model="attendeeDialog.attendee.role">
                         <md-option ng-repeat="role in attendeeDialog.listOfSettableRoles"
                                    value="{{role.value}}"
-                                   ng-selected="attendeeDialog.attendeeRoleValueTranslationMapping.value == role.value"><span translate>{{role.translated}}</span></md-option>
+                                   ng-selected="attendeeDialog.attendeeRoleValueTranslationMapping.value == role.value">
+                            <span translate>{{role.translated}}</span>
+                        </md-option>
                     </md-select>
                 </md-input-container>
                 <div class="top-buffer">
