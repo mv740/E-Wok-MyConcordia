@@ -1,8 +1,8 @@
 /**
  * Created by Michal Wozniak on 11/18/2016.
  */
-// Taken from github.com/IdentityModel/oidc-client-js
-
+// Taken from github.com/IdentityModel/oidc-client-js//
+//https://github.com/markphillips100/oidc-cordova-demo
 var NgOidcClient;
 (function (NgOidcClient) {
     angular.module('ng.oidcclient', []);
@@ -23,7 +23,7 @@ var NgOidcClient;
                 isAuthenticated: false
             };
             this.urls = [];
-            this.$get.$inject = ['$q', '$log', '$rootScope'];
+            this.$get.$inject = ['$q', '$log', '$rootScope','$location'];
         }
         NgOidcClientProvider.prototype.setSettings = function (options) {
             this.settings = options;
@@ -31,7 +31,7 @@ var NgOidcClient;
         NgOidcClientProvider.prototype.setUrls = function (options) {
             this.urls = options;
         };
-        NgOidcClientProvider.prototype.$get = function ($q, $log, $rootScope) {
+        NgOidcClientProvider.prototype.$get = function ($q, $log, $rootScope, $location) {
             var _this = this;
             $log.log("NgOidcClient service started");
             if (!this.settings)
@@ -59,6 +59,7 @@ var NgOidcClient;
                 _this.userInfo.isAuthenticated = false;
                 $log.log("token expired");
                 notifyUserInfoChangedEvent();
+                expiredTokenLoggingOut();
             });
             this.mgr.events.addSilentRenewError(function (e) {
                 _this.userInfo.user = null;
@@ -95,6 +96,14 @@ var NgOidcClient;
 
             var removeUser = function () {
                 return _this.mgr.removeUser();
+            };
+
+            var expiredTokenLoggingOut = function () {
+              _this.mgr.removeUser().then(function success() {
+                  $location.path('/login');
+                  //trigger digest manually
+                  $rootScope.$apply()
+              })
             };
 
             return {
