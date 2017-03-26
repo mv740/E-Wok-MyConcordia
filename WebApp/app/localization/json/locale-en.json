@@ -230,6 +230,16 @@
         "STATISTICS": "Statistics"
       }
     },
+    "REVIEW": {
+      "HEADER": "Student picture review center",
+      "SEARCHBOX": {
+        "PLACEHOLDER": "You can use the name, netname, id or alpha numeric birthdate or all of them at once! Ex: Justin Case 2999999 january 01 2010",
+        "FIND": "Find!"
+      },
+      "SEARCHRESULTS": {
+        "EMPTYFEEDBACK": "We were unable to find results matching your search."
+      }
+    },
     "BUTTONS": {
       "BACK": "Back",
       "NEXTSTEP": "Next step",

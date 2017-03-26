@@ -230,6 +230,16 @@
         "STATISTICS": "Statistiques"
       }
     },
+    "REVIEW": {
+      "HEADER": "Centre de révision de photos étudiantes",
+      "SEARCHBOX": {
+        "PLACEHOLDER": "Utilisez le nom, netname, ID, date de naissance en symboles alphanunériques de l'usager, ou tous ces-derniers! Ex: Justin Case 2999999 january 01 2010",
+        "FIND": "Chercher!"
+      },
+      "SEARCHRESULTS": {
+        "EMPTYFEEDBACK": "Nous n'étions pas capable de retrouver l'étudiant(e) selon vos critères de recherches."
+      }
+    },
     "BUTTONS": {
       "BACK": "Retourner",
       "NEXTSTEP": "Continuer",
