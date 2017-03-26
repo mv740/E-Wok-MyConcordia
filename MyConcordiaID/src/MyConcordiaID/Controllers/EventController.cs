@@ -153,7 +153,7 @@ namespace MyConcordiaID.Controllers
         [Route("user")]
         public IActionResult PostEventUser([FromBody] NewEventUser user)
         {
-            var result = _eventRepo.InsertUser(user);
+            var result = _eventRepo.InsertUserAsync(user).Result;
             switch (result)
             {
                 case EventActionResult.EventNotFound:
@@ -180,7 +180,7 @@ namespace MyConcordiaID.Controllers
         [Route("user")]
         public IActionResult UpdateEventUser([FromBody] EventUser user)
         {
-            var result = _eventRepo.UpdateUser(user);
+            var result = _eventRepo.UpdateUserAsync(user).Result;
             if (result != EventActionResult.Success)
             {
                 return NotFound();
@@ -199,7 +199,7 @@ namespace MyConcordiaID.Controllers
         [Route("user")]
         public IActionResult DeleteEventUser([FromBody] EventUser user)
         {
-            var result = _eventRepo.RemoveUser(user);
+            var result = _eventRepo.RemoveUserAsync(user).Result;
             if (result != EventActionResult.Success)
             {
                 return NotFound();
@@ -286,7 +286,7 @@ namespace MyConcordiaID.Controllers
         [HttpPut]
         public IActionResult UpdateEvent([FromBody] EventInformation information)
         {
-            var selectedEvent = _eventRepo.UpdateEvent(information); //default user for now until everything is tested
+            var selectedEvent = _eventRepo.UpdateEventAsync(information).Result; //default user for now until everything is tested
             if (selectedEvent != EventActionResult.Success)
             {
                 return NotFound();
@@ -305,7 +305,7 @@ namespace MyConcordiaID.Controllers
         [HttpDelete]
         public IActionResult CancelEvent([FromBody] EventCancelled cancelEvent)
         {
-            var result = _eventRepo.RemoveEvent(cancelEvent);
+            var result = _eventRepo.RemoveEventAsync(cancelEvent).Result;
             if (result != EventActionResult.Success)
             {
                 return NotFound();

@@ -303,7 +303,7 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="information"></param>
         /// <param name="netname"></param>
-        public void InsertEvent(NewEvent information, string netname)
+        public async void InsertEvent(NewEvent information, string netname)
         {
 
             var newEvent = new EVENT
@@ -319,7 +319,7 @@ namespace MyConcordiaID.Models.Event
             };
 
             _database.EVENTS.Add(newEvent);
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
 
 
             var newOwner = new EVENT_USERS
@@ -331,10 +331,8 @@ namespace MyConcordiaID.Models.Event
             };
 
             _database.EVENT_USERS.Add(newOwner);
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
 
-
-            //TODO: will need to catch save error using logs
 
         }
 
@@ -343,21 +341,21 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public EventActionResult InsertUser(NewEventUser user)
+        public async Task<EventActionResult> InsertUserAsync(NewEventUser user)
         {
 
-            var selectedEvent = _database.EVENTS
+            var selectedEvent = await _database.EVENTS
                 .Where(e => e.ID_PK == user.EventID)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (selectedEvent != null)
             {
                 var netName = "";
                 if (!string.IsNullOrEmpty(user.UserNetname))
                 {
-                    var student = _database.STUDENTS
+                    var student = await _database.STUDENTS
                         .Where(s => s.NETNAME == user.UserNetname)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     if (student != null)
                     {
@@ -366,9 +364,9 @@ namespace MyConcordiaID.Models.Event
                 }
                 else if (user.UserId != null)
                 {
-                    var student = _database.STUDENTS
+                    var student = await _database.STUDENTS
                         .Where(s => s.ID == user.UserId)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     if (student != null)
                     {
@@ -382,9 +380,9 @@ namespace MyConcordiaID.Models.Event
                     //student does exist 
 
 
-                    var userExist = _database.EVENT_USERS
+                    var userExist = await _database.EVENT_USERS
                         .Where(u => u.EVENT_ID == user.EventID && u.STUDENT_NETNAME_FK == netName)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     if (userExist != null)
                     {
@@ -414,7 +412,7 @@ namespace MyConcordiaID.Models.Event
                     };
 
                     _database.EVENT_USERS.Add(newUser);
-                    _database.SaveChanges();
+                    await _database.SaveChangesAsync();
 
                     return EventActionResult.Success;
                 }
@@ -496,18 +494,17 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="cancellation"></param>
         /// <returns></returns>
-        public EventActionResult RemoveEvent(EventCancelled cancellation)
+        public async Task<EventActionResult> RemoveEventAsync(EventCancelled cancellation)
         {
 
-            var removeEvent = _database.EVENTS
-                .Where(e => e.ID_PK == cancellation.EventId)
-                .FirstOrDefault();
+            var removeEvent = await _database.EVENTS
+                .FirstOrDefaultAsync(e => e.ID_PK == cancellation.EventId);
 
             if (removeEvent != null)
             {
                 //canceled event
                 removeEvent.STATUS = EventStatusType.Cancelled.ToString();
-                _database.SaveChanges();
+                await _database.SaveChangesAsync();
 
                 return EventActionResult.Success;
             }
@@ -522,25 +519,19 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Success/UserNotFound</returns>
-        public EventActionResult RemoveUser(EventUser user)
+        public async Task<EventActionResult> RemoveUserAsync(EventUser user)
         {
-            var userToRemove = _database.EVENT_USERS
-                .Where(u => u.ID_PK == user.UserId)
-                .FirstOrDefault();
+            var userToRemove = await _database.EVENT_USERS
+                .FirstOrDefaultAsync(u => u.ID_PK == user.UserId);
 
             if (userToRemove != null)
             {
                 _database.EVENT_USERS.Remove(userToRemove);
-                _database.SaveChanges();
+                await _database.SaveChangesAsync();
 
                 return EventActionResult.Success;
             }
-            else
-            {
-                return EventActionResult.UserNotFound;
-            }
-
-
+            return EventActionResult.UserNotFound;
         }
 
         /// <summary>
@@ -548,11 +539,10 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="information"></param>
         /// <returns></returns>
-        public EventActionResult UpdateEvent(EventInformation information)
+        public async Task<EventActionResult> UpdateEventAsync(EventInformation information)
         {
-            var updateEvent = _database.EVENTS
-                .Where(e => e.ID_PK == information.EventId)
-                .FirstOrDefault();
+            var updateEvent = await _database.EVENTS
+                .FirstOrDefaultAsync(e => e.ID_PK == information.EventId);
 
             if (updateEvent != null)
             {
@@ -573,7 +563,7 @@ namespace MyConcordiaID.Models.Event
                 updateEvent.ROOM = information.Room;
                 updateEvent.TYPE = information.Type.ToString();
 
-                _database.SaveChanges();
+                await _database.SaveChangesAsync();
 
                 return EventActionResult.Success;
             }
@@ -584,15 +574,20 @@ namespace MyConcordiaID.Models.Event
 
         }
 
-        public EventActionResult UpdateUser(EventUser user)
+        /// <summary>
+        ///  Update an user's role 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<EventActionResult> UpdateUserAsync(EventUser user)
         {
-            var existingUser = _database.EVENT_USERS
-                .FirstOrDefault(u => u.ID_PK == user.UserId);
+            var existingUser = await _database.EVENT_USERS
+                .FirstOrDefaultAsync(u => u.ID_PK == user.UserId);
 
             if (existingUser == null) return EventActionResult.UserNotFound;
 
             existingUser.ROLE = user.Role.ToString();
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
 
             return EventActionResult.Success;
         }

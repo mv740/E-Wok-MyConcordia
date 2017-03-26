@@ -7,12 +7,12 @@ namespace MyConcordiaID.Models.Event
     public interface IEventRepository
     {
 
-        EventActionResult InsertUser(NewEventUser user);
-        EventActionResult UpdateUser(EventUser user);
-        EventActionResult RemoveUser(EventUser user);
+        Task<EventActionResult> InsertUserAsync(NewEventUser user);
+        Task<EventActionResult> UpdateUserAsync(EventUser user);
+        Task<EventActionResult> RemoveUserAsync(EventUser user);
         void InsertEvent(NewEvent newEvent, string Netname);
-        EventActionResult UpdateEvent(EventInformation information);
-        EventActionResult RemoveEvent(EventCancelled cancellation);
+        Task<EventActionResult> UpdateEventAsync(EventInformation information);
+        Task<EventActionResult> RemoveEventAsync(EventCancelled cancellation);
         Task<IEnumerable<EventInformation>> GetEventsAsync();
         Task<IEnumerable<EventInformation>> GetEventsByStatusAsync(EventStatusType status);
         Task<IEnumerable<EventInformation>> GetActiveEventsAsync();
