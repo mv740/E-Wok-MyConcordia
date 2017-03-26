@@ -105,12 +105,11 @@
                 // only parse the dates if a date is set i.e. not set to default
                 if (value.startDate != defaultStartDate && value.endDate != defaultEndDate) {
                     var year = value.year;
+                    adminTab.fetchedAcademicYear = year + "-" + (year + 1);
+
                     adminTab.startDate = dateParsingService.parseUpdatePeriod(value.startDate);
                     adminTab.endDate = dateParsingService.parseUpdatePeriod(value.endDate);
 
-                    adminTab.currentUpdatePeriod = "Academic Year: " + year + "-" + (year + 1)
-                        + ", from " + adminTab.startDate.month + " " + adminTab.startDate.day + ", " + adminTab.startDate.year
-                        + " to " + adminTab.endDate.month + " " + adminTab.endDate.day + ", " + adminTab.endDate.year;
                 }
                 else {
                     adminTab.currentUpdatePeriod = "There is no update period currently set";

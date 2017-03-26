@@ -8,7 +8,7 @@
             </div>
 
             <div>
-                <h4><span translate>PARTIALS.ADMIN.CURRENTLYSET</span>: <span ng-if="!adminTab.loading">{{adminTab.currentUpdatePeriod}}</span>
+                <h4><span translate>PARTIALS.ADMIN.CURRENTLYSET</span>: <span ng-if="!adminTab.loading" ><span translate>PARTIALS.ADMIN.ACADEMICYEAR</span>: {{adminTab.fetchedAcademicYear}} <span translate>PARTIALS.ADMIN.STARTDATELABEL</span> {{adminTab.startDate}} <span translate>PARTIALS.ADMIN.ENDDATELABEL</span> {{adminTab.endDate}}</span>
 
                 </h4>
             </div>
