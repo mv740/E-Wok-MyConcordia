@@ -240,6 +240,12 @@
         "EMPTYFEEDBACK": "Nous n'étions pas capable de retrouver l'étudiant(e) selon vos critères de recherches."
       }
     },
+    "SIDENAV": {
+      "LOGOUT": "Déconnecter",
+      "REVIEW": "Révision",
+      "ADMIN": "Administrer",
+      "EVENT": "Événement"
+    },
     "BUTTONS": {
       "BACK": "Retourner",
       "NEXTSTEP": "Continuer",

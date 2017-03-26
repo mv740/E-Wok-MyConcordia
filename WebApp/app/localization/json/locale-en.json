@@ -240,6 +240,12 @@
         "EMPTYFEEDBACK": "We were unable to find results matching your search."
       }
     },
+    "SIDENAV": {
+      "LOGOUT": "Logout",
+      "REVIEW": "Review",
+      "ADMIN": "Admin",
+      "EVENT": "Event"
+    },
     "BUTTONS": {
       "BACK": "Back",
       "NEXTSTEP": "Next step",
