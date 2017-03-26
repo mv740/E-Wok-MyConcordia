@@ -87,25 +87,25 @@ function AttendeeDialogCtrl($mdDialog, attendee, loggedInAttendee, eventService)
             attendeeDialog.listOfSettableRoles = [
                 {
                     value: 'Mod',
-                    translated: "PARTIALS.EVENT.ATTENDEE.ROLE.MOD"
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.MOD"
                 },
                 {
                     value: 'Scanner',
-                    translated: "PARTIALS.EVENT.ATTENDEE.ROLE.SCANNER"
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.SCANNER"
                 },
                 {
                     value: 'Attendee',
-                    translated: "PARTIALS.EVENT.ATTENDEE.ROLE.ATTENDEE"
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.ATTENDEE"
                 }];
         else if (loggedInAttendee.role == "Mod")
             attendeeDialog.listOfSettableRoles = [
                 {
                     value: 'Scanner',
-                    translated: "PARTIALS.EVENT.ATTENDEE.ROLE.SCANNER"
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.SCANNER"
                 },
                 {
                     value: 'Attendee',
-                    translated: "PARTIALS.EVENT.ATTENDEE.ROLE.ATTENDEE"
+                    translated: "PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.ATTENDEE"
                 }];
     }
 

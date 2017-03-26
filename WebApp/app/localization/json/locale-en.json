@@ -193,14 +193,16 @@
         }
       },
       "ATTENDEE": {
-        "PLACEHOLDER": "Role",
-        "SETROLE": "Set role",
-        "REMOVE": "Remove",
-        "ROLE": {
-          "CREATOR": "Creator",
-          "MOD": "Mod",
-          "SCANNER": "Scanner",
-          "ATTENDEE": "Attendee"
+        "DIALOG": {
+          "PLACEHOLDER": "Role",
+          "SETROLE": "Set role",
+          "REMOVE": "Remove",
+          "ROLE": {
+            "CREATOR": "Creator",
+            "MOD": "Mod",
+            "SCANNER": "Scanner",
+            "ATTENDEE": "Attendee"
+          }
         }
       }
     }
