@@ -1,7 +1,11 @@
 # E-Wok
 Soen 490
 
-###Team
+| Component                        | Version | Status          |
+| :-------------: |:-------------:|  :-------------:| 
+| Api Backend | Dev | [![Build Status](http://173.176.41.65:1111/job/MyConcordiaID/badge/icon)](http://173.176.41.65:1111/job/MyConcordiaID/)|   
+
+### Team
 
 | Member                         | Id          | Username |
 | :-------------: |:-------------:| :-----:               |
@@ -13,9 +17,9 @@ Soen 490
 | Simon Moniere Abes             | 26648568       | simonma1 |
 
 
-##PhoneAsId
+## PhoneAsId
 
-####Mobile Client Application
+#### Mobile Client Application
 
 * run on android/ios/other platform supported by phonegap
 * Access your virtual id card
@@ -26,9 +30,9 @@ Soen 490
 * View available events
 * Event administrator can scan user id ( track attendance) 
 
-##MyConcordiaID
+## MyConcordiaID
 
-####Web application
+#### Web application
 * Administrator validate the profile picture of each student  
 * revalidate previous picture, discard current valid picture 
 * View log of each transaction on each student account
@@ -37,13 +41,13 @@ Soen 490
 * Create a public or private event 
 
 
-### MyConcordiaId Api server Live [![Build Status](http://173.176.41.65:1111/job/MyConcordiaID/badge/icon)](http://173.176.41.65:1111/job/MyConcordiaID/)
+### MyConcordiaId Api server Live 
 https://myconcordiaid.azurewebsites.net/swagger/
 
 ### Web Client Live :
-Dev : https://concordiaidclient.netlify.com/WebApp/app/login
-Production : https://www.myconcordiaid.me
+- Dev : https://concordiaidclient.netlify.com/WebApp/app/login
+- Production : https://www.myconcordiaid.me
 
 ### android application download 
-https://android.myconcordiaid.me 
+http://android.myconcordiaid.me 
 
