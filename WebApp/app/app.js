@@ -100,13 +100,8 @@ angular.module('myApp', [
     }])
     .config(['$translateProvider', function($translateProvider) {
         $translateProvider.useStaticFilesLoader({
-            files: [{
-                prefix: "localization/json/locale-",
-                suffix: ".json"
-            }, {
-                prefix: "localization/json/locale-",
-                suffix: ".json"
-            }]
+            prefix: "localization/json/locale-",
+            suffix: ".json"
         });
         $translateProvider.preferredLanguage('en');
         $translateProvider.useSanitizeValueStrategy('escape');
