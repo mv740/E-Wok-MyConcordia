@@ -15,4 +15,4 @@ MyConcordiaID/src/UnitTestCore/project.lock.json
 MyConcordiaID/.idea/
 MyConcordiaID/src/MyConcordiaID/project.lock.json
 MyConcordiaID/test/obj/
-MyConcordiaID/test/
+MyConcordiaID/test/bin/
