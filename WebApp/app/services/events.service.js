@@ -5,9 +5,9 @@ angular
     .factory('eventService', eventService);
 
 
-eventService.$inject = ['$q', '$translate', 'toastedHttpService', 'myConfig'];
+eventService.$inject = ['$q', 'translateService', 'toastedHttpService', 'myConfig'];
 
-function eventService($q, $translate, toastedHttp, myConfig) {
+function eventService($q, translateService, toastedHttp, myConfig) {
 
     var service = {
         getThisEvent: getThisEvent,
@@ -20,7 +20,7 @@ function eventService($q, $translate, toastedHttp, myConfig) {
         cancelEvent: cancelEvent,
         deleteUser: deleteUser,
         getStats: getStats
-    }
+    };
 
     return service;
 
@@ -28,9 +28,9 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function getThisEvent(id) {
         var localizationPromises = {
-            401: getTranslation('TOASTFEEDBACK.EVENTS.GETTHISEVENT.failureMsg.401'),
-            404: getTranslation('TOASTFEEDBACK.EVENTS.GETTHISEVENT.failureMsg.404'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.GETTHISEVENT.failureMsg.500')
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETTHISEVENT.failureMsg.401'),
+            404: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETTHISEVENT.failureMsg.404'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETTHISEVENT.failureMsg.500')
         };
 
         var settings = {
@@ -55,9 +55,9 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function submit(event){
         var localizationPromises = {
-            responseMsg: getTranslation('TOASTFEEDBACK.EVENTS.SUBMIT.responseMsg'),
-            401: getTranslation('TOASTFEEDBACK.EVENTS.SUBMIT.failureMsg.401'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.SUBMIT.failureMsg.500')
+            responseMsg: translateService.getTranslation('TOASTFEEDBACK.EVENTS.SUBMIT.responseMsg'),
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.SUBMIT.failureMsg.401'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.SUBMIT.failureMsg.500')
         };
 
         var settings = {
@@ -81,8 +81,8 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function getAllEvents() {
         var localizationPromises = {
-            401: getTranslation('TOASTFEEDBACK.EVENTS.GETALLEVENTS.failureMsg.401'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.GETALLEVENTS.failureMsg.500')
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETALLEVENTS.failureMsg.401'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETALLEVENTS.failureMsg.500')
         };
 
         var settings = {
@@ -104,10 +104,10 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function updateEvent(event) {
         var localizationPromises = {
-            responseMsg: getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.responseMsg'),
-            401: getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.401'),
-            404: getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.404'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.500')
+            responseMsg: translateService.getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.responseMsg'),
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.401'),
+            404: translateService.getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.404'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.500')
         };
 
         var settings = {
@@ -133,11 +133,11 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function cancelEvent(event) {
         var localizationPromises = {
-            responseMsg: getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.responseMsg'),
-            401: getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.failureMsg.401'),
-            403: getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.failureMsg.403'),
-            404: getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.failureMsg.404'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.failureMsg.500')
+            responseMsg: translateService.getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.responseMsg'),
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.failureMsg.401'),
+            403: translateService.getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.failureMsg.403'),
+            404: translateService.getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.failureMsg.404'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.CANCELEVENT.failureMsg.500')
         };
 
         var settings = {
@@ -165,11 +165,11 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function setUserRole(user) {
         var localizationPromises = {
-            responseMsg: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.responseMsg'),
-            401: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.401'),
-            403: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.403'),
-            404: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.404'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.500')
+            responseMsg: translateService.getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.responseMsg'),
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.401'),
+            403: translateService.getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.403'),
+            404: translateService.getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.404'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.SETUSERROLE.failureMsg.500')
         };
 
         var settings = {
@@ -198,9 +198,9 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function getEventAttendees(id) {
         var localizationPromises = {
-            401: getTranslation('TOASTFEEDBACK.EVENTS.GETEVENTATTENDEES.failureMsg.401'),
-            404: getTranslation('TOASTFEEDBACK.EVENTS.GETEVENTATTENDEES.failureMsg.404'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.GETEVENTATTENDEES.failureMsg.500')
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETEVENTATTENDEES.failureMsg.401'),
+            404: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETEVENTATTENDEES.failureMsg.404'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETEVENTATTENDEES.failureMsg.500')
         };
 
         var settings = {
@@ -225,11 +225,11 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function addUser(user) {
         var localizationPromises = {
-            responseMsg: getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.responseMsg'),
-            401: getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.failureMsg.401'),
-            404: getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.failureMsg.404'),
-            409: getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.failureMsg.409'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.failureMsg.500')
+            responseMsg: translateService.getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.responseMsg'),
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.failureMsg.401'),
+            404: translateService.getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.failureMsg.404'),
+            409: translateService.getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.failureMsg.409'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.ADDUSER.failureMsg.500')
         };
 
         var settings = {
@@ -257,11 +257,11 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function deleteUser(user) {
         var localizationPromises = {
-            responseMsg: getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.responseMsg'),
-            401: getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.failureMsg.401'),
-            403: getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.failureMsg.403'),
-            404: getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.failureMsg.404'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.failureMsg.500')
+            responseMsg: translateService.getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.responseMsg'),
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.failureMsg.401'),
+            403: translateService.getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.failureMsg.403'),
+            404: translateService.getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.failureMsg.404'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.DELETEUSER.failureMsg.500')
         };
 
         var settings = {
@@ -290,9 +290,9 @@ function eventService($q, $translate, toastedHttp, myConfig) {
 
     function getStats(eventId){
         var localizationPromises = {
-            401: getTranslation('TOASTFEEDBACK.EVENTS.GETSTATS.failureMsg.401'),
-            404: getTranslation('TOASTFEEDBACK.EVENTS.GETSTATS.failureMsg.404'),
-            500: getTranslation('TOASTFEEDBACK.EVENTS.GETSTATS.failureMsg.500')
+            401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETSTATS.failureMsg.401'),
+            404: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETSTATS.failureMsg.404'),
+            500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.GETSTATS.failureMsg.500')
         };
 
         var settings = {
@@ -312,16 +312,5 @@ function eventService($q, $translate, toastedHttp, myConfig) {
                 return toastedHttp.get(settings);
 
             });
-    }
-
-    function getTranslation(path) {
-        var deferred = $q.defer();
-
-        $translate(path)
-            .then(function(translation) {
-                deferred.resolve(translation);
-            });
-
-        return deferred.promise;
     }
 }
