@@ -195,7 +195,13 @@
           "MODIFY": "Modify",
           "VIEWDETAILS": "View details",
           "ATTENDEES": "Attendees",
-          "CANCEL": "Cancel it"
+          "CANCEL": "Cancel"
+        },
+        "CANCELDIALOG": {
+          "TITLE": "Are you sure you want to delete event: ",
+          "TEXTCONTENT": "This action cannot be undone",
+          "OK": "Yes, cancel it!",
+          "CANCEL": "No, let me think about it"
         },
         "CREATEEVENT": "Create an event",
         "EVENTTYPE": "Event Type",

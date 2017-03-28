@@ -197,6 +197,12 @@
           "ATTENDEES": "Participants",
           "CANCEL": "Annuler"
         },
+        "CANCELDIALOG": {
+          "TITLE": "Êtes vous certain(e) que vous voulez annuler l'événement: ",
+          "TEXTCONTENT": "Cette action ne peut pas être défaite",
+          "OK": "Oui, annulez le!",
+          "CANCEL": "Non, laissez-moi y penser"
+        },
         "CREATEEVENT": "Créer un événement",
         "EVENTTYPE": "Type d'événement",
         "OPENCLOSED": "Est-ce un événement ouvert ou privé?",

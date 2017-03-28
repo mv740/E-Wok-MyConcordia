@@ -29,6 +29,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
     eventTab.isFilterTarget = isFilterTarget;
     eventTab.updateStatistics = updateStatistics;
     eventTab.localize = localize;
+    eventTab.confirmCancelEvent = confirmCancelEvent;
     eventTab.filters = [
         {
             value: "All",
@@ -294,6 +295,36 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
             });
 
         return deferred.promise;
+    }
+
+    function confirmCancelEvent(eventTarget) {
+        var dialogConfig = {
+            title: getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.TITLE"),
+            textContent: getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.TEXTCONTENT"),
+            ok: getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.OK"),
+            cancel: getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.CANCEL")
+        };
+
+        $q.all(dialogConfig)
+            .then(function(translations) {
+                var confirm = $mdDialog.confirm()
+                    .title(translations.title + eventTarget.information.name)
+                    .textContent(translations.textContent)
+                    .targetEvent(eventTarget)
+                    .ok(translations.ok)
+                    .cancel(translations.cancel);
+
+                $mdDialog.show(confirm)
+                    .then(function() {
+                        // if user decides to cancel the event, this function is called
+                        console.log("event has been cancelled");
+                        cancel(eventTarget);
+                    }, function() {
+                        // if user changes mind, nothing happens.
+                        console.log("event has not been cancelled");
+                    })
+            });
+
     }
 
     Mousetrap.bind('enter', eventTab.addUser);
