@@ -1,0 +1,42 @@
+{
+
+  "undergraduate_status": "Études de premier cycle",
+  "graduate_status": "Études supérieures",
+  "expires_label": "Valide jusqu'au",
+
+
+  "university_name": "Université Concordia",
+  "convocation": "Convocation",
+  "marshalling_card": "Carte de Marshalling",
+
+
+  "event_from": "De",
+  "event_to": "À",
+  "event_location": "Lieu:",
+  "event_room": "Local:",
+  "event_type": "Type:",
+  "event_status": "Statut:",
+  "event_scan_msg": "Vous êtes enregistré comme modérateur de cet événement. Appuyez sur le bouton de numérisation pour commencer à enregistrer les participants.",
+  "event_barcode": "Code à barre ID:",
+  "event_response": "Réponse:",
+
+
+  "cam_instruct_1" : "Essayez de trouver un mur blanc ou pâle",
+  "cam_instruct_2" : "Placez l'appareil photo au niveau de vos yeux",
+  "cam_instruct_3" : "Assurez-vous qu'il y a suffisamment de lumière dans l'image",
+  "cam_instruct_4" : "Votre visage doit être face à la caméra droite",
+
+
+  "id_card": "Carte d'identité",
+  "update_picture": "Mettre à jour l'image",
+  "events": "Événements",
+  "logout": "Déconnexion",
+  "feedback": "Fournir une réponse",
+
+
+  "popup_upload_succ": "L'image a été envoyée avec succès. Veuillez visiter le Centre de services aux étudiants Birks en personne pour que votre photo soit validée.",
+  "popup_upload_fail": "Euh, on dirait que quelque chose s'est mal passé. Veuillez réessayer d'envoyer la photo.",
+  "popup_logout_txt": "Êtes-vous sûr de vouloir vous déconnecter?",
+  "popup_login_fail": "Il y avait une erreur. Assurez-vous d'être connecté à Internet et essayez de vous reconnecter.",
+  "popup_loading": "Chargement..."
+}
