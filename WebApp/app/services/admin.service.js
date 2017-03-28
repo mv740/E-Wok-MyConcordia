@@ -4,14 +4,14 @@ angular
     .module('myApp')
     .factory('adminService', adminService);
 
-adminService.$inject = ['$q', '$translate', 'toastedHttpService', 'myConfig'];
+adminService.$inject = ['$q', 'translateService', 'toastedHttpService', 'myConfig'];
 
-function adminService($q, $translate, toastedHttp, myConfig) {
+function adminService($q, translateService, toastedHttp, myConfig) {
 
     var service = {
         submitUpdatePeriod: submitUpdatePeriod,
         getUpdatePeriod: getUpdatePeriod
-    }
+    };
 
     return service;
 
@@ -19,10 +19,10 @@ function adminService($q, $translate, toastedHttp, myConfig) {
 
     function submitUpdatePeriod(updatePeriod){
         var localizationPromises = {
-            responseMsg: getTranslation("TOASTFEEDBACK.ADMIN.SUBMITUPDATEPERIOD.responseMsg"),
-            401: getTranslation("TOASTFEEDBACK.ADMIN.SUBMITUPDATEPERIOD.failureMsg.401"),
-            404: getTranslation("TOASTFEEDBACK.ADMIN.SUBMITUPDATEPERIOD.failureMsg.404"),
-            500: getTranslation("TOASTFEEDBACK.ADMIN.SUBMITUPDATEPERIOD.failureMsg.500")
+            responseMsg: translateService.getTranslation("TOASTFEEDBACK.ADMIN.SUBMITUPDATEPERIOD.responseMsg"),
+            401: translateService.getTranslation("TOASTFEEDBACK.ADMIN.SUBMITUPDATEPERIOD.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.ADMIN.SUBMITUPDATEPERIOD.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.ADMIN.SUBMITUPDATEPERIOD.failureMsg.500")
         };
 
         var settings = {
@@ -48,9 +48,9 @@ function adminService($q, $translate, toastedHttp, myConfig) {
 
     function getUpdatePeriod() {
         var localizationPromises = {
-            401: getTranslation("TOASTFEEDBACK.ADMIN.GETUPDATEPERIOD.failureMsg.401"),
-            404: getTranslation("TOASTFEEDBACK.ADMIN.GETUPDATEPERIOD.failureMsg.404"),
-            500: getTranslation("TOASTFEEDBACK.ADMIN.GETUPDATEPERIOD.failureMsg.500")
+            401: translateService.getTranslation("TOASTFEEDBACK.ADMIN.GETUPDATEPERIOD.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.ADMIN.GETUPDATEPERIOD.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.ADMIN.GETUPDATEPERIOD.failureMsg.500")
         };
 
         var settings = {
@@ -69,16 +69,5 @@ function adminService($q, $translate, toastedHttp, myConfig) {
                 settings.failureMsg[500] = translations[500];
                 return toastedHttp.get(settings);
             });
-    }
-
-    function getTranslation(path) {
-        var deferred = $q.defer();
-
-        $translate(path)
-            .then(function(translation) {
-                deferred.resolve(translation);
-            });
-
-        return deferred.promise;
     }
 }

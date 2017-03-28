@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .factory('studentService', studentService);
 
-studentService.$inject = ['$q', '$translate', 'toastedHttpService', 'myConfig'];
+studentService.$inject = ['$q', 'translateService', 'toastedHttpService', 'myConfig'];
 
-function studentService($q, $translate, toastedHttp, myConfig) {
+function studentService($q, translateService, toastedHttp, myConfig) {
 
     var service = {
         sendValidation: sendValidation,
@@ -42,17 +42,17 @@ function studentService($q, $translate, toastedHttp, myConfig) {
 
         if (valid)
             localizationPromises = {
-                responseMsg: getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.responseMsg.valid"),
-                401: getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.401"),
-                404: getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.404"),
-                500: getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.500")
+                responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.responseMsg.valid"),
+                401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.401"),
+                404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.404"),
+                500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.500")
             };
         else
             localizationPromises = {
-                responseMsg: getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.responseMsg.invalid"),
-                401: getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.401"),
-                404: getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.404"),
-                500: getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.500")
+                responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.responseMsg.invalid"),
+                401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.401"),
+                404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.404"),
+                500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.500")
             };
 
         return $q.all(localizationPromises)
@@ -67,9 +67,9 @@ function studentService($q, $translate, toastedHttp, myConfig) {
 
     function getStudentPictures(id) {
         var localizationPromises = {
-            401: getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTPICTURES.failureMsg.401"),
-            404: getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTPICTURES.failureMsg.404"),
-            500: getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTPICTURES.failureMsg.500")
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTPICTURES.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTPICTURES.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTPICTURES.failureMsg.500")
         };
 
         var settings = {
@@ -93,9 +93,9 @@ function studentService($q, $translate, toastedHttp, myConfig) {
 
     function getStudentLogs(netname) {
         var localizationPromises = {
-            401: getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTLOGS.failureMsg.401"),
-            404: getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTLOGS.failureMsg.404"),
-            500: getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTLOGS.failureMsg.500")
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTLOGS.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTLOGS.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTLOGS.failureMsg.500")
         };
 
         var settings = {
@@ -119,9 +119,9 @@ function studentService($q, $translate, toastedHttp, myConfig) {
 
     function getStudents() {
         var localizationPromises = {
-            401: getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTS.failureMsg.401"),
-            404: getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTS.failureMsg.404"),
-            500: getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTS.failureMsg.500")
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTS.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTS.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTS.failureMsg.500")
         };
 
         var settings = {
@@ -144,10 +144,10 @@ function studentService($q, $translate, toastedHttp, myConfig) {
 
     function search(params) {
         var localizationPromises = {
-            responseMsg: getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.responseMsg"),
-            401: getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.failureMsg.401"),
-            404: getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.failureMsg.404"),
-            500: getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.failureMsg.500")
+            responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.responseMsg"),
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.failureMsg.500")
         };
 
         var settings = {
@@ -192,17 +192,17 @@ function studentService($q, $translate, toastedHttp, myConfig) {
 
         if (valid)
             localizationPromises = {
-                responseMsg: getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.responseMsg.valid"),
-                401: getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.401"),
-                404: getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.404"),
-                500: getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.500")
+                responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.responseMsg.valid"),
+                401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.401"),
+                404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.404"),
+                500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.500")
             };
         else
             localizationPromises = {
-                responseMsg: getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.responseMsg.invalid"),
-                401: getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.401"),
-                404: getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.404"),
-                500: getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.500")
+                responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.responseMsg.invalid"),
+                401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.401"),
+                404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.404"),
+                500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.500")
             };
 
         return $q.all(localizationPromises)
@@ -217,10 +217,10 @@ function studentService($q, $translate, toastedHttp, myConfig) {
 
     function submitComment(id, comment){
         var localizationPromises = {
-            responseMsg: getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.responseMsg"),
-            401: getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.failureMsg.401"),
-            404: getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.failureMsg.404"),
-            500: getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.failureMsg.500")
+            responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.responseMsg"),
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.failureMsg.500")
         };
 
         var json = { id: id,
@@ -245,16 +245,5 @@ function studentService($q, $translate, toastedHttp, myConfig) {
                 settings.failureMsg[500] = translations[500];
                 return toastedHttp.post(settings);
             });
-    }
-
-    function getTranslation(path) {
-        var deferred = $q.defer();
-
-        $translate(path)
-            .then(function(translation) {
-                deferred.resolve(translation);
-            });
-
-        return deferred.promise;
     }
 }

@@ -9,9 +9,9 @@ angular
     .controller('EventController', EventController);
 
 
-EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', '$translate', '$q', 'eventService'];
+EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', '$q', 'eventService', 'translateService'];
 
-function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, eventService) {
+function EventController($filter, $modal, $timeout, $mdDialog, $q, eventService, translateService) {
 
 
 
@@ -113,14 +113,14 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
     function updateStatistics() {
         var labels = {
             // this object contains translation mappings that are to be used for the statistics below
-            mod: getTranslation("PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.MOD"),
-            scanner: getTranslation("PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.SCANNER"),
-            registered: getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.REGISTERED"),
-            attending: getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.ATTENDING"),
-            tracking: getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.TRACKING"),
-            didNotCome: getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.DIDNOTCOME"),
-            chartCaption: getTranslation("PARTIALS.EVENT.STATISTICS.CHARTCAPTION"),
-            pieCaption: getTranslation("PARTIALS.EVENT.STATISTICS.PIECAPTION")
+            mod: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.MOD"),
+            scanner: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.SCANNER"),
+            registered: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.REGISTERED"),
+            attending: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.ATTENDING"),
+            tracking: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.TRACKING"),
+            didNotCome: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.DIDNOTCOME"),
+            chartCaption: translateService.getTranslation("PARTIALS.EVENT.STATISTICS.CHARTCAPTION"),
+            pieCaption: translateService.getTranslation("PARTIALS.EVENT.STATISTICS.PIECAPTION")
 
         };
 
@@ -285,23 +285,12 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
         return noCurrentFilterAndNotCancelled || ( isCancelledAndTargetted || eventTargettedByFilterButIsNotCancelled);
     }
 
-    function getTranslation(path) { // translates text given a path
-        var deferred = $q.defer();
-
-        $translate(path)
-            .then(function(translation) {
-                deferred.resolve(translation);
-            });
-
-        return deferred.promise;
-    }
-
     function confirmCancelEvent(eventTarget) {
         var dialogConfig = {
-            title: getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.TITLE"),
-            textContent: getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.TEXTCONTENT"),
-            ok: getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.OK"),
-            cancel: getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.CANCEL")
+            title: translateService.getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.TITLE"),
+            textContent: translateService.getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.TEXTCONTENT"),
+            ok: translateService.getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.OK"),
+            cancel: translateService.getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.CANCEL")
         };
 
         $q.all(dialogConfig)
