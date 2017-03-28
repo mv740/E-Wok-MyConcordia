@@ -10,16 +10,17 @@
     function AdminController(adminService, dateParsingService, $filter) {
         var adminTab = this;
 
+        // user isn't allowed to scroll around the various sections unless he or she uses the provided buttons
         adminTab.fpOptions = {
             navigation: false,
-            keyboardScrolling: false,
+            keyboardScrolling: false
         };
 
 
-        var defaultStartDate = "18-12-2016";
+        var defaultStartDate = "18-12-2016"; // default value provided by DB
         var defaultEndDate = "24-18-2016";
-        var lengthOfAYearString = 4; // number of characters for a year to be valid
 
+        //initialize
         adminTab.academicYear = null;
         adminTab.yearEntered = false;
         adminTab.startDateEntered = false;
@@ -27,8 +28,8 @@
 
         adminTab.loading = true;
 
-        fetchUpdatePeriod();
-        resetForm();
+        fetchUpdatePeriod(); // fetch and display the latest update period
+        resetForm(); // clear whatever data could be lying around in the form
 
 
 
@@ -51,16 +52,16 @@
                 adminTab.startDateEntered = adminTab.dtFrom != undefined;
                 adminTab.endDateEntered = adminTab.dtTo != undefined;
 
-                if (adminTab.yearEntered && adminTab.startDateEntered && adminTab.endDateEntered) {
+                if (adminTab.yearEntered && adminTab.startDateEntered && adminTab.endDateEntered) { // this check is performed just in case the user somehow reaches the submit button
 
                     var validDateRange = adminTab.dtFrom.getTime() < adminTab.dtTo.getTime();
 
                     if (validDateRange) {
                         adminService.submitUpdatePeriod(updatePeriod)
                             .then(function success(response) {
-                                adminTab.fpControls.moveTo(1);
-                                resetForm();
-                                fetchUpdatePeriod();
+                                adminTab.fpControls.moveTo(1); // scroll to the top
+                                resetForm(); // deletes the form after the data has been successfully sent.
+                                fetchUpdatePeriod(); // This is to refresh the update period being displayed
                             }, function failure(response) {
                             });
                     }
@@ -68,9 +69,6 @@
                         alert("The date range selected is invalid.\nPlease ensure the \"From\" date is before the \"To\" date.");
 
                     }
-                }
-                else {
-
                 }
         };
 
@@ -80,11 +78,11 @@
 
         adminTab.setStartDateEntered = function() {
             adminTab.startDateEntered = adminTab.dtFrom != null;
-        }
+        };
 
         adminTab.setEndDateEntered = function() {
             adminTab.endDateEntered = adminTab.dtTo != null;
-        }
+        };
 
         var currentDate = new Date();
         var currentYear = currentDate.getFullYear();

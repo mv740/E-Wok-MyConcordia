@@ -28,9 +28,8 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
     eventTab.setFilter = setFilter;
     eventTab.isFilterTarget = isFilterTarget;
     eventTab.updateStatistics = updateStatistics;
-    eventTab.localize = localize;
     eventTab.confirmCancelEvent = confirmCancelEvent;
-    eventTab.filters = [
+    eventTab.filters = [ // have to set key value mappings in order to maintain english database set values, but display translated content.
         {
             value: "All",
             translated: "PARTIALS.EVENT.EVENT.CHIPS.ALL"
@@ -62,9 +61,9 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
     ];
 
 
-    eventTab.readonly = true;
-    eventTab.removable = false;
-    eventTab.eventTypes = [
+    eventTab.readonly = true; // you can't modify the md-chips
+    eventTab.removable = false; // you can't remove the md-chips
+    eventTab.eventTypes = [ // have to set key value mappings in order to maintain english database set values, but display translated content.
         {
             value: 'Open',
             translated: "PARTIALS.EVENT.EVENT.CHIPS.OPEN"
@@ -77,10 +76,11 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
     getEvents();
 
     eventTab.fpOptions = {
-        navigation: false,
-        keyboardScrolling: false
+        navigation: false, // you can't use the enter key to scroll around and cheat the fullpage.js
+        keyboardScrolling: false // you can't use scroll to scroll around and cheat the fullpage.js
     };
 
+    // initialize my charts with empty values, but they will be set later at updateStatistics
     eventTab.stats = {
         chart: {
             caption: "",
@@ -124,6 +124,9 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
 
         };
 
+        // First I have to translate my labels because the translation is done asynchronously
+        // then I get the statistics information for my charts
+        // then I set the configurations.
         $q.all(labels)
             .then(function(translations){
                 eventService.getStats(eventTab.selectedEvent.information.eventId)
@@ -170,8 +173,8 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
     function submit(){
         if (eventTab.creating.eventID) eventService.updateEvent(eventTab.creating).then(function(){});
         else eventService.submit(eventTab.creating).then(function(){
-            eventTab.fpControls.moveTo(1);
-            getEvents();
+            eventTab.fpControls.moveTo(1); // scroll to the top
+            getEvents(); // refresh the events
         });
     }
 
@@ -244,10 +247,10 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
                 role: "Attendee",
                 eventID: eventTab.selectedEvent.information.eventId
             };
-            if (userNetnameOrId.match(/^[0-9]*$/g) != null) {
+            if (userNetnameOrId.match(/^[0-9]*$/g) != null) { // you can only search for numbers for id's
                 newUser.userId = eventTab.newUserNetnameOrId;
             }
-            else if (userNetnameOrId.match(/^[a-zA-Z]*_?[a-zA-Z]*$/g) != null){
+            else if (userNetnameOrId.match(/^[a-zA-Z]*_?[a-zA-Z]*$/g) != null){ // you can only search for letters followed by an optional underscore and then more letters for netnames
                 newUser.userNetname = eventTab.newUserNetnameOrId;
             }
             eventService.addUser(newUser)
@@ -281,12 +284,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
         return noCurrentFilterAndNotCancelled || ( isCancelledAndTargetted || eventTargettedByFilterButIsNotCancelled);
     }
 
-    function localize(langKey) {
-        $translate.use(langKey);
-        eventTab.frenchSelected = langKey == 'fr';
-    }
-
-    function getTranslation(path) {
+    function getTranslation(path) { // translates text given a path
         var deferred = $q.defer();
 
         $translate(path)
