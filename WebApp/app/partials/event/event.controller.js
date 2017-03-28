@@ -155,6 +155,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, e
                             }
                         ];
 
+                        eventTab.pie.chart.caption = translations.pieCaption;
                         var registered = value.attendees.registered - value.administration.mods - value.administration.scanners - value.administration.creator;
                         eventTab.pie.data = [
                             {
