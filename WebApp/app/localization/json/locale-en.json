@@ -229,7 +229,17 @@
         },
         "ADDUSERPLACEHOLDER": "User's netname or ID",
         "ADDATTENDEE": "Add Attendee!",
-        "STATISTICS": "Statistics"
+        "STATISTICS": {
+          "STATISTICS": "Statistics",
+          "REGISTERED": "Registered",
+          "ATTENDING": "Attending",
+          "TRACKING": "Tracking",
+          "DIDNOTCOME": "Did not come"
+        }
+      },
+      "STATISTICS": {
+        "CHARTCAPTION": "Administration and attendees statistics",
+        "PIECAPTION": "Percentage of people who attended"
       }
     },
     "REVIEW": {

@@ -9,9 +9,9 @@ angular
     .controller('EventController', EventController);
 
 
-EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', '$translate', 'eventService'];
+EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', '$translate', '$q', 'eventService'];
 
-function EventController($filter, $modal, $timeout, $mdDialog, $translate, eventService) {
+function EventController($filter, $modal, $timeout, $mdDialog, $translate, $q, eventService) {
 
 
 
@@ -82,7 +82,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, event
 
     eventTab.stats = {
         chart: {
-            caption: "Administration and attendees statistics",
+            caption: "",
             subCaption: "",
             numberPrefix: "",
             theme: "zune"
@@ -92,7 +92,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, event
 
     eventTab.pie = {
         chart: {
-            caption: "Percentage of people who attended",
+            caption: "",
             //subcaption: "",
             startingangle: "120",
             //showlabels: "0",
@@ -110,43 +110,60 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, event
     ////////////////////////////////////////////////////////////
 
     function updateStatistics() {
-        eventService.getStats(eventTab.selectedEvent.information.eventId).then(function(value){
-            eventTab.stats.data = [
-                {
-                    label: "Mods",
-                    value: value.administration.mods
-                },
-                {
-                    label: "Scanners",
-                    value: value.administration.scanners
-                },
-                {
-                    label: "Registered",
-                    value: value.attendees.registered
-                },
-                {
-                    label: "Attending",
-                    value: value.attendees.attending
-                },
-                {
-                    label: "Tracking",
-                    value: value.attendees.tracking
-                }
-            ];
+        var labels = {
+            // this object contains translation mappings that are to be used for the statistics below
+            mod: getTranslation("PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.MOD"),
+            scanner: getTranslation("PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.SCANNER"),
+            registered: getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.REGISTERED"),
+            attending: getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.ATTENDING"),
+            tracking: getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.TRACKING"),
+            didNotCome: getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.DIDNOTCOME"),
+            chartCaption: getTranslation("PARTIALS.EVENT.STATISTICS.CHARTCAPTION"),
+            pieCaption: getTranslation("PARTIALS.EVENT.STATISTICS.PIECAPTION")
 
-            var registered = value.attendees.registered - value.administration.mods - value.administration.scanners - value.administration.creator;
-            eventTab.pie.data = [
-                {
-                    label: "Attending",
-                    value: value.attendees.attending
-                },
-                {
-                    label: "Did not come",
-                    value: registered
-                }
-            ];
-        });
+        };
 
+        $q.all(labels)
+            .then(function(translations){
+                eventService.getStats(eventTab.selectedEvent.information.eventId)
+                    .then(function(value) {
+                        eventTab.stats.chart.caption = translations.chartCaption;
+                        eventTab.stats.data = [
+                            {
+                                label: translations.mod,
+                                value: value.administration.mods
+                            },
+                            {
+                                label: translations.scanner,
+                                value: value.administration.scanners
+                            },
+                            {
+                                label: translations.registered,
+                                value: value.attendees.registered
+                            },
+                            {
+                                label: translations.attending,
+                                value: value.attendees.attending
+                            },
+                            {
+                                label: translations.tracking,
+                                value: value.attendees.tracking
+                            }
+                        ];
+
+                        var registered = value.attendees.registered - value.administration.mods - value.administration.scanners - value.administration.creator;
+                        eventTab.pie.data = [
+                            {
+                                label: translations.attending,
+                                value: value.attendees.attending
+                            },
+                            {
+                                label: translations.didNotCome,
+                                value: registered
+                            }
+                        ];
+                    });
+            });
     }
 
     function submit(){
@@ -267,5 +284,17 @@ function EventController($filter, $modal, $timeout, $mdDialog, $translate, event
         $translate.use(langKey);
         eventTab.frenchSelected = langKey == 'fr';
     }
+
+    function getTranslation(path) {
+        var deferred = $q.defer();
+
+        $translate(path)
+            .then(function(translation) {
+                deferred.resolve(translation);
+            });
+
+        return deferred.promise;
+    }
+
     Mousetrap.bind('enter', eventTab.addUser);
 }

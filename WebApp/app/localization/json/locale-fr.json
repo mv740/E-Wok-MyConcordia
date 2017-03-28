@@ -184,18 +184,18 @@
         "HEADER": "Vos événements",
         "CHIPS": {
           "ALL": "Tout",
-          "CANCELLED": "Annulés",
-          "POSTPONED": "Replanifiés",
-          "RESCHEDULED": "Reportés",
-          "SCHEDULED": "Planifiés",
-          "OPEN": "Ouverts",
-          "CLOSED": "Privés"
+          "CANCELLED": "Annulé",
+          "POSTPONED": "Replanifié",
+          "RESCHEDULED": "Reporté",
+          "SCHEDULED": "Planifié",
+          "OPEN": "Ouvert",
+          "CLOSED": "Privé"
         },
         "BUTTONS": {
           "MODIFY": "Modifier",
           "VIEWDETAILS": "Détailles",
           "ATTENDEES": "Participants",
-          "CANCEL": "L'annuler"
+          "CANCEL": "Annuler"
         },
         "CREATEEVENT": "Créer un événement",
         "EVENTTYPE": "Type d'événement",
@@ -229,7 +229,17 @@
         },
         "ADDUSERPLACEHOLDER": "Le netname ou ID de l'usager",
         "ADDATTENDEE": "Ajouter Participant(e)!",
-        "STATISTICS": "Statistiques"
+        "STATISTICS": {
+          "STATISTICS": "Statistiques",
+          "REGISTERED": "Enregistré",
+          "ATTENDING": "Présent(e)",
+          "TRACKING": "Suivi",
+          "DIDNOTCOME": "N'a pas assisté"
+        }
+      },
+      "STATISTICS": {
+        "CHARTCAPTION": "Statistiques d'administration et de participants",
+        "PIECAPTION": "Pourcentage de présence"
       }
     },
     "REVIEW": {

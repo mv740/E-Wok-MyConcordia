@@ -152,12 +152,12 @@ md-toast {
   outline: 1px solid slategrey; }
 
 md-toast.md-error-toast-theme .md-toast-content {
-  background-color: red;
+  background-color: #d2322d;
   text-align: center;
   max-width: 100%; }
 
 md-toast.md-error-toast-theme {
-  width: 100%; }
+  width: 95%; }
 
 .button3D {
   background-color: white;
