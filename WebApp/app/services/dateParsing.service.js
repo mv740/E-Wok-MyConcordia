@@ -42,7 +42,8 @@ function dateParsingService($filter) {
 
         var date = new Date(year, month, day);
 
-        return date.toLocaleDateString(); // parse date into localized settings according to the configuration of the browser.
+
+        return date;
     }
 
 }

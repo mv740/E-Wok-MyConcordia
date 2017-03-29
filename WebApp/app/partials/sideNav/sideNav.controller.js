@@ -7,9 +7,9 @@ angular
     .controller('SideNavCtrl', SideNavCtrl);
 
 
-SideNavCtrl.$inject = ['AuthenticationService','$scope', '$translate'];
+SideNavCtrl.$inject = ['AuthenticationService','$scope', '$translate', '$rootScope'];
 
-function SideNavCtrl(AuthenticationService, $scope, $translate) {
+function SideNavCtrl(AuthenticationService, $scope, $translate, $rootScope) {
 
     var sideNav = this;
 
@@ -18,7 +18,7 @@ function SideNavCtrl(AuthenticationService, $scope, $translate) {
     sideNav.logout = logout;
     sideNav.isLoggedIn = isLoggedIn;
     sideNav.translate = translate;
-    sideNav.frenchSelected = $translate.proposedLanguage() == 'fr';
+    sideNav.frenchSelected = $translate.use() == 'fr';
 
     //////////////////
 
@@ -78,7 +78,11 @@ function SideNavCtrl(AuthenticationService, $scope, $translate) {
     }
 
     function translate(langKey) {
-        $translate.use(langKey);
-        sideNav.frenchSelected = !sideNav.frenchSelected;
+        $translate.use(langKey)
+            .then(function() {
+                var key = $translate.use();
+                sideNav.frenchSelected = !sideNav.frenchSelected;
+                $rootScope.$broadcast('adminTab.localizeDate');
+            });
     }
 }

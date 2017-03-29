@@ -5,9 +5,9 @@
         .module('myApp')
         .controller('AdminController', AdminController);
 
-    AdminController.$inject = ['adminService', 'dateParsingService', '$filter'];
+    AdminController.$inject = ['$filter', '$translate', '$scope', 'adminService', 'dateParsingService'];
 
-    function AdminController(adminService, dateParsingService, $filter) {
+    function AdminController($filter, $translate, $scope, adminService, dateParsingService) {
         var adminTab = this;
 
         // user isn't allowed to scroll around the various sections unless he or she uses the provided buttons
@@ -31,10 +31,7 @@
         fetchUpdatePeriod(); // fetch and display the latest update period
         resetForm(); // clear whatever data could be lying around in the form
 
-
-
-
-
+        $scope.$on('adminTab.localizeDate', localizeDate);
 
         adminTab.submit = function UpdatePeriod() {
                 var dateFormat = 'MM-dd-yyyyTHH:mm:ss';
@@ -105,8 +102,22 @@
                     var year = value.year;
                     adminTab.fetchedAcademicYear = year + "-" + (year + 1);
 
+                    var localeOptions = {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric'
+                    };
+
+                    var langKey = $translate.use();
+
+                    // Have 1 attribute to store the actual date object, and one that will be localized and displayed to screen
                     adminTab.startDate = dateParsingService.parseUpdatePeriod(value.startDate);
+                    adminTab.startDateLocalized = adminTab.startDate.toLocaleString(langKey + "-CA", localeOptions);
+
+                    // Have 1 attribute to store the actual date object, and one that will be localized and displayed to screen
                     adminTab.endDate = dateParsingService.parseUpdatePeriod(value.endDate);
+                    adminTab.endDateLocalized = adminTab.endDate.toLocaleString(langKey + "-CA", localeOptions);
+
 
                 }
                 else {
@@ -123,6 +134,22 @@
             adminTab.currentUpdatePeriod = "";
         }
 
+        function localizeDate() {
+            if (adminTab.startDate != undefined && adminTab.endDate != undefined) {
+                var localeOptions = {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                };
+
+                var langKey = $translate.use();
+                adminTab.startDateLocalized = adminTab.startDate
+                    .toLocaleString(langKey + "-CA", localeOptions);
+
+                adminTab.endDateLocalized = adminTab.endDate
+                    .toLocaleString(langKey + "-CA", localeOptions);
+            }
+        }
         Mousetrap.bind('enter', adminTab.submit);
     }
 })();

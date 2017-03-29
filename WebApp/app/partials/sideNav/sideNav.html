@@ -1,4 +1,4 @@
-<div class="full-height" ng-if="sideNav.isLoggedIn()">
+<div ng-controller="SideNavCtrl as sideNav" class="full-height" ng-if="sideNav.isLoggedIn()">
     <div id="mySidenav" class="sideNavDrawer">
         <a></a>
         <a href="" ng-click="sideNav.logout()" translate>PARTIALS.SIDENAV.LOGOUT</a>
