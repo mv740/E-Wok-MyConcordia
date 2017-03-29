@@ -5,6 +5,7 @@
 
 $sidenav-top-margin: 28px;
 $sideNav-width: 60px;
+$sideNav-width-slider: 170px;
 $sideNav-icon-size:25px;
 
 #sideMenuContainer{
@@ -72,15 +73,7 @@ $sideNav-icon-size:25px;
     .eventIcon{
       @include setBackground($event-icon, $sideNav-icon-size);
     }
-    .languageSelector {
-      margin-bottom: 30px;
-      font-weight: bold;
-      color: black;
-      &:hover{
-        text-decoration: none;
-        cursor: pointer;
-      }
-    }
+
   }
 
 
@@ -94,6 +87,21 @@ $sideNav-icon-size:25px;
     overflow-x: hidden; /* Disable horizontal scroll */
     transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
   padding-left: $sideNav-width;
+
+  .languageSelector{
+    width: $sideNav-width-slider - $sideNav-width;
+  }
 }
+  .languageSelector {
+    font-weight: bold;
+    color: black;
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+    &:hover{
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
 
 }

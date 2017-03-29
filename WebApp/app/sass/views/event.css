@@ -443,13 +443,6 @@ md-toast.md-error-toast-theme {
       background-size: 25px;
       background-repeat: no-repeat;
       background-position: center; }
-    #sideMenuContainer #sideMenuStatic .languageSelector {
-      margin-bottom: 30px;
-      font-weight: bold;
-      color: black; }
-      #sideMenuContainer #sideMenuStatic .languageSelector:hover {
-        text-decoration: none;
-        cursor: pointer; }
   #sideMenuContainer .sideNavDrawer {
     height: 100%;
     /* 100% Full-height */
@@ -465,6 +458,17 @@ md-toast.md-error-toast-theme {
     transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidenav */
     padding-left: 60px; }
+    #sideMenuContainer .sideNavDrawer .languageSelector {
+      width: 110px; }
+  #sideMenuContainer .languageSelector {
+    font-weight: bold;
+    color: black;
+    bottom: 0px;
+    position: absolute;
+    width: 100%; }
+    #sideMenuContainer .languageSelector:hover {
+      text-decoration: none;
+      cursor: pointer; }
 
 .listResults div span {
   margin-right: 8px; }
