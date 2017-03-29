@@ -10,12 +10,12 @@
     .module('starter')
     .factory('AuthenticationService', AuthenticationService);
 
-  AuthenticationService.$inject = ['SessionService', '$state', 'ngOidcClient', '$cordovaInAppBrowser', '$rootScope', '$ionicSideMenuDelegate', '$ionicNavBarDelegate', '$ionicPopup', '$cordovaNetwork', '$ionicLoading'];
+  AuthenticationService.$inject = ['SessionService', '$state', 'ngOidcClient', '$cordovaInAppBrowser', '$rootScope', '$ionicSideMenuDelegate', '$ionicNavBarDelegate', '$ionicPopup', '$cordovaNetwork', '$ionicLoading', '$filter'];
 
-  function AuthenticationService(SessionService, $state, ngOidcClient, $cordovaInAppBrowser, $rootScope, $ionicSideMenuDelegate, $ionicNavBarDelegate, $ionicPopup, $cordovaNetwork, $ionicLoading) {
+  function AuthenticationService(SessionService, $state, ngOidcClient, $cordovaInAppBrowser, $rootScope, $ionicSideMenuDelegate, $ionicNavBarDelegate, $ionicPopup, $cordovaNetwork, $ionicLoading, $filter) {
     var failedLoginAlert = function () {
       var alertPopup = $ionicPopup.alert({
-        title: 'Failed to login',
+        title: '<b>' + $filter('translate')('popup_login_fail_title') + '</b>',
         template: '{{"popup_login_fail" | translate}}'
       });
 
@@ -64,7 +64,7 @@
 
       } else {
         $ionicPopup.alert({
-          title: 'Failed to login',
+          title: '<b>' + $filter('translate')('popup_login_fail_title') + '</b>',
           template: '{{"popup_login_fail" | translate}}'
         }).then(function (res) {
           console.log('redirected to login page.');

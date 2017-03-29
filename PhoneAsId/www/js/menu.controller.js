@@ -8,9 +8,9 @@
     .module('starter')
     .controller('MenuController', MenuController);
 
-  MenuController.$inject = ['AuthenticationService', '$ionicPopup'];
+  MenuController.$inject = ['AuthenticationService', '$ionicPopup', '$filter'];
 
-  function MenuController(AuthenticationService, $ionicPopup) {
+  function MenuController(AuthenticationService, $ionicPopup, $filter) {
     var vm = this;
     vm.overlay = false;
 
@@ -26,7 +26,7 @@
     function logOut() {
       // A confirm dialog
       var confirmPopup = $ionicPopup.confirm({
-        title: '<b>Logout</b>',
+        title: '<b>' + $filter('translate')('popup_logout_title') + '</b>',
         template: '{{"popup_logout_txt" | translate}}'
       });
 

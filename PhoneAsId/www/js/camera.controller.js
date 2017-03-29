@@ -9,9 +9,9 @@
     .module('starter')
     .controller('CameraCtrl', CameraCtrl);
 
-    CameraCtrl.$inject = ['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', '$rootScope','Settings'];
+    CameraCtrl.$inject = ['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', '$rootScope','Settings', '$filter'];
 
-    function CameraCtrl(SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location, $rootScope, Settings) {
+    function CameraCtrl(SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location, $rootScope, Settings, $filter) {
       var camCtrl = this;
 
       camCtrl.pictureUrl = 'http://placehold.it/300x300';
@@ -162,7 +162,7 @@
           $rootScope.canUpdate = false; //disable
 
           alertPopup = $ionicPopup.alert({
-            title: 'Upload successful',
+            title: '<b>' + $filter('translate')('popup_upload_succ_title') + '</b>',
             template: '{{"popup_upload_succ" | translate}}'
           });
           alertPopup.then(function (res) {
@@ -171,7 +171,7 @@
           });
         } else if (alertType = "upload-fail") {
           alertPopup = $ionicPopup.alert({
-            title: 'Upload failed',
+            title: '<b>' + $filter('translate')('popup_upload_fail_title') + '</b>',
             template: '{{"popup_upload_fail" | translate}}'
           });
         }
@@ -299,15 +299,15 @@
       function displayPicture() {
         var myPopup = $ionicPopup.show({
           templateUrl: 'templates/cameraPopup.html',
-          title: 'Send picture for approval?',
+          title: '<b>' + $filter('translate')('popup_send_pic_title') + '</b>',
           scope: $scope,
           buttons: [
             {
-              text: 'Cancel',
+              text: $filter('translate')('popup_btn_cancel'),
               type: 'button-assertive'
             },
             {
-              text: 'Send',
+              text: $filter('translate')('popup_btn_send'),
               type: 'button-balanced',
               onTap: function (e) {
                 camCtrl.sendPicture();

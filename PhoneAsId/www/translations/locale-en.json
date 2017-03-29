@@ -1,14 +1,11 @@
 {
-
   "undergraduate_status": "Undergraduate",
   "graduate_status": "Graduate",
   "expires_label": "Expires on",
 
-
   "university_name": "Concordia university",
   "convocation": "Convocation",
   "marshalling_card": "Marshalling Card",
-
 
   "event_from": "From",
   "event_to": "To",
@@ -20,12 +17,10 @@
   "event_barcode": "Barcode ID:",
   "event_response": "Response:",
 
-
   "cam_instruct_1" : "Try to find a white or pale wall",
   "cam_instruct_2" : "Place the camera at your eye level",
   "cam_instruct_3" : "Ensure that there is enough light in the picture",
   "cam_instruct_4" : "Your face must be facing the camera straight",
-
 
   "id_card": "Id Card",
   "update_picture": "Update Picture",
@@ -33,10 +28,19 @@
   "logout": "Logout",
   "feedback": "Provide Feedback",
 
-
+  "popup_upload_succ_title" : "Upload successful",
+  "popup_upload_fail_title" : "Upload failed",
   "popup_upload_succ": "The picture has been successfully sent. Please visit the Birks Student Service Centre in person to have your photo validated.",
   "popup_upload_fail": "Uh oh, looks like something went wrong. Please try sending the photo again.",
+  "popup_send_pic_title" : "Send picture for approval?",
+
+  "popup_logout_title" : "Logout",
   "popup_logout_txt": "Are you sure you want to logout?",
+
+  "popup_login_fail_title" : "Failed to login",
   "popup_login_fail": "There was an error. Please make sure you are connected\nto the internet and try logging in again.",
+
+  "popup_btn_send": "Send",
+  "popup_btn_cancel": "Cancel",
   "popup_loading": "Loading..."
 }
