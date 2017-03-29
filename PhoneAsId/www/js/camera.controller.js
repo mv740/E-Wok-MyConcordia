@@ -9,9 +9,9 @@
     .module('starter')
     .controller('CameraCtrl', CameraCtrl);
 
-    CameraCtrl.$inject = ['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', '$rootScope','Settings'];
+    CameraCtrl.$inject = ['SessionService','$scope','$cordovaCamera', '$cordovaFile', '$cordovaFileTransfer', '$ionicPopup', '$location', '$rootScope','Settings', '$filter'];
 
-    function CameraCtrl(SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location, $rootScope, Settings) {
+    function CameraCtrl(SessionService, $scope, $cordovaCamera, $cordovaFile, $cordovaFileTransfer, $ionicPopup, $location, $rootScope, Settings, $filter) {
       var camCtrl = this;
 
       camCtrl.pictureUrl = 'http://placehold.it/300x300';
@@ -121,8 +121,8 @@
           $rootScope.canUpdate = false; //disable
 
           alertPopup = $ionicPopup.alert({
-            title: 'Upload successful',
-            template: 'The picture has been successfully sent. Please visit the Birks Student Service Centre in person to have your photo validated.'
+            title: '<b>' + $filter('translate')('popup_upload_succ_title') + '</b>',
+            template: '{{"popup_upload_succ" | translate}}'
           });
           alertPopup.then(function (res) {
             console.log('Thank you for not eating my delicious ice cream cone');
@@ -130,8 +130,8 @@
           });
         } else if (alertType = "upload-fail") {
           alertPopup = $ionicPopup.alert({
-            title: 'Upload failed',
-            template: 'Uh oh, looks like something went wrong. Please try sending the photo again.'
+            title: '<b>' + $filter('translate')('popup_upload_fail_title') + '</b>',
+            template: '{{"popup_upload_fail" | translate}}'
           });
         }
       };
@@ -140,15 +140,15 @@
       function displayPicture() {
         var myPopup = $ionicPopup.show({
           templateUrl: 'templates/cameraPopup.html',
-          title: 'Send picture for approval?',
+          title: '<b>' + $filter('translate')('popup_send_pic_title') + '</b>',
           scope: $scope,
           buttons: [
             {
-              text: 'Cancel',
+              text: $filter('translate')('popup_btn_cancel'),
               type: 'button-assertive'
             },
             {
-              text: 'Send',
+              text: $filter('translate')('popup_btn_send'),
               type: 'button-balanced',
               onTap: function (e) {
                 camCtrl.sendPicture();
