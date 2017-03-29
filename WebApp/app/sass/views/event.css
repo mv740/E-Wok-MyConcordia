@@ -576,3 +576,6 @@ md-toast.md-error-toast-theme {
 
 .selectedChip {
   color: #a1325e; }
+
+tooltip {
+  width: 100%; }

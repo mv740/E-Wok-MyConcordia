@@ -251,7 +251,8 @@
     "REVIEW": {
       "HEADER": "Centre de révision de photos étudiantes",
       "SEARCHBOX": {
-        "PLACEHOLDER": "Utilisez le nom, netname, ID, date de naissance en symboles alphanunériques de l'usager, ou tous ces-derniers! Ex: Justin Case 2999999 january 01 2010",
+        "PLACEHOLDER": "Utilisez le nom, netname, ID, date de naissance en symboles alphanunériques de l'usager, ou tous ces-derniers ensemble!",
+        "TOOLTIP" : "Ex: Justin Case 2999999 january 01 2010",
         "FIND": "Chercher!"
       },
       "SEARCHRESULTS": {

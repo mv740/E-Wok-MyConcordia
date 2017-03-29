@@ -251,7 +251,8 @@
     "REVIEW": {
       "HEADER": "Student picture review center",
       "SEARCHBOX": {
-        "PLACEHOLDER": "You can use the name, netname, id or alpha numeric birthdate or all of them at once! Ex: Justin Case 2999999 january 01 2010",
+        "PLACEHOLDER": "You can use the name, netname, id or alpha numeric birthdate or all of them at once!",
+        "TOOLTIP" : "Ex: Justin Case 2999999 january 01 2010",
         "FIND": "Find!"
       },
       "SEARCHRESULTS": {

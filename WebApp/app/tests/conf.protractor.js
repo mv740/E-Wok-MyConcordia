@@ -5,7 +5,9 @@ exports.config = {
     framework: 'jasmine',
     seleniumAddress: env.seleniumAddress,
     specs: [
-        'search.test.js'
+        'search.spec.js',
+        'newEvent.spec.js',
+        'deleteEvent.spec.js'
     ],
     onPrepare: function(){
         https.get(env.urlBackendInit).end(function(err, resp) {
