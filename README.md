@@ -1,11 +1,11 @@
-# E-Wok
+# MyConcordiaID
 Soen 490
 
 | Component                        | Version | Status          |
 | :-------------: |:-------------:|  :-------------:| 
 | Api Backend | Dev | [![Build Status](http://173.176.41.65:1111/job/MyConcordiaID/badge/icon)](http://173.176.41.65:1111/job/MyConcordiaID/)|   
 
-### Team
+### Team - E-Wok
 
 | Member                         | Id          | Username |
 | :-------------: |:-------------:| :-----:               |
@@ -16,8 +16,6 @@ Soen 490
 | Sebastian Rafique Proctor-Shah | 29649727       | EXPSPACE |
 | Simon Moniere Abes             | 26648568       | simonma1 |
 
-
-## PhoneAsId
 
 #### Mobile Client Application
 
@@ -30,7 +28,6 @@ Soen 490
 * View available events
 * Event administrator can scan user id ( track attendance) 
 
-## MyConcordiaID
 
 #### Web application
 * Administrator validate the profile picture of each student  
