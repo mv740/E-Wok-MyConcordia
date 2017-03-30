@@ -39,7 +39,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetAll()
         {
 
-            var students = _studentsRepo.GetAll().Result;
+            var students = _studentsRepo.GetAllAsync().Result;
 
             return new ObjectResult(students);
         }
@@ -56,7 +56,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetById(int id)
         {
 
-            var student = _studentsRepo.FindById(id).Result;
+            var student = _studentsRepo.FindByIdAsync(id).Result;
 
             if (student == null)
             {
@@ -79,7 +79,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetStudentPictures(int id)
         {
 
-            var studentPictures = _pictureRepo.FindStudentPictures(id).Result;
+            var studentPictures = _pictureRepo.FindStudentPicturesAsync(id).Result;
 
             if (studentPictures == null)
             {
@@ -100,7 +100,7 @@ namespace MyConcordiaID.Controllers
         [Route("account")]
         public IActionResult GetAccount()
         {
-            var result = _studentsRepo.FindByNetName(GetAuthenticatedUserNetname()).Result;
+            var result = _studentsRepo.FindByNetNameAsync(GetAuthenticatedUserNetname()).Result;
 
             if (result == null)
             {
@@ -258,7 +258,9 @@ namespace MyConcordiaID.Controllers
         [Route("UpdatePeriod")]
         public IActionResult GetUpdatePicturePeriod()
         {
-            return new ObjectResult(_studentsRepo.GetUpdatePicturePeriod());
+            var updatePeriod = _studentsRepo.GetUpdatePicturePeriodAsync().Result;
+
+            return new ObjectResult(updatePeriod);
         }
 
         /// <summary>

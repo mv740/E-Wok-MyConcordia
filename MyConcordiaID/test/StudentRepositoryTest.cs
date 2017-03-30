@@ -91,7 +91,7 @@ namespace Tests
             ConnectMocksToDataStore(users);
 
 
-            var student = _repo.FindById(21941097).Result;
+            var student = _repo.FindByIdAsync(21941097).Result;
             Assert.Equal(21941097, student.Id);
             Assert.Equal("testFirst", student.FirstName);
 
@@ -130,7 +130,7 @@ namespace Tests
             _mySetStudent.Object.AddRange(users);
             ConnectMocksToDataStore(users);
 
-            var result = _repo.GetAll().Result;
+            var result = _repo.GetAllAsync().Result;
 
             Assert.Equal(2, Enumerable.Count(result));
 
@@ -342,7 +342,7 @@ namespace Tests
 
             _repo.ValidatePicture(validationMessage, "test");
 
-            var studentPictures = _picture.FindStudentPictures(21941097).Result;
+            var studentPictures = _picture.FindStudentPicturesAsync(21941097).Result;
 
             decimal id = -1;
             var status = "";

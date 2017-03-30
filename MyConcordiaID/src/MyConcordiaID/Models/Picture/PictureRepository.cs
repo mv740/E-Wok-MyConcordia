@@ -15,7 +15,12 @@ namespace MyConcordiaID.Models.Picture
             _database = context;
         }
 
-        public async Task<StudentPictures> FindStudentPictures(int id)
+        /// <summary>
+        ///  Retrieve a specific picture by id 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public async Task<StudentPictures> FindStudentPicturesAsync(int id)
         {
             var student = await _database.STUDENTS
                 .Where(s => s.ID == id)
@@ -44,7 +49,7 @@ namespace MyConcordiaID.Models.Picture
                     })
                     .ToListAsync();
 
-                StudentPictures pictures = new StudentPictures
+                var pictures = new StudentPictures
                 {
                     ProfilePicture = myPictures
                         .Where(item => item.Status == aproved)

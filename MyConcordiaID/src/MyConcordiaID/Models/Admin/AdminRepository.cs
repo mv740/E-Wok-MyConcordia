@@ -83,7 +83,6 @@ namespace MyConcordiaID.Models.Admin
 
             //Get require no tracking
             var period = await _database.PICTUREUPDATESETTINGs
-                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.YEAR == academicYear);
 
 
@@ -109,7 +108,6 @@ namespace MyConcordiaID.Models.Admin
         public async Task<PeriodSetting> GetUpdatePicturePeriodAsync(int year)
         {
             var period = await _database.PICTUREUPDATESETTINGs
-                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.YEAR == year);
 
             if (period != null)
@@ -133,7 +131,6 @@ namespace MyConcordiaID.Models.Admin
         public async Task<List<PeriodSetting>> GetAllUpdatePicturePeriodAsync()
         {
             var info = await _database.PICTUREUPDATESETTINGs
-                .AsNoTracking()
                 .ToListAsync();
 
             var periodList = info.Select(period => new PeriodSetting
