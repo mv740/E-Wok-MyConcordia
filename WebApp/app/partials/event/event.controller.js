@@ -9,9 +9,9 @@ angular
     .controller('EventController', EventController);
 
 
-EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', 'eventService'];
+EventController.$inject = ['$filter', '$uibModal', '$timeout', '$mdDialog', '$q', 'eventService', 'translateService'];
 
-function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
+function EventController($filter, $modal, $timeout, $mdDialog, $q, eventService, translateService) {
 
 
 
@@ -28,31 +28,62 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
     eventTab.setFilter = setFilter;
     eventTab.isFilterTarget = isFilterTarget;
     eventTab.updateStatistics = updateStatistics;
-    eventTab.filters = [
-        "All",
-        "Cancelled",
-        "Postponed",
-        "Rescheduled",
-        "Scheduled",
-        "Open",
-        "Closed"
+    eventTab.confirmCancelEvent = confirmCancelEvent;
+    eventTab.filters = [ // have to set key value mappings in order to maintain english database set values, but display translated content.
+        {
+            value: "All",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.ALL"
+        },
+        {
+            value: "Cancelled",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.CANCELLED"
+        },
+        {
+            value: "Postponed",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.POSTPONED"
+        },
+        {
+            value: "Rescheduled",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.RESCHEDULED"
+        },
+        {
+            value: "Scheduled",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.SCHEDULED"
+        },
+        {
+            value: "Open",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.OPEN"
+        },
+        {
+            value: "Closed",
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.CLOSED"
+        }
     ];
 
 
-    eventTab.readonly = true;
-    eventTab.removable = false;
-    eventTab.eventTypes = ['Open', 'Closed'];
+    eventTab.readonly = true; // you can't modify the md-chips
+    eventTab.removable = false; // you can't remove the md-chips
+    eventTab.eventTypes = [ // have to set key value mappings in order to maintain english database set values, but display translated content.
+        {
+            value: 'Open',
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.OPEN"
+        },
+        {
+            value: 'Closed',
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.CLOSED"
+        }];
 
     getEvents();
 
     eventTab.fpOptions = {
-        navigation: false,
-        keyboardScrolling: false
+        navigation: false, // you can't use the enter key to scroll around and cheat the fullpage.js
+        keyboardScrolling: false // you can't use scroll to scroll around and cheat the fullpage.js
     };
 
+    // initialize my charts with empty values, but they will be set later at updateStatistics
     eventTab.stats = {
         chart: {
-            caption: "Administration and attendees statistics",
+            caption: "",
             subCaption: "",
             numberPrefix: "",
             theme: "zune"
@@ -62,7 +93,7 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
 
     eventTab.pie = {
         chart: {
-            caption: "Percentage of people who attended",
+            caption: "",
             //subcaption: "",
             startingangle: "120",
             //showlabels: "0",
@@ -75,55 +106,76 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
             theme: "fint"
         },
         data: []
-    }
+    };
 
     ////////////////////////////////////////////////////////////
 
     function updateStatistics() {
-        eventService.getStats(eventTab.selectedEvent.information.eventId).then(function(value){
-            eventTab.stats.data = [
-                {
-                    label: "Mods",
-                    value: value.administration.mods
-                },
-                {
-                    label: "Scanners",
-                    value: value.administration.scanners
-                },
-                {
-                    label: "Registered",
-                    value: value.attendees.registered
-                },
-                {
-                    label: "Attending",
-                    value: value.attendees.attending
-                },
-                {
-                    label: "Tracking",
-                    value: value.attendees.tracking
-                }
-            ];
+        var labels = {
+            // this object contains translation mappings that are to be used for the statistics below
+            mod: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.MOD"),
+            scanner: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.DIALOG.ROLE.SCANNER"),
+            registered: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.REGISTERED"),
+            attending: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.ATTENDING"),
+            tracking: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.TRACKING"),
+            didNotCome: translateService.getTranslation("PARTIALS.EVENT.ATTENDEE.STATISTICS.DIDNOTCOME"),
+            chartCaption: translateService.getTranslation("PARTIALS.EVENT.STATISTICS.CHARTCAPTION"),
+            pieCaption: translateService.getTranslation("PARTIALS.EVENT.STATISTICS.PIECAPTION")
 
-            var registered = value.attendees.registered - value.administration.mods - value.administration.scanners - value.administration.creator;
-            eventTab.pie.data = [
-                {
-                    label: "Attending",
-                    value: value.attendees.attending
-                },
-                {
-                    label: "Did not come",
-                    value: registered
-                }
-            ];
-        });
+        };
 
+        // First I have to translate my labels because the translation is done asynchronously
+        // then I get the statistics information for my charts
+        // then I set the configurations.
+        $q.all(labels)
+            .then(function(translations){
+                eventService.getStats(eventTab.selectedEvent.information.eventId)
+                    .then(function(value) {
+                        eventTab.stats.chart.caption = translations.chartCaption;
+                        eventTab.stats.data = [
+                            {
+                                label: translations.mod,
+                                value: value.administration.mods
+                            },
+                            {
+                                label: translations.scanner,
+                                value: value.administration.scanners
+                            },
+                            {
+                                label: translations.registered,
+                                value: value.attendees.registered
+                            },
+                            {
+                                label: translations.attending,
+                                value: value.attendees.attending
+                            },
+                            {
+                                label: translations.tracking,
+                                value: value.attendees.tracking
+                            }
+                        ];
+
+                        eventTab.pie.chart.caption = translations.pieCaption;
+                        var registered = value.attendees.registered - value.administration.mods - value.administration.scanners - value.administration.creator;
+                        eventTab.pie.data = [
+                            {
+                                label: translations.attending,
+                                value: value.attendees.attending
+                            },
+                            {
+                                label: translations.didNotCome,
+                                value: registered
+                            }
+                        ];
+                    });
+            });
     }
 
     function submit(){
         if (eventTab.creating.eventID) eventService.updateEvent(eventTab.creating).then(function(){});
         else eventService.submit(eventTab.creating).then(function(){
-            eventTab.fpControls.moveTo(1);
-            getEvents();
+            eventTab.fpControls.moveTo(1); // scroll to the top
+            getEvents(); // refresh the events
         });
     }
 
@@ -196,10 +248,10 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
                 role: "Attendee",
                 eventID: eventTab.selectedEvent.information.eventId
             };
-            if (userNetnameOrId.match(/^[0-9]*$/g) != null) {
+            if (userNetnameOrId.match(/^[0-9]*$/g) != null) { // you can only search for numbers for id's
                 newUser.userId = eventTab.newUserNetnameOrId;
             }
-            else if (userNetnameOrId.match(/^[a-zA-Z]*_?[a-zA-Z]*$/g) != null){
+            else if (userNetnameOrId.match(/^[a-zA-Z]*_?[a-zA-Z]*$/g) != null){ // you can only search for letters followed by an optional underscore and then more letters for netnames
                 newUser.userNetname = eventTab.newUserNetnameOrId;
             }
             eventService.addUser(newUser)
@@ -231,6 +283,36 @@ function EventController($filter, $modal, $timeout, $mdDialog, eventService) {
         var eventTargettedByFilter = eventTab.currentFilter == "All" || (result.information.status == eventTab.currentFilter || result.information.type == eventTab.currentFilter);
         var eventTargettedByFilterButIsNotCancelled = result.information.status != "Cancelled" && eventTargettedByFilter;
         return noCurrentFilterAndNotCancelled || ( isCancelledAndTargetted || eventTargettedByFilterButIsNotCancelled);
+    }
+
+    function confirmCancelEvent(eventTarget) {
+        var dialogConfig = {
+            title: translateService.getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.TITLE"),
+            textContent: translateService.getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.TEXTCONTENT"),
+            ok: translateService.getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.OK"),
+            cancel: translateService.getTranslation("PARTIALS.EVENT.EVENT.CANCELDIALOG.CANCEL")
+        };
+
+        $q.all(dialogConfig)
+            .then(function(translations) {
+                var confirm = $mdDialog.confirm()
+                    .title(translations.title + eventTarget.information.name)
+                    .textContent(translations.textContent)
+                    .targetEvent(eventTarget)
+                    .ok(translations.ok)
+                    .cancel(translations.cancel);
+
+                $mdDialog.show(confirm)
+                    .then(function() {
+                        // if user decides to cancel the event, this function is called
+                        console.log("event has been cancelled");
+                        cancel(eventTarget);
+                    }, function() {
+                        // if user changes mind, nothing happens.
+                        console.log("event has not been cancelled");
+                    })
+            });
+
     }
 
     Mousetrap.bind('enter', eventTab.addUser);

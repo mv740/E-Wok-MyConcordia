@@ -13,6 +13,8 @@
     height: 60px;
     line-height: 60px;
     text-align: center; }
+    #sideMenuContainer a .languageSelector {
+      margin-bottom: 30px; }
   #sideMenuContainer a:first-child {
     margin-top: 20px; }
   #sideMenuContainer a.selected {
@@ -68,6 +70,17 @@
     transition: 0.5s;
     /* 0.5 second transition effect to slide in the sidenav */
     padding-left: 60px; }
+    #sideMenuContainer .sideNavDrawer .languageSelector {
+      width: 110px; }
+  #sideMenuContainer .languageSelector {
+    font-weight: bold;
+    color: black;
+    bottom: 0px;
+    position: absolute;
+    width: 100%; }
+    #sideMenuContainer .languageSelector:hover {
+      text-decoration: none;
+      cursor: pointer; }
 
 .full-height {
   height: 100%; }
@@ -143,12 +156,12 @@ md-toast {
   outline: 1px solid slategrey; }
 
 md-toast.md-error-toast-theme .md-toast-content {
-  background-color: red;
+  background-color: #d2322d;
   text-align: center;
   max-width: 100%; }
 
 md-toast.md-error-toast-theme {
-  width: 100%; }
+  width: 95%; }
 
 .button3D {
   background-color: white;

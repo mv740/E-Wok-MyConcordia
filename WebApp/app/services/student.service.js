@@ -4,9 +4,9 @@ angular
     .module('myApp')
     .factory('studentService', studentService);
 
-studentService.$inject = ['$q', 'toastedHttpService', 'myConfig', 'studentToastFeedback'];
+studentService.$inject = ['$q', 'translateService', 'toastedHttpService', 'myConfig'];
 
-function studentService($q, toastedHttp, myConfig, studentToastFeedback) {
+function studentService($q, translateService, toastedHttp, myConfig) {
 
     var service = {
         sendValidation: sendValidation,
@@ -22,6 +22,8 @@ function studentService($q, toastedHttp, myConfig, studentToastFeedback) {
     /////////////////////
 
     function sendValidation(id, valid) {
+        var localizationPromises;
+
         var json = {
             id: parseInt(id),
             valid: valid
@@ -31,56 +33,147 @@ function studentService($q, toastedHttp, myConfig, studentToastFeedback) {
             data: json,
             topUrl: myConfig.validatePhoto,
             responseMsg: "",
-            failureMsg: studentToastFeedback.sendValidation.failureMsg
+            failureMsg: {
+                401: "",
+                404: "",
+                500: ""
+            }
         };
 
         if (valid)
-            settings.responseMsg = studentToastFeedback.sendValidation.responseMsg.valid;
+            localizationPromises = {
+                responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.responseMsg.valid"),
+                401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.401"),
+                404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.404"),
+                500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.500")
+            };
         else
-            settings.responseMsg = studentToastFeedback.sendValidation.responseMsg.invalid;
+            localizationPromises = {
+                responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.responseMsg.invalid"),
+                401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.401"),
+                404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.404"),
+                500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SENDVALIDATION.failureMsg.500")
+            };
 
-        return toastedHttp.post(settings);
+        return $q.all(localizationPromises)
+            .then(function (translations) {
+                settings.responseMsg = translations.responseMsg;
+                settings.failureMsg[401] = translations[401];
+                settings.failureMsg[404] = translations[404];
+                settings.failureMsg[500] = translations[500];
+                return toastedHttp.post(settings);
+            });
     }
 
     function getStudentPictures(id) {
+        var localizationPromises = {
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTPICTURES.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTPICTURES.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTPICTURES.failureMsg.500")
+        };
+
         var settings = {
             param: id,
             topUrl: myConfig.getStudentPictures,
-            failureMsg: studentToastFeedback.getStudentPictures.failureMsg
+            failureMsg: {
+                401: "",
+                404: "",
+                500: ""
+            }
         };
-        return toastedHttp.get(settings);
+
+        return $q.all(localizationPromises)
+            .then(function (translations) {
+                settings.failureMsg[401] = translations[401];
+                settings.failureMsg[404] = translations[404];
+                settings.failureMsg[500] = translations[500];
+                return toastedHttp.get(settings);
+            });
     }
 
     function getStudentLogs(netname) {
+        var localizationPromises = {
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTLOGS.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTLOGS.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTLOGS.failureMsg.500")
+        };
+
         var settings = {
             param: netname,
             topUrl: myConfig.getLogs,
-            failureMsg: studentToastFeedback.getStudentLogs.failureMsg
+            failureMsg: {
+                401: "",
+                404: "",
+                500: ""
+            }
         };
-        return toastedHttp.get(settings);
+
+        return $q.all(localizationPromises)
+            .then(function (translations) {
+                settings.failureMsg[401] = translations[401];
+                settings.failureMsg[404] = translations[404];
+                settings.failureMsg[500] = translations[500];
+                return toastedHttp.get(settings);
+            });
     }
 
     function getStudents() {
+        var localizationPromises = {
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTS.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTS.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.GETSTUDENTS.failureMsg.500")
+        };
+
         var settings = {
             topUrl: myConfig.getStudents,
-            failureMsg: studentToastFeedback.getStudents.failureMsg
+            failureMsg: {
+                401: "",
+                404: "",
+                500: ""
+            }
         };
-        return toastedHttp.get(settings);
+
+        return $q.all(localizationPromises)
+            .then(function (translations) {
+                settings.failureMsg[401] = translations[401];
+                settings.failureMsg[404] = translations[404];
+                settings.failureMsg[500] = translations[500];
+                return toastedHttp.get(settings);
+            });
     }
 
     function search(params) {
+        var localizationPromises = {
+            responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.responseMsg"),
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SEARCH.failureMsg.500")
+        };
+
         var settings = {
             data: params,
             topUrl: myConfig.search,
-            responseMsg: "Student found",
-            failureMsg: studentToastFeedback.search.failureMsg
+            responseMsg: "",
+            failureMsg: {
+                401: "",
+                404: "",
+                500: ""
+            }
         };
-        return toastedHttp.post(settings);
+
+        return $q.all(localizationPromises)
+            .then(function (translations) {
+                settings.responseMsg = translations.responseMsg;
+                settings.failureMsg[401] = translations[401];
+                settings.failureMsg[404] = translations[404];
+                settings.failureMsg[500] = translations[500];
+                return toastedHttp.post(settings);
+            });
     }
 
-
-
     function validateArchived(id, valid){
+        var localizationPromises;
+
         var json = {
             id: id,
             valid: valid
@@ -90,28 +183,67 @@ function studentService($q, toastedHttp, myConfig, studentToastFeedback) {
             data: json,
             topUrl: myConfig.validateArchived,
             responseMsg: "",
-            failureMsg: studentToastFeedback.validateArchived.failureMsg
+            failureMsg: {
+                401: "",
+                404: "",
+                500: ""
+            }
         };
 
         if (valid)
-            settings.responseMsg = studentToastFeedback.validateArchived.responseMsg.valid;
+            localizationPromises = {
+                responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.responseMsg.valid"),
+                401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.401"),
+                404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.404"),
+                500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.500")
+            };
         else
-            settings.responseMsg = studentToastFeedback.validateArchived.responseMsg.invalid;
+            localizationPromises = {
+                responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.responseMsg.invalid"),
+                401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.401"),
+                404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.404"),
+                500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.VALIDATEARCHIVED.failureMsg.500")
+            };
 
-        return toastedHttp.post(settings);
+        return $q.all(localizationPromises)
+            .then(function (translations) {
+                settings.responseMsg = translations.responseMsg;
+                settings.failureMsg[401] = translations[401];
+                settings.failureMsg[404] = translations[404];
+                settings.failureMsg[500] = translations[500];
+                return toastedHttp.post(settings);
+            });
     }
 
     function submitComment(id, comment){
+        var localizationPromises = {
+            responseMsg: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.responseMsg"),
+            401: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.failureMsg.401"),
+            404: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.failureMsg.404"),
+            500: translateService.getTranslation("TOASTFEEDBACK.STUDENT.SUBMITCOMMENT.failureMsg.500")
+        };
+
         var json = { id: id,
             comment: comment};
 
         var settings = {
             data: json,
             topUrl: myConfig.submitComment,
-            responseMsg: studentToastFeedback.submitComment.responseMsg,
-            failureMsg: studentToastFeedback.submitComment.failureMsg
+            responseMsg: "",
+            failureMsg: {
+                401: "",
+                404: "",
+                500: ""
+            }
         };
-        return toastedHttp.post(settings);
-    }
 
+        return $q.all(localizationPromises)
+            .then(function (translations) {
+                settings.responseMsg = translations.responseMsg;
+                settings.failureMsg[401] = translations[401];
+                settings.failureMsg[404] = translations[404];
+                settings.failureMsg[500] = translations[500];
+                return toastedHttp.post(settings);
+            });
+    }
 }

@@ -12,7 +12,9 @@ angular.module('myApp', [
     'ng.oidcclient',
     '720kb.tooltips',
     'fullPage.js',
-    'ng-fusioncharts'
+    'ng-fusioncharts',
+    'ngCookies',
+    'pascalprecht.translate'
 
 
 ]).constant("myConfig", {
@@ -95,8 +97,17 @@ angular.module('myApp', [
 
         $httpProvider.interceptors.push('AuthInterceptorService');
     }])
+    .config(['$translateProvider', function($translateProvider) {
+        $translateProvider.useStaticFilesLoader({
+            prefix: "localization/json/locale-",
+            suffix: ".json"
+        });
+        $translateProvider.preferredLanguage('en'); // Sets the preferred language
+        $translateProvider.useSanitizeValueStrategy('escape'); // This just sanitizes whatever is parsed from the json files so that no html is rendered
+        $translateProvider.useCookieStorage(); // This setting enables storage of the language as a cookie. It's the only line that needs to be called in order for it to save language preference.
+    }])
     .run(['$rootScope', 'SessionService', '$location', function ($rootScope, SessionService, $location) {
-
+		
         $rootScope.$on("$routeChangeStart", function (event, curr, prev) {
 
             if (!SessionService.isAuthenticated()) {

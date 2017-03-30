@@ -9,9 +9,9 @@ angular
     .module('myApp')
     .factory('toastedHttpService', toastedHttpService);
 
-toastedHttpService.$inject = ['$http', '$q', '$timeout', '$mdToast', 'myConfig'];
+toastedHttpService.$inject = ['$http', '$q', '$timeout', '$translate', '$mdToast', 'myConfig'];
 
-function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
+function toastedHttpService($http, $q, $timeout, $translate, $mdToast, myConfig) {
 
     var service = {
         get: get,
@@ -185,23 +185,33 @@ function toastedHttpService($http, $q, $timeout,  $mdToast, myConfig) {
     }
 
     function showToast(options){
-        if (!toast) {
-            return $mdToast.show(buildSimple(options));
-        }
-    }
-
-    function buildSimple(options){
-        var msg = "Loading...";
+        var msg = "";
         var theme = "";
         var delay = 6000;
         if (options && options.responseFailed) theme = "error-toast";
-        if (options && options.msg) msg = options.msg;
         if (options && options.delay) delay = options.delay;
-        return $mdToast.simple()
-            .textContent(msg)
-            .position("bottom right")
-            .hideDelay(delay)
-            .theme(theme)
-    }
 
+        if (options && options.msg) {
+            msg = options.msg;
+            toast = $mdToast.simple()
+                .textContent(msg)
+                .position("bottom right")
+                .hideDelay(delay)
+                .theme(theme);
+            $mdToast.show(toast);
+        }
+        else {
+            $translate("TOASTFEEDBACK.LOADING")
+                .then(function(loading) {
+                    msg = loading;
+
+                    toast = $mdToast.simple()
+                        .textContent(msg)
+                        .position("bottom right")
+                        .hideDelay(delay)
+                        .theme(theme);
+                    $mdToast.show(toast);
+                });
+        }
+    }
 }

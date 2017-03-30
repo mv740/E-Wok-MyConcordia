@@ -9,7 +9,7 @@ describe('student validation center student search', function() {
         element(by.id('search')).click();
 
 
-        var searchResultsUl = element(by.id('searchResults'));
+        var searchResultsUl = element(by.css('.listResults'));
         browser.wait(EC.presenceOf(searchResultsUl), 5000).then(function(){
             var searchResults = element.all(by.repeater('result in search.results'));
             expect(searchResults.count()).toEqual(1);

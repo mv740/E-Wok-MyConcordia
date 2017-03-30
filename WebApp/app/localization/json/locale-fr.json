@@ -1,0 +1,274 @@
+{
+  "TOASTFEEDBACK": {
+    "LOADING": "Chargement...",
+    "EVENTS": {
+      "GETTHISEVENT": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Événement non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "SUBMIT": {
+        "responseMsg": "Événement créé",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETALLEVENTS": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "UPDATEEVENT": {
+        "responseMsg": "Événement actualisé",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Événement non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "CANCELEVENT": {
+        "responseMsg": "Événement annulé",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "403": "Vous n'avez pas le droit d'annuller cet événement",
+          "404": "Événement non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "SETUSERROLE": {
+        "responseMsg": "Rôle actualisé",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "403": "Vous n'avez pas le droit de changer le role de cet usager",
+          "404": "Usager non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETEVENTATTENDEES": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Usager non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "ADDUSER": {
+        "responseMsg": "Participant(e) ajouté(e)",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Usager non trouvé",
+          "409": "Participant(e) déjà ajouté(e)",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "DELETEUSER": {
+        "responseMsg": "Participant(e) retiré(e)",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "403": "Vous n'avez pas le droit d'enlever des participants de cet événement",
+          "404": "Usager non trouvé",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETSTATS": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Statistiques non trouvées",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      }
+    },
+    "STUDENT": {
+      "SENDVALIDATION": {
+        "responseMsg": {
+          "valid": "Photo Validée",
+          "invalid": "Photo révoquée"
+        },
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Photo non trouvée",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETSTUDENTPICTURES": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Étudiant(e) non trouvé(e)",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETSTUDENTLOGS": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Registres non trouvés",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETSTUDENTS": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Étudiant(e)s non trouvé(e)s",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "SEARCH": {
+        "responseMsg": "Étudiant(e) trouvé(e)",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Étudiant(e) non trouvé(e)",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "VALIDATEARCHIVED": {
+        "responseMsg": {
+          "valid": "Archive picture validated",
+          "invalid": "Archive picture revoked"
+        },
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Photo archivée non trouvée",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "SUBMITCOMMENT": {
+        "responseMsg": "Commenté",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Impossible de commenter. Étudiant(e) non trouvé(e)",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      }
+    },
+    "ADMIN": {
+      "SUBMITUPDATEPERIOD": {
+        "responseMsg": "Période actualisée",
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Période d'actualisation non trouvée",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      },
+      "GETUPDATEPERIOD": {
+        "failureMsg": {
+          "401": "Veuillez vous connecter",
+          "404": "Période d'actualisation non trouvée",
+          "500": "Mille excuses! Nos serveurs sont en pane :("
+        }
+      }
+    }
+  },
+  "PARTIALS": {
+    "ADMIN": {
+      "HEADER": "Période d'actualisation",
+      "CURRENTLYSET": "Configuration actuelle",
+      "MODIFY": "Modifier",
+      "YEAR": "Année",
+      "STARTDATE": "Date de départ",
+      "STARTDATELABEL": "du",
+      "ENDDATE": "Date de fin",
+      "ENDDATELABEL": "au",
+      "CHOOSEYEAR": "Veuillez choisir l'année académique pendant laquelle les étudiants pourront faire des requêtes de photo profile",
+      "CHOOSESTART": "Veuillez choisir la date de départ à partir de laquelle les étudiants pourront faire des requêtes de photo profile",
+      "CHOOSEEND": "Veuillez choisir la date de fin jusqu'à laquelle les étudiants pourront faire des requêtes de photo profile",
+      "ACADEMICYEAR": "Année académique"
+    },
+    "LOGIN": {
+      "TITLE": "Centre de révision de photos étudiantes",
+      "SIGNIN": "Se connecter"
+    },
+    "EVENT": {
+      "EVENT": {
+        "HEADER": "Vos événements",
+        "CHIPS": {
+          "ALL": "Tout",
+          "CANCELLED": "Annulé",
+          "POSTPONED": "Replanifié",
+          "RESCHEDULED": "Reporté",
+          "SCHEDULED": "Planifié",
+          "OPEN": "Ouvert",
+          "CLOSED": "Privé"
+        },
+        "BUTTONS": {
+          "MODIFY": "Modifier",
+          "VIEWDETAILS": "Détailles",
+          "ATTENDEES": "Participants",
+          "CANCEL": "Annuler"
+        },
+        "CANCELDIALOG": {
+          "TITLE": "Êtes vous certain(e) que vous voulez annuler l'événement: ",
+          "TEXTCONTENT": "Cette action ne peut pas être défaite",
+          "OK": "Oui, annulez le!",
+          "CANCEL": "Non, laissez-moi y penser"
+        },
+        "CREATEEVENT": "Créer un événement",
+        "EVENTTYPE": "Type d'événement",
+        "OPENCLOSED": "Est-ce un événement ouvert ou privé?",
+        "EVENTNAME": "Nom de l'événement",
+        "EVENTNAMEDESC": "Donnez votre événement un nom",
+        "LOCATION": "Lieu",
+        "LOCATIONDESC": "Quel est le lieu de votre événement?",
+        "ROOM": "Salle",
+        "ROOMDESC": "Dans quelle salle aura lieu votre événement?",
+        "EVENTDESCRIPTION": "Déscription de l'événement",
+        "EVENTDESCRIPTIONDESC": "Quelles sont les détailles de votre événement?",
+        "STARTDATE": "Date de départ",
+        "STARTDATELABEL": "De",
+        "ENDDATE": "Date de fin",
+        "ENDDATELABEL": "À",
+        "STARTDATEDESC": "Indiquez la date de départ de votre événement",
+        "ENDDATEDESC": "Indiquez la date de fin de votre événement"
+      },
+      "ATTENDEE": {
+        "DIALOG": {
+          "PLACEHOLDER": "Rôle",
+          "SETROLE": "Établir rôle",
+          "REMOVE": "Retirer",
+          "ROLE": {
+            "CREATOR": "Créateur",
+            "MOD": "Mod",
+            "SCANNER": "Scanneur",
+            "ATTENDEE": "Participant"
+          }
+        },
+        "ADDUSERPLACEHOLDER": "Le netname ou ID de l'usager",
+        "ADDATTENDEE": "Ajouter Participant(e)!",
+        "STATISTICS": {
+          "STATISTICS": "Statistiques",
+          "REGISTERED": "Enregistré",
+          "ATTENDING": "Présent(e)",
+          "TRACKING": "Suivi",
+          "DIDNOTCOME": "N'a pas assisté"
+        }
+      },
+      "STATISTICS": {
+        "CHARTCAPTION": "Statistiques d'administration et de participants",
+        "PIECAPTION": "Pourcentage de présence"
+      }
+    },
+    "REVIEW": {
+      "HEADER": "Centre de révision de photos étudiantes",
+      "SEARCHBOX": {
+        "PLACEHOLDER": "Utilisez le nom, netname, ID, date de naissance en symboles alphanunériques de l'usager, ou tous ces-derniers ensemble!",
+        "TOOLTIP" : "Ex: Justin Case 2999999 january 01 2010",
+        "FIND": "Chercher!"
+      },
+      "SEARCHRESULTS": {
+        "EMPTYFEEDBACK": "Nous n'étions pas capable de retrouver l'étudiant(e) selon vos critères de recherches."
+      }
+    },
+    "SIDENAV": {
+      "LOGOUT": "Déconnecter",
+      "REVIEW": "Révision",
+      "ADMIN": "Administrer",
+      "EVENT": "Événement"
+    },
+    "BUTTONS": {
+      "BACK": "Retourner",
+      "NEXTSTEP": "Continuer",
+      "SUBMIT": "Soumettre"
+    }
+  }
+}

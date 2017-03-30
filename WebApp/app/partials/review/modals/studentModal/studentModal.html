@@ -71,7 +71,8 @@ WE ARE PIZZA. with pepperoni.
     <ul ng-show="studentModal.logsOpened" class="col-xs-12">
         <li ng-repeat="log in studentModal.logs">
             <p>
-                <span>{{log.action}}:</span>
+                <span>{{log.action}} by </span>
+                <span>{{log.netname}} on </span>
                 <span>{{log.timestamp | date}}</span>
             </p>
         </li>

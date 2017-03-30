@@ -43,13 +43,7 @@ function dateParsingService($filter) {
         var date = new Date(year, month, day);
 
 
-
-        var result = {};
-        result.year = $filter('date')(date, 'yyyy');
-        result.day = $filter('date')(date, 'd');
-        result.month = $filter('date')(date, 'MMMM');
-
-        return result;
+        return date;
     }
 
 }
