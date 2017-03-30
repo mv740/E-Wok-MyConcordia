@@ -38,7 +38,7 @@ function adminService($q, translateService, toastedHttp, myConfig) {
 
         return $q.all(localizationPromises)
             .then(function (translations) {
-                settings.responseMsg = translations.response;
+                settings.responseMsg = translations.responseMsg;
                 settings.failureMsg[401] = translations[401];
                 settings.failureMsg[404] = translations[404];
                 settings.failureMsg[500] = translations[500];
