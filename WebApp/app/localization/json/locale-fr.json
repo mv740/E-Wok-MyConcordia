@@ -189,7 +189,9 @@
           "RESCHEDULED": "Reporté",
           "SCHEDULED": "Planifié",
           "OPEN": "Ouvert",
-          "CLOSED": "Privé"
+          "OPENDESCRIPTION": "Un événement ouvert est considéré comme publique",
+          "CLOSED": "Privé",
+          "CLOSEDDESCRIPTION": "Un événement fermé est considéré comme privé",
         },
         "BUTTONS": {
           "MODIFY": "Modifier",

@@ -13,6 +13,7 @@
                                   md-removable="eventTab.removable">
                             <md-chip-template ng-class="{'selectedChip': $chip.value == eventTab.currentFilter}">
                                 <div class="no-outline" ng-click="eventTab.setFilter($chip.value)">
+                                    <md-tooltip ng-if="$chip.description"><span translate>{{$chip.description}}</span></md-tooltip>
                                     <span> <strong translate>{{$chip.translated}}</strong> </span>
                                 </div>
                             </md-chip-template>
