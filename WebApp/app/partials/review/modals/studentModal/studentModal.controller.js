@@ -17,6 +17,7 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
     studentModal.close = $modalInstance.close;
     studentModal.emptyProfilePicture = 'images/empty-profile.png';
 
+    $scope.$on("StudentModal.resetModal", resetModal);
     $scope.$on("StudentModal.updateStudent", updateStudent);
     $modalInstance.opened.then(updateStudent);
     $modalInstance.result.then(resetModal);
@@ -83,6 +84,7 @@ function StudentModalCtrl($scope, $modal, $modalInstance, studentService, studen
     function resetModal(){
         studentModal.logs = undefined;
         studentModal.student = undefined;
+        updateStudent();
     }
 
     function submitComment(){
