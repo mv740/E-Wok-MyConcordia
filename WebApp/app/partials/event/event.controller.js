@@ -68,11 +68,13 @@ function EventController($filter, $modal, $timeout, $mdDialog, $q, eventService,
     eventTab.eventTypes = [ // have to set key value mappings in order to maintain english database set values, but display translated content.
         {
             value: 'Open',
-            translated: "PARTIALS.EVENT.EVENT.CHIPS.OPEN"
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.OPEN",
+            description: "PARTIALS.EVENT.EVENT.CHIPS.OPENDESCRIPTION"
         },
         {
             value: 'Closed',
-            translated: "PARTIALS.EVENT.EVENT.CHIPS.CLOSED"
+            translated: "PARTIALS.EVENT.EVENT.CHIPS.CLOSED",
+            description: "PARTIALS.EVENT.EVENT.CHIPS.CLOSEDDESCRIPTION"
         }];
 
     getEvents();

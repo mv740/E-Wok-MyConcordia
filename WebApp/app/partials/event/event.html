@@ -132,7 +132,7 @@
                             ng-model="eventTab.creating.type"
                     >
                         <option value="" selected disabled translate>PARTIALS.EVENT.EVENT.EVENTTYPE</option>
-                        <option value="{{eventType.value}}" ng-repeat="eventType in eventTab.eventTypes" translate>{{eventType.translated}}</option>
+                        <option value="{{eventType.value}}" ng-repeat="eventType in eventTab.eventTypes" translate> {{eventType.description}}</option>
                     </select>
                 </div>
 
