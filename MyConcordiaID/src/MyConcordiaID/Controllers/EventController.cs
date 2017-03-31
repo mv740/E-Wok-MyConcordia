@@ -36,7 +36,7 @@ namespace MyConcordiaID.Controllers
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
         public IActionResult GetAll()
         {
-            var events = _eventRepo.GetEvents();
+            var events = _eventRepo.GetEventsAsync().Result;
 
             return new ObjectResult(events);
         }
@@ -53,7 +53,7 @@ namespace MyConcordiaID.Controllers
         [ProducesResponseType(typeof(EventInformation), 200)]
         public IActionResult GetById(string id)
         {
-            var myEvent = _eventRepo.GetEventById(id);
+            var myEvent = _eventRepo.GetEventByIdAsync(id).Result;
 
             if (myEvent == null)
             {
@@ -74,7 +74,7 @@ namespace MyConcordiaID.Controllers
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
         public IActionResult GetCanceledEvents()
         {
-            var canceledEvent = _eventRepo.GetEventsByStatus(EventStatusType.Cancelled);
+            var canceledEvent = _eventRepo.GetEventsByStatusAsync(EventStatusType.Cancelled).Result;
 
             return new ObjectResult(canceledEvent);
         }
@@ -90,7 +90,7 @@ namespace MyConcordiaID.Controllers
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
         public IActionResult GetPostponedEvents()
         {
-            var canceledEvent = _eventRepo.GetEventsByStatus(EventStatusType.Postponed);
+            var canceledEvent = _eventRepo.GetEventsByStatusAsync(EventStatusType.Postponed).Result;
 
             return new ObjectResult(canceledEvent);
         }
@@ -105,7 +105,7 @@ namespace MyConcordiaID.Controllers
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
         public IActionResult GetResheduleddEvents()
         {
-            var canceledEvent = _eventRepo.GetEventsByStatus(EventStatusType.Rescheduled);
+            var canceledEvent = _eventRepo.GetEventsByStatusAsync(EventStatusType.Rescheduled).Result;
 
             return new ObjectResult(canceledEvent);
         }
@@ -121,7 +121,7 @@ namespace MyConcordiaID.Controllers
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
         public IActionResult GetScheduledEvents()
         {
-            var canceledEvent = _eventRepo.GetEventsByStatus(EventStatusType.Scheduled);
+            var canceledEvent = _eventRepo.GetEventsByStatusAsync(EventStatusType.Scheduled).Result;
 
             return new ObjectResult(canceledEvent);
         }
@@ -137,7 +137,7 @@ namespace MyConcordiaID.Controllers
         [ProducesResponseType(typeof(IEnumerable<EventInformation>), 200)]
         public IActionResult GetActiveEvents()
         {
-            var activeEvents = _eventRepo.GetActiveEvents();
+            var activeEvents = _eventRepo.GetActiveEventsAsync().Result;
 
             return new ObjectResult(activeEvents);
         }
@@ -153,7 +153,7 @@ namespace MyConcordiaID.Controllers
         [Route("user")]
         public IActionResult PostEventUser([FromBody] NewEventUser user)
         {
-            var result = _eventRepo.InsertUser(user);
+            var result = _eventRepo.InsertUserAsync(user).Result;
             switch (result)
             {
                 case EventActionResult.EventNotFound:
@@ -188,7 +188,8 @@ namespace MyConcordiaID.Controllers
                 return Forbid();
             }
 
-            var result = _eventRepo.UpdateUser(user);
+            var result = _eventRepo.UpdateUserAsync(user).Result;
+
             if (result != EventActionResult.Success)
             {
                 return NotFound();
@@ -207,7 +208,7 @@ namespace MyConcordiaID.Controllers
         [Route("user")]
         public IActionResult DeleteEventUser([FromBody] EventUser user)
         {
-            var result = _eventRepo.RemoveUser(user);
+            var result = _eventRepo.RemoveUserAsync(user).Result;
             if (result != EventActionResult.Success)
             {
                 return NotFound();
@@ -230,7 +231,8 @@ namespace MyConcordiaID.Controllers
         {
             var authenticatedUser = GetAuthenticatedUserNetname();
 
-            var users = _eventRepo.GetEventUsers(id, order, authenticatedUser);
+            var users = _eventRepo.GetEventUsersAsync(id, order, authenticatedUser).Result;
+
             if (users == null)
             {
                 //event not found
@@ -255,7 +257,7 @@ namespace MyConcordiaID.Controllers
         {
             //var authenticatedUser = GetAuthenticatedUserNetname();
 
-            var users = _eventRepo.GetEventStatistic(id).Result;
+            var users = _eventRepo.GetEventStatisticAsync(id).Result;
             if (users == null)
             {
                 //event not found
@@ -294,7 +296,7 @@ namespace MyConcordiaID.Controllers
         [HttpPut]
         public IActionResult UpdateEvent([FromBody] EventInformation information)
         {
-            var selectedEvent = _eventRepo.UpdateEvent(information); //default user for now until everything is tested
+            var selectedEvent = _eventRepo.UpdateEventAsync(information).Result; //default user for now until everything is tested
             if (selectedEvent != EventActionResult.Success)
             {
                 return NotFound();
@@ -314,14 +316,14 @@ namespace MyConcordiaID.Controllers
         [HttpDelete]
         public IActionResult CancelEvent([FromBody] EventCancelled cancelEvent)
         {
-
             var authenticatedUser = GetAuthenticatedUserNetname();
             if (!_eventRepo.IsAuthorized(cancelEvent.EventId, authenticatedUser, Role.Creator, true))
             {
                 return Forbid();
             }
 
-            var result = _eventRepo.RemoveEvent(cancelEvent);
+            var result = _eventRepo.RemoveEventAsync(cancelEvent).Result;
+
             if (result != EventActionResult.Success)
             {
                 return NotFound();
@@ -345,7 +347,8 @@ namespace MyConcordiaID.Controllers
         {
             var authenticatedUser = GetAuthenticatedUserNetname();
 
-            var events = _eventRepo.GetAdminEvents(authenticatedUser);
+            var events = _eventRepo.GetAdminEventsAsync(authenticatedUser).Result;
+
             if (events == null)
             {
                 //user not found
@@ -369,7 +372,7 @@ namespace MyConcordiaID.Controllers
         public IActionResult GetAttendeeEvents()
         {
             var authenticatedUser = GetAuthenticatedUserNetname();
-            var events = _eventRepo.GetAttendeeEvents(authenticatedUser);
+            var events = _eventRepo.GetAttendeeEventsAsync(authenticatedUser).Result;
 
             return new ObjectResult(events);
         }

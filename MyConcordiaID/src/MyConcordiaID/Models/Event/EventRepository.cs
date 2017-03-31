@@ -22,11 +22,11 @@ namespace MyConcordiaID.Models.Event
         ///  Get a list of current scheduled events which have not expired 
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<EventInformation> GetActiveEvents()
+        public async Task<IEnumerable<EventInformation>> GetActiveEventsAsync()
         {
             var today = DateTime.UtcNow;
 
-            var activeEvents = _database.EVENTS
+            var activeEvents = await _database.EVENTS
                 .Where(e => e.TIME_END > today)
                 .Select(e => new EventInformation
                 {
@@ -40,7 +40,8 @@ namespace MyConcordiaID.Models.Event
                     Type = e.TYPE,
                     Status = e.STATUS
                 })
-                .OrderByDescending(e => e.TimeBegin);
+                .OrderByDescending(e => e.TimeBegin)
+                .ToListAsync();
 
             return activeEvents;
         }
@@ -50,20 +51,18 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="netname"></param>
         /// <returns></returns>
-        public IEnumerable<dynamic> GetAdminEvents(string netname)
+        public async Task<IEnumerable<AvailableEvent>> GetAdminEventsAsync(string netname)
         {
 
             var user = _database.STUDENTS
-                .AsNoTracking()
-                .Where(u => u.NETNAME == netname)
-                .FirstOrDefault();
+                .FirstOrDefault(u => u.NETNAME == netname);
 
             if (user != null)
             {
                 var attendee = Role.Attendee.ToString();
                 var today = DateTime.UtcNow;
 
-                var studentEvents = _database.EVENT_USERS
+                var studentEvents = await _database.EVENT_USERS
                     .Where(e => e.STUDENT_NETNAME_FK == netname && e.ROLE != attendee)
                     .Select(e => new AvailableEvent
                     {
@@ -81,15 +80,15 @@ namespace MyConcordiaID.Models.Event
                             Status = e.EVENT.STATUS
                         }
                     })
-                    .ToList();
+                    .ToListAsync();
 
                 //Sort list of dates closest to current date
-                studentEvents = studentEvents
+                var ordederedStudentEvents =  studentEvents
                     .OrderBy(n => (today - n.Information.TimeBegin).Duration())
                     .ThenBy(n => (today - n.Information.TimeEnd).Duration())
                     .ToList();
 
-                return studentEvents;
+                return ordederedStudentEvents;
             }
             return null;
 
@@ -100,7 +99,7 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="netname"></param>
         /// <returns>List of events</returns>
-        public IEnumerable<AvailableEvent> GetAttendeeEvents(string netname)
+        public async Task<IEnumerable<AvailableEvent>> GetAttendeeEventsAsync(string netname)
         {
             var today = DateTime.UtcNow;
             var cancelled = EventStatusType.Cancelled.ToString();
@@ -108,7 +107,7 @@ namespace MyConcordiaID.Models.Event
 
 
             // event can't be canceled or expired 
-            var events = _database.EVENT_USERS
+            var events = await _database.EVENT_USERS
                 .Where(e => e.STUDENT_NETNAME_FK == netname && e.EVENT.STATUS != cancelled && e.EVENT.TIME_END > today)
                 .Select(e => new AvailableEvent
                 {
@@ -126,13 +125,13 @@ namespace MyConcordiaID.Models.Event
                         Status = e.EVENT.STATUS
                     }
                 })
-                .ToList();
+                .ToListAsync();
 
             var open = EventType.Open.ToString();
 
 
             // event must be open & not canceled or expired
-            var openEvents = _database.EVENTS
+            var openEvents = await _database.EVENTS
                 .Where(e => e.TYPE == open && e.STATUS != cancelled && e.TIME_END > today)
                 .Select(e => new AvailableEvent
                 {
@@ -150,7 +149,7 @@ namespace MyConcordiaID.Models.Event
                         Status = e.STATUS
                     }
                 })
-                .ToList();
+                .ToListAsync();
 
 
             //merge list
@@ -174,10 +173,10 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
-        public EventInformation GetEventById(string eventId)
+        public async Task<EventInformation> GetEventByIdAsync(string eventId)
         {
 
-            var currentEvent = _database.EVENTS
+            var currentEvent = await _database.EVENTS
                 .Where(e => e.ID_PK == eventId)
                 .Select(e => new EventInformation
                 {
@@ -191,7 +190,7 @@ namespace MyConcordiaID.Models.Event
                     Type = e.TYPE,
                     Status = e.STATUS
                 })
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             return currentEvent;
         }
@@ -200,9 +199,9 @@ namespace MyConcordiaID.Models.Event
         ///  Get a list of all the events
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<EventInformation> GetEvents()
+        public async Task<IEnumerable<EventInformation>> GetEventsAsync()
         {
-            var events = _database.EVENTS
+            var events = await _database.EVENTS
                 .Select(e => new EventInformation
                 {
                     EventId = e.ID_PK,
@@ -215,7 +214,8 @@ namespace MyConcordiaID.Models.Event
                     Type = e.TYPE,
                     Status = e.STATUS
                 })
-                .OrderByDescending(e => e.TimeBegin);
+                .OrderByDescending(e => e.TimeBegin)
+                .ToListAsync();
 
             return events;
         }
@@ -225,11 +225,11 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="eventStatus"></param>
         /// <returns></returns>
-        public IEnumerable<EventInformation> GetEventsByStatus(EventStatusType eventStatus)
+        public async Task<IEnumerable<EventInformation>> GetEventsByStatusAsync(EventStatusType eventStatus)
         {
             var status = eventStatus.ToString();
 
-            var events = _database.EVENTS
+            var events = await _database.EVENTS
                 .Where(e => e.STATUS == status)
                 .Select(e => new EventInformation
                 {
@@ -243,7 +243,8 @@ namespace MyConcordiaID.Models.Event
                     Type = e.TYPE,
                     Status = e.STATUS
                 })
-                .OrderByDescending(e => e.TimeBegin);
+                .OrderByDescending(e => e.TimeBegin)
+                .ToListAsync();
 
             return events;
 
@@ -256,16 +257,15 @@ namespace MyConcordiaID.Models.Event
         /// <param name="orderUserOnTop"></param>
         /// <param name="netName"></param>
         /// <returns></returns>
-        public IEnumerable<EventUserInformation> GetEventUsers(string eventId, bool orderUserOnTop, string netName)
+        public async Task<IEnumerable<EventUserInformation>> GetEventUsersAsync(string eventId, bool orderUserOnTop, string netName)
         {
 
-            var selectedEvent = _database.EVENTS
-                .Where(e => e.ID_PK == eventId)
-                .FirstOrDefault();
+            var selectedEvent = await _database.EVENTS
+                .FirstOrDefaultAsync(e => e.ID_PK == eventId);
 
             if (selectedEvent != null)
             {
-                var eventUsers = _database.EVENT_USERS
+                var eventUsers = await _database.EVENT_USERS
                     .Where(user => user.EVENT_ID == eventId)
                     .Select(u => new EventUserInformation
                     {
@@ -280,7 +280,7 @@ namespace MyConcordiaID.Models.Event
                             LastName = u.STUDENT.LASTNAME
                         }
                     })
-                    .ToList();
+                    .ToListAsync();
 
                 if (orderUserOnTop)
                 {
@@ -303,7 +303,7 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="information"></param>
         /// <param name="netname"></param>
-        public void InsertEvent(NewEvent information, string netname)
+        public async void InsertEvent(NewEvent information, string netname)
         {
 
             var newEvent = new EVENT
@@ -319,7 +319,7 @@ namespace MyConcordiaID.Models.Event
             };
 
             _database.EVENTS.Add(newEvent);
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
 
 
             var newOwner = new EVENT_USERS
@@ -331,10 +331,8 @@ namespace MyConcordiaID.Models.Event
             };
 
             _database.EVENT_USERS.Add(newOwner);
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
 
-
-            //TODO: will need to catch save error using logs
 
         }
 
@@ -343,21 +341,21 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public EventActionResult InsertUser(NewEventUser user)
+        public async Task<EventActionResult> InsertUserAsync(NewEventUser user)
         {
 
-            var selectedEvent = _database.EVENTS
+            var selectedEvent = await _database.EVENTS
                 .Where(e => e.ID_PK == user.EventID)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if (selectedEvent != null)
             {
                 var netName = "";
                 if (!string.IsNullOrEmpty(user.UserNetname))
                 {
-                    var student = _database.STUDENTS
+                    var student = await _database.STUDENTS
                         .Where(s => s.NETNAME == user.UserNetname)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     if (student != null)
                     {
@@ -366,9 +364,9 @@ namespace MyConcordiaID.Models.Event
                 }
                 else if (user.UserId != null)
                 {
-                    var student = _database.STUDENTS
+                    var student = await _database.STUDENTS
                         .Where(s => s.ID == user.UserId)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     if (student != null)
                     {
@@ -382,9 +380,9 @@ namespace MyConcordiaID.Models.Event
                     //student does exist 
 
 
-                    var userExist = _database.EVENT_USERS
+                    var userExist = await _database.EVENT_USERS
                         .Where(u => u.EVENT_ID == user.EventID && u.STUDENT_NETNAME_FK == netName)
-                        .FirstOrDefault();
+                        .FirstOrDefaultAsync();
 
                     if (userExist != null)
                     {
@@ -414,7 +412,7 @@ namespace MyConcordiaID.Models.Event
                     };
 
                     _database.EVENT_USERS.Add(newUser);
-                    _database.SaveChanges();
+                    await _database.SaveChangesAsync();
 
                     return EventActionResult.Success;
                 }
@@ -496,18 +494,17 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="cancellation"></param>
         /// <returns></returns>
-        public EventActionResult RemoveEvent(EventCancelled cancellation)
+        public async Task<EventActionResult> RemoveEventAsync(EventCancelled cancellation)
         {
 
-            var removeEvent = _database.EVENTS
-                .Where(e => e.ID_PK == cancellation.EventId)
-                .FirstOrDefault();
+            var removeEvent = await _database.EVENTS
+                .FirstOrDefaultAsync(e => e.ID_PK == cancellation.EventId);
 
             if (removeEvent != null)
             {
                 //canceled event
                 removeEvent.STATUS = EventStatusType.Cancelled.ToString();
-                _database.SaveChanges();
+                await _database.SaveChangesAsync();
 
                 return EventActionResult.Success;
             }
@@ -522,25 +519,19 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="user"></param>
         /// <returns>Success/UserNotFound</returns>
-        public EventActionResult RemoveUser(EventUser user)
+        public async Task<EventActionResult> RemoveUserAsync(EventUser user)
         {
-            var userToRemove = _database.EVENT_USERS
-                .Where(u => u.ID_PK == user.UserId)
-                .FirstOrDefault();
+            var userToRemove = await _database.EVENT_USERS
+                .FirstOrDefaultAsync(u => u.ID_PK == user.UserId);
 
             if (userToRemove != null)
             {
                 _database.EVENT_USERS.Remove(userToRemove);
-                _database.SaveChanges();
+                await _database.SaveChangesAsync();
 
                 return EventActionResult.Success;
             }
-            else
-            {
-                return EventActionResult.UserNotFound;
-            }
-
-
+            return EventActionResult.UserNotFound;
         }
 
         /// <summary>
@@ -548,11 +539,10 @@ namespace MyConcordiaID.Models.Event
         /// </summary>
         /// <param name="information"></param>
         /// <returns></returns>
-        public EventActionResult UpdateEvent(EventInformation information)
+        public async Task<EventActionResult> UpdateEventAsync(EventInformation information)
         {
-            var updateEvent = _database.EVENTS
-                .Where(e => e.ID_PK == information.EventId)
-                .FirstOrDefault();
+            var updateEvent = await _database.EVENTS
+                .FirstOrDefaultAsync(e => e.ID_PK == information.EventId);
 
             if (updateEvent != null)
             {
@@ -573,7 +563,7 @@ namespace MyConcordiaID.Models.Event
                 updateEvent.ROOM = information.Room;
                 updateEvent.TYPE = information.Type.ToString();
 
-                _database.SaveChanges();
+                await _database.SaveChangesAsync();
 
                 return EventActionResult.Success;
             }
@@ -584,88 +574,33 @@ namespace MyConcordiaID.Models.Event
 
         }
 
-        public EventActionResult UpdateUser(EventUser user)
+        /// <summary>
+        ///  Update an user's role 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public async Task<EventActionResult> UpdateUserAsync(EventUser user)
         {
-            var existingUser = _database.EVENT_USERS
-                .FirstOrDefault(u => u.ID_PK == user.UserId);
+            var existingUser = await _database.EVENT_USERS
+                .FirstOrDefaultAsync(u => u.ID_PK == user.UserId);
 
             if (existingUser == null) return EventActionResult.UserNotFound;
 
             existingUser.ROLE = user.Role.ToString();
-            _database.SaveChanges();
+            await _database.SaveChangesAsync();
 
             return EventActionResult.Success;
         }
 
-        /// <summary>
-        ///  Validating is an user has the required permision to do a specific action on a user
-        /// </summary>
-        /// <param name="userId"></param>
-        /// <param name="authenticatedUser"></param>
-        /// <returns></returns>
-        public bool IsAuthorized(string userId, string authenticatedUser)
-        {
-            var userData = _database.EVENT_USERS
-                .FirstOrDefault(u => u.ID_PK == userId);
-
-            if(userData == null) return false;
-
-            var authenticatedUserData = _database.EVENT_USERS
-                .FirstOrDefault(u => u.EVENT_ID == userData.EVENT_ID && u.STUDENT_NETNAME_FK == authenticatedUser);
-
-            if (authenticatedUserData == null) return false;
-
-            Role userRole;
-            Enum.TryParse(userData.ROLE, out userRole);
-
-            Role authenticatedUserRole;
-            Enum.TryParse(authenticatedUserData.ROLE, out authenticatedUserRole);
-
-
-            // Creator, Mod, Scanner, Attendee
-            // 0, 1, 2, 3 ranks  lower is better 
-            return userRole >= authenticatedUserRole;
-            
-        }
 
         /// <summary>
-        ///  Validating if an user has the required permision to do a specific action on a event
-        /// </summary>
-        /// <param name="eventId"></param>
-        /// <param name="authenticatedUser"></param>
-        /// <param name="requiredRole"></param>
-        /// <param name="exactRole"></param>
-        /// <returns></returns>
-        public bool IsAuthorized(string eventId, string authenticatedUser, Role requiredRole, bool exactRole)
-        {
-            var eventUserData = _database.EVENT_USERS
-                .FirstOrDefault(e => e.EVENT_ID == eventId && e.STUDENT_NETNAME_FK == authenticatedUser);
-
-            if (eventUserData == null) return false;
-
-
-            Role currentRole;
-            Enum.TryParse(eventUserData.ROLE, out currentRole);
-
-            if (exactRole)
-            {
-                return currentRole == requiredRole;
-            }
-
-            // Creator, Mod, Scanner, Attendee
-            // 0, 1, 2, 3 ranks  lower is better 
-            return requiredRole >= currentRole;
-        }
-
-        /// <summary>
-        ///  Retieve specific statistic about an event 
+        ///  Retrieve specific data about an event
         /// </summary>
         /// <param name="eventId"></param>
         /// <returns></returns>
-        public async Task<EventStatistic> GetEventStatistic(string eventId)
+        public async Task<EventStatistic> GetEventStatisticAsync(string eventId)
         {
             var myEvent = await _database.EVENTS
-                .AsNoTracking()
                 .FirstOrDefaultAsync(e => e.ID_PK == eventId);
 
             if (myEvent == null) return null;
@@ -730,6 +665,66 @@ namespace MyConcordiaID.Models.Event
             };
 
             return statistic;
+        }
+
+        /// <summary>
+        ///  Validating is an user has the required permision to do a specific action on a user
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="authenticatedUser"></param>
+        /// <returns></returns>
+        public bool IsAuthorized(string userId, string authenticatedUser)
+        {
+            var userData = _database.EVENT_USERS
+                .FirstOrDefault(u => u.ID_PK == userId);
+
+            if (userData == null) return false;
+
+            var authenticatedUserData = _database.EVENT_USERS
+                .FirstOrDefault(u => u.EVENT_ID == userData.EVENT_ID && u.STUDENT_NETNAME_FK == authenticatedUser);
+
+            if (authenticatedUserData == null) return false;
+
+            Role userRole;
+            Enum.TryParse(userData.ROLE, out userRole);
+
+            Role authenticatedUserRole;
+            Enum.TryParse(authenticatedUserData.ROLE, out authenticatedUserRole);
+
+
+            // Creator, Mod, Scanner, Attendee
+            // 0, 1, 2, 3 ranks  lower is better 
+            return userRole >= authenticatedUserRole;
+
+        }
+
+        /// <summary>
+        ///  Validating if an user has the required permision to do a specific action on a event
+        /// </summary>
+        /// <param name="eventId"></param>
+        /// <param name="authenticatedUser"></param>
+        /// <param name="requiredRole"></param>
+        /// <param name="exactRole"></param>
+        /// <returns></returns>
+        public bool IsAuthorized(string eventId, string authenticatedUser, Role requiredRole, bool exactRole)
+        {
+            var eventUserData = _database.EVENT_USERS
+                .FirstOrDefault(e => e.EVENT_ID == eventId && e.STUDENT_NETNAME_FK == authenticatedUser);
+
+            if (eventUserData == null) return false;
+
+
+            Role currentRole;
+            Enum.TryParse(eventUserData.ROLE, out currentRole);
+
+            if (exactRole)
+            {
+                return currentRole == requiredRole;
+            }
+
+            // Creator, Mod, Scanner, Attendee
+            // 0, 1, 2, 3 ranks  lower is better 
+            return requiredRole >= currentRole;
         }
     }
 }

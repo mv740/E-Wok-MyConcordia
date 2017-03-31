@@ -19,7 +19,7 @@ namespace MyConcordiaID.Models.Student
             _database = context;
         }
 
-        public async Task<StudentAccount> FindById(int id)
+        public async Task<StudentAccount> FindByIdAsync(int id)
         {
             var student = await _database.STUDENTS
                  .Where(s => s.ID == id)
@@ -84,7 +84,7 @@ namespace MyConcordiaID.Models.Student
             return null;
         }
 
-        public async Task<StudentAccount> FindByNetName(string netName)
+        public async Task<StudentAccount> FindByNetNameAsync(string netName)
         {
             var student = await _database.STUDENTS
                  .Where(s => s.NETNAME == netName)
@@ -155,7 +155,7 @@ namespace MyConcordiaID.Models.Student
         ///  Retrieve all the students basic informations
         /// </summary>
         /// <returns></returns>
-        public async Task<dynamic> GetAll()
+        public async Task<dynamic> GetAllAsync()
         {
 
             var students = await _database.STUDENTS
@@ -312,12 +312,16 @@ namespace MyConcordiaID.Models.Student
             _database.SaveChanges();
         }
 
-        public PicturePeriod GetUpdatePicturePeriod()
+        /// <summary>
+        ///  Retrieve the update period for the current academic year
+        /// </summary>
+        /// <returns></returns>
+        public async Task<PicturePeriod> GetUpdatePicturePeriodAsync()
         {
             // May 1st 2016 start of academic year 2016-17 : summer 2016, fall 16, winter 17
 
-            int month = DateTime.Now.Month;
-            int year = DateTime.Now.Year;
+            var month = DateTime.Now.Month;
+            var year = DateTime.Now.Year;
 
 
             int academicYear;
@@ -330,21 +334,18 @@ namespace MyConcordiaID.Models.Student
                 academicYear = year - 1;
             }
 
-            var period = _database.PICTUREUPDATESETTINGs
+            var period = await _database.PICTUREUPDATESETTINGs
+                .AsNoTracking()
                 .Where(p => p.YEAR == academicYear)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
 
             if(period != null)
             {
-                DateTime today = DateTime.Today;
+                var today = DateTime.Today;
 
-                bool canUpdate = false;
-                if (today >= period.STARDATE && today <= period.ENDDATE)
-                {
-                    canUpdate = true;
-                }
+                var canUpdate = today >= period.STARDATE && today <= period.ENDDATE;
 
-                PicturePeriod picturePeriod = new PicturePeriod
+                var picturePeriod = new PicturePeriod
                 {
                     CanUpdatePicture = canUpdate,
                     StartDate = period.STARDATE.ToString(),
@@ -355,7 +356,7 @@ namespace MyConcordiaID.Models.Student
             }
             else
             {
-                PicturePeriod picturePeriod = new PicturePeriod
+                var picturePeriod = new PicturePeriod
                 {
                     CanUpdatePicture = false,
                     StartDate = string.Empty,

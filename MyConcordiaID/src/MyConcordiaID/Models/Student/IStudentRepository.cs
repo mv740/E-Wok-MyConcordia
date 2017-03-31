@@ -7,13 +7,13 @@ namespace MyConcordiaID.Models.Student
 {
     public interface IStudentRepository
     {
-        Task<dynamic> GetAll();
-        Task<StudentAccount> FindById(int id);
-        Task<StudentAccount> FindByNetName(string netname);
+        Task<dynamic> GetAllAsync();
+        Task<StudentAccount> FindByIdAsync(int id);
+        Task<StudentAccount> FindByNetNameAsync(string netname);
         string ValidatePicture(PictureValidation pictureValidation, string netName);
         string RevalidatePicture(PictureValidation pictureValidation, string netname);
         void Add(STUDENT student);
-        PicturePeriod GetUpdatePicturePeriod();
+        Task<PicturePeriod> GetUpdatePicturePeriodAsync();
         IEnumerable<STUDENT> Search(SearchOptions searchOptions);
         bool DoesStudentExist(string firstName, string lastName);
         
