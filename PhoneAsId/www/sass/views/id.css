@@ -152,7 +152,7 @@ html, body {
 
 .platform-ios .barcodeId {
   text-align: center;
-  transform: translate(-6%, 0);
+  transform: translateX(-6%) scaleX(0.9);
   position: relative;
   display: block;
   width: 100%; }
