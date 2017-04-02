@@ -32,7 +32,7 @@ function searchParsing() {
         var parsed = {
             'id': id,
             'netname': netname,
-            'birdthdate': birdthdate,
+            'birthdate': birdthdate,
             'name': name
         };
 
@@ -65,31 +65,31 @@ function searchParsing() {
     function findBirthdate(params) {
 
         var birthdate = {};
+        paramLoop:
         for (var i = 0; i < params.length; i++) {
 
 
             //find year
             if (params[i].match(/(\d{4})/)) {
-                birthdate.year = params[i];
+                birthdate.year = parseInt(params[i]);
                 params.splice(i, 1);
                 i--;
+                continue;
             }
             
             //find month
             for (var j = 0; j < months.length; j++) {
-                if (params[i].match(months[j])) {
+                if (params[i].toLowerCase().match(months[j].toLowerCase())) {
                     birthdate.month = j;
                     params.splice(i, 1);
                     i--;
+                    continue paramLoop;
                 }
             }
 
         }
 
-        //search only for day if a year is found. Otherwise it means that the year and day could be mistaken if they were written as dd/month/yy instead of dd/month/yyyy
-        if (birthdate.year) {
-           birthdate.day = findBirthdateDay(params);
-        }
+        birthdate.day = findBirthdateDay(params);
 
         var datum = new Date(Date.UTC(birthdate.year,birthdate.month,birthdate.day,0,0,0));
 
@@ -108,7 +108,7 @@ function searchParsing() {
                 if (day.length > 2) {
                     return day.substring(0,2);
                 }
-                return day;
+                return parseInt(day);
             }
 
         }

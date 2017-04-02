@@ -44,3 +44,8 @@
 .selectedChip{
   color: $concordia-background-color;
 }
+
+tooltip{
+  //to fix bug where width behave in an unpredicatble way
+  width:100%;
+}

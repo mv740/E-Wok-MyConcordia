@@ -39,7 +39,7 @@ function ImageModalCtrl($rootScope, $modalInstance, studentService, dateParsingS
 
                 setTimeout(function(){
                     $modalInstance.close();
-                    $rootScope.$broadcast("studentModal.updateStudent");
+                    $rootScope.$broadcast("StudentModal.resetModal");
                 }, 2000);
             });
         }
