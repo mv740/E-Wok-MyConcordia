@@ -12,8 +12,8 @@
 
         <div class="item item-body">
           <img class="full-image" src="img\concordia_ev_pic.png">
-          <h2><b>From {{event.information.timeBegin | date:"MM/dd/yyyy 'at' h:mma"}}</b></h2>
-          <h2><b>To {{event.information.timeEnd | date: "MM/dd/yyyy 'at' h:mma"}}</b></h2>
+          <h2><b>{{"event_from" | translate}} {{event.information.timeBegin | date:"MM/dd/yyyy 'at' h:mma"}}</b></h2>
+          <h2><b>{{"event_to" | translate}} {{event.information.timeEnd | date: "MM/dd/yyyy 'at' h:mma"}}</b></h2>
         </div>
       </div>
 
