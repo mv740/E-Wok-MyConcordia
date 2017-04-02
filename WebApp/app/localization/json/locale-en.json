@@ -189,7 +189,10 @@
           "RESCHEDULED": "Rescheduled",
           "SCHEDULED": "Scheduled",
           "OPEN": "Open",
-          "CLOSED": "Closed"
+          "OPENDESCRIPTION": "Open: An open event is considered a public event",
+          "CLOSED": "Closed",
+          "CLOSEDDESCRIPTION": "Closed: A closed event is considered a private event"
+
         },
         "BUTTONS": {
           "MODIFY": "Modify",
