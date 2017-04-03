@@ -127,6 +127,8 @@ function toastedHttpService($http, $q, $timeout, $translate, $mdToast, myConfig)
                         showToast({msg: "Failed", delay: 3000, responseFailed: true});
                     else if (failure.status == 401)
                         showToast({msg: settings.failureMsg[401], delay: 3000, responseFailed: true});
+                    else if (failure.status == 403)
+                        showToast({msg: settings.failureMsg[403], delay: 3000, responseFailed: true});
                     else if (failure.status == 404)
                         showToast({msg: settings.failureMsg[404], delay: 3000, responseFailed: true});
                     else if (failure.status == 500)
@@ -167,6 +169,8 @@ function toastedHttpService($http, $q, $timeout, $translate, $mdToast, myConfig)
                         showToast({msg: "Failed", delay: 3000, responseFailed: true});
                     else if (failure.status == 401)
                         showToast({msg: settings.failureMsg[401], delay: 3000, responseFailed: true});
+                    else if (failure.status == 403)
+                        showToast({msg: settings.failureMsg[403], delay: 3000, responseFailed: true});
                     else if (failure.status == 404)
                         showToast({msg: settings.failureMsg[404], delay: 3000, responseFailed: true});
                     else if (failure.status == 500)
