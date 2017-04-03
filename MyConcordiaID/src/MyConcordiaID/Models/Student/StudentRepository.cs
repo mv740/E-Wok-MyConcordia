@@ -335,7 +335,6 @@ namespace MyConcordiaID.Models.Student
             }
 
             var period = await _database.PICTUREUPDATESETTINGs
-                .AsNoTracking()
                 .Where(p => p.YEAR == academicYear)
                 .FirstOrDefaultAsync();
 
