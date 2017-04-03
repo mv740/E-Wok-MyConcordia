@@ -26,6 +26,7 @@
         "responseMsg": "Événement actualisé",
         "failureMsg": {
           "401": "Veuillez vous connecter",
+          "403": "Vous n'avez pas le droit de modifier cet événement",
           "404": "Événement non trouvé",
           "500": "Mille excuses! Nos serveurs sont en pane :("
         }

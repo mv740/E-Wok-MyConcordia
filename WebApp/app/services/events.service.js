@@ -106,6 +106,7 @@ function eventService($q, translateService, toastedHttp, myConfig) {
         var localizationPromises = {
             responseMsg: translateService.getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.responseMsg'),
             401: translateService.getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.401'),
+            403: translateService.getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.403'),
             404: translateService.getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.404'),
             500: translateService.getTranslation('TOASTFEEDBACK.EVENTS.UPDATEEVENT.failureMsg.500')
         };
@@ -116,6 +117,7 @@ function eventService($q, translateService, toastedHttp, myConfig) {
             responseMsg: "",
             failureMsg: {
                 401: "",
+                403: "",
                 404: "",
                 500: ""
             }
@@ -125,6 +127,7 @@ function eventService($q, translateService, toastedHttp, myConfig) {
             .then(function (translations) {
                 settings.responseMsg = translations.responseMsg;
                 settings.failureMsg[401] = translations[401];
+                settings.failureMsg[403] = translations[403];
                 settings.failureMsg[404] = translations[404];
                 settings.failureMsg[500] = translations[500];
                 return toastedHttp.put(settings);
